@@ -19,6 +19,7 @@ const NAV = [
   { to:'/compare',  icon:'⚖️', label:'Bandingkan' },
   { to:'/parties',  icon:'🎭', label:'Partai' },
   { to:'/network',  icon:'🕸️', label:'Jaringan' },
+  { to:'/pengaruh', icon:'🌐', label:'Pengaruh' },
   { to:'/regions',  icon:'🗺️', label:'Wilayah' },
   { to:'/elections',icon:'📊', label:'Pemilu' },
   { to:'/pilkada',  icon:'🗳️', label:'Pilkada 2024' },

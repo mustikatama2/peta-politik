@@ -4,6 +4,22 @@ import { PARTY_MAP } from '../data/parties'
 import { CONNECTION_TYPES } from '../data/connections'
 import { PERSONS } from '../data/persons'
 
+// Political bloc cluster definitions
+const CLUSTERS = {
+  kim_plus:     { label: 'KIM Plus',       color: '#ef4444', parties: ['ger','gol','nas','pan','dem','pks','pbb','pkb'] },
+  pdip_oposisi: { label: 'PDIP / Oposisi', color: '#a855f7', parties: ['pdip'] },
+  independent:  { label: 'Independen',     color: '#6b7280', parties: ['independent'] },
+  historis:     { label: 'Historis',       color: '#92400e', parties: [] },
+}
+
+function getNodeCluster(node) {
+  if (node.tier === 'historis') return 'historis'
+  for (const [key, c] of Object.entries(CLUSTERS)) {
+    if (c.parties.includes(node.party_id)) return key
+  }
+  return null
+}
+
 const LINK_COLORS = {
   koalisi:         '#3B82F6',
   keluarga:        '#EC4899',
@@ -30,6 +46,7 @@ export default function NetworkGraph({
   filterType, filterParty,
   centerNodeId, highlightIds,
   visibleTypes, focusNodeId,
+  showClusters,
 }) {
   const svgRef      = useRef(null)
   const simulationRef = useRef(null)
@@ -97,6 +114,35 @@ export default function NetworkGraph({
       .attr('height', height)
 
     const g = svg.append('g')
+
+    // ── Hull layers (drawn first so they appear behind nodes/links) ──
+    const hullLayer      = g.append('g').attr('class', 'hull-layer')
+    const hullLabelLayer = g.append('g').attr('class', 'hull-label-layer')
+
+    if (showClusters) {
+      Object.entries(CLUSTERS).forEach(([key, clusterDef]) => {
+        hullLayer.append('path')
+          .attr('class', `hull-path hull-${key}`)
+          .attr('fill', clusterDef.color)
+          .attr('fill-opacity', 0.10)
+          .attr('stroke', clusterDef.color)
+          .attr('stroke-opacity', 0.45)
+          .attr('stroke-width', 2)
+          .attr('stroke-linejoin', 'round')
+          .attr('d', '')
+
+        hullLabelLayer.append('text')
+          .attr('class', `hull-label hull-label-${key}`)
+          .attr('text-anchor', 'middle')
+          .attr('dominant-baseline', 'middle')
+          .attr('fill', clusterDef.color)
+          .attr('font-size', 13)
+          .attr('font-weight', 'bold')
+          .attr('opacity', 0.75)
+          .style('pointer-events', 'none')
+          .text(clusterDef.label)
+      })
+    }
 
     const zoom = d3.zoom()
       .scaleExtent([0.3, 3])
@@ -245,6 +291,37 @@ export default function NetworkGraph({
 
     // --- Tick ---
     simulationRef.current.on('tick', () => {
+      // Update cluster hulls
+      if (showClusters) {
+        Object.entries(CLUSTERS).forEach(([key]) => {
+          const clusterNodes = filteredNodes.filter(n => getNodeCluster(n) === key)
+          if (clusterNodes.length < 2) {
+            hullLayer.select(`.hull-${key}`).attr('d', '')
+            hullLabelLayer.select(`.hull-label-${key}`).attr('x', -9999).attr('y', -9999)
+            return
+          }
+          const pts = clusterNodes.map(n => [n.x, n.y])
+          // Pad points outward slightly so hull doesn't hug nodes tightly
+          const cx0 = pts.reduce((s, p) => s + p[0], 0) / pts.length
+          const cy0 = pts.reduce((s, p) => s + p[1], 0) / pts.length
+          const pad = 30
+          const paddedPts = pts.map(([x, y]) => {
+            const dx = x - cx0, dy = y - cy0
+            const dist = Math.sqrt(dx * dx + dy * dy) || 1
+            return [x + (dx / dist) * pad, y + (dy / dist) * pad]
+          })
+          const hull = pts.length === 2
+            ? [pts[0], [pts[0][0] + 1, pts[0][1] + 1], pts[1]]
+            : d3.polygonHull(paddedPts)
+          if (hull) {
+            hullLayer.select(`.hull-${key}`).attr('d', `M${hull.map(p => p.join(',')).join('L')}Z`)
+            const cx = hull.reduce((s, p) => s + p[0], 0) / hull.length
+            const cy = hull.reduce((s, p) => s + p[1], 0) / hull.length
+            hullLabelLayer.select(`.hull-label-${key}`).attr('x', cx).attr('y', cy)
+          }
+        })
+      }
+
       link
         .attr('x1', d => d.source.x)
         .attr('y1', d => d.source.y)
@@ -257,7 +334,7 @@ export default function NetworkGraph({
 
       node.attr('transform', d => `translate(${d.x},${d.y})`)
     })
-  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds, visibleTypes, focusNodeId])
+  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds, visibleTypes, focusNodeId, showClusters])
 
   // Focus zoom effect — runs after draw settles
   useEffect(() => {

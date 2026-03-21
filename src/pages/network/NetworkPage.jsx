@@ -61,6 +61,7 @@ export default function NetworkPage() {
   const [filterParty,  setFilterParty]  = useState(null)
   const [filterTier,   setFilterTier]   = useState(null)
   const [selectedPerson, setSelectedPerson] = useState(null)
+  const [showClusters, setShowClusters] = useState(false)
 
   // Shortest path
   const [pathStart, setPathStart] = useState('')
@@ -138,6 +139,25 @@ export default function NetworkPage() {
             <option value="">Cari tokoh...</option>
             {NETWORK_NODES.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
           </select>
+        </div>
+
+        {/* Cluster Toggle */}
+        <div>
+          <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+            Tampilan
+          </h3>
+          <button
+            onClick={() => setShowClusters(v => !v)}
+            className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium transition-colors border ${
+              showClusters
+                ? 'bg-blue-900/30 border-blue-500/50 text-blue-300'
+                : 'bg-bg-elevated border-border text-text-secondary hover:text-text-primary hover:bg-bg-hover'
+            }`}
+          >
+            <span>🔵</span>
+            <span>Tampilkan Cluster</span>
+            {showClusters && <span className="ml-auto text-blue-400">✓</span>}
+          </button>
         </div>
 
         {/* Filter Koneksi — checkboxes */}
@@ -352,6 +372,7 @@ export default function NetworkPage() {
               visibleTypes={visibleTypes}
               highlightIds={highlightIds}
               focusNodeId={focusNodeId}
+              showClusters={showClusters}
             />
 
             {/* Stats overlay */}

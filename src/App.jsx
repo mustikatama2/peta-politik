@@ -12,6 +12,7 @@ const PersonDetail   = lazy(() => import('./pages/persons/PersonDetail'))
 const PartyList      = lazy(() => import('./pages/parties/PartyList'))
 const PartyDetail    = lazy(() => import('./pages/parties/PartyDetail'))
 const NetworkPage    = lazy(() => import('./pages/network/NetworkPage'))
+const PengaruhPage   = lazy(() => import('./pages/pengaruh/PengaruhPage'))
 const RegionView     = lazy(() => import('./pages/regions/RegionView'))
 const Elections      = lazy(() => import('./pages/elections/Elections'))
 const LHKPNTracker   = lazy(() => import('./pages/lhkpn/LHKPNTracker'))
@@ -76,6 +77,7 @@ export default function App() {
         <Route path="/parties" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PartyList /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/parties/:id" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PartyDetail /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/network" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><NetworkPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/pengaruh" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PengaruhPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/regions" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RegionView /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/elections" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Elections /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/dapil" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><DapilPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
