@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { PERSONS } from '../../data/persons'
 import { PARTIES } from '../../data/parties'
 import PersonCard from '../../components/PersonCard'
@@ -32,14 +33,32 @@ function getJabatan(person) {
 }
 
 export default function PersonList() {
-  const [search, setSearch] = useState('')
-  const [filterTier, setFilterTier] = useState('')
-  const [filterParty, setFilterParty] = useState('')
-  const [filterRisk, setFilterRisk] = useState('')
-  const [filterTag, setFilterTag] = useState('')
-  const [filterWilayah, setFilterWilayah] = useState('')
-  const [filterJabatan, setFilterJabatan] = useState('')
-  const [sortBy, setSortBy] = useState('name')
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const search       = searchParams.get('q')       || ''
+  const filterTier   = searchParams.get('tier')    || ''
+  const filterParty  = searchParams.get('party')   || ''
+  const filterRisk   = searchParams.get('risk')    || ''
+  const filterTag    = searchParams.get('tag')     || ''
+  const filterWilayah = searchParams.get('wilayah') || ''
+  const filterJabatan = searchParams.get('jabatan') || ''
+  const sortBy       = searchParams.get('sort')    || 'name'
+
+  const setFilter = (key, value) => {
+    const next = new URLSearchParams(searchParams)
+    if (value) next.set(key, value)
+    else next.delete(key)
+    setSearchParams(next, { replace: true })
+  }
+
+  const setSearch       = (v) => setFilter('q', v)
+  const setFilterTier   = (v) => setFilter('tier', v)
+  const setFilterParty  = (v) => setFilter('party', v)
+  const setFilterRisk   = (v) => setFilter('risk', v)
+  const setFilterTag    = (v) => setFilter('tag', v)
+  const setFilterWilayah = (v) => setFilter('wilayah', v)
+  const setFilterJabatan = (v) => setFilter('jabatan', v)
+  const setSortBy       = (v) => setFilter('sort', v === 'name' ? '' : v)
 
   const partyOptions = PARTIES.map(p => ({ value: p.id, label: `${p.logo_emoji} ${p.abbr}` }))
 
@@ -141,13 +160,7 @@ export default function PersonList() {
   const hasActiveFilter = search || filterTier || filterParty || filterRisk || filterTag || filterWilayah || filterJabatan
 
   const resetAll = () => {
-    setSearch('')
-    setFilterTier('')
-    setFilterParty('')
-    setFilterRisk('')
-    setFilterTag('')
-    setFilterWilayah('')
-    setFilterJabatan('')
+    setSearchParams({}, { replace: true })
   }
 
   return (

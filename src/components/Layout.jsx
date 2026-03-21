@@ -26,11 +26,11 @@ const NAV = [
 
 // Bottom nav: 5 most important for mobile
 const MOBILE_NAV = [
-  { to:'/',        icon:'🏠', label:'Beranda' },
-  { to:'/persons', icon:'👥', label:'Tokoh' },
-  { to:'/network', icon:'🕸️', label:'Jaringan' },
-  { to:'/lhkpn',  icon:'💰', label:'LHKPN' },
-  { to:'/news',   icon:'📰', label:'Berita' },
+  { to:'/',         icon:'🏠', label:'Beranda' },
+  { to:'/persons',  icon:'👥', label:'Tokoh' },
+  { to:'/network',  icon:'🕸️', label:'Jaringan' },
+  { to:'/analitik', icon:'📈', label:'Analitik' },
+  { to:'/news',     icon:'📰', label:'Berita' },
 ]
 
 export default function Layout({ children }) {

@@ -11,6 +11,8 @@ import { PILEG_2024, PILPRES_2024 } from '../../data/elections'
 import * as RegionsData from '../../data/regions'
 import { NEWS } from '../../data/news'
 import { AGENDAS } from '../../data/agendas'
+import { KPK_CASES } from '../../data/kpk_cases'
+import { TIMELINE_EVENTS } from '../../data/timeline_events'
 import PersonCard from '../../components/PersonCard'
 import NewsCard from '../../components/NewsCard'
 import { KPICard, Card } from '../../components/ui'
@@ -36,6 +38,14 @@ const PILPRES_COLORS = ['#8B0000', '#27AAE1', '#C8102E']
 const atRiskPersons = PERSONS.filter(p =>
   ['tersangka', 'terpidana'].includes(p.analysis?.corruption_risk)
 )
+
+const KPK_CASES_COUNT = KPK_CASES.filter(c =>
+  ['tersangka', 'terpidana'].includes(c.status)
+).length
+
+const recentTimelineEvents = [...TIMELINE_EVENTS]
+  .sort((a, b) => new Date(`${b.year}-${b.month || 1}-${b.day || 1}`) - new Date(`${a.year}-${a.month || 1}-${a.day || 1}`))
+  .slice(0, 5)
 
 const recentNews = [...NEWS]
   .sort((a, b) => new Date(b.date) - new Date(a.date))
@@ -108,6 +118,26 @@ export default function Dashboard() {
           <span className="text-amber-600">Menurun dari skor 40 pada 2019</span>
         </div>
         <span className="ml-auto text-xs text-amber-500 flex-shrink-0 hidden sm:block">Transparency International</span>
+      </div>
+
+      {/* Quick Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="bg-bg-card rounded-xl border border-border p-3 text-center">
+          <p className="text-2xl font-bold text-text-primary">{PERSONS.length}</p>
+          <p className="text-xs text-text-secondary">Tokoh Terpetakan</p>
+        </div>
+        <div className="bg-bg-card rounded-xl border border-border p-3 text-center">
+          <p className="text-2xl font-bold text-text-primary">{CONNECTIONS.length}</p>
+          <p className="text-xs text-text-secondary">Koneksi</p>
+        </div>
+        <div className="bg-bg-card rounded-xl border border-border p-3 text-center">
+          <p className="text-2xl font-bold text-text-primary">{PROVINCES.length}</p>
+          <p className="text-xs text-text-secondary">Provinsi</p>
+        </div>
+        <div className="bg-bg-card rounded-xl border border-border p-3 text-center">
+          <p className="text-2xl font-bold text-text-primary">{KPK_CASES_COUNT}</p>
+          <p className="text-xs text-text-secondary">Kasus KPK Aktif</p>
+        </div>
       </div>
 
       {/* KPI Cards */}
@@ -372,6 +402,27 @@ export default function Dashboard() {
           >
             Lihat Peta Wilayah →
           </Link>
+        </div>
+      </Card>
+
+      {/* Recent Updates Feed */}
+      <Card className="p-5">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-sm font-semibold text-text-primary">📅 Peristiwa Terkini</h2>
+          <Link to="/timeline" className="text-xs text-accent-blue hover:underline">Semua →</Link>
+        </div>
+        <div className="space-y-3">
+          {recentTimelineEvents.map(evt => (
+            <div key={evt.id} className="flex gap-3 items-start">
+              <div className="flex-shrink-0 text-xs text-text-secondary bg-bg-elevated px-2 py-1 rounded font-mono min-w-[52px] text-center">
+                {evt.year}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-text-primary leading-snug">{evt.title}</p>
+                <p className="text-xs text-text-secondary mt-0.5 line-clamp-1">{evt.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </Card>
     </div>

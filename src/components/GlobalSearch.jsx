@@ -54,6 +54,19 @@ const TYPE_COLORS = {
   province: '#10b981',
 }
 
+function Highlight({ text, query }) {
+  if (!query.trim()) return <span>{text}</span>
+  const idx = text.toLowerCase().indexOf(query.toLowerCase())
+  if (idx === -1) return <span>{text}</span>
+  return (
+    <span>
+      {text.slice(0, idx)}
+      <mark className="bg-accent-red/30 text-accent-red rounded px-0.5">{text.slice(idx, idx + query.length)}</mark>
+      {text.slice(idx + query.length)}
+    </span>
+  )
+}
+
 export default function GlobalSearch() {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -180,7 +193,7 @@ export default function GlobalSearch() {
               >
                 <span className="text-xl flex-shrink-0">{item.icon}</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-text-primary truncate">{item.title}</p>
+                  <p className="text-sm font-medium text-text-primary truncate"><Highlight text={item.title} query={query} /></p>
                   <p className="text-xs text-text-secondary truncate">{item.sub}</p>
                 </div>
                 <span

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
   CartesianGrid
@@ -61,7 +61,9 @@ function buildPartySummary(data) {
 }
 
 export default function Elections() {
-  const [activeTab, setActiveTab] = useState('pilpres')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const activeTab = searchParams.get('tab') || 'pilpres'
+  const setActiveTab = (tab) => setSearchParams({ tab }, { replace: true })
 
   const partySummary = buildPartySummary(PILKADA_2024)
   const totalPilkada = PILKADA_2024.length

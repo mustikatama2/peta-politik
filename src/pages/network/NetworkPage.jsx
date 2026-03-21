@@ -14,6 +14,8 @@ const connectedIds = new Set([
 ])
 const NETWORK_NODES = PERSONS.filter(p => connectedIds.has(p.id))
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
 export default function NetworkPage() {
   const navigate = useNavigate()
   const [filterType, setFilterType] = useState(null)
@@ -144,22 +146,39 @@ export default function NetworkPage() {
         </div>
       </div>
 
-      {/* Network Graph */}
-      <div className="flex-1 relative">
-        <NetworkGraph
-          nodes={filterTier ? NETWORK_NODES.filter(n => n.tier === filterTier) : NETWORK_NODES}
-          edges={CONNECTIONS}
-          onNodeClick={handleNodeClick}
-          filterType={filterType}
-          filterParty={filterParty}
-        />
-
-        {/* Stats overlay */}
-        <div className="absolute top-3 left-3 flex gap-2">
-          <span className="px-2 py-1 bg-bg-card/90 border border-border rounded text-xs text-text-secondary">
-            {NETWORK_NODES.length} tokoh · {CONNECTIONS.length} koneksi
-          </span>
-        </div>
+      {/* Network Graph / Mobile fallback */}
+      <div className="flex-1 relative overflow-y-auto">
+        {isMobile ? (
+          <div className="p-4 space-y-2">
+            <p className="text-text-secondary text-sm mb-3">Graf tidak tersedia di layar kecil. Menampilkan daftar koneksi:</p>
+            {NETWORK_NODES.slice(0, 30).map(node => {
+              const nodeConns = CONNECTIONS.filter(c => c.from === node.id || c.to === node.id)
+              if (!nodeConns.length) return null
+              return (
+                <div key={node.id} className="bg-bg-card rounded-lg p-3 border border-border">
+                  <p className="text-sm font-semibold text-text-primary">{node.name}</p>
+                  <p className="text-xs text-text-secondary">{nodeConns.length} koneksi</p>
+                </div>
+              )
+            })}
+          </div>
+        ) : (
+          <>
+            <NetworkGraph
+              nodes={filterTier ? NETWORK_NODES.filter(n => n.tier === filterTier) : NETWORK_NODES}
+              edges={CONNECTIONS}
+              onNodeClick={handleNodeClick}
+              filterType={filterType}
+              filterParty={filterParty}
+            />
+            {/* Stats overlay */}
+            <div className="absolute top-3 left-3 flex gap-2">
+              <span className="px-2 py-1 bg-bg-card/90 border border-border rounded text-xs text-text-secondary">
+                {NETWORK_NODES.length} tokoh · {CONNECTIONS.length} koneksi
+              </span>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Right Info Panel */}
