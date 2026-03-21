@@ -5,6 +5,9 @@ import { PARTY_MAP } from '../../data/parties'
 import { CONNECTIONS } from '../../data/connections'
 import { NEWS } from '../../data/news'
 import { AGENDAS } from '../../data/agendas'
+import { BILLS } from '../../data/voting_records'
+import { COMPANIES, POLITICAL_BUSINESS_TIES } from '../../data/business'
+import { TIMELINE_EVENTS } from '../../data/timeline_events'
 import NetworkGraph from '../../components/NetworkGraph'
 import CharacterRadar from '../../components/CharacterRadar'
 import WealthBar from '../../components/WealthBar'
@@ -64,6 +67,7 @@ const TABS = [
   { id: 'lhkpn',   label: '💰 LHKPN' },
   { id: 'berita',   label: '📰 Berita' },
   { id: 'agenda',   label: '📋 Agenda' },
+  { id: 'voting',   label: '🗳️ Voting' },
   { id: 'analisis', label: '🔬 Analisis' },
 ]
 
@@ -73,6 +77,99 @@ const STATUS_VARIANTS = {
   selesai: 'status-selesai',
   ingkar: 'status-ingkar',
   batal: 'status-batal',
+}
+
+function VotingTab({ person }) {
+  const partyId = person.party_id
+  if (!partyId) return (
+    <div className="py-8 text-center text-text-secondary">
+      <p className="text-3xl mb-2">📋</p>
+      <p>Tokoh independen/profesional — tidak ada data voting partai</p>
+    </div>
+  )
+
+  const billsWithVote = BILLS.map(bill => ({
+    ...bill,
+    vote: bill.party_positions?.[partyId] || null,
+  }))
+
+  const kimParties = ['ger', 'gol', 'nas', 'pan', 'dem', 'pks', 'pbb', 'pkb']
+  const isKIM = kimParties.includes(partyId)
+
+  const withVote = billsWithVote.filter(b => b.vote)
+  const consistent = withVote.filter(b => {
+    const govVote = isKIM ? 'setuju' : 'menolak'
+    return b.vote === govVote
+  }).length
+  const consistency = withVote.length ? Math.round(consistent / withVote.length * 100) : null
+
+  const voteConfig = {
+    setuju:  { icon: '✅', label: 'Setuju',  cls: 'text-green-400 bg-green-400/10 border-green-400/30' },
+    menolak: { icon: '❌', label: 'Menolak', cls: 'text-red-400 bg-red-400/10 border-red-400/30' },
+    abstain: { icon: '🟡', label: 'Abstain', cls: 'text-amber-400 bg-amber-400/10 border-amber-400/30' },
+  }
+  const resultCfg = {
+    disahkan: 'bg-red-500/10 text-red-400',
+    ditarik: 'bg-amber-500/10 text-amber-400',
+    dibatalkan_mk: 'bg-green-500/10 text-green-400',
+    disetujui: 'bg-red-500/10 text-red-400',
+  }
+
+  return (
+    <div className="space-y-4">
+      {consistency !== null && (
+        <div className="p-4 rounded-xl border border-border bg-bg-elevated flex items-center gap-4">
+          <div
+            className="text-3xl font-bold"
+            style={{ color: consistency > 70 ? '#22C55E' : consistency > 40 ? '#F59E0B' : '#EF4444' }}
+          >
+            {consistency}%
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-text-primary">Konsistensi Voting</p>
+            <p className="text-xs text-text-secondary">
+              {isKIM
+                ? 'Tingkat dukungan terhadap agenda koalisi pemerintah'
+                : 'Tingkat konsistensi oposisi terhadap agenda pemerintah'}
+            </p>
+          </div>
+        </div>
+      )}
+      <div className="space-y-3">
+        {billsWithVote.map(bill => {
+          const cfg = voteConfig[bill.vote] || { icon: '➖', label: 'Tidak Hadir/Data N/A', cls: 'text-gray-500 bg-gray-500/10 border-gray-500/30' }
+          return (
+            <div key={bill.id} className="p-4 rounded-xl border border-border bg-bg-card flex items-center gap-4">
+              <div className={`flex-shrink-0 px-3 py-2 rounded-lg border text-center min-w-[80px] ${cfg.cls}`}>
+                <div className="text-xl">{cfg.icon}</div>
+                <div className="text-xs font-bold">{cfg.label}</div>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap mb-1">
+                  <p className="text-sm font-semibold text-text-primary">{bill.title}</p>
+                  <span className={`text-xs px-2 py-0.5 rounded ${resultCfg[bill.result] || 'bg-gray-500/10 text-gray-400'}`}>
+                    {bill.result}
+                  </span>
+                </div>
+                <p className="text-xs text-text-secondary line-clamp-2">{bill.description}</p>
+                <div className="flex gap-2 mt-1 flex-wrap">
+                  {(bill.controversies || []).slice(0, 2).map(c => (
+                    <span key={c} className="text-xs px-2 py-0.5 rounded-full bg-bg-elevated border border-border text-text-secondary">{c}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex-shrink-0 text-right">
+                <p className="text-xs text-text-secondary">{bill.date?.slice(0, 7)}</p>
+                <p className="text-xs font-medium" style={{ color: bill.votes_against > 0 ? '#F59E0B' : '#6B7280' }}>
+                  {bill.votes_for > 0 ? `${bill.votes_for}:${bill.votes_against}` : 'N/A'}
+                </p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
 }
 
 export default function PersonDetail() {
@@ -393,6 +490,77 @@ export default function PersonDetail() {
                 </div>
               </Card>
             )}
+
+            {/* Business Interests */}
+            {(() => {
+              const personCompanies = COMPANIES.filter(c => c.owner_ids?.includes(person.id))
+              const personTies = POLITICAL_BUSINESS_TIES.filter(t => t.person_id === person.id)
+              if (personCompanies.length === 0 && personTies.length === 0) return null
+              return (
+                <Card className="p-5">
+                  <h3 className="text-sm font-bold text-text-primary mb-3 flex items-center gap-2">
+                    🏢 Kepentingan Bisnis
+                    {personTies.some(t => t.risk === 'tinggi') && (
+                      <span className="text-xs px-2 py-0.5 rounded bg-red-500/10 border border-red-500/30 text-red-400">⚠️ COI Risk</span>
+                    )}
+                  </h3>
+                  <div className="space-y-2">
+                    {personCompanies.map(c => (
+                      <div key={c.id} className="p-3 rounded-lg border border-border bg-bg-elevated">
+                        <div className="flex justify-between items-start gap-3">
+                          <div>
+                            <p className="text-sm font-semibold text-text-primary">{c.name}</p>
+                            <p className="text-xs text-text-secondary">{c.sector} · {c.revenue_estimate}</p>
+                            <p className="text-xs text-text-secondary mt-1">{c.political_link}</p>
+                          </div>
+                          <span className={`text-xs px-2 py-0.5 rounded border flex-shrink-0 ${c.coi_risk === 'tinggi' ? 'border-red-500/40 text-red-400' : 'border-amber-500/40 text-amber-400'}`}>
+                            {c.coi_risk} risk
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                    {personTies.filter(t => !personCompanies.find(c => c.id === t.company_id)).map(t => (
+                      <div key={t.company_id} className="p-3 rounded-lg border border-border bg-bg-elevated">
+                        <div className="flex justify-between items-start gap-3">
+                          <div>
+                            <p className="text-sm font-semibold text-text-primary">{t.company_id}</p>
+                            <p className="text-xs text-text-secondary">{t.description}</p>
+                          </div>
+                          <span className={`text-xs px-2 py-0.5 rounded border flex-shrink-0 ${t.risk === 'tinggi' ? 'border-red-500/40 text-red-400' : 'border-amber-500/40 text-amber-400'}`}>
+                            {t.risk} risk
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              )
+            })()}
+
+            {/* Timeline appearances */}
+            {(() => {
+              const personTimeline = TIMELINE_EVENTS.filter(e =>
+                e.person_ids?.includes(person.id) ||
+                e.description?.toLowerCase().includes(person.name.split(' ')[0].toLowerCase())
+              ).sort((a, b) => b.year - a.year).slice(0, 5)
+              if (personTimeline.length === 0) return null
+              return (
+                <Card className="p-5">
+                  <h3 className="text-sm font-bold text-text-primary mb-3">📅 Momen Bersejarah</h3>
+                  <div className="space-y-2">
+                    {personTimeline.map(e => (
+                      <div key={e.id} className="flex gap-3 p-3 rounded-lg border border-border bg-bg-elevated">
+                        <span className="text-xs font-bold text-accent-red flex-shrink-0 w-10">{e.year}</span>
+                        <div>
+                          <p className="text-sm text-text-primary">{e.title}</p>
+                          <p className="text-xs text-text-secondary line-clamp-1">{e.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              )
+            })()}
           </div>
         )}
 
@@ -577,6 +745,11 @@ export default function PersonDetail() {
               ))
             )}
           </div>
+        )}
+
+        {/* VOTING */}
+        {activeTab === 'voting' && (
+          <VotingTab person={person} />
         )}
 
         {/* ANALISIS */}
