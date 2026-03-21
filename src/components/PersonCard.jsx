@@ -11,7 +11,7 @@ const RISK_CONFIG = {
   terpidana: { label: '⛔ Terpidana', cls: 'risk-terpidana' },
 }
 
-export default function PersonCard({ person, compact }) {
+export default function PersonCard({ person, compact, bookmarked, onBookmark }) {
   const navigate = useNavigate()
   const party = person.party_id ? PARTY_MAP[person.party_id] : null
   const currentPos = person.positions?.find(p => p.is_current)
@@ -56,9 +56,18 @@ export default function PersonCard({ person, compact }) {
       whileHover={{ y: -3 }}
       transition={{ type: 'spring', stiffness: 400, damping: 28 }}
       onClick={() => navigate(`/persons/${person.id}`)}
-      className="bg-bg-card rounded-xl border border-border overflow-hidden cursor-pointer group"
+      className="relative bg-bg-card rounded-xl border border-border overflow-hidden cursor-pointer group"
       style={{ boxShadow: 'var(--shadow-card)' }}
     >
+      {onBookmark && (
+        <button
+          onClick={e => { e.preventDefault(); e.stopPropagation(); onBookmark(person.id) }}
+          className="absolute top-2 right-2 text-lg opacity-60 hover:opacity-100 z-10 transition-opacity"
+          title={bookmarked ? 'Hapus dari pantauan' : 'Tambah ke pantauan'}
+        >
+          {bookmarked ? '⭐' : '☆'}
+        </button>
+      )}
       {/* Party color top bar */}
       <div
         className="h-1.5 w-full"

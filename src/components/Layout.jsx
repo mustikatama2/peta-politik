@@ -24,6 +24,7 @@ const NAV = [
   { to:'/kpk',      icon:'⚖️', label:'KPK Cases' },
   { to:'/coi',      icon:'🔍', label:'Konflik Kepentingan' },
   { to:'/media',    icon:'📡', label:'Kepemilikan Media' },
+  { to:'/bisnis',   icon:'🏢', label:'Kepemilikan Bisnis' },
   { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
   { to:'/news',     icon:'📰', label:'Berita' },
   { to:'/agendas',  icon:'📋', label:'Agenda' },

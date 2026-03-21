@@ -1,4 +1,58 @@
 export const PERSONS = [
+  // ─── HISTORICAL / THIN ENTRIES (for dynasty linking) ─────────────────────
+  {
+    id:"soekarno", name:"Ir. Soekarno", photo_url:null, photo_placeholder:"SK",
+    born:"6 Jun 1901", born_place:"Surabaya", religion:"Islam",
+    education:"TH Bandung (ITB)",
+    party_id:"pdip", party_role:"Proklamator",
+    positions:[{title:"Presiden RI ke-1", institution:"Republik Indonesia", region:"Nasional", start:"1945", end:"1967", is_current:false}],
+    tier:"historis", region_id:null,
+    bio:"Proklamator dan Presiden pertama RI. Pendiri ideologi Marhaenisme dan Pancasila. Wafat 21 Juni 1970.",
+    tags:["historis","proklamator","presiden"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Proklamator RI, ayah Megawati",
+    analysis:{ ideology_score:3, populism_score:10, corruption_risk:"rendah", nationalism:10, religiosity:5, track_record:"Pemimpin revolusi kemerdekaan RI 1945.", policy_direction:"Nasionalis-Marhaenis" }
+  },
+  {
+    id:"sumitro", name:"Sumitro Djojohadikusumo", photo_url:null, photo_placeholder:"SD",
+    born:"29 Mei 1917", born_place:"Kebumen", religion:"Islam",
+    education:"Ekonomi Rotterdam Belanda",
+    party_id:"ger", party_role:"Ekonom",
+    positions:[{title:"Menteri Keuangan RI", institution:"Kabinet RIS", region:"Nasional", start:"1950", end:"1952", is_current:false}],
+    tier:"historis", region_id:null,
+    bio:"Ekonom besar Indonesia. Ayah Prabowo Subianto dan Hashim Djojohadikusumo. Arsitek kebijakan ekonomi era Soekarno-Soeharto.",
+    tags:["historis","ekonom","akademisi"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Ekonom senior; ayah Prabowo dan Hashim",
+    analysis:{ ideology_score:5, populism_score:3, corruption_risk:"rendah", nationalism:8, religiosity:4, track_record:"Teknokrat ekonomi RI.", policy_direction:"Teknokratis" }
+  },
+  {
+    id:"prananda", name:"Prananda Prabowo", photo_url:null, photo_placeholder:"PP",
+    born:"8 Apr 1970", born_place:"Jakarta", religion:"Islam",
+    education:"Universitas Indonesia",
+    party_id:"pdip", party_role:"Wakil Ketua Bidang Pemenangan",
+    positions:[{title:"Wakil Ketua DPP PDIP Bidang Pemenangan Pemilu", institution:"PDIP", region:"Nasional", start:"2019", end:null, is_current:true}],
+    tier:"nasional", region_id:null,
+    bio:"Putra Megawati Soekarnoputri, adik Puan Maharani. Mengelola sayap digital dan pemenangan PDIP.",
+    tags:["pdip","legislatif"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Anak Megawati, adik Puan; strategis di PDIP",
+    analysis:{ ideology_score:3, populism_score:5, corruption_risk:"rendah", nationalism:7, religiosity:4, track_record:"Berperan di balik layar PDIP.", policy_direction:"Nasionalis-PDIP" }
+  },
+  {
+    id:"guruh", name:"Guruh Soekarnoputra", photo_url:null, photo_placeholder:"GS",
+    born:"13 Jan 1953", born_place:"Jakarta", religion:"Islam",
+    education:"ASKI Yogyakarta (seni)",
+    party_id:"pdip", party_role:"Anggota DPR",
+    positions:[{title:"Anggota DPR RI Fraksi PDIP", institution:"DPR RI", region:"Nasional", start:"2004", end:null, is_current:true}],
+    tier:"nasional", region_id:null,
+    bio:"Seniman dan politisi PDIP. Putra bungsu Soekarno dari Fatmawati. Dikenal lewat karya seni dan tari.",
+    tags:["pdip","legislatif","seniman"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Anak Soekarno, adik Megawati",
+    analysis:{ ideology_score:3, populism_score:4, corruption_risk:"rendah", nationalism:8, religiosity:4, track_record:"Anggota DPR PDIP sejak 2004.", policy_direction:"Nasionalis-Soekarnoisme" }
+  },
+
   // ─── NASIONAL — EKSEKUTIF ───────────────────────────────────────────────
   {
     id:"prabowo", name:"Prabowo Subianto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Prabowo_Subianto_2024_official_portrait.jpg/400px-Prabowo_Subianto_2024_official_portrait.jpg", photo_placeholder:"PS",
