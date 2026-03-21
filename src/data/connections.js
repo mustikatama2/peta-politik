@@ -127,6 +127,157 @@ export const CONNECTIONS = [
 
   // ── Keamanan nasional ────────────────────────────────────────────────────
   { from:"ahmad_luthfi",   to:"listyo_sigit", type:"rekan",  label:"Eks-Kapolda Jateng; jaringan Polri", strength:6 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH: Gubernur → Ketum Partai (Pilkada 2024) ───────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Gerindra gubernur → prabowo (presiden/patron) + sufmi_dasco (Sekjen, Plt Ketum)
+  { from:"al_haris",        to:"prabowo",      type:"koalisi", label:"Gerindra — Gubernur Jambi 2024",                strength:7 },
+  { from:"al_haris",        to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Jambi", strength:6 },
+  { from:"rahmat_mirzani",  to:"prabowo",       type:"koalisi", label:"Gerindra — Gubernur Lampung 2024",              strength:7 },
+  { from:"rahmat_mirzani",  to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Lampung",strength:6 },
+  { from:"hidayat_arsani",  to:"prabowo",       type:"koalisi", label:"Gerindra — Gubernur Babel 2024",                strength:6 },
+  { from:"hidayat_arsani",  to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Babel",  strength:5 },
+  { from:"yulius_selvanus", to:"prabowo",       type:"koalisi", label:"Gerindra — Gubernur Sulut 2024",               strength:6 },
+  { from:"yulius_selvanus", to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Sulut", strength:5 },
+  { from:"andi_sumangerukka",to:"prabowo",      type:"koalisi", label:"Gerindra — Gubernur Sultra 2024",              strength:6 },
+  { from:"andi_sumangerukka",to:"sufmi_dasco",  type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Sultra",strength:5 },
+  { from:"sitti_sutinah",   to:"prabowo",       type:"koalisi", label:"Gerindra — Gubernur Sulbar 2024",              strength:6 },
+  { from:"sitti_sutinah",   to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Sulbar",strength:5 },
+  { from:"sherly_tjoanda",  to:"prabowo",       type:"koalisi", label:"Gerindra — Gubernur Malut 2025",               strength:6 },
+  { from:"sherly_tjoanda",  to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Malut", strength:5 },
+  // Gerindra Sulsel sudah ada, tambah sufmi_dasco
+  { from:"muzakir_manaf",   to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Aceh",  strength:6 },
+  { from:"bobby_nasution",  to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Sumut", strength:6 },
+  { from:"dedi_mulyadi",    to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Jabar", strength:6 },
+  { from:"ahmad_luthfi",    to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Jateng",strength:6 },
+  { from:"andra_soni",      to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Banten",strength:6 },
+  { from:"rudy_masud",      to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Kaltim",strength:6 },
+  { from:"agustiar_sabran", to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Kalteng",strength:5 },
+  { from:"muhidin",         to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Kalsel",strength:5 },
+  { from:"zainal_arifin",   to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Kaltara",strength:5 },
+  { from:"anwar_hafid",     to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Sulteng",strength:5 },
+  { from:"hendrik_lewerissa",to:"sufmi_dasco",  type:"koalisi", label:"Gerindra — Sekjen Gerindra, koordinasi Maluku",strength:5 },
+
+  // Golkar gubernur → bahlil (Ketua Umum baru sejak 2024)
+  { from:"ansar_ahmad",     to:"bahlil",        type:"koalisi", label:"Golkar — Gubernur Kepri 2x periode",           strength:7 },
+  { from:"ansar_ahmad",     to:"airlangga",     type:"koalisi", label:"Golkar — Mantan Ketum Golkar era Kepri I",     strength:6 },
+  { from:"melkiades",       to:"bahlil",        type:"koalisi", label:"Golkar — Gubernur NTT 2024",                   strength:6 },
+  { from:"ria_norsan",      to:"bahlil",        type:"koalisi", label:"Golkar — Gubernur Kalbar 2x periode",          strength:7 },
+  { from:"ria_norsan",      to:"airlangga",     type:"koalisi", label:"Golkar — era Mantan Ketum Golkar",            strength:5 },
+  { from:"gusnar_ismail",   to:"bahlil",        type:"koalisi", label:"Golkar — Gubernur Gorontalo 2024",             strength:6 },
+
+  // PKB gubernur → cakimin
+  { from:"khofifah",        to:"cakimin",       type:"koalisi", label:"PKB — Gubernur Jatim 2024, kader PKB",        strength:7 },
+  { from:"abdul_wahid",     to:"cakimin",       type:"koalisi", label:"PKB — Gubernur Riau 2024",                     strength:7 },
+
+  // PKS gubernur → ahmad_syaikhu
+  { from:"mahyeldi",        to:"ahmad_syaikhu", type:"koalisi", label:"PKS — Gubernur Sumbar 2x periode",             strength:8 },
+  { from:"helmi_hasan",     to:"ahmad_syaikhu", type:"koalisi", label:"PKS — Gubernur Bengkulu 2024",                 strength:7 },
+
+  // NasDem gubernur → surya_paloh
+  { from:"herman_deru",     to:"surya_paloh",   type:"koalisi", label:"NasDem — Gubernur Sumsel 2x periode",          strength:7 },
+  { from:"lalu_iqbal",      to:"surya_paloh",   type:"koalisi", label:"NasDem — Gubernur NTB 2024, eks-Dubes",        strength:7 },
+  { from:"andi_sudirman",   to:"surya_paloh",   type:"koalisi", label:"NasDem — Gubernur Sulsel 2x periode",          strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH: Menteri Kabinet Merah Putih → Prabowo ─────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"sugiono",         to:"prabowo",       type:"koalisi", label:"Menteri Luar Negeri — Kabinet Merah Putih",    strength:8 },
+  { from:"sjafrie",         to:"prabowo",       type:"koalisi", label:"Menteri Pertahanan — Kabinet Merah Putih",     strength:8 },
+  { from:"agus_gumiwang",   to:"prabowo",       type:"koalisi", label:"Menteri Perindustrian — Kabinet Merah Putih",  strength:7 },
+  { from:"azwar_anas",      to:"prabowo",       type:"koalisi", label:"Menteri PAN-RB — Kabinet Merah Putih",         strength:7 },
+  { from:"nawawi",          to:"prabowo",       type:"rekan",   label:"Ketua KPK — koordinasi pemberantasan korupsi", strength:5 },
+  { from:"basuki",          to:"prabowo",       type:"koalisi", label:"Kepala OIKN Nusantara — Kabinet Prabowo",      strength:7 },
+  { from:"agus_subiyanto",  to:"prabowo",       type:"koalisi", label:"Panglima TNI — di bawah Presiden Prabowo",     strength:8 },
+  { from:"listyo_sigit",    to:"prabowo",       type:"koalisi", label:"Kapolri — bertugas di era Presiden Prabowo",   strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH: Keluarga & Dinasti ────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // SBY-AHY
+  { from:"sby",             to:"ahy",           type:"keluarga", label:"Bapak-Anak (Agus Harimurti Yudhoyono)",      strength:10 },
+  { from:"sby",             to:"agus_subiyanto", type:"rekan",   label:"Era SBY — jaringan militer AD",               strength:5 },
+
+  // Jokowi dynasty ekstra
+  { from:"jokowi",          to:"anwar_usman",   type:"keluarga", label:"Ipar — Anwar menikahi adik Jokowi",          strength:9 },
+  { from:"anwar_usman",     to:"gibran",        type:"keluarga", label:"Paman — putusan MK batas usia Cawapres",     strength:10 },
+
+  // Megawati-Puan ekstra
+  { from:"puan",            to:"hasto",         type:"rekan",   label:"Rekan senior PDIP; koordinasi partai",         strength:7 },
+  { from:"puan",            to:"ganjar",        type:"koalisi", label:"PDIP — Puan usung Ganjar Capres 2024",         strength:8 },
+
+  // Hashim bisnis
+  { from:"hashim",          to:"erick_thohir",  type:"bisnis",  label:"Lingkaran pengusaha Prabowo — bisnis bersama", strength:5 },
+  { from:"hashim",          to:"sufmi_dasco",   type:"rekan",   label:"Dewan Pembina-Sekjen Gerindra; koordinasi partai", strength:7 },
+
+  // Emil Dardak → Hary Tanoe (mertua)
+  { from:"emil_dardak",     to:"ahy",           type:"koalisi", label:"Demokrat — Wagub Jatim kader Demokrat",       strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH: Bisnis & Konflik ──────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"surya_paloh",     to:"anies",         type:"rekan",   label:"NasDem usung Anies; Paloh patron Anies 2024",  strength:8 },
+  { from:"anies",           to:"pramono_anung", type:"konflik", label:"Rival Pilkada DKI 2024 — Anies kalah",         strength:3 },
+  { from:"ridwan_kamil",    to:"pramono_anung", type:"konflik", label:"Rival Pilkada DKI 2024 — RK kalah",            strength:3 },
+  { from:"budi_gunawan",    to:"megawati",      type:"konflik", label:"BIN vs PDIP — BG calon Kapolri gagal era PDIP",strength:4 },
+  { from:"anies",           to:"hasto",         type:"konflik", label:"Oposisi vs PDIP internal — beda visi perubahan",strength:3 },
+  { from:"tom_lembong",     to:"megawati",      type:"rekan",   label:"NasDem-PDIP, koalisi Anies 2024",              strength:4 },
+  { from:"anies",           to:"ahmad_syaikhu", type:"koalisi", label:"PKS dukung Anies Capres 2024",                 strength:7 },
+  { from:"mahfud_md",       to:"ganjar",        type:"koalisi", label:"Paslon Capres-Cawapres 2024 (Paslon 3)",       strength:10 },
+  { from:"ganjar",          to:"megawati",      type:"koalisi", label:"PDIP usung Ganjar Capres 2024",                strength:9 },
+  { from:"ganjar",          to:"hasto",         type:"rekan",   label:"Hasto koordinator kampanye Ganjar-Mahfud 2024",strength:7 },
+  { from:"said_iqbal",      to:"cakimin",       type:"rekan",   label:"Buruh-PKB, basis massa pekerja & NU",          strength:5 },
+  { from:"gus_yahya",       to:"cakimin",       type:"konflik", label:"PBNU tidak otomatis mendukung PKB — tensi 2024",strength:4 },
+  { from:"haedar_nashir",   to:"anies",         type:"rekan",   label:"Muhammadiyah — basis massa Anies Capres 2024", strength:5 },
+  { from:"anwar_abbas",     to:"prabowo",       type:"rekan",   label:"MUI — dukung stabilitas pemerintah Prabowo",   strength:5 },
+
+  // ── KPK dan tersangka ───────────────────────────────────────────────────
+  { from:"gus_muhdlor",     to:"khofifah",      type:"rekan",   label:"Bupati Sidoarjo di bawah pemerintahan Gubernur Jatim", strength:6 },
+  { from:"saiful_ilah",     to:"gus_muhdlor",   type:"rekan",   label:"Mantan-Bupati ke Bupati Sidoarjo; warisan pemerintahan", strength:5 },
+  { from:"hasan_aminuddin", to:"cakimin",       type:"rekan",   label:"NasDem Probolinggo; bersinggungan dengan PKB", strength:4 },
+  { from:"sanusi_malang",   to:"prabowo",       type:"koalisi", label:"Gerindra — Bupati Malang dari Gerindra",       strength:6 },
+
+  // ── Jawa Timur ekstra ───────────────────────────────────────────────────
+  { from:"eri_cahyadi",     to:"megawati",      type:"koalisi", label:"PDIP — Walikota Surabaya kader PDIP",          strength:7 },
+  { from:"timbul_prihanjoko",to:"megawati",     type:"koalisi", label:"PDIP — Bupati Pasuruan kader PDIP",            strength:6 },
+  { from:"dawam_ridho",     to:"megawati",      type:"koalisi", label:"PDIP — Bupati Lumajang kader PDIP",            strength:6 },
+  { from:"ipuk",            to:"megawati",      type:"koalisi", label:"PDIP — Bupati Banyuwangi kader PDIP",          strength:6 },
+  { from:"hanindhito",      to:"megawati",      type:"koalisi", label:"PDIP — Bupati Kediri kader PDIP",              strength:6 },
+  { from:"azwar_anas",      to:"megawati",      type:"koalisi", label:"PDIP — Menteri PAN-RB kader PDIP",             strength:6 },
+  { from:"fandi_yani",      to:"cakimin",       type:"koalisi", label:"PKB — Bupati Gresik kader PKB",                strength:7 },
+  { from:"hendy_siswanto",  to:"cakimin",       type:"koalisi", label:"PKB — Bupati Jember kader PKB",                strength:6 },
+  { from:"ikfina",          to:"cakimin",       type:"koalisi", label:"PKB — Bupati Mojokerto kader PKB",             strength:6 },
+  { from:"mundjidah",       to:"cakimin",       type:"koalisi", label:"PKB — Bupati Jombang kader PKB; basis NU",     strength:7 },
+  { from:"yuhronur_efendi", to:"cakimin",       type:"koalisi", label:"PKB — Bupati Lamongan kader PKB",              strength:6 },
+  { from:"fauzi_ngawi",     to:"cakimin",       type:"koalisi", label:"PKB — Bupati Ngawi kader PKB",                 strength:6 },
+  { from:"andri_wahyudi",   to:"cakimin",       type:"koalisi", label:"PKB — Bupati Bondowoso kader PKB",             strength:6 },
+  { from:"bangkalan_bupati",to:"cakimin",       type:"koalisi", label:"PKB — Bupati Bangkalan kader PKB",             strength:6 },
+  { from:"fauzi_sampang",   to:"cakimin",       type:"koalisi", label:"PKB — Bupati Sampang kader PKB",               strength:6 },
+  { from:"taufiq_pamekasan",to:"cakimin",       type:"koalisi", label:"PKB — Bupati Pamekasan kader PKB; Madura",     strength:6 },
+  { from:"winarso_kediri",  to:"cakimin",       type:"koalisi", label:"PKB — Walikota Kediri kader PKB",              strength:6 },
+  { from:"arifin_tuban",    to:"cakimin",       type:"koalisi", label:"PKB — Bupati Tuban kader PKB",                 strength:6 },
+  { from:"karna_suswandi",  to:"surya_paloh",   type:"koalisi", label:"NasDem — Bupati Situbondo kader NasDem",       strength:6 },
+  { from:"suwandy",         to:"surya_paloh",   type:"koalisi", label:"NasDem — Walikota Probolinggo kader NasDem",   strength:6 },
+  { from:"maidi",           to:"prabowo",       type:"koalisi", label:"Gerindra — Walikota Madiun kader Gerindra",    strength:6 },
+  { from:"maidi",           to:"sufmi_dasco",   type:"koalisi", label:"Gerindra — koordinasi partai",                 strength:5 },
+  { from:"ipong_muchlissoni",to:"prabowo",      type:"koalisi", label:"Gerindra — Bupati Ponorogo kader Gerindra",    strength:6 },
+  { from:"ipong_muchlissoni",to:"sufmi_dasco",  type:"koalisi", label:"Gerindra — koordinasi partai",                 strength:5 },
+  { from:"sutiaji",         to:"ahy",           type:"koalisi", label:"Demokrat — Walikota Malang kader Demokrat",   strength:6 },
+  { from:"busyro_sumenep",  to:"megawati",      type:"koalisi", label:"PDIP — Bupati Sumenep kader PDIP",             strength:6 },
+
+  // ── Analitik & Koalisi Besar ────────────────────────────────────────────
+  { from:"prabowo",         to:"sufmi_dasco",   type:"koalisi", label:"Presiden-Sekjen Gerindra; Prabowo patron Dasco",strength:9 },
+  { from:"prabowo",         to:"bahlil",        type:"koalisi", label:"Golkar bergabung KIM Plus; Bahlil menteri ESDM",strength:8 },
+  { from:"prabowo",         to:"cakimin",       type:"koalisi", label:"PKB bergabung KIM Plus setelah Pilpres",       strength:7 },
+  { from:"prabowo",         to:"surya_paloh",   type:"mantan-koalisi", label:"NasDem sempat bergabung, kemudian jarak",strength:4 },
+  { from:"prabowo",         to:"ahmad_syaikhu", type:"mantan-koalisi", label:"PKS gabung KIM Plus setelah Pilpres 2024",strength:5 },
+  { from:"airlangga",       to:"bahlil",        type:"konflik", label:"Pergantian Ketum Golkar — Bahlil gantikan Airlangga 2024", strength:5 },
+  { from:"cakimin",         to:"anies",         type:"konflik", label:"Paslon 2024 gagal; PKB kemudian gabung KIM Plus", strength:4 },
 ]
 
 export const CONNECTION_TYPES = {

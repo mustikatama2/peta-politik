@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { useTheme } from '../contexts/ThemeContext'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ToastContainer } from './ui'
+import GlobalSearch from './GlobalSearch'
 
 const NAV = [
   { to:'/',         icon:'🏠', label:'Dashboard' },
@@ -13,6 +14,7 @@ const NAV = [
   { to:'/regions',  icon:'🗺️', label:'Wilayah' },
   { to:'/elections',icon:'📊', label:'Pemilu' },
   { to:'/analitik', icon:'📈', label:'Analitik' },
+  { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
   { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
   { to:'/news',     icon:'📰', label:'Berita' },
   { to:'/agendas',  icon:'📋', label:'Agenda' },
@@ -133,14 +135,8 @@ export default function Layout({ children }) {
               <span>CPI 34/100</span>
             </div>
 
-            {/* Search pill */}
-            <button
-              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-bg-elevated text-text-secondary hover:border-border-strong text-xs transition-colors"
-            >
-              <span>🔍</span>
-              <span>Cari...</span>
-              <kbd className="px-1.5 py-0.5 rounded text-[10px] border border-border bg-bg-card text-text-muted">⌘K</kbd>
-            </button>
+            {/* Global Search */}
+            <GlobalSearch />
 
             {/* Theme toggle */}
             <button
