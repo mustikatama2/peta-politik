@@ -31,6 +31,7 @@ const NAV = [
   { to:'/timeline', icon:'📅', label:'Linimasa' },
   { to:'/voting',   icon:'🗳️', label:'Rekam Jejak Voting' },
   { to:'/kpk',      icon:'⚖️', label:'KPK Cases' },
+  { to:'/investigasi', icon:'🔍', label:'Investigasi' },
   { to:'/coi',      icon:'🔍', label:'Konflik Kepentingan' },
   { to:'/media',    icon:'📡', label:'Kepemilikan Media' },
   { to:'/bisnis',   icon:'🏢', label:'Kepemilikan Bisnis' },

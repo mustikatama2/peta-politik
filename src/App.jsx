@@ -37,6 +37,7 @@ const CoalitionPage  = lazy(() => import('./pages/coalition/CoalitionPage'))
 const PemerintahPage = lazy(() => import('./pages/pemerintah/PemerintahPage'))
 const IndikatorPage  = lazy(() => import('./pages/indikator/IndikatorPage'))
 const DapilPage      = lazy(() => import('./pages/dapil/DapilPage'))
+const InvestigasiPage = lazy(() => import('./pages/investigasi/InvestigasiPage'))
 const PencarianPage  = lazy(() => import('./pages/pencarian/PencarianPage'))
 
 // Loading fallback — skeleton style
@@ -80,6 +81,7 @@ export default function App() {
         <Route path="/ormas" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><OrmasList /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/analitik" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><AnalitikPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/kpk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KPKCases /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/investigasi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><InvestigasiPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/media" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><MediaOwnership /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/dynasty" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><DynastyMapper /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/timeline" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Timeline /></Suspense></ErrorBoundary></ProtectedRoute>} />
