@@ -1881,6 +1881,656 @@ function TabTrenSkor() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// TAB 9: PREDIKSI 2029
+// ═══════════════════════════════════════════════════════════════════════════════
+function TabPrediksi2029() {
+  const pilpresScenarioData = [
+    { short: 'Prabowo',     fullName: 'Prabowo Subianto', skenarioA: 45, skenarioB: 35, note: 'Incumbent premium; volatil terhadap ekonomi' },
+    { short: 'Anies',       fullName: 'Anies Baswedan',   skenarioA: 25, skenarioB: 28, note: 'Basis oposisi konsisten; urban kuat' },
+    { short: 'Ganjar/PDIP', fullName: 'Ganjar / Kandidat PDIP', skenarioA: 17, skenarioB: 20, note: 'Bergantung rekonsiliasi internal PDIP' },
+    { short: 'RK',          fullName: 'Ridwan Kamil',     skenarioA: 12, skenarioB: 10, note: 'Emerging; hasil Pilkada jadi batu ujian' },
+    { short: 'AHY',         fullName: 'AHY / Dark Horse', skenarioA: 10, skenarioB: 8,  note: 'Efek "Menteri" bisa naikkan popularitas' },
+  ]
+
+  const dprData = [
+    { name: 'Gerindra', current: 86,  projected: 95, color: '#ef4444', reason: 'Incumbent premium' },
+    { name: 'PDIP',     current: 110, projected: 85, color: '#dc2626', reason: 'Penalti oposisi' },
+    { name: 'Golkar',   current: 102, projected: 95, color: '#f59e0b', reason: 'Stabil koalisi' },
+    { name: 'PKB',      current: 68,  projected: 75, color: '#22c55e', reason: 'Basis NU tumbuh' },
+    { name: 'NasDem',   current: 69,  projected: 55, color: '#3b82f6', reason: 'Sinyal Jakarta melemah' },
+    { name: 'PKS',      current: 53,  projected: 65, color: '#8b5cf6', reason: 'Basis Islamis tumbuh' },
+    { name: 'Demokrat', current: 44,  projected: 50, color: '#06b6d4', reason: 'Efek AHY Menteri' },
+    { name: 'PAN',      current: 48,  projected: 45, color: '#f97316', reason: 'Stabil' },
+  ]
+
+  const totalProjected = dprData.reduce((s, d) => s + d.projected, 0)
+
+  const trendData = useMemo(() =>
+    PILPRES_2029_POLLS.map(p => ({ date: p.date, ...p.candidates })),
+    []
+  )
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">🔮 Prediksi Lanskap Politik 2029</h2>
+        <p className="text-sm text-text-muted mt-1">
+          Proyeksi berbasis tren survei 2024–2025 · Bukan prediksi resmi
+        </p>
+      </div>
+
+      {/* ── A: Pilpres 2029 Scenario Chart ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">A. Proyeksi Pilpres 2029 — Putaran Pertama</h3>
+        <p className="text-xs text-text-muted mb-4">
+          Skenario A: Ekonomi Baik · Skenario B: Penurunan Ekonomi
+          <br />
+          Sumber: Proyeksi berdasarkan tren survei 2024–2025
+        </p>
+        <ResponsiveContainer width="100%" height={280}>
+          <BarChart data={pilpresScenarioData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+            <XAxis dataKey="short" tick={{ fill: '#9ca3af', fontSize: 12 }} />
+            <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} unit="%" domain={[0, 55]} />
+            <Tooltip
+              contentStyle={{ background: 'var(--color-bg-card)', border: '1px solid var(--color-border)', borderRadius: 8, fontSize: 12 }}
+              formatter={(v, name) => [`${v}%`, name === 'skenarioA' ? '🟢 Skenario A (Ekonomi Baik)' : '🔴 Skenario B (Penurunan)']}
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs shadow-xl">
+                    <p className="font-bold text-text-primary mb-1">{d.fullName}</p>
+                    <p className="text-green-400">🟢 Skenario A (Ekonomi Baik): {d.skenarioA}%</p>
+                    <p className="text-red-400">🔴 Skenario B (Penurunan): {d.skenarioB}%</p>
+                    <p className="text-text-muted mt-1 italic">{d.note}</p>
+                  </div>
+                )
+              }}
+            />
+            <Legend formatter={v => v === 'skenarioA' ? '🟢 Skenario A (Ekonomi Baik)' : '🔴 Skenario B (Penurunan)'} />
+            <Bar dataKey="skenarioA" name="skenarioA" fill="#22c55e" radius={[4, 4, 0, 0]}
+              label={{ position: 'top', fill: '#9ca3af', fontSize: 10, formatter: v => `${v}%` }}
+            />
+            <Bar dataKey="skenarioB" name="skenarioB" fill="#ef4444" radius={[4, 4, 0, 0]}
+              label={{ position: 'top', fill: '#9ca3af', fontSize: 10, formatter: v => `${v}%` }}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+
+        {/* Candidate notes */}
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
+          {pilpresScenarioData.map(c => (
+            <div key={c.short} className="bg-bg-elevated rounded-lg p-3 text-xs">
+              <p className="font-semibold text-text-primary mb-1">{c.fullName}</p>
+              <p className="text-amber-400 font-bold mb-1">{c.skenarioB}–{c.skenarioA}%</p>
+              <p className="text-text-muted leading-relaxed">{c.note}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Survey Trend Chart ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">Tren Elektabilitas 2029 (Data Survei)</h3>
+        <p className="text-xs text-text-muted mb-4">
+          Dari {PILPRES_2029_POLLS.length} survei (Sep 2024 – Des 2025, termasuk proyeksi) · Sumber: Saiful Mujani, Indikator, SMRC, Charta, Median
+        </p>
+        <ResponsiveContainer width="100%" height={250}>
+          <LineChart data={trendData} margin={{ top: 0, right: 20, left: 0, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+            <XAxis dataKey="date" tick={{ fill: '#9ca3af', fontSize: 10 }} />
+            <YAxis tick={{ fill: '#9ca3af', fontSize: 10 }} unit="%" />
+            <Tooltip contentStyle={{ background: 'var(--color-bg-card)', border: '1px solid var(--color-border)', borderRadius: 8, fontSize: 11 }} />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+            <Line type="monotone" dataKey="prabowo"      name="Prabowo"      stroke="#ef4444" strokeWidth={2}   dot={{ r: 3 }} connectNulls />
+            <Line type="monotone" dataKey="anies"        name="Anies"        stroke="#3b82f6" strokeWidth={2}   dot={{ r: 3 }} connectNulls />
+            <Line type="monotone" dataKey="dedi_mulyadi" name="Dedi Mulyadi" stroke="#22c55e" strokeWidth={1.5} dot={{ r: 3 }} connectNulls />
+            <Line type="monotone" dataKey="khofifah"     name="Khofifah"     stroke="#f59e0b" strokeWidth={1.5} dot={{ r: 3 }} connectNulls />
+            <Line type="monotone" dataKey="ridwan_kamil" name="RK"           stroke="#8b5cf6" strokeWidth={1.5} dot={{ r: 3 }} connectNulls />
+            <Line type="monotone" dataKey="ahy"          name="AHY"          stroke="#06b6d4" strokeWidth={1}   dot={{ r: 2 }} connectNulls />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* ── B: DPR 2029 Projection ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">B. Proyeksi Kursi DPR 2029</h3>
+        <p className="text-xs text-text-muted mb-4">
+          Perbandingan kursi DPR 2024 vs proyeksi 2029 · Total proyeksi: <strong className="text-text-primary">{totalProjected} kursi</strong>
+        </p>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={dprData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+            <XAxis dataKey="name" tick={{ fill: '#9ca3af', fontSize: 11 }} />
+            <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} domain={[0, 130]} />
+            <Tooltip
+              content={({ active, payload }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                const delta = d.projected - d.current
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs">
+                    <p className="font-bold" style={{ color: d.color }}>{d.name}</p>
+                    <p className="text-text-muted">2024: <strong className="text-text-primary">{d.current}</strong></p>
+                    <p className="text-text-muted">Proyeksi 2029: <strong className="text-text-primary">{d.projected}</strong></p>
+                    <p style={{ color: delta > 0 ? '#22c55e' : delta < 0 ? '#ef4444' : '#9ca3af' }}>
+                      Delta: {delta > 0 ? '+' : ''}{delta}
+                    </p>
+                    <p className="text-text-muted mt-1 italic">{d.reason}</p>
+                  </div>
+                )
+              }}
+            />
+            <Legend formatter={v => v === 'current' ? '🏛️ Kursi DPR 2024' : '🔮 Proyeksi 2029'} />
+            <Bar dataKey="current"   name="current"   radius={[4, 4, 0, 0]} label={{ position: 'top', fill: '#9ca3af', fontSize: 10 }}>
+              {dprData.map(d => <Cell key={d.name} fill={d.color} opacity={0.45} />)}
+            </Bar>
+            <Bar dataKey="projected" name="projected" radius={[4, 4, 0, 0]} label={{ position: 'top', fill: '#9ca3af', fontSize: 10 }}>
+              {dprData.map(d => <Cell key={d.name} fill={d.color} />)}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+
+        {/* Delta table */}
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="text-left py-2 px-3 text-text-muted">Partai</th>
+                <th className="text-right py-2 px-3 text-text-muted">2024</th>
+                <th className="text-right py-2 px-3 text-text-muted">Proyeksi 2029</th>
+                <th className="text-right py-2 px-3 text-text-muted">Delta</th>
+                <th className="text-left py-2 px-3 text-text-muted">Alasan Proyeksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dprData.map(d => {
+                const delta = d.projected - d.current
+                return (
+                  <tr key={d.name} className="border-b border-border/50 hover:bg-bg-elevated/50">
+                    <td className="py-2 px-3 font-medium" style={{ color: d.color }}>{d.name}</td>
+                    <td className="py-2 px-3 text-right text-text-muted">{d.current}</td>
+                    <td className="py-2 px-3 text-right font-bold text-text-primary">{d.projected}</td>
+                    <td className="py-2 px-3 text-right font-bold" style={{ color: delta > 0 ? '#22c55e' : delta < 0 ? '#ef4444' : '#9ca3af' }}>
+                      {delta > 0 ? '+' : ''}{delta}
+                    </td>
+                    <td className="py-2 px-3 text-text-muted">{d.reason}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+        <p className="text-[10px] text-text-muted mt-3 italic">
+          * Proyeksi indikatif — bukan prediksi resmi. Berdasarkan tren historis 2019–2024, polling partai terkini, dan dinamika koalisi.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// TAB 10: KORELASI STATISTIK
+// ═══════════════════════════════════════════════════════════════════════════════
+function TabKorelasiStat() {
+  // ── Section A: LHKPN vs Controversy ──
+  const lhkpnData = useMemo(() =>
+    PERSONS
+      .filter(p => p.lhkpn_latest && p.lhkpn_latest > 0 && p.analysis?.controversy_level != null)
+      .map(p => ({
+        id: p.id,
+        name: p.name.split(' ').slice(0, 2).join(' '),
+        fullName: p.name,
+        x: p.lhkpn_latest / 1_000_000_000,
+        y: p.analysis.controversy_level,
+        tier: p.tier,
+        party_id: p.party_id,
+      })),
+    []
+  )
+
+  const lhkpnXs = useMemo(() => lhkpnData.map(d => d.x), [lhkpnData])
+  const lhkpnYs = useMemo(() => lhkpnData.map(d => d.y), [lhkpnData])
+  const lhkpnR   = useMemo(() => pearsonR(lhkpnXs, lhkpnYs), [lhkpnXs, lhkpnYs])
+  const lhkpnReg = useMemo(() => linearRegression(lhkpnXs, lhkpnYs), [lhkpnXs, lhkpnYs])
+  const lhkpnRI  = useMemo(() => lhkpnR !== null ? interpretR(lhkpnR) : null, [lhkpnR])
+
+  const lhkpnRegLine = useMemo(() => {
+    if (lhkpnXs.length < 2) return []
+    const minX = Math.min(...lhkpnXs), maxX = Math.max(...lhkpnXs)
+    return [
+      { x: minX, y: lhkpnReg.slope * minX + lhkpnReg.intercept },
+      { x: maxX, y: lhkpnReg.slope * maxX + lhkpnReg.intercept },
+    ]
+  }, [lhkpnXs, lhkpnReg])
+
+  const top5Outliers = useMemo(() =>
+    [...lhkpnData].sort((a, b) => (b.x * b.y) - (a.x * a.y)).slice(0, 5),
+    [lhkpnData]
+  )
+
+  // ── Section B: Network Size vs Influence ──
+  const netInflData = useMemo(() =>
+    PERSONS.map(p => {
+      const connCount = CONNECTIONS.filter(c => c.from === p.id || c.to === p.id).length
+      const s = scoreOnePerson(p, CONNECTIONS)
+      return {
+        id: p.id,
+        name: p.name.split(' ').slice(0, 2).join(' '),
+        fullName: p.name,
+        x: connCount,
+        y: s.total,
+        tier: p.tier,
+      }
+    }).filter(d => d.x > 0),
+    []
+  )
+
+  const netXs = useMemo(() => netInflData.map(d => d.x), [netInflData])
+  const netYs = useMemo(() => netInflData.map(d => d.y), [netInflData])
+  const netR   = useMemo(() => pearsonR(netXs, netYs), [netXs, netYs])
+  const netReg = useMemo(() => linearRegression(netXs, netYs), [netXs, netYs])
+  const netRI  = useMemo(() => netR !== null ? interpretR(netR) : null, [netR])
+
+  const netRegLine = useMemo(() => {
+    if (netXs.length < 2) return []
+    const minX = Math.min(...netXs), maxX = Math.max(...netXs)
+    return [
+      { x: minX, y: netReg.slope * minX + netReg.intercept },
+      { x: maxX, y: netReg.slope * maxX + netReg.intercept },
+    ]
+  }, [netXs, netReg])
+
+  // ── Section C: Party vs Governance ──
+  const partyGovData = useMemo(() => {
+    const scored = calculateScores(PROVINCE_SCORECARD)
+    const partyMap = {}
+    scored.forEach(p => {
+      const key = p.party || 'Lainnya'
+      if (!partyMap[key]) partyMap[key] = []
+      partyMap[key].push(p.total_score)
+    })
+    return Object.entries(partyMap)
+      .map(([party, scores], i) => ({
+        party,
+        avg: Math.round(scores.reduce((a, b) => a + b, 0) / scores.length),
+        count: scores.length,
+        colorIdx: i,
+      }))
+      .sort((a, b) => b.avg - a.avg)
+  }, [])
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">📐 Analisis Korelasi Statistik</h2>
+        <p className="text-sm text-text-muted mt-1">
+          Korelasi antar dimensi data: kekayaan vs kontroversi, jaringan vs pengaruh, partai vs tata kelola
+        </p>
+      </div>
+
+      {/* ── A: LHKPN vs Controversy ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">A. Kekayaan LHKPN vs Tingkat Kontroversi</h3>
+        <p className="text-xs text-text-muted mb-4">
+          N = {lhkpnData.length} tokoh · X = Kekayaan LHKPN (miliar Rp) · Y = Controversy Level (0–10)
+        </p>
+        {/* Stats */}
+        <div className="grid grid-cols-3 gap-3 mb-4">
+          <div className="bg-bg-elevated rounded-lg p-3">
+            <p className="text-xs text-text-muted">Pearson r</p>
+            <p className="text-xl font-bold mt-1" style={{ color: lhkpnRI?.color }}>{lhkpnR?.toFixed(3) ?? 'N/A'}</p>
+            {lhkpnRI && <p className="text-[10px] text-text-muted mt-0.5">{lhkpnRI.label}</p>}
+          </div>
+          <div className="bg-bg-elevated rounded-lg p-3">
+            <p className="text-xs text-text-muted">R²</p>
+            <p className="text-xl font-bold mt-1 text-text-primary">
+              {lhkpnReg?.r2 != null ? (lhkpnReg.r2 * 100).toFixed(1) + '%' : '-'}
+            </p>
+            <p className="text-[10px] text-text-muted mt-0.5">Variansi dijelaskan</p>
+          </div>
+          <div className="bg-bg-elevated rounded-lg p-3">
+            <p className="text-xs text-text-muted">Sampel</p>
+            <p className="text-xl font-bold mt-1 text-text-primary">{lhkpnData.length}</p>
+            <p className="text-[10px] text-text-muted mt-0.5">tokoh LHKPN valid</p>
+          </div>
+        </div>
+        <ResponsiveContainer width="100%" height={320}>
+          <ComposedChart margin={{ top: 10, right: 20, left: 0, bottom: 30 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff0f" />
+            <XAxis
+              dataKey="x" type="number" domain={['auto', 'auto']}
+              label={{ value: 'Kekayaan LHKPN (Miliar Rp)', position: 'insideBottom', offset: -15, fill: '#9ca3af', fontSize: 11 }}
+              tick={{ fill: '#9ca3af', fontSize: 10 }}
+            />
+            <YAxis
+              dataKey="y" type="number" domain={[0, 11]}
+              label={{ value: 'Controversy Level', angle: -90, position: 'insideLeft', fill: '#9ca3af', fontSize: 11 }}
+              tick={{ fill: '#9ca3af', fontSize: 10 }}
+            />
+            <Tooltip
+              content={({ active, payload }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                if (!d?.fullName) return null
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs shadow-xl">
+                    <p className="font-bold text-text-primary mb-1">{d.fullName}</p>
+                    <p className="text-text-muted">LHKPN: <strong className="text-amber-400">Rp {d.x?.toFixed(1)} M</strong></p>
+                    <p className="text-text-muted">Kontroversi: <strong className="text-red-400">{d.y}/10</strong></p>
+                  </div>
+                )
+              }}
+            />
+            <Scatter name="Tokoh" data={lhkpnData} fill="#f59e0b" opacity={0.75} />
+            <Line data={lhkpnRegLine} dataKey="y" type="linear" stroke="#ef4444" strokeWidth={2} strokeDasharray="6 3" dot={false} name="Regresi" legendType="line" />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+          </ComposedChart>
+        </ResponsiveContainer>
+        {/* Top 5 outliers */}
+        <div className="mt-4">
+          <h4 className="text-xs font-semibold text-text-primary mb-2">🎯 Top 5 Outlier (Kaya + Kontroversial)</h4>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+            {top5Outliers.map(d => (
+              <div key={d.id} className="bg-bg-elevated rounded-lg p-3 text-[11px]">
+                <p className="font-semibold text-text-primary truncate mb-1">{d.fullName}</p>
+                <p className="text-amber-400">Rp {d.x.toFixed(1)} M</p>
+                <p className="text-red-400">Kontroversi: {d.y}/10</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── B: Network vs Influence ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">B. Ukuran Jaringan vs Skor Pengaruh</h3>
+        <p className="text-xs text-text-muted mb-4">
+          N = {netInflData.length} tokoh · X = Jumlah Koneksi · Y = Skor Total
+        </p>
+        <div className="grid grid-cols-3 gap-3 mb-4">
+          <div className="bg-bg-elevated rounded-lg p-3">
+            <p className="text-xs text-text-muted">Pearson r</p>
+            <p className="text-xl font-bold mt-1" style={{ color: netRI?.color }}>{netR?.toFixed(3) ?? 'N/A'}</p>
+            {netRI && <p className="text-[10px] text-text-muted mt-0.5">{netRI.label}</p>}
+          </div>
+          <div className="bg-bg-elevated rounded-lg p-3">
+            <p className="text-xs text-text-muted">R²</p>
+            <p className="text-xl font-bold mt-1 text-text-primary">
+              {netReg?.r2 != null ? (netReg.r2 * 100).toFixed(1) + '%' : '-'}
+            </p>
+            <p className="text-[10px] text-text-muted mt-0.5">Variansi dijelaskan</p>
+          </div>
+          <div className="bg-bg-elevated rounded-lg p-3">
+            <p className="text-xs text-text-muted">Avg Koneksi</p>
+            <p className="text-xl font-bold mt-1 text-text-primary">
+              {netXs.length > 0 ? (netXs.reduce((a, b) => a + b, 0) / netXs.length).toFixed(1) : 0}
+            </p>
+            <p className="text-[10px] text-text-muted mt-0.5">per tokoh (dengan koneksi)</p>
+          </div>
+        </div>
+        <ResponsiveContainer width="100%" height={320}>
+          <ComposedChart margin={{ top: 10, right: 20, left: 0, bottom: 30 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff0f" />
+            <XAxis
+              dataKey="x" type="number" domain={['auto', 'auto']}
+              label={{ value: 'Jumlah Koneksi', position: 'insideBottom', offset: -15, fill: '#9ca3af', fontSize: 11 }}
+              tick={{ fill: '#9ca3af', fontSize: 10 }}
+            />
+            <YAxis
+              dataKey="y" type="number" domain={[0, 105]}
+              label={{ value: 'Skor Total', angle: -90, position: 'insideLeft', fill: '#9ca3af', fontSize: 11 }}
+              tick={{ fill: '#9ca3af', fontSize: 10 }}
+            />
+            <Tooltip
+              content={({ active, payload }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                if (!d?.fullName) return null
+                const tc = d.tier === 'nasional' ? '#ef4444' : d.tier === 'regional' ? '#3b82f6' : '#9ca3af'
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs shadow-xl">
+                    <p className="font-bold text-text-primary mb-1">{d.fullName}</p>
+                    <p className="text-text-muted">Koneksi: <strong className="text-blue-400">{d.x}</strong></p>
+                    <p className="text-text-muted">Skor: <strong className="text-amber-400">{d.y?.toFixed(1)}</strong></p>
+                    <p className="text-text-muted">Tier: <span style={{ color: tc }}>{d.tier}</span></p>
+                  </div>
+                )
+              }}
+            />
+            <Scatter name="Nasional"   data={netInflData.filter(d => d.tier === 'nasional')}  fill="#ef4444" opacity={0.8} />
+            <Scatter name="Provinsi"   data={netInflData.filter(d => d.tier === 'regional')}  fill="#3b82f6" opacity={0.75} />
+            <Scatter name="Kab/Lainnya" data={netInflData.filter(d => d.tier !== 'nasional' && d.tier !== 'regional')} fill="#6b7280" opacity={0.6} />
+            <Line data={netRegLine} dataKey="y" type="linear" stroke="#f59e0b" strokeWidth={2} strokeDasharray="6 3" dot={false} name="Regresi" legendType="line" />
+            <Legend wrapperStyle={{ fontSize: 11 }} />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* ── C: Party vs Governance ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">C. Partai Gubernur vs Rata-rata Skor Tata Kelola</h3>
+        <p className="text-xs text-text-muted mb-4">
+          Dari {PROVINCE_SCORECARD.length} provinsi · Skor dari calculateScores() — berbobot IPM, Anti-Korupsi, PAD, Infrastruktur, Transparansi, Inovasi
+        </p>
+        <ResponsiveContainer width="100%" height={280}>
+          <BarChart data={partyGovData} margin={{ top: 10, right: 20, left: 0, bottom: 50 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+            <XAxis dataKey="party" tick={{ fill: '#9ca3af', fontSize: 10 }} angle={-35} textAnchor="end" interval={0} />
+            <YAxis tick={{ fill: '#9ca3af', fontSize: 10 }} domain={[0, 100]} />
+            <Tooltip
+              content={({ active, payload }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs">
+                    <p className="font-bold text-text-primary">{d.party}</p>
+                    <p className="text-text-muted">Avg Score: <strong className="text-amber-400">{d.avg}</strong></p>
+                    <p className="text-text-muted">Provinsi: {d.count}</p>
+                  </div>
+                )
+              }}
+            />
+            <Bar dataKey="avg" name="Avg Governance Score" radius={[4, 4, 0, 0]}
+              label={{ position: 'top', fill: '#9ca3af', fontSize: 9 }}
+            >
+              {partyGovData.map((d, i) => (
+                <Cell key={i} fill={`hsl(${(i * 47 + 200) % 360}, 60%, 55%)`} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// TAB 11: PERBANDINGAN CEPAT
+// ═══════════════════════════════════════════════════════════════════════════════
+function TabPerbandinganCepat() {
+  const [personAId, setPersonAId] = useState('prabowo')
+  const [personBId, setPersonBId] = useState('anies')
+
+  const personA = useMemo(() => PERSONS.find(p => p.id === personAId), [personAId])
+  const personB = useMemo(() => PERSONS.find(p => p.id === personBId), [personBId])
+  const scoreA  = useMemo(() => personA ? scoreOnePerson(personA, CONNECTIONS) : null, [personA])
+  const scoreB  = useMemo(() => personB ? scoreOnePerson(personB, CONNECTIONS) : null, [personB])
+
+  const connA = useMemo(() => personA ? CONNECTIONS.filter(c => c.from === personA.id || c.to === personA.id).length : 0, [personA])
+  const connB = useMemo(() => personB ? CONNECTIONS.filter(c => c.from === personB.id || c.to === personB.id).length : 0, [personB])
+
+  const personOptions = useMemo(() =>
+    [...PERSONS].sort((a, b) => {
+      const tier = { nasional: 0, regional: 1, historis: 2, kabupaten: 3 }
+      return (tier[a.tier] ?? 9) - (tier[b.tier] ?? 9) || a.name.localeCompare(b.name)
+    }),
+    []
+  )
+
+  const fmtLHKPN = v => {
+    if (!v) return 'N/A'
+    if (v >= 1_000_000_000_000) return `Rp ${(v / 1_000_000_000_000).toFixed(2)} T`
+    if (v >= 1_000_000_000)     return `Rp ${(v / 1_000_000_000).toFixed(1)} M`
+    return `Rp ${(v / 1_000_000).toFixed(0)} jt`
+  }
+
+  const kpkColor = v => ({ terpidana: '#7f1d1d', tersangka: '#ef4444', tinggi: '#f97316', sedang: '#f59e0b', rendah: '#22c55e' }[v] || '#9ca3af')
+
+  const rows = useMemo(() => {
+    if (!personA || !personB || !scoreA || !scoreB) return []
+    return [
+      { label: 'Skor Total',        vA: scoreA.total,                             vB: scoreB.total,                             fmt: v => typeof v === 'number' ? v.toFixed(1) : '-', higherWins: true },
+      { label: 'Skor Posisi',       vA: scoreA.pos,                               vB: scoreB.pos,                               fmt: v => typeof v === 'number' ? v.toFixed(1) : '-', higherWins: true },
+      { label: 'Skor Jaringan',     vA: scoreA.net,                               vB: scoreB.net,                               fmt: v => typeof v === 'number' ? v.toFixed(1) : '-', higherWins: true },
+      { label: 'Partai',            vA: PARTY_MAP[personA.party_id]?.abbr || '-', vB: PARTY_MAP[personB.party_id]?.abbr || '-', fmt: v => v, higherWins: null },
+      { label: 'LHKPN',            vA: personA.lhkpn_latest,                     vB: personB.lhkpn_latest,                     fmt: fmtLHKPN, higherWins: null },
+      { label: 'Koneksi',           vA: connA,                                    vB: connB,                                    fmt: v => v, higherWins: true },
+      { label: 'KPK Status',        vA: personA.analysis?.corruption_risk || 'rendah', vB: personB.analysis?.corruption_risk || 'rendah', fmt: v => v, higherWins: null, colorFn: kpkColor },
+      { label: 'Ideology Score',    vA: personA.analysis?.ideology_score,         vB: personB.analysis?.ideology_score,         fmt: v => v ?? '-', higherWins: null },
+      { label: 'Controversy Level', vA: personA.analysis?.controversy_level,      vB: personB.analysis?.controversy_level,      fmt: v => v != null ? `${v}/10` : '-', higherWins: false },
+    ]
+  }, [personA, personB, scoreA, scoreB, connA, connB])
+
+  const getWinner = row => {
+    if (row.higherWins === null || row.higherWins === undefined) return null
+    const nA = parseFloat(row.vA), nB = parseFloat(row.vB)
+    if (isNaN(nA) || isNaN(nB)) return null
+    if (nA === nB) return 'tie'
+    return row.higherWins ? (nA > nB ? 'A' : 'B') : (nA < nB ? 'A' : 'B')
+  }
+
+  const winsA = rows.filter(r => getWinner(r) === 'A').length
+  const winsB = rows.filter(r => getWinner(r) === 'B').length
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">🏆 Perbandingan Cepat</h2>
+        <p className="text-sm text-text-muted mt-1">Bandingkan dua tokoh secara head-to-head berdasarkan semua dimensi data</p>
+      </div>
+
+      {/* Person Selectors */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {[
+          { label: 'Tokoh A', value: personAId, onChange: setPersonAId, person: personA, score: scoreA, side: 'A' },
+          { label: 'Tokoh B', value: personBId, onChange: setPersonBId, person: personB, score: scoreB, side: 'B' },
+        ].map(({ label, value, onChange, person, score, side }) => (
+          <div key={side} className="bg-bg-card rounded-xl border border-border p-4">
+            <p className="text-xs text-text-muted mb-2 font-medium">{label}</p>
+            <select
+              value={value}
+              onChange={e => onChange(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg border border-border bg-bg-elevated text-text-primary text-sm focus:outline-none focus:border-accent-red mb-3"
+            >
+              {personOptions.map(p => (
+                <option key={p.id} value={p.id}>{p.name} ({p.tier})</option>
+              ))}
+            </select>
+            {person && (
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-bg-elevated border border-border flex items-center justify-center text-sm font-bold text-text-muted flex-shrink-0">
+                  {person.photo_placeholder || person.name[0]}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-semibold text-text-primary truncate">{person.name}</p>
+                  <p className="text-xs text-text-muted truncate">
+                    {person.positions?.find(p => p.is_current)?.title || person.positions?.[0]?.title || '-'}
+                  </p>
+                  <PartyBadge partyId={person.party_id} />
+                </div>
+                {score && (
+                  <div className="text-right flex-shrink-0">
+                    <p className="text-[10px] text-text-muted">Skor</p>
+                    <p className="text-2xl font-black text-amber-400">{score.total.toFixed(1)}</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Win summary banner */}
+      {personA && personB && rows.length > 0 && (
+        <div className="flex items-center justify-center gap-6 py-3 bg-bg-elevated rounded-xl border border-border text-sm">
+          <span className="font-bold text-green-400">{personA.name.split(' ')[0]}: {winsA} kategori menang</span>
+          <span className="text-text-muted">vs</span>
+          <span className="font-bold text-blue-400">{personB.name.split(' ')[0]}: {winsB} kategori menang</span>
+        </div>
+      )}
+
+      {/* Comparison Table */}
+      {personA && personB && rows.length > 0 && (
+        <div className="bg-bg-card rounded-xl border border-border overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-bg-elevated">
+                  <th className="text-left px-4 py-3 text-text-muted font-medium w-44">Metrik</th>
+                  <th className="text-center px-4 py-3 font-semibold text-green-400">
+                    {personA.name.split(' ').slice(0, 2).join(' ')}
+                  </th>
+                  <th className="text-center px-4 py-3 text-text-muted font-medium w-20">🏆</th>
+                  <th className="text-center px-4 py-3 font-semibold text-blue-400">
+                    {personB.name.split(' ').slice(0, 2).join(' ')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, idx) => {
+                  const winner = getWinner(row)
+                  const cellA = winner === 'A' ? 'bg-green-500/10 border-l-2 border-green-500/50' : ''
+                  const cellB = winner === 'B' ? 'bg-blue-500/10 border-r-2 border-blue-500/50' : ''
+                  return (
+                    <tr key={idx} className="border-b border-border/50 hover:bg-bg-elevated/50">
+                      <td className="px-4 py-3 text-text-muted text-xs font-medium">{row.label}</td>
+                      <td className={`px-4 py-3 text-center font-bold ${cellA}`}
+                        style={{ color: row.colorFn ? row.colorFn(row.vA) : undefined }}>
+                        {row.fmt(row.vA)}
+                      </td>
+                      <td className="px-4 py-3 text-center text-xs">
+                        {winner === 'A' && <span className="text-green-400 font-bold">◀</span>}
+                        {winner === 'B' && <span className="text-blue-400 font-bold">▶</span>}
+                        {winner === 'tie' && <span className="text-text-muted">⚖️</span>}
+                        {!winner && <span className="text-text-muted">—</span>}
+                      </td>
+                      <td className={`px-4 py-3 text-center font-bold ${cellB}`}
+                        style={{ color: row.colorFn ? row.colorFn(row.vB) : undefined }}>
+                        {row.fmt(row.vB)}
+                      </td>
+                    </tr>
+                  )
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Link to full comparison */}
+      {personA && personB && (
+        <div className="flex justify-center">
+          <a
+            href={`/compare/${personAId}/${personBId}`}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-accent-red text-white rounded-xl font-semibold hover:opacity-90 transition-opacity text-sm"
+          >
+            Lihat Perbandingan Lengkap →
+          </a>
+        </div>
+      )}
+
+      {/* Notes */}
+      <div className="bg-bg-elevated rounded-xl border border-border p-4 text-xs text-text-muted">
+        <p>💡 <strong className="text-text-primary">Cara membaca:</strong> Skor Total, Posisi, Jaringan, dan Koneksi — menang = lebih tinggi.
+          KPK Status — "rendah" dianggap lebih baik (penalti korupsi lebih kecil). Controversy Level — menang = lebih rendah.</p>
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function AnalitikPage() {
@@ -1920,14 +2570,17 @@ export default function AnalitikPage() {
 
       {/* Tab Content */}
       <div>
-        {activeTab === 'individu'   && <TabIndividu       personScores={personScores} />}
-        {activeTab === 'partai'     && <TabPartai         partyScores={partyScores} provincesData={provincesData} />}
-        {activeTab === 'provinsi'   && <TabProvinsi       provincesData={provincesData} />}
-        {activeTab === 'lhkpn'     && <TabLHKPN />}
-        {activeTab === 'gdp'        && <TabGDP            provincesData={provincesData} />}
-        {activeTab === 'metodologi' && <TabMetodologi />}
-        {activeTab === 'afinitas'   && <TabAfinitasPartai />}
-        {activeTab === 'tren_skor'  && <TabTrenSkor />}
+        {activeTab === 'individu'           && <TabIndividu          personScores={personScores} />}
+        {activeTab === 'partai'             && <TabPartai            partyScores={partyScores} provincesData={provincesData} />}
+        {activeTab === 'provinsi'           && <TabProvinsi          provincesData={provincesData} />}
+        {activeTab === 'lhkpn'             && <TabLHKPN />}
+        {activeTab === 'gdp'               && <TabGDP               provincesData={provincesData} />}
+        {activeTab === 'metodologi'        && <TabMetodologi />}
+        {activeTab === 'afinitas'          && <TabAfinitasPartai />}
+        {activeTab === 'tren_skor'         && <TabTrenSkor />}
+        {activeTab === 'prediksi_2029'     && <TabPrediksi2029 />}
+        {activeTab === 'korelasi_stat'     && <TabKorelasiStat />}
+        {activeTab === 'perbandingan_cepat' && <TabPerbandinganCepat />}
       </div>
     </div>
   )
