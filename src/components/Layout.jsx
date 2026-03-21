@@ -12,6 +12,7 @@ const NAV = [
   { to:'/network',  icon:'🕸️', label:'Jaringan' },
   { to:'/regions',  icon:'🗺️', label:'Wilayah' },
   { to:'/elections',icon:'📊', label:'Pemilu' },
+  { to:'/analitik', icon:'📈', label:'Analitik' },
   { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
   { to:'/news',     icon:'📰', label:'Berita' },
   { to:'/agendas',  icon:'📋', label:'Agenda' },
