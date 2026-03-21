@@ -10,7 +10,17 @@ const RSS_SOURCES = [
       'https://rss.kompas.com/nasional/berita/nasional',
       'https://rss.kompas.com/news/politik',
       'https://indeks.kompas.com/?site=nasional&format=rss',
+      'https://rss.kompas.com/nasional',
+      'https://news.kompas.com/nasional/rss',
+      'https://www.kompas.com/rss/nasional.xml',
+      'https://rss.kompas.com/index.xml',
+      'https://kompas.com/rss/nasional',
     ],
+    headers: {
+      'Accept': 'text/xml, application/xml, application/rss+xml, */*',
+      'Accept-Language': 'id-ID,id;q=0.9',
+      'Cache-Control': 'no-cache',
+    },
     bias: 'tengah',
   },
   {
@@ -60,19 +70,35 @@ const RSS_SOURCES = [
   {
     id: 'jpnn',
     name: 'JPNN',
-    urls: ['https://www.jpnn.com/rss/news', 'https://www.jpnn.com/feed'],
+    urls: [
+      'https://www.jpnn.com/rss/news',
+      'https://www.jpnn.com/feed',
+      'https://www.jpnn.com/feed/nasional',
+      'https://jpnn.com/rss',
+    ],
     bias: 'tengah',
   },
   {
     id: 'suara',
     name: 'Suara.com',
-    urls: ['https://www.suara.com/rss', 'https://www.suara.com/feed/nasional.rss'],
+    urls: [
+      'https://www.suara.com/rss',
+      'https://www.suara.com/feed/nasional.rss',
+      'https://suara.com/rss',
+      'https://www.suara.com/feed',
+      'https://www.suara.com/nasional/feed.rss',
+    ],
     bias: 'tengah',
   },
   {
     id: 'merdeka',
     name: 'Merdeka',
-    urls: ['https://merdeka.com/feeds/rss.xml', 'https://www.merdeka.com/rss/peristiwa.xml'],
+    urls: [
+      'https://merdeka.com/feeds/rss.xml',
+      'https://www.merdeka.com/rss/peristiwa.xml',
+      'https://merdeka.com/rss.xml',
+      'https://rss.merdeka.com/',
+    ],
     bias: 'tengah',
   },
   {
@@ -80,6 +106,36 @@ const RSS_SOURCES = [
     name: 'RMOL',
     urls: ['https://rmol.id/rss/nasional', 'https://rmol.id/feed'],
     bias: 'kritis',
+  },
+  {
+    id: 'kumparan',
+    name: 'Kumparan',
+    urls: [
+      'https://kumparan.com/feed/nasional',
+      'https://kumparan.com/kumparannews/rss',
+      'https://kumparan.com/feed',
+    ],
+    bias: 'tengah',
+  },
+  {
+    id: 'okezone',
+    name: 'Okezone',
+    urls: [
+      'https://news.okezone.com/rss/nasional.xml',
+      'https://okezone.com/rss/nasional',
+      'https://news.okezone.com/feed',
+    ],
+    bias: 'tengah',
+  },
+  {
+    id: 'inews',
+    name: 'iNews',
+    urls: [
+      'https://www.inews.id/feed/nasional',
+      'https://inews.id/rss/nasional',
+      'https://www.inews.id/rss',
+    ],
+    bias: 'tengah',
   },
 ];
 
@@ -430,7 +486,7 @@ async function fetchWithFallback(urls, opts = {}) {
   for (const url of urls) {
     try {
       const controller = new AbortController();
-      const t = setTimeout(() => controller.abort(), 6000);
+      const t = setTimeout(() => controller.abort(), 10000);
       const r = await fetch(url, { ...opts, signal: controller.signal });
       clearTimeout(t);
       if (r.ok) {
@@ -473,7 +529,7 @@ function parseRSS(xml, sourceId, sourceName) {
   const itemRe = /<item>([\s\S]*?)<\/item>/gi;
   let match;
   let idx = 0;
-  while ((match = itemRe.exec(xml)) !== null && idx < 15) {
+  while ((match = itemRe.exec(xml)) !== null && idx < 20) {
     const item = match[1];
     const title = getTag(item, 'title');
     const link = getTag(item, 'link') || getTag(item, 'guid');
@@ -509,8 +565,18 @@ function parseRSS(xml, sourceId, sourceName) {
     else if (topicCategories.has('media'))         cat = 'media';
     else if (topicCategories.has('lingkungan'))    cat = 'lingkungan';
 
-    // Relevance filter: skip article if no person_ids AND no topic keywords
-    const hasPoliticalContent = person_ids.length > 0 || topicTags.length > 0;
+    // Broader political relevance check
+    const POLITICAL_SIGNAL_WORDS = [
+      'pemerintah','presiden','menteri','gubernur','bupati','walikota',
+      'dpr','mpr','dprd','partai','politik','kebijakan','peraturan',
+      'undang-undang','anggaran','apbn','korupsi','kpk','pemilu',
+      'kabinet','senator','parlemen','legislatif','eksekutif',
+      'negara','republik','indonesia','nasional','daerah',
+    ];
+    const textLower = fullText.toLowerCase();
+    const hasPoliticalSignal = POLITICAL_SIGNAL_WORDS.some(w => textLower.includes(w));
+    // Relevance filter: skip article if no person_ids AND no topic keywords AND no signal words
+    const hasPoliticalContent = person_ids.length > 0 || topicTags.length > 0 || hasPoliticalSignal;
     if (!hasPoliticalContent) {
       idx++;
       continue; // skip non-political articles (traffic, crime, sports, etc.)
@@ -536,9 +602,8 @@ function parseRSS(xml, sourceId, sourceName) {
       'kerjasama','kolaborasi','sinergi','inovasi','terobosan',
       'melesat','melonjak','rebound','surplus','untung',
     ];
-    const textLower2 = fullText.toLowerCase();
-    const negScore = negWords.filter(w => textLower2.includes(w)).length;
-    const posScore = posWords.filter(w => textLower2.includes(w)).length;
+    const negScore = negWords.filter(w => textLower.includes(w)).length;
+    const posScore = posWords.filter(w => textLower.includes(w)).length;
     const sentiment = negScore > posScore ? 'negatif' : posScore > negScore ? 'positif' : 'netral';
 
     articles.push({
@@ -580,7 +645,8 @@ export default async function handler(req, res) {
   const results = await Promise.allSettled(
     RSS_SOURCES.map(async (src) => {
       try {
-        const result = await fetchWithFallback(src.urls, { headers: fetchHeaders });
+        const srcHeaders = src.headers ? { ...fetchHeaders, ...src.headers } : fetchHeaders;
+        const result = await fetchWithFallback(src.urls, { headers: srcHeaders });
         if (!result) return { source: src, articles: [], error: 'all URLs failed' };
         return { source: src, articles: parseRSS(result.text, src.id, src.name) };
       } catch (e) {
