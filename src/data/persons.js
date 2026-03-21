@@ -3596,7 +3596,7 @@ export const PERSONS = [
     id:"alexander_marwata", name:"Alexander Marwata", photo_url:null, photo_placeholder:"AM",
     born:"1967", born_place:"Klaten, Jawa Tengah", religion:"Kristen",
     education:"S1 Akuntansi, Universitas Gadjah Mada; S2 Akuntansi, Universitas Indonesia",
-    party_id:"ind", party_role:"Non-partai",
+    party_id:null, party_role:null,
     positions:[
       {title:"Wakil Ketua KPK", institution:"Komisi Pemberantasan Korupsi", region:"Nasional", start:"2019", end:"2024", is_current:false},
       {title:"Komisioner KPK", institution:"Komisi Pemberantasan Korupsi", region:"Nasional", start:"2015", end:"2019", is_current:false},
@@ -3652,7 +3652,7 @@ export const PERSONS = [
     id:"rafael_alun", name:"Rafael Alun Trisambodo", photo_url:null, photo_placeholder:"RA",
     born:"1969", born_place:"Jakarta", religion:"Kristen",
     education:"S1 Akuntansi; S2 Keuangan Publik",
-    party_id:"ind", party_role:"Non-partai / PNS",
+    party_id:null, party_role:null,
     positions:[
       {title:"Pejabat Direktorat Jenderal Pajak Kemenkeu", institution:"Kementerian Keuangan", region:"Nasional", start:"1990", end:"2023", is_current:false},
     ],
@@ -3679,7 +3679,7 @@ export const PERSONS = [
     id:"lukas_enembe", name:"Lukas Enembe", photo_url:null, photo_placeholder:"LE",
     born:"1967", born_place:"Puncak Jaya, Papua", religion:"Kristen",
     education:"S1 Administrasi Negara",
-    party_id:"pdk", party_role:"Ketua DPW",
+    party_id:"dem", party_role:"Anggota",
     positions:[
       {title:"Gubernur Papua", institution:"Pemerintah Provinsi Papua", region:"Papua", start:"2013", end:"2023", is_current:false},
     ],
