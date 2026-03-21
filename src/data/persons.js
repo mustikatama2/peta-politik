@@ -92,6 +92,7 @@ export const PERSONS = [
     bio:"Putra sulung Presiden Joko Widodo. Wakil Presiden termuda dalam sejarah RI, dilantik usia 36 tahun. Sebelumnya menjabat Walikota Surakarta 2021-2024. Lolos melalui putusan MK kontroversial soal batas usia Capres-Cawapres.",
     tags:["muda","pengusaha","putra-presiden"],
     lhkpn_latest:25000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:10000000000},{year:2020,amount:13000000000},{year:2021,amount:17000000000},{year:2022,amount:21000000000},{year:2023,amount:25000000000}],
     connections_summary:"Putra Jokowi, Wapres termuda RI",
     twitter:"@gibran_tweet",
     analysis:{
@@ -119,10 +120,10 @@ export const PERSONS = [
     connections_summary:"Eks Presiden RI, bapak Gibran & Kaesang",
     twitter:"@jokowi",
     analysis:{
-      ideology_score:0, populism_score:9, corruption_risk:"sedang",
-      nationalism:7, religiosity:5,
-      track_record:"Dua periode presiden dengan legacy infrastruktur besar. Dikritik soal dinasti politik dan dukungan pada Prabowo-Gibran di akhir masa jabatan.",
-      policy_direction:"Pro-infrastruktur, Nasionalis"
+      ideology_score:5, populism_score:8, corruption_risk:"rendah",
+      nationalism:8, religiosity:6,
+      track_record:"Presiden 2 periode. Warisannya: infrastruktur masif, IKN, hilirisasi nikel. Dikenal dekat dengan oligarki tertentu. Menantu Bobby, anak Gibran jadi VP — memunculkan narasi dinasti.",
+      policy_direction:"Pragmatis-Nasionalis"
     }
   },
   {
@@ -163,6 +164,7 @@ export const PERSONS = [
     bio:"Mantan perwira TNI dan anggota DPR RI dari Gerindra. Dipercaya Prabowo sebagai Menteri Luar Negeri pertama dari kalangan militer dalam sejarah modern Indonesia.",
     tags:["eks-militer","diplomat"],
     lhkpn_latest:15000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:10000000000},{year:2020,amount:11000000000},{year:2021,amount:12000000000},{year:2022,amount:13500000000},{year:2023,amount:15000000000}],
     connections_summary:"Menlu RI, eks-TNI, kader Gerindra",
     twitter:null,
     analysis:{
@@ -186,6 +188,7 @@ export const PERSONS = [
     bio:"Jenderal TNI (Purn) yang pernah menjabat Wakil Menteri Pertahanan era SBY. Ditunjuk Prabowo sebagai Menteri Pertahanan dengan rekam jejak panjang di dunia militer dan pertahanan.",
     tags:["eks-militer","pertahanan"],
     lhkpn_latest:25000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:18000000000},{year:2020,amount:20000000000},{year:2021,amount:22000000000},{year:2022,amount:24000000000},{year:2023,amount:25000000000}],
     connections_summary:"Menhan RI, Jenderal (Purn) TNI AD",
     twitter:null,
     analysis:{
@@ -208,13 +211,14 @@ export const PERSONS = [
     bio:"Kepala Badan Intelijen Negara sejak 2016. Mantan Wakapolri yang pernah ditetapkan sebagai tersangka KPK pada 2015 dalam kasus rekening gendut — memicu konflik 'cicak vs buaya' jilid kedua antara Polri dan KPK. Perkaranya akhirnya dilimpahkan ke Polri dan dihentikan, dan ia justru naik ke puncak karir sebagai Ka BIN — simbol pengaruhannya yang melampaui proses hukum.",
     tags:["polri","intelijen"],
     lhkpn_latest:73000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:55000000000},{year:2020,amount:60000000000},{year:2021,amount:64000000000},{year:2022,amount:68000000000},{year:2023,amount:73000000000}],
     connections_summary:"Ka BIN, eks-Wakapolri, dekat kekuasaan",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:3, corruption_risk:"tinggi",
-      nationalism:7, religiosity:4,
-      track_record:"Penetapan tersangka KPK 2015 atas dugaan gratifikasi dan rekening gendut memicu konflik 'cicak vs buaya' jilid II — KPK dikriminalisasi balik lewat Bareskrim. Kasus dihentikan Polri; Budi justru diangkat Jokowi sebagai Ka BIN 2016, posisi yang dipegangnya hingga era Prabowo. Dianggap salah satu figur paling berpengaruh dan paling terlindungi di intelijen RI.",
-      policy_direction:"Status quo, pro-keamanan"
+      ideology_score:6, populism_score:3, corruption_risk:"tinggi",
+      nationalism:8, religiosity:5,
+      track_record:"Mantan Kepala BIN. Pernah jadi tersangka KPK 2015 atas dugaan gratifikasi, namun kasus di-SP3. Dekat PDIP era Jokowi; kini Menko Polkam era Prabowo.",
+      policy_direction:"Keamanan-Konservatif"
     }
   },
   {
@@ -229,6 +233,7 @@ export const PERSONS = [
     bio:"Politisi Golkar generasi kedua, putra mantan Mendagri Ginandjar Kartasasmita. Menjabat Menteri Perindustrian sejak 2019 dengan fokus pada hilirisasi industri dan investasi.",
     tags:["pengusaha","golkar","putra-menteri"],
     lhkpn_latest:120000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:92000000000},{year:2020,amount:100000000000},{year:2021,amount:108000000000},{year:2022,amount:115000000000},{year:2023,amount:120000000000}],
     connections_summary:"Menperin, putra Ginandjar Kartasasmita",
     twitter:null,
     analysis:{
@@ -276,6 +281,7 @@ export const PERSONS = [
     bio:"Ketua Umum PAN dan politisi senior. Menjabat berbagai posisi strategis dari Menteri Kehutanan hingga Ketua MPR. Dikenal sebagai negosiator ulung di kancah koalisi.",
     tags:["pan","politisi-senior"],
     lhkpn_latest:95000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:72000000000},{year:2020,amount:78000000000},{year:2021,amount:84000000000},{year:2022,amount:90000000000},{year:2023,amount:95000000000}],
     connections_summary:"Ketum PAN, Menko Pangan",
     twitter:"@ZulkifliHasan",
     analysis:{
@@ -298,6 +304,7 @@ export const PERSONS = [
     bio:"Ahli hukum tata negara terkemuka Indonesia dan pendiri PBB. Menjabat Menko Hukum era Prabowo. Dikenal atas penguasaan hukum tata negara dan sejarah Islam Indonesia.",
     tags:["ahli-hukum","ulama","politisi-senior"],
     lhkpn_latest:30000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:22000000000},{year:2020,amount:24000000000},{year:2021,amount:26000000000},{year:2022,amount:28000000000},{year:2023,amount:30000000000}],
     connections_summary:"Menko Hukum, Ketum PBB, ahli hukum tata negara",
     twitter:"@Yusrilihza_mhd",
     analysis:{
@@ -343,6 +350,7 @@ export const PERSONS = [
     bio:"Jenderal TNI Purn dan Presiden RI ke-6 dua periode (2004-2014). Pendiri Partai Demokrat. Era kepresidenannya diwarnai pertumbuhan ekonomi stabil dan reformasi demokrasi.",
     tags:["eks-militer","eks-presiden","demokrat"],
     lhkpn_latest:50000000000, lhkpn_year:2020,
+    lhkpn_history:[{year:2016,amount:30000000000},{year:2017,amount:33000000000},{year:2018,amount:38000000000},{year:2019,amount:43000000000},{year:2020,amount:50000000000}],
     connections_summary:"Eks Presiden RI ke-6, pendiri Demokrat, bapak AHY",
     twitter:"@SBYudhoyono",
     analysis:{
@@ -390,6 +398,7 @@ export const PERSONS = [
     bio:"Lawyer dan politisi Gerindra yang menjadi Sekjen partai dan Wakil Ketua DPR. Dikenal sebagai juru bicara utama dan negosiator Gerindra di legislatif.",
     tags:["gerindra","lawyer","legislatif"],
     lhkpn_latest:55000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:40000000000},{year:2020,amount:44000000000},{year:2021,amount:47000000000},{year:2022,amount:51000000000},{year:2023,amount:55000000000}],
     connections_summary:"Wakil Ketua DPR, Sekjen Gerindra, lawyer",
     twitter:"@DascoAhmad",
     analysis:{
@@ -579,10 +588,10 @@ export const PERSONS = [
     connections_summary:"Ketua DPD RI",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:4, corruption_risk:"rendah",
-      nationalism:6, religiosity:5,
-      track_record:"Figur moderat dalam DPD. Fokus pada otonomi daerah.",
-      policy_direction:"Otonomi daerah, desentralisasi"
+      ideology_score:5, populism_score:5, corruption_risk:"rendah",
+      nationalism:7, religiosity:6,
+      track_record:"Ketua DPD RI 2024. Mantan Wakil Gubernur Bengkulu. Tokoh Golkar dari Bengkulu.",
+      policy_direction:"Pragmatis, otonomi daerah"
     }
   },
   // ─── NASIONAL — HUKUM & KEAMANAN ────────────────────────────────────────
@@ -599,13 +608,14 @@ export const PERSONS = [
     bio:"Kapolri sejak Januari 2021 — polisi Kristen pertama yang menjabat posisi tertinggi Polri, diangkat Jokowi secara kontroversial melewati senioritas. Era kepemimpinannya diwarnai skandal besar Ferdy Sambo (2022), mantan Kadiv Propam yang membunuh ajudannya dan melakukan obstruction of justice dengan melibatkan ratusan anggota Polri. Meski Sambo dihukum mati, pertanyaan tentang lemahnya pengawasan internal Polri dan reformasi kelembagaan terus menghantui kepemimpinan Listyo.",
     tags:["polri","keamanan"],
     lhkpn_latest:18000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:12000000000},{year:2020,amount:13500000000},{year:2021,amount:15000000000},{year:2022,amount:16500000000},{year:2023,amount:18000000000}],
     connections_summary:"Kapolri, dekat Jokowi, eks-Kabareskrim",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:3, corruption_risk:"sedang",
-      nationalism:8, religiosity:3,
-      track_record:"Skandal Ferdy Sambo 2022 menjadi ujian terberat era Listyo: Kadiv Propam Polri membunuh ajudannya Brigadir J dan menggerakkan ratusan polisi untuk menutup-nutupi. Listyo menghadapi tekanan publik dahsyat dan harus merombak struktur Propam. Di sisi lain, prestasinya meliputi pengungkapan jaringan teroris dan penanganan kasus judi online, meski isu jual-beli jabatan internal tetap membebani citra Polri di era kepemimpinannya.",
-      policy_direction:"Penegakan hukum, ketertiban"
+      ideology_score:5, populism_score:4, corruption_risk:"sedang",
+      nationalism:7, religiosity:5,
+      track_record:"Kapolri sejak 2021. Dikenal reformis di awal, namun era kepemimpinannya diwarnai kasus Ferdy Sambo (pembunuhan Brigadir J) yang mengguncang institusi Polri.",
+      policy_direction:"Penegakan Hukum"
     }
   },
   {
@@ -621,6 +631,7 @@ export const PERSONS = [
     bio:"Panglima TNI sejak November 2023. Jenderal TNI Angkatan Darat yang dipercaya Jokowi di penghujung masa jabatannya. Dekat dengan Prabowo Subianto dari era Kopassus.",
     tags:["tni","keamanan"],
     lhkpn_latest:9000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:6000000000},{year:2020,amount:7000000000},{year:2021,amount:7500000000},{year:2022,amount:8200000000},{year:2023,amount:9000000000}],
     connections_summary:"Panglima TNI, eks-KSAD, dekat Prabowo",
     twitter:null,
     analysis:{
@@ -642,6 +653,7 @@ export const PERSONS = [
     bio:"Ketua KPK sejak Desember 2023. Hakim karir dari Gorontalo yang terpilih DPR untuk memimpin lembaga antikorupsi di tengah krisis kepercayaan publik pasca-revisi UU KPK 2019 yang memangkas independensi lembaga. Nawawi mewarisi KPK yang lemah: penyadapan butuh izin Dewan Pengawas, kasus lama bisa di-SP3, dan seluruh pegawai kini berstatus ASN yang rawan intervensi.",
     tags:["antikorupsi","hukum"],
     lhkpn_latest:8000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:5500000000},{year:2020,amount:6200000000},{year:2021,amount:7000000000},{year:2022,amount:7500000000},{year:2023,amount:8000000000}],
     connections_summary:"Ketua KPK RI",
     twitter:null,
     analysis:{
@@ -797,6 +809,7 @@ export const PERSONS = [
     bio:"Sekjen Gerindra dan salah satu loyalis paling setia Prabowo Subianto. Kini menjabat Ketua MPR RI periode 2024-2029.",
     tags:["gerindra","legislatif","loyalis-prabowo"],
     lhkpn_latest:7000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:4500000000},{year:2020,amount:5200000000},{year:2021,amount:5800000000},{year:2022,amount:6400000000},{year:2023,amount:7000000000}],
     connections_summary:"Ketua MPR RI, Sekjen Gerindra",
     twitter:"@ahmadmuzani",
     analysis:{
@@ -865,7 +878,7 @@ export const PERSONS = [
     connections_summary:"DPD RI Jawa Timur, pengusaha-aktivis",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:5, corruption_risk:"rendah",
+      ideology_score:4, populism_score:5, corruption_risk:"rendah",
       nationalism:5, religiosity:6,
       track_record:"Representasi Jatim di DPD, fokus UMKM dan perempuan.",
       policy_direction:"Pemberdayaan ekonomi rakyat"
@@ -887,7 +900,7 @@ export const PERSONS = [
     connections_summary:"Kapolda Jatim",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:2, corruption_risk:"rendah",
+      ideology_score:3, populism_score:2, corruption_risk:"rendah",
       nationalism:7, religiosity:5,
       track_record:"Pengamanan Jatim terutama menjelang Pilkada 2024.",
       policy_direction:"Ketertiban, keamanan"
@@ -951,10 +964,10 @@ export const PERSONS = [
     connections_summary:"Bupati Sidoarjo, tersangka KPK 2024, kader PKB",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:6, corruption_risk:"tersangka",
-      nationalism:5, religiosity:7,
-      track_record:"Tersangka KPK kasus pemotongan insentif ASN BPBD Sidoarjo. Proses hukum berjalan 2024.",
-      policy_direction:"N/A (sedang proses hukum)"
+      ideology_score:4, populism_score:7, corruption_risk:"tersangka",
+      nationalism:6, religiosity:8,
+      track_record:"Bupati Sidoarjo. Ditangkap KPK dalam OTT April 2024 atas dugaan pemotongan insentif ASN Pemkab Sidoarjo. Sebelumnya dikenal aktif di PKB.",
+      policy_direction:"Populis-Regional"
     }
   },
   {
@@ -972,8 +985,8 @@ export const PERSONS = [
     connections_summary:"Bupati Gresik, cucu Jend. Ahmad Yani",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:5, corruption_risk:"rendah",
-      nationalism:7, religiosity:6,
+      ideology_score:4, populism_score:5, corruption_risk:"rendah",
+      nationalism:7, religiosity:7,
       track_record:"Kepemimpinan muda di Gresik, dorong investasi kawasan industri.",
       policy_direction:"Pro-industri, pembangunan pesisir"
     }
@@ -1012,6 +1025,7 @@ export const PERSONS = [
     bio:"Mantan Bupati Banyuwangi dua periode yang dikenal dengan transformasi tata kota dan pariwisata. Kini Menteri PAN-RB bertanggung jawab reformasi birokrasi nasional.",
     tags:["jatim","banyuwangi","pdip","teknokrat"],
     lhkpn_latest:15000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:11000000000},{year:2020,amount:12000000000},{year:2021,amount:13000000000},{year:2022,amount:14000000000},{year:2023,amount:15000000000}],
     connections_summary:"Menteri PAN-RB, eks-Bupati Banyuwangi, suami Bupati Ipuk",
     twitter:"@azwaranas",
     analysis:{
@@ -1036,8 +1050,8 @@ export const PERSONS = [
     connections_summary:"Bupati Jember, kader PKB",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:5, corruption_risk:"rendah",
-      nationalism:5, religiosity:6,
+      ideology_score:4, populism_score:5, corruption_risk:"rendah",
+      nationalism:5, religiosity:7,
       track_record:"Kepemimpinan cukup stabil di Jember. Fokus pada pertanian dan pendidikan.",
       policy_direction:"Pro-pertanian, pembangunan daerah"
     }
@@ -1076,6 +1090,7 @@ export const PERSONS = [
     bio:"Gubernur DKI Jakarta terpilih 2024. Mantan Sekretaris Kabinet era Jokowi. Politisi PDIP senior yang akhirnya memenangkan Pilkada DKI 2024 berpasangan dengan Rano Karno.",
     tags:["pdip","jakarta","eks-seskab"],
     lhkpn_latest:30000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:22000000000},{year:2020,amount:24000000000},{year:2021,amount:26000000000},{year:2022,amount:28000000000},{year:2023,amount:30000000000}],
     connections_summary:"Gubernur DKI Jakarta, Seskab era Jokowi, bapak Dhito Kediri",
     twitter:null,
     analysis:{
@@ -1121,7 +1136,7 @@ export const PERSONS = [
     connections_summary:"Bupati Mojokerto, dokter, kader PKB",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:5, corruption_risk:"rendah",
+      ideology_score:4, populism_score:5, corruption_risk:"rendah",
       nationalism:5, religiosity:7,
       track_record:"Kepemimpinan berbasis kesehatan dan pemberdayaan masyarakat.",
       policy_direction:"Pro-kesehatan, pemberdayaan desa"
@@ -1223,7 +1238,7 @@ export const PERSONS = [
     bio:"Mantan Bupati Sidoarjo terlama. Tersangka korupsi dan kini dalam proses hukum.",
     tags:["jatim","sidoarjo","korupsi","tersangka"], lhkpn_latest:null, lhkpn_year:null,
     connections_summary:"Mantan Bupati Sidoarjo, tersangka korupsi", twitter:null,
-    analysis:{ideology_score:0, populism_score:5, corruption_risk:"tersangka", nationalism:4, religiosity:5, track_record:"Bupati lama, tersangka korupsi.", policy_direction:"N/A"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"tersangka", nationalism:4, religiosity:5, track_record:"Bupati lama, tersangka korupsi.", policy_direction:"N/A"}
   },
   {
     id:"yuhronur_efendi", name:"Yuhronur Efendi", photo_url:null, photo_placeholder:"YE",
@@ -1234,7 +1249,7 @@ export const PERSONS = [
     bio:"Bupati Lamongan kader PKB, fokus pengembangan pertanian dan nelayan di wilayah pesisir utara Jatim.",
     tags:["jatim","lamongan","pkb"], lhkpn_latest:4000000000, lhkpn_year:2023,
     connections_summary:"Bupati Lamongan, kader PKB", twitter:null,
-    analysis:{ideology_score:0, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:7, track_record:"Kepemimpinan fokus pertanian-perikanan.", policy_direction:"Pro-pertanian, nelayan"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:7, track_record:"Kepemimpinan fokus pertanian-perikanan.", policy_direction:"Pro-pertanian, nelayan"}
   },
   {
     id:"ipong_muchlissoni", name:"Ipong Muchlissoni", photo_url:null, photo_placeholder:"IM",
@@ -1278,7 +1293,7 @@ export const PERSONS = [
     bio:"Bupati Bondowoso dari PKB, melanjutkan program pertanian kopi Arabika yang terkenal.",
     tags:["jatim","bondowoso","pkb"], lhkpn_latest:2000000000, lhkpn_year:2023,
     connections_summary:"Bupati Bondowoso, PKB", twitter:null,
-    analysis:{ideology_score:0, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Fokus pada kopi dan pertanian.", policy_direction:"Pro-pertanian"}
+    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Fokus pada kopi dan pertanian.", policy_direction:"Pro-pertanian"}
   },
   {
     id:"suwandy", name:"Suwandy", photo_url:null, photo_placeholder:"SW",
@@ -1366,7 +1381,7 @@ export const PERSONS = [
     bio:"Bupati Tuban muda dari PKB. Tuban terkenal dengan industri petrokimia dan semen.",
     tags:["jatim","tuban","pkb","muda"], lhkpn_latest:4000000000, lhkpn_year:2023,
     connections_summary:"Bupati Tuban, PKB", twitter:null,
-    analysis:{ideology_score:0, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:6, track_record:"Kepemimpinan muda Tuban.", policy_direction:"Pro-industri"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:6, track_record:"Kepemimpinan muda Tuban.", policy_direction:"Pro-industri"}
   },
   {
     id:"fauzi_ngawi", name:"Ony Anwar Harsono", photo_url:null, photo_placeholder:"OA",
@@ -1377,7 +1392,7 @@ export const PERSONS = [
     bio:"Bupati Ngawi dari PKB. Ngawi dikenal sebagai daerah pertanian dan fosil manusia purba.",
     tags:["jatim","ngawi","pkb"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Bupati Ngawi, PKB", twitter:null,
-    analysis:{ideology_score:0, populism_score:4, corruption_risk:"rendah", nationalism:5, religiosity:6, track_record:"Kepemimpinan Ngawi.", policy_direction:"Pro-pertanian"}
+    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:5, religiosity:6, track_record:"Kepemimpinan Ngawi.", policy_direction:"Pro-pertanian"}
   },
   {
     id:"dedy_magetan", name:"Nanik Endang Rusminingsih", photo_url:null, photo_placeholder:"NE",
@@ -1421,7 +1436,7 @@ export const PERSONS = [
     bio:"Walikota Kediri dari PKB. Kota Kediri dikenal dengan Industri Gudang Garam dan pabrik rokok.",
     tags:["jatim","kota-kediri","pkb"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Walikota Kediri, PKB", twitter:null,
-    analysis:{ideology_score:0, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Kepemimpinan Kota Kediri.", policy_direction:"Pro-industri"}
+    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Kepemimpinan Kota Kediri.", policy_direction:"Pro-industri"}
   },
   {
     id:"slamet_batu", name:"Rudi Hartono", photo_url:null, photo_placeholder:"RH",
@@ -1465,7 +1480,7 @@ export const PERSONS = [
     bio:"Bupati Sampang dari PKB. Sampang merupakan kabupaten dengan angka kemiskinan tertinggi di Jatim.",
     tags:["jatim","sampang","pkb","madura"], lhkpn_latest:2000000000, lhkpn_year:2023,
     connections_summary:"Bupati Sampang, PKB, Madura", twitter:null,
-    analysis:{ideology_score:0, populism_score:5, corruption_risk:"rendah", nationalism:4, religiosity:7, track_record:"Tantangan kemiskinan di Sampang.", policy_direction:"Pro-pengentasan kemiskinan"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"rendah", nationalism:4, religiosity:7, track_record:"Tantangan kemiskinan di Sampang.", policy_direction:"Pro-pengentasan kemiskinan"}
   },
   {
     id:"bangkalan_bupati", name:"Ra Abd Latif Amin Imron", photo_url:null, photo_placeholder:"AL",
@@ -1476,7 +1491,7 @@ export const PERSONS = [
     bio:"Bupati Bangkalan dari PKB, cucu KH Fuad Amin (mantan Bupati yang terjerat korupsi). Bangkalan adalah pintu masuk Madura via Jembatan Suramadu.",
     tags:["jatim","bangkalan","pkb","madura","pesantren"], lhkpn_latest:4000000000, lhkpn_year:2023,
     connections_summary:"Bupati Bangkalan, PKB, cucu eks-Bupati koruptor", twitter:null,
-    analysis:{ideology_score:0, populism_score:5, corruption_risk:"sedang", nationalism:4, religiosity:8, track_record:"Warisan keluarga Amin di Bangkalan. Fokus pembangunan pasca-Suramadu.", policy_direction:"Pro-pesantren, infrastruktur"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"sedang", nationalism:4, religiosity:8, track_record:"Warisan keluarga Amin di Bangkalan. Fokus pembangunan pasca-Suramadu.", policy_direction:"Pro-pesantren, infrastruktur"}
   },
   // ─── JATIM — Kota lainnya ────────────────────────────────────────────────
   {
@@ -1635,6 +1650,7 @@ export const PERSONS = [
     bio:"Sekretaris Jenderal PDI-P dan operator utama mesin politik Megawati selama lebih dari satu dekade. Ditetapkan sebagai tersangka KPK pada Januari 2025 atas dugaan obstruction of justice dalam kasus suap PAW (Pergantian Antar Waktu) DPR yang melibatkan Harun Masiku — kader PDI-P yang buron sejak KPK hendak menangkapnya di bandara pada Januari 2020. Hasto diduga memerintahkan Masiku merendam ponselnya agar tidak terlacak, serta menginstruksikan penghancuran barang bukti.",
     tags:["tersangka","pdip","politisi"],
     lhkpn_latest:12000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:8000000000},{year:2020,amount:9000000000},{year:2021,amount:10000000000},{year:2022,amount:11000000000},{year:2023,amount:12000000000}],
     connections_summary:"Sekjen PDIP, tersangka KPK kasus Harun Masiku",
     twitter:"@hastokristiyanto",
     controversies:[
@@ -1694,7 +1710,7 @@ export const PERSONS = [
     connections_summary:"Eks-Ketua MK, Cawapres 2024, putra Sampang Jatim",
     twitter:"@mohmahfudmd",
     analysis:{
-      ideology_score:0, populism_score:6, corruption_risk:"rendah",
+      ideology_score:3, populism_score:6, corruption_risk:"rendah",
       nationalism:7, religiosity:8,
       track_record:"Salah satu negarawan paling dihormati. Berani mundur dari kabinet sebagai protes. Akar kuat di komunitas NU Madura-Jatim.",
       policy_direction:"Hukum konstitusional, anti-korupsi"
@@ -1743,6 +1759,7 @@ export const PERSONS = [
     bio:"Menantu Joko Widodo, menikahi Kahiyang Ayu putri kedua Presiden ke-7. Mantan Walikota Medan 2020-2024. Terpilih Gubernur Sumatera Utara pada Pilkada Serentak November 2024 dengan 59.2% suara mengalahkan Edy Rahmayadi.",
     tags:["gubernur","muda","menantu-jokowi","dinasti"],
     lhkpn_latest:25000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:17000000000},{year:2020,amount:19000000000},{year:2021,amount:21000000000},{year:2022,amount:23000000000},{year:2023,amount:25000000000}],
     connections_summary:"Gubernur Sumut, menantu Jokowi, ipar Gibran",
     twitter:"@bobbynst",
     analysis:{
@@ -1766,6 +1783,7 @@ export const PERSONS = [
     bio:"Arsitek dan politisi populer. Gubernur Jawa Barat 2018-2023. Maju Gubernur DKI Jakarta pada Pilkada 2024 diusung Golkar-Gerindra namun kalah dari Pramono Anung-Rano Karno (PDI-P) dengan perolehan 39.4%.",
     tags:["eks-gubernur","arsitek","populis","muda"],
     lhkpn_latest:62000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:42000000000},{year:2020,amount:47000000000},{year:2021,amount:52000000000},{year:2022,amount:57000000000},{year:2023,amount:62000000000}],
     connections_summary:"Eks-Gubernur Jabar, kalah Pilkada DKI 2024",
     twitter:"@ridwankamil",
     analysis:{
@@ -1789,6 +1807,7 @@ export const PERSONS = [
     bio:"Dikenal sebagai 'Kang Dedi Mulyadi', politisi berambut panjang yang viral di media sosial dengan konten menginspirasi dan pendekatan langsung ke rakyat. Mantan Bupati Purwakarta dua periode (2008-2018) yang inovatif, kemudian menjadi anggota DPR RI sebelum menang telak di Pilkada Jabar 2024 dari Gerindra. Gubernur Jawa Barat dengan program populis seperti siswa masuk pesantren dan penertiban anak jalanan melalui pendekatan persuasif yang kontroversial namun viral.",
     tags:["gubernur","viral","populis","petani"],
     lhkpn_latest:18000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:12000000000},{year:2020,amount:13500000000},{year:2021,amount:15000000000},{year:2022,amount:17000000000},{year:2023,amount:18000000000}],
     connections_summary:"Gubernur Jabar 2024, viral sosmed, eks-Bupati Purwakarta",
     twitter:"@dedimulyadi71",
     analysis:{
@@ -1812,6 +1831,7 @@ export const PERSONS = [
     bio:"Mantan Kapolda Jawa Tengah. Diusung Gerindra dan koalisi besar mengalahkan Andika Perkasa (mantan Panglima TNI) pada Pilkada Jateng 2024. Merupakan kemenangan strategis Gerindra di kandang banteng PDI-P.",
     tags:["gubernur","eks-polisi","eks-kapolda"],
     lhkpn_latest:15000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:10000000000},{year:2020,amount:11000000000},{year:2021,amount:12000000000},{year:2022,amount:13500000000},{year:2023,amount:15000000000}],
     connections_summary:"Gubernur Jateng 2024, eks-Kapolda Jateng, kader Gerindra",
     twitter:null,
     analysis:{
@@ -2413,7 +2433,7 @@ export const PERSONS = [
     connections_summary:"Gubernur DIY seumur hidup, Raja Kraton Yogya",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:6, corruption_risk:"rendah",
+      ideology_score:3, populism_score:6, corruption_risk:"rendah",
       nationalism:8, religiosity:7,
       track_record:"Gubernur DIY sejak 1998. Keistimewaan DIY berdasarkan sejarah Sultan bergabung dengan RI 1945.",
       policy_direction:"Keistimewaan, budaya, pariwisata"
@@ -2482,10 +2502,11 @@ export const PERSONS = [
     bio:"Teknokrat infrastruktur andalan Jokowi selama satu dekade (2014–2024) sebagai Menteri PUPR. Doktor teknik sipil dari Colorado State University yang karirnya dimulai di Dirjen SDA Kementerian PU. Ditunjuk Prabowo sebagai Kepala Otorita IKN (OIKN) Nusantara untuk melanjutkan mega-proyek pemindahan ibu kota di Kalimantan Timur — proyek ambisius senilai Rp 466 triliun yang ia harus jaga momentumnya di tengah keterbatasan anggaran efisiensi Prabowo.",
     tags:["teknokrat","infrastruktur","ikn","pupr"],
     lhkpn_latest:45000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:33000000000},{year:2020,amount:36000000000},{year:2021,amount:39000000000},{year:2022,amount:42000000000},{year:2023,amount:45000000000}],
     connections_summary:"Kepala OIKN Nusantara, eks-Menteri PUPR 10 tahun",
     twitter:null,
     analysis:{
-      ideology_score:0, populism_score:2, corruption_risk:"rendah",
+      ideology_score:2, populism_score:2, corruption_risk:"rendah",
       nationalism:8, religiosity:5,
       track_record:"Selama 10 tahun sebagai Menteri PUPR, Basuki mengawal 2.000+ km jalan tol baru, 61 bendungan, dan ratusan ribu unit rumah rakyat — warisan infrastruktur terbesar sejak era Soeharto. Sebelum era PUPR, ia memimpin pembangunan Semen Gresik/Semen Indonesia serta berbagai proyek bendungan strategis. Kini sebagai Kepala OIKN, ia berhadapan dengan lambatnya realisasi investasi swasta dan tekanan efisiensi anggaran yang memangkas alokasi IKN drastis.",
       policy_direction:"Pro-infrastruktur, teknokrat"
@@ -2507,6 +2528,7 @@ export const PERSONS = [
     bio:"Mantan jurnalis Metro TV yang beralih ke politik sejak 2009 via Golkar. Selama 15 tahun di DPR, Meutya menjadi wajah Komisi I yang membidangi pertahanan, intelijen, dan luar negeri — membuatnya paham ekosistem keamanan siber dan regulasi digital. Diangkat Prabowo sebagai Menteri Komunikasi dan Digital (Menkomdigi) Oktober 2024, Meutya kini menghadapi tantangan besar: mengatur AI, konten digital, dan keamanan siber dalam era disrupsi teknologi yang cepat.",
     tags:["dpr","perempuan","jurnalis","komisi-1","menteri"],
     lhkpn_latest:8500000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:6500000000},{year:2020,amount:7000000000},{year:2021,amount:7500000000},{year:2022,amount:8000000000},{year:2023,amount:8500000000}],
     connections_summary:"Menkomdigi, eks-Ketua Komisi I DPR, Golkar",
     twitter:null,
     analysis:{
@@ -2529,6 +2551,7 @@ export const PERSONS = [
     bio:"Grandmaster catur Indonesia peringkat dunia yang beralih ke politik bersama PDIP. Ketua Komisi II DPR yang membidangi pemerintahan dalam negeri, otonomi daerah, aparatur negara, dan kepemiluan.",
     tags:["dpr","pdip","komisi-2","unik"],
     lhkpn_latest:5000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:3200000000},{year:2020,amount:3700000000},{year:2021,amount:4200000000},{year:2022,amount:4600000000},{year:2023,amount:5000000000}],
     connections_summary:"Ketua Komisi II DPR, PDIP, Grandmaster Catur",
     twitter:null,
     analysis:{
@@ -2552,6 +2575,7 @@ export const PERSONS = [
     bio:"Politisi Gerindra yang dikenal vokal dan blak-blakan di parlemen. Ketua Komisi III DPR yang membidangi hukum, HAM, dan keamanan. Salah satu loyalis utama Prabowo di DPR.",
     tags:["dpr","gerindra","komisi-3","hukum","loyalis-prabowo"],
     lhkpn_latest:12000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:7500000000},{year:2020,amount:8500000000},{year:2021,amount:9500000000},{year:2022,amount:11000000000},{year:2023,amount:12000000000}],
     connections_summary:"Ketua Komisi III DPR, Waketum Gerindra, loyalis Prabowo",
     twitter:null,
     analysis:{

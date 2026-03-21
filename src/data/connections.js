@@ -708,6 +708,57 @@ export const CONNECTIONS = [
   { from:"hasto",                to:"nawawi",          type:"konflik",        label:"KPK vs PDIP — Hasto Kristiyanto ditetapkan tersangka oleh KPK Nawawi", strength:8 },
   { from:"puan",                 to:"jokowi",          type:"konflik",        label:"PDIP split — Puan-Megawati berseberangan dengan Jokowi pasca 2023",    strength:5 },
   { from:"erick_thohir",         to:"gibran",          type:"rekan",          label:"Sesama Kabinet Merah Putih; Erick Thohir Menkes, Gibran Wapres",       strength:6 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH BISNIS: Oligarch-Media-Politik + DPR-Instansi ──────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"hary_tanoe",   to:"airlangga",   type:"bisnis", label:"MNC Group — Golkar media relasi",                             strength:7 },
+  { from:"hary_tanoe",   to:"prabowo",     type:"bisnis", label:"Perindo-KIM Plus — media mendukung pemerintah",               strength:7 },
+  { from:"hary_tanoe",   to:"jokowi",      type:"bisnis", label:"MNC media relasi positif era Jokowi",                         strength:6 },
+  { from:"erick_thohir", to:"prabowo",     type:"bisnis", label:"Tim Pemenangan 2024 → Menteri BUMN",                          strength:8 },
+  { from:"erick_thohir", to:"jokowi",      type:"bisnis", label:"Ketua Tim Pemenangan Jokowi 2019",                            strength:9 },
+  { from:"surya_paloh",  to:"anies",       type:"bisnis", label:"Metro TV — NasDem usung Anies; media dan politik",            strength:8 },
+  { from:"surya_paloh",  to:"jokowi",      type:"bisnis", label:"Metro TV dukung Jokowi 2014-2019",                            strength:7 },
+  { from:"airlangga",    to:"erick_thohir",type:"bisnis", label:"Koordinasi Golkar-BUMN kebijakan industri",                   strength:6 },
+  { from:"bahlil",       to:"erick_thohir",type:"bisnis", label:"Menko Energi-Menteri BUMN koordinasi Danantara",              strength:7 },
+  { from:"bahlil",       to:"prabowo",     type:"bisnis", label:"Konsesi tambang nikel — kontroversi izin usaha",              strength:7 },
+  { from:"hary_tanoe",   to:"cakimin",     type:"bisnis", label:"MNC-PKB media pendukung koalisi",                             strength:5 },
+  { from:"basuki",       to:"erick_thohir",type:"bisnis", label:"OIKN-BUMN koordinasi pembangunan IKN",                       strength:7 },
+  { from:"sri_mulyani",  to:"airlangga",   type:"bisnis", label:"Kemenkeu-Menko Ekonomi — koordinasi APBN",                   strength:8 },
+  { from:"erick_thohir", to:"bahlil",      type:"bisnis", label:"BUMN Energi — Danantara investasi sektor energi",             strength:7 },
+  { from:"misbakhun",    to:"sri_mulyani", type:"bisnis", label:"Komisi XI DPR mengawasi Kemenkeu",                            strength:6 },
+  { from:"habiburokhman",to:"yusril",      type:"bisnis", label:"Komisi III DPR mengawasi Kemenko Hukum",                      strength:6 },
+  { from:"utut_adianto", to:"sjafrie",     type:"bisnis", label:"Komisi I DPR mengawasi Kemhan",                               strength:6 },
+  { from:"surya_paloh",  to:"megawati",    type:"bisnis", label:"Metro TV — relasi NasDem-PDIP media coverage",                strength:5 },
+  { from:"hary_tanoe",   to:"megawati",    type:"bisnis", label:"MNC terkait Perindo dalam konstelasi PDIP-KIM",               strength:4 },
+  { from:"erick_thohir", to:"airlangga",   type:"bisnis", label:"BUMN-Golkar koordinasi kebijakan industri nasional",          strength:6 },
+  { from:"bahlil",       to:"airlangga",   type:"bisnis", label:"Golkar — Bahlil penerus kepemimpinan Golkar dari Airlangga",  strength:7 },
+  { from:"hashim",       to:"jokowi",      type:"bisnis", label:"Jaringan bisnis Djojohadikusumo — relasi koalisi pemerintahan",strength:5 },
+  { from:"sjafrie",      to:"prabowo",     type:"bisnis", label:"Jaringan TNI-bisnis pertahanan; Sjafrie Menhan di bawah Prabowo", strength:6 },
+  { from:"agus_subiyanto",to:"prabowo",    type:"bisnis", label:"Panglima TNI di bawah kepresidenan Prabowo",                  strength:7 },
+  { from:"surya_paloh",  to:"hary_tanoe",  type:"bisnis", label:"Sesama taipan media — koordinasi posisi media nasional",      strength:5 },
+  { from:"tom_lembong",  to:"jokowi",      type:"bisnis", label:"Kepala BKPM era Jokowi 2015-2016",                            strength:7 },
+  { from:"agus_gumiwang",to:"prabowo",     type:"bisnis", label:"Koordinasi Kemenperin-pemerintahan Prabowo",                  strength:6 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH MENTOR-MURID: Patronase Politik & Dinasti ───────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"megawati",    to:"ganjar",        type:"mentor-murid", label:"PDIP — Megawati mengorbitkan Ganjar Capres 2024",      strength:9 },
+  { from:"megawati",    to:"puan",          type:"mentor-murid", label:"PDIP — ibu-anak, Megawati pewaris kepemimpinan PDIP", strength:10 },
+  { from:"jokowi",      to:"gibran",        type:"mentor-murid", label:"Ayah-anak, jalur politik Wali Kota→Wapres",           strength:10 },
+  { from:"jokowi",      to:"bobby_nasution",type:"mentor-murid", label:"Mertua-menantu, jalur politik ke Gubernur Sumut",     strength:9 },
+  { from:"jokowi",      to:"pramono_anung", type:"mentor-murid", label:"Jokowi dorong Pramono jadi Gubernur DKI",             strength:8 },
+  { from:"sby",         to:"ahy",           type:"mentor-murid", label:"Ayah-anak, SBY bangun Demokrat untuk AHY",            strength:10 },
+  { from:"prabowo",     to:"hashim",        type:"mentor-murid", label:"Kakak membimbing adik ke bisnis dan Gerindra",        strength:7 },
+  { from:"prabowo",     to:"sufmi_dasco",   type:"mentor-murid", label:"Prabowo mengorbitkan Dasco jadi Ketua DPR",           strength:9 },
+  { from:"prabowo",     to:"ahmad_muzani",  type:"mentor-murid", label:"Prabowo mengorbitkan Muzani jadi Ketua MPR",          strength:9 },
+  { from:"airlangga",   to:"bahlil",        type:"mentor-murid", label:"Airlangga senior Golkar; Bahlil penerus Golkar",      strength:7 },
+  { from:"mahfud_md",   to:"nawawi",        type:"mentor-murid", label:"Mahfud senior hukum; Nawawi eks bawahan di MK",       strength:6 },
+  { from:"surya_paloh", to:"anies",         type:"mentor-murid", label:"NasDem mengorbitkan Anies Gubernur→Capres 2024",      strength:8 },
+  { from:"khofifah",    to:"dedi_mulyadi",  type:"mentor-murid", label:"Senior gubernur — berbagi pengalaman tata kelola",    strength:5 },
+  { from:"gus_yahya",   to:"cakimin",       type:"mentor-murid", label:"NU membimbing PKB — Gus Yahya pengaruhi basis PKB",   strength:7 },
 ]
 
 export const CONNECTION_TYPES = {
