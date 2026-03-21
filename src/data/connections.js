@@ -761,6 +761,43 @@ export const CONNECTIONS = [
   { from:"khofifah",    to:"dedi_mulyadi",  type:"mentor-murid", label:"Senior gubernur — berbagi pengalaman tata kelola",    strength:5 },
   { from:"gus_yahya",   to:"cakimin",       type:"mentor-murid", label:"NU membimbing PKB — Gus Yahya pengaruhi basis PKB",   strength:7 },
   { from:"soekarno",    to:"megawati",      type:"mentor-murid", label:"Ayah-anak — warisan ideologi Marhaenisme ke Megawati",  strength:10 },
+
+  // ─── DPR LEADERSHIP NETWORK ──────────────────────────────────────────────
+  { from:"sufmi_dasco",       to:"prabowo",          type:"rekan",          label:"Sekjen-Ketum Gerindra",                                          strength:9  },
+  { from:"adies_kadir",       to:"airlangga",        type:"rekan",          label:"Kader Golkar — DPR dan partai",                                  strength:8  },
+  { from:"lodewijk_paulus",   to:"prabowo",          type:"rekan",          label:"Eks Sekjen TNI AD — dekat Gerindra",                             strength:6  },
+
+  // ─── KPK / HUKUM NETWORK ─────────────────────────────────────────────────
+  { from:"novel_baswedan",    to:"alexander_marwata",type:"rekan",          label:"Sesama pegawai KPK",                                             strength:5  },
+  { from:"novel_baswedan",    to:"hasto_kristiyanto",type:"konflik",        label:"Novel menyelidiki kasus Harun Masiku — PDIP menekan KPK",        strength:7  },
+  { from:"hasto_kristiyanto", to:"megawati",         type:"rekan",          label:"Sekjen PDIP — langsung melapor ke Megawati",                     strength:9  },
+  { from:"hasto_kristiyanto", to:"jokowi",           type:"rekan",          label:"Sekjen PDIP era pemerintahan Jokowi",                            strength:7  },
+  { from:"tom_lembong",       to:"jokowi",           type:"mantan-koalisi", label:"Mantan menteri andalan Jokowi, kini berseberangan pasca-penangkapan", strength:4 },
+  { from:"johny_plate",       to:"surya_paloh",      type:"rekan",          label:"Kader Nasdem — Sekjen partai sebelum ditahan",                   strength:8  },
+  { from:"johny_plate",       to:"jokowi",           type:"rekan",          label:"Menteri Kominfo era Jokowi",                                     strength:6  },
+
+  // ─── KORUPSI / TERSANGKA ─────────────────────────────────────────────────
+  { from:"lukas_enembe",      to:"prabowo",          type:"rekan",          label:"Dukungan Gerindra di Papua",                                     strength:4  },
+
+  // ─── KABINET / EKSEKUTIF ─────────────────────────────────────────────────
+  { from:"pramono_anung",     to:"anies",            type:"mantan-koalisi", label:"Menggantikan Anies sebagai Gubernur DKI",                        strength:3  },
+  { from:"supratman_andi",    to:"prabowo",          type:"koalisi",        label:"Menkumham — Kabinet Merah Putih",                                strength:7  },
+  { from:"nusron_wahid",      to:"airlangga",        type:"rekan",          label:"Kader Golkar — Menteri ATR/BPN",                                 strength:7  },
+  { from:"dito_ariotedjo",    to:"jokowi",           type:"koalisi",        label:"Menpora — Kabinet era Jokowi, dilanjutkan Prabowo",               strength:6  },
+  { from:"luluk_nur",         to:"cakimin",          type:"rekan",          label:"Kader PKB — legislatif",                                         strength:7  },
+
+  // ─── KONEKSI YANG BELUM ADA (EXISTING PERSONS) ───────────────────────────
+  { from:"sri_mulyani",       to:"prabowo",          type:"koalisi",        label:"Menteri Keuangan Kabinet Merah Putih",                           strength:7  },
+  { from:"ridwan_kamil",      to:"prabowo",          type:"koalisi",        label:"Tim Kampanye Prabowo — maju Pilgub DKI",                         strength:7  },
+  { from:"ridwan_kamil",      to:"anies",            type:"konflik",        label:"Rivalitas Pilgub DKI 2024 — KIM+ vs oposisi",                    strength:7  },
+  { from:"ganjar",            to:"megawati",         type:"rekan",          label:"Capres PDIP 2024 — restu Megawati",                              strength:8  },
+  { from:"ganjar",            to:"prabowo",          type:"mantan-koalisi", label:"Rival Pilpres 2024",                                             strength:3  },
+  { from:"mahfud_md",         to:"jokowi",           type:"konflik",        label:"Mundur dari Menkopolhukam — sinyal ketidakpuasan",               strength:6  },
+  { from:"surya_paloh",       to:"anies",            type:"koalisi",        label:"Nasdem usung Anies — koalisi perubahan",                         strength:8  },
+  { from:"surya_paloh",       to:"prabowo",          type:"mantan-koalisi", label:"Nasdem bergabung koalisi setelah Pilpres",                       strength:5  },
+
+  // ─── BISNIS / MEDIA ───────────────────────────────────────────────────────
+  { from:"hary_tanoe",        to:"airlangga",        type:"bisnis",         label:"Media Nusantara Citra — Golkar nexus",                           strength:6  },
 ]
 
 export const CONNECTION_TYPES = {
