@@ -1,5 +1,5 @@
-import { useState, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useCallback, useMemo } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import { PERSONS } from '../../data/persons'
 import { CONNECTIONS, CONNECTION_TYPES } from '../../data/connections'
 import { PARTIES } from '../../data/parties'
@@ -16,6 +16,18 @@ const NETWORK_NODES = PERSONS.filter(p => connectedIds.has(p.id))
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
+// Type labels + colors
+const TYPE_INFO = {
+  koalisi:          { label: 'Koalisi',       color: '#3B82F6' },
+  keluarga:         { label: 'Keluarga',       color: '#EC4899' },
+  bisnis:           { label: 'Bisnis',         color: '#F59E0B' },
+  konflik:          { label: 'Konflik',        color: '#EF4444' },
+  'mentor-murid':   { label: 'Mentor-Murid',   color: '#8B5CF6' },
+  rekan:            { label: 'Rekan',          color: '#6B7280' },
+  'mantan-koalisi': { label: 'Mantan Koalisi', color: '#D97706' },
+}
+const ALL_TYPES = Object.keys(TYPE_INFO)
+
 // BFS shortest path
 function findShortestPath(connections, startId, endId) {
   if (startId === endId) return [startId]
@@ -27,11 +39,10 @@ function findShortestPath(connections, startId, endId) {
     adj[c.to].push({   id: c.from, edge: c })
   })
   const visited = new Set([startId])
-  const queue = [[startId, [startId]]]
+  const queue   = [[startId, [startId]]]
   while (queue.length) {
     const [current, path] = queue.shift()
-    const neighbors = adj[current] || []
-    for (const { id } of neighbors) {
+    for (const { id } of (adj[current] || [])) {
       if (id === endId) return [...path, id]
       if (!visited.has(id)) {
         visited.add(id)
@@ -39,37 +50,49 @@ function findShortestPath(connections, startId, endId) {
       }
     }
   }
-  return null // no path found
+  return null
 }
 
 export default function NetworkPage() {
   const navigate = useNavigate()
-  const [filterType, setFilterType] = useState(null)
-  const [filterParty, setFilterParty] = useState(null)
-  const [filterTier, setFilterTier] = useState(null)
+
+  // Filters
+  const [visibleTypes, setVisibleTypes] = useState(ALL_TYPES)
+  const [filterParty,  setFilterParty]  = useState(null)
+  const [filterTier,   setFilterTier]   = useState(null)
   const [selectedPerson, setSelectedPerson] = useState(null)
 
-  // Shortest path state
+  // Shortest path
   const [pathStart, setPathStart] = useState('')
-  const [pathEnd, setPathEnd] = useState('')
-  const [path, setPath] = useState(undefined) // undefined = not searched yet, null = no path
+  const [pathEnd,   setPathEnd]   = useState('')
+  const [path,      setPath]      = useState(undefined) // undefined = not searched
 
-  const handleNodeClick = useCallback((person) => {
-    setSelectedPerson(person)
-  }, [])
+  // Focus node (search-to-zoom)
+  const [focusNodeId, setFocusNodeId] = useState(null)
+  const [searchValue, setSearchValue] = useState('')
+
+  const handleNodeClick = useCallback(person => setSelectedPerson(person), [])
 
   const handleReset = () => {
-    setFilterType(null)
+    setVisibleTypes(ALL_TYPES)
     setFilterParty(null)
     setFilterTier(null)
     setSelectedPerson(null)
+    setFocusNodeId(null)
+    setSearchValue('')
   }
 
   const computePath = () => {
     if (!pathStart || !pathEnd) return
-    const result = findShortestPath(CONNECTIONS, pathStart, pathEnd)
-    setPath(result)
+    setPath(findShortestPath(CONNECTIONS, pathStart, pathEnd))
   }
+
+  // Live stats
+  const stats = useMemo(() => {
+    const visEdges = CONNECTIONS.filter(e => visibleTypes.includes(e.type))
+    const activeNodeIds = new Set([...visEdges.map(e => e.from), ...visEdges.map(e => e.to)])
+    return { visible: visEdges.length, total: CONNECTIONS.length, activeNodes: activeNodeIds.size }
+  }, [visibleTypes])
 
   const connectionCounts = selectedPerson
     ? Object.keys(CONNECTION_TYPES).reduce((acc, type) => {
@@ -87,36 +110,92 @@ export default function NetworkPage() {
 
   const highlightIds = Array.isArray(path) ? path : undefined
 
+  const toggleType = type => {
+    setVisibleTypes(prev =>
+      prev.includes(type) ? prev.filter(t => t !== type) : [...prev, type]
+    )
+  }
+
   return (
     <div className="flex h-[calc(100vh-8rem)] gap-0 -m-4 md:-m-6 overflow-hidden">
-      {/* Left Filter Panel */}
+
+      {/* ── Left Filter Panel ─────────────────────────────────────────── */}
       <div className="w-56 flex-shrink-0 bg-bg-sidebar border-r border-border overflow-y-auto p-4 space-y-5">
+
+        {/* Search to focus */}
         <div>
           <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
-            Jenis Koneksi
+            🔎 Cari Tokoh
           </h3>
+          <select
+            value={searchValue}
+            onChange={e => {
+              setSearchValue(e.target.value)
+              setFocusNodeId(e.target.value || null)
+            }}
+            className="w-full text-xs bg-bg-elevated border border-border rounded px-2 py-1 text-text-primary"
+          >
+            <option value="">Cari tokoh...</option>
+            {NETWORK_NODES.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
+          </select>
+        </div>
+
+        {/* Filter Koneksi — checkboxes */}
+        <div>
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider">
+              Filter Koneksi
+            </h3>
+            <button
+              onClick={() => setVisibleTypes(visibleTypes.length === ALL_TYPES.length ? [] : ALL_TYPES)}
+              className="text-[10px] text-text-secondary hover:text-text-primary"
+            >
+              {visibleTypes.length === ALL_TYPES.length ? 'Semua' : 'Pilih Semua'}
+            </button>
+          </div>
           <div className="space-y-1.5">
-            {Object.entries(CONNECTION_TYPES).map(([type, cfg]) => (
-              <button
-                key={type}
-                onClick={() => setFilterType(filterType === type ? null : type)}
-                className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs transition-colors ${
-                  filterType === type ? 'bg-bg-elevated' : 'hover:bg-bg-elevated'
-                }`}
-              >
-                <span
-                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                  style={{ backgroundColor: filterType === type ? cfg.color : cfg.color + '80' }}
-                />
-                <span className={filterType === type ? 'text-text-primary font-medium' : 'text-text-secondary'}>
-                  {cfg.label}
-                </span>
-                {filterType === type && <span className="ml-auto text-text-secondary">✓</span>}
-              </button>
-            ))}
+            {ALL_TYPES.map(type => {
+              const info = TYPE_INFO[type]
+              const checked = visibleTypes.includes(type)
+              return (
+                <label
+                  key={type}
+                  className="flex items-center gap-2 cursor-pointer px-2 py-1 rounded-lg hover:bg-bg-elevated transition-colors"
+                >
+                  <input
+                    type="checkbox"
+                    checked={checked}
+                    onChange={() => toggleType(type)}
+                    className="rounded accent-blue-500 w-3.5 h-3.5 flex-shrink-0"
+                  />
+                  <span
+                    className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: info.color }}
+                  />
+                  <span className={`text-xs ${checked ? 'text-text-primary' : 'text-text-secondary'}`}>
+                    {info.label}
+                  </span>
+                </label>
+              )
+            })}
           </div>
         </div>
 
+        {/* Live stats */}
+        <div className="bg-bg-elevated rounded-lg p-3 space-y-1">
+          <p className="text-xs text-text-secondary">
+            <span className="font-semibold text-text-primary">{stats.visible}</span>
+            {' / '}
+            <span>{stats.total}</span>
+            {' koneksi ditampilkan'}
+          </p>
+          <p className="text-xs text-text-secondary">
+            <span className="font-semibold text-text-primary">{stats.activeNodes}</span>
+            {' node aktif'}
+          </p>
+        </div>
+
+        {/* Party filter */}
         <div>
           <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
             Partai
@@ -140,6 +219,7 @@ export default function NetworkPage() {
           </div>
         </div>
 
+        {/* Tier filter */}
         <div>
           <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
             Tingkat
@@ -150,7 +230,9 @@ export default function NetworkPage() {
                 key={tier}
                 onClick={() => setFilterTier(filterTier === tier ? null : tier)}
                 className={`w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs transition-colors capitalize ${
-                  filterTier === tier ? 'bg-bg-elevated text-text-primary font-medium' : 'text-text-secondary hover:bg-bg-elevated'
+                  filterTier === tier
+                    ? 'bg-bg-elevated text-text-primary font-medium'
+                    : 'text-text-secondary hover:bg-bg-elevated'
                 }`}
               >
                 {tier.charAt(0).toUpperCase() + tier.slice(1)}
@@ -160,16 +242,16 @@ export default function NetworkPage() {
           </div>
         </div>
 
-        {(filterType || filterParty || filterTier) && (
+        {(visibleTypes.length < ALL_TYPES.length || filterParty || filterTier) && (
           <button
             onClick={handleReset}
             className="w-full px-3 py-2 text-xs text-red-400 hover:bg-red-900/20 border border-red-700/30 rounded-lg transition-colors"
           >
-            ✕ Reset Filter
+            ✕ Reset Semua Filter
           </button>
         )}
 
-        {/* Shortest Path section */}
+        {/* Shortest path */}
         <div className="border-t border-border pt-4">
           <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
             🔍 Jalur Terpendek
@@ -215,65 +297,92 @@ export default function NetworkPage() {
             <p className="text-xs text-text-secondary mt-2">Tidak ada jalur ditemukan</p>
           )}
         </div>
-
-        {/* Legend */}
-        <div>
-          <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
-            Legenda
-          </h3>
-          <div className="space-y-1">
-            {Object.entries(CONNECTION_TYPES).map(([type, cfg]) => (
-              <div key={type} className="flex items-center gap-2 text-xs text-text-secondary">
-                <span className="inline-block w-5 h-0.5" style={{ backgroundColor: cfg.color }} />
-                {cfg.label}
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
 
-      {/* Network Graph / Mobile fallback */}
-      <div className="flex-1 relative overflow-y-auto">
+      {/* ── Main Graph Area ───────────────────────────────────────────── */}
+      <div className="flex-1 relative overflow-hidden flex flex-col">
         {isMobile ? (
-          <div className="p-4 space-y-2">
-            <p className="text-text-secondary text-sm mb-3">Graf tidak tersedia di layar kecil. Menampilkan daftar koneksi:</p>
-            {NETWORK_NODES.slice(0, 30).map(node => {
-              const nodeConns = CONNECTIONS.filter(c => c.from === node.id || c.to === node.id)
+          <div className="flex-1 overflow-y-auto p-4 space-y-2">
+            <p className="text-text-secondary text-sm mb-3">
+              Graf tidak tersedia di layar kecil. Menampilkan daftar koneksi:
+            </p>
+            {NETWORK_NODES.slice(0, 40).map(node => {
+              const nodeConns = CONNECTIONS.filter(c =>
+                (c.from === node.id || c.to === node.id) &&
+                visibleTypes.includes(c.type)
+              )
               if (!nodeConns.length) return null
               return (
-                <div key={node.id} className="bg-bg-card rounded-lg p-3 border border-border">
-                  <p className="text-sm font-semibold text-text-primary">{node.name}</p>
-                  <p className="text-xs text-text-secondary">{nodeConns.length} koneksi</p>
-                </div>
+                <Link
+                  key={node.id}
+                  to={`/persons/${node.id}`}
+                  className="block bg-bg-card rounded-lg p-3 border border-border hover:border-accent-red transition-colors"
+                >
+                  <p className="text-sm font-semibold text-text-primary mb-1.5">{node.name}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {nodeConns.slice(0, 6).map((c, i) => {
+                      const info = TYPE_INFO[c.type]
+                      return (
+                        <span
+                          key={i}
+                          className="px-1.5 py-0.5 rounded text-[10px] font-medium text-white"
+                          style={{ backgroundColor: info?.color || '#6B7280' }}
+                        >
+                          {info?.label || c.type}
+                        </span>
+                      )
+                    })}
+                    {nodeConns.length > 6 && (
+                      <span className="px-1.5 py-0.5 rounded text-[10px] text-text-secondary bg-bg-elevated">
+                        +{nodeConns.length - 6} lagi
+                      </span>
+                    )}
+                  </div>
+                </Link>
               )
             })}
           </div>
         ) : (
-          <>
+          <div className="flex-1 relative">
             <NetworkGraph
               nodes={filterTier ? NETWORK_NODES.filter(n => n.tier === filterTier) : NETWORK_NODES}
               edges={CONNECTIONS}
               onNodeClick={handleNodeClick}
-              filterType={filterType}
               filterParty={filterParty}
+              visibleTypes={visibleTypes}
               highlightIds={highlightIds}
+              focusNodeId={focusNodeId}
             />
+
             {/* Stats overlay */}
-            <div className="absolute top-3 left-3 flex gap-2">
+            <div className="absolute top-3 left-3 flex gap-2 pointer-events-none">
               <span className="px-2 py-1 bg-bg-card/90 border border-border rounded text-xs text-text-secondary">
-                {NETWORK_NODES.length} tokoh · {CONNECTIONS.length} koneksi
+                {stats.visible} / {stats.total} koneksi · {stats.activeNodes} node aktif
               </span>
               {Array.isArray(path) && (
                 <span className="px-2 py-1 bg-yellow-500/20 border border-yellow-500/40 rounded text-xs text-yellow-400">
-                  ✨ Jalur disorot: {path.length} tokoh
+                  ✨ Jalur: {path.length} tokoh
                 </span>
               )}
             </div>
-          </>
+          </div>
         )}
+
+        {/* ── Legend bar ──────────────────────────────────────────────── */}
+        <div className="flex-shrink-0 border-t border-border bg-bg-sidebar px-4 py-2 flex flex-wrap gap-x-4 gap-y-1">
+          {ALL_TYPES.map(type => {
+            const info = TYPE_INFO[type]
+            return (
+              <span key={type} className="flex items-center gap-1.5 text-xs text-text-secondary">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: info.color }} />
+                {info.label}
+              </span>
+            )
+          })}
+        </div>
       </div>
 
-      {/* Right Info Panel */}
+      {/* ── Right Info Panel ─────────────────────────────────────────── */}
       {selectedPerson && (
         <div className="w-72 flex-shrink-0 bg-bg-sidebar border-l border-border overflow-y-auto p-4 space-y-4">
           <div className="flex items-center justify-between">
@@ -303,12 +412,12 @@ export default function NetworkPage() {
               </h4>
               <div className="space-y-1.5">
                 {Object.entries(connectionCounts).map(([type, count]) => {
-                  const cfg = CONNECTION_TYPES[type]
+                  const info = TYPE_INFO[type] || CONNECTION_TYPES[type]
                   return (
                     <div key={type} className="flex items-center justify-between text-xs">
                       <span className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: cfg.color }} />
-                        <span className="text-text-secondary">{cfg.label}</span>
+                        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: info?.color }} />
+                        <span className="text-text-secondary">{info?.label || type}</span>
                       </span>
                       <span className="font-medium text-text-primary">{count}</span>
                     </div>
