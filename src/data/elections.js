@@ -87,3 +87,88 @@ export const PILKADA_RESULTS_2024 = [
   { region:"Mojokerto",  winner:"Ikfina Fahmawati",       party:"PKB",     pct:60.4 },
   { region:"Jombang",    winner:"Warsubi",                party:"PKB",     pct:55.3 },
 ]
+
+// ─── PILKADA SERENTAK 2024 — GUBERNUR NASIONAL ────────────────────────────
+export const PILKADA_2024 = [
+  {
+    id:"pilkada-aceh-2024", region:"Aceh", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Muzakir Manaf",    party:"Gerindra/Nasdem", pct:59.0, person_id:"muzakir_manaf" },
+    runner_up: { name:"Bustami Hamzah",   party:"Golkar",          pct:41.0, person_id:null },
+  },
+  {
+    id:"pilkada-sumut-2024", region:"Sumatera Utara", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Bobby Nasution",   party:"Gerindra", pct:59.2, person_id:"bobby_nasution" },
+    runner_up: { name:"Edy Rahmayadi",    party:"Golkar",   pct:40.8, person_id:null },
+  },
+  {
+    id:"pilkada-sumbar-2024", region:"Sumatera Barat", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Mahyeldi Ansharullah", party:"PKS", pct:57.3, person_id:"mahyeldi" },
+    runner_up: { name:"Epyardi Asda",        party:"NasDem", pct:42.7, person_id:null },
+  },
+  {
+    id:"pilkada-riau-2024", region:"Riau", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Abdul Wahid",      party:"PKB",    pct:52.1, person_id:"abdul_wahid" },
+    runner_up: { name:"M. Nasir",         party:"Golkar", pct:47.9, person_id:null },
+  },
+  {
+    id:"pilkada-lampung-2024", region:"Lampung", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Rahmat Mirzani Djausal", party:"Gerindra", pct:55.6, person_id:"rahmat_mirzani" },
+    runner_up: { name:"Umar Ahmad",             party:"PDI-P",    pct:44.4, person_id:null },
+  },
+  {
+    id:"pilkada-dki-2024", region:"DKI Jakarta", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Pramono Anung",   party:"PDI-P",           pct:50.1, person_id:"pramono_anung" },
+    runner_up: { name:"Ridwan Kamil",    party:"Golkar/Gerindra",  pct:39.4, person_id:"ridwan_kamil"  },
+    third:     { name:"Dharma Pongrekun", party:"Independen",      pct:10.5, person_id:null },
+  },
+  {
+    id:"pilkada-jabar-2024", region:"Jawa Barat", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Dedi Mulyadi",    party:"Gerindra", pct:61.3, person_id:"dedi_mulyadi" },
+    runner_up: { name:"Ahmad Syaikhu",   party:"PKS",      pct:38.7, person_id:"ahmad_syaikhu" },
+  },
+  {
+    id:"pilkada-jateng-2024", region:"Jawa Tengah", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Ahmad Luthfi",    party:"Gerindra/PDI-P", pct:53.1, person_id:"ahmad_luthfi" },
+    runner_up: { name:"Andika Perkasa",  party:"PDI-P/PKB",      pct:46.9, person_id:null },
+  },
+  {
+    id:"pilkada-jatim-2024", region:"Jawa Timur", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Khofifah Indar Parawansa", party:"PKB/Gerindra", pct:59.8, person_id:"khofifah" },
+    runner_up: { name:"Luluk Nur Hamidah",        party:"PKB/PDI-P",    pct:40.2, person_id:null },
+  },
+  {
+    id:"pilkada-banten-2024", region:"Banten", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Andra Soni",      party:"Gerindra", pct:55.0, person_id:"andra_soni" },
+    runner_up: { name:"Airin Rachmi",    party:"Golkar",   pct:45.0, person_id:null },
+  },
+  {
+    id:"pilkada-bali-2024", region:"Bali", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"I Wayan Koster",  party:"PDI-P",    pct:63.2, person_id:"koster" },
+    runner_up: { name:"Mulia Budi",      party:"Gerindra", pct:36.8, person_id:null },
+  },
+  {
+    id:"pilkada-ntb-2024", region:"Nusa Tenggara Barat", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Lalu Muhamad Iqbal", party:"NasDem", pct:51.7, person_id:"lalu_iqbal" },
+    runner_up: { name:"Zulkieflimansyah",   party:"PKS",    pct:48.3, person_id:null },
+  },
+  {
+    id:"pilkada-kaltim-2024", region:"Kalimantan Timur", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Rudy Mas'ud",     party:"Gerindra", pct:63.5, person_id:"rudy_masud" },
+    runner_up: { name:"Isran Noor",      party:"NasDem",   pct:36.5, person_id:null },
+  },
+  {
+    id:"pilkada-sulsel-2024", region:"Sulawesi Selatan", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Andi Sudirman Sulaiman", party:"NasDem/Gerindra", pct:55.4, person_id:"andi_sudirman" },
+    runner_up: { name:"Munafri Arifuddin",      party:"Golkar/PKS",      pct:44.6, person_id:null },
+  },
+  {
+    id:"pilkada-maluku-2024", region:"Maluku", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Hendrik Lewerissa", party:"Gerindra", pct:52.3, person_id:"hendrik_lewerissa" },
+    runner_up: { name:"Murad Ismail",      party:"PDI-P",    pct:47.7, person_id:null },
+  },
+  {
+    id:"pilkada-sulteng-2024", region:"Sulawesi Tengah", type:"gubernur", year:2024, date:"2024-11-27",
+    winner:    { name:"Anwar Hafid",      party:"Gerindra", pct:58.2, person_id:"anwar_hafid" },
+    runner_up: { name:"Ahmad Ali",        party:"NasDem",   pct:41.8, person_id:null },
+  },
+]

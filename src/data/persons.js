@@ -1658,6 +1658,769 @@ export const PERSONS = [
       policy_direction:"N/A (yudisial)"
     }
   },
+
+  // ─── GUBERNUR PROVINSI — NASIONAL POST-PILKADA 2024 ────────────────────
+
+  {
+    id:"bobby_nasution", name:"Bobby Nasution", photo_url:null, photo_placeholder:"BN",
+    born:"1991", born_place:"Sumatera Utara", religion:"Islam",
+    education:"S1 Teknik Sipil, Universitas Sumatera Utara",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Sumatera Utara", institution:"Pemprov Sumut", region:"Sumatera Utara", start:"2024", end:null, is_current:true},
+      {title:"Walikota Medan", institution:"Pemkot Medan", region:"Sumatera Utara", start:"2020", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"sumatera_utara",
+    bio:"Menantu Joko Widodo, menikahi Kahiyang Ayu putri kedua Presiden ke-7. Mantan Walikota Medan 2020-2024. Terpilih Gubernur Sumatera Utara pada Pilkada Serentak November 2024 dengan 59.2% suara mengalahkan Edy Rahmayadi.",
+    tags:["gubernur","muda","menantu-jokowi","dinasti"],
+    lhkpn_latest:25000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Sumut, menantu Jokowi, ipar Gibran",
+    twitter:"@bobbynst",
+    analysis:{
+      ideology_score:2, populism_score:6, corruption_risk:"rendah",
+      nationalism:6, religiosity:5,
+      track_record:"Walikota Medan 2020-2024 dengan program pro-rakyat. Pindah ke Gerindra jelang Pilkada 2024. Menang besar sebagai menantu eks-Presiden.",
+      policy_direction:"Pro-investasi, ekonomi inklusif"
+    }
+  },
+  {
+    id:"ridwan_kamil", name:"Ridwan Kamil", photo_url:null, photo_placeholder:"RK",
+    born:"4 Oct 1971", born_place:"Bandung", religion:"Islam",
+    education:"S1 Arsitektur ITB; Master Arsitektur UC Berkeley",
+    party_id:"gol", party_role:"Kader",
+    positions:[
+      {title:"Calon Gubernur DKI Jakarta (kalah)", institution:"-", region:"DKI Jakarta", start:"2024", end:"2024", is_current:false},
+      {title:"Gubernur Jawa Barat", institution:"Pemprov Jabar", region:"Jawa Barat", start:"2018", end:"2023", is_current:false},
+      {title:"Walikota Bandung", institution:"Pemkot Bandung", region:"Jawa Barat", start:"2013", end:"2018", is_current:false},
+    ],
+    tier:"regional", region_id:"jawa_barat",
+    bio:"Arsitek dan politisi populer. Gubernur Jawa Barat 2018-2023. Maju Gubernur DKI Jakarta pada Pilkada 2024 diusung Golkar-Gerindra namun kalah dari Pramono Anung-Rano Karno (PDI-P) dengan perolehan 39.4%.",
+    tags:["eks-gubernur","arsitek","populis","muda"],
+    lhkpn_latest:62000000000, lhkpn_year:2023,
+    connections_summary:"Eks-Gubernur Jabar, kalah Pilkada DKI 2024",
+    twitter:"@ridwankamil",
+    analysis:{
+      ideology_score:2, populism_score:8, corruption_risk:"rendah",
+      nationalism:7, religiosity:6,
+      track_record:"Gubernur Jabar populer dengan berbagai inovasi. Kalah tipis di DKI 2024. Dianggap kandidat potensial Pilpres masa depan.",
+      policy_direction:"Pro-inovasi, smart city"
+    }
+  },
+  {
+    id:"dedi_mulyadi", name:"Dedi Mulyadi", photo_url:null, photo_placeholder:"DM",
+    born:"11 Apr 1971", born_place:"Subang, Jawa Barat", religion:"Islam",
+    education:"S1 Hukum, Universitas Pasundan",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Jawa Barat", institution:"Pemprov Jabar", region:"Jawa Barat", start:"2024", end:null, is_current:true},
+      {title:"Bupati Purwakarta", institution:"Pemkab Purwakarta", region:"Jawa Barat", start:"2008", end:"2018", is_current:false},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Nasional", start:"2019", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"jawa_barat",
+    bio:"Dikenal sebagai 'Kang Dedi Mulyadi', politisi berambut panjang yang viral di media sosial. Menang Pilkada Jabar 2024 secara telak. Terkenal dengan kebijakan-kebijakan populis dan pendekatan langsung ke rakyat.",
+    tags:["gubernur","viral","populis","petani"],
+    lhkpn_latest:18000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Jabar 2024, viral sosmed, eks-Bupati Purwakarta",
+    twitter:"@dedimulyadi71",
+    analysis:{
+      ideology_score:3, populism_score:9, corruption_risk:"rendah",
+      nationalism:7, religiosity:7,
+      track_record:"Bupati Purwakarta inovatif 10 tahun. Anggota DPR 2019-2024. Gubernur Jabar terpilih 2024 dengan margin besar.",
+      policy_direction:"Populis, pro-rakyat kecil, nasionalis budaya"
+    }
+  },
+  {
+    id:"ahmad_luthfi", name:"Ahmad Luthfi", photo_url:null, photo_placeholder:"AL",
+    born:"1965", born_place:"Klaten, Jawa Tengah", religion:"Islam",
+    education:"Akademi Kepolisian",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Jawa Tengah", institution:"Pemprov Jateng", region:"Jawa Tengah", start:"2024", end:null, is_current:true},
+      {title:"Kapolda Jawa Tengah", institution:"Polri", region:"Jawa Tengah", start:"2019", end:"2021", is_current:false},
+      {title:"Kapolda Kalimantan Selatan", institution:"Polri", region:"Kalimantan Selatan", start:"2017", end:"2019", is_current:false},
+    ],
+    tier:"regional", region_id:"jawa_tengah",
+    bio:"Mantan Kapolda Jawa Tengah. Diusung Gerindra dan koalisi besar mengalahkan Andika Perkasa (mantan Panglima TNI) pada Pilkada Jateng 2024. Merupakan kemenangan strategis Gerindra di kandang banteng PDI-P.",
+    tags:["gubernur","eks-polisi","eks-kapolda"],
+    lhkpn_latest:15000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Jateng 2024, eks-Kapolda Jateng, kader Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:4, populism_score:5, corruption_risk:"rendah",
+      nationalism:8, religiosity:6,
+      track_record:"Kapolda Jateng kemudian Kapolda Kalsel. Menang Pilgub Jateng 2024 mengalahkan Andika Perkasa, simbol kekalahan PDI-P di basis tradisionalnya.",
+      policy_direction:"Pro-keamanan, investasi"
+    }
+  },
+  {
+    id:"andra_soni", name:"Andra Soni", photo_url:null, photo_placeholder:"AS",
+    born:"1975", born_place:"Banten", religion:"Islam",
+    education:"S1 Ilmu Politik",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Banten", institution:"Pemprov Banten", region:"Banten", start:"2024", end:null, is_current:true},
+      {title:"Wakil Ketua DPRD Banten", institution:"DPRD Banten", region:"Banten", start:"2019", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"banten",
+    bio:"Terpilih sebagai Gubernur Banten pada Pilkada 2024, menggantikan Wahidin Halim. Kader Gerindra yang diusung koalisi KIM Plus.",
+    tags:["gubernur","ger"],
+    lhkpn_latest:8000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Banten 2024, kader Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Politisi Banten berlatar DPRD. Menang Pilkada 2024 diusung Gerindra.",
+      policy_direction:"Pro-investasi, infrastruktur"
+    }
+  },
+  {
+    id:"koster", name:"I Wayan Koster", photo_url:null, photo_placeholder:"IK",
+    born:"8 Sep 1971", born_place:"Buleleng, Bali", religion:"Hindu",
+    education:"S1 Matematika ITB; S3 Universitas Pendidikan Ganesha",
+    party_id:"pdip", party_role:"Anggota DPR",
+    positions:[
+      {title:"Gubernur Bali", institution:"Pemprov Bali", region:"Bali", start:"2024", end:null, is_current:true},
+      {title:"Gubernur Bali (Periode I)", institution:"Pemprov Bali", region:"Bali", start:"2018", end:"2023", is_current:false},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Nasional", start:"2004", end:"2018", is_current:false},
+    ],
+    tier:"regional", region_id:"bali",
+    bio:"Gubernur Bali dua periode dari PDI-P. Terpilih kembali pada Pilkada 2024, mempertahankan Bali sebagai benteng PDI-P. Dikenal dengan kebijakan kebudayaan Bali dan Pergub kontroversial soal penggunaan produk lokal Bali.",
+    tags:["gubernur","pdip","hindu","bali"],
+    lhkpn_latest:22000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Bali 2x periode, loyalis Megawati",
+    twitter:null,
+    analysis:{
+      ideology_score:-2, populism_score:6, corruption_risk:"sedang",
+      nationalism:6, religiosity:7,
+      track_record:"Gubernur Bali periode pertama 2018-2023. Menang kembali 2024. PDI-P mempertahankan Bali meski kalah di banyak provinsi lain.",
+      policy_direction:"Pro-budaya Bali, pariwisata berkelanjutan"
+    }
+  },
+  {
+    id:"muzakir_manaf", name:"Muzakir Manaf", photo_url:null, photo_placeholder:"MM",
+    born:"1966", born_place:"Aceh", religion:"Islam",
+    education:"SMA; Militer GAM",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Aceh", institution:"Pemprov Aceh", region:"Aceh", start:"2024", end:null, is_current:true},
+      {title:"Wakil Gubernur Aceh", institution:"Pemprov Aceh", region:"Aceh", start:"2017", end:"2022", is_current:false},
+      {title:"Panglima Militer GAM", institution:"GAM", region:"Aceh", start:"1999", end:"2005", is_current:false},
+    ],
+    tier:"regional", region_id:"aceh",
+    bio:"Mantan Panglima Militer Gerakan Aceh Merdeka (GAM). Setelah MoU Helsinki 2005 beralih ke politik. Terpilih Gubernur Aceh 2024. Dikenal dengan nama panggilan 'Mualem'. Simbol rekonsiliasi konflik Aceh.",
+    tags:["gubernur","eks-gam","rekonsiliasi","aceh"],
+    lhkpn_latest:10000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Aceh 2024, eks-panglima GAM, rekonsiliasi",
+    twitter:null,
+    analysis:{
+      ideology_score:4, populism_score:7, corruption_risk:"sedang",
+      nationalism:5, religiosity:8,
+      track_record:"Dari panglima GAM ke Wagub ke Gubernur. Tokoh kunci rekonsiliasi Aceh pasca-MoU Helsinki. Menang Pilgub Aceh 2024.",
+      policy_direction:"Otonomi Aceh, syariat Islam, pro-rakyat"
+    }
+  },
+  {
+    id:"rudy_masud", name:"Rudy Mas'ud", photo_url:null, photo_placeholder:"RM",
+    born:"1972", born_place:"Samarinda, Kalimantan Timur", religion:"Islam",
+    education:"S1 Hukum",
+    party_id:"ger", party_role:"Ketua DPD Gerindra Kaltim",
+    positions:[
+      {title:"Gubernur Kalimantan Timur", institution:"Pemprov Kaltim", region:"Kalimantan Timur", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Nasional", start:"2009", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"kalimantan_timur",
+    bio:"Anggota DPR RI empat periode dari Gerindra. Terpilih Gubernur Kalimantan Timur 2024. Kaltim menjadi provinsi penting karena adanya IKN Nusantara. Kehadirannya sebagai gubernur mempererat koordinasi pusat-daerah soal IKN.",
+    tags:["gubernur","ger","ikn","kaltim"],
+    lhkpn_latest:35000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Kaltim 2024, eks-DPR 4 periode, IKN",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:5, corruption_risk:"rendah",
+      nationalism:7, religiosity:5,
+      track_record:"Empat periode DPR RI. Gubernur Kaltim strategis karena IKN Nusantara di wilayahnya.",
+      policy_direction:"Pro-investasi, dukungan IKN"
+    }
+  },
+  {
+    id:"mahyeldi", name:"Mahyeldi Ansharullah", photo_url:null, photo_placeholder:"MA",
+    born:"1966", born_place:"Sumatera Barat", religion:"Islam",
+    education:"S1 Pertanian, Universitas Andalas",
+    party_id:"pks", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Sumatera Barat", institution:"Pemprov Sumbar", region:"Sumatera Barat", start:"2024", end:null, is_current:true},
+      {title:"Gubernur Sumatera Barat (Periode I)", institution:"Pemprov Sumbar", region:"Sumatera Barat", start:"2021", end:"2024", is_current:false},
+      {title:"Walikota Padang", institution:"Pemkot Padang", region:"Sumatera Barat", start:"2014", end:"2021", is_current:false},
+    ],
+    tier:"regional", region_id:"sumatera_barat",
+    bio:"Gubernur Sumatera Barat dua periode dari PKS. Mantan Walikota Padang. Sumbar merupakan salah satu kantong utama PKS di Indonesia.",
+    tags:["gubernur","pks","sumbar"],
+    lhkpn_latest:12000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Sumbar 2x periode, kader PKS",
+    twitter:null,
+    analysis:{
+      ideology_score:6, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:8,
+      track_record:"Walikota Padang lalu Gubernur Sumbar. PKS dominan di Sumbar.",
+      policy_direction:"Berbasis nilai Islam moderat"
+    }
+  },
+  {
+    id:"abdul_wahid", name:"Abdul Wahid", photo_url:null, photo_placeholder:"AW",
+    born:"1970", born_place:"Riau", religion:"Islam",
+    education:"S1 Hukum",
+    party_id:"pkb", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Riau", institution:"Pemprov Riau", region:"Riau", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPRD Riau", institution:"DPRD Riau", region:"Riau", start:"2019", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"riau",
+    bio:"Terpilih Gubernur Riau pada Pilkada 2024 dari PKB. Riau merupakan provinsi kaya minyak dan perkebunan sawit strategis.",
+    tags:["gubernur","pkb","riau"],
+    lhkpn_latest:8000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Riau 2024, kader PKB",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Politisi daerah Riau dari PKB. Menang Pilgub Riau 2024.",
+      policy_direction:"Pro-pengembangan daerah, perkebunan"
+    }
+  },
+  {
+    id:"al_haris", name:"Al Haris", photo_url:null, photo_placeholder:"AH",
+    born:"1972", born_place:"Jambi", religion:"Islam",
+    education:"S1 Ekonomi",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Jambi", institution:"Pemprov Jambi", region:"Jambi", start:"2024", end:null, is_current:true},
+      {title:"Gubernur Jambi (Periode I)", institution:"Pemprov Jambi", region:"Jambi", start:"2021", end:"2024", is_current:false},
+      {title:"Bupati Merangin", institution:"Pemkab Merangin", region:"Jambi", start:"2013", end:"2021", is_current:false},
+    ],
+    tier:"regional", region_id:"jambi",
+    bio:"Gubernur Jambi dua periode. Mantan Bupati Merangin. Terpilih kembali 2024 dari Gerindra.",
+    tags:["gubernur","ger","jambi"],
+    lhkpn_latest:10000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Jambi 2x periode, kader Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Bupati Merangin lalu Gubernur Jambi dua periode.",
+      policy_direction:"Pembangunan daerah, infrastruktur"
+    }
+  },
+  {
+    id:"herman_deru", name:"Herman Deru", photo_url:null, photo_placeholder:"HD",
+    born:"1966", born_place:"Sumatera Selatan", religion:"Islam",
+    education:"S1 Pertanian",
+    party_id:"nas", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Sumatera Selatan", institution:"Pemprov Sumsel", region:"Sumatera Selatan", start:"2024", end:null, is_current:true},
+      {title:"Gubernur Sumatera Selatan (Periode I)", institution:"Pemprov Sumsel", region:"Sumatera Selatan", start:"2018", end:"2023", is_current:false},
+    ],
+    tier:"regional", region_id:"sumatera_selatan",
+    bio:"Gubernur Sumatera Selatan dua periode dari NasDem. Sumsel merupakan provinsi batu bara dan minyak terbesar di Sumatera Selatan.",
+    tags:["gubernur","nas","sumsel"],
+    lhkpn_latest:15000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Sumsel 2x periode",
+    twitter:null,
+    analysis:{
+      ideology_score:2, populism_score:5, corruption_risk:"sedang",
+      nationalism:6, religiosity:5,
+      track_record:"Dua periode Gubernur Sumsel. NasDem pertahankan Sumsel di Pilkada 2024.",
+      policy_direction:"Pro-energi, pembangunan"
+    }
+  },
+  {
+    id:"helmi_hasan", name:"Helmi Hasan", photo_url:null, photo_placeholder:"HH",
+    born:"1970", born_place:"Bengkulu", religion:"Islam",
+    education:"S1 Hukum",
+    party_id:"pks", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Bengkulu", institution:"Pemprov Bengkulu", region:"Bengkulu", start:"2024", end:null, is_current:true},
+      {title:"Walikota Bengkulu", institution:"Pemkot Bengkulu", region:"Bengkulu", start:"2012", end:"2021", is_current:false},
+    ],
+    tier:"regional", region_id:"bengkulu",
+    bio:"Gubernur Bengkulu terpilih 2024 dari PKS. Mantan Walikota Bengkulu.",
+    tags:["gubernur","pks","bengkulu"],
+    lhkpn_latest:7000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Bengkulu 2024, PKS",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:7,
+      track_record:"Walikota Bengkulu lalu Gubernur Bengkulu 2024.",
+      policy_direction:"Pro-tata kelola, nilai Islam"
+    }
+  },
+  {
+    id:"rahmat_mirzani", name:"Rahmat Mirzani Djausal", photo_url:null, photo_placeholder:"RMD",
+    born:"1975", born_place:"Lampung", religion:"Islam",
+    education:"S1 Teknik",
+    party_id:"ger", party_role:"Ketua DPD Gerindra Lampung",
+    positions:[
+      {title:"Gubernur Lampung", institution:"Pemprov Lampung", region:"Lampung", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Nasional", start:"2019", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"lampung",
+    bio:"Terpilih Gubernur Lampung pada Pilkada November 2024 dari Gerindra, mengalahkan petahana. Lampung memiliki potensi agroindustri besar.",
+    tags:["gubernur","ger","lampung"],
+    lhkpn_latest:20000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Lampung 2024, Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:5,
+      track_record:"Anggota DPR Gerindra lalu Gubernur Lampung 2024.",
+      policy_direction:"Pro-agroindustri, investasi"
+    }
+  },
+  {
+    id:"hidayat_arsani", name:"Hidayat Arsani", photo_url:null, photo_placeholder:"HA",
+    born:"1973", born_place:"Bangka Belitung", religion:"Islam",
+    education:"S1 Hukum",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Kepulauan Bangka Belitung", institution:"Pemprov Babel", region:"Bangka Belitung", start:"2024", end:null, is_current:true},
+      {title:"Wakil Gubernur Kepulauan Bangka Belitung", institution:"Pemprov Babel", region:"Bangka Belitung", start:"2022", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"bangka_belitung",
+    bio:"Gubernur Kepulauan Bangka Belitung terpilih 2024. Mantan Wagub. Babel terkenal dengan tambang timah dan pariwisata.",
+    tags:["gubernur","ger","babel"],
+    lhkpn_latest:8000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Babel 2024, Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:4, corruption_risk:"rendah",
+      nationalism:6, religiosity:5,
+      track_record:"Wagub lalu Gubernur Babel 2024.",
+      policy_direction:"Pro-pengelolaan tambang berkelanjutan"
+    }
+  },
+  {
+    id:"ansar_ahmad", name:"Ansar Ahmad", photo_url:null, photo_placeholder:"AA",
+    born:"1966", born_place:"Kepulauan Riau", religion:"Islam",
+    education:"S1 Teknik Sipil",
+    party_id:"gol", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Kepulauan Riau", institution:"Pemprov Kepri", region:"Kepulauan Riau", start:"2024", end:null, is_current:true},
+      {title:"Gubernur Kepulauan Riau (Periode I)", institution:"Pemprov Kepri", region:"Kepulauan Riau", start:"2021", end:"2024", is_current:false},
+      {title:"Bupati Bintan", institution:"Pemkab Bintan", region:"Kepulauan Riau", start:"2010", end:"2021", is_current:false},
+    ],
+    tier:"regional", region_id:"kepulauan_riau",
+    bio:"Gubernur Kepulauan Riau dua periode dari Golkar. Kepri berbatasan langsung dengan Singapura, menjadi kawasan investasi strategis.",
+    tags:["gubernur","gol","kepri"],
+    lhkpn_latest:12000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Kepri 2x periode, Golkar",
+    twitter:null,
+    analysis:{
+      ideology_score:2, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:5,
+      track_record:"Bupati Bintan lalu Gubernur Kepri. Fokus investasi kawasan ekonomi khusus.",
+      policy_direction:"Pro-investasi, kawasan ekonomi"
+    }
+  },
+  {
+    id:"lalu_iqbal", name:"Lalu Muhamad Iqbal", photo_url:null, photo_placeholder:"LI",
+    born:"1974", born_place:"Lombok, NTB", religion:"Islam",
+    education:"S1 Hubungan Internasional; Diplomat Karir Kemlu",
+    party_id:"nas", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Nusa Tenggara Barat", institution:"Pemprov NTB", region:"Nusa Tenggara Barat", start:"2024", end:null, is_current:true},
+      {title:"Duta Besar RI untuk Turki", institution:"Kemlu RI", region:"Internasional", start:"2019", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"nusa_tenggara_barat",
+    bio:"Diplomat karir yang menjabat Dubes RI di Turki kemudian kembali ke NTB untuk maju Pilkada 2024. Menang dengan dukungan NasDem, mengalahkan Zulkieflimansyah petahana.",
+    tags:["gubernur","nas","diplomat","ntb"],
+    lhkpn_latest:5000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur NTB 2024, eks-Dubes, NasDem",
+    twitter:null,
+    analysis:{
+      ideology_score:1, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Karir diplomatik panjang. Gubernur NTB terpilih 2024.",
+      policy_direction:"Pro-pariwisata, ekonomi kerakyatan"
+    }
+  },
+  {
+    id:"melkiades", name:"Emanuel Melkiades Laka Lena", photo_url:null, photo_placeholder:"EML",
+    born:"1970", born_place:"Flores, NTT", religion:"Katolik",
+    education:"S1 Ekonomi",
+    party_id:"gol", party_role:"Anggota DPR",
+    positions:[
+      {title:"Gubernur Nusa Tenggara Timur", institution:"Pemprov NTT", region:"Nusa Tenggara Timur", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Nasional", start:"2014", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"nusa_tenggara_timur",
+    bio:"Anggota DPR RI dua periode dari Golkar, terpilih Gubernur NTT pada Pilkada 2024. NTT adalah satu-satunya provinsi mayoritas Kristen/Katolik di Nusa Tenggara.",
+    tags:["gubernur","gol","ntt","katolik"],
+    lhkpn_latest:10000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur NTT 2024, Golkar, eks-DPR",
+    twitter:null,
+    analysis:{
+      ideology_score:2, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:7,
+      track_record:"Dua periode DPR lalu Gubernur NTT 2024.",
+      policy_direction:"Pro-pembangunan, pariwisata Flores-Komodo"
+    }
+  },
+  {
+    id:"ria_norsan", name:"Ria Norsan", photo_url:null, photo_placeholder:"RN",
+    born:"1965", born_place:"Kalimantan Barat", religion:"Islam",
+    education:"S1 Administrasi Negara",
+    party_id:"gol", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Kalimantan Barat", institution:"Pemprov Kalbar", region:"Kalimantan Barat", start:"2024", end:null, is_current:true},
+      {title:"Gubernur Kalimantan Barat (Periode I)", institution:"Pemprov Kalbar", region:"Kalimantan Barat", start:"2021", end:"2024", is_current:false},
+      {title:"Bupati Mempawah", institution:"Pemkab Mempawah", region:"Kalimantan Barat", start:"2011", end:"2021", is_current:false},
+    ],
+    tier:"regional", region_id:"kalimantan_barat",
+    bio:"Gubernur Kalimantan Barat dua periode dari Golkar. Kalbar berbatasan langsung dengan Malaysia, menjadi daerah strategis perbatasan.",
+    tags:["gubernur","gol","kalbar","perbatasan"],
+    lhkpn_latest:12000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Kalbar 2x periode, Golkar",
+    twitter:null,
+    analysis:{
+      ideology_score:2, populism_score:5, corruption_risk:"rendah",
+      nationalism:7, religiosity:5,
+      track_record:"Bupati Mempawah lalu Gubernur Kalbar. Fokus perbatasan Indonesia-Malaysia.",
+      policy_direction:"Pro-perbatasan, investasi"
+    }
+  },
+  {
+    id:"agustiar_sabran", name:"Agustiar Sabran", photo_url:null, photo_placeholder:"AGS",
+    born:"1972", born_place:"Kalimantan Tengah", religion:"Islam",
+    education:"S1 Hukum",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Kalimantan Tengah", institution:"Pemprov Kalteng", region:"Kalimantan Tengah", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Nasional", start:"2019", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"kalimantan_tengah",
+    bio:"Terpilih Gubernur Kalimantan Tengah pada Pilkada 2024 dari Gerindra. Kalteng berbatasan dengan IKN Nusantara di Kaltim, memiliki peran penting dalam pembangunan ibu kota baru.",
+    tags:["gubernur","ger","kalteng"],
+    lhkpn_latest:15000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Kalteng 2024, Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:5,
+      track_record:"Anggota DPR Gerindra lalu Gubernur Kalteng 2024.",
+      policy_direction:"Pro-pembangunan, dukungan IKN"
+    }
+  },
+  {
+    id:"muhidin", name:"H. Muhidin", photo_url:null, photo_placeholder:"MHD",
+    born:"1965", born_place:"Kalimantan Selatan", religion:"Islam",
+    education:"S1 Ekonomi",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Kalimantan Selatan", institution:"Pemprov Kalsel", region:"Kalimantan Selatan", start:"2024", end:null, is_current:true},
+      {title:"Bupati Balangan", institution:"Pemkab Balangan", region:"Kalimantan Selatan", start:"2015", end:"2023", is_current:false},
+    ],
+    tier:"regional", region_id:"kalimantan_selatan",
+    bio:"Gubernur Kalimantan Selatan terpilih 2024 dari Gerindra. Kalsel dikenal sebagai sentra batu bara terbesar Indonesia.",
+    tags:["gubernur","ger","kalsel","batubara"],
+    lhkpn_latest:18000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Kalsel 2024, Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:4, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Bupati Balangan lalu Gubernur Kalsel 2024.",
+      policy_direction:"Pro-energi, tambang berkelanjutan"
+    }
+  },
+  {
+    id:"zainal_arifin", name:"Zainal Arifin Paliwang", photo_url:null, photo_placeholder:"ZAP",
+    born:"1965", born_place:"Kalimantan Utara", religion:"Islam",
+    education:"Akademi Kepolisian",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Kalimantan Utara", institution:"Pemprov Kaltara", region:"Kalimantan Utara", start:"2024", end:null, is_current:true},
+      {title:"Gubernur Kalimantan Utara (Periode I)", institution:"Pemprov Kaltara", region:"Kalimantan Utara", start:"2021", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"kalimantan_utara",
+    bio:"Gubernur Kalimantan Utara dua periode. Mantan perwira Polri. Kaltara merupakan provinsi paling utara Indonesia, berbatasan Malaysia.",
+    tags:["gubernur","ger","kaltara","eks-polisi"],
+    lhkpn_latest:8000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Kaltara 2x periode, Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:4, populism_score:4, corruption_risk:"rendah",
+      nationalism:8, religiosity:5,
+      track_record:"Dua periode Gubernur Kaltara. Fokus perbatasan dan PLTA Kayan.",
+      policy_direction:"Pro-perbatasan, energi terbarukan"
+    }
+  },
+  {
+    id:"yulius_selvanus", name:"Yulius Selvanus", photo_url:null, photo_placeholder:"YS",
+    born:"1972", born_place:"Sulawesi Utara", religion:"Kristen",
+    education:"Akademi Kepolisian",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Sulawesi Utara", institution:"Pemprov Sulut", region:"Sulawesi Utara", start:"2024", end:null, is_current:true},
+    ],
+    tier:"regional", region_id:"sulawesi_utara",
+    bio:"Gubernur Sulawesi Utara terpilih 2024 dari Gerindra. Sulut merupakan pintu gerbang Indonesia ke Pasifik dan berbatasan dengan Filipina.",
+    tags:["gubernur","ger","sulut","kristen"],
+    lhkpn_latest:7000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Sulut 2024, Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:5, corruption_risk:"rendah",
+      nationalism:7, religiosity:6,
+      track_record:"Terpilih Gubernur Sulut 2024.",
+      policy_direction:"Pro-pariwisata, investasi Pasifik"
+    }
+  },
+  {
+    id:"anwar_hafid", name:"Anwar Hafid", photo_url:null, photo_placeholder:"ANH",
+    born:"1970", born_place:"Sulawesi Tengah", religion:"Islam",
+    education:"S1 Hukum",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Sulawesi Tengah", institution:"Pemprov Sulteng", region:"Sulawesi Tengah", start:"2024", end:null, is_current:true},
+      {title:"Bupati Morowali Utara", institution:"Pemkab Morowali Utara", region:"Sulawesi Tengah", start:"2016", end:"2021", is_current:false},
+    ],
+    tier:"regional", region_id:"sulawesi_tengah",
+    bio:"Gubernur Sulawesi Tengah terpilih 2024 dari Gerindra. Sulteng memiliki kawasan industri nikel-baterai Morowali yang menjadi pusat smelter terbesar dunia.",
+    tags:["gubernur","ger","sulteng","nikel"],
+    lhkpn_latest:10000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Sulteng 2024, Gerindra, Morowali",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Bupati Morowali Utara lalu Gubernur Sulteng 2024.",
+      policy_direction:"Pro-industri nikel, investasi"
+    }
+  },
+  {
+    id:"andi_sudirman", name:"Andi Sudirman Sulaiman", photo_url:null, photo_placeholder:"ASS",
+    born:"1986", born_place:"Makassar, Sulawesi Selatan", religion:"Islam",
+    education:"S1 Teknik Sipil ITB; S2 Teknik Sipil ITB",
+    party_id:"nas", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Sulawesi Selatan", institution:"Pemprov Sulsel", region:"Sulawesi Selatan", start:"2024", end:null, is_current:true},
+      {title:"Gubernur Sulawesi Selatan (Periode I)", institution:"Pemprov Sulsel", region:"Sulawesi Selatan", start:"2021", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"sulawesi_selatan",
+    bio:"Gubernur Sulawesi Selatan dua periode dari NasDem. Menjabat sejak 2021 sebagai penerus Nurdin Abdullah yang terseret kasus korupsi. Sulsel adalah pusat ekonomi Kawasan Timur Indonesia.",
+    tags:["gubernur","nas","sulsel","muda","itb"],
+    lhkpn_latest:5000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Sulsel 2x periode, NasDem, termuda",
+    twitter:null,
+    analysis:{
+      ideology_score:2, populism_score:6, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Gubernur Sulsel termuda. Diusung NasDem. Fokus infrastruktur dan investasi KTI.",
+      policy_direction:"Pro-investasi KTI, infrastruktur"
+    }
+  },
+  {
+    id:"andi_sumangerukka", name:"Andi Sumangerukka", photo_url:null, photo_placeholder:"ASUK",
+    born:"1968", born_place:"Sulawesi Tenggara", religion:"Islam",
+    education:"Akademi Kepolisian",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Sulawesi Tenggara", institution:"Pemprov Sultra", region:"Sulawesi Tenggara", start:"2024", end:null, is_current:true},
+    ],
+    tier:"regional", region_id:"sulawesi_tenggara",
+    bio:"Gubernur Sulawesi Tenggara terpilih 2024 dari Gerindra. Sultra kaya nikel dan pertambangan.",
+    tags:["gubernur","ger","sultra"],
+    lhkpn_latest:8000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Sultra 2024, Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:4, corruption_risk:"rendah",
+      nationalism:7, religiosity:5,
+      track_record:"Terpilih Gubernur Sultra 2024 dari Gerindra.",
+      policy_direction:"Pro-pertambangan, investasi"
+    }
+  },
+  {
+    id:"gusnar_ismail", name:"Gusnar Ismail", photo_url:null, photo_placeholder:"GI",
+    born:"1965", born_place:"Gorontalo", religion:"Islam",
+    education:"S1 Ekonomi",
+    party_id:"gol", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Gorontalo", institution:"Pemprov Gorontalo", region:"Gorontalo", start:"2024", end:null, is_current:true},
+      {title:"Wakil Gubernur Gorontalo", institution:"Pemprov Gorontalo", region:"Gorontalo", start:"2019", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"gorontalo",
+    bio:"Gubernur Gorontalo terpilih 2024 dari Golkar. Mantan Wakil Gubernur. Gorontalo merupakan provinsi terkecil di Sulawesi.",
+    tags:["gubernur","gol","gorontalo"],
+    lhkpn_latest:6000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Gorontalo 2024, Golkar",
+    twitter:null,
+    analysis:{
+      ideology_score:2, populism_score:4, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Wagub lalu Gubernur Gorontalo 2024.",
+      policy_direction:"Pro-pertanian, jagung"
+    }
+  },
+  {
+    id:"sitti_sutinah", name:"Sitti Sutinah Suhardi", photo_url:null, photo_placeholder:"SSS",
+    born:"1972", born_place:"Sulawesi Barat", religion:"Islam",
+    education:"S1 Hukum",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Sulawesi Barat", institution:"Pemprov Sulbar", region:"Sulawesi Barat", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPRD Sulawesi Barat", institution:"DPRD Sulbar", region:"Sulawesi Barat", start:"2019", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"sulawesi_barat",
+    bio:"Gubernur Sulawesi Barat terpilih 2024 dari Gerindra. Sulbar adalah provinsi termuda di Sulawesi, terbentuk 2004.",
+    tags:["gubernur","ger","sulbar","perempuan"],
+    lhkpn_latest:5000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Sulbar 2024, Gerindra",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:4, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"DPRD lalu Gubernur Sulbar 2024.",
+      policy_direction:"Pembangunan daerah, infrastruktur"
+    }
+  },
+  {
+    id:"hendrik_lewerissa", name:"Hendrik Lewerissa", photo_url:null, photo_placeholder:"HL",
+    born:"1970", born_place:"Maluku", religion:"Kristen",
+    education:"S1 Hukum Universitas Pattimura",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Maluku", institution:"Pemprov Maluku", region:"Maluku", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Nasional", start:"2009", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"maluku",
+    bio:"Anggota DPR RI tiga periode dari Gerindra, terpilih Gubernur Maluku 2024. Maluku memiliki sumber daya laut dan rempah yang kaya.",
+    tags:["gubernur","ger","maluku","kristen"],
+    lhkpn_latest:15000000000, lhkpn_year:2023,
+    connections_summary:"Gubernur Maluku 2024, Gerindra, eks-DPR",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:5, corruption_risk:"rendah",
+      nationalism:7, religiosity:6,
+      track_record:"Tiga periode DPR RI lalu Gubernur Maluku 2024.",
+      policy_direction:"Pro-kelautan, pariwisata"
+    }
+  },
+  {
+    id:"sherly_tjoanda", name:"Sherly Tjoanda", photo_url:null, photo_placeholder:"ST",
+    born:"1975", born_place:"Maluku Utara", religion:"Kristen",
+    education:"S1 Ekonomi",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Gubernur Maluku Utara", institution:"Pemprov Malut", region:"Maluku Utara", start:"2025", end:null, is_current:true},
+      {title:"Calon Wakil Gubernur Maluku Utara", institution:"-", region:"Maluku Utara", start:"2024", end:"2024", is_current:false},
+    ],
+    tier:"regional", region_id:"maluku_utara",
+    bio:"Gubernur Maluku Utara yang naik dari posisi calon Wakil Gubernur setelah calon gubernurnya, Benny Laos, meninggal akibat kecelakaan kapal dalam kampanye Oktober 2024. Dilantik sebagai Gubernur Malut awal 2025.",
+    tags:["gubernur","ger","malut","perempuan","naik-jabatan"],
+    lhkpn_latest:8000000000, lhkpn_year:2024,
+    connections_summary:"Gubernur Malut 2025, naik dari cawagub setelah Benny Laos meninggal",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:4, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Naik dari cawagub ke gubernur setelah calon gubernurnya meninggal kecelakaan. Malut kaya nikel.",
+      policy_direction:"Pro-nikel, pembangunan"
+    }
+  },
+  {
+    id:"sultan_hb10", name:"Sri Sultan Hamengkubuwono X", photo_url:null, photo_placeholder:"SHX",
+    born:"2 Apr 1946", born_place:"Yogyakarta", religion:"Islam",
+    education:"S1 Hukum UGM; S3 Hukum UGM",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Gubernur Daerah Istimewa Yogyakarta", institution:"Kraton Ngayogyakarta", region:"DIY", start:"1998", end:null, is_current:true},
+      {title:"Sri Sultan Hamengkubuwono X", institution:"Kraton Ngayogyakarta", region:"DIY", start:"1989", end:null, is_current:true},
+    ],
+    tier:"regional", region_id:"diy",
+    bio:"Raja Keraton Yogyakarta sekaligus Gubernur DIY sejak 1998. Berdasarkan UU No.13/2012, Gubernur DIY tidak dipilih melalui Pilkada melainkan otomatis dijabat Sultan Yogyakarta. Tokoh berpengaruh dalam budaya dan politik nasional.",
+    tags:["gubernur","raja","istimewa","diy","budaya"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Gubernur DIY seumur hidup, Raja Kraton Yogya",
+    twitter:null,
+    analysis:{
+      ideology_score:0, populism_score:6, corruption_risk:"rendah",
+      nationalism:8, religiosity:7,
+      track_record:"Gubernur DIY sejak 1998. Keistimewaan DIY berdasarkan sejarah Sultan bergabung dengan RI 1945.",
+      policy_direction:"Keistimewaan, budaya, pariwisata"
+    }
+  },
+
+  // ─── MENTERI & PEJABAT NASIONAL TAMBAHAN ────────────────────────────────
+
+  {
+    id:"budi_arie", name:"Budi Arie Setiadi", photo_url:null, photo_placeholder:"BA",
+    born:"1972", born_place:"Jakarta", religion:"Islam",
+    education:"S1 Fisip UI",
+    party_id:"psi", party_role:"Ketua Umum Dewan Pembina",
+    positions:[
+      {title:"Menteri Komunikasi dan Informatika", institution:"Kemenkominfo", region:"Nasional", start:"2023", end:"2024", is_current:false},
+      {title:"Menteri Koperasi", institution:"Kemenkop", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Ketua Umum Dewan Pembina PSI", institution:"PSI", region:"Nasional", start:"2019", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Politisi dekat Jokowi, Ketua Projo (relawan Jokowi). Menjabat Menkominfo 2023-2024 di masa akhir Jokowi, dilanjutkan Kabinet Prabowo sebagai Menteri Koperasi. Dikritik atas penanganan judi online dan kebocoran data saat Menkominfo.",
+    tags:["menteri","psi","jokowi-loyalis","kominfo"],
+    lhkpn_latest:12000000000, lhkpn_year:2023,
+    connections_summary:"Menteri Kabinet Prabowo, eks-Menkominfo, loyalis Jokowi",
+    twitter:"@budiari",
+    analysis:{
+      ideology_score:2, populism_score:5, corruption_risk:"sedang",
+      nationalism:6, religiosity:4,
+      track_record:"Menkominfo 2023-2024 dikritik soal judi online dan PDN. Pindah ke Kemenkop di kabinet Prabowo.",
+      policy_direction:"Pro-digital, ekonomi kerakyatan"
+    }
+  },
+  {
+    id:"erick_thohir", name:"Erick Thohir", photo_url:null, photo_placeholder:"ET",
+    born:"30 May 1970", born_place:"Jakarta", religion:"Islam",
+    education:"S1 Bisnis, Glendale University; MBA, National University USA",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Menteri Badan Usaha Milik Negara", institution:"Kementerian BUMN", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Menteri BUMN (Periode I)", institution:"Kementerian BUMN", region:"Nasional", start:"2019", end:"2024", is_current:false},
+      {title:"Ketua Umum PSSI", institution:"PSSI", region:"Nasional", start:"2023", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Pengusaha media dan olahraga. Pemilik Inter Milan (2013-2018), Anfield (saham Liverpool), dan media grup iNews/ANTV. Menteri BUMN dua periode: era Jokowi dan Prabowo. Ketua PSSI reformis sejak 2023. Dikenal dekat Prabowo dan Jokowi.",
+    tags:["menteri","pengusaha","bumn","pssi","olahraga"],
+    lhkpn_latest:2500000000000, lhkpn_year:2023,
+    connections_summary:"Menkeu BUMN, eks-pemilik Inter Milan, Ketum PSSI",
+    twitter:"@erickthohir",
+    analysis:{
+      ideology_score:2, populism_score:6, corruption_risk:"sedang",
+      nationalism:7, religiosity:6,
+      track_record:"Menteri BUMN dua periode. Reformasi GoTo, BRI, Telkom. Ketum PSSI reformis. Pengusaha sukses internasional.",
+      policy_direction:"Pro-privatisasi BUMN, investasi asing"
+    }
+  },
+  {
+    id:"basuki", name:"Basuki Hadimuljono", photo_url:null, photo_placeholder:"BHM",
+    born:"5 Nov 1954", born_place:"Surakarta, Jawa Tengah", religion:"Islam",
+    education:"S1 Teknik Sipil UGM; PhD Teknik Sipil Colorado State University",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Kepala Otorita IKN Nusantara", institution:"Otorita IKN", region:"Kalimantan Timur", start:"2024", end:null, is_current:true},
+      {title:"Menteri PUPR", institution:"Kementerian PUPR", region:"Nasional", start:"2014", end:"2024", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Teknokrat infrastruktur andalan Jokowi selama 10 tahun (2014-2024). Menteri PUPR yang mengawal ribuan proyek infrastruktur nasional. Ditunjuk Prabowo sebagai Kepala Otorita IKN Nusantara untuk melanjutkan mega-proyek ibu kota baru di Kalimantan Timur.",
+    tags:["teknokrat","infrastruktur","ikn","pupr"],
+    lhkpn_latest:45000000000, lhkpn_year:2023,
+    connections_summary:"Kepala OIKN Nusantara, eks-Menteri PUPR 10 tahun",
+    twitter:null,
+    analysis:{
+      ideology_score:0, populism_score:2, corruption_risk:"rendah",
+      nationalism:8, religiosity:5,
+      track_record:"Menteri PUPR terlama dan paling produktif era Jokowi. Memimpin ribuan km jalan tol, bendungan, dan proyek infrastruktur. Kini amanahkan pindahkan IKN Nusantara.",
+      policy_direction:"Pro-infrastruktur, teknokrat"
+    }
+  },
 ]
 
 export const PERSONS_MAP = Object.fromEntries(PERSONS.map(p => [p.id, p]))

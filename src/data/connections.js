@@ -82,6 +82,51 @@ export const CONNECTIONS = [
   { from:"anwar_usman", to:"gibran",     type:"keluarga", label:"Paman-Keponakan; putusan MK batas usia menguntungkan Gibran", strength:10 },
   { from:"budi_gunawan", to:"jokowi",    type:"rekan",    label:"Kepala BIN 2019-2024 di era Jokowi",                  strength:8 },
   { from:"budi_gunawan", to:"prabowo",   type:"rekan",    label:"Kepala BIN berlanjut era Prabowo",                    strength:7 },
+
+  // ── Dinasti Bobby Nasution ──────────────────────────────────────────────
+  { from:"bobby_nasution", to:"jokowi",    type:"keluarga",  label:"Menantu-Mertua; Bobby menikahi Kahiyang Ayu putri Jokowi", strength:10 },
+  { from:"bobby_nasution", to:"gibran",    type:"keluarga",  label:"Ipar; sesama anak-menantu Jokowi", strength:8 },
+  { from:"bobby_nasution", to:"prabowo",   type:"koalisi",   label:"Gerindra; dukung Prabowo, Gubernur Sumut 2024", strength:7 },
+  { from:"jokowi",         to:"bobby_nasution", type:"keluarga", label:"Mertua-Menantu; Kahiyang Ayu menikah Bobby", strength:10 },
+  { from:"gibran",         to:"bobby_nasution", type:"keluarga", label:"Ipar; keduanya anak-menantu Jokowi", strength:8 },
+
+  // ── Gubernur Gerindra ke Prabowo ─────────────────────────────────────────
+  { from:"dedi_mulyadi",   to:"prabowo",   type:"koalisi",   label:"Gerindra Jabar; Gubernur Jabar 2024", strength:8 },
+  { from:"ahmad_luthfi",   to:"prabowo",   type:"koalisi",   label:"Gerindra Jateng; eks-Kapolda diusung Prabowo", strength:8 },
+  { from:"andra_soni",     to:"prabowo",   type:"koalisi",   label:"Gerindra Banten; Gubernur Banten 2024", strength:7 },
+  { from:"muzakir_manaf",  to:"prabowo",   type:"koalisi",   label:"Gerindra Aceh; eks-GAM, Gubernur Aceh 2024", strength:7 },
+  { from:"rudy_masud",     to:"prabowo",   type:"koalisi",   label:"Gerindra Kaltim; Gubernur IKN-strategis 2024", strength:7 },
+  { from:"hendrik_lewerissa",to:"prabowo", type:"koalisi",   label:"Gerindra Maluku; Gubernur Maluku 2024", strength:7 },
+  { from:"anwar_hafid",    to:"prabowo",   type:"koalisi",   label:"Gerindra Sulteng; Gubernur Sulteng 2024", strength:7 },
+  { from:"muhidin",        to:"prabowo",   type:"koalisi",   label:"Gerindra Kalsel; Gubernur Kalsel 2024", strength:6 },
+  { from:"agustiar_sabran",to:"prabowo",   type:"koalisi",   label:"Gerindra Kalteng; Gubernur Kalteng 2024", strength:6 },
+  { from:"zainal_arifin",  to:"prabowo",   type:"koalisi",   label:"Gerindra Kaltara; Gubernur Kaltara 2x periode", strength:6 },
+
+  // ── PDI-P Gubernur ───────────────────────────────────────────────────────
+  { from:"pramono_anung",  to:"megawati",  type:"koalisi",   label:"PDI-P; loyalis Megawati, Gubernur DKI 2024", strength:8 },
+  { from:"koster",         to:"megawati",  type:"koalisi",   label:"PDI-P; loyalis Megawati, Gubernur Bali 2x periode", strength:8 },
+
+  // ── Koster-Pramono vs Nasional ───────────────────────────────────────────
+  { from:"ridwan_kamil",   to:"prabowo",   type:"mantan-koalisi", label:"Diusung KIM Plus DKI; kalah Pilkada DKI 2024", strength:5 },
+  { from:"ridwan_kamil",   to:"megawati",  type:"konflik",        label:"Rival Pramono-Rano (PDIP) di Pilkada DKI 2024", strength:3 },
+
+  // ── Pramono Anung ekstra ─────────────────────────────────────────────────
+  { from:"pramono_anung",  to:"jokowi",    type:"rekan",     label:"Seskab Jokowi 2014-2024; loyalis eks-presiden", strength:8 },
+  { from:"hanindhito",     to:"pramono_anung", type:"keluarga", label:"Anak-Bapak; Bupati Kediri-Gubernur DKI", strength:10 },
+
+  // ── Menteri Kabinet Merah Putih ──────────────────────────────────────────
+  { from:"erick_thohir",   to:"prabowo",   type:"koalisi",   label:"Menteri BUMN Kabinet Merah Putih", strength:7 },
+  { from:"erick_thohir",   to:"jokowi",    type:"rekan",     label:"Menteri BUMN Kabinet Jokowi 2019-2024", strength:8 },
+  { from:"budi_arie",      to:"jokowi",    type:"rekan",     label:"Menkominfo 2023-2024, loyalis Projo-Jokowi", strength:8 },
+  { from:"budi_arie",      to:"prabowo",   type:"koalisi",   label:"Menteri Koperasi Kabinet Merah Putih 2024", strength:6 },
+
+  // ── IKN Nusantara ────────────────────────────────────────────────────────
+  { from:"basuki",         to:"jokowi",    type:"rekan",     label:"Menteri PUPR andalan Jokowi 10 tahun (2014-2024)", strength:9 },
+  { from:"basuki",         to:"prabowo",   type:"rekan",     label:"Kepala OIKN Nusantara di Kabinet Prabowo", strength:7 },
+  { from:"basuki",         to:"rudy_masud",type:"rekan",     label:"Kepala OIKN-Gubernur Kaltim, koordinasi IKN", strength:7 },
+
+  // ── Keamanan nasional ────────────────────────────────────────────────────
+  { from:"ahmad_luthfi",   to:"listyo_sigit", type:"rekan",  label:"Eks-Kapolda Jateng; jaringan Polri", strength:6 },
 ]
 
 export const CONNECTION_TYPES = {
