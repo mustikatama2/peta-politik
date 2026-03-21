@@ -1,15 +1,86 @@
 // api/news.js — Vercel Serverless Function
 // Fetches Indonesian political RSS feeds, parses, tags with person IDs
-// Supports query params: ?person_id=X&category=Y&source=Z&limit=60
+// Supports query params: ?person_id=X&category=Y&source=Z&limit=60&q=search
 
 const RSS_SOURCES = [
-  { id: 'kompas',    name: 'Kompas',          url: 'https://rss.kompas.com/news/politik',                              bias: 'tengah' },
-  { id: 'tempo',     name: 'Tempo',           url: 'https://rss.tempo.co/nasional',                                    bias: 'kritis' },
-  { id: 'antara',    name: 'ANTARA',          url: 'https://www.antaranews.com/rss/terkini.xml',                        bias: 'pemerintah' },
-  { id: 'detik',     name: 'Detik',           url: 'https://feed.detik.com/index.php/detikcom/news/news/politik',       bias: 'tengah' },
-  { id: 'cnn',       name: 'CNN Indonesia',   url: 'https://www.cnnindonesia.com/nasional/rss',                         bias: 'tengah' },
-  { id: 'republika', name: 'Republika',       url: 'https://www.republika.co.id/rss/berita/nasional',                  bias: 'konservatif' },
-  { id: 'tribun',    name: 'Tribun',          url: 'https://www.tribunnews.com/nasional/feed',                          bias: 'tengah' },
+  {
+    id: 'kompas',
+    name: 'Kompas',
+    urls: [
+      'https://rss.kompas.com/nasional/berita/nasional',
+      'https://rss.kompas.com/news/politik',
+      'https://indeks.kompas.com/?site=nasional&format=rss',
+    ],
+    bias: 'tengah',
+  },
+  {
+    id: 'tempo',
+    name: 'Tempo',
+    urls: ['https://rss.tempo.co/nasional'],
+    bias: 'kritis',
+  },
+  {
+    id: 'antara',
+    name: 'ANTARA',
+    urls: ['https://www.antaranews.com/rss/terkini.xml'],
+    bias: 'pemerintah',
+  },
+  {
+    id: 'detik',
+    name: 'Detik',
+    urls: [
+      'https://rss.detik.com/index.php/detikcom/news/news',
+      'https://news.detik.com/rss',
+      'https://feed.detik.com/index.php/detikcom/news/news/politik',
+    ],
+    bias: 'tengah',
+  },
+  {
+    id: 'cnn',
+    name: 'CNN Indonesia',
+    urls: ['https://www.cnnindonesia.com/nasional/rss'],
+    bias: 'tengah',
+  },
+  {
+    id: 'republika',
+    name: 'Republika',
+    urls: ['https://www.republika.co.id/rss/berita/nasional'],
+    bias: 'konservatif',
+  },
+  {
+    id: 'tribun',
+    name: 'Tribun',
+    urls: [
+      'https://www.tribunnews.com/rss',
+      'https://nasional.tribunnews.com/rss',
+      'https://www.tribunnews.com/nasional/feed',
+    ],
+    bias: 'tengah',
+  },
+  {
+    id: 'jpnn',
+    name: 'JPNN',
+    urls: ['https://www.jpnn.com/rss/news', 'https://www.jpnn.com/feed'],
+    bias: 'tengah',
+  },
+  {
+    id: 'suara',
+    name: 'Suara.com',
+    urls: ['https://www.suara.com/rss', 'https://www.suara.com/feed/nasional.rss'],
+    bias: 'tengah',
+  },
+  {
+    id: 'merdeka',
+    name: 'Merdeka',
+    urls: ['https://merdeka.com/feeds/rss.xml', 'https://www.merdeka.com/rss/peristiwa.xml'],
+    bias: 'tengah',
+  },
+  {
+    id: 'rmol',
+    name: 'RMOL',
+    urls: ['https://rmol.id/rss/nasional', 'https://rmol.id/feed'],
+    bias: 'kritis',
+  },
 ];
 
 // Person name → ID index (hardcoded key names from persons.js data)
@@ -31,17 +102,18 @@ const PERSON_NAME_INDEX = {
   'hasto kristiyanto': 'hasto',
   'mahfud': 'mahfud_md',
   'mahfud md': 'mahfud_md',
-  'puan': 'puan',
+  // 'puan' removed — too short, matches "perempuan"; keep full name only
   'puan maharani': 'puan',
-  'cak imin': 'cakimin',
+  // 'cak imin' removed — keep full name only
   'muhaimin': 'cakimin',
+  'muhaimin iskandar': 'cakimin',
   'ganjar': 'ganjar',
   'ganjar pranowo': 'ganjar',
   'bahlil': 'bahlil',
   'bahlil lahadalia': 'bahlil',
   'erick thohir': 'erick_thohir',
   'erick': 'erick_thohir',
-  'ahy': 'ahy',
+  // 'ahy' removed — too short; keep full names only
   'agus yudhoyono': 'ahy',
   'agus harimurti': 'ahy',
   'zulhas': 'zulhas',
@@ -59,13 +131,18 @@ const PERSON_NAME_INDEX = {
   'budi arie': 'budi_arie',
   'meutya': 'meutya_hafid',
   'meutya hafid': 'meutya_hafid',
-  'luhut': 'luhut', // frequently mentioned even if not in persons.js
+  'luhut': 'luhut',
+  'luhut binsar': 'luhut',
+  'luhut pandjaitan': 'luhut',
   'sjafrie': 'sjafrie',
   'listyo': 'listyo_sigit',
   'listyo sigit': 'listyo_sigit',
   'kaesang': 'kaesang',
   'hashim': 'hashim',
+  'hashim djojohadikusumo': 'hashim',
   'nawawi': 'nawawi',
+  'nawawi pomolango': 'nawawi',
+  'ketua kpk': 'nawawi',
   'tom lembong': 'tom_lembong',
   'anwar usman': 'anwar_usman',
   'habiburokhman': 'habiburokhman',
@@ -73,11 +150,43 @@ const PERSON_NAME_INDEX = {
   'gus yahya': 'gus_yahya',
   'ahmad luthfi': 'ahmad_luthfi',
   'andra soni': 'andra_soni',
-  'kpk': null,      // institution tag, not person
+  // 'sby' removed — keep full name only
+  'susilo bambang yudhoyono': 'sby',
+  // New politician names
+  'agus subiyanto': 'agus_subiyanto',
+  'panglima tni': 'agus_subiyanto',
+  'misbakhun': 'misbakhun',
+  'titiek soeharto': 'titiek_soeharto',
+  'basuki hadimuljono': 'basuki',
+  'muzakir manaf': 'muzakir_manaf',
+  'andre rosiade': null,
+  'budisatrio': null,
+  'dandhy laksono': null,
+  // institution tags — not persons
+  'kpk': null,
   'pdip': null,
   'gerindra': null,
   'golkar': null,
 };
+
+// Fetch a list of URLs, returning first that returns valid RSS XML (contains <item>)
+async function fetchWithFallback(urls, opts = {}) {
+  for (const url of urls) {
+    try {
+      const controller = new AbortController();
+      const t = setTimeout(() => controller.abort(), 6000);
+      const r = await fetch(url, { ...opts, signal: controller.signal });
+      clearTimeout(t);
+      if (r.ok) {
+        const text = await r.text();
+        if (text.includes('<item>')) return { url, text };
+      }
+    } catch (e) {
+      /* try next URL */
+    }
+  }
+  return null;
+}
 
 // Simple CDATA-aware XML text extractor
 function getTag(xml, tag) {
@@ -85,6 +194,21 @@ function getTag(xml, tag) {
   const m = re.exec(xml);
   if (!m) return '';
   return (m[1] || m[2] || '').trim();
+}
+
+// Improved person tagger: uses word-boundary regex, skips short single-word names
+function tagPersons(text) {
+  const found = [];
+  for (const [name, id] of Object.entries(PERSON_NAME_INDEX)) {
+    if (!id) continue;
+    // Skip short single-word names (< 5 chars) — too many false positives
+    if (name.split(' ').length === 1 && name.length < 5) continue;
+    const re = new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+    if (re.test(text) && !found.includes(id)) {
+      found.push(id);
+    }
+  }
+  return found;
 }
 
 // Parse RSS XML into article array (max 15 items per source)
@@ -102,16 +226,12 @@ function parseRSS(xml, sourceId, sourceName) {
 
     if (!title || !link) { idx++; continue; }
 
-    // Auto-tag with person IDs
-    const textLower = (title + ' ' + description).toLowerCase();
-    const person_ids = [];
-    for (const [name, id] of Object.entries(PERSON_NAME_INDEX)) {
-      if (id && textLower.includes(name)) {
-        if (!person_ids.includes(id)) person_ids.push(id);
-      }
-    }
+    // Auto-tag with person IDs using improved tagger
+    const fullText = title + ' ' + description;
+    const person_ids = tagPersons(fullText);
 
     // Detect sentiment from keywords
+    const textLower = fullText.toLowerCase();
     const negWords = ['korupsi','ditangkap','tersangka','ditahan','divonis','pecat','mundur','demo','protes','tolak','gagal','turun','kecam','kritik','skandal'];
     const posWords = ['berhasil','sukses','naik','terpilih','apresiasi','mendukung','menyetujui','pertumbuhan','meningkat'];
     const negScore = negWords.filter(w => textLower.includes(w)).length;
@@ -152,24 +272,22 @@ export default async function handler(req, res) {
   // Cache at Vercel edge for 15 minutes
   res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=1800');
 
-  const { person_id, category, source, limit = 60 } = req.query || {};
+  const { person_id, category, source, limit = 60, q } = req.query || {};
 
-  // Fetch all RSS feeds in parallel with 8s timeout each
+  const fetchHeaders = {
+    'User-Agent': 'Mozilla/5.0 (compatible; PetaPolitikBot/1.0)',
+    'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+    'Referer': 'https://www.google.com/',
+  };
+
+  // Fetch all RSS feeds in parallel, each with fallback URLs
   const results = await Promise.allSettled(
     RSS_SOURCES.map(async (src) => {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 8000);
       try {
-        const resp = await fetch(src.url, {
-          signal: controller.signal,
-          headers: { 'User-Agent': 'Mozilla/5.0 (compatible; PetaPolitikBot/1.0)' },
-        });
-        clearTimeout(timeout);
-        if (!resp.ok) return { source: src, articles: [] };
-        const xml = await resp.text();
-        return { source: src, articles: parseRSS(xml, src.id, src.name) };
+        const result = await fetchWithFallback(src.urls, { headers: fetchHeaders });
+        if (!result) return { source: src, articles: [], error: 'all URLs failed' };
+        return { source: src, articles: parseRSS(result.text, src.id, src.name) };
       } catch (e) {
-        clearTimeout(timeout);
         return { source: src, articles: [], error: e.message };
       }
     })
@@ -191,6 +309,15 @@ export default async function handler(req, res) {
   }
   if (source && source !== 'semua') {
     articles = articles.filter(a => a.source_id === source);
+  }
+
+  // Text search filter
+  if (q) {
+    const searchLower = q.toLowerCase();
+    articles = articles.filter(a =>
+      a.title.toLowerCase().includes(searchLower) ||
+      a.excerpt.toLowerCase().includes(searchLower)
+    );
   }
 
   // Deduplicate by title prefix (simple, handles cross-source reposts)
