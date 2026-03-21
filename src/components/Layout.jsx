@@ -17,6 +17,8 @@ const NAV = [
   { to:'/regions',  icon:'🗺️', label:'Wilayah' },
   { to:'/elections',icon:'📊', label:'Pemilu' },
   { to:'/analitik', icon:'📈', label:'Analitik' },
+  { to:'/risk',     icon:'🚨', label:'Indeks Risiko' },
+  { to:'/scenarios',icon:'🔮', label:'Skenario 2029' },
   { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
   { to:'/timeline', icon:'📅', label:'Linimasa' },
   { to:'/kpk',      icon:'⚖️', label:'KPK Cases' },

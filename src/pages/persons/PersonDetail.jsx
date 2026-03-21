@@ -541,6 +541,20 @@ export default function PersonDetail() {
           </div>
         )}
       </div>
+
+      {/* Tokoh Terkait */}
+      {relatedPersons.length > 0 && (
+        <div className="mt-6 pt-6 border-t border-border">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">👥 Tokoh Terkait</h3>
+          <div className="flex gap-3 overflow-x-auto pb-2">
+            {relatedPersons.map(p => (
+              <Link key={p.id} to={`/persons/${p.id}`} className="flex-shrink-0 w-40">
+                <PersonCard person={p} compact />
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -25,6 +25,8 @@ const DynastyMapper  = lazy(() => import('./pages/dynasty/DynastyMapper'))
 const Timeline       = lazy(() => import('./pages/timeline/Timeline'))
 const COIScanner     = lazy(() => import('./pages/coi/COIScanner'))
 const ComparePage    = lazy(() => import('./pages/compare/ComparePage'))
+const RiskIndex      = lazy(() => import('./pages/risk/RiskIndex'))
+const ScenarioPage   = lazy(() => import('./pages/scenarios/ScenarioPage'))
 
 // Loading fallback — skeleton style
 function PageLoader() {
@@ -70,6 +72,8 @@ export default function App() {
         <Route path="/compare" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/compare/:id1" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/compare/:id1/:id2" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/risk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RiskIndex /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/scenarios" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScenarioPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
