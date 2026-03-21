@@ -20,6 +20,7 @@ const LHKPNTracker   = lazy(() => import('./pages/lhkpn/LHKPNTracker'))
 const NewsFeed       = lazy(() => import('./pages/news/NewsFeed'))
 const AgendaTracker  = lazy(() => import('./pages/agendas/AgendaTracker'))
 const OrmasList      = lazy(() => import('./pages/ormas/OrmasList'))
+const MahasiswaPage  = lazy(() => import('./pages/mahasiswa/MahasiswaPage'))
 const AnalitikPage   = lazy(() => import('./pages/analitik/AnalitikPage'))
 const KPKCases       = lazy(() => import('./pages/kpk/KPKCases'))
 const MediaOwnership = lazy(() => import('./pages/media/MediaOwnership'))
@@ -100,6 +101,7 @@ export default function App() {
         <Route path="/news" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><NewsFeed /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/agendas" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><AgendaTracker /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/ormas" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><OrmasList /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/mahasiswa" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><MahasiswaPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/analitik" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><AnalitikPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/kpk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KPKCases /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/investigasi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><InvestigasiPage /></Suspense></ErrorBoundary></ProtectedRoute>} />

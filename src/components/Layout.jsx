@@ -47,6 +47,7 @@ const NAV = [
   { to:'/news',     icon:'📰', label:'Berita' },
   { to:'/agendas',  icon:'📋', label:'Agenda' },
   { to:'/ormas',    icon:'🏛️', label:'Ormas' },
+  { to:'/mahasiswa',icon:'🎓', label:'Gerakan Mahasiswa' },
   { to:'/indikator',icon:'📊', label:'Indikator' },
   { to:'/glosarium',icon:'📖', label:'Glosarium' },
   { to:'/tentang',  icon:'ℹ️', label:'Tentang' },
