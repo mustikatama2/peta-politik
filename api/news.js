@@ -86,88 +86,344 @@ const RSS_SOURCES = [
 // Person name → ID index (hardcoded key names from persons.js data)
 // These are the most newsworthy persons — map their searchable names
 const PERSON_NAME_INDEX = {
+  // ── PRESIDEN / WAPRES ─────────────────────────────────────────────
   'prabowo': 'prabowo',
   'prabowo subianto': 'prabowo',
+  'presiden prabowo': 'prabowo',
   'gibran': 'gibran',
   'gibran rakabuming': 'gibran',
+  'wapres gibran': 'gibran',
+
+  // ── MANTAN PRESIDEN ───────────────────────────────────────────────
   'jokowi': 'jokowi',
   'joko widodo': 'jokowi',
-  'sri mulyani': 'sri_mulyani',
+  'presiden jokowi': 'jokowi',
+  'soekarno': 'soekarno',
+  'bung karno': 'soekarno',
+  'ir soekarno': 'soekarno',
+  'susilo bambang yudhoyono': 'sby',
+  'presiden sby': 'sby',
   'megawati': 'megawati',
+  'megawati soekarnoputri': 'megawati',
+  'bu mega': 'megawati',
+
+  // ── MENKO / MENTERI ───────────────────────────────────────────────
+  'sri mulyani': 'sri_mulyani',
+  'menkeu': 'sri_mulyani',
+  'menteri keuangan sri mulyani': 'sri_mulyani',
   'airlangga': 'airlangga',
   'airlangga hartarto': 'airlangga',
-  'anies': 'anies',
-  'anies baswedan': 'anies',
-  'hasto': 'hasto',
-  'hasto kristiyanto': 'hasto',
-  'mahfud': 'mahfud_md',
-  'mahfud md': 'mahfud_md',
-  // 'puan' removed — too short, matches "perempuan"; keep full name only
-  'puan maharani': 'puan',
-  // 'cak imin' removed — keep full name only
-  'muhaimin': 'cakimin',
-  'muhaimin iskandar': 'cakimin',
-  'ganjar': 'ganjar',
-  'ganjar pranowo': 'ganjar',
+  'menko ekonomi': 'airlangga',
   'bahlil': 'bahlil',
   'bahlil lahadalia': 'bahlil',
-  'erick thohir': 'erick_thohir',
-  'erick': 'erick_thohir',
-  // 'ahy' removed — too short; keep full names only
-  'agus yudhoyono': 'ahy',
-  'agus harimurti': 'ahy',
-  'zulhas': 'zulhas',
-  'zulkifli hasan': 'zulhas',
-  'surya paloh': 'surya_paloh',
-  'khofifah': 'khofifah',
-  'khofifah indar': 'khofifah',
-  'dedi mulyadi': 'dedi_mulyadi',
-  'bobby nasution': 'bobby_nasution',
-  'ridwan kamil': 'ridwan_kamil',
-  'pramono': 'pramono_anung',
-  'pramono anung': 'pramono_anung',
+  'menko energi': 'bahlil',
   'yusril': 'yusril',
+  'yusril ihza mahendra': 'yusril',
+  'menko hukum': 'yusril',
   'budi gunawan': 'budi_gunawan',
-  'budi arie': 'budi_arie',
-  'meutya': 'meutya_hafid',
-  'meutya hafid': 'meutya_hafid',
-  'luhut': 'luhut',
-  'luhut binsar': 'luhut',
-  'luhut pandjaitan': 'luhut',
+  'menko polkam': 'budi_gunawan',
   'sjafrie': 'sjafrie',
-  'listyo': 'listyo_sigit',
-  'listyo sigit': 'listyo_sigit',
-  'kaesang': 'kaesang',
+  'sjafrie sjamsoeddin': 'sjafrie',
+  'menhan': 'sjafrie',
+  'menteri pertahanan': 'sjafrie',
+  'agus gumiwang': 'agus_gumiwang',
+  'menteri perindustrian': 'agus_gumiwang',
+  'erick thohir': 'erick_thohir',
+  'menteri bumn': 'erick_thohir',
+  'sugiono': 'sugiono',
+  'menlu': 'sugiono',
+  'menteri luar negeri': 'sugiono',
+  'meutya hafid': 'meutya_hafid',
+  'menkominfo': 'meutya_hafid',
+  'menteri komunikasi': 'meutya_hafid',
+  'zulkifli hasan': 'zulhas',
+  'zulhas': 'zulhas',
+  'menko pangan': 'zulhas',
+  'agus harimurti yudhoyono': 'ahy',
+  'agus harimurti': 'ahy',
+  'ahy': 'ahy',
+  'menko infrastruktur': 'ahy',
+  'azwar anas': 'azwar_anas',
+  'menpan rb': 'azwar_anas',
+  'budi arie': 'budi_arie',
+  'menkop': 'budi_arie',
+  'menteri koperasi': 'budi_arie',
+  'basuki hadimuljono': 'basuki',
+  'kepala oikn': 'basuki',
+  'basuki': 'basuki',
   'hashim': 'hashim',
   'hashim djojohadikusumo': 'hashim',
+
+  // ── KAPOLRI / TNI / KPK / MA ──────────────────────────────────────
+  'listyo sigit': 'listyo_sigit',
+  'listyo sigit prabowo': 'listyo_sigit',
+  'kapolri': 'listyo_sigit',
+  'agus subiyanto': 'agus_subiyanto',
+  'panglima tni': 'agus_subiyanto',
   'nawawi': 'nawawi',
   'nawawi pomolango': 'nawawi',
   'ketua kpk': 'nawawi',
-  'tom lembong': 'tom_lembong',
+  'kepala bin': 'budi_gunawan',
   'anwar usman': 'anwar_usman',
+  'mantan ketua mk': 'anwar_usman',
+  'suhartoyo': 'suhartoyo',
+  'ketua mk': 'suhartoyo',
+  'sunarto': 'sunarto',
+  'ketua ma': 'sunarto',
+
+  // ── PARTAI / DPR / MPR ───────────────────────────────────────────
+  'puan maharani': 'puan',
+  'ketua dpr': 'puan',
+  'sufmi dasco': 'sufmi_dasco',
+  'dasco': 'sufmi_dasco',
+  'wakil ketua dpr': 'sufmi_dasco',
+  'ahmad muzani': 'ahmad_muzani',
+  'ketua mpr': 'ahmad_muzani',
+  'muzani': 'ahmad_muzani',
+  'sultan najamudin': 'sultan_najamudin',
+  'cucun syamsurijal': 'cucun_syamsurijal',
+  'cucun': 'cucun_syamsurijal',
+  'sartono': 'sartono_hutomo',
+  'sartono hutomo': 'sartono_hutomo',
   'habiburokhman': 'habiburokhman',
-  'hary tanoe': 'hary_tanoe',
-  'gus yahya': 'gus_yahya',
-  'ahmad luthfi': 'ahmad_luthfi',
-  'andra soni': 'andra_soni',
-  // 'sby' removed — keep full name only
-  'susilo bambang yudhoyono': 'sby',
-  // New politician names
-  'agus subiyanto': 'agus_subiyanto',
-  'panglima tni': 'agus_subiyanto',
+  'ketua komisi iii': 'habiburokhman',
+  'utut adianto': 'utut_adianto',
   'misbakhun': 'misbakhun',
+  'ketua komisi xi': 'misbakhun',
   'titiek soeharto': 'titiek_soeharto',
-  'basuki hadimuljono': 'basuki',
+  'titiek': 'titiek_soeharto',
+  'marwan dasopang': 'marwan_dasopang',
+  'hary tanoe': 'hary_tanoe',
+  'hary tanoesoedibjo': 'hary_tanoe',
+
+  // ── KETUM PARTAI ─────────────────────────────────────────────────
+  'surya paloh': 'surya_paloh',
+  'ketua umum nasdem': 'surya_paloh',
+  'ahmad syaikhu': 'ahmad_syaikhu',
+  'ketua umum pks': 'ahmad_syaikhu',
+  'muhaimin iskandar': 'cakimin',
+  'muhaimin': 'cakimin',
+  'ketua umum pkb': 'cakimin',
+  'cak imin': 'cakimin',
+
+  // ── OPOSISI / CAPRES ─────────────────────────────────────────────
+  'anies baswedan': 'anies',
+  'anies': 'anies',
+  'ganjar pranowo': 'ganjar',
+  'ganjar': 'ganjar',
+  'mahfud md': 'mahfud_md',
+  'mahfud': 'mahfud_md',
+  'prof mahfud': 'mahfud_md',
+  'hasto kristiyanto': 'hasto',
+  'hasto': 'hasto',
+  'sekjen pdip': 'hasto',
+  'tom lembong': 'tom_lembong',
+  'thomas lembong': 'tom_lembong',
+  'gatot nurmantyo': 'gatot_nurmantyo',
+  'gatot': 'gatot_nurmantyo',
+
+  // ── GUBERNUR ─────────────────────────────────────────────────────
+  'khofifah': 'khofifah',
+  'khofifah indar parawansa': 'khofifah',
+  'gubernur jatim': 'khofifah',
+  'dedi mulyadi': 'dedi_mulyadi',
+  'gubernur jabar': 'dedi_mulyadi',
+  'ahmad luthfi': 'ahmad_luthfi',
+  'gubernur jateng': 'ahmad_luthfi',
+  'pramono anung': 'pramono_anung',
+  'gubernur dki': 'pramono_anung',
+  'pramono': 'pramono_anung',
+  'bobby nasution': 'bobby_nasution',
+  'gubernur sumut': 'bobby_nasution',
+  'ridwan kamil': 'ridwan_kamil',
+  'kang emil': 'ridwan_kamil',
+  'andra soni': 'andra_soni',
+  'gubernur banten': 'andra_soni',
   'muzakir manaf': 'muzakir_manaf',
-  'andre rosiade': null,
-  'budisatrio': null,
-  'dandhy laksono': null,
-  // institution tags — not persons
+  'gubernur aceh': 'muzakir_manaf',
+  'mahyeldi': 'mahyeldi',
+  'gubernur sumbar': 'mahyeldi',
+  'koster': 'koster',
+  'gubernur bali': 'koster',
+  'lalu iqbal': 'lalu_iqbal',
+  'gubernur ntb': 'lalu_iqbal',
+  'sultan hamengkubuwono': 'sultan_hb10',
+  'sri sultan': 'sultan_hb10',
+  'gubernur diy': 'sultan_hb10',
+
+  // ── DINASTI / KELUARGA ───────────────────────────────────────────
+  'kaesang': 'kaesang',
+  'kaesang pangarep': 'kaesang',
+  'ketua umum psi': 'kaesang',
+  'prananda': 'prananda',
+  'prananda prabowo': 'prananda',
+  'guruh': 'guruh',
+  'guruh soekarnoputra': 'guruh',
+  'sumitro': 'sumitro',
+  'sumitro djojohadikusumo': 'sumitro',
+
+  // ── ORMAS ────────────────────────────────────────────────────────
+  'gus yahya': 'gus_yahya',
+  'yahya cholil': 'gus_yahya',
+  'ketua umum pbnu': 'gus_yahya',
+  'haedar nashir': 'haedar_nashir',
+  'ketua umum muhammadiyah': 'haedar_nashir',
+  'said iqbal': 'said_iqbal',
+  'anwar abbas': 'anwar_abbas',
+
+  // ── NULL (institution/party tags — for filtering only) ───────────
+  'luhut': null,
+  'luhut binsar': null,
+  'luhut pandjaitan': null,
+  'menperin': null,
   'kpk': null,
   'pdip': null,
   'gerindra': null,
   'golkar': null,
+  'pkb': null,
+  'nasdem': null,
+  'pks': null,
+  'demokrat': null,
+  'pan': null,
 };
+
+// Topics → maps to article tags/subtopics
+// Used for: (a) relevance filtering, (b) richer article.tags
+const TOPIC_KEYWORDS = {
+  // ── POLITIK NASIONAL ─────────────────────────────────────────────
+  'kabinet': 'kabinet',
+  'kabinet merah putih': 'kabinet',
+  'reshuffle': 'kabinet',
+  'dpr': 'legislatif',
+  'mpr': 'legislatif',
+  'dprd': 'legislatif',
+  'fraksi': 'legislatif',
+  'rancangan undang': 'legislatif',
+  'undang-undang': 'legislatif',
+  'omnibus': 'legislatif',
+  'oposisi': 'oposisi',
+  'koalisi': 'koalisi',
+  'kim plus': 'koalisi',
+  'koalisi indonesia maju': 'koalisi',
+  'pilkada': 'pemilu',
+  'pilpres': 'pemilu',
+  'pemilihan umum': 'pemilu',
+  'pemilu': 'pemilu',
+  'kpu': 'pemilu',
+  'bawaslu': 'pemilu',
+  'paslon': 'pemilu',
+  'capres': 'pemilu',
+  'cawapres': 'pemilu',
+  'elektabilitas': 'pemilu',
+  'survei politik': 'pemilu',
+  // ── HUKUM & KORUPSI ──────────────────────────────────────────────
+  'tipikor': 'korupsi',
+  'kejaksaan agung': 'korupsi',
+  'tersangka': 'korupsi',
+  'terdakwa': 'korupsi',
+  'terpidana': 'korupsi',
+  'korupsi': 'korupsi',
+  'suap': 'korupsi',
+  'gratifikasi': 'korupsi',
+  'pencucian uang': 'korupsi',
+  'ott kpk': 'korupsi',
+  'operasi tangkap tangan': 'korupsi',
+  'lhkpn': 'korupsi',
+  'mahkamah konstitusi': 'hukum',
+  'mahkamah agung': 'hukum',
+  'putusan mk': 'hukum',
+  'hakim': 'hukum',
+  'vonis': 'hukum',
+  'persidangan': 'hukum',
+  'polri': 'hukum',
+  // ── EKONOMI & KEUANGAN ───────────────────────────────────────────
+  'apbn': 'ekonomi',
+  'apbd': 'ekonomi',
+  'anggaran': 'ekonomi',
+  'efisiensi anggaran': 'ekonomi',
+  'inflasi': 'ekonomi',
+  'rupiah': 'ekonomi',
+  'pajak': 'ekonomi',
+  'pajak pertambahan nilai': 'ekonomi',
+  'ppn': 'ekonomi',
+  'bea cukai': 'ekonomi',
+  'investasi': 'ekonomi',
+  'bkpm': 'ekonomi',
+  'bumn': 'ekonomi',
+  'danantara': 'ekonomi',
+  'sovereign wealth fund': 'ekonomi',
+  'pertamina': 'ekonomi',
+  'pln': 'ekonomi',
+  'hilirisasi': 'ekonomi',
+  'nikel': 'ekonomi',
+  'batu bara': 'ekonomi',
+  'sawit': 'ekonomi',
+  'ekspor': 'ekonomi',
+  'impor': 'ekonomi',
+  'subsidi': 'ekonomi',
+  'bbm': 'ekonomi',
+  'pertalite': 'ekonomi',
+  // ── MILITER & KEAMANAN ───────────────────────────────────────────
+  'tni': 'keamanan',
+  'panglima': 'keamanan',
+  'kopassus': 'keamanan',
+  'densus 88': 'keamanan',
+  'teroris': 'keamanan',
+  'terorisme': 'keamanan',
+  'separatis': 'keamanan',
+  'papua': 'keamanan',
+  'kkb': 'keamanan',
+  'ksad': 'keamanan',
+  'ksal': 'keamanan',
+  'ksau': 'keamanan',
+  // ── SOSIAL & KEBIJAKAN ───────────────────────────────────────────
+  'makan bergizi gratis': 'sosial',
+  'mbg': 'sosial',
+  'program makan': 'sosial',
+  'bansos': 'sosial',
+  'pkh': 'sosial',
+  'stunting': 'sosial',
+  'kemiskinan': 'sosial',
+  'pengangguran': 'sosial',
+  'umk': 'sosial',
+  'ump': 'sosial',
+  'upah minimum': 'sosial',
+  'buruh': 'sosial',
+  'guru': 'sosial',
+  'pppk': 'sosial',
+  'asn': 'sosial',
+  // ── INFRASTRUKTUR & TATA RUANG ──────────────────────────────────
+  'ikn': 'infrastruktur',
+  'ibu kota nusantara': 'infrastruktur',
+  'nusantara': 'infrastruktur',
+  'oikn': 'infrastruktur',
+  'tol': 'infrastruktur',
+  'kereta cepat': 'infrastruktur',
+  'mrt': 'infrastruktur',
+  'lrt': 'infrastruktur',
+  'bandara': 'infrastruktur',
+  'pelabuhan': 'infrastruktur',
+  // ── MEDIA & DIGITAL ──────────────────────────────────────────────
+  'judi online': 'media',
+  'judol': 'media',
+  'kominfo': 'media',
+  'komdigi': 'media',
+  'siaran pers': 'media',
+  'hoaks': 'media',
+  'disinformasi': 'media',
+  'medsos': 'media',
+  'pinjol': 'media',
+  // ── LINGKUNGAN ───────────────────────────────────────────────────
+  'kebakaran hutan': 'lingkungan',
+  'deforestasi': 'lingkungan',
+  'reklamasi': 'lingkungan',
+  'tambang ilegal': 'lingkungan',
+  'amdal': 'lingkungan',
+  'perubahan iklim': 'lingkungan',
+};
+
+// Minimum political keywords required to consider article relevant
+const MIN_POLITICAL_KEYWORDS = 1;
 
 // Fetch a list of URLs, returning first that returns valid RSS XML (contains <item>)
 async function fetchWithFallback(urls, opts = {}) {
@@ -230,21 +486,60 @@ function parseRSS(xml, sourceId, sourceName) {
     const fullText = title + ' ' + description;
     const person_ids = tagPersons(fullText);
 
-    // Detect sentiment from keywords
-    const textLower = fullText.toLowerCase();
-    const negWords = ['korupsi','ditangkap','tersangka','ditahan','divonis','pecat','mundur','demo','protes','tolak','gagal','turun','kecam','kritik','skandal'];
-    const posWords = ['berhasil','sukses','naik','terpilih','apresiasi','mendukung','menyetujui','pertumbuhan','meningkat'];
-    const negScore = negWords.filter(w => textLower.includes(w)).length;
-    const posScore = posWords.filter(w => textLower.includes(w)).length;
-    const sentiment = negScore > posScore ? 'negatif' : posScore > negScore ? 'positif' : 'netral';
+    // Tag with topic keywords
+    const topicTags = [];
+    const topicCategories = new Set();
+    for (const [keyword, topicCat] of Object.entries(TOPIC_KEYWORDS)) {
+      const re = new RegExp(`\\b${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+      if (re.test(fullText)) {
+        topicTags.push(keyword);
+        topicCategories.add(topicCat);
+      }
+    }
 
-    // Detect category
+    // Determine primary category (priority order)
     let cat = 'politik';
-    if (textLower.match(/korupsi|kpk|kejagung|tipikor/))             cat = 'korupsi';
-    else if (textLower.match(/ekonomi|apbn|pajak|inflasi|rupiah|harga/)) cat = 'ekonomi';
-    else if (textLower.match(/militer|tni|polri|keamanan|bom|teroris/))  cat = 'keamanan';
-    else if (textLower.match(/pemilu|pilkada|pilpres|suara|kpu/))        cat = 'pemilu';
-    else if (textLower.match(/hukum|mk|ma|mahkamah|pengadilan|vonis/))   cat = 'hukum';
+    if (topicCategories.has('korupsi'))            cat = 'korupsi';
+    else if (topicCategories.has('pemilu'))        cat = 'pemilu';
+    else if (topicCategories.has('hukum'))         cat = 'hukum';
+    else if (topicCategories.has('ekonomi'))       cat = 'ekonomi';
+    else if (topicCategories.has('keamanan'))      cat = 'keamanan';
+    else if (topicCategories.has('sosial'))        cat = 'sosial';
+    else if (topicCategories.has('infrastruktur')) cat = 'infrastruktur';
+    else if (topicCategories.has('media'))         cat = 'media';
+    else if (topicCategories.has('lingkungan'))    cat = 'lingkungan';
+
+    // Relevance filter: skip article if no person_ids AND no topic keywords
+    const hasPoliticalContent = person_ids.length > 0 || topicTags.length > 0;
+    if (!hasPoliticalContent) {
+      idx++;
+      continue; // skip non-political articles (traffic, crime, sports, etc.)
+    }
+
+    // Enhanced sentiment (40+ keywords each direction)
+    const negWords = [
+      'korupsi','ditangkap','tersangka','ditahan','divonis','pecat','mundur',
+      'demo','protes','tolak','gagal','turun','kecam','kritik','skandal',
+      'suap','gratifikasi','bocor','kebocoran','manipulasi','penipuan',
+      'ott','operasi tangkap tangan','terdakwa','terpidana','dipenjara',
+      'dipecat','dicopot','dihukum','dihentikan',
+      'runtuh','ambruk','anjlok','merosot','terpuruk','krisis',
+      'pelanggaran','penyimpangan','penyalahgunaan','abuse',
+      'intimidasi','ancaman','kekerasan','konflik','bentrokan',
+    ];
+    const posWords = [
+      'berhasil','sukses','naik','terpilih','apresiasi','mendukung',
+      'menyetujui','pertumbuhan','meningkat','positif','baik',
+      'tumbuh','bangkit','pulih','membaik','optimis','harapan',
+      'prestasi','penghargaan','award','pencapaian','rekor',
+      'dilantik','diluncurkan','diresmikan','disepakati','ditandatangani',
+      'kerjasama','kolaborasi','sinergi','inovasi','terobosan',
+      'melesat','melonjak','rebound','surplus','untung',
+    ];
+    const textLower2 = fullText.toLowerCase();
+    const negScore = negWords.filter(w => textLower2.includes(w)).length;
+    const posScore = posWords.filter(w => textLower2.includes(w)).length;
+    const sentiment = negScore > posScore ? 'negatif' : posScore > negScore ? 'positif' : 'netral';
 
     articles.push({
       id: `${sourceId}_${idx}_${Date.now()}`,
@@ -257,7 +552,8 @@ function parseRSS(xml, sourceId, sourceName) {
       category: cat,
       sentiment,
       person_ids,
-      tags: [sourceName.toLowerCase(), cat],
+      tags: [...new Set([sourceName.toLowerCase(), cat, ...topicTags.slice(0, 5)])],
+      topic_categories: [...topicCategories],
     });
     idx++;
   }
@@ -272,7 +568,7 @@ export default async function handler(req, res) {
   // Cache at Vercel edge for 15 minutes
   res.setHeader('Cache-Control', 's-maxage=900, stale-while-revalidate=1800');
 
-  const { person_id, category, source, limit = 60, q } = req.query || {};
+  const { person_id, category, source, limit = 60, q, topic } = req.query || {};
 
   const fetchHeaders = {
     'User-Agent': 'Mozilla/5.0 (compatible; PetaPolitikBot/1.0)',
@@ -309,6 +605,11 @@ export default async function handler(req, res) {
   }
   if (source && source !== 'semua') {
     articles = articles.filter(a => a.source_id === source);
+  }
+
+  // Topic filter
+  if (topic && topic !== 'semua') {
+    articles = articles.filter(a => a.topic_categories?.includes(topic));
   }
 
   // Text search filter
