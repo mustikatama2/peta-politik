@@ -3702,6 +3702,43 @@ export const PERSONS = [
       notes:"Gubernur Papua dua periode. Ditangkap KPK 2022. Kasus ini diwarnai isu kedaerahan dan dinamika pusat-Papua. Meninggal pada Januari 2024 saat jalani perawatan."
     }
   },
+  {
+    id:"hasto_kristiyanto", name:"Hasto Kristiyanto", photo_url:null, photo_placeholder:"HK",
+    born:"7 Apr 1973", born_place:"Yogyakarta", religion:"Islam",
+    education:"S2 Ilmu Politik",
+    party_id:"pdip", party_role:"Sekretaris Jenderal",
+    positions:[
+      {title:"Sekretaris Jenderal PDIP",institution:"PDI Perjuangan",region:"Nasional",start:"2014",end:null,is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Sekretaris Jenderal PDIP yang menjadi tersangka KPK dalam kasus perintangan penyidikan (obstruction of justice) terkait buronan Harun Masiku, ditetapkan Desember 2024.",
+    tags:["pdip","sekjen","kpk","harun_masiku","korupsi","obstruction"],
+    lhkpn_latest:12_000_000_000, lhkpn_year:2023,
+    analysis:{
+      ideology_score:3, style:"Aparatur Partai", risk:"high", influence:7, controversy_level:9,
+      connections_summary:"Sekjen PDIP, loyalis Megawati, tersangka KPK kasus Harun Masiku",
+      notes:"Penetapan tersangka Desember 2024 mengguncang internal PDIP menjelang Pilkada"
+    }
+  },
+  {
+    id:"novel_baswedan", name:"Novel Baswedan", photo_url:null, photo_placeholder:"NB",
+    born:"22 Jun 1977", born_place:"Jakarta", religion:"Islam",
+    education:"S1 Teknik, Universitas Bengkulu",
+    party_id:"independent", party_role:"Non-Partai",
+    positions:[
+      {title:"Penyidik Senior KPK",institution:"KPK",region:"Nasional",start:"2006",end:"2021",is_current:false},
+      {title:"Ketua Tim Penyidik TPDI",institution:"TPDI",region:"Nasional",start:"2021",end:null,is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Mantan penyidik senior KPK yang menjadi korban penyiraman air keras pada April 2017. Kasus ini menjadi simbol serangan terhadap pemberantasan korupsi. Pelaku dihukum ringan. Kini aktif di TPDI.",
+    tags:["kpk","antikorupsi","penyidik","teror","air_keras","tpdi"],
+    lhkpn_latest:null, lhkpn_year:null,
+    analysis:{
+      ideology_score:2, style:"Penegak Hukum", risk:"low", influence:7, controversy_level:6,
+      connections_summary:"Simbol integritas KPK, korban kekerasan, kini advokasi antikorupsi",
+      notes:"Kasus penyiraman air keras 2017 tidak tuntas, pelaku mendapat hukuman ringan"
+    }
+  },
 ]
 
 export const PERSONS_MAP = Object.fromEntries(PERSONS.map(p => [p.id, p]))
