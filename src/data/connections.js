@@ -611,6 +611,103 @@ export const CONNECTIONS = [
   { from:"basuki",          to:"airlangga",      type:"rekan",    label:"Kepala OIKN-Menko Ekonomi; koordinasi pembangunan IKN Nusantara",     strength:6 },
   { from:"prabowo",         to:"sby",            type:"rekan",    label:"Eks-rival Pilpres 2009; bersama lagi di kabinet-koalisi pasca-2024",  strength:5 },
   { from:"megawati",        to:"anies",          type:"konflik",  label:"PDIP tidak usung Anies; Megawati dukung Ganjar melawan Anies",        strength:5 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH Q: Fix 16 Isolated Persons ──────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // faisol_riza — PKB DPR RI Jatim
+  { from:"faisol_riza",          to:"cakimin",         type:"koalisi",        label:"PKB — Faisol Riza Anggota DPR RI Jatim, kader PKB",                  strength:8 },
+  { from:"faisol_riza",          to:"khofifah",        type:"rekan",          label:"DPR RI Jatim — koordinasi dengan Gubernur Jatim",                    strength:5 },
+
+  // lia_istifhama — DPD RI Jatim, non-partisan
+  { from:"lia_istifhama",        to:"khofifah",        type:"rekan",          label:"DPD RI Jatim — koordinasi dengan Gubernur Jawa Timur",               strength:5 },
+  { from:"lia_istifhama",        to:"puan",            type:"rekan",          label:"DPD RI-DPR RI — legislatif nasional lintas kamar",                   strength:4 },
+
+  // imam_sugianto — Kapolda Jatim
+  { from:"imam_sugianto",        to:"listyo_sigit",    type:"rekan",          label:"Kapolda Jatim bawahan langsung Kapolri Listyo Sigit",                strength:8 },
+  { from:"imam_sugianto",        to:"khofifah",        type:"rekan",          label:"Kapolda Jatim — koordinasi keamanan dengan Gubernur Jatim",          strength:6 },
+
+  // rudy_saladin — Pangdam V/Brawijaya
+  { from:"rudy_saladin",         to:"agus_subiyanto",  type:"rekan",          label:"Pangdam V/Brawijaya bawahan langsung Panglima TNI",                  strength:8 },
+  { from:"rudy_saladin",         to:"khofifah",        type:"rekan",          label:"Pangdam V/Brawijaya — koordinasi keamanan Gubernur Jatim",           strength:6 },
+
+  // rendra_kresna — Mantan Bupati Malang, Golkar, terpidana
+  { from:"rendra_kresna",        to:"airlangga",       type:"koalisi",        label:"Golkar — mantan Bupati Malang kader Golkar",                         strength:5 },
+  { from:"rendra_kresna",        to:"khofifah",        type:"rekan",          label:"Mantan Bupati Malang era Gubernur Jatim Khofifah",                   strength:4 },
+
+  // joko_suroto — Bupati Tulungagung, PDIP
+  { from:"joko_suroto",          to:"megawati",        type:"koalisi",        label:"PDIP — Bupati Tulungagung kader PDIP",                               strength:6 },
+  { from:"joko_suroto",          to:"khofifah",        type:"rekan",          label:"Bupati Tulungagung — koordinasi Gubernur Jatim",                     strength:5 },
+
+  // wahid_cahyono — Bupati Probolinggo, PDIP
+  { from:"wahid_cahyono",        to:"megawati",        type:"koalisi",        label:"PDIP — Bupati Probolinggo kader PDIP",                               strength:6 },
+  { from:"wahid_cahyono",        to:"khofifah",        type:"rekan",          label:"Bupati Probolinggo — koordinasi Gubernur Jatim",                     strength:5 },
+
+  // sandhika — Bupati Blitar, PDIP
+  { from:"sandhika",             to:"megawati",        type:"koalisi",        label:"PDIP — Bupati Blitar kader PDIP; Blitar kandang PDIP historis",       strength:7 },
+  { from:"sandhika",             to:"khofifah",        type:"rekan",          label:"Bupati Blitar — koordinasi Gubernur Jatim",                           strength:5 },
+
+  // santoso_blitar — Walikota Blitar, PDIP
+  { from:"santoso_blitar",       to:"megawati",        type:"koalisi",        label:"PDIP — Walikota Blitar kader PDIP; Blitar kota historis PDIP",        strength:7 },
+  { from:"santoso_blitar",       to:"soekarno",        type:"rekan",          label:"Blitar kota kelahiran Soekarno; Walikota Blitar menjaga warisan Bung Karno", strength:6 },
+
+  // budhabar — Bupati Nganjuk, PDIP
+  { from:"budhabar",             to:"megawati",        type:"koalisi",        label:"PDIP — Bupati Nganjuk kader PDIP",                                   strength:6 },
+  { from:"budhabar",             to:"khofifah",        type:"rekan",          label:"Bupati Nganjuk — koordinasi Gubernur Jatim",                         strength:5 },
+
+  // hariyanto_bojonegoro — Bupati Bojonegoro, PDIP
+  { from:"hariyanto_bojonegoro", to:"megawati",        type:"koalisi",        label:"PDIP — Bupati Bojonegoro kader PDIP",                                strength:6 },
+  { from:"hariyanto_bojonegoro", to:"khofifah",        type:"rekan",          label:"Bupati Bojonegoro — koordinasi Gubernur Jatim",                      strength:5 },
+
+  // dedy_magetan — Bupati Magetan, PDIP
+  { from:"dedy_magetan",         to:"megawati",        type:"koalisi",        label:"PDIP — Bupati Magetan kader PDIP",                                   strength:6 },
+  { from:"dedy_magetan",         to:"khofifah",        type:"rekan",          label:"Bupati Magetan — koordinasi Gubernur Jatim",                         strength:5 },
+
+  // tri_sragen — Bupati Pacitan, PDIP
+  { from:"tri_sragen",           to:"megawati",        type:"koalisi",        label:"PDIP — Bupati Pacitan kader PDIP; Pacitan kota asal SBY dikuasai PDIP", strength:6 },
+  { from:"tri_sragen",           to:"sby",             type:"rekan",          label:"Pacitan kota asal SBY; PDIP berkuasa di kandang SBY",                strength:4 },
+
+  // daryono_trenggalek — Bupati Trenggalek, PDIP
+  { from:"daryono_trenggalek",   to:"megawati",        type:"koalisi",        label:"PDIP — Bupati Trenggalek kader PDIP, penerus Emil Dardak",           strength:6 },
+  { from:"daryono_trenggalek",   to:"khofifah",        type:"rekan",          label:"Bupati Trenggalek — koordinasi Gubernur Jatim",                      strength:5 },
+
+  // slamet_batu — Walikota Batu, PDIP
+  { from:"slamet_batu",          to:"megawati",        type:"koalisi",        label:"PDIP — Walikota Batu kader PDIP",                                    strength:6 },
+  { from:"slamet_batu",          to:"khofifah",        type:"rekan",          label:"Walikota Batu — koordinasi Gubernur Jatim",                          strength:5 },
+
+  // bambang_haryo — DPR RI Gerindra Jatim
+  { from:"bambang_haryo",        to:"prabowo",         type:"koalisi",        label:"Gerindra — Bambang Haryo DPR RI Jatim, loyalis Prabowo",             strength:7 },
+  { from:"bambang_haryo",        to:"sufmi_dasco",     type:"koalisi",        label:"Gerindra DPR RI — kader Gerindra koordinasi Ketua Dewan",            strength:6 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH R: Institution Ties + Cross-Party Historical ────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"sri_mulyani",          to:"azwar_anas",      type:"rekan",          label:"Kemenkeu-KemenPAN koordinasi reformasi birokrasi dan fiskal",         strength:6 },
+  { from:"basuki",               to:"sjafrie",         type:"rekan",          label:"OIKN-Kemhan koordinasi keamanan dan pertahanan IKN Nusantara",        strength:5 },
+  { from:"meutya_hafid",         to:"agus_subiyanto",  type:"rekan",          label:"Kominfo-TNI koordinasi pertahanan siber dan komunikasi strategis",    strength:5 },
+  { from:"nawawi",               to:"anwar_usman",     type:"konflik",        label:"KPK mengusut dugaan konflik kepentingan putusan MK Anwar Usman",      strength:6 },
+  { from:"anies",                to:"jokowi",          type:"konflik",        label:"Jokowi copot Anies sebagai Gubernur DKI 2022 — perseteruan politik",  strength:7 },
+  { from:"utut_adianto",         to:"jokowi",          type:"rekan",          label:"PDIP DPR — Utut Ketua Komisi II, loyalis Jokowi era kepemimpinan",   strength:7 },
+  { from:"marwan_dasopang",      to:"prabowo",         type:"mantan-koalisi", label:"PKB bergabung KIM Plus 2024; Marwan Ketua Komisi VIII DPR",           strength:6 },
+  { from:"cucun_syamsurijal",    to:"prabowo",         type:"koalisi",        label:"PKB KIM Plus — Cucun Wakil Ketua DPR dukung pemerintahan Prabowo",    strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH S: Extra Density — Jatim + National Network ────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"ipuk",                 to:"khofifah",        type:"rekan",          label:"Bupati Banyuwangi — koordinasi Gubernur Jatim",                      strength:5 },
+  { from:"azwar_anas",           to:"khofifah",        type:"rekan",          label:"MenPAN-RB mantan Bupati Banyuwangi; jaringan Jatim bersama Khofifah", strength:6 },
+  { from:"eri_cahyadi",          to:"jokowi",          type:"rekan",          label:"Walikota Surabaya PDIP — loyalis Jokowi di Jatim",                   strength:6 },
+  { from:"habiburokhman",        to:"sufmi_dasco",     type:"koalisi",        label:"Gerindra DPR RI — Habiburokhman Komisi III, sesama loyalis Dasco",    strength:7 },
+  { from:"prananda",             to:"hasto",           type:"rekan",          label:"PDIP internal — Prananda ketua tim digital, Hasto Sekjen koordinasi", strength:7 },
+  { from:"gibran",               to:"prabowo",         type:"koalisi",        label:"Wakil Presiden — bersama dalam pasangan Pilpres 2024",                strength:10 },
+  { from:"cakimin",              to:"prabowo",         type:"koalisi",        label:"PKB KIM Plus — Cak Imin dukung pemerintahan Prabowo",                 strength:7 },
+  { from:"sby",                  to:"jokowi",          type:"konflik",        label:"Demokrat vs PDIP-Jokowi; SBY dan Demokrat berseberangan dengan Jokowi 2014-2019", strength:4 },
+  { from:"hasto",                to:"nawawi",          type:"konflik",        label:"KPK vs PDIP — Hasto Kristiyanto ditetapkan tersangka oleh KPK Nawawi", strength:8 },
+  { from:"puan",                 to:"jokowi",          type:"konflik",        label:"PDIP split — Puan-Megawati berseberangan dengan Jokowi pasca 2023",    strength:5 },
+  { from:"erick_thohir",         to:"gibran",          type:"rekan",          label:"Sesama Kabinet Merah Putih; Erick Thohir Menkes, Gibran Wapres",       strength:6 },
 ]
 
 export const CONNECTION_TYPES = {

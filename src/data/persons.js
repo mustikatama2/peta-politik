@@ -564,7 +564,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sultan_najamudin", name:"Sultan B. Najamudin", photo_url:null, photo_placeholder:"SN",
+    id:"sultan_najamudin", name:"Sultan B. Najamudin", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Sultan_B._Najamudin,_Anggota_DPD_RI_(2024).jpg?width=400", photo_placeholder:"SN",
     born:"1975", born_place:"Bengkulu", religion:"Islam",
     education:"S1 Hukum, Universitas Indonesia",
     party_id:null, party_role:null,
@@ -652,7 +652,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sunarto", name:"Sunarto", photo_url:null, photo_placeholder:"SR",
+    id:"sunarto", name:"Sunarto", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Ketua_Mahkamah_Agung_Republik_Indonesia_Sunarto_(cropped).jpg?width=400", photo_placeholder:"SR",
     born:"1962", born_place:"Yogyakarta", religion:"Islam",
     education:"S1 Hukum, Universitas Gadjah Mada",
     party_id:null, party_role:null,
@@ -937,7 +937,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"gus_muhdlor", name:"Ahmad Muhdlor Ali", photo_url:null, photo_placeholder:"GM",
+    id:"gus_muhdlor", name:"Ahmad Muhdlor Ali", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Ahmad_Muhdlor_Ali.jpg?width=400", photo_placeholder:"GM",
     born:"1990", born_place:"Sidoarjo", religion:"Islam",
     education:"S1 Ekonomi, Universitas Airlangga",
     party_id:"pkb", party_role:"Anggota",
@@ -979,7 +979,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ipuk", name:"Ipuk Fiestiandani Azwar Anas", photo_url:null, photo_placeholder:"IF",
+    id:"ipuk", name:"Ipuk Fiestiandani Azwar Anas", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Bupati_Banyuwangi_Ipuk_Fiestiandani_2025.png?width=400", photo_placeholder:"IF",
     born:"1977", born_place:"Banyuwangi", religion:"Islam",
     education:"S1 Ilmu Komunikasi, Universitas Airlangga",
     party_id:"pdip", party_role:"Anggota",
@@ -1043,7 +1043,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hanindhito", name:"Hanindhito Himawan Pramana", photo_url:null, photo_placeholder:"HH",
+    id:"hanindhito", name:"Hanindhito Himawan Pramana", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Hanindhito_Himawan_Pramana.jpg?width=400", photo_placeholder:"HH",
     born:"1992", born_place:"Kediri", religion:"Islam",
     education:"S1 Ilmu Komunikasi, Universitas Gadjah Mada; eks-pemain sepakbola Persik Kediri",
     party_id:"pdip", party_role:"Anggota",
