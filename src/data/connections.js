@@ -416,6 +416,108 @@ export const CONNECTIONS = [
   { from:"sunarto",         to:"prabowo",       type:"rekan",    label:"Ketua Mahkamah Agung era Prabowo",                          strength:6 },
   { from:"suhartoyo",       to:"anwar_usman",   type:"rekan",    label:"MK sesama Hakim Konstitusi; Suhartoyo gantikan Anwar Usman",strength:5 },
   { from:"suhartoyo",       to:"prabowo",       type:"rekan",    label:"Ketua MK era Presiden Prabowo",                             strength:6 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH 17: Inter-Minister Cabinet Ties ────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"sjafrie",         to:"agus_subiyanto", type:"rekan",   label:"Menhan-Panglima TNI koordinasi pertahanan",                 strength:8 },
+  { from:"sjafrie",         to:"listyo_sigit",   type:"rekan",   label:"Menko Polkam-Kapolri koordinasi keamanan",                  strength:7 },
+  { from:"budi_gunawan",    to:"listyo_sigit",   type:"rekan",   label:"Menkopolkam-Kapolri koordinasi Polri",                      strength:8 },
+  { from:"budi_gunawan",    to:"agus_subiyanto", type:"rekan",   label:"Menkopolkam-Panglima TNI koordinasi",                       strength:8 },
+  { from:"erick_thohir",    to:"bahlil",         type:"rekan",   label:"BUMN-Menko Energi koordinasi BUMN energi",                  strength:7 },
+  { from:"erick_thohir",    to:"airlangga",      type:"rekan",   label:"BUMN-Menko Ekonomi koordinasi investasi",                   strength:7 },
+  { from:"bahlil",          to:"airlangga",      type:"rekan",   label:"Sesama Menko kabinet ekonomi — Golkar eks Ketum",           strength:7 },
+  { from:"sri_mulyani",     to:"airlangga",      type:"rekan",   label:"Kemenkeu-Menko Ekonomi koordinasi fiskal",                  strength:8 },
+  { from:"meutya_hafid",    to:"sugiono",        type:"rekan",   label:"Kemenkomdigi-Kemenlu koordinasi diplomasi digital",         strength:6 },
+  { from:"yusril",          to:"prabowo",        type:"koalisi", label:"PBB dukung Prabowo; Yusril Menko Hukum Kabinet Merah Putih",strength:8 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH 18: Party Internal Hierarchy ───────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"sufmi_dasco",     to:"airlangga",      type:"rekan",   label:"DPR-Golkar koordinasi legislatif",                          strength:6 },
+  { from:"sufmi_dasco",     to:"cakimin",        type:"rekan",   label:"DPR lintas fraksi Gerindra-PKB",                            strength:5 },
+  { from:"ahmad_muzani",    to:"sufmi_dasco",    type:"rekan",   label:"MPR Ketua-DPR, sesama pimpinan legislatif",                 strength:7 },
+  { from:"ahmad_muzani",    to:"airlangga",      type:"rekan",   label:"MPR-Golkar koordinasi KIM Plus",                            strength:6 },
+  { from:"cucun_syamsurijal",to:"megawati",      type:"konflik", label:"PKB berseberangan PDIP; pertemuan lintas blok terbatas",    strength:4 },
+  { from:"sultan_najamudin", to:"airlangga",     type:"rekan",   label:"Wakil Ketua MPR — Golkar; koordinasi parlemen",             strength:6 },
+  { from:"sunarto",         to:"nawawi",         type:"rekan",   label:"MA-KPK koordinasi penegakan hukum",                         strength:5 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH 19: Jatim Deep Network ─────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"khofifah",        to:"eri_cahyadi",    type:"rekan",   label:"Gubernur Jatim-Walikota Surabaya koordinasi regional",      strength:7 },
+  { from:"khofifah",        to:"gus_muhdlor",    type:"rekan",   label:"Gubernur Jatim-Bupati Sidoarjo; OTT KPK terjadi",          strength:6 },
+  { from:"khofifah",        to:"hanindhito",     type:"rekan",   label:"Gubernur Jatim-Bupati Kediri; koordinasi PDIP-PKB Jatim",  strength:6 },
+  { from:"khofifah",        to:"azwar_anas",     type:"rekan",   label:"Gubernur Jatim-Mantan Bupati Banyuwangi; eks-tetangga",    strength:7 },
+  { from:"khofifah",        to:"ipuk",           type:"rekan",   label:"Gubernur Jatim-Bupati Banyuwangi koordinasi regional",     strength:7 },
+  { from:"eri_cahyadi",     to:"gus_muhdlor",    type:"rekan",   label:"Walikota Surabaya-Bupati Sidoarjo; tetangga kota",         strength:6 },
+  { from:"gus_muhdlor",     to:"hasto",          type:"konflik", label:"OTT KPK 2024 — PDIP lewat Hasto terseret isu suap",        strength:5 },
+  { from:"gus_muhdlor",     to:"nawawi",         type:"konflik", label:"OTT KPK — Gus Muhdlor tersangka KPK era Nawawi",           strength:8 },
+  { from:"ipuk",            to:"puan",           type:"rekan",   label:"PDIP perempuan Jatim; Ipuk Bupati Banyuwangi-Puan DPR",   strength:6 },
+  { from:"fandi_yani",      to:"airlangga",      type:"rekan",   label:"Golkar Jatim — Fandi Yani Bojonegoro koneksi Golkar",      strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH 20: National Cross-Links ───────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"hasto",           to:"prabowo",        type:"konflik", label:"PDIP oposisi — Hasto Sekjen PDIP berseberangan Prabowo",   strength:8 },
+  { from:"mahfud_md",       to:"nawawi",         type:"rekan",   label:"Eks Menko Polhukam-Ketua KPK; koordinasi antikorupsi",     strength:7 },
+  { from:"mahfud_md",       to:"hasto",          type:"rekan",   label:"PDIP eks mitra kampanye Ganjar-Mahfud 2024",               strength:7 },
+  { from:"anwar_usman",     to:"suhartoyo",      type:"rekan",   label:"MK sesama hakim; Suhartoyo gantikan Anwar Usman 2023",     strength:6 },
+  { from:"tom_lembong",     to:"sri_mulyani",    type:"konflik", label:"Eks menteri — rivalisasi kebijakan era Jokowi",             strength:5 },
+  { from:"gatot_nurmantyo", to:"agus_subiyanto", type:"konflik", label:"Eks Panglima TNI vs Panglima baru; berbeda blok",          strength:4 },
+  { from:"gatot_nurmantyo", to:"listyo_sigit",   type:"rekan",   label:"Eks pimpinan militer-Kapolri; jaringan keamanan nasional", strength:5 },
+  { from:"budi_gunawan",    to:"hasto",          type:"rekan",   label:"BIN-PDIP era Jokowi; koordinasi intel-partai",             strength:7 },
+  { from:"budi_gunawan",    to:"nawawi",         type:"konflik", label:"BIN-KPK historical tension; beda lembaga penegak hukum",   strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH 21: Sumatra Network ─────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"bobby_nasution",  to:"dedi_mulyadi",   type:"rekan",   label:"Gubernur baru KIM Plus sepantaran 2024",                   strength:5 },
+  { from:"bobby_nasution",  to:"ahmad_luthfi",   type:"rekan",   label:"Gubernur baru KIM Plus sepantaran 2024",                   strength:5 },
+  { from:"bobby_nasution",  to:"andra_soni",     type:"rekan",   label:"Gubernur baru KIM Plus sepantaran 2024",                   strength:5 },
+  { from:"mahyeldi",        to:"cakimin",        type:"rekan",   label:"PKS-PKB pernah koalisi Sumbar; lintas partai Islam",       strength:5 },
+  { from:"ansar_ahmad",     to:"prabowo",        type:"koalisi", label:"KIM Plus — Gubernur Kepri Golkar dukung Prabowo",          strength:7 },
+  { from:"herman_deru",     to:"airlangga",      type:"rekan",   label:"NasDem-Golkar koordinasi Sumsel; rekan KIM Plus",          strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH 22: Kalimantan-Sulawesi Network ────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"rudy_masud",      to:"bahlil",         type:"rekan",   label:"Golkar Kaltim-Bahlil Ketum Golkar; IKN koordinasi",        strength:6 },
+  { from:"agustiar_sabran", to:"airlangga",      type:"koalisi", label:"Golkar Kalteng — koalisi KIM Plus",                        strength:7 },
+  { from:"zainal_arifin",   to:"airlangga",      type:"koalisi", label:"Golkar Kaltara — koordinasi partai",                       strength:7 },
+  { from:"andi_sudirman",   to:"sjafrie",        type:"rekan",   label:"NasDem Sulsel-Menhan; koordinasi keamanan regional",       strength:5 },
+  { from:"andi_sudirman",   to:"airlangga",      type:"rekan",   label:"KIM Plus Sulsel — Golkar-NasDem koordinasi",               strength:7 },
+  { from:"andi_sumangerukka",to:"airlangga",     type:"koalisi", label:"KIM Plus Sultra — Gerindra-Golkar koordinasi",             strength:6 },
+  { from:"gusnar_ismail",   to:"airlangga",      type:"koalisi", label:"Golkar Gorontalo — koordinasi partai KIM Plus",            strength:7 },
+  { from:"lalu_iqbal",      to:"prabowo",        type:"koalisi", label:"NTB KIM Plus — Gubernur NTB dukung pemerintahan Prabowo",  strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH 23: Ormas Deeper Ties ──────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"gus_yahya",       to:"megawati",       type:"rekan",   label:"NU-PDIP kolaborasi historis; Gus Yahya-Megawati dialog",   strength:6 },
+  { from:"gus_yahya",       to:"puan",           type:"rekan",   label:"PBNU-PDIP era; Gus Yahya-Puan pertemuan",                  strength:5 },
+  { from:"gus_yahya",       to:"mahfud_md",      type:"rekan",   label:"NU-Menko era Jokowi; Gus Yahya-Mahfud dialog",             strength:7 },
+  { from:"haedar_nashir",   to:"surya_paloh",    type:"rekan",   label:"Muhammadiyah-NasDem dialog publik",                        strength:4 },
+  { from:"haedar_nashir",   to:"sri_mulyani",    type:"rekan",   label:"Muhammadiyah-Kemenkeu dialog kebijakan ekonomi",           strength:5 },
+  { from:"said_iqbal",      to:"megawati",       type:"rekan",   label:"KSPI-PDIP — buruh dan partai tenaga kerja",                strength:6 },
+  { from:"said_iqbal",      to:"hasto",          type:"rekan",   label:"KSPI-PDIP koordinasi — Said Iqbal dekat Sekjen PDIP",      strength:6 },
+  { from:"anwar_abbas",     to:"megawati",       type:"rekan",   label:"MUI-PDIP dialog; Anwar Abbas-Megawati pertemuan",          strength:5 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH 24: Dynasty / Family Additional ────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  { from:"kaesang",         to:"jokowi",         type:"keluarga","label":"Anak-Bapak; Kaesang putra bungsu Jokowi",                strength:10 },
+  { from:"kaesang",         to:"prabowo",        type:"koalisi", label:"PSI bergabung KIM Plus; Kaesang Ketum PSI dukung Prabowo", strength:7 },
+  { from:"kaesang",         to:"airlangga",      type:"rekan",   label:"PSI-Golkar koalisi KIM Plus; Kaesang-Airlangga koordinasi",strength:6 },
+  { from:"titiek_soeharto", to:"sby",            type:"rekan",   label:"Demokrat-Golkar lintas fraksi; Titiek anggota DPR",        strength:5 },
 ]
 
 export const CONNECTION_TYPES = {
