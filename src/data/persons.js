@@ -117,7 +117,7 @@ export const PERSONS = [
     tags:["pengusaha","eks-presiden","populis"],
     lhkpn_latest:82000000000, lhkpn_year:2023,
     lhkpn_history:[{year:2019,amount:60000000000},{year:2020,amount:63000000000},{year:2021,amount:66000000000},{year:2022,amount:72000000000},{year:2023,amount:82000000000}],
-    connections_summary:"Eks Presiden RI, bapak Gibran & Kaesang",
+    connections_summary:"Mantan Presiden RI ke-7 (2014-2024). Menantu Bobby Nasution (Gubernur Sumut), putra sulung Gibran (Wapres). Dipecat PDIP, kini tanpa partai formal.",
     twitter:"@jokowi",
     analysis:{
       ideology_score:5, populism_score:8, corruption_risk:"rendah",
@@ -212,7 +212,7 @@ export const PERSONS = [
     tags:["polri","intelijen"],
     lhkpn_latest:73000000000, lhkpn_year:2023,
     lhkpn_history:[{year:2019,amount:55000000000},{year:2020,amount:60000000000},{year:2021,amount:64000000000},{year:2022,amount:68000000000},{year:2023,amount:73000000000}],
-    connections_summary:"Ka BIN, eks-Wakapolri, dekat kekuasaan",
+    connections_summary:"Menko Polkam era Prabowo. Mantan Kepala BIN selama 6 tahun. Kontroversial: pernah jadi tersangka KPK 2015, kasus di-SP3.",
     twitter:null,
     analysis:{
       ideology_score:6, populism_score:3, corruption_risk:"tinggi",
@@ -1606,7 +1606,7 @@ export const PERSONS = [
     tags:["pengusaha","gerindra","adik-presiden"],
     lhkpn_latest:null, lhkpn_year:null,
     lhkpn_history:[{year:2019,amount:30000000000000},{year:2020,amount:32000000000000},{year:2021,amount:35000000000000},{year:2022,amount:38000000000000},{year:2023,amount:40000000000000}],
-    connections_summary:"Adik Prabowo, konglomerat, Ketua Dewan Pembina Gerindra",
+    connections_summary:"Adik Prabowo, pengusaha tambang dan perkebunan. Bos Arsari Group. Penyandang dana utama Gerindra.",
     twitter:null,
     analysis:{
       ideology_score:5, populism_score:2, corruption_risk:"sedang",
@@ -2480,7 +2480,7 @@ export const PERSONS = [
     tags:["menteri","pengusaha","bumn","pssi","olahraga"],
     lhkpn_latest:2500000000000, lhkpn_year:2023,
     lhkpn_history:[{year:2019,amount:1800000000000},{year:2020,amount:1950000000000},{year:2021,amount:2100000000000},{year:2022,amount:2300000000000},{year:2023,amount:2500000000000}],
-    connections_summary:"Menkeu BUMN, eks-pemilik Inter Milan, Ketum PSSI",
+    connections_summary:"Menteri BUMN era Jokowi dan Prabowo. Pendiri Danantara 2025. Mantan Ketua Tim Pemenangan Jokowi 2019. Pengusaha media & olahraga.",
     twitter:"@erickthohir",
     analysis:{
       ideology_score:2, populism_score:6, corruption_risk:"sedang",
@@ -2530,7 +2530,7 @@ export const PERSONS = [
     lhkpn_latest:8500000000, lhkpn_year:2023,
     lhkpn_history:[{year:2019,amount:6500000000},{year:2020,amount:7000000000},{year:2021,amount:7500000000},{year:2022,amount:8000000000},{year:2023,amount:8500000000}],
     connections_summary:"Menkomdigi, eks-Ketua Komisi I DPR, Golkar",
-    twitter:null,
+    twitter:"@meutya_hafid",
     analysis:{
       ideology_score:3, populism_score:4, corruption_risk:"rendah",
       nationalism:6, religiosity:4,
@@ -2687,7 +2687,7 @@ export const PERSONS = [
     bio:"Konglomerat media terbesar Indonesia berdasarkan jangkauan (MNC Group — RCTI, MNCTV, Global TV, iNews, Okezone). Mendirikan Partai Perindo 2015. Pemilik media yang sekaligus ketua partai menciptakan konflik kepentingan antara kebebasan pers dan kepentingan politik.",
     tags:["pengusaha","media","ketum-partai","perindo"],
     lhkpn_latest:null, lhkpn_year:null,
-    connections_summary:"Ketum Perindo, CEO MNC Group (RCTI, MNCTV), media mogul",
+    connections_summary:"Pemilik MNC Group (RCTI, MNCTV, iNews, Koran Sindo, dll). Ketua Umum Perindo. Salah satu oligarki media terbesar Indonesia.",
     twitter:"@hary_tanoe",
     analysis:{
       ideology_score:3, populism_score:6, corruption_risk:"sedang",
