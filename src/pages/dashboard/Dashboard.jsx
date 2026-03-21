@@ -131,17 +131,19 @@ function LiveStatsBar() {
   ]
 
   return (
-    <div className="flex flex-wrap items-center gap-0 rounded-xl border border-border bg-bg-card overflow-hidden mb-6">
-      {stats.map((s, i) => (
-        <div
-          key={s.label}
-          className={`flex flex-col px-4 py-2.5 flex-1 min-w-[110px] ${i < stats.length - 1 ? 'border-r border-border' : ''}`}
-        >
-          <span className="text-[10px] text-text-secondary uppercase tracking-wider">{s.label}</span>
-          <span className="text-base font-bold text-text-primary leading-tight">{s.value}</span>
-          <span className="text-[10px] text-text-muted">{s.sub}</span>
-        </div>
-      ))}
+    <div className="overflow-x-auto mb-6">
+      <div className="flex items-center gap-0 rounded-xl border border-border bg-bg-card overflow-hidden min-w-[560px]">
+        {stats.map((s, i) => (
+          <div
+            key={s.label}
+            className={`flex flex-col px-4 py-2.5 flex-1 min-w-[110px] ${i < stats.length - 1 ? 'border-r border-border' : ''}`}
+          >
+            <span className="text-[10px] text-text-secondary uppercase tracking-wider">{s.label}</span>
+            <span className="text-base font-bold text-text-primary leading-tight">{s.value}</span>
+            <span className="text-[10px] text-text-muted">{s.sub}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
@@ -556,8 +558,8 @@ export default function Dashboard() {
         <LiveRecentNews />
       </div>
 
-      {/* Legacy Koalisi Bar (kept for detail) */}
-      <Card className="p-5">
+      {/* Legacy Koalisi Bar (kept for detail) — hidden on mobile */}
+      <Card className="p-5 hidden md:block">
         <h2 className="text-sm font-semibold text-text-primary mb-4">🏛️ Koalisi Indonesia Maju Plus</h2>
         <div className="flex flex-wrap gap-2 mb-4">
           {KIM_PARTIES.map(pid => {

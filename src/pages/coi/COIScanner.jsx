@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { PageHeader, Card, Badge, KPICard } from '../../components/ui'
 import { COI_FLAGS } from '../../data/coi'
 import { PERSONS_MAP } from '../../data/persons'
+import { detectCOI } from '../../lib/coiDetector'
 
 // ── Risk config ───────────────────────────────────────────────────────────────
 const RISK_CONFIG = {
@@ -30,6 +31,161 @@ function PersonAvatar({ person, size = 'md' }) {
          style={{ background: 'linear-gradient(135deg, #dc2626, #7c3aed)' }}>
       {initials}
     </div>
+  )
+}
+
+// ── Auto-detected Alert Card ──────────────────────────────────────────────────
+const AUTO_SEVERITY_CONFIG = {
+  high:   { label: 'Tinggi',  color: '#ef4444', icon: '🔴', bg: '#fef2f2' },
+  medium: { label: 'Sedang',  color: '#f59e0b', icon: '🟡', bg: '#fffbeb' },
+  low:    { label: 'Rendah',  color: '#10b981', icon: '🟢', bg: '#f0fdf4' },
+}
+
+const AUTO_TYPE_LABELS = {
+  business_conflict: '💼 Konflik Bisnis',
+  family_tie:        '👨‍👩‍👦 Hubungan Keluarga',
+  kpk_history:       '⚖️ Riwayat KPK',
+  party_business:    '🎭 Bisnis Separtai',
+  revolving_door:    '🔄 Revolving Door',
+}
+
+function AutoDetectedAlertCard({ alert }) {
+  const person = PERSONS_MAP[alert.person_id]
+  const sev = AUTO_SEVERITY_CONFIG[alert.severity] || AUTO_SEVERITY_CONFIG.medium
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <div
+      className="p-4 rounded-xl border bg-bg-card flex flex-col gap-2"
+      style={{ borderLeftWidth: 4, borderLeftColor: sev.color }}
+    >
+      <div className="flex items-start gap-3">
+        {person?.photo_url ? (
+          <img
+            src={person.photo_url}
+            alt={person.name}
+            className="w-9 h-9 rounded-full object-cover flex-shrink-0 border border-border"
+            onError={e => { e.currentTarget.style.display = 'none' }}
+          />
+        ) : (
+          <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+               style={{ background: `linear-gradient(135deg, ${sev.color}, #7c3aed)` }}>
+            {person?.photo_placeholder || person?.name?.[0] || '?'}
+          </div>
+        )}
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-center gap-2 mb-0.5">
+            {person ? (
+              <Link
+                to={`/persons/${alert.person_id}`}
+                className="text-sm font-semibold text-text-primary hover:text-accent-red transition-colors"
+              >
+                {alert.person_name}
+              </Link>
+            ) : (
+              <span className="text-sm font-semibold text-text-primary">{alert.person_name}</span>
+            )}
+            <span
+              className="px-2 py-0.5 rounded-full text-[10px] font-bold"
+              style={{ backgroundColor: sev.color + '22', color: sev.color, border: `1px solid ${sev.color}44` }}
+            >
+              {sev.icon} {sev.label}
+            </span>
+            <span className="text-[10px] text-text-secondary">{AUTO_TYPE_LABELS[alert.type] || alert.type}</span>
+          </div>
+          <p className="text-xs text-text-secondary leading-relaxed">{alert.description}</p>
+        </div>
+      </div>
+
+      {alert.evidence?.length > 0 && (
+        <>
+          <button
+            onClick={() => setExpanded(e => !e)}
+            className="text-[11px] text-text-secondary hover:text-text-primary self-start underline"
+          >
+            {expanded ? '▲ Sembunyikan bukti' : `▼ Lihat ${alert.evidence.length} bukti`}
+          </button>
+          {expanded && (
+            <ul className="space-y-1 pl-2 border-l-2 border-border">
+              {alert.evidence.map((e, i) => (
+                <li key={i} className="text-xs text-text-secondary leading-relaxed">• {e}</li>
+              ))}
+            </ul>
+          )}
+        </>
+      )}
+    </div>
+  )
+}
+
+// ── Auto Detected Section ─────────────────────────────────────────────────────
+function AutoDetectedSection() {
+  const autoAlerts = useMemo(() => {
+    try { return detectCOI() } catch { return [] }
+  }, [])
+
+  const [autoFilter, setAutoFilter] = useState('all')
+
+  const filtered = useMemo(() => {
+    if (autoFilter === 'all') return autoAlerts
+    return autoAlerts.filter(a => a.severity === autoFilter)
+  }, [autoAlerts, autoFilter])
+
+  if (autoAlerts.length === 0) return null
+
+  const highCount = autoAlerts.filter(a => a.severity === 'high').length
+  const mediumCount = autoAlerts.filter(a => a.severity === 'medium').length
+
+  return (
+    <Card className="p-5">
+      {/* Section Header */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div className="flex items-center gap-2">
+          <span className="text-lg">⚠️</span>
+          <h3 className="text-sm font-bold text-text-primary">Terdeteksi Otomatis</h3>
+          <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-500/10 text-red-400 border border-red-500/20">
+            {autoAlerts.length} temuan
+          </span>
+        </div>
+        <p className="text-xs text-text-secondary">
+          Hasil pemindaian otomatis — belum diverifikasi manual
+        </p>
+      </div>
+
+      {/* Summary badges */}
+      <div className="flex flex-wrap gap-2 mb-4">
+        {[
+          { key: 'all',    label: `Semua (${autoAlerts.length})`,  color: null },
+          { key: 'high',   label: `🔴 Tinggi (${highCount})`,      color: '#ef4444' },
+          { key: 'medium', label: `🟡 Sedang (${mediumCount})`,     color: '#f59e0b' },
+        ].map(tab => (
+          <button
+            key={tab.key}
+            onClick={() => setAutoFilter(tab.key)}
+            className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
+              autoFilter === tab.key
+                ? 'bg-accent-red text-white'
+                : 'bg-bg-elevated border border-border text-text-secondary hover:text-text-primary'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Alert cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        {filtered.map(alert => (
+          <AutoDetectedAlertCard key={alert.id} alert={alert} />
+        ))}
+      </div>
+
+      {filtered.length === 0 && (
+        <p className="text-center text-text-secondary text-sm py-4">
+          Tidak ada temuan untuk filter ini.
+        </p>
+      )}
+    </Card>
   )
 }
 
@@ -205,6 +361,9 @@ export default function COIScanner() {
           </div>
         </div>
       </div>
+
+      {/* ── Auto-detected section ── */}
+      <AutoDetectedSection />
 
       {/* ── KPI Row ── */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

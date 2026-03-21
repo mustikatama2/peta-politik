@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 // ── Button ───────────────────────────────────────────────────────────────────
 export function Btn({ variant = 'primary', className = '', children, ...props }) {
-  const base = 'inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-bg-card'
+  const base = 'inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-bg-card min-h-[44px] md:min-h-0'
   const variants = {
     primary:   'bg-accent-red hover:opacity-90 text-white focus:ring-accent-red',
     secondary: 'border border-border text-text-secondary hover:text-text-primary hover:bg-bg-hover bg-transparent focus:ring-border',
