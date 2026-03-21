@@ -203,11 +203,18 @@ export function ToastContainer() {
             key={t.id}
             initial={{ opacity: 0, x: 80 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 80 }}
             className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border text-sm font-medium max-w-xs bg-bg-card border-border text-text-primary ${
-              t.type === 'error' ? 'border-l-4 !border-l-red-500' :
-              t.type === 'success' ? 'border-l-4 !border-l-green-500' : ''
+              t.type === 'error'   ? 'border-l-4 !border-l-red-500'    :
+              t.type === 'success' ? 'border-l-4 !border-l-green-500'  :
+              t.type === 'warning' ? 'border-l-4 !border-l-yellow-400' :
+              t.type === 'info'    ? 'border-l-4 !border-l-blue-400'   : ''
             }`}
           >
-            <span>{t.type === 'error' ? '❌' : t.type === 'success' ? '✅' : 'ℹ️'}</span>
+            <span>{
+              t.type === 'error'   ? '❌' :
+              t.type === 'success' ? '✅' :
+              t.type === 'warning' ? '⚠️' :
+              'ℹ️'
+            }</span>
             {t.message}
           </motion.div>
         ))}

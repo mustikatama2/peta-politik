@@ -6,6 +6,8 @@ import {
 import { scoreAllPersons } from '../../lib/scoring'
 import { PERSONS } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
+import { exportToCSV } from '../../lib/exportUtils'
+import ShareButton from '../../components/ShareButton'
 
 // ─── Static trending data ──────────────────────────────────────────────────────
 const RISING = [
@@ -450,12 +452,30 @@ export default function RankingPage() {
             Diperbarui: {lastUpdated} · {allScored.length} politisi terindeks
           </p>
         </div>
-        <button
-          onClick={() => setShowMethodology(v => !v)}
-          className="flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/10 text-white/60 text-xs hover:bg-white/5 transition-colors"
-        >
-          📐 Metodologi {showMethodology ? '▴' : '▾'}
-        </button>
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            onClick={() => exportToCSV(
+              top50.map((r, i) => ({
+                rank: i + 1,
+                nama: r.name,
+                partai: r.party_id || '—',
+                skor: r.total,
+                tier: r.tier,
+              })),
+              'peta-politik-ranking'
+            )}
+            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/10 text-white/60 text-xs hover:bg-white/5 transition-colors"
+          >
+            ⬇️ Export CSV
+          </button>
+          <ShareButton title="PetaPolitik — Power Rankings" />
+          <button
+            onClick={() => setShowMethodology(v => !v)}
+            className="flex-shrink-0 flex items-center gap-1.5 px-3 py-2 rounded-lg border border-white/10 text-white/60 text-xs hover:bg-white/5 transition-colors"
+          >
+            📐 Metodologi {showMethodology ? '▴' : '▾'}
+          </button>
+        </div>
       </div>
 
       {/* Inline methodology (top) */}

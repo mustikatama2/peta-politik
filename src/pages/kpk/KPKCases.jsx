@@ -4,6 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recha
 import { PageHeader, Card, Badge, KPICard, Btn, formatIDR } from '../../components/ui'
 import { KPK_CASES, INSTITUTION_CONFIG, STATUS_CONFIG, STAGE_STEPS, ARREST_TYPE_CONFIG } from '../../data/kpk_cases'
 import { PERSONS_MAP } from '../../data/persons'
+import { exportToCSV } from '../../lib/exportUtils'
 
 // ── Stage Progress Bar ────────────────────────────────────────────────────────
 function StageBar({ stage }) {
@@ -194,7 +195,21 @@ export default function KPKCases() {
         title="⚖️ KPK Cases Tracker"
         subtitle="Pantau kasus korupsi pejabat publik Indonesia — KPK, Kejaksaan Agung, dan MKMK"
         actions={
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
+            <Btn
+              variant="secondary"
+              onClick={() => exportToCSV(
+                filtered.map(c => ({
+                  nama: c.title,
+                  jabatan: c.institution,
+                  kasus: c.charges,
+                  status: c.status,
+                  tahun: c.date_start,
+                  nilai: c.losses_idr || 0,
+                })),
+                'kpk-cases'
+              )}
+            >⬇️ Export CSV</Btn>
             <Btn
               variant={viewMode === 'grid' ? 'primary' : 'secondary'}
               onClick={() => setViewMode('grid')}

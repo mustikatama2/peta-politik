@@ -74,6 +74,13 @@ export default function GlobalSearch() {
   const inputRef = useRef(null)
   const navigate = useNavigate()
 
+  const goToFullSearch = () => {
+    if (!query.trim()) return
+    navigate(`/pencarian?q=${encodeURIComponent(query.trim())}`)
+    setOpen(false)
+    setQuery('')
+  }
+
   // ⌘K / Ctrl+K opens
   useEffect(() => {
     const handler = (e) => {
@@ -125,8 +132,12 @@ export default function GlobalSearch() {
       e.preventDefault()
       setSelected(s => Math.max(s - 1, 0))
     }
-    if (e.key === 'Enter' && filteredResults[selected]) {
-      handleSelect(filteredResults[selected])
+    if (e.key === 'Enter') {
+      if (filteredResults[selected]) {
+        handleSelect(filteredResults[selected])
+      } else if (query.trim()) {
+        goToFullSearch()
+      }
     }
   }
 
@@ -153,7 +164,8 @@ export default function GlobalSearch() {
 
       {/* Modal */}
       <div
-        className="relative w-full max-w-xl bg-bg-card border border-border rounded-2xl shadow-2xl overflow-hidden"
+        data-global-search-modal="1"
+      className="relative w-full max-w-xl bg-bg-card border border-border rounded-2xl shadow-2xl overflow-hidden"
         onClick={e => e.stopPropagation()}
       >
         {/* Input */}
@@ -231,7 +243,17 @@ export default function GlobalSearch() {
         {/* Footer */}
         <div className="flex items-center justify-between px-4 py-2 border-t border-border bg-bg-elevated/50 text-xs text-text-muted">
           <span>↑↓ navigasi · Enter pilih · Esc tutup</span>
-          <span>{filteredResults.length} hasil</span>
+          <div className="flex items-center gap-3">
+            <span>{filteredResults.length} hasil</span>
+            {query.trim() && (
+              <button
+                onClick={goToFullSearch}
+                className="text-accent-red hover:underline font-medium flex items-center gap-1"
+              >
+                Cari semua hasil →
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

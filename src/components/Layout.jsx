@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { NavLink, useNavigate, useLocation } from 'react-router-dom'
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { useTheme } from '../contexts/ThemeContext'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -198,6 +198,15 @@ export default function Layout({ children }) {
 
             {/* Global Search */}
             <GlobalSearch />
+
+            {/* Pencarian link — full search results page */}
+            <Link
+              to="/pencarian"
+              title="Halaman Pencarian"
+              className="hidden md:flex w-9 h-9 rounded-lg border border-border bg-bg-elevated hover:bg-bg-hover hover:border-accent-red items-center justify-center text-base transition-all"
+            >
+              📋
+            </Link>
 
             {/* Theme toggle */}
             <button

@@ -7,6 +7,7 @@ import { PERSONS } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
 import WealthBar from '../../components/WealthBar'
 import { PageHeader, Card, KPICard, Select, formatIDR } from '../../components/ui'
+import { exportToCSV } from '../../lib/exportUtils'
 
 const SALARY_MAP = {
   nasional: { label: 'Pejabat Nasional', salary: 1_500_000_000 },
@@ -99,6 +100,28 @@ export default function LHKPNTracker() {
       <PageHeader
         title="💰 Pelacak LHKPN"
         subtitle="Data Kekayaan Penyelenggara Negara"
+        actions={
+          <button
+            onClick={() => exportToCSV(
+              filtered.map(p => {
+                const currentPos = p.positions?.find(pos => pos.is_current)
+                const party = p.party_id ? PARTY_MAP[p.party_id] : null
+                return {
+                  nama: p.name,
+                  jabatan: currentPos?.title || '—',
+                  partai: party?.abbr || '—',
+                  kekayaan: p.lhkpn_latest,
+                  tahun_lhkpn: p.lhkpn_year || '—',
+                  risiko: p.analysis?.corruption_risk || '—',
+                }
+              }),
+              'lhkpn-tracker'
+            )}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-text-secondary text-xs hover:bg-bg-elevated transition-colors"
+          >
+            ⬇️ Export CSV
+          </button>
+        }
       />
 
       {/* Disclaimer */}

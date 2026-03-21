@@ -16,6 +16,8 @@ import NewsCard from '../../components/NewsCard'
 import PersonCard from '../../components/PersonCard'
 import CareerTimeline from '../../components/CareerTimeline'
 import { Avatar, Badge, Tabs, Card, formatIDR, Tag, RiskDot, Btn, Breadcrumb } from '../../components/ui'
+import { printElement, exportToJSON } from '../../lib/exportUtils'
+import ShareButton from '../../components/ShareButton'
 
 function getRelatedPersons(person, allPersons, connections) {
   const scores = {}
@@ -274,7 +276,10 @@ export default function PersonDetail() {
   }
   const riskKey = person.analysis?.corruption_risk || 'rendah'
 
-  const handlePrint = () => window.print()
+  const handlePrint = () => {
+    printElement('profile-print-area', person.name + ' — PetaPolitik')
+    setShowExport(false)
+  }
 
   const handleExportJSON = () => {
     const data = {
@@ -285,13 +290,7 @@ export default function PersonDetail() {
       exportedAt: new Date().toISOString(),
       source: 'PetaPolitik v1.0',
     }
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url
-    a.download = `${person.id}-petapolitik.json`
-    a.click()
-    URL.revokeObjectURL(url)
+    exportToJSON(data, `${person.id}-petapolitik`)
     setShowExport(false)
   }
 
@@ -308,6 +307,9 @@ export default function PersonDetail() {
         { label: 'Tokoh', to: '/persons' },
         { label: person.name },
       ]} />
+
+      {/* ── Print-friendly wrapper ─────────────────────────────────────── */}
+      <div id="profile-print-area">
 
       {/* Hero section */}
       <div
@@ -349,6 +351,7 @@ export default function PersonDetail() {
               <Btn onClick={() => navigate(`/compare/${person.id}`)} variant="secondary" size="sm">
                 ⚖️ Bandingkan
               </Btn>
+              <ShareButton title={person.name} />
               <div className="relative">
                 <Btn onClick={() => setShowExport(!showExport)} variant="secondary" size="sm">
                   📤 Export ▾
@@ -880,6 +883,8 @@ export default function PersonDetail() {
           </div>
         )}
       </div>
+
+      </div>{/* end profile-print-area */}
 
       {/* Tokoh Terkait */}
       {relatedPersons.length > 0 && (
