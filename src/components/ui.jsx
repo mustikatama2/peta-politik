@@ -319,3 +319,18 @@ export function formatIDR(amount) {
   if (amount >= 1_000_000) return `Rp ${(amount / 1_000_000).toFixed(0)} Jt`
   return `Rp ${amount.toLocaleString('id-ID')}`
 }
+
+// ── SkeletonCard ──────────────────────────────────────────────────────────────
+export function SkeletonCard({ lines = 3 }) {
+  return (
+    <div className="bg-bg-card border border-border rounded-lg p-4 animate-pulse">
+      <div className="h-4 bg-bg-elevated rounded w-3/4 mb-3" />
+      {Array.from({ length: lines }).map((_, i) => (
+        <div
+          key={i}
+          className={`h-3 bg-bg-elevated rounded mb-2 ${i === lines - 1 ? 'w-1/2' : 'w-full'}`}
+        />
+      ))}
+    </div>
+  )
+}

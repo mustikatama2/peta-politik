@@ -46,6 +46,7 @@ const BUMNPage         = lazy(() => import('./pages/bumn/BUMNPage'))
 const ArsipPage        = lazy(() => import('./pages/arsip/ArsipPage'))
 const TentangPage      = lazy(() => import('./pages/tentang/TentangPage'))
 const GlosariumPage    = lazy(() => import('./pages/glosarium/GlosariumPage'))
+const ScorecardPage    = lazy(() => import('./pages/scorecard/ScorecardPage'))
 
 // Loading fallback — skeleton style
 function PageLoader() {
@@ -100,6 +101,7 @@ export default function App() {
         <Route path="/compare/:id1" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/compare/:id1/:id2" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/risk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RiskIndex /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/scorecard" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScorecardPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/scenarios" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScenarioPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/bisnis" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BusinessPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/bumn" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BUMNPage /></Suspense></ErrorBoundary></ProtectedRoute>} />

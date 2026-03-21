@@ -19,6 +19,7 @@ import NewsCard from '../../components/NewsCard'
 import { KPICard, Card } from '../../components/ui'
 import WatchlistAlerts from '../../components/WatchlistAlerts'
 import QuickSearch from '../../components/QuickSearch'
+import MetaTags from '../../components/MetaTags'
 
 // Safe fallback for PROVINCES (data agent may not have committed yet)
 const PROVINCES = RegionsData.PROVINCES || []
@@ -300,6 +301,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
+      <MetaTags title="Dashboard" description="Ringkasan intelijen politik Indonesia — tokoh, partai, koalisi, dan berita terkini" />
       {/* ── Live News Ticker ── */}
       <NewsTicker />
 

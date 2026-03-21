@@ -3,7 +3,8 @@ import { useSearchParams, useNavigate } from 'react-router-dom'
 import { PERSONS } from '../../data/persons'
 import { PARTIES } from '../../data/parties'
 import PersonCard from '../../components/PersonCard'
-import { SearchBar, Select, PageHeader, toast } from '../../components/ui'
+import { SearchBar, Select, PageHeader, toast, SkeletonCard } from '../../components/ui'
+import MetaTags from '../../components/MetaTags'
 
 // ── Watchlist helpers ──────────────────────────────────────────────────────────
 const getWatchlist = () => JSON.parse(localStorage.getItem('pp_watchlist') || '[]')
@@ -50,6 +51,12 @@ export default function PersonList() {
   const [showWatchlist, setShowWatchlist] = useState(false)
   const [livePersonIds, setLivePersonIds] = useState(new Set())
   const [compareP1, setCompareP1] = useState(() => localStorage.getItem('compare_p1') || null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const t = setTimeout(() => setIsLoading(false), 300)
+    return () => clearTimeout(t)
+  }, [])
 
   useEffect(() => {
     fetch('/api/news?limit=100')
@@ -221,6 +228,7 @@ export default function PersonList() {
 
   return (
     <div className="space-y-5">
+      <MetaTags title="Tokoh Politik" description="Direktori tokoh-tokoh politik Indonesia — profil, jabatan, kekayaan, dan rekam jejak" />
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <PageHeader
           title="👥 Tokoh Politik"
@@ -332,7 +340,11 @@ export default function PersonList() {
       </p>
 
       {/* Grid */}
-      {filtered.length === 0 ? (
+      {isLoading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+          {Array.from({ length: 8 }).map((_, i) => <SkeletonCard key={i} />)}
+        </div>
+      ) : filtered.length === 0 ? (
         <div className="text-center py-20 text-text-secondary">
           <div className="text-5xl mb-4">{showWatchlist ? '⭐' : '🔍'}</div>
           <p className="font-medium">

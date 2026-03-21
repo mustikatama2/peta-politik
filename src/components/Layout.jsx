@@ -29,6 +29,7 @@ const NAV = [
   { to:'/survei',   icon:'📉', label:'Survei & Polling' },
   { to:'/analitik', icon:'📈', label:'Analitik' },
   { to:'/risk',     icon:'🚨', label:'Indeks Risiko' },
+  { to:'/scorecard',icon:'🏆', label:'Rapor Provinsi' },
   { to:'/scenarios',icon:'🔮', label:'Skenario 2029' },
   { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
   { to:'/timeline', icon:'📅', label:'Linimasa' },
