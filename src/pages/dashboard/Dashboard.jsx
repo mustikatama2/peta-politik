@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -47,9 +48,9 @@ const recentTimelineEvents = [...TIMELINE_EVENTS]
   .sort((a, b) => new Date(`${b.year}-${b.month || 1}-${b.day || 1}`) - new Date(`${a.year}-${a.month || 1}-${a.day || 1}`))
   .slice(0, 5)
 
-const recentNews = [...NEWS]
+const staticRecentNews = [...NEWS]
   .sort((a, b) => new Date(b.date) - new Date(a.date))
-  .slice(0, 5)
+  .slice(0, 6)
 
 const kimSeats = KIM_PARTIES.reduce((sum, id) => {
   const p = PARTY_MAP[id]
@@ -78,6 +79,207 @@ function buildPetaKekuatan() {
     }))
 }
 
+// ── Bloomberg-style Live News Ticker ──────────────────────────────────────
+function NewsTicker() {
+  const [headlines, setHeadlines] = useState([])
+
+  useEffect(() => {
+    fetch('/api/news?limit=20')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data?.articles?.length) setHeadlines(data.articles)
+      })
+      .catch(() => {})
+  }, [])
+
+  if (!headlines.length) return null
+
+  const text = headlines.map(a => `${a.source.toUpperCase()} · ${a.title}`).join('    ◆    ')
+
+  return (
+    <div className="bg-bg-elevated border-b border-border overflow-hidden py-2 mb-4">
+      <div className="flex items-center gap-3">
+        <span className="flex-shrink-0 px-3 text-xs font-bold text-accent-red border-r border-border flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent-red animate-pulse" />LIVE
+        </span>
+        <div className="overflow-hidden flex-1">
+          <div
+            className="whitespace-nowrap text-xs text-text-secondary"
+            style={{ animation: 'ticker 60s linear infinite' }}
+          >
+            {text}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Bloomberg Live Stats Bar ───────────────────────────────────────────────
+function LiveStatsBar() {
+  const kimPct = (kimSeats / 580 * 100).toFixed(1)
+
+  const stats = [
+    { label: '🇮🇩 CPI', value: '34/100', sub: 'Korupsi' },
+    { label: 'DPR KIM+', value: `${kimPct}%`, sub: 'kursi' },
+    { label: 'KPK Aktif', value: `${KPK_CASES_COUNT}`, sub: 'kasus' },
+    { label: 'Tokoh Tersangka', value: `${atRiskPersons.length}`, sub: 'orang' },
+    { label: 'Tokoh Dipetakan', value: `${PERSONS.length}`, sub: 'tokoh' },
+    { label: 'Provinsi', value: `${PROVINCES.length || 38}`, sub: 'wilayah' },
+  ]
+
+  return (
+    <div className="flex flex-wrap items-center gap-0 rounded-xl border border-border bg-bg-card overflow-hidden mb-6">
+      {stats.map((s, i) => (
+        <div
+          key={s.label}
+          className={`flex flex-col px-4 py-2.5 flex-1 min-w-[110px] ${i < stats.length - 1 ? 'border-r border-border' : ''}`}
+        >
+          <span className="text-[10px] text-text-secondary uppercase tracking-wider">{s.label}</span>
+          <span className="text-base font-bold text-text-primary leading-tight">{s.value}</span>
+          <span className="text-[10px] text-text-muted">{s.sub}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ── Trending Politicians ───────────────────────────────────────────────────
+function TrendingPoliticians() {
+  const [trending, setTrending] = useState([])
+
+  useEffect(() => {
+    fetch('/api/news?limit=100')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (!data?.articles) return
+        const counts = {}
+        data.articles.forEach(a => {
+          ;(a.person_ids || []).forEach(id => {
+            counts[id] = (counts[id] || 0) + 1
+          })
+        })
+        const top = Object.entries(counts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 8)
+          .map(([id, count]) => ({ person: PERSONS.find(p => p.id === id), count, id }))
+          .filter(x => x.person)
+        setTrending(top)
+      })
+      .catch(() => {})
+  }, [])
+
+  if (!trending.length) return null
+
+  return (
+    <div className="mb-6">
+      <h2 className="text-base font-bold text-text-primary mb-3 flex items-center gap-2">
+        🔥 Trending Hari Ini
+        <span className="text-xs font-normal text-text-secondary">berdasarkan sebutan di media</span>
+      </h2>
+      <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
+        {trending.map(({ person, count, id }) => {
+          const party = PARTY_MAP[person.party_id]
+          return (
+            <Link
+              key={id}
+              to={`/persons/${id}`}
+              className="flex flex-col items-center gap-1 p-2 rounded-lg border border-border hover:border-accent-red/50 bg-bg-card transition-all group text-center"
+            >
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white overflow-hidden"
+                style={{ background: party?.color || '#374151' }}
+              >
+                {person.photo_url
+                  ? <img src={person.photo_url} alt={person.name} className="w-10 h-10 rounded-full object-cover" onError={e => { e.target.style.display = 'none' }} />
+                  : person.photo_placeholder
+                }
+              </div>
+              <span className="text-xs text-text-primary group-hover:text-accent-red line-clamp-1">{person.name.split(' ')[0]}</span>
+              <span className="text-xs font-bold text-accent-red">{count}×</span>
+            </Link>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+// ── Coalition Power Meter ─────────────────────────────────────────────────
+function CoalitionMeter() {
+  const KIM_IDS = ['ger', 'gol', 'nas', 'pan', 'dem', 'pks', 'pbb', 'pkb']
+  const cKimSeats = KIM_IDS.reduce((s, id) => s + (PARTY_MAP[id]?.seats_2024 || 0), 0)
+  const cPdipSeats = PARTY_MAP['pdip']?.seats_2024 || 0
+  const total = 580
+  const kimPct = (cKimSeats / total * 100).toFixed(1)
+  const pdipPct = (cPdipSeats / total * 100).toFixed(1)
+
+  return (
+    <div className="p-4 rounded-xl border border-border bg-bg-card mb-6">
+      <h3 className="text-sm font-bold text-text-primary mb-3">⚖️ Peta Kekuatan DPR</h3>
+      <div className="flex rounded-full overflow-hidden h-6 mb-2">
+        <div
+          className="bg-red-600 flex items-center justify-center text-xs font-bold text-white transition-all"
+          style={{ width: `${kimPct}%` }}
+        >
+          KIM+ {kimPct}%
+        </div>
+        <div
+          className="bg-red-900 flex items-center justify-center text-xs font-bold text-white transition-all"
+          style={{ width: `${pdipPct}%` }}
+        >
+          PDIP {pdipPct}%
+        </div>
+        <div className="bg-bg-elevated flex-1 flex items-center justify-center text-xs text-text-secondary">
+          Lainnya
+        </div>
+      </div>
+      <div className="flex justify-between text-xs text-text-secondary">
+        <span>KIM Plus: {cKimSeats} kursi</span>
+        <span>Total DPR: {total} kursi</span>
+        <span>PDIP: {cPdipSeats} kursi</span>
+      </div>
+    </div>
+  )
+}
+
+// ── Live Recent News ──────────────────────────────────────────────────────
+function LiveRecentNews() {
+  const [articles, setArticles] = useState(staticRecentNews)
+  const [live, setLive] = useState(false)
+
+  useEffect(() => {
+    fetch('/api/news?limit=6')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (data?.articles?.length) {
+          setArticles(data.articles)
+          setLive(true)
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  return (
+    <Card className="p-5">
+      <h2 className="text-sm font-semibold text-text-primary mb-4 flex items-center gap-2">
+        📰 Berita Terkini
+        {live && (
+          <span className="flex items-center gap-1 text-[10px] font-medium text-accent-red">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-red animate-pulse" />
+            LIVE
+          </span>
+        )}
+      </h2>
+      <div className="space-y-3">
+        {articles.map((article, i) => (
+          <NewsCard key={article.id || i} article={article} />
+        ))}
+      </div>
+    </Card>
+  )
+}
+
 export default function Dashboard() {
   const { user } = useAuth()
   const today = new Date().toLocaleDateString('id-ID', {
@@ -94,6 +296,12 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
+      {/* ── Live News Ticker ── */}
+      <NewsTicker />
+
+      {/* ── Bloomberg Stats Bar ── */}
+      <LiveStatsBar />
+
       {/* Welcome Banner */}
       <div className="bg-gradient-to-r from-bg-card to-bg-elevated border border-border rounded-xl p-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
@@ -166,6 +374,9 @@ export default function Dashboard() {
           <p className="text-xs text-text-secondary mt-1">Tersangka/Terpidana</p>
         </div>
       </div>
+
+      {/* ── Trending Politicians ── */}
+      <TrendingPoliticians />
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -313,7 +524,10 @@ export default function Dashboard() {
         </Card>
       )}
 
-      {/* At-Risk + Recent News */}
+      {/* ── Coalition Power Meter (Bloomberg style) ── */}
+      <CoalitionMeter />
+
+      {/* At-Risk + Live Recent News */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card className="p-5">
           <h2 className="text-sm font-semibold text-text-primary mb-4">⚠️ Perlu Perhatian</h2>
@@ -330,17 +544,11 @@ export default function Dashboard() {
           )}
         </Card>
 
-        <Card className="p-5">
-          <h2 className="text-sm font-semibold text-text-primary mb-4">📰 Berita Terkini</h2>
-          <div className="space-y-3">
-            {recentNews.map(article => (
-              <NewsCard key={article.id} article={article} />
-            ))}
-          </div>
-        </Card>
+        {/* ── Live Recent News ── */}
+        <LiveRecentNews />
       </div>
 
-      {/* Koalisi Bar */}
+      {/* Legacy Koalisi Bar (kept for detail) */}
       <Card className="p-5">
         <h2 className="text-sm font-semibold text-text-primary mb-4">🏛️ Koalisi Indonesia Maju Plus</h2>
         <div className="flex flex-wrap gap-2 mb-4">

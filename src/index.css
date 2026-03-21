@@ -135,6 +135,11 @@
   20%,40%,60%,80% { transform: translateX(5px); }
 }
 
+@keyframes ticker {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
 /* ── Mobile bottom nav ───────────────────────────────────────────────────── */
 .mobile-nav {
   display: none;
