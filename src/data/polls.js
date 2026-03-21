@@ -44,11 +44,15 @@ export const APPROVAL_POLLS = [
 
 // 2029 Pilpres early electability (hypothetical, based on real survey data)
 export const PILPRES_2029_POLLS = [
+  { date: '2024-09', pollster: 'saifulmujani', candidates: { prabowo: 55, anies: 16, dedi_mulyadi: 6, khofifah: 6, ridwan_kamil: 7, gibran: 4 } },
+  { date: '2024-10', pollster: 'indikator',    candidates: { prabowo: 54, anies: 17, dedi_mulyadi: 7, khofifah: 6, ridwan_kamil: 6, gibran: 4 } },
   { date: '2024-11', pollster: 'indikator', candidates: { prabowo: 52, anies: 18, dedi_mulyadi: 8,  khofifah: 7,  ganjar: 5,         ridwan_kamil: 5 } },
   { date: '2024-12', pollster: 'smrc',      candidates: { prabowo: 48, anies: 20, dedi_mulyadi: 10, khofifah: 8,  ridwan_kamil: 6,   gibran: 4 } },
   { date: '2025-01', pollster: 'lsi',       candidates: { prabowo: 50, anies: 19, dedi_mulyadi: 11, khofifah: 7,  puan: 4,           ridwan_kamil: 5 } },
   { date: '2025-02', pollster: 'charta',    candidates: { prabowo: 47, anies: 21, dedi_mulyadi: 13, khofifah: 8,  gibran: 5,         ahy: 3 } },
   { date: '2025-03', pollster: 'median',    candidates: { prabowo: 45, anies: 22, dedi_mulyadi: 14, khofifah: 9,  ridwan_kamil: 5,   ahy: 3 } },
+  { date: '2025-06', pollster: 'proyeksi',  candidates: { prabowo: 42, anies: 24, dedi_mulyadi: 15, khofifah: 9,  ridwan_kamil: 5,   ahy: 3 }, is_projection: true },
+  { date: '2025-12', pollster: 'proyeksi',  candidates: { prabowo: 40, anies: 25, dedi_mulyadi: 17, khofifah: 10, ridwan_kamil: 4,   ahy: 3 }, is_projection: true },
 ];
 
 // Party electability trends 2022-2025

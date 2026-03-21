@@ -125,6 +125,161 @@ export const BILLS = [
       "pdip": "menolak", "pks": "abstain"
     }
   },
+  {
+    id: "uu_ite_2021",
+    title: "Revisi UU ITE 2021",
+    short: "UU ITE",
+    category: "hukum",
+    date: "2021-11-25",
+    description: "Revisi UU Informasi dan Transaksi Elektronik yang dikritik karena pasal karet (pasal 27, 28) digunakan untuk membungkam kritik. Revisi 2021 tidak mencabut pasal karet.",
+    result: "disahkan",
+    votes_for: 305, votes_against: 0, votes_abstain: 0,
+    controversies: ["Pasal 27 ayat 3 (penghinaan)", "Pasal 28 ayat 2 (SARA)", "Dipakai PolSLAPP terhadap aktivis"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pks": "menolak", "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju"
+    }
+  },
+  {
+    id: "uu_kesehatan_2023",
+    title: "UU Kesehatan 2023",
+    short: "UU Kesehatan",
+    category: "sosial",
+    date: "2023-07-11",
+    description: "Omnibus law kesehatan yang mengubah sistem perizinan dokter dan tenaga kesehatan. Ditolak IDI, PDGI, IBI, dan organisasi tenaga kesehatan lainnya.",
+    result: "disahkan",
+    votes_for: 274, votes_against: 0, votes_abstain: 0,
+    controversies: ["IDI menolak", "STR seumur hidup", "Dokter asing diizinkan praktik", "Legalisasi aborsi terbatas"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "menolak"
+    }
+  },
+  {
+    id: "uu_asn_2023",
+    title: "UU ASN 2023",
+    short: "UU ASN",
+    category: "pemerintahan",
+    date: "2023-10-03",
+    description: "Reformasi aparatur sipil negara: menghapus tenaga honorer, mengubah skema PPPK, dan memperkuat mobilitas ASN. 2,3 juta honorer terancam status kepegawaian.",
+    result: "disahkan",
+    votes_for: 290, votes_against: 0, votes_abstain: 0,
+    controversies: ["2.3 juta honorer terancam", "Guru honorer diangkat PPPK", "Jabatan struktural dipangkas"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "pks": "setuju", "ppp": "setuju"
+    }
+  },
+  {
+    id: "uu_minerba_2020",
+    title: "Revisi UU Minerba 2020",
+    short: "UU Minerba",
+    category: "ekonomi",
+    date: "2020-05-12",
+    description: "Revisi UU Pertambangan Mineral dan Batu Bara yang memperpanjang izin tambang perusahaan besar dan mengurangi royalti. Dikritik melemahkan reklamasi pascatambang.",
+    result: "disahkan",
+    votes_for: 288, votes_against: 0, votes_abstain: 0,
+    controversies: ["Perpanjangan izin PKP2B", "Pengurangan royalti batu bara", "Melemahkan reklamasi", "Penambangan di hutan lindung"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "menolak"
+    }
+  },
+  {
+    id: "uu_mahkamah_konstitusi_2020",
+    title: "Revisi UU MK 2020",
+    short: "Revisi UU MK",
+    category: "hukum",
+    date: "2020-08-18",
+    description: "Revisi yang memperpanjang masa jabatan hakim MK dari 5 tahun menjadi 15 tahun. Dinilai menguntungkan hakim petahana dan mengurangi akuntabilitas.",
+    result: "disahkan",
+    votes_for: 298, votes_against: 0, votes_abstain: 0,
+    controversies: ["Masa jabatan 15 tahun", "Hakim petahana diuntungkan", "Disetujui 1 hari sebelum uji MK"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "abstain"
+    }
+  },
+  {
+    id: "uu_ibu_kota_2022",
+    title: "UU Ibu Kota Nusantara 2022",
+    short: "UU IKN",
+    category: "infrastruktur",
+    date: "2022-01-18",
+    description: "Pemindahan ibu kota dari Jakarta ke Nusantara, Kalimantan Timur. Pengesahan kilat dalam 43 hari dari pembahasan ke pengesahan — rekor DPR.",
+    result: "disahkan",
+    votes_for: 305, votes_against: 0, votes_abstain: 0,
+    controversies: ["Pembahasan hanya 43 hari", "Masyarakat adat Kalimantan terancam", "Investasi asing belum masuk", "PKS walk-out"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "menolak"
+    }
+  },
+  {
+    id: "uu_perampasan_aset",
+    title: "RUU Perampasan Aset (Mangkrak 2023)",
+    short: "RUU Perampasan Aset",
+    category: "antikorupsi",
+    date: "2023-06-01",
+    description: "RUU yang memungkinkan KPK menyita aset koruptor tanpa vonis pidana (non-conviction based). Didukung aktivis antikorupsi tapi macet di DPR selama 2 tahun.",
+    result: "ditarik",
+    votes_for: 0, votes_against: 0, votes_abstain: 0,
+    controversies: ["Macet di DPR 2+ tahun", "Dianggap ancaman bagi politisi DPR", "ICW desak pengesahan", "Dijanjikan tapi tidak disahkan"],
+    party_positions: {
+      "pks": "setuju", "pdip": "abstain", "ger": "menolak", "gol": "menolak", "nas": "abstain",
+      "pkb": "abstain", "pan": "menolak", "dem": "abstain", "ppp": "abstain"
+    }
+  },
+  {
+    id: "uu_dana_desa_2024",
+    title: "Revisi UU Desa 2024",
+    short: "UU Desa",
+    category: "pemerintahan",
+    date: "2024-07-25",
+    description: "Revisi UU Desa yang memperpanjang masa jabatan kepala desa dari 6 menjadi 8 tahun, dan memperbolehkan 3 periode. Diloloskan setelah demo kepala desa besar.",
+    result: "disahkan",
+    votes_for: 312, votes_against: 0, votes_abstain: 0,
+    controversies: ["Masa jabatan jadi 8 tahun", "Bisa 3 periode = 24 tahun", "Demo kepades di Jakarta", "Dana desa Rp 71T rawan korupsi"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "setuju"
+    }
+  },
+  {
+    id: "uu_tapera_2024",
+    title: "PP Tapera 2024 (Tabungan Perumahan Rakyat)",
+    short: "PP Tapera",
+    category: "sosial",
+    date: "2024-05-27",
+    description: "Peraturan Pemerintah yang mewajibkan potongan gaji 3% untuk Tapera (0.5% pengusaha, 2.5% pekerja). Ditolak pengusaha dan serikat buruh; ditunda implementasinya.",
+    result: "ditarik",
+    votes_for: 0, votes_against: 0, votes_abstain: 0,
+    controversies: ["Potongan gaji 2.5%", "Tidak ada jaminan dapat rumah", "Pengusaha keberatan", "Buruh demo besar-besaran"],
+    party_positions: {
+      "ger": "setuju", "gol": "setuju", "nas": "setuju", "pkb": "setuju",
+      "pdip": "abstain", "pks": "menolak", "dem": "abstain", "pan": "setuju"
+    }
+  },
+  {
+    id: "uu_darurat_2025",
+    title: "Revisi UU TNI & Polri 2024 (Paket)",
+    short: "Paket TNI-Polri",
+    category: "militer",
+    date: "2024-09-19",
+    description: "Pengesahan bersama revisi UU TNI dan UU Polri dalam satu hari — memperluas kewenangan sipil TNI dan intelijen Polri. Demo 'Indonesia Gelap' di 40+ kota.",
+    result: "disahkan",
+    votes_for: 310, votes_against: 180, votes_abstain: 22,
+    controversies: ["Demo Indonesia Gelap", "TNI masuk jabatan sipil", "Polri bisa menyadap", "Mahasiswa ditangkap"],
+    party_positions: {
+      "ger": "setuju", "gol": "setuju", "nas": "setuju", "pkb": "setuju", "pan": "setuju", "dem": "setuju",
+      "pdip": "menolak", "pks": "menolak", "ppp": "setuju"
+    }
+  },
 ];
 
 // Pre-compute: each party's setuju/menolak/abstain counts across all bills
@@ -167,4 +322,7 @@ export const CATEGORIES = [
   { value: "pemilu", label: "Pemilu" },
   { value: "anggaran", label: "Anggaran" },
   { value: "antikorupsi", label: "Antikorupsi" },
+  { value: "sosial", label: "Sosial" },
+  { value: "pemerintahan", label: "Pemerintahan" },
+  { value: "infrastruktur", label: "Infrastruktur" },
 ];
