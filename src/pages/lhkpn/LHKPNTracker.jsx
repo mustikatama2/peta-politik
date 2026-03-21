@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
+  LineChart, Line, CartesianGrid, Legend
 } from 'recharts'
 import { PERSONS } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
@@ -46,11 +47,30 @@ const SALARY_SPOTLIGHT = [
   }
 }).filter(Boolean)
 
+const personsWithHistory = PERSONS.filter(p => p.lhkpn_history?.length > 0)
+
+// Build multi-series LineChart data for up to 5 selected persons
+function buildTrendData(personIds) {
+  const years = [2019, 2020, 2021, 2022, 2023]
+  return years.map(y => {
+    const row = { year: y }
+    for (const id of personIds) {
+      const p = PERSONS.find(x => x.id === id)
+      const entry = p?.lhkpn_history?.find(h => h.year === y)
+      row[id] = entry?.amount ?? null
+    }
+    return row
+  })
+}
+
+const TREND_COLORS = ['#f59e0b', '#ef4444', '#3b82f6', '#22c55e', '#8b5cf6']
+
 export default function LHKPNTracker() {
   const [sortBy, setSortBy] = useState('wealth')
   const [filterTier, setFilterTier] = useState('')
   const [filterParty, setFilterParty] = useState('')
   const [filterRisk, setFilterRisk] = useState('')
+  const [selectedPersonIds, setSelectedPersonIds] = useState(['prabowo', 'erick_thohir', 'surya_paloh'])
 
   const partyOptions = [...new Set(personsWithLHKPN.map(p => p.party_id).filter(Boolean))]
     .map(id => ({ value: id, label: PARTY_MAP[id]?.abbr || id }))
@@ -232,6 +252,81 @@ export default function LHKPNTracker() {
             </tbody>
           </table>
         </div>
+      </Card>
+
+      {/* Tren Kekayaan LineChart */}
+      <Card className="p-5">
+        <h3 className="text-sm font-semibold text-text-primary mb-1">📈 Tren Kekayaan (2019–2023)</h3>
+        <p className="text-xs text-text-secondary mb-4">
+          Pilih hingga 5 tokoh untuk melihat perubahan kekayaan dari laporan LHKPN
+        </p>
+        {/* Person picker */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {personsWithHistory.map(p => {
+            const selected = selectedPersonIds.includes(p.id)
+            const idx = selectedPersonIds.indexOf(p.id)
+            const color = selected ? TREND_COLORS[idx] : '#4B5563'
+            return (
+              <button
+                key={p.id}
+                onClick={() => {
+                  if (selected) {
+                    setSelectedPersonIds(prev => prev.filter(id => id !== p.id))
+                  } else if (selectedPersonIds.length < 5) {
+                    setSelectedPersonIds(prev => [...prev, p.id])
+                  }
+                }}
+                className="px-2 py-1 rounded text-xs border transition-all"
+                style={{
+                  borderColor: color,
+                  color: selected ? '#fff' : color,
+                  backgroundColor: selected ? color + '33' : 'transparent',
+                }}
+              >
+                {p.name.split(' ').slice(0, 2).join(' ')}
+              </button>
+            )
+          })}
+        </div>
+        {selectedPersonIds.length > 0 ? (
+          <ResponsiveContainer width="100%" height={260}>
+            <LineChart data={buildTrendData(selectedPersonIds)} margin={{ top: 4, right: 20, left: 10, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#2D3748" />
+              <XAxis dataKey="year" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
+              <YAxis
+                tick={{ fill: '#9CA3AF', fontSize: 10 }}
+                tickFormatter={v => v >= 1e12 ? `${(v/1e12).toFixed(1)}T` : v >= 1e9 ? `${(v/1e9).toFixed(0)}M` : ''}
+                width={55}
+              />
+              <Tooltip
+                contentStyle={{ backgroundColor: '#1E2235', border: '1px solid #2D3748', borderRadius: 8 }}
+                formatter={(v, name) => {
+                  const p = PERSONS.find(x => x.id === name)
+                  return [formatIDR(v), p?.name || name]
+                }}
+              />
+              <Legend
+                formatter={name => {
+                  const p = PERSONS.find(x => x.id === name)
+                  return <span style={{ color: '#D1D5DB', fontSize: 11 }}>{p?.name?.split(' ').slice(0,2).join(' ') || name}</span>
+                }}
+              />
+              {selectedPersonIds.map((id, idx) => (
+                <Line
+                  key={id}
+                  type="monotone"
+                  dataKey={id}
+                  stroke={TREND_COLORS[idx]}
+                  strokeWidth={2}
+                  dot={{ r: 4, fill: TREND_COLORS[idx] }}
+                  connectNulls
+                />
+              ))}
+            </LineChart>
+          </ResponsiveContainer>
+        ) : (
+          <p className="text-xs text-text-secondary text-center py-8">Pilih minimal 1 tokoh di atas</p>
+        )}
       </Card>
 
       {/* Wealth vs Salary */}

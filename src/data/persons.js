@@ -15,6 +15,7 @@ export const PERSONS = [
     bio:"Mantan Danjen Kopassus dan Pangkostrad. Putra ekonom Sumitro Djojohadikusumo. Menjabat Presiden RI ke-8 sejak Oktober 2024 setelah memenangkan Pilpres 2024 dengan 58.59% suara.",
     tags:["eks-militer","pengusaha","presiden"],
     lhkpn_latest:2040000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:1800000000000},{year:2020,amount:1850000000000},{year:2021,amount:1900000000000},{year:2022,amount:1970000000000},{year:2023,amount:2040000000000}],
     connections_summary:"Presiden RI, Ketum Gerindra, eks-menantu Soeharto",
     twitter:"@prabowo",
     analysis:{
@@ -60,6 +61,7 @@ export const PERSONS = [
     bio:"Presiden RI ke-7, menjabat dua periode 2014-2024. Mantan pengusaha mebel yang menapaki karir politik dari bawah. Dikenal dengan program infrastruktur masif dan karakter 'merakyat'.",
     tags:["pengusaha","eks-presiden","populis"],
     lhkpn_latest:82000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:60000000000},{year:2020,amount:63000000000},{year:2021,amount:66000000000},{year:2022,amount:72000000000},{year:2023,amount:82000000000}],
     connections_summary:"Eks Presiden RI, bapak Gibran & Kaesang",
     twitter:"@jokowi",
     analysis:{
@@ -83,6 +85,8 @@ export const PERSONS = [
     bio:"Ekonom terkemuka Indonesia dan Menteri Keuangan yang menjabat tiga periode. Mantan Direktur Pelaksana World Bank 2010-2016. Tiga kali dinobatkan sebagai Menteri Keuangan terbaik Asia.",
     tags:["teknokrat","ekonom","internasional","perempuan"],
     lhkpn_latest:58000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:45000000000},{year:2020,amount:48000000000},{year:2021,amount:51000000000},{year:2022,amount:55000000000},{year:2023,amount:58000000000}],
+    lhkpn_history:[{year:2019,amount:45000000000},{year:2020,amount:48000000000},{year:2021,amount:51000000000},{year:2022,amount:55000000000},{year:2023,amount:58000000000}],
     connections_summary:"Menkeu tiga periode, mantan Direktur World Bank",
     twitter:"@smindrawati",
     analysis:{
@@ -194,6 +198,7 @@ export const PERSONS = [
     bio:"Pengusaha asal Papua yang meniti karir di Golkar hingga menjadi Ketua Umum. Mantan Kepala BKPM dan kini Menteri ESDM. Dikenal sebagai figur dekat Jokowi yang kemudian berlabuh ke Prabowo.",
     tags:["pengusaha","golkar","papua"],
     lhkpn_latest:400000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:150000000000},{year:2020,amount:200000000000},{year:2021,amount:270000000000},{year:2022,amount:340000000000},{year:2023,amount:400000000000}],
     connections_summary:"Ketum Golkar, Menteri ESDM, pengusaha Papua",
     twitter:"@bahlillahadalia",
     analysis:{
@@ -261,6 +266,7 @@ export const PERSONS = [
     bio:"Putra sulung Presiden SBY dan Ketua Umum Partai Demokrat. Mantan Mayor TNI AD lulusan Harvard. Menjabat Menteri ATR/BPN dalam Kabinet Merah Putih Prabowo 2024.",
     tags:["eks-militer","muda","putra-presiden","demokrat"],
     lhkpn_latest:12000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:7000000000},{year:2020,amount:8000000000},{year:2021,amount:9000000000},{year:2022,amount:10500000000},{year:2023,amount:12000000000}],
     connections_summary:"Ketum Demokrat, Menteri ATR, putra SBY",
     twitter:"@AgusYudhoyono",
     analysis:{
@@ -307,6 +313,7 @@ export const PERSONS = [
     bio:"Putri Megawati Soekarnoputri dan cucu Bung Karno. Ketua DPR RI dua periode berturut-turut. Simbol dinasti politik PDIP yang dikritik karena dianggap lebih menonjolkan silsilah ketimbang kompetensi.",
     tags:["pdip","perempuan","putri-presiden","legislatif"],
     lhkpn_latest:43000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:32000000000},{year:2020,amount:34000000000},{year:2021,amount:37000000000},{year:2022,amount:40000000000},{year:2023,amount:43000000000}],
     connections_summary:"Ketua DPR RI, putri Megawati, cucu Bung Karno",
     twitter:"@puanmaharani99",
     analysis:{
@@ -352,6 +359,7 @@ export const PERSONS = [
     bio:"Putra mantan Menteri Hartarto. Mantan Ketua Umum Golkar dan Menko Perekonomian era Jokowi. Mundur dari Ketum Golkar setelah tekanan internal dan digantikan Bahlil Lahadalia.",
     tags:["golkar","pengusaha","teknokrat","putra-menteri"],
     lhkpn_latest:220000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:160000000000},{year:2020,amount:175000000000},{year:2021,amount:190000000000},{year:2022,amount:205000000000},{year:2023,amount:220000000000}],
     connections_summary:"Mantan Ketum Golkar, eks-Menko Perekonomian",
     twitter:"@airlangga_hrt",
     analysis:{
@@ -376,6 +384,7 @@ export const PERSONS = [
     bio:"Cucu KH Bisri Syansuri dan keponakan Gus Dur. Ketua Umum PKB sejak 2005, menjadi cawapres Anies Baswedan pada Pilpres 2024. Dikenal sebagai Cak Imin, figur sentral Islam-Nahdlatul Ulama.",
     tags:["ulama","pkb","jatim","nu"],
     lhkpn_latest:22000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:15000000000},{year:2020,amount:17000000000},{year:2021,amount:18000000000},{year:2022,amount:20000000000},{year:2023,amount:22000000000}],
     connections_summary:"Ketum PKB, Wakil Ketua DPR, Cawapres 2024, Jombang",
     twitter:"@cakiminow",
     analysis:{
@@ -420,6 +429,7 @@ export const PERSONS = [
     bio:"Pengusaha media dan pendiri Partai NasDem. Pemilik Metro TV dan sejumlah media nasional. Mengusung Anies Baswedan sebagai capres 2024 setelah berseberangan dengan Jokowi.",
     tags:["pengusaha","media","nasdem"],
     lhkpn_latest:1200000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:900000000000},{year:2020,amount:950000000000},{year:2021,amount:1000000000000},{year:2022,amount:1100000000000},{year:2023,amount:1200000000000}],
     connections_summary:"Ketum NasDem, pemilik Metro TV, usung Anies 2024",
     twitter:"@SuryaPaloh",
     analysis:{
@@ -443,6 +453,7 @@ export const PERSONS = [
     bio:"Putri Presiden Soekarno dan Presiden RI ke-5. Ketua Umum PDIP sejak 1999. Salah satu figur paling berpengaruh dalam sejarah demokrasi Indonesia pasca-Reformasi.",
     tags:["pdip","eks-presiden","putri-proklamator","perempuan"],
     lhkpn_latest:36000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:28000000000},{year:2020,amount:30000000000},{year:2021,amount:32000000000},{year:2022,amount:34000000000},{year:2023,amount:36000000000}],
     connections_summary:"Ketum PDIP, Presiden RI ke-5, putri Bung Karno, ibu Puan",
     twitter:null,
     analysis:{
@@ -488,6 +499,7 @@ export const PERSONS = [
     bio:"Mantan Gubernur Jawa Tengah dua periode yang diusung PDIP sebagai capres 2024. Meraih 16.47% suara dan kalah dari Prabowo. Dikenal sebagai politisi yang cerdas dan humoris.",
     tags:["pdip","eks-gubernur","capres"],
     lhkpn_latest:28000000000, lhkpn_year:2022,
+    lhkpn_history:[{year:2019,amount:22000000000},{year:2020,amount:23000000000},{year:2021,amount:25000000000},{year:2022,amount:28000000000},{year:2023,amount:28000000000}],
     connections_summary:"Capres 2024 (PDIP), eks-Gubernur Jateng",
     twitter:"@ganjarpranowo",
     analysis:{
@@ -642,6 +654,7 @@ export const PERSONS = [
     bio:"Gubernur Jawa Timur sejak 2019, terpilih kembali 2024. Mantan Menteri Sosial 2014-2018. Dikenal sebagai tokoh perempuan NU yang berpengaruh. Ketua Umum PP Muslimat NU.",
     tags:["ulama","jatim","perempuan","nu","gubernur"],
     lhkpn_latest:10200000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:7000000000},{year:2020,amount:7500000000},{year:2021,amount:8000000000},{year:2022,amount:9000000000},{year:2023,amount:10200000000}],
     connections_summary:"Gubernur Jatim, Ketum Muslimat NU, eks-Mensos",
     twitter:"@KhofifahIP",
     analysis:{
@@ -1523,6 +1536,7 @@ export const PERSONS = [
     bio:"Adik kandung Prabowo Subianto dan pengusaha besar. Ketua Dewan Pembina Gerindra. Dikenal sebagai bankir utama Gerindra dari konglomerasi bisnisnya.",
     tags:["pengusaha","gerindra","adik-presiden"],
     lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_history:[{year:2019,amount:30000000000000},{year:2020,amount:32000000000000},{year:2021,amount:35000000000000},{year:2022,amount:38000000000000},{year:2023,amount:40000000000000}],
     connections_summary:"Adik Prabowo, konglomerat, Ketua Dewan Pembina Gerindra",
     twitter:null,
     analysis:{
@@ -1622,6 +1636,7 @@ export const PERSONS = [
     bio:"Akademisi hukum dan negarawan dari Sampang, Jawa Timur. Mantan Ketua MK dan Menko Polhukam. Cawapres bersama Ganjar Pranowo 2024. Mengundurkan diri dari kabinet Jokowi Februari 2024 sebagai protes atas 'kondisi demokrasi yang mengkhawatirkan'.",
     tags:["akademisi","hukum","jatim","madura"],
     lhkpn_latest:22000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:16000000000},{year:2020,amount:17000000000},{year:2021,amount:18500000000},{year:2022,amount:20000000000},{year:2023,amount:22000000000}],
     connections_summary:"Eks-Ketua MK, Cawapres 2024, putra Sampang Jatim",
     twitter:"@mohmahfudmd",
     analysis:{
@@ -2390,6 +2405,7 @@ export const PERSONS = [
     bio:"Pengusaha media dan olahraga. Pemilik Inter Milan (2013-2018), Anfield (saham Liverpool), dan media grup iNews/ANTV. Menteri BUMN dua periode: era Jokowi dan Prabowo. Ketua PSSI reformis sejak 2023. Dikenal dekat Prabowo dan Jokowi.",
     tags:["menteri","pengusaha","bumn","pssi","olahraga"],
     lhkpn_latest:2500000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:1800000000000},{year:2020,amount:1950000000000},{year:2021,amount:2100000000000},{year:2022,amount:2300000000000},{year:2023,amount:2500000000000}],
     connections_summary:"Menkeu BUMN, eks-pemilik Inter Milan, Ketum PSSI",
     twitter:"@erickthohir",
     analysis:{

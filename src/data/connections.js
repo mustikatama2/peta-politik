@@ -289,6 +289,13 @@ export const CONNECTIONS = [
   { from:"marwan_dasopang", to:"cakimin",       type:"koalisi", label:"PKB — Marwan Ketua Komisi VIII DPR",                 strength:7 },
   { from:"misbakhun",       to:"airlangga",     type:"koalisi", label:"Golkar — Misbakhun Ketua Komisi XI DPR",             strength:7 },
   { from:"hary_tanoe",      to:"prabowo",       type:"koalisi", label:"Perindo dukung KIM Plus; MNC Group pro-pemerintah",  strength:6 },
+
+  // ── DPR Commission Chairs → Overseen Ministers (pengawasan) ─────────────
+  { from:"meutya_hafid",    to:"budi_arie",     type:"rekan",   label:"Komisi I DPR mengawasi Kemenkomdigi (Meutya kini Menkomdigi, Budi Arie Menkominfo sebelumnya)", strength:6 },
+  { from:"habiburokhman",   to:"yusril",        type:"rekan",   label:"Komisi III DPR (Hukum) mengawasi Kemenkopolhukam — Yusril Menko Hukum", strength:6 },
+  { from:"misbakhun",       to:"sri_mulyani",   type:"rekan",   label:"Komisi XI DPR mengawasi Kemenkeu dan BI — Sri Mulyani Menkeu", strength:7 },
+  { from:"utut_adianto",    to:"megawati",      type:"koalisi", label:"PDIP — Ketua Komisi II DPR loyalis Megawati; pengawasan otonomi daerah & pemerintahan", strength:8 },
+  { from:"titiek_soeharto", to:"prabowo",       type:"keluarga",label:"Mantan suami-istri; bercerai tapi tetap satu partai Gerindra", strength:5 },
 ]
 
 export const CONNECTION_TYPES = {
