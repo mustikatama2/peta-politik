@@ -21,6 +21,7 @@ const NAV = [
   { to:'/network',  icon:'🕸️', label:'Jaringan' },
   { to:'/regions',  icon:'🗺️', label:'Wilayah' },
   { to:'/elections',icon:'📊', label:'Pemilu' },
+  { to:'/dana-kampanye', icon:'💰', label:'Dana Kampanye' },
   { to:'/dapil',    icon:'🗳️', label:'Peta Dapil' },
   { to:'/koalisi',  icon:'🤝', label:'Sejarah Koalisi' },
   { to:'/survei',   icon:'📉', label:'Survei & Polling' },
