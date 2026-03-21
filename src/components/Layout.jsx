@@ -18,6 +18,7 @@ const NAV = [
   { to:'/network',  icon:'🕸️', label:'Jaringan' },
   { to:'/regions',  icon:'🗺️', label:'Wilayah' },
   { to:'/elections',icon:'📊', label:'Pemilu' },
+  { to:'/survei',   icon:'📉', label:'Survei & Polling' },
   { to:'/analitik', icon:'📈', label:'Analitik' },
   { to:'/risk',     icon:'🚨', label:'Indeks Risiko' },
   { to:'/scenarios',icon:'🔮', label:'Skenario 2029' },

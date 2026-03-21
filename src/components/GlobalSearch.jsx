@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { PERSONS } from '../data/persons'
 import { PARTIES } from '../data/parties'
 import { NEWS } from '../data/news'
@@ -105,6 +105,11 @@ export default function GlobalSearch() {
       .slice(0, 12)
   }, [query])
 
+  const newsResultsCount = useMemo(
+    () => filteredResults.filter(item => item.type === 'news').length,
+    [filteredResults]
+  )
+
   const handleSelect = (item) => {
     navigate(item.url)
     setOpen(false)
@@ -209,6 +214,19 @@ export default function GlobalSearch() {
             ))
           )}
         </div>
+
+        {/* News shortcut — shown when query matches news items */}
+        {query.trim() && newsResultsCount > 0 && (
+          <div className="border-t border-border px-4 py-2 bg-bg-elevated/30">
+            <Link
+              to="/news"
+              onClick={() => setOpen(false)}
+              className="text-xs text-accent-red hover:underline font-medium"
+            >
+              📰 Lihat semua berita ({newsResultsCount} cocok) →
+            </Link>
+          </div>
+        )}
 
         {/* Footer */}
         <div className="flex items-center justify-between px-4 py-2 border-t border-border bg-bg-elevated/50 text-xs text-text-muted">

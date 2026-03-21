@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { NEWS } from '../../data/news'
 import { PERSONS } from '../../data/persons'
@@ -27,6 +27,19 @@ const CATEGORIES = [
   { id: 'keamanan', label: '🔒 Keamanan' },
   { id: 'pilkada', label: '🗳️ Pilkada' },
   { id: 'pemilu', label: '🗳️ Pemilu' },
+]
+
+const TOPIC_FILTERS = [
+  { id: 'semua',         label: '🌐 Semua Topik' },
+  { id: 'kabinet',       label: '🏛️ Kabinet' },
+  { id: 'korupsi',       label: '⚖️ KPK/Korupsi' },
+  { id: 'ekonomi',       label: '💰 Ekonomi' },
+  { id: 'pemilu',        label: '🗳️ Pemilu/Survei' },
+  { id: 'keamanan',      label: '🔒 TNI/Polri' },
+  { id: 'sosial',        label: '🤝 Sosial' },
+  { id: 'infrastruktur', label: '🏗️ IKN/Infrastruktur' },
+  { id: 'media',         label: '📺 Media/Digital' },
+  { id: 'lingkungan',    label: '🌿 Lingkungan' },
 ]
 
 // Convert static NEWS entries to the live article shape
@@ -188,6 +201,7 @@ export default function NewsFeed() {
   const [sentiment, setSentiment] = useState('semua')
   const [search, setSearch] = useState('')
   const [compact, setCompact] = useState(false)
+  const [topic, setTopic] = useState('semua')
 
   // Auto-refresh countdown
   const [nextRefresh, setNextRefresh] = useState(REFRESH_INTERVAL_MS)
@@ -233,11 +247,26 @@ export default function NewsFeed() {
     }
   }, [loadNews])
 
+  // Trending topics derived from all loaded articles
+  const trendingTopics = useMemo(() => {
+    const counts = {}
+    articles.forEach(a => {
+      ;(a.topic_categories || []).forEach(t => {
+        counts[t] = (counts[t] || 0) + 1
+      })
+    })
+    return Object.entries(counts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([t, count]) => ({ topic: t, count }))
+  }, [articles])
+
   // Client-side filtering
-  const filtered = articles.filter(a => {
+  let filtered = articles.filter(a => {
     if (category !== 'semua' && a.category !== category) return false
     if (source !== 'semua' && a.source_id !== source) return false
     if (sentiment !== 'semua' && a.sentiment !== sentiment) return false
+    if (topic !== 'semua' && !a.topic_categories?.includes(topic)) return false
     if (search) {
       const q = search.toLowerCase()
       if (
@@ -404,6 +433,23 @@ export default function NewsFeed() {
           ))}
         </div>
 
+        {/* Topic filter */}
+        <div className="flex gap-1.5 flex-wrap">
+          {TOPIC_FILTERS.map(t => (
+            <button
+              key={t.id}
+              onClick={() => setTopic(t.id)}
+              className={`px-2.5 py-1 text-[11px] rounded-full border transition-all ${
+                topic === t.id
+                  ? 'border-accent-red/70 text-accent-red bg-accent-red/10'
+                  : 'border-border text-text-secondary hover:border-accent-red/40'
+              }`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
         {/* Source filter */}
         <div className="flex gap-2 flex-wrap">
           {NEWS_SOURCES.map(s => (
@@ -430,6 +476,23 @@ export default function NewsFeed() {
           ))}
         </div>
       </div>
+
+      {/* ── Trending Topics Panel ────────────────────────────────────── */}
+      {trendingTopics.length > 0 && (
+        <div className="mb-4 flex items-center gap-2 flex-wrap">
+          <span className="text-xs font-bold text-text-secondary">📈 Trending:</span>
+          {trendingTopics.map(({ topic: t, count }) => (
+            <button
+              key={t}
+              onClick={() => setTopic(t)}
+              className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-bg-elevated border border-border text-xs text-text-secondary hover:border-accent-red/50 hover:text-text-primary transition-all"
+            >
+              {t}
+              <span className="font-bold text-accent-red">{count}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* ── Article Grid ─────────────────────────────────────────────── */}
       {loading ? (
