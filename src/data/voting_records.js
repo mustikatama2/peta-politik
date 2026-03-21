@@ -280,6 +280,149 @@ export const BILLS = [
       "pdip": "menolak", "pks": "menolak", "ppp": "setuju"
     }
   },
+  {
+    id: "uu_pertanahan_2024",
+    title: "RUU Pertanahan 2024",
+    short: "RUU Pertanahan",
+    category: "ekonomi",
+    date: "2024-11-05",
+    description: "RUU Pertanahan yang mengatur penguasaan, pemilikan, penggunaan, dan pemanfaatan tanah. Dikritik karena melegitimasi Land Bank untuk kepentingan investasi besar termasuk IKN.",
+    result: "ditarik",
+    votes_for: 0, votes_against: 0, votes_abstain: 0,
+    controversies: ["Land Bank mengancam petani", "Hak adat terancam", "Memuluskan investasi korporasi", "Macet di DPR 2+ tahun"],
+    party_positions: {
+      "ger": "setuju", "gol": "setuju", "nas": "setuju", "pkb": "abstain",
+      "pan": "setuju", "dem": "abstain", "pdip": "menolak", "pks": "menolak", "ppp": "abstain"
+    }
+  },
+  {
+    id: "uu_keimigrasian_2024",
+    title: "Revisi UU Keimigrasian 2024",
+    short: "UU Keimigrasian",
+    category: "hukum",
+    date: "2024-10-03",
+    description: "Revisi UU Keimigrasian yang memperluas kewenangan pencegahan ke luar negeri dan mengatur visa digital nomad. Disetujui sebagai bagian paket legislasi akhir periode DPR.",
+    result: "disahkan",
+    votes_for: 285, votes_against: 0, votes_abstain: 20,
+    controversies: ["Pencegahan ke luar negeri diperluas", "Masa detensi imigrasi diperpanjang", "Visa digital nomad tanpa perlindungan buruh"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "abstain"
+    }
+  },
+  {
+    id: "uu_koperasi_2023",
+    title: "UU Koperasi 2023",
+    short: "UU Koperasi",
+    category: "ekonomi",
+    date: "2023-12-05",
+    description: "Revisi UU Koperasi yang memperbarui tata kelola koperasi Indonesia, memperbolehkan koperasi membentuk anak perusahaan berbentuk PT. Dikritik menggeser watak koperasi menjadi korporasi.",
+    result: "disahkan",
+    votes_for: 295, votes_against: 0, votes_abstain: 10,
+    controversies: ["Koperasi bisa bentuk PT", "Karakter gotong-royong berkurang", "Melayani kepentingan koperasi besar"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "setuju"
+    }
+  },
+  {
+    id: "uu_ebt_2024",
+    title: "UU Energi Baru Terbarukan 2024",
+    short: "UU EBT",
+    category: "ekonomi",
+    date: "2024-09-12",
+    description: "UU yang mengatur pengembangan energi baru (nuklir, hidrogen) dan energi terbarukan (surya, angin, panas bumi). Menjadi landasan hukum transisi energi. Disahkan setelah 8 tahun pembahasan.",
+    result: "disahkan",
+    votes_for: 298, votes_against: 30, votes_abstain: 15,
+    controversies: ["Nuklir masuk kategori 'energi baru'", "PLTN diizinkan", "Transisi batu bara lambat", "Investasi EBT belum atraktif"],
+    party_positions: {
+      "ger": "setuju", "gol": "setuju", "nas": "setuju", "pkb": "setuju",
+      "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pdip": "abstain", "pks": "menolak"
+    }
+  },
+  {
+    id: "uu_paten_2024",
+    title: "Revisi UU Paten 2024",
+    short: "UU Paten",
+    category: "ekonomi",
+    date: "2024-08-29",
+    description: "Revisi UU Paten yang mengatur compulsory license obat dan alat kesehatan, serta hak paten kekayaan intelektual lokal. Penting untuk akses obat murah dan inovasi dalam negeri.",
+    result: "disahkan",
+    votes_for: 290, votes_against: 0, votes_abstain: 15,
+    controversies: ["Compulsory license obat patent", "Konflik dengan perjanjian TRIPS internasional", "Akses obat generik diperluas"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "setuju"
+    }
+  },
+  {
+    id: "uu_bumn_2023",
+    title: "RUU BUMN 2023 (Mangkrak)",
+    short: "RUU BUMN",
+    category: "ekonomi",
+    date: "2023-03-01",
+    description: "RUU BUMN yang mengatur transformasi BUMN, pembentukan holding, dan mekanisme privatisasi. Menimbulkan pro-kontra soal peran negara vs swasta. Belum disahkan hingga 2024.",
+    result: "ditarik",
+    votes_for: 0, votes_against: 0, votes_abstain: 0,
+    controversies: ["Privatisasi BUMN strategis", "Holding BUMN mengurangi kontrol DPR", "Transparansi manajemen BUMN", "Pembentukan Danantara di luar UU BUMN"],
+    party_positions: {
+      "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pdip": "menolak", "pks": "menolak", "pkb": "abstain",
+      "pan": "setuju", "dem": "abstain", "ppp": "abstain"
+    }
+  },
+  {
+    id: "uu_pengawasan_obat_2024",
+    title: "RUU Pengawasan Obat dan Makanan 2024",
+    short: "RUU Pengawasan Obat",
+    category: "sosial",
+    date: "2024-09-25",
+    description: "RUU yang memperbarui kewenangan BPOM dalam pengawasan peredaran obat, kosmetik, suplemen, dan pangan olahan. Merespons krisis keamanan pangan dan obat ilegal.",
+    result: "disahkan",
+    votes_for: 280, votes_against: 10, votes_abstain: 20,
+    controversies: ["Kewenangan BPOM vs Kemenkes", "Obat herbal tradisional", "Izin edar dipercepat", "Sanksi pidana importir obat palsu"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "abstain"
+    }
+  },
+  {
+    id: "uu_dp3a_2022",
+    title: "UU TPKS 2022 (Tindak Pidana Kekerasan Seksual)",
+    short: "UU TPKS",
+    category: "sosial",
+    date: "2022-04-12",
+    description: "UU perlindungan korban kekerasan seksual yang diperjuangkan selama 10 tahun. Mengkriminalisasi pemerkosaan dalam pernikahan, pelecehan seksual non-fisik, dan memberikan perlindungan menyeluruh bagi korban.",
+    result: "disahkan",
+    votes_for: 435, votes_against: 0, votes_abstain: 0,
+    controversies: ["Marital rape dikriminalisasi", "Perjuangan aktivis 10+ tahun", "PKS abstain di rapat komisi", "Implementasi masih lemah"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "abstain"
+    }
+  },
+  {
+    id: "uu_kesejahteraan_ibu_2024",
+    title: "UU Kesejahteraan Ibu dan Anak 2024",
+    short: "UU KIA",
+    category: "sosial",
+    date: "2024-06-04",
+    description: "UU yang memberikan cuti melahirkan 6 bulan bagi ibu dan cuti 40 hari bagi ayah. Mewajibkan fasilitas menyusui di tempat kerja. Merupakan kemajuan signifikan perlindungan ketenagakerjaan.",
+    result: "disahkan",
+    votes_for: 350, votes_against: 0, votes_abstain: 0,
+    controversies: ["Pengusaha keberatan biaya cuti panjang", "Implementasi di UKM sulit", "Sanksi tidak tegas"],
+    party_positions: {
+      "pdip": "setuju", "ger": "setuju", "gol": "setuju", "nas": "setuju",
+      "pkb": "setuju", "pan": "setuju", "dem": "setuju", "ppp": "setuju",
+      "pks": "setuju"
+    }
+  },
 ];
 
 // Pre-compute: each party's setuju/menolak/abstain counts across all bills
