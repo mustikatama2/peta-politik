@@ -1,4 +1,4 @@
-import { useState, Component, useMemo } from 'react'
+import { useState, useEffect, Component, useMemo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { PERSONS } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
@@ -80,12 +80,55 @@ export default function PersonDetail() {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('profil')
   const [showExport, setShowExport] = useState(false)
+  const [personNews, setPersonNews] = useState([])
+  const [newsLoading, setNewsLoading] = useState(false)
 
   const person = PERSONS.find(p => p.id === id)
   const relatedPersons = useMemo(() => {
     if (!person) return []
     return getRelatedPersons(person, PERSONS, CONNECTIONS)
   }, [person])
+
+  // Live news fetch for berita tab — falls back to static on error
+  useEffect(() => {
+    if (activeTab !== 'berita' || !person) return
+    setNewsLoading(true)
+    fetch(`/api/news?person_id=${person.id}&limit=20`)
+      .then(r => (r.ok ? r.json() : null))
+      .then(data => {
+        if (data?.articles?.length > 0) {
+          setPersonNews(data.articles)
+        } else {
+          setPersonNews(
+            NEWS
+              .filter(n => n.person_ids?.includes(person.id))
+              .sort((a, b) => new Date(b.date) - new Date(a.date))
+              .map(n => ({
+                ...n,
+                title: n.headline || n.title || '',
+                excerpt: n.excerpt || n.summary || '',
+                url: n.url || '#',
+                source_id: 'static',
+              }))
+          )
+        }
+      })
+      .catch(() => {
+        setPersonNews(
+          NEWS
+            .filter(n => n.person_ids?.includes(person.id))
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .map(n => ({
+              ...n,
+              title: n.headline || n.title || '',
+              excerpt: n.excerpt || n.summary || '',
+              url: n.url || '#',
+              source_id: 'static',
+            }))
+        )
+      })
+      .finally(() => setNewsLoading(false))
+  }, [activeTab, person])
 
   if (!person) {
     return (
@@ -113,11 +156,6 @@ export default function PersonDetail() {
   )
   const safeNodeIds = new Set(networkNodes.map(n => n.id))
   const safeEdges = networkEdges.filter(e => safeNodeIds.has(e.from) && safeNodeIds.has(e.to))
-
-  // Related news
-  const personNews = [...NEWS]
-    .filter(n => n.person_ids?.includes(person.id))
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
 
   // Related agendas
   const personAgendas = AGENDAS.filter(a => a.subject_id === person.id)
@@ -444,15 +482,69 @@ export default function PersonDetail() {
         {/* BERITA */}
         {activeTab === 'berita' && (
           <div className="space-y-4">
-            {personNews.length === 0 ? (
+            {/* Live indicator */}
+            {personNews.some(a => a.source_id !== 'static') && (
+              <div className="flex items-center gap-2">
+                <span className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-500/10 border border-green-500/30">
+                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <span className="text-xs font-bold text-green-400">LIVE</span>
+                </span>
+                <span className="text-xs text-text-secondary">{personNews.length} artikel ditemukan</span>
+              </div>
+            )}
+
+            {newsLoading ? (
+              <div className="space-y-3">
+                {Array.from({ length: 4 }).map((_, i) => (
+                  <div key={i} className="h-24 rounded-xl bg-bg-elevated border border-border animate-pulse" />
+                ))}
+              </div>
+            ) : personNews.length === 0 ? (
               <div className="text-center py-16 text-text-secondary">
                 <div className="text-5xl mb-4">📰</div>
                 <p className="font-medium">Belum ada berita untuk tokoh ini</p>
               </div>
             ) : (
-              personNews.map(article => (
-                <NewsCard key={article.id} article={article} />
-              ))
+              personNews.map(article => {
+                const isLiveArticle = article.source_id !== 'static'
+                const title = article.title || article.headline || ''
+                const excerpt = article.excerpt || article.summary || ''
+                return (
+                  <a
+                    key={article.id}
+                    href={article.url || '#'}
+                    target={article.url && article.url !== '#' ? '_blank' : undefined}
+                    rel="noopener noreferrer"
+                    className="block p-4 rounded-xl border border-border bg-bg-card hover:border-accent-red/50 hover:bg-bg-elevated transition-all group"
+                  >
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <h3 className="text-sm font-semibold text-text-primary group-hover:text-accent-red line-clamp-2 transition-colors leading-snug">
+                        {title}
+                      </h3>
+                      {article.sentiment && (
+                        <span className={`text-xs px-2 py-0.5 rounded font-medium flex-shrink-0 ${
+                          article.sentiment === 'positif' ? 'text-green-400 bg-green-400/10' :
+                          article.sentiment === 'negatif' ? 'text-red-400 bg-red-400/10' :
+                          'text-gray-400 bg-gray-400/10'
+                        }`}>
+                          {article.sentiment === 'positif' ? '▲ Positif' :
+                           article.sentiment === 'negatif' ? '▼ Negatif' : '● Netral'}
+                        </span>
+                      )}
+                    </div>
+                    {excerpt && (
+                      <p className="text-xs text-text-secondary line-clamp-2 mb-3">{excerpt}</p>
+                    )}
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs font-semibold text-accent-blue">{article.source}</span>
+                      <span className="text-xs text-text-secondary">{article.date}</span>
+                      {isLiveArticle && (
+                        <span className="text-xs font-medium text-green-400">● LIVE</span>
+                      )}
+                    </div>
+                  </a>
+                )
+              })
             )}
           </div>
         )}
