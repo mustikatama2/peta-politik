@@ -733,6 +733,7 @@ export const CONNECTIONS = [
   { from:"surya_paloh",  to:"megawati",    type:"bisnis", label:"Metro TV — relasi NasDem-PDIP media coverage",                strength:5 },
   { from:"hary_tanoe",   to:"megawati",    type:"bisnis", label:"MNC terkait Perindo dalam konstelasi PDIP-KIM",               strength:4 },
   { from:"erick_thohir", to:"airlangga",   type:"bisnis", label:"BUMN-Golkar koordinasi kebijakan industri nasional",          strength:6 },
+  { from:"sri_mulyani",  to:"erick_thohir",type:"bisnis", label:"Kemenkeu-BUMN koordinasi Danantara dan APBN",                 strength:7 },
   { from:"bahlil",       to:"airlangga",   type:"bisnis", label:"Golkar — Bahlil penerus kepemimpinan Golkar dari Airlangga",  strength:7 },
   { from:"hashim",       to:"jokowi",      type:"bisnis", label:"Jaringan bisnis Djojohadikusumo — relasi koalisi pemerintahan",strength:5 },
   { from:"sjafrie",      to:"prabowo",     type:"bisnis", label:"Jaringan TNI-bisnis pertahanan; Sjafrie Menhan di bawah Prabowo", strength:6 },
@@ -759,6 +760,7 @@ export const CONNECTIONS = [
   { from:"surya_paloh", to:"anies",         type:"mentor-murid", label:"NasDem mengorbitkan Anies Gubernur→Capres 2024",      strength:8 },
   { from:"khofifah",    to:"dedi_mulyadi",  type:"mentor-murid", label:"Senior gubernur — berbagi pengalaman tata kelola",    strength:5 },
   { from:"gus_yahya",   to:"cakimin",       type:"mentor-murid", label:"NU membimbing PKB — Gus Yahya pengaruhi basis PKB",   strength:7 },
+  { from:"soekarno",    to:"megawati",      type:"mentor-murid", label:"Ayah-anak — warisan ideologi Marhaenisme ke Megawati",  strength:10 },
 ]
 
 export const CONNECTION_TYPES = {

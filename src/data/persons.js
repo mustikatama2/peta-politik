@@ -1,7 +1,7 @@
 export const PERSONS = [
   // ─── HISTORICAL / THIN ENTRIES (for dynasty linking) ─────────────────────
   {
-    id:"soekarno", name:"Ir. Soekarno", photo_url:null, photo_placeholder:"SK",
+    id:"soekarno", name:"Ir. Soekarno", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Soekarno.jpg?width=400", photo_placeholder:"SK",
     born:"6 Jun 1901", born_place:"Surabaya", religion:"Islam",
     education:"TH Bandung (ITB)",
     party_id:"pdip", party_role:"Proklamator",
@@ -753,7 +753,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hasan_aminuddin", name:"Hasan Aminuddin", photo_url:null, photo_placeholder:"HA",
+    id:"hasan_aminuddin", name:"Hasan Aminuddin", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Hasan_Aminuddin.jpg?width=400", photo_placeholder:"HA",
     born:"1968", born_place:"Probolinggo", religion:"Islam",
     education:"S1 Pertanian, Universitas Brawijaya",
     party_id:"nas", party_role:"Anggota",
@@ -2608,7 +2608,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sartono_hutomo", name:"Sartono Hutomo", photo_url:null, photo_placeholder:"SH2",
+    id:"sartono_hutomo", name:"Sartono Hutomo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Sartono_Hutomo.jpg?width=400", photo_placeholder:"SH2",
     born:"1972", born_place:"Jawa Tengah", religion:"Islam",
     education:"S1 Ekonomi",
     party_id:"ger", party_role:"Ketua Komisi VI DPR",
@@ -2653,7 +2653,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"misbakhun", name:"Mukhamad Misbakhun", photo_url:null, photo_placeholder:"MB",
+    id:"misbakhun", name:"Mukhamad Misbakhun", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Mukhamad_Misbakhun.jpg?width=400", photo_placeholder:"MB",
     born:"1970", born_place:"Pasuruan, Jawa Timur", religion:"Islam",
     education:"S1 Ekonomi; S2 Akuntansi",
     party_id:"gol", party_role:"Ketua Komisi XI DPR",

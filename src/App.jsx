@@ -33,6 +33,7 @@ const KabinetPage    = lazy(() => import('./pages/kabinet/KabinetPage'))
 const BudgetPage     = lazy(() => import('./pages/budget/BudgetPage'))
 const SurveyPage     = lazy(() => import('./pages/surveys/SurveyPage'))
 const RankingPage    = lazy(() => import('./pages/ranking/RankingPage'))
+const CoalitionPage  = lazy(() => import('./pages/coalition/CoalitionPage'))
 
 // Loading fallback — skeleton style
 function PageLoader() {
@@ -66,6 +67,7 @@ export default function App() {
         <Route path="/network" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><NetworkPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/regions" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RegionView /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/elections" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Elections /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/koalisi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><CoalitionPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/survei" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><SurveyPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/lhkpn" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><LHKPNTracker /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/news" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><NewsFeed /></Suspense></ErrorBoundary></ProtectedRoute>} />
