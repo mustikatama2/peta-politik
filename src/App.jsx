@@ -15,6 +15,8 @@ import NewsFeed from './pages/news/NewsFeed'
 import AgendaTracker from './pages/agendas/AgendaTracker'
 import OrmasList from './pages/ormas/OrmasList'
 import AnalitikPage from './pages/analitik/AnalitikPage'
+import KPKCases from './pages/kpk/KPKCases'
+import MediaOwnership from './pages/media/MediaOwnership'
 import DynastyMapper from './pages/dynasty/DynastyMapper'
 
 function ProtectedRoute({ children }) {
@@ -39,6 +41,8 @@ export default function App() {
       <Route path="/agendas" element={<ProtectedRoute><AgendaTracker /></ProtectedRoute>} />
       <Route path="/ormas" element={<ProtectedRoute><OrmasList /></ProtectedRoute>} />
       <Route path="/analitik" element={<ProtectedRoute><AnalitikPage /></ProtectedRoute>} />
+      <Route path="/kpk" element={<ProtectedRoute><KPKCases /></ProtectedRoute>} />
+      <Route path="/media" element={<ProtectedRoute><MediaOwnership /></ProtectedRoute>} />
       <Route path="/dynasty" element={<ProtectedRoute><DynastyMapper /></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

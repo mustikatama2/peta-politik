@@ -15,6 +15,8 @@ const NAV = [
   { to:'/elections',icon:'📊', label:'Pemilu' },
   { to:'/analitik', icon:'📈', label:'Analitik' },
   { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
+  { to:'/kpk',      icon:'⚖️', label:'KPK Cases' },
+  { to:'/media',    icon:'📡', label:'Kepemilikan Media' },
   { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
   { to:'/news',     icon:'📰', label:'Berita' },
   { to:'/agendas',  icon:'📋', label:'Agenda' },
