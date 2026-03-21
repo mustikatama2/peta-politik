@@ -6,20 +6,49 @@ import { SearchBar, Select, PageHeader } from '../../components/ui'
 
 const RISK_ORDER = { rendah: 0, sedang: 1, tinggi: 2, tersangka: 3, terpidana: 4 }
 
+// Island group → region_id prefixes / full IDs
+const ISLAND_REGION_IDS = {
+  Jawa: ['jawa-timur','jawa-barat','jawa-tengah','diy','dki-jakarta','banten'],
+  Sumatera: ['aceh','sumatera-utara','sumatera-barat','riau','jambi','sumatera-selatan','bengkulu','lampung','bangka-belitung','kepri'],
+  Kalimantan: ['kalimantan-barat','kalimantan-tengah','kalimantan-selatan','kalimantan-timur','kalimantan-utara'],
+  Sulawesi: ['sulawesi-utara','sulawesi-tengah','sulawesi-selatan','sulawesi-tenggara','gorontalo','sulawesi-barat'],
+  'Bali-Nusra': ['bali','nusa-tenggara-barat','nusa-tenggara-timur'],
+  Maluku: ['maluku','maluku-utara'],
+  Papua: ['papua-barat','papua-barat-daya','papua-tengah','papua-pegunungan','papua-selatan','papua'],
+}
+
+// Jabatan categorization based on position title
+function getJabatan(person) {
+  const title = (person.positions?.[0]?.title || '').toLowerCase()
+  if (title.includes('presiden') && !title.includes('wakil')) return 'Presiden/Wapres'
+  if (title.includes('wakil presiden')) return 'Presiden/Wapres'
+  if (title.includes('menteri') || title.includes('menko') || title.includes('kepala badan') || title.includes('jaksa agung') || title.includes('kapolri')) return 'Menteri'
+  if (title.includes('gubernur')) return 'Gubernur'
+  if (title.includes('bupati') || title.includes('walikota')) return 'Bupati/Walikota'
+  if (title.includes('anggota') || title.includes('dpr') || title.includes('mpr') || title.includes('dpd')) return 'DPR/MPR'
+  // Check TNI/Polri by tags
+  if (person.tags?.includes('eks-militer') || title.includes('jenderal') || title.includes('tni') || title.includes('polri') || title.includes('danjen') || title.includes('pangkostrad') || title.includes('kapolri')) return 'TNI/Polri'
+  return null
+}
+
 export default function PersonList() {
   const [search, setSearch] = useState('')
   const [filterTier, setFilterTier] = useState('')
   const [filterParty, setFilterParty] = useState('')
   const [filterRisk, setFilterRisk] = useState('')
   const [filterTag, setFilterTag] = useState('')
+  const [filterWilayah, setFilterWilayah] = useState('')
+  const [filterJabatan, setFilterJabatan] = useState('')
   const [sortBy, setSortBy] = useState('name')
 
   const partyOptions = PARTIES.map(p => ({ value: p.id, label: `${p.logo_emoji} ${p.abbr}` }))
+
   const tierOptions = [
     { value: 'nasional', label: 'Nasional' },
     { value: 'provinsi', label: 'Provinsi' },
     { value: 'kabupaten', label: 'Kabupaten' },
   ]
+
   const riskOptions = [
     { value: 'rendah', label: '🟢 Rendah' },
     { value: 'sedang', label: '🟡 Sedang' },
@@ -27,6 +56,7 @@ export default function PersonList() {
     { value: 'tersangka', label: '⛔ Tersangka' },
     { value: 'terpidana', label: '🔴 Terpidana' },
   ]
+
   const tagOptions = [
     { value: 'eks-militer', label: '🎖️ Eks-Militer' },
     { value: 'pengusaha', label: '💼 Pengusaha' },
@@ -34,10 +64,32 @@ export default function PersonList() {
     { value: 'perempuan', label: '👩 Perempuan' },
     { value: 'muda', label: '⚡ Muda' },
   ]
+
   const sortOptions = [
     { value: 'name', label: 'Nama A-Z' },
     { value: 'wealth', label: 'Kekayaan Tertinggi' },
     { value: 'risk', label: 'Risiko Korupsi' },
+  ]
+
+  const wilayahOptions = [
+    { value: 'nasional', label: '🇮🇩 Nasional' },
+    { value: 'Jawa', label: '🌏 Jawa' },
+    { value: 'Sumatera', label: '🏝️ Sumatera' },
+    { value: 'Kalimantan', label: '🌿 Kalimantan' },
+    { value: 'Sulawesi', label: '🏔️ Sulawesi' },
+    { value: 'Bali-Nusra', label: '🌺 Bali-Nusra' },
+    { value: 'Maluku', label: '🌊 Maluku' },
+    { value: 'Papua', label: '🦜 Papua' },
+    { value: 'jawa-timur', label: '🗺️ Jawa Timur' },
+  ]
+
+  const jabatanOptions = [
+    { value: 'Presiden/Wapres', label: '🏛️ Presiden/Wapres' },
+    { value: 'Menteri', label: '📋 Menteri' },
+    { value: 'Gubernur', label: '🗺️ Gubernur' },
+    { value: 'Bupati/Walikota', label: '🏘️ Bupati/Walikota' },
+    { value: 'DPR/MPR', label: '🏛️ DPR/MPR' },
+    { value: 'TNI/Polri', label: '🎖️ TNI/Polri' },
   ]
 
   const filtered = useMemo(() => {
@@ -51,10 +103,28 @@ export default function PersonList() {
         p.positions?.some(pos => pos.title?.toLowerCase().includes(q))
       )
     }
+
     if (filterTier) result = result.filter(p => p.tier === filterTier)
     if (filterParty) result = result.filter(p => p.party_id === filterParty)
     if (filterRisk) result = result.filter(p => p.analysis?.corruption_risk === filterRisk)
     if (filterTag) result = result.filter(p => p.tags?.includes(filterTag))
+
+    // Wilayah filter
+    if (filterWilayah) {
+      if (filterWilayah === 'nasional') {
+        result = result.filter(p => p.tier === 'nasional')
+      } else if (filterWilayah === 'jawa-timur') {
+        result = result.filter(p => p.region_id === 'jawa-timur')
+      } else {
+        const ids = ISLAND_REGION_IDS[filterWilayah] || []
+        result = result.filter(p => ids.includes(p.region_id))
+      }
+    }
+
+    // Jabatan filter
+    if (filterJabatan) {
+      result = result.filter(p => getJabatan(p) === filterJabatan)
+    }
 
     result.sort((a, b) => {
       if (sortBy === 'name') return a.name.localeCompare(b.name)
@@ -64,8 +134,21 @@ export default function PersonList() {
       }
       return 0
     })
+
     return result
-  }, [search, filterTier, filterParty, filterRisk, filterTag, sortBy])
+  }, [search, filterTier, filterParty, filterRisk, filterTag, filterWilayah, filterJabatan, sortBy])
+
+  const hasActiveFilter = search || filterTier || filterParty || filterRisk || filterTag || filterWilayah || filterJabatan
+
+  const resetAll = () => {
+    setSearch('')
+    setFilterTier('')
+    setFilterParty('')
+    setFilterRisk('')
+    setFilterTag('')
+    setFilterWilayah('')
+    setFilterJabatan('')
+  }
 
   return (
     <div className="space-y-5">
@@ -77,8 +160,22 @@ export default function PersonList() {
       {/* Search */}
       <SearchBar value={search} onChange={setSearch} placeholder="Cari nama, jabatan, atau bio..." />
 
-      {/* Filters */}
+      {/* Filters — Row 1: Wilayah + Jabatan + Tier */}
       <div className="flex flex-wrap gap-3">
+        <Select
+          value={filterWilayah}
+          onChange={setFilterWilayah}
+          options={wilayahOptions}
+          placeholder="🌏 Semua Wilayah"
+          className="min-w-[160px]"
+        />
+        <Select
+          value={filterJabatan}
+          onChange={setFilterJabatan}
+          options={jabatanOptions}
+          placeholder="💼 Semua Jabatan"
+          className="min-w-[160px]"
+        />
         <Select
           value={filterTier}
           onChange={setFilterTier}
@@ -114,15 +211,33 @@ export default function PersonList() {
           placeholder="Urutkan"
           className="min-w-[160px]"
         />
-        {(search || filterTier || filterParty || filterRisk || filterTag) && (
+        {hasActiveFilter && (
           <button
-            onClick={() => { setSearch(''); setFilterTier(''); setFilterParty(''); setFilterRisk(''); setFilterTag('') }}
+            onClick={resetAll}
             className="px-3 py-2 text-xs text-text-secondary hover:text-text-primary border border-border rounded-lg transition-colors"
           >
             ✕ Reset
           </button>
         )}
       </div>
+
+      {/* Active filter chips */}
+      {(filterWilayah || filterJabatan) && (
+        <div className="flex flex-wrap gap-2">
+          {filterWilayah && (
+            <span className="flex items-center gap-1.5 px-2.5 py-1 text-xs bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full">
+              🌏 {wilayahOptions.find(o => o.value === filterWilayah)?.label || filterWilayah}
+              <button onClick={() => setFilterWilayah('')} className="hover:text-blue-200">×</button>
+            </span>
+          )}
+          {filterJabatan && (
+            <span className="flex items-center gap-1.5 px-2.5 py-1 text-xs bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-full">
+              💼 {filterJabatan}
+              <button onClick={() => setFilterJabatan('')} className="hover:text-purple-200">×</button>
+            </span>
+          )}
+        </div>
+      )}
 
       {/* Count */}
       <p className="text-sm text-text-secondary">

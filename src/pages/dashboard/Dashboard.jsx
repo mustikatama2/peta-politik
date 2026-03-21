@@ -2,17 +2,21 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend
+  PieChart, Pie, Cell
 } from 'recharts'
 import { PERSONS } from '../../data/persons'
 import { PARTIES, PARTY_MAP, KIM_PARTIES } from '../../data/parties'
 import { CONNECTIONS } from '../../data/connections'
 import { PILEG_2024, PILPRES_2024 } from '../../data/elections'
+import * as RegionsData from '../../data/regions'
 import { NEWS } from '../../data/news'
 import { AGENDAS } from '../../data/agendas'
 import PersonCard from '../../components/PersonCard'
 import NewsCard from '../../components/NewsCard'
 import { KPICard, Card } from '../../components/ui'
+
+// Safe fallback for PROVINCES (data agent may not have committed yet)
+const PROVINCES = RegionsData.PROVINCES || []
 
 const pillegData = [...PILEG_2024]
   .filter(d => d.seats > 0)
@@ -43,6 +47,27 @@ const kimSeats = KIM_PARTIES.reduce((sum, id) => {
 }, 0)
 const pdipSeats = PARTY_MAP['pdip']?.seats_2024 || 0
 
+// Build Peta Kekuatan from PROVINCES data
+function buildPetaKekuatan() {
+  if (PROVINCES.length === 0) return null
+
+  const partyCounts = {}
+  PROVINCES.forEach(prov => {
+    const pid = prov.governor_party_id
+    if (pid) partyCounts[pid] = (partyCounts[pid] || 0) + 1
+  })
+
+  return Object.entries(partyCounts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([pid, count]) => ({
+      pid,
+      count,
+      party: PARTY_MAP[pid],
+      name: PARTY_MAP[pid]?.abbr || pid,
+      fill: PARTY_MAP[pid]?.color || '#6B7280',
+    }))
+}
+
 export default function Dashboard() {
   const { user } = useAuth()
   const today = new Date().toLocaleDateString('id-ID', {
@@ -50,6 +75,12 @@ export default function Dashboard() {
   })
 
   const jatimPersons = PERSONS.filter(p => p.region_id === 'jawa-timur')
+  const petaKekuatan = buildPetaKekuatan()
+
+  // Koalisi KIM Plus province count
+  const KIM_PROVINCE_COUNT = petaKekuatan
+    ? petaKekuatan.filter(p => KIM_PARTIES.includes(p.pid)).reduce((sum, p) => sum + p.count, 0)
+    : null
 
   return (
     <div className="space-y-6">
@@ -108,7 +139,6 @@ export default function Dashboard() {
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Pileg BarChart */}
         <Card className="lg:col-span-2 p-5">
           <h2 className="text-sm font-semibold text-text-primary mb-4">📊 Pileg DPR 2024 — Kursi Partai</h2>
           <ResponsiveContainer width="100%" height={220}>
@@ -129,7 +159,6 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </Card>
 
-        {/* Pilpres PieChart */}
         <Card className="p-5">
           <h2 className="text-sm font-semibold text-text-primary mb-4">🗳️ Pilpres 2024</h2>
           <ResponsiveContainer width="100%" height={180}>
@@ -166,6 +195,93 @@ export default function Dashboard() {
           </div>
         </Card>
       </div>
+
+      {/* ── Peta Kekuatan ────────────────────────────────────────────────────── */}
+      {petaKekuatan && petaKekuatan.length > 0 ? (
+        <Card className="p-5">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <h2 className="text-sm font-semibold text-text-primary">🗺️ Peta Kekuatan — Gubernur per Partai (38 Provinsi)</h2>
+            <Link to="/regions" className="text-xs text-accent-blue hover:underline">Lihat detail →</Link>
+          </div>
+
+          {/* Koalisi headline */}
+          {KIM_PROVINCE_COUNT !== null && (
+            <div className="mb-4 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+              <div className="flex items-center gap-3">
+                <div>
+                  <p className="text-xs text-text-secondary">Koalisi Prabowo (KIM Plus)</p>
+                  <p className="text-xl font-bold text-blue-400">{KIM_PROVINCE_COUNT} dari 38 provinsi</p>
+                </div>
+                <div className="flex-1 h-3 bg-bg-elevated rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all"
+                    style={{ width: `${(KIM_PROVINCE_COUNT / 38) * 100}%`, backgroundColor: '#3B82F6' }}
+                  />
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-text-secondary">PDI-P</p>
+                  <p className="text-xl font-bold text-red-400">
+                    {petaKekuatan.find(p => p.pid === 'pdip')?.count || 0} provinsi
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Bar chart of party province counts */}
+          <ResponsiveContainer width="100%" height={180}>
+            <BarChart
+              data={petaKekuatan}
+              margin={{ top: 0, right: 10, left: -20, bottom: 0 }}
+              layout="vertical"
+            >
+              <XAxis type="number" tick={{ fill: '#9CA3AF', fontSize: 10 }} allowDecimals={false} />
+              <YAxis type="category" dataKey="name" tick={{ fill: '#9CA3AF', fontSize: 10 }} width={60} />
+              <Tooltip
+                contentStyle={{ backgroundColor: '#1E2235', border: '1px solid #2D3748', borderRadius: 8 }}
+                formatter={(v) => [v, 'Provinsi']}
+              />
+              <Bar dataKey="count" name="Provinsi" radius={[0, 4, 4, 0]}>
+                {petaKekuatan.map((entry, i) => (
+                  <Cell key={i} fill={entry.fill} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+
+          {/* Legend chips */}
+          <div className="flex flex-wrap gap-2 mt-3">
+            {petaKekuatan.map(({ pid, count, party }) => (
+              <div
+                key={pid}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border"
+                style={{
+                  borderColor: (party?.color || '#6B7280') + '50',
+                  backgroundColor: (party?.color || '#6B7280') + '12',
+                  color: party?.color || '#9CA3AF'
+                }}
+              >
+                <span>{party?.logo_emoji || '🏛️'}</span>
+                <span>{party?.abbr || pid}</span>
+                <span className="font-bold">{count}×</span>
+              </div>
+            ))}
+          </div>
+        </Card>
+      ) : (
+        /* Placeholder when PROVINCES data not yet available */
+        <Card className="p-5">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <h2 className="text-sm font-semibold text-text-primary">🗺️ Peta Kekuatan — 38 Provinsi</h2>
+            <Link to="/regions" className="text-xs text-accent-blue hover:underline">Lihat detail →</Link>
+          </div>
+          <div className="p-6 text-center border border-dashed border-border rounded-lg">
+            <div className="text-3xl mb-2">🏗️</div>
+            <p className="text-sm text-text-secondary">Data kekuatan provinsi sedang disiapkan.</p>
+            <p className="text-xs text-text-muted mt-1">Akan menampilkan distribusi gubernur per partai di 38 provinsi.</p>
+          </div>
+        </Card>
+      )}
 
       {/* At-Risk + Recent News */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -216,7 +332,7 @@ export default function Dashboard() {
         </div>
         <div className="flex items-center gap-4">
           <div>
-            <p className="text-text-secondary text-xs mb-1">KIM Plus (Koalisi)</p>
+            <p className="text-text-secondary text-xs mb-1">KIM Plus (DPR)</p>
             <p className="text-xl font-bold text-blue-400">{kimSeats} kursi</p>
           </div>
           <div className="flex-1 h-4 bg-bg-elevated rounded-full overflow-hidden">
@@ -233,20 +349,20 @@ export default function Dashboard() {
         <p className="text-xs text-text-secondary mt-2">Total 580 kursi DPR RI</p>
       </Card>
 
-      {/* Jatim Spotlight */}
+      {/* Jatim / National Spotlight */}
       <Card className="p-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-sm font-semibold text-text-primary mb-1">🗺️ Jawa Timur — Provinsi Pilot</h2>
+            <h2 className="text-sm font-semibold text-text-primary mb-1">🗺️ Peta Wilayah Indonesia</h2>
             <div className="flex flex-wrap gap-4 text-sm mt-2">
               <span className="text-text-secondary">
-                <span className="text-text-primary font-semibold">{jatimPersons.length}</span> tokoh dipantau
+                <span className="text-text-primary font-semibold">38</span> provinsi terpetakan
               </span>
               <span className="text-text-secondary">
-                <span className="text-text-primary font-semibold">38</span> kab/kota
+                <span className="text-text-primary font-semibold">{jatimPersons.length}</span> tokoh Jatim
               </span>
               <span className="text-text-secondary">
-                <span className="text-text-primary font-semibold">PKB</span> dominan
+                <span className="text-text-primary font-semibold">38</span> kab/kota Jatim
               </span>
             </div>
           </div>
