@@ -31,6 +31,7 @@ const NAV = [
   { to:'/scenarios',icon:'🔮', label:'Skenario 2029' },
   { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
   { to:'/timeline', icon:'📅', label:'Linimasa' },
+  { to:'/arsip',    icon:'📜', label:'Arsip Sejarah' },
   { to:'/voting',   icon:'🗳️', label:'Rekam Jejak Voting' },
   { to:'/kpk',      icon:'⚖️', label:'KPK Cases' },
   { to:'/investigasi', icon:'🔍', label:'Investigasi' },
