@@ -43,6 +43,8 @@ const NAV = [
   { to:'/agendas',  icon:'📋', label:'Agenda' },
   { to:'/ormas',    icon:'🏛️', label:'Ormas' },
   { to:'/indikator',icon:'📊', label:'Indikator' },
+  { to:'/glosarium',icon:'📖', label:'Glosarium' },
+  { to:'/tentang',  icon:'ℹ️', label:'Tentang' },
 ]
 
 // Bottom nav: 5 most important tabs for mobile

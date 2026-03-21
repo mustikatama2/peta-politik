@@ -42,6 +42,8 @@ const PencarianPage    = lazy(() => import('./pages/pencarian/PencarianPage'))
 const PilkadaPage      = lazy(() => import('./pages/pilkada/PilkadaPage'))
 const DanaKampanyePage = lazy(() => import('./pages/dana/DanaKampanyePage'))
 const BUMNPage         = lazy(() => import('./pages/bumn/BUMNPage'))
+const TentangPage      = lazy(() => import('./pages/tentang/TentangPage'))
+const GlosariumPage    = lazy(() => import('./pages/glosarium/GlosariumPage'))
 
 // Loading fallback — skeleton style
 function PageLoader() {
@@ -104,6 +106,8 @@ export default function App() {
         <Route path="/indikator" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><IndikatorPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/pencarian" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PencarianPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/pilkada" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PilkadaPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/tentang" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><TentangPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/glosarium" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><GlosariumPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
