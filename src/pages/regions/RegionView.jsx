@@ -408,8 +408,8 @@ export default function RegionView() {
     const prov = selectedProvince
     const island = prov.island || ISLAND_MAP[prov.id] || 'Lainnya'
     const islandColor = ISLAND_COLORS[island] || '#6B7280'
-    const govParty = PARTY_MAP[prov.governor_party_id]
-    const isJatim = prov.id === 'jawa-timur'
+    const govParty = PARTY_MAP[prov.governor_party_id || prov.party_id]
+    const isJatim = prov.id === 'jawa-timur' || prov.id === 'jawa_timur'
     const jatimGov = PERSONS.find(p => p.id === 'khofifah')
 
     return (
@@ -442,16 +442,16 @@ export default function RegionView() {
             </div>
             <p className="text-sm text-text-secondary mt-0.5">
               Ibu Kota: {prov.capital || prov.ibu_kota}
-              {prov.population && ` · Populasi: ${formatPop(prov.population)}`}
+              {(prov.pop || prov.population) && ` · Populasi: ${formatPop(prov.pop || prov.population)}`}
               {prov.dpr_seats && ` · DPR: ${prov.dpr_seats} kursi`}
             </p>
           </div>
         </div>
 
-        {/* Governor info */}
-        <Card className="p-5">
-          <h3 className="text-sm font-semibold text-text-primary mb-3">👤 Gubernur</h3>
-          {isJatim ? (
+        {/* Governor info — only for Jatim (ProvinceDetail handles the rest) */}
+        {isJatim && (
+          <Card className="p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-3">👤 Gubernur</h3>
             <div className="flex items-center gap-3">
               <div
                 className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold"
@@ -466,25 +466,8 @@ export default function RegionView() {
                 <p className="text-sm text-text-secondary">Gubernur Jawa Timur · PKB</p>
               </div>
             </div>
-          ) : prov.governor_name ? (
-            <div className="flex items-center gap-3">
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold"
-                style={{ backgroundColor: govParty?.color || '#374151' }}
-              >
-                {prov.governor_name.split(' ').map(w => w[0]).join('').slice(0, 2)}
-              </div>
-              <div>
-                <p className="text-base font-semibold text-text-primary">{prov.governor_name}</p>
-                <p className="text-sm text-text-secondary">
-                  Gubernur {prov.name}{govParty ? ` · ${govParty.abbr}` : ''}
-                </p>
-              </div>
-            </div>
-          ) : (
-            <p className="text-sm text-text-secondary">Data gubernur belum tersedia</p>
-          )}
-        </Card>
+          </Card>
+        )}
 
         {/* Kabupaten/Kota section */}
         {isJatim ? (
@@ -635,8 +618,8 @@ export default function RegionView() {
         {filteredProvinces.map(prov => {
           const island = prov.island || ISLAND_MAP[prov.id] || 'Lainnya'
           const islandColor = ISLAND_COLORS[island] || '#6B7280'
-          const govParty = PARTY_MAP[prov.governor_party_id]
-          const isJatim = prov.id === 'jawa-timur'
+          const govParty = PARTY_MAP[prov.governor_party_id || prov.party_id]
+          const isJatim = prov.id === 'jawa-timur' || prov.id === 'jawa_timur'
 
           return (
             <div
@@ -678,8 +661,8 @@ export default function RegionView() {
               <div className="text-xs text-text-secondary mt-2">
                 {isJatim ? (
                   <span>Gubernur: <span className="text-text-primary">Khofifah I.P.</span></span>
-                ) : prov.governor_name ? (
-                  <span>Gubernur: <span className="text-text-primary">{prov.governor_name}</span></span>
+                ) : (prov.governor_name || prov.gubernur) ? (
+                  <span>Gubernur: <span className="text-text-primary">{prov.governor_name || prov.gubernur}</span></span>
                 ) : (
                   <span className="italic text-text-muted">Data gubernur menyusul</span>
                 )}
@@ -687,9 +670,9 @@ export default function RegionView() {
 
               {/* Stats row */}
               <div className="flex items-center gap-3 mt-2 text-xs text-text-secondary">
-                {prov.population && <span>👥 {formatPop(prov.population)}</span>}
+                {(prov.population || prov.pop) && <span>👥 {formatPop(prov.pop || prov.population)}</span>}
                 {prov.dpr_seats && <span>🏛️ {prov.dpr_seats} kursi</span>}
-                {!prov.population && <span className="text-text-muted">—</span>}
+                {!prov.population && !prov.pop && <span className="text-text-muted">—</span>}
               </div>
 
               <div className="mt-3 pt-2 border-t border-border/50 text-right">
