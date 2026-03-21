@@ -1082,6 +1082,28 @@ export const PERSONS = [
       policy_direction:"Ketertiban, keamanan"
     }
   },
+  // ─── JATIM — KEAMANAN ────────────────────────────────────────────────────
+  {
+    id:"imam_sugianto", name:"Imam Sugianto", photo_url:null, photo_placeholder:"IS",
+    born:"1968", born_place:"Jawa Timur", religion:"Islam",
+    education:"Akademi Kepolisian",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Kapolda Jawa Timur",      institution:"Polda Jatim",      region:"Jawa Timur",  start:"2023", end:null,   is_current:true},
+    ],
+    tier:"provinsi", region_id:"jawa-timur",
+    bio:"Kepala Kepolisian Daerah Jawa Timur. Pejabat Polri senior yang memimpin pengamanan di salah satu provinsi terbesar Indonesia.",
+    tags:["polri","jatim","keamanan"],
+    lhkpn_latest:8000000000, lhkpn_year:2023,
+    connections_summary:"Kapolda Jatim",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:2, corruption_risk:"rendah",
+      nationalism:7, religiosity:5,
+      track_record:"Pengamanan Jatim terutama menjelang Pilkada 2024.",
+      policy_direction:"Ketertiban, keamanan"
+    }
+  },
   {
     id:"rudy_saladin", name:"Rudy Saladin", photo_url:null, photo_placeholder:"RS",
     born:"1968", born_place:"Jawa Barat", religion:"Islam",
@@ -1895,6 +1917,29 @@ export const PERSONS = [
     tags:["jatim","gerindra","pengusaha"], lhkpn_latest:15000000000, lhkpn_year:2023,
     connections_summary:"DPR RI Gerindra Jatim, pengusaha", twitter:null,
     analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:6, religiosity:4, track_record:"Fokus pada transportasi dan infrastruktur.", policy_direction:"Pro-infrastruktur"}
+  },
+  // ─── ORMAS & RELIGIOUS LEADERS ──────────────────────────────────────────
+  {
+    id:"gus_yahya", name:"Yahya Cholil Staquf", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wantimpres_Gus-Yahya.jpg?width=400", photo_placeholder:"YC",
+    born:"1966", born_place:"Rembang", religion:"Islam",
+    education:"Pesantren Raudlatut Thalabah; S1 Filsafat UGM",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Ketua Umum PBNU",         institution:"PBNU",             region:"Nasional",    start:"2021", end:null,   is_current:true},
+      {title:"Juru Bicara Kepresidenan", institution:"Istana Negara",    region:"Nasional",    start:"2007", end:"2014", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Ketua Umum PBNU sejak 2021. Tokoh muda NU yang dikenal karena pandangan moderat dan dialog antaragama internasional. Cucu KH Bisri Mustofa, kakak ipar Muhaimin Iskandar (secara tidak langsung via jaringan NU).",
+    tags:["nu","ulama","moderat","internasional"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Ketum PBNU, cucu KH Bisri Mustofa Rembang",
+    twitter:"@gusyahya",
+    analysis:{
+      ideology_score:-3, populism_score:4, corruption_risk:"rendah",
+      nationalism:8, religiosity:10,
+      track_record:"Reformis dalam NU. Mendorong islam moderat inklusif. Tur global soal perdamaian dan dialog Islam.",
+      policy_direction:"Islam moderat, inklusif, nasionalis"
+    }
   },
   // ─── ORMAS & RELIGIOUS LEADERS ──────────────────────────────────────────
   {
@@ -3032,13 +3077,19 @@ export const PERSONS = [
     bio:"Politisi dekat Jokowi, Ketua Projo (relawan Jokowi). Menjabat Menkominfo 2023-2024 di masa akhir Jokowi, dilanjutkan Kabinet Prabowo sebagai Menteri Koperasi. Dikritik atas penanganan judi online dan kebocoran data saat Menkominfo.",
     tags:["menteri","psi","jokowi-loyalis","kominfo"],
     lhkpn_latest:12000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:6000000000},{year:2020,amount:7500000000},{year:2021,amount:9000000000},{year:2022,amount:10500000000},{year:2023,amount:12000000000}],
     connections_summary:"Menteri Kabinet Prabowo, eks-Menkominfo, loyalis Jokowi",
     twitter:"@budiari",
     analysis:{
       ideology_score:2, populism_score:5, corruption_risk:"sedang",
       nationalism:6, religiosity:4,
       track_record:"Menkominfo 2023-2024 dikritik soal judi online dan PDN. Pindah ke Kemenkop di kabinet Prabowo.",
-      policy_direction:"Pro-digital, ekonomi kerakyatan"
+      policy_direction:"Pro-digital, ekonomi kerakyatan",
+      style:'Populis',
+      risk:'medium',
+      influence:6,
+      controversy_level:7,
+      notes:"Menkominfo 2023-2024 dikritik soal judi online dan PDN. Pindah ke Kemenkop di kabinet Prabowo."
     }
   },
   {
