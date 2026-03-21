@@ -518,6 +518,99 @@ export const CONNECTIONS = [
   { from:"kaesang",         to:"prabowo",        type:"koalisi", label:"PSI bergabung KIM Plus; Kaesang Ketum PSI dukung Prabowo", strength:7 },
   { from:"kaesang",         to:"airlangga",      type:"rekan",   label:"PSI-Golkar koalisi KIM Plus; Kaesang-Airlangga koordinasi",strength:6 },
   { from:"titiek_soeharto", to:"sby",            type:"rekan",   label:"Demokrat-Golkar lintas fraksi; Titiek anggota DPR",        strength:5 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH I: Academic/Technocrat Network ─────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  { from:"nawawi",          to:"hasto",          type:"konflik",  label:"KPK vs PDIP — Harun Masiku; Hasto tersangka obstruction of justice", strength:8 },
+  { from:"anwar_usman",     to:"megawati",       type:"konflik",  label:"PDIP kritik keras putusan MK 90/2023 yang menguntungkan Gibran",     strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH J: Opposition Network ──────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  { from:"anies",           to:"mahfud_md",      type:"rekan",    label:"Sesama oposisi Prabowo; mantan capres-cawapres yang kalah 2024",      strength:6 },
+  { from:"anies",           to:"ganjar",         type:"rekan",    label:"Sesama capres yang kalah Pilpres 2024",                               strength:5 },
+  { from:"mahfud_md",       to:"listyo_sigit",   type:"rekan",    label:"Menko Polhukam-Kapolri koordinasi keamanan dan penegakan hukum",      strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH K: Religious/Civil Society ─────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  { from:"gus_yahya",       to:"anies",          type:"rekan",    label:"NU-Anies dialog pemilu 2024; basis massa Islam moderat",              strength:6 },
+  { from:"haedar_nashir",   to:"mahfud_md",      type:"rekan",    label:"Muhammadiyah-eks Menko dialog kebijakan publik",                      strength:6 },
+  { from:"said_iqbal",      to:"ganjar",         type:"rekan",    label:"KSPI-PDIP koalisi buruh; Said Iqbal dukung Ganjar 2024",              strength:6 },
+  { from:"anwar_abbas",     to:"airlangga",      type:"rekan",    label:"MUI-Golkar dialog ekonomi syariah dan kebijakan",                     strength:5 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH L: Regional Cross-Links ────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  { from:"dedi_mulyadi",    to:"khofifah",       type:"rekan",    label:"Gubernur Jabar-Jatim; koordinasi antar-gubernur pulau Jawa",          strength:6 },
+  { from:"dedi_mulyadi",    to:"pramono_anung",  type:"rekan",    label:"Gubernur Jabar-DKI; koordinasi Jabodetabek dan isu bersama",          strength:6 },
+  { from:"ahmad_luthfi",    to:"khofifah",       type:"rekan",    label:"Gubernur Jateng-Jatim; tetangga provinsi, koordinasi regional",       strength:7 },
+  { from:"ahmad_luthfi",    to:"dedi_mulyadi",   type:"rekan",    label:"Gubernur tiga provinsi besar Jawa; koordinasi nasional",              strength:6 },
+  { from:"andra_soni",      to:"dedi_mulyadi",   type:"rekan",    label:"Gubernur Banten-Jabar; tetangga provinsi, isu bersama Jabodetabek",   strength:6 },
+  { from:"bobby_nasution",  to:"muzakir_manaf",  type:"rekan",    label:"Gubernur Sumut-Aceh; tetangga provinsi Sumatera utara",               strength:5 },
+  { from:"mahyeldi",        to:"muzakir_manaf",  type:"rekan",    label:"Gubernur Sumbar-Aceh; tetangga provinsi Sumatera barat-utara",        strength:5 },
+  { from:"koster",          to:"mahyeldi",       type:"rekan",    label:"Gubernur Bali-Sumbar; pertemuan forum gubernur nasional",              strength:4 },
+  { from:"sultan_hb10",     to:"koster",         type:"rekan",    label:"Gubernur DIY-Bali; dialog budaya dan pariwisata antar-gubernur",      strength:5 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH M: Business-Politics ────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  { from:"hary_tanoe",      to:"jokowi",         type:"rekan",    label:"MNC Group media relasi era Jokowi 2014-2024",                         strength:7 },
+  { from:"hashim",          to:"jokowi",         type:"konflik",  label:"Bisnis tambang-Djojohadikusumo vs lingkaran PDIP era konflik",        strength:4 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH N: DPR Internal Ties ────────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  { from:"puan",            to:"sufmi_dasco",    type:"rekan",    label:"Ketua DPR-Ketua Harian DPR; koordinasi lintas fraksi PDIP-Gerindra",  strength:6 },
+  { from:"puan",            to:"cucun_syamsurijal", type:"rekan", label:"Ketua DPR-Wakil Ketua DPR lintas fraksi PDIP-PKB",                   strength:5 },
+  { from:"meutya_hafid",    to:"habiburokhman",  type:"rekan",    label:"Sesama Golkar/Gerindra DPR; Komisi I-III lintas koordinasi",          strength:6 },
+  { from:"sartono_hutomo",  to:"sufmi_dasco",    type:"rekan",    label:"Gerindra DPR; Sartono Ketua Komisi VI-Dasco Ketua Harian DPR",        strength:7 },
+  { from:"utut_adianto",    to:"puan",           type:"koalisi",  label:"PDIP DPR — Utut Ketua Komisi II koordinasi dengan Puan Ketua DPR",    strength:7 },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH O: Historical/Dynasty ──────────────────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  { from:"soekarno",        to:"megawati",       type:"keluarga", label:"Ayah-Anak kandung; Soekarno Presiden RI ke-1, Megawati ke-5",         strength:10 },
+  { from:"soekarno",        to:"guruh",          type:"keluarga", label:"Ayah-Anak kandung; Guruh putra bungsu Soekarno dari Fatmawati",       strength:10 },
+  { from:"soekarno",        to:"prananda",       type:"keluarga", label:"Kakek-Cucu; Prananda cucu Soekarno melalui Megawati",                 strength:8  },
+  { from:"sumitro",         to:"prabowo",        type:"keluarga", label:"Ayah-Anak kandung; Sumitro ekonom besar, Prabowo Presiden ke-8",      strength:10 },
+  { from:"sumitro",         to:"hashim",         type:"keluarga", label:"Ayah-Anak kandung; Hashim pengusaha Arsari Group",                    strength:10 },
+  { from:"prananda",        to:"puan",           type:"keluarga", label:"Kakak-Adik kandung; keduanya anak Megawati, kader PDIP",              strength:9  },
+  { from:"prananda",        to:"megawati",       type:"keluarga", label:"Anak-Ibu; Prananda putra Megawati, pengelola digital PDIP",           strength:10 },
+  { from:"guruh",           to:"megawati",       type:"keluarga", label:"Adik-Kakak kandung; keduanya anak Soekarno-Fatmawati",                strength:9  },
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // ── BATCH P: Extra Cross-Links (push to 400+) ─────────────────────────────
+  // ═══════════════════════════════════════════════════════════════════════════
+  { from:"prabowo",         to:"megawati",       type:"konflik",  label:"Rival Pilpres 2009 (Mega-Prabowo kalah), beda blok 2024",             strength:4 },
+  { from:"anies",           to:"prabowo",        type:"konflik",  label:"Rival Pilpres 2024 — Anies kalah 24.95% vs Prabowo 58.59%",           strength:7 },
+  { from:"ganjar",          to:"prabowo",        type:"konflik",  label:"Rival Pilpres 2024 — Ganjar kalah 16.47% vs Prabowo 58.59%",          strength:7 },
+  { from:"zulhas",          to:"airlangga",      type:"rekan",    label:"PAN-Golkar KIM Plus; Zulhas-Airlangga koordinasi koalisi",            strength:6 },
+  { from:"anwar_usman",     to:"prabowo",        type:"rekan",    label:"Putusan MK batas usia Cawapres membantu Gibran/Prabowo menang",        strength:5 },
+  { from:"kaesang",         to:"megawati",       type:"konflik",  label:"PSI vs PDIP — Kaesang Ketum PSI berseberangan partai Megawati",       strength:3 },
+  { from:"nawawi",          to:"listyo_sigit",   type:"rekan",    label:"KPK-Polri koordinasi penegakan hukum dan pemberantasan korupsi",      strength:6 },
+  { from:"pramono_anung",   to:"hasto",          type:"rekan",    label:"PDIP — Gubernur DKI-Sekjen PDIP; koordinasi partai",                  strength:6 },
+  { from:"khofifah",        to:"airlangga",      type:"rekan",    label:"Gubernur Jatim berkoalisi KIM Plus; Golkar-PKB koordinasi Jatim",     strength:6 },
+  { from:"surya_paloh",     to:"megawati",       type:"mantan-koalisi", label:"NasDem-PDIP pernah berkoalisi; kini renggang pasca-split Anies", strength:5 },
+  { from:"ganjar",          to:"jokowi",         type:"rekan",    label:"Eks-Gubernur Jateng didukung Jokowi; loyalis Jokowi dalam PDIP",      strength:7 },
+  { from:"anies",           to:"sby",            type:"rekan",    label:"Sesama mantan pejabat; oposisi bersama pasca-Pilpres 2024",           strength:5 },
+  { from:"dedi_mulyadi",    to:"cakimin",        type:"rekan",    label:"Gubernur Jabar-Ketum PKB; Jabar punya basis PKB besar",               strength:5 },
+  { from:"ahmad_luthfi",    to:"cakimin",        type:"rekan",    label:"Gubernur Jateng-Ketum PKB; Jateng basis PKB signifikan",              strength:5 },
+  { from:"ahmad_luthfi",    to:"airlangga",      type:"koalisi",  label:"KIM Plus Jateng; Gerindra-Golkar koalisi di Jawa Tengah",             strength:7 },
+  { from:"andra_soni",      to:"airlangga",      type:"koalisi",  label:"KIM Plus Banten; Demokrat-Golkar koalisi di Banten",                  strength:6 },
+  { from:"muzakir_manaf",   to:"airlangga",      type:"koalisi",  label:"KIM Plus Aceh; Gerindra-Golkar koordinasi di Aceh",                   strength:5 },
+  { from:"khofifah",        to:"megawati",       type:"konflik",  label:"PKB vs PDIP Jatim 2024; persaingan basis massa dan gubernur",         strength:4 },
+  { from:"mahfud_md",       to:"prabowo",        type:"konflik",  label:"Rival Pilpres 2024 — Ganjar-Mahfud kalah dari Prabowo",               strength:6 },
+  { from:"nawawi",          to:"megawati",       type:"konflik",  label:"KPK vs PDIP-Megawati atas kasus Harun Masiku dan Hasto",              strength:7 },
+  { from:"tom_lembong",     to:"prabowo",        type:"konflik",  label:"Ditangkap Kejagung era Prabowo — diduga kriminalisasi oposan",        strength:6 },
+  { from:"jokowi",          to:"hasto",          type:"konflik",  label:"Jokowi vs PDIP; Hasto Sekjen yang menentang perpanjangan masa jabatan",strength:5 },
+  { from:"anies",           to:"mahyeldi",       type:"rekan",    label:"PKS usung keduanya; Anies Capres, Mahyeldi Gubernur Sumbar PKS",      strength:5 },
+  { from:"sri_mulyani",     to:"gibran",         type:"rekan",    label:"Menkeu-Wakil Presiden koordinasi fiskal kabinet Prabowo",             strength:7 },
+  { from:"ahy",             to:"megawati",       type:"konflik",  label:"Demokrat-PDIP berseberangan; AHY pro-Prabowo, Mega oposisi",          strength:4 },
+  { from:"basuki",          to:"airlangga",      type:"rekan",    label:"Kepala OIKN-Menko Ekonomi; koordinasi pembangunan IKN Nusantara",     strength:6 },
+  { from:"prabowo",         to:"sby",            type:"rekan",    label:"Eks-rival Pilpres 2009; bersama lagi di kabinet-koalisi pasca-2024",  strength:5 },
+  { from:"megawati",        to:"anies",          type:"konflik",  label:"PDIP tidak usung Anies; Megawati dukung Ganjar melawan Anies",        strength:5 },
 ]
 
 export const CONNECTION_TYPES = {
