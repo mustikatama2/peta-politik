@@ -14,6 +14,7 @@ import WealthBar from '../../components/WealthBar'
 import ConnectionBadge from '../../components/ConnectionBadge'
 import NewsCard from '../../components/NewsCard'
 import PersonCard from '../../components/PersonCard'
+import CareerTimeline from '../../components/CareerTimeline'
 import { Avatar, Badge, Tabs, Card, formatIDR, Tag, RiskDot, Btn, Breadcrumb } from '../../components/ui'
 
 function getRelatedPersons(person, allPersons, connections) {
@@ -63,6 +64,7 @@ class ErrorBoundary extends Component {
 
 const TABS = [
   { id: 'profil',   label: '📋 Profil' },
+  { id: 'karir',    label: '🏛️ Karier' },
   { id: 'koneksi',  label: '🕸️ Koneksi' },
   { id: 'lhkpn',   label: '💰 LHKPN' },
   { id: 'berita',   label: '📰 Berita' },
@@ -400,6 +402,42 @@ export default function PersonDetail() {
             </div>
           </div>
         )}
+
+        {/* Rekam Jejak Singkat — last 3 positions as compact chips */}
+        {sortedPositions.length > 0 && (
+          <div className="mt-4">
+            <p className="text-[11px] text-text-secondary uppercase tracking-wider mb-2 font-semibold">Rekam Jejak Singkat</p>
+            <div className="flex flex-wrap items-center gap-1.5">
+              {sortedPositions.slice(0, 3).map((pos, i) => {
+                const yearStart = pos.year_start || pos.start || null
+                const yearEnd   = pos.year_end   || pos.end   || null
+                const org       = pos.org         || pos.institution || null
+                const label     = `${yearStart || '?'} – ${pos.is_current ? 'Sekarang' : (yearEnd || '?')}: ${pos.title}${org ? ` · ${org}` : ''}`
+                return (
+                  <span
+                    key={i}
+                    className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium border"
+                    style={{
+                      backgroundColor: pos.is_current ? 'rgba(245,158,11,0.12)' : 'var(--bg-elevated)',
+                      borderColor:     pos.is_current ? 'rgba(245,158,11,0.4)' : 'var(--border)',
+                      color:           pos.is_current ? 'var(--accent-gold, #F59E0B)' : 'var(--text-secondary)',
+                    }}
+                  >
+                    {label}
+                  </span>
+                )
+              })}
+              {sortedPositions.length > 3 && (
+                <button
+                  onClick={() => setActiveTab('karir')}
+                  className="text-[11px] font-medium px-2.5 py-1 rounded-full border border-border text-text-secondary hover:text-text-primary hover:bg-bg-elevated transition-colors"
+                >
+                  +{sortedPositions.length - 3} lainnya →
+                </button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Tabs */}
@@ -555,6 +593,41 @@ export default function PersonDetail() {
                         <div>
                           <p className="text-sm text-text-primary">{e.title}</p>
                           <p className="text-xs text-text-secondary line-clamp-1">{e.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              )
+            })()}
+          </div>
+        )}
+
+        {/* KARIER */}
+        {activeTab === 'karir' && (
+          <div className="space-y-4">
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-4">Rekam Jabatan</h3>
+              <CareerTimeline person={person} />
+            </Card>
+
+            {/* Timeline events tied to this person */}
+            {(() => {
+              const personTimeline = TIMELINE_EVENTS.filter(e =>
+                e.person_ids?.includes(person.id) ||
+                e.description?.toLowerCase().includes(person.name.split(' ')[0].toLowerCase())
+              ).sort((a, b) => b.year - a.year)
+              if (personTimeline.length === 0) return null
+              return (
+                <Card className="p-5">
+                  <h3 className="text-sm font-bold text-text-primary mb-3">📅 Momen Bersejarah</h3>
+                  <div className="space-y-2">
+                    {personTimeline.map(e => (
+                      <div key={e.id} className="flex gap-3 p-3 rounded-lg border border-border bg-bg-elevated">
+                        <span className="text-xs font-bold text-accent-red flex-shrink-0 w-10">{e.year}</span>
+                        <div>
+                          <p className="text-sm text-text-primary">{e.title}</p>
+                          <p className="text-xs text-text-secondary line-clamp-2">{e.description}</p>
                         </div>
                       </div>
                     ))}

@@ -94,12 +94,21 @@ export default function PersonCard({ person, compact, bookmarked, onBookmark, ha
             <h3 className="font-semibold text-text-primary text-sm leading-snug group-hover:text-accent-red transition-colors line-clamp-1">
               {person.name}
             </h3>
-            <p className="text-xs text-text-secondary mt-0.5 line-clamp-1">
-              {currentPos?.title || '—'}
-            </p>
-            <p className="text-xs text-text-muted line-clamp-1">
-              {currentPos?.institution || person.tier}
-            </p>
+            {currentPos ? (
+              <div className="mt-0.5">
+                <p className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--text-muted, #6B7280)' }}>
+                  Jabatan Saat Ini
+                </p>
+                <p className="text-xs text-text-secondary line-clamp-1 leading-snug">
+                  {currentPos.title}
+                </p>
+                <p className="text-xs text-text-muted line-clamp-1">
+                  {currentPos.institution || currentPos.org}
+                </p>
+              </div>
+            ) : (
+              <p className="text-xs text-text-muted mt-0.5 line-clamp-1">{person.tier}</p>
+            )}
           </div>
         </div>
 
