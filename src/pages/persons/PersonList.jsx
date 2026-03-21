@@ -1,9 +1,9 @@
 import { useMemo, useState, useCallback, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import { PERSONS } from '../../data/persons'
 import { PARTIES } from '../../data/parties'
 import PersonCard from '../../components/PersonCard'
-import { SearchBar, Select, PageHeader } from '../../components/ui'
+import { SearchBar, Select, PageHeader, toast } from '../../components/ui'
 
 // ── Watchlist helpers ──────────────────────────────────────────────────────────
 const getWatchlist = () => JSON.parse(localStorage.getItem('pp_watchlist') || '[]')
@@ -45,9 +45,11 @@ function getJabatan(person) {
 
 export default function PersonList() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
   const [watchlist, setWatchlist] = useState(() => getWatchlist())
   const [showWatchlist, setShowWatchlist] = useState(false)
   const [livePersonIds, setLivePersonIds] = useState(new Set())
+  const [compareP1, setCompareP1] = useState(() => localStorage.getItem('compare_p1') || null)
 
   useEffect(() => {
     fetch('/api/news?limit=100')
@@ -64,6 +66,25 @@ export default function PersonList() {
     const updated = toggleWatchlistItem(id)
     setWatchlist(updated)
   }, [])
+
+  const handleCompare = useCallback((personId) => {
+    const existing = localStorage.getItem('compare_p1')
+    if (!existing) {
+      // First selection
+      localStorage.setItem('compare_p1', personId)
+      setCompareP1(personId)
+      toast('Pilih satu lagi untuk dibandingkan', 'info')
+    } else if (existing === personId) {
+      // Deselect same person
+      localStorage.removeItem('compare_p1')
+      setCompareP1(null)
+    } else {
+      // Second selection — navigate to compare page
+      localStorage.removeItem('compare_p1')
+      setCompareP1(null)
+      navigate(`/compare/${existing}/${personId}`)
+    }
+  }, [navigate])
 
   const search       = searchParams.get('q')       || ''
   const filterTier   = searchParams.get('tier')    || ''
@@ -325,15 +346,39 @@ export default function PersonList() {
         </div>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
-          {filtered.map(person => (
-            <PersonCard
-              key={person.id}
-              person={person}
-              bookmarked={watchlist.includes(person.id)}
-              onBookmark={handleBookmark}
-              hasLiveNews={livePersonIds.has(person.id)}
-            />
-          ))}
+          {filtered.map(person => {
+            const isSelected = compareP1 === person.id
+            return (
+              <div key={person.id} className="relative flex flex-col">
+                {/* Terpilih badge */}
+                {isSelected && (
+                  <div className="absolute top-0 left-0 right-0 z-20 flex justify-center pointer-events-none">
+                    <span className="mt-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500 text-white shadow">
+                      Terpilih ✓
+                    </span>
+                  </div>
+                )}
+                <PersonCard
+                  person={person}
+                  bookmarked={watchlist.includes(person.id)}
+                  onBookmark={handleBookmark}
+                  hasLiveNews={livePersonIds.has(person.id)}
+                />
+                {/* Bandingkan button */}
+                <button
+                  onClick={() => handleCompare(person.id)}
+                  className={`mt-1 w-full py-1 rounded-lg text-[11px] font-medium border transition-all ${
+                    isSelected
+                      ? 'bg-blue-500/20 border-blue-500/40 text-blue-400 hover:bg-blue-500/30'
+                      : 'bg-bg-elevated border-border text-text-secondary hover:text-text-primary hover:border-border/80'
+                  }`}
+                  title={isSelected ? 'Batalkan pilihan' : 'Bandingkan tokoh ini'}
+                >
+                  {isSelected ? '✓ Terpilih — pilih satu lagi' : '⚖️ Bandingkan'}
+                </button>
+              </div>
+            )
+          })}
         </div>
       )}
     </div>

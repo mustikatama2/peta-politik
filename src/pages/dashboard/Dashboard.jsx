@@ -17,6 +17,8 @@ import { TIMELINE_EVENTS } from '../../data/timeline_events'
 import PersonCard from '../../components/PersonCard'
 import NewsCard from '../../components/NewsCard'
 import { KPICard, Card } from '../../components/ui'
+import WatchlistAlerts from '../../components/WatchlistAlerts'
+import QuickSearch from '../../components/QuickSearch'
 
 // Safe fallback for PROVINCES (data agent may not have committed yet)
 const PROVINCES = RegionsData.PROVINCES || []
@@ -302,9 +304,12 @@ export default function Dashboard() {
       {/* ── Bloomberg Stats Bar ── */}
       <LiveStatsBar />
 
+      {/* ── Watchlist Alerts ── */}
+      <WatchlistAlerts />
+
       {/* Welcome Banner */}
       <div className="bg-gradient-to-r from-bg-card to-bg-elevated border border-border rounded-xl p-5">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <h1 className="text-xl font-bold text-text-primary">
               Selamat datang, {user?.name || 'Analis'} 👋
@@ -313,7 +318,10 @@ export default function Dashboard() {
               Platform pemantauan transparansi &amp; akuntabilitas politik Indonesia
             </p>
           </div>
-          <span className="text-text-secondary text-sm">{today}</span>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <QuickSearch />
+            <span className="text-text-secondary text-sm whitespace-nowrap">{today}</span>
+          </div>
         </div>
       </div>
 
