@@ -1040,6 +1040,411 @@ function TabMetodologi() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// TAB: KETIMPANGAN LHKPN
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function giniCoefficient(values) {
+  if (!values || values.length === 0) return 0
+  const sorted = [...values].sort((a, b) => a - b)
+  const n = sorted.length
+  const mean = sorted.reduce((a, b) => a + b, 0) / n
+  if (mean === 0) return 0
+  let numerator = 0
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      numerator += Math.abs(sorted[i] - sorted[j])
+    }
+  }
+  return numerator / (2 * n * n * mean)
+}
+
+function lorenzCurve(values) {
+  const sorted = [...values].sort((a, b) => a - b)
+  const n = sorted.length
+  const total = sorted.reduce((a, b) => a + b, 0)
+  const points = [{ x: 0, actual: 0, equality: 0 }]
+  let cumWealth = 0
+  for (let i = 0; i < n; i++) {
+    cumWealth += sorted[i]
+    const x = ((i + 1) / n) * 100
+    const y = (cumWealth / total) * 100
+    points.push({ x: parseFloat(x.toFixed(1)), actual: parseFloat(y.toFixed(1)), equality: parseFloat(x.toFixed(1)) })
+  }
+  return points
+}
+
+const SALARY_DATA_LHKPN = [
+  { id: 'prabowo',      salary_year: 1_500_000_000 },
+  { id: 'gibran',       salary_year: 900_000_000 },
+  { id: 'airlangga',    salary_year: 600_000_000 },
+  { id: 'sri_mulyani',  salary_year: 600_000_000 },
+  { id: 'megawati',     salary_year: 300_000_000 },
+  { id: 'erick_thohir', salary_year: 600_000_000 },
+  { id: 'bahlil',       salary_year: 600_000_000 },
+  { id: 'ahy',          salary_year: 600_000_000 },
+  { id: 'jokowi',       salary_year: 1_200_000_000 },
+  { id: 'khofifah',     salary_year: 180_000_000 },
+].map(s => {
+  const p = PERSONS.find(x => x.id === s.id)
+  if (!p?.lhkpn_latest) return null
+  const shortName = p.name.split(' ').slice(0, 2).join(' ')
+  return {
+    name: shortName,
+    fullName: p.name,
+    wealth: p.lhkpn_latest,
+    salary_year: s.salary_year,
+    years: Math.round(p.lhkpn_latest / s.salary_year),
+    party_id: p.party_id,
+    party_color: PARTY_MAP[p.party_id]?.color || '#6B7280',
+  }
+}).filter(Boolean)
+
+function fmtTrilion(v) {
+  if (v >= 1_000_000_000_000) return `Rp ${(v / 1_000_000_000_000).toFixed(2)} T`
+  if (v >= 1_000_000_000)     return `Rp ${(v / 1_000_000_000).toFixed(1)} M`
+  if (v >= 1_000_000)         return `Rp ${(v / 1_000_000).toFixed(0)} jt`
+  return `Rp ${v.toLocaleString('id-ID')}`
+}
+
+function fmtMiliar(v) {
+  return (v / 1_000_000_000).toFixed(1)
+}
+
+function TabLHKPN() {
+  const personsWithLHKPN = useMemo(() =>
+    PERSONS.filter(p => p.lhkpn_latest && p.lhkpn_latest > 0), [])
+
+  const lhkpnValues = useMemo(() =>
+    personsWithLHKPN.map(p => p.lhkpn_latest), [personsWithLHKPN])
+
+  const gini = useMemo(() => giniCoefficient(lhkpnValues), [lhkpnValues])
+
+  // Lorenz curve data (sample every 5th point for performance)
+  const lorenzData = useMemo(() => {
+    const pts = lorenzCurve(lhkpnValues)
+    const step = Math.max(1, Math.floor(pts.length / 30))
+    return pts.filter((_, i) => i % step === 0 || i === pts.length - 1)
+  }, [lhkpnValues])
+
+  // Section B: by tier
+  const tierData = useMemo(() => {
+    const groups = {}
+    personsWithLHKPN.forEach(p => {
+      const tier = p.tier || 'nasional'
+      if (!groups[tier]) groups[tier] = []
+      groups[tier].push(p.lhkpn_latest)
+    })
+    return Object.entries(groups).map(([tier, vals]) => {
+      const sorted = [...vals].sort((a, b) => a - b)
+      const mid = Math.floor(sorted.length / 2)
+      const median = sorted.length % 2 === 0
+        ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid]
+      const mean = vals.reduce((a, b) => a + b, 0) / vals.length
+      const tierLabel = tier === 'nasional' ? 'Nasional' : tier === 'regional' ? 'Provinsi' : 'Kabupaten/Kota'
+      return {
+        tier: tierLabel,
+        median: parseFloat(fmtMiliar(median)),
+        mean: parseFloat(fmtMiliar(mean)),
+        max: parseFloat(fmtMiliar(Math.max(...vals))),
+        count: vals.length,
+      }
+    }).sort((a, b) => b.median - a.median)
+  }, [personsWithLHKPN])
+
+  // Section D: Top 20
+  const top20 = useMemo(() =>
+    [...personsWithLHKPN]
+      .sort((a, b) => b.lhkpn_latest - a.lhkpn_latest)
+      .slice(0, 20)
+      .map(p => ({
+        name: p.name.split(' ').slice(0, 2).join(' '),
+        fullName: p.name,
+        wealth: parseFloat(fmtMiliar(p.lhkpn_latest)),
+        wealthRaw: p.lhkpn_latest,
+        party_id: p.party_id,
+        position: p.positions?.[0]?.title || '-',
+        color: PARTY_MAP[p.party_id]?.color || '#6B7280',
+      })),
+    [personsWithLHKPN])
+
+  // Insights
+  const avgWealth = lhkpnValues.reduce((a, b) => a + b, 0) / lhkpnValues.length
+  const prabowo = PERSONS.find(p => p.id === 'prabowo')
+  const prabMult = prabowo ? (prabowo.lhkpn_latest / avgWealth).toFixed(1) : '?'
+  const nasional = personsWithLHKPN.filter(p => p.tier === 'nasional')
+  const regional = personsWithLHKPN.filter(p => p.tier === 'regional')
+  const avgNasional = nasional.length ? nasional.reduce((a, b) => a + b.lhkpn_latest, 0) / nasional.length : 0
+  const avgRegional = regional.length ? regional.reduce((a, b) => a + b.lhkpn_latest, 0) / regional.length : 0
+  const rich100 = personsWithLHKPN.filter(p => p.lhkpn_latest >= 100_000_000_000)
+  const richBusiness = rich100.filter(p => (p.tags || []).includes('pengusaha'))
+
+  const giniLabel = gini > 0.6 ? 'sangat tinggi' : gini > 0.4 ? 'tinggi' : gini > 0.3 ? 'sedang' : 'rendah'
+  const giniPct = (gini * 100).toFixed(0)
+
+  // Cumulative share for insight
+  const sorted = [...lhkpnValues].sort((a, b) => b - a)
+  const totalWealth = sorted.reduce((a, b) => a + b, 0)
+  const top10Count = Math.ceil(sorted.length * 0.1)
+  const top10Wealth = sorted.slice(0, top10Count).reduce((a, b) => a + b, 0)
+  const top10Pct = ((top10Wealth / totalWealth) * 100).toFixed(0)
+
+  return (
+    <div className="space-y-8">
+      {/* Header */}
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">💰 Ketimpangan Kekayaan Pejabat (LHKPN)</h2>
+        <p className="text-sm text-text-muted mt-1">
+          Analisis distribusi kekayaan berdasarkan data deklarasi LHKPN publik — {personsWithLHKPN.length} tokoh dengan data valid
+        </p>
+      </div>
+
+      {/* ─── Section A: Gini Coefficient ─── */}
+      <div className="bg-bg-card rounded-xl border border-border p-6">
+        <h3 className="text-base font-semibold text-text-primary mb-4">A. Koefisien Gini Kekayaan Pejabat</h3>
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+          {/* Big Gini number */}
+          <div className="text-center p-6 bg-bg-elevated rounded-xl border border-border min-w-[140px]">
+            <p className="text-xs text-text-muted mb-1">Koefisien Gini</p>
+            <p className="text-5xl font-black" style={{ color: gini > 0.5 ? '#ef4444' : gini > 0.35 ? '#f59e0b' : '#22c55e' }}>
+              {gini.toFixed(2)}
+            </p>
+            <p className="text-xs text-text-muted mt-1 capitalize">{giniLabel}</p>
+          </div>
+
+          <div className="flex-1 space-y-4">
+            {/* Interpretation */}
+            <div className="text-sm text-text-muted space-y-1">
+              <p>Skala: <span className="text-green-400">0</span> = sempurna merata · <span className="text-red-400">1</span> = maksimum timpang</p>
+              <p className="text-text-primary font-medium">
+                Ketimpangan kekayaan pejabat bersifat <span className="capitalize font-bold" style={{ color: gini > 0.5 ? '#ef4444' : '#f59e0b' }}>{giniLabel}</span>
+              </p>
+              <p>→ {top10Pct}% kekayaan yang dideklarasikan dimiliki oleh 10% pejabat terkaya</p>
+            </div>
+
+            {/* Comparison bars */}
+            <div className="space-y-2">
+              <div>
+                <div className="flex justify-between text-xs text-text-muted mb-1">
+                  <span>Pejabat RI (LHKPN)</span>
+                  <span className="font-mono">{gini.toFixed(3)}</span>
+                </div>
+                <div className="w-full h-4 bg-bg-elevated rounded-full overflow-hidden">
+                  <div className="h-full rounded-full" style={{ width: `${(gini * 100).toFixed(1)}%`, backgroundColor: '#ef4444' }} />
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between text-xs text-text-muted mb-1">
+                  <span>Populasi umum Indonesia (BPS 2023)</span>
+                  <span className="font-mono">0.381</span>
+                </div>
+                <div className="w-full h-4 bg-bg-elevated rounded-full overflow-hidden">
+                  <div className="h-full rounded-full" style={{ width: '38.1%', backgroundColor: '#f59e0b' }} />
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-text-muted">Referensi: Rasio Gini nasional Indonesia = 0.381 (BPS 2023)</p>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Section B: Wealth by Tier ─── */}
+      <div className="bg-bg-card rounded-xl border border-border p-6">
+        <h3 className="text-base font-semibold text-text-primary mb-4">B. Distribusi Kekayaan per Tingkat Jabatan</h3>
+        <p className="text-xs text-text-muted mb-4">Median kekayaan LHKPN per jenjang jabatan (dalam miliar Rupiah)</p>
+        <ResponsiveContainer width="100%" height={220}>
+          <BarChart data={tierData} margin={{ top: 0, right: 20, left: 10, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+            <XAxis dataKey="tier" tick={{ fill: '#9ca3af', fontSize: 12 }} />
+            <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} unit=" M" />
+            <Tooltip
+              contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151', borderRadius: 8 }}
+              labelStyle={{ color: '#f9fafb', fontWeight: 600 }}
+              formatter={(v, name) => {
+                if (name === 'median') return [`Rp ${v} miliar`, 'Median']
+                if (name === 'mean')   return [`Rp ${v} miliar`, 'Rata-rata']
+                return [v, name]
+              }}
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs space-y-1">
+                    <p className="font-semibold text-text-primary">{label}</p>
+                    <p className="text-text-muted">Median: <span className="text-text-primary">Rp {d?.median} M</span></p>
+                    <p className="text-text-muted">Rata-rata: <span className="text-text-primary">Rp {d?.mean} M</span></p>
+                    <p className="text-text-muted">Tertinggi: <span className="text-text-primary">Rp {d?.max} M</span></p>
+                    <p className="text-text-muted">Jumlah: <span className="text-text-primary">{d?.count} tokoh</span></p>
+                  </div>
+                )
+              }}
+            />
+            <Bar dataKey="median" fill="#3b82f6" radius={[4, 4, 0, 0]} name="median" />
+            <Bar dataKey="mean" fill="#8b5cf6" radius={[4, 4, 0, 0]} name="mean" />
+            <Legend formatter={v => v === 'median' ? 'Median' : 'Rata-rata'} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* ─── Section C: Wealth vs Salary ─── */}
+      <div className="bg-bg-card rounded-xl border border-border p-6">
+        <h3 className="text-base font-semibold text-text-primary mb-1">C. Rasio Kekayaan vs Gaji Jabatan</h3>
+        <p className="text-xs text-text-muted mb-4">Berapa tahun gaji diperlukan untuk mencapai total kekayaan LHKPN — <span className="text-red-400">merah {'>'} 100 tahun</span>, <span className="text-amber-400">kuning 50–100 tahun</span>, <span className="text-green-400">hijau {'<'} 50 tahun</span></p>
+        <ResponsiveContainer width="100%" height={280}>
+          <BarChart data={SALARY_DATA_LHKPN} layout="vertical" margin={{ top: 0, right: 80, left: 90, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+            <XAxis type="number" tick={{ fill: '#9ca3af', fontSize: 11 }} unit=" th" />
+            <YAxis dataKey="name" type="category" tick={{ fill: '#9ca3af', fontSize: 11 }} width={88} />
+            <Tooltip
+              contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151', borderRadius: 8 }}
+              content={({ active, payload }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs space-y-1">
+                    <p className="font-semibold text-text-primary">{d.fullName}</p>
+                    <p className="text-text-muted">Kekayaan LHKPN: <span className="text-text-primary">{fmtTrilion(d.wealth)}</span></p>
+                    <p className="text-text-muted">Estimasi gaji/tahun: <span className="text-text-primary">{fmtTrilion(d.salary_year)}</span></p>
+                    <p className="text-amber-400 font-bold">{d.years} tahun gaji</p>
+                  </div>
+                )
+              }}
+            />
+            <Bar dataKey="years" radius={[0, 4, 4, 0]}>
+              {SALARY_DATA_LHKPN.map((d, i) => (
+                <Cell
+                  key={i}
+                  fill={d.years > 100 ? '#ef4444' : d.years > 50 ? '#f59e0b' : '#22c55e'}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* ─── Section D: Top 20 Wealthiest ─── */}
+      <div className="bg-bg-card rounded-xl border border-border p-6">
+        <h3 className="text-base font-semibold text-text-primary mb-4">D. 20 Pejabat Terkaya (LHKPN)</h3>
+        <ResponsiveContainer width="100%" height={480}>
+          <BarChart data={top20} layout="vertical" margin={{ top: 0, right: 100, left: 100, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+            <XAxis type="number" tick={{ fill: '#9ca3af', fontSize: 10 }} unit=" M" />
+            <YAxis dataKey="name" type="category" tick={{ fill: '#9ca3af', fontSize: 10 }} width={98} />
+            <Tooltip
+              content={({ active, payload }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs space-y-1">
+                    <p className="font-semibold text-text-primary">{d.fullName}</p>
+                    <p className="text-text-muted">Jabatan: <span className="text-text-primary">{d.position}</span></p>
+                    <p className="text-text-muted">Partai: <span className="text-text-primary">{PARTY_MAP[d.party_id]?.abbr || '-'}</span></p>
+                    <p className="text-amber-400 font-bold">{fmtTrilion(d.wealthRaw)}</p>
+                  </div>
+                )
+              }}
+            />
+            <Bar dataKey="wealth" radius={[0, 4, 4, 0]}>
+              {top20.map((d, i) => (
+                <Cell key={i} fill={d.color} />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* ─── Section E: Lorenz Curve ─── */}
+      <div className="bg-bg-card rounded-xl border border-border p-6">
+        <h3 className="text-base font-semibold text-text-primary mb-1">E. Kurva Lorenz Kekayaan Pejabat</h3>
+        <p className="text-xs text-text-muted mb-4">Semakin jauh kurva merah dari diagonal garis sempurna, semakin timpang distribusi kekayaan</p>
+        <ResponsiveContainer width="100%" height={320}>
+          <ComposedChart data={lorenzData} margin={{ top: 10, right: 20, left: 10, bottom: 20 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" />
+            <XAxis
+              dataKey="x"
+              type="number"
+              domain={[0, 100]}
+              tick={{ fill: '#9ca3af', fontSize: 11 }}
+              label={{ value: 'Kumulatif pejabat (%)', position: 'insideBottom', offset: -12, fill: '#9ca3af', fontSize: 11 }}
+            />
+            <YAxis
+              domain={[0, 100]}
+              tick={{ fill: '#9ca3af', fontSize: 11 }}
+              label={{ value: 'Kumulatif kekayaan (%)', angle: -90, position: 'insideLeft', fill: '#9ca3af', fontSize: 11 }}
+            />
+            <Tooltip
+              contentStyle={{ backgroundColor: '#1f2937', border: '1px solid #374151', borderRadius: 8 }}
+              formatter={(v, name) => [
+                `${v.toFixed(1)}%`,
+                name === 'equality' ? 'Sempurna Merata' : 'Aktual (LHKPN)'
+              ]}
+            />
+            <Legend />
+            <Line type="monotone" dataKey="equality" stroke="#22c55e" strokeDasharray="6 3" dot={false} strokeWidth={2} name="equality" />
+            <Line type="monotone" dataKey="actual" stroke="#ef4444" dot={false} strokeWidth={2.5} name="actual" />
+            <Area type="monotone" dataKey="actual" fill="#ef444420" stroke="none" />
+          </ComposedChart>
+        </ResponsiveContainer>
+        <p className="text-xs text-text-muted mt-2 text-center">
+          Area antara kurva merah dan garis hijau proporsional dengan Gini = <strong className="text-text-primary">{gini.toFixed(3)}</strong>
+        </p>
+      </div>
+
+      {/* ─── Section F: Insights ─── */}
+      <div className="bg-bg-card rounded-xl border border-border p-6">
+        <h3 className="text-base font-semibold text-text-primary mb-4">F. Catatan Analis</h3>
+        <ul className="space-y-3 text-sm">
+          <li className="flex items-start gap-2">
+            <span className="text-amber-400 mt-0.5">📊</span>
+            <span className="text-text-muted">
+              Koefisien Gini <strong className="text-text-primary">{gini.toFixed(3)}</strong> menunjukkan ketimpangan kekayaan
+              bersifat <strong className="text-text-primary capitalize">{giniLabel}</strong> di antara pejabat RI yang melaporkan LHKPN —
+              jauh lebih timpang dibanding Gini populasi umum Indonesia (0.381).
+            </span>
+          </li>
+          {prabowo && (
+            <li className="flex items-start gap-2">
+              <span className="text-red-400 mt-0.5">💸</span>
+              <span className="text-text-muted">
+                Prabowo Subianto memiliki kekayaan <strong className="text-text-primary">{fmtTrilion(prabowo.lhkpn_latest)}</strong> —
+                sekitar <strong className="text-text-primary">{prabMult}×</strong> rata-rata kekayaan pejabat yang melaporkan LHKPN (Rp {fmtMiliar(avgWealth)} miliar).
+              </span>
+            </li>
+          )}
+          <li className="flex items-start gap-2">
+            <span className="text-blue-400 mt-0.5">🏛️</span>
+            <span className="text-text-muted">
+              Pejabat tingkat nasional rata-rata memiliki kekayaan <strong className="text-text-primary">Rp {fmtMiliar(avgNasional)} miliar</strong> vs
+              pejabat tingkat provinsi rata-rata <strong className="text-text-primary">Rp {fmtMiliar(avgRegional)} miliar</strong>.
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-purple-400 mt-0.5">🏢</span>
+            <span className="text-text-muted">
+              <strong className="text-text-primary">{richBusiness.length}</strong> dari <strong className="text-text-primary">{rich100.length}</strong> pejabat
+              dengan kekayaan {'>'} Rp 100 miliar berlatar belakang sebagai pengusaha, mencerminkan dominasi kalangan bisnis dalam politik nasional.
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-green-400 mt-0.5">📈</span>
+            <span className="text-text-muted">
+              10% pejabat terkaya menguasai <strong className="text-text-primary">{top10Pct}%</strong> dari total kekayaan yang dideklarasikan,
+              menunjukkan konsentrasi aset yang ekstrem di kalangan elite politik RI.
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-yellow-400 mt-0.5">⚠️</span>
+            <span className="text-text-muted">
+              Data LHKPN adalah deklarasi mandiri — kekayaan riil bisa jauh lebih besar. Analisis ini hanya mencerminkan apa yang dilaporkan
+              ke <em>elhkpn.kpk.go.id</em>, bukan total aset sebenarnya.
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function AnalitikPage() {
@@ -1082,6 +1487,7 @@ export default function AnalitikPage() {
         {activeTab === 'individu'   && <TabIndividu  personScores={personScores} />}
         {activeTab === 'partai'     && <TabPartai    partyScores={partyScores} provincesData={provincesData} />}
         {activeTab === 'provinsi'   && <TabProvinsi  provincesData={provincesData} />}
+        {activeTab === 'lhkpn'     && <TabLHKPN />}
         {activeTab === 'gdp'        && <TabGDP       provincesData={provincesData} />}
         {activeTab === 'metodologi' && <TabMetodologi />}
       </div>
