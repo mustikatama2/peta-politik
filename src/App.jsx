@@ -41,6 +41,7 @@ const InvestigasiPage = lazy(() => import('./pages/investigasi/InvestigasiPage')
 const PencarianPage    = lazy(() => import('./pages/pencarian/PencarianPage'))
 const PilkadaPage      = lazy(() => import('./pages/pilkada/PilkadaPage'))
 const DanaKampanyePage = lazy(() => import('./pages/dana/DanaKampanyePage'))
+const BUMNPage         = lazy(() => import('./pages/bumn/BUMNPage'))
 
 // Loading fallback — skeleton style
 function PageLoader() {
@@ -96,6 +97,7 @@ export default function App() {
         <Route path="/risk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RiskIndex /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/scenarios" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScenarioPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/bisnis" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BusinessPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/bumn" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BUMNPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/kabinet" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KabinetPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/pemerintah" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PemerintahPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/anggaran" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BudgetPage /></Suspense></ErrorBoundary></ProtectedRoute>} />

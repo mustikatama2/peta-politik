@@ -37,6 +37,7 @@ const NAV = [
   { to:'/coi',      icon:'🔍', label:'Konflik Kepentingan' },
   { to:'/media',    icon:'📡', label:'Kepemilikan Media' },
   { to:'/bisnis',   icon:'🏢', label:'Kepemilikan Bisnis' },
+  { to:'/bumn',     icon:'🏢', label:'BUMN & Bisnis' },
   { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
   { to:'/news',     icon:'📰', label:'Berita' },
   { to:'/agendas',  icon:'📋', label:'Agenda' },
