@@ -255,6 +255,225 @@ export const AGENDAS = [
     status:"janji", budget_idr:500_000_000_000,
     source:"Debat Pilkada Jatim 2024", year:2024,
   },
+
+  // ── Prabowo — Tambahan ──────────────────────────────────────────────────────
+  {
+    id:"a_pr6", subject_id:"prabowo", subject_type:"person",
+    title:"Swasembada Beras 2027",
+    description:"Target produksi beras nasional 100% tanpa impor pada 2027. Cetak sawah 3 juta hektare baru di luar Jawa dan intensifikasi lahan eksisting.",
+    status:"proses", budget_idr:50_000_000_000_000,
+    source:"Visi Misi Prabowo-Gibran 2024 & Kementan", year:2024,
+  },
+  {
+    id:"a_pr7", subject_id:"prabowo", subject_type:"person",
+    title:"Hilirisasi Nikel — Nilai Tambah Domestik",
+    description:"Larangan ekspor bijih nikel mentah; membangun smelter dan industri baterai EV di Sulawesi dan Maluku Utara. Target nilai ekspor naik 10× dari raw material.",
+    status:"proses", budget_idr:null,
+    source:"Visi Misi 2024 & Perpres Hilirisasi", year:2024,
+  },
+  {
+    id:"a_pr8", subject_id:"prabowo", subject_type:"person",
+    title:"Makan Bergizi Gratis — 82 Juta Penerima",
+    description:"Program makan siang bergizi untuk 82 juta pelajar, ibu hamil, dan balita. Anggaran APBN 2025 dialokasikan Rp 71 triliun, dikelola Badan Gizi Nasional.",
+    status:"proses", budget_idr:71_000_000_000_000,
+    source:"APBN 2025 & Perpres Badan Gizi Nasional", year:2025,
+  },
+  {
+    id:"a_pr9", subject_id:"prabowo", subject_type:"person",
+    title:"Rekrutmen 1 Juta Guru ASN PPPK",
+    description:"Formasi 1 juta guru Pegawai Pemerintah dengan Perjanjian Kerja (PPPK) 2024–2025 untuk menggantikan tenaga honorer dan menutup kekurangan guru negeri.",
+    status:"proses", budget_idr:null,
+    source:"Kemenpan RB & Kemendikbud 2024", year:2024,
+  },
+  {
+    id:"a_pr10", subject_id:"prabowo", subject_type:"person",
+    title:"3 Juta Rumah Rakyat per Tahun",
+    description:"Program ambisius membangun 3 juta unit hunian rakyat per tahun, mencakup rumah subsidi, rusun, dan hunian transmigrasi. Jauh melampaui target Jokowi.",
+    status:"proses", budget_idr:120_000_000_000_000,
+    source:"Program Prioritas 100 Hari Prabowo", year:2024,
+  },
+
+  // ── Sri Mulyani — Tambahan ──────────────────────────────────────────────────
+  {
+    id:"a_sm1", subject_id:"sri_mulyani", subject_type:"person",
+    title:"Efisiensi Anggaran Rp 306 Triliun",
+    description:"Pemotongan belanja kementerian/lembaga (K/L) Rp 306 triliun pada APBN 2025 untuk membiayai program prioritas Prabowo tanpa tambah utang. Kontroversial karena memotong layanan publik.",
+    status:"proses", budget_idr:null,
+    source:"PMK 2025 & Laporan DPR RI", year:2025,
+  },
+  {
+    id:"a_sm2", subject_id:"sri_mulyani", subject_type:"person",
+    title:"Reformasi Pajak — Target Rasio 12% PDB",
+    description:"Target jangka menengah rasio pajak 12% terhadap PDB sebagai milestone sebelum 18%. Reformasi administrasi pajak melalui coretax DJP dan penguatan kepatuhan.",
+    status:"proses", budget_idr:null,
+    source:"Kemenkeu APBN 2025 Outlook", year:2025,
+  },
+  {
+    id:"a_sm3", subject_id:"sri_mulyani", subject_type:"person",
+    title:"Peringkat Kredit Indonesia A — Target 2026",
+    description:"Meningkatkan peringkat kredit Indonesia dari BBB+ ke level A dari S&P/Fitch. Syarat: defisit fiskal di bawah 3% PDB dan debt-to-GDP stabil di bawah 40%.",
+    status:"janji", budget_idr:null,
+    source:"Kemenkeu Investor Day 2024", year:2024,
+  },
+  {
+    id:"a_sm4", subject_id:"sri_mulyani", subject_type:"person",
+    title:"Dana Desa Rp 71 Triliun 2025",
+    description:"Penyaluran dana desa Rp 71 triliun secara merata ke 74.961 desa di Indonesia. Fokus pada efisiensi penyaluran dan pengawasan penggunaan berbasis kinerja.",
+    status:"proses", budget_idr:71_000_000_000_000,
+    source:"APBN 2025 & Kemenkeu", year:2025,
+  },
+
+  // ── Erick Thohir — Menteri BUMN ─────────────────────────────────────────────
+  {
+    id:"a_et1", subject_id:"erick_thohir", subject_type:"person",
+    title:"Danantara — Sovereign Wealth Fund Rp 1.000 T",
+    description:"Peluncuran Badan Pengelola Investasi Daya Anagata Nusantara (Danantara) sebagai sovereign wealth fund Indonesia dengan target AUM Rp 1.000 triliun dari dividen dan aset BUMN.",
+    status:"selesai", budget_idr:null,
+    source:"PP Danantara & Peluncuran Feb 2025", year:2025,
+  },
+  {
+    id:"a_et2", subject_id:"erick_thohir", subject_type:"person",
+    title:"Merger BUMN Agribisnis — Pupuk Indonesia + Pertani",
+    description:"Rencana merger Pupuk Indonesia dan Pertani (Persero) untuk menciptakan holding agribisnis terintegrasi dari hulu ke hilir. Bagian restrukturisasi BUMN cluster pangan.",
+    status:"proses", budget_idr:null,
+    source:"Kementerian BUMN 2024–2025", year:2024,
+  },
+  {
+    id:"a_et3", subject_id:"erick_thohir", subject_type:"person",
+    title:"IPO BUMN 2025–2026 — Pertamina Hulu & InJourney",
+    description:"Rencana penawaran saham perdana (IPO) Pertamina Hulu Energi dan InJourney (BUMN pariwisata) di bursa. Target tambahan kapitalisasi pasar dan diversifikasi investor.",
+    status:"proses", budget_idr:null,
+    source:"Kementerian BUMN Roadmap 2024", year:2024,
+  },
+  {
+    id:"a_et4", subject_id:"erick_thohir", subject_type:"person",
+    title:"Restrukturisasi BUMN Karya",
+    description:"Penyelamatan dan restrukturisasi Waskita Karya dan Hutama Karya yang menanggung utang jumbo dari proyek infrastruktur era Jokowi. Injeksi modal dan penjualan aset non-inti.",
+    status:"proses", budget_idr:25_000_000_000_000,
+    source:"Kementerian BUMN & OJK 2024", year:2024,
+  },
+
+  // ── Anies Baswedan — Tambahan ───────────────────────────────────────────────
+  {
+    id:"a_an2", subject_id:"anies", subject_type:"person",
+    title:"DP 0% Rumah Jakarta",
+    description:"Program cicilan rumah tanpa uang muka bagi warga DKI berpenghasilan rendah — warisan kebijakan Anies sebagai Gubernur DKI 2017–2022. Dilanjutkan namun direvisi penerusnya.",
+    status:"selesai", budget_idr:2_000_000_000_000,
+    source:"Pemprov DKI Jakarta 2018–2022", year:2018,
+  },
+  {
+    id:"a_an3", subject_id:"anies", subject_type:"person",
+    title:"Hentikan Reklamasi Pantai Jakarta",
+    description:"Anies menghentikan proyek reklamasi pantai Teluk Jakarta yang kontroversial. Beberapa pulau reklamasi dibatalkan izinnya, namun sisanya tetap berjalan sesuai komitmen kontrak.",
+    status:"proses", budget_idr:null,
+    source:"Pergub DKI Jakarta No. 206/2016 & Anies 2018", year:2018,
+  },
+  {
+    id:"a_an4", subject_id:"anies", subject_type:"person",
+    title:"Reformasi Transportasi Jakarta — MRT, LRT, Jaklingko",
+    description:"Integrasi moda transportasi Jakarta: MRT, LRT, Transjakarta, dan KRL dalam satu platform Jaklingko. Anies mempercepat pembangunan MRT Fase 2 dan menerapkan tarif terintegrasi.",
+    status:"selesai", budget_idr:15_000_000_000_000,
+    source:"Pemprov DKI 2019–2022 & Jaklingko", year:2019,
+  },
+
+  // ── Khofifah — Tambahan ─────────────────────────────────────────────────────
+  {
+    id:"a_kf5", subject_id:"khofifah", subject_type:"person",
+    title:"Jatim Lumbung Pangan Nasional 2025",
+    description:"Target mempertahankan dan meningkatkan surplus pangan Jawa Timur sebagai penyumbang terbesar beras, jagung, dan kedelai nasional pada 2025.",
+    status:"proses", budget_idr:5_000_000_000_000,
+    source:"RPJMD Jatim 2024–2029", year:2024,
+  },
+  {
+    id:"a_kf6", subject_id:"khofifah", subject_type:"person",
+    title:"UMKM Jatim — 3 Juta Tenaga Kerja Baru",
+    description:"Program pengembangan UMKM Jawa Timur untuk menyerap 3 juta tenaga kerja baru melalui inkubasi bisnis, akses KUR, dan perluasan pasar ekspor.",
+    status:"janji", budget_idr:10_000_000_000_000,
+    source:"Visi Misi Pilkada Jatim 2024", year:2024,
+  },
+  {
+    id:"a_kf7", subject_id:"khofifah", subject_type:"person",
+    title:"Rumah Sakit Gratis — Layanan Rujukan Provinsi",
+    description:"Program layanan rumah sakit gratis berbasis BPJS di seluruh RS rujukan provinsi Jawa Timur bagi warga tidak mampu yang belum tercover JKN.",
+    status:"proses", budget_idr:3_000_000_000_000,
+    source:"Program Prioritas Gubernur Jatim 2024", year:2024,
+  },
+  {
+    id:"a_kf8", subject_id:"khofifah", subject_type:"person",
+    title:"Beasiswa Jatim Cerdas — 10.000 Mahasiswa",
+    description:"Beasiswa penuh bagi 10.000 mahasiswa berprestasi asal keluarga kurang mampu di Jawa Timur untuk kuliah di PTN/PTS terbaik. Program prioritas 5 tahun.",
+    status:"janji", budget_idr:500_000_000_000,
+    source:"Debat Pilkada Jatim 2024", year:2024,
+  },
+
+  // ── Dedi Mulyadi — Tambahan ─────────────────────────────────────────────────
+  {
+    id:"a_dm4", subject_id:"dedi_mulyadi", subject_type:"person",
+    title:"Barak Militer untuk Siswa Bermasalah",
+    description:"Program kontroversial menempatkan siswa bermasalah (tawuran, narkoba) di barak militer TNI untuk pembinaan disiplin. Menuai kritik dari aktivis HAM dan pendidikan.",
+    status:"proses", budget_idr:null,
+    source:"Kompas & Pikiran Rakyat 2025", year:2025,
+  },
+  {
+    id:"a_dm5", subject_id:"dedi_mulyadi", subject_type:"person",
+    title:"Penertiban Tambang Ilegal Jabar",
+    description:"Operasi penertiban ratusan tambang ilegal (pasir, batu, emas) di Jawa Barat yang merusak lingkungan dan merugikan PAD. Target bersih dari PETI dalam 2 tahun.",
+    status:"proses", budget_idr:null,
+    source:"Pemprov Jabar & ESDM 2025", year:2025,
+  },
+  {
+    id:"a_dm6", subject_id:"dedi_mulyadi", subject_type:"person",
+    title:"Trans Jabar — Subsidi Angkutan Umum",
+    description:"Subsidi angkutan umum bus Trans Jabar antar kota dalam provinsi untuk menekan biaya transportasi warga dan mengurangi kemacetan di koridor utama Jabar.",
+    status:"janji", budget_idr:1_500_000_000_000,
+    source:"Visi Misi Pilkada Jabar 2024", year:2024,
+  },
+  {
+    id:"a_dm7", subject_id:"dedi_mulyadi", subject_type:"person",
+    title:"Zero Kemiskinan Ekstrem Jabar 2027",
+    description:"Target menghapus kemiskinan ekstrem (pengeluaran < Rp 11.633/hari) di Jawa Barat pada 2027 melalui program bantuan sosial terpadu dan pemberdayaan ekonomi desa.",
+    status:"janji", budget_idr:8_000_000_000_000,
+    source:"Debat Pilkada Jabar & RPJMD Jabar 2025–2030", year:2024,
+  },
+
+  // ── Ahmad Luthfi — Tambahan ─────────────────────────────────────────────────
+  {
+    id:"a_al3", subject_id:"ahmad_luthfi", subject_type:"person",
+    title:"Berantas Judi Online di Jateng",
+    description:"Program penegakan hukum terhadap jaringan judi online (judol) di Jawa Tengah melalui koordinasi Polda Jateng dan Kominfo. Target blokir ribuan situs dan tangkap bandar.",
+    status:"proses", budget_idr:null,
+    source:"Polda Jateng & Debat Pilkada 2024", year:2024,
+  },
+  {
+    id:"a_al4", subject_id:"ahmad_luthfi", subject_type:"person",
+    title:"1 Juta UMKM Naik Kelas Jateng",
+    description:"Program akselerasi 1 juta UMKM Jawa Tengah naik dari skala mikro ke kecil dan menengah melalui pelatihan digital marketing, akses pembiayaan KUR, dan sertifikasi produk.",
+    status:"janji", budget_idr:2_000_000_000_000,
+    source:"Visi Misi Pilkada Jateng 2024", year:2024,
+  },
+  {
+    id:"a_al5", subject_id:"ahmad_luthfi", subject_type:"person",
+    title:"Jateng Bebas Stunting 2027",
+    description:"Target penurunan prevalensi stunting Jawa Tengah dari 20% ke bawah 5% pada 2027 melalui program gizi 1.000 hari pertama kehidupan, posyandu aktif, dan intervensi spesifik.",
+    status:"janji", budget_idr:3_000_000_000_000,
+    source:"Dinkes Jateng & Visi Misi Pilkada 2024", year:2024,
+  },
+
+  // ── Bobby Nasution — Tambahan ───────────────────────────────────────────────
+  {
+    id:"a_bn3", subject_id:"bobby_nasution", subject_type:"person",
+    title:"Medan Smart City 2025",
+    description:"Transformasi digital Kota Medan menjadi smart city: sistem e-government terintegrasi, CCTV traffic management, dan aplikasi layanan warga Medan Pintar.",
+    status:"proses", budget_idr:500_000_000_000,
+    source:"Program Gubernur Sumut & Kominfo 2024", year:2024,
+  },
+  {
+    id:"a_bn4", subject_id:"bobby_nasution", subject_type:"person",
+    title:"Pengembangan KEK Inalum Sumatera Utara",
+    description:"Pengembangan Kawasan Ekonomi Khusus berbasis industri aluminium PT Inalum (Indonesia Asahan Aluminium) di Kabupaten Batubara, Sumut. Target menarik investasi hilir senilai Rp 30 triliun.",
+    status:"proses", budget_idr:30_000_000_000_000,
+    source:"BKPM & Kementerian BUMN 2024", year:2024,
+  },
 ]
 
 export const AGENDA_STATUS_CONFIG = {

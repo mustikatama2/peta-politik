@@ -9,9 +9,11 @@ import { PARTIES, PARTY_MAP } from '../../data/parties'
 import { CONNECTIONS } from '../../data/connections'
 import { PROVINCES } from '../../data/regions'
 import { GDP_PROVINCES } from '../../data/gdp'
+import { BILLS } from '../../data/voting_records'
 import {
   scoreAllPersons, scoreAllParties, scoreAllProvincesFromData,
   pearsonR, spearmanR, linearRegression, interpretR, descStats, KIM_PLUS,
+  scoreIndividu, CORRUPTION_PENALTIES,
 } from '../../lib/scoring'
 
 // ─── ISLAND COLORS ────────────────────────────────────────────────────────────
@@ -114,6 +116,8 @@ const TABS = [
   { id: 'lhkpn',     label: 'Ketimpangan LHKPN',  icon: '💰' },
   { id: 'gdp',        label: 'Korelasi GDP',       icon: '📈' },
   { id: 'metodologi', label: 'Metodologi',         icon: '📖' },
+  { id: 'afinitas',   label: 'Afinitas Partai',    icon: '🤝' },
+  { id: 'tren_skor',  label: 'Tren Skor',          icon: '🎚️' },
 ]
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -1445,6 +1449,433 @@ function TabLHKPN() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// TAB 6: AFINITAS PARTAI (Party Affinity Heatmap)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+// Historical coalitions 2004–2024
+const HISTORICAL_COALITIONS = [
+  { name: 'Koalisi SBY 2004–2009',     parties: ['dem', 'gol', 'pkb', 'ppp', 'pks', 'pan'] },
+  { name: 'Koalisi SBY 2009–2014',     parties: ['dem', 'gol', 'pks', 'pan', 'ppp', 'pkb', 'nas'] },
+  { name: 'Koalisi Jokowi 2014–2019',  parties: ['pdip', 'nas', 'pkb', 'ppp'] },
+  { name: 'Oposisi 2014–2019',         parties: ['ger', 'gol', 'pan', 'pks', 'dem'] },
+  { name: 'Koalisi Jokowi 2019–2024',  parties: ['pdip', 'ger', 'gol', 'nas', 'pkb', 'pan', 'ppp', 'dem'] },
+  { name: 'KIM Plus 2024–sekarang',    parties: ['ger', 'gol', 'nas', 'pan', 'dem', 'pks', 'pkb'] },
+]
+
+const HEATMAP_PARTIES = ['pdip', 'ger', 'gol', 'nas', 'pks', 'pkb', 'pan', 'dem', 'ppp']
+
+function computeAffinity(partyA, partyB) {
+  if (partyA === partyB) return 100
+
+  // Coalition overlap score (0–100)
+  let togetherCount = 0
+  let totalCoalitions = HISTORICAL_COALITIONS.length
+  HISTORICAL_COALITIONS.forEach(c => {
+    const hasA = c.parties.includes(partyA)
+    const hasB = c.parties.includes(partyB)
+    if (hasA && hasB) togetherCount++
+  })
+  const coalitionScore = (togetherCount / totalCoalitions) * 100
+
+  // Voting alignment from BILLS
+  let aligned = 0
+  let compared = 0
+  BILLS.forEach(bill => {
+    const posA = bill.party_positions?.[partyA]
+    const posB = bill.party_positions?.[partyB]
+    if (posA && posB) {
+      compared++
+      if (posA === posB) aligned++
+    }
+  })
+  const votingScore = compared > 0 ? (aligned / compared) * 100 : 50
+
+  // Final affinity: 40% coalition + 60% voting
+  return Math.round(coalitionScore * 0.4 + votingScore * 0.6)
+}
+
+function affinityColor(score) {
+  if (score >= 75) return '#22c55e'
+  if (score >= 55) return '#86efac'
+  if (score >= 45) return '#fef08a'
+  if (score >= 30) return '#fb923c'
+  return '#ef4444'
+}
+
+function TabAfinitasPartai() {
+  const [hoveredCell, setHoveredCell] = useState(null)
+
+  const matrix = useMemo(() => {
+    return HEATMAP_PARTIES.map(a =>
+      HEATMAP_PARTIES.map(b => computeAffinity(a, b))
+    )
+  }, [])
+
+  const partyMeta = HEATMAP_PARTIES.map(id => PARTY_MAP[id] || { abbr: id, color: '#6b7280', logo_emoji: '' })
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">🤝 Afinitas Partai</h2>
+        <p className="text-sm text-text-muted mt-1">
+          Seberapa dekat setiap pasang partai berdasarkan riwayat koalisi pemerintahan (2004–2024) dan rekam jejak voting di DPR
+        </p>
+      </div>
+
+      {/* Heatmap grid */}
+      <div className="bg-bg-card rounded-xl border border-border p-4 overflow-x-auto">
+        <table className="text-xs border-collapse w-full">
+          <thead>
+            <tr>
+              <th className="p-2 text-text-muted font-normal w-16" />
+              {partyMeta.map((p, i) => (
+                <th key={i} className="p-1.5 text-center font-medium" style={{ color: p.color, minWidth: 60 }}>
+                  <div>{p.logo_emoji}</div>
+                  <div>{p.abbr}</div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {HEATMAP_PARTIES.map((rowParty, ri) => (
+              <tr key={rowParty}>
+                <td className="p-1.5 font-medium text-right pr-3" style={{ color: partyMeta[ri].color }}>
+                  {partyMeta[ri].logo_emoji} {partyMeta[ri].abbr}
+                </td>
+                {HEATMAP_PARTIES.map((colParty, ci) => {
+                  const score = matrix[ri][ci]
+                  const cellKey = `${ri}-${ci}`
+                  const isHovered = hoveredCell === cellKey
+                  return (
+                    <td
+                      key={ci}
+                      className="p-1 text-center cursor-default transition-all relative"
+                      onMouseEnter={() => setHoveredCell(cellKey)}
+                      onMouseLeave={() => setHoveredCell(null)}
+                    >
+                      <div
+                        className="w-12 h-10 mx-auto flex items-center justify-center rounded font-bold text-xs transition-transform"
+                        style={{
+                          backgroundColor: affinityColor(score) + (rowParty === colParty ? 'ff' : '99'),
+                          color: score >= 45 ? '#1a1a1a' : '#fff',
+                          transform: isHovered ? 'scale(1.15)' : 'scale(1)',
+                          border: isHovered ? '2px solid #fff4' : '2px solid transparent',
+                        }}
+                      >
+                        {rowParty === colParty ? '—' : score}
+                      </div>
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Color legend */}
+      <div className="flex flex-wrap items-center gap-3 text-xs text-text-muted">
+        <span className="font-medium text-text-primary">Skala Afinitas:</span>
+        {[
+          { label: '≥ 75 — Sangat Dekat',   color: '#22c55e' },
+          { label: '55–74 — Dekat',          color: '#86efac' },
+          { label: '45–54 — Netral',         color: '#fef08a' },
+          { label: '30–44 — Renggang',       color: '#fb923c' },
+          { label: '< 30 — Antagonis',       color: '#ef4444' },
+        ].map(({ label, color }) => (
+          <span key={label} className="flex items-center gap-1">
+            <span className="inline-block w-3 h-3 rounded" style={{ backgroundColor: color }} />
+            {label}
+          </span>
+        ))}
+      </div>
+
+      {/* Top affinity pairs */}
+      <div className="grid md:grid-cols-2 gap-4">
+        {/* Most aligned */}
+        <div className="bg-bg-card rounded-xl border border-border p-4">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">🟢 Pasangan Paling Afinitas</h3>
+          <div className="space-y-2">
+            {useMemo(() => {
+              const pairs = []
+              for (let i = 0; i < HEATMAP_PARTIES.length; i++) {
+                for (let j = i + 1; j < HEATMAP_PARTIES.length; j++) {
+                  pairs.push({ a: HEATMAP_PARTIES[i], b: HEATMAP_PARTIES[j], score: matrix[i][j] })
+                }
+              }
+              return pairs.sort((x, y) => y.score - x.score).slice(0, 5)
+            }, [matrix]).map(({ a, b, score }) => (
+              <div key={`${a}-${b}`} className="flex items-center justify-between text-sm">
+                <span>
+                  <span style={{ color: PARTY_MAP[a]?.color }}>{PARTY_MAP[a]?.abbr || a}</span>
+                  <span className="text-text-muted mx-1">–</span>
+                  <span style={{ color: PARTY_MAP[b]?.color }}>{PARTY_MAP[b]?.abbr || b}</span>
+                </span>
+                <span className="font-bold text-green-400">{score}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Most divergent */}
+        <div className="bg-bg-card rounded-xl border border-border p-4">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">🔴 Pasangan Paling Renggang</h3>
+          <div className="space-y-2">
+            {useMemo(() => {
+              const pairs = []
+              for (let i = 0; i < HEATMAP_PARTIES.length; i++) {
+                for (let j = i + 1; j < HEATMAP_PARTIES.length; j++) {
+                  pairs.push({ a: HEATMAP_PARTIES[i], b: HEATMAP_PARTIES[j], score: matrix[i][j] })
+                }
+              }
+              return pairs.sort((x, y) => x.score - y.score).slice(0, 5)
+            }, [matrix]).map(({ a, b, score }) => (
+              <div key={`${a}-${b}`} className="flex items-center justify-between text-sm">
+                <span>
+                  <span style={{ color: PARTY_MAP[a]?.color }}>{PARTY_MAP[a]?.abbr || a}</span>
+                  <span className="text-text-muted mx-1">–</span>
+                  <span style={{ color: PARTY_MAP[b]?.color }}>{PARTY_MAP[b]?.abbr || b}</span>
+                </span>
+                <span className="font-bold text-red-400">{score}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Methodology note */}
+      <div className="bg-blue-500/10 rounded-xl border border-blue-500/30 p-4 text-sm text-text-muted">
+        <h3 className="font-semibold text-blue-400 mb-2">ℹ️ Metodologi Afinitas</h3>
+        <ul className="space-y-1">
+          <li>• <strong className="text-text-primary">Koalisi Pemerintahan (40%)</strong> — Jumlah periode pemerintahan (2004–2024) di mana kedua partai berada dalam koalisi yang sama, dari total {HISTORICAL_COALITIONS.length} periode koalisi yang dianalisis.</li>
+          <li>• <strong className="text-text-primary">Keselarasan Voting DPR (60%)</strong> — Proporsi RUU ({BILLS.length} undang-undang) di mana kedua partai memberikan suara yang sama (setuju/menolak).</li>
+          <li>• Skor 100 = identik · Skor 0 = berlawanan total pada semua dimensi.</li>
+          <li>• Data koalisi berdasarkan susunan kabinet resmi; data voting dari arsip DPR RI.</li>
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// TAB 7: TREN SKOR (Score Scenario Simulator)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+function computeScoresWithPenalty(penaltyMultiplier) {
+  const customPenalties = {
+    terpidana: Math.min(-100, CORRUPTION_PENALTIES.terpidana * penaltyMultiplier),
+    tersangka:  Math.min(-100, CORRUPTION_PENALTIES.tersangka  * penaltyMultiplier),
+    tinggi:    Math.min(-100, CORRUPTION_PENALTIES.tinggi    * penaltyMultiplier),
+    sedang:    Math.min(-100, CORRUPTION_PENALTIES.sedang    * penaltyMultiplier),
+    rendah:    0,
+  }
+
+  return PERSONS.map(person => {
+    const base = scoreIndividu(person, CONNECTIONS)
+    // Recompute total with modified penalty
+    const risk = person.analysis?.corruption_risk || 'rendah'
+    const origPenalty = CORRUPTION_PENALTIES[risk] || 0
+    const newPenalty = customPenalties[risk] || 0
+    const newTotal = Math.max(0, Math.min(100, base.total - origPenalty + newPenalty))
+    return {
+      id: base.id,
+      name: base.name,
+      position_title: base.position_title,
+      party_id: base.party_id,
+      corruption_risk: risk,
+      baseTotal: base.total,
+      newTotal: Math.round(newTotal * 10) / 10,
+      delta: Math.round((newTotal - base.total) * 10) / 10,
+    }
+  }).sort((a, b) => b.baseTotal - a.baseTotal).slice(0, 15)
+}
+
+function TabTrenSkor() {
+  const [penaltyMultiplier, setPenaltyMultiplier] = useState(1)
+
+  const baseScores   = useMemo(() => scoreAllPersons().slice(0, 15), [])
+  const scenarioData = useMemo(() => computeScoresWithPenalty(penaltyMultiplier), [penaltyMultiplier])
+
+  // Merge for comparison chart
+  const chartData = useMemo(() => {
+    return scenarioData.map(s => ({
+      name: s.name.split(' ').slice(0, 2).join(' '),
+      fullName: s.name,
+      base: s.baseTotal,
+      skenario: s.newTotal,
+      delta: s.delta,
+      risk: s.corruption_risk,
+      party_id: s.party_id,
+      color: PARTY_MAP[s.party_id]?.color || '#6b7280',
+    }))
+  }, [scenarioData])
+
+  const riskColor = risk => {
+    if (risk === 'terpidana') return '#7f1d1d'
+    if (risk === 'tersangka') return '#ef4444'
+    if (risk === 'tinggi')    return '#f97316'
+    if (risk === 'sedang')    return '#f59e0b'
+    return '#22c55e'
+  }
+
+  const mostImpacted = [...chartData].sort((a, b) => a.delta - b.delta).slice(0, 5)
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">🎚️ Tren Skor — Simulasi Skenario</h2>
+        <p className="text-sm text-text-muted mt-1">
+          Bagaimana skor individu berubah jika bobot penalti korupsi dinaikkan? Geser slider untuk mengeksplorasi skenario.
+        </p>
+      </div>
+
+      {/* Slider */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-sm font-semibold text-text-primary">⚖️ Skenario Korupsi — Bobot Penalti</h3>
+          <span className="text-lg font-bold" style={{ color: penaltyMultiplier > 2 ? '#ef4444' : penaltyMultiplier > 1.5 ? '#f59e0b' : '#22c55e' }}>
+            {penaltyMultiplier.toFixed(1)}×
+          </span>
+        </div>
+        <input
+          type="range"
+          min={0.5}
+          max={4}
+          step={0.1}
+          value={penaltyMultiplier}
+          onChange={e => setPenaltyMultiplier(parseFloat(e.target.value))}
+          className="w-full h-2 rounded-full appearance-none cursor-pointer"
+          style={{ accentColor: '#ef4444' }}
+        />
+        <div className="flex justify-between text-xs text-text-muted mt-1">
+          <span>0.5× (Lunak)</span>
+          <span>1.0× (Standar)</span>
+          <span>2× (Ketat)</span>
+          <span>4× (Sangat Ketat)</span>
+        </div>
+        <p className="text-xs text-text-muted mt-3">
+          Penalti saat ini: Terpidana <span className="text-red-400 font-bold">{Math.round(CORRUPTION_PENALTIES.terpidana * penaltyMultiplier)}</span>
+          {' · '} Tersangka <span className="text-orange-400 font-bold">{Math.round(CORRUPTION_PENALTIES.tersangka * penaltyMultiplier)}</span>
+          {' · '} Risiko Tinggi <span className="text-yellow-400 font-bold">{Math.round(CORRUPTION_PENALTIES.tinggi * penaltyMultiplier)}</span>
+          {' · '} Risiko Sedang <span className="text-amber-400 font-bold">{Math.round(CORRUPTION_PENALTIES.sedang * penaltyMultiplier)}</span>
+        </p>
+      </div>
+
+      {/* Before vs After bar chart */}
+      <div className="bg-bg-card rounded-xl border border-border p-4">
+        <h3 className="text-sm font-semibold text-text-primary mb-4">
+          Perbandingan Skor Top 15 — Standar vs {penaltyMultiplier.toFixed(1)}× Penalti Korupsi
+        </h3>
+        <ResponsiveContainer width="100%" height={460}>
+          <BarChart
+            data={chartData}
+            layout="vertical"
+            margin={{ top: 0, right: 60, left: 110, bottom: 0 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" horizontal={false} />
+            <XAxis type="number" domain={[0, 100]} tick={{ fill: '#9ca3af', fontSize: 11 }} />
+            <YAxis
+              dataKey="name"
+              type="category"
+              width={108}
+              tick={{ fill: '#d1d5db', fontSize: 11 }}
+            />
+            <Tooltip
+              content={({ active, payload }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs space-y-1 shadow-xl">
+                    <p className="font-bold text-text-primary">{d.fullName}</p>
+                    <p className="text-text-muted">Skor Standar: <span className="text-blue-400 font-bold">{d.base}</span></p>
+                    <p className="text-text-muted">Skor Skenario: <span className="text-red-400 font-bold">{d.skenario}</span></p>
+                    <p className="text-text-muted">Perubahan: <span style={{ color: d.delta < 0 ? '#ef4444' : '#22c55e', fontWeight: 'bold' }}>{d.delta >= 0 ? '+' : ''}{d.delta}</span></p>
+                    <p className="text-text-muted">Risiko: <span style={{ color: riskColor(d.risk) }}>{d.risk}</span></p>
+                  </div>
+                )
+              }}
+            />
+            <Legend
+              wrapperStyle={{ fontSize: 11 }}
+              formatter={v => v === 'base' ? 'Skor Standar (1×)' : `Skor Skenario (${penaltyMultiplier.toFixed(1)}×)`}
+            />
+            <Bar dataKey="base"     name="base"     fill="#3b82f6" opacity={0.7} radius={[0, 3, 3, 0]} label={false} />
+            <Bar dataKey="skenario" name="skenario"  fill="#ef4444" opacity={0.9} radius={[0, 3, 3, 0]}
+              label={{ position: 'right', fill: '#9ca3af', fontSize: 10, formatter: v => v }}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* Most impacted */}
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="bg-bg-card rounded-xl border border-border p-4">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">📉 Paling Terdampak (Skor Turun)</h3>
+          <div className="space-y-3">
+            {mostImpacted.map(d => (
+              <div key={d.name} className="text-sm">
+                <div className="flex justify-between mb-1">
+                  <span className="text-text-primary font-medium">{d.fullName}</span>
+                  <span className="font-bold text-red-400">{d.delta}</span>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <ProgressBar value={d.base}     max={100} color="#3b82f6" height={4} />
+                  <span className="text-xs text-blue-400 w-8">{d.base}</span>
+                </div>
+                <div className="flex gap-2 items-center mt-0.5">
+                  <ProgressBar value={d.skenario} max={100} color="#ef4444" height={4} />
+                  <span className="text-xs text-red-400 w-8">{d.skenario}</span>
+                </div>
+                <span className="text-[10px] mt-1 inline-block" style={{ color: riskColor(d.risk) }}>
+                  ▲ {d.risk}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-bg-card rounded-xl border border-border p-4">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">📊 Insight Skenario</h3>
+          <div className="space-y-3 text-sm text-text-muted">
+            <div className="flex gap-2 items-start">
+              <span className="text-blue-400 flex-shrink-0">📌</span>
+              <span>
+                Pada penalti <strong className="text-text-primary">{penaltyMultiplier.toFixed(1)}×</strong>,
+                tokoh dengan risiko korupsi <em>tinggi/terpidana</em> kehilangan skor signifikan,
+                sementara tokoh bersih tetap stabil.
+              </span>
+            </div>
+            <div className="flex gap-2 items-start">
+              <span className="text-amber-400 flex-shrink-0">⚠️</span>
+              <span>
+                Sistem standar (1×) menggunakan penalti: Terpidana −40, Tersangka −30, Risiko Tinggi −15, Risiko Sedang −5.
+                Semakin tinggi multiplier, semakin besar gap antara tokoh bersih dan bermasalah.
+              </span>
+            </div>
+            <div className="flex gap-2 items-start">
+              <span className="text-green-400 flex-shrink-0">💡</span>
+              <span>
+                Coba multiplier <strong className="text-text-primary">2×–3×</strong> untuk melihat bagaimana ranking berubah
+                jika KPK lebih agresif menegakkan hukum dan masyarakat memberi penalti sosial lebih besar.
+              </span>
+            </div>
+            <div className="mt-3 p-3 bg-bg-elevated rounded-lg">
+              <p className="text-xs text-text-muted">
+                <strong className="text-text-primary">Jumlah tokoh terdampak (skor berubah):</strong>
+                {' '}{chartData.filter(d => d.delta !== 0).length} dari 15 tokoh top.
+                <br />
+                <strong className="text-text-primary">Rata-rata perubahan skor:</strong>
+                {' '}{(chartData.reduce((s, d) => s + d.delta, 0) / chartData.length).toFixed(1)} poin
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function AnalitikPage() {
@@ -1484,12 +1915,14 @@ export default function AnalitikPage() {
 
       {/* Tab Content */}
       <div>
-        {activeTab === 'individu'   && <TabIndividu  personScores={personScores} />}
-        {activeTab === 'partai'     && <TabPartai    partyScores={partyScores} provincesData={provincesData} />}
-        {activeTab === 'provinsi'   && <TabProvinsi  provincesData={provincesData} />}
+        {activeTab === 'individu'   && <TabIndividu       personScores={personScores} />}
+        {activeTab === 'partai'     && <TabPartai         partyScores={partyScores} provincesData={provincesData} />}
+        {activeTab === 'provinsi'   && <TabProvinsi       provincesData={provincesData} />}
         {activeTab === 'lhkpn'     && <TabLHKPN />}
-        {activeTab === 'gdp'        && <TabGDP       provincesData={provincesData} />}
+        {activeTab === 'gdp'        && <TabGDP            provincesData={provincesData} />}
         {activeTab === 'metodologi' && <TabMetodologi />}
+        {activeTab === 'afinitas'   && <TabAfinitasPartai />}
+        {activeTab === 'tren_skor'  && <TabTrenSkor />}
       </div>
     </div>
   )
