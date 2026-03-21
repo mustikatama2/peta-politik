@@ -70,6 +70,18 @@ export const CONNECTIONS = [
 
   // ── Kasus Hukum ──────────────────────────────────────────────────────────
   { from:"hasto",      to:"anwar_usman",  type:"rekan",          label:"Keduanya tersangkut kasus institusional besar 2024-2025", strength:2 },
+
+  // ── KPK/Korupsi — Relasi Politik ─────────────────────────────────────────
+  { from:"gus_muhdlor", to:"prabowo",    type:"koalisi",  label:"PKB dukung KIM Plus 2024",                            strength:4 },
+  { from:"gus_muhdlor", to:"cakimin",    type:"koalisi",  label:"PKB Sidoarjo — Muhdlor kader PKB",                    strength:7 },
+  { from:"hasto",       to:"puan",       type:"rekan",    label:"Hasto loyalis PDIP; koordinasi dengan Puan",           strength:8 },
+  { from:"hasto",       to:"anies",      type:"konflik",  label:"Kasus Harun Masiku — Anies basis oposisi",             strength:3 },
+  { from:"tom_lembong", to:"anies",      type:"rekan",    label:"Tim Pemenangan Anies 2024 — Lembong co-captain",       strength:9 },
+  { from:"tom_lembong", to:"jokowi",     type:"konflik",  label:"Ditangkap era Prabowo — diduga kriminalisasi oposan Jokowi lama", strength:5 },
+  { from:"anwar_usman", to:"jokowi",     type:"keluarga", label:"Ipar Jokowi; menikahi Idayati adik Jokowi 2022",      strength:10 },
+  { from:"anwar_usman", to:"gibran",     type:"keluarga", label:"Paman-Keponakan; putusan MK batas usia menguntungkan Gibran", strength:10 },
+  { from:"budi_gunawan", to:"jokowi",    type:"rekan",    label:"Kepala BIN 2019-2024 di era Jokowi",                  strength:8 },
+  { from:"budi_gunawan", to:"prabowo",   type:"rekan",    label:"Kepala BIN berlanjut era Prabowo",                    strength:7 },
 ]
 
 export const CONNECTION_TYPES = {

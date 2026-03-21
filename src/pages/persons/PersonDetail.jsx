@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, Component } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { PERSONS } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
@@ -13,6 +13,21 @@ import NewsCard from '../../components/NewsCard'
 import { Avatar, Badge, Tabs, Card, formatIDR, Tag, RiskDot, Btn } from '../../components/ui'
 
 const MAX_WEALTH = Math.max(...PERSONS.filter(p => p.lhkpn_latest).map(p => p.lhkpn_latest))
+
+class ErrorBoundary extends Component {
+  constructor(props) { super(props); this.state = { hasError: false } }
+  static getDerivedStateFromError() { return { hasError: true } }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex items-center justify-center h-full text-text-secondary text-sm">
+          Koneksi graph tidak tersedia
+        </div>
+      )
+    }
+    return this.props.children
+  }
+}
 
 const TABS = [
   { id: 'profil',   label: '📋 Profil' },
@@ -62,6 +77,8 @@ export default function PersonDetail() {
     connectedPersonIds.has(c.from) || connectedPersonIds.has(c.to) ||
     c.from === person.id || c.to === person.id
   )
+  const safeNodeIds = new Set(networkNodes.map(n => n.id))
+  const safeEdges = networkEdges.filter(e => safeNodeIds.has(e.from) && safeNodeIds.has(e.to))
 
   // Related news
   const personNews = [...NEWS]
@@ -104,7 +121,7 @@ export default function PersonDetail() {
           />
 
           {/* Info */}
-          <div className="flex-1">
+          <div className="flex-1 min-w-0">
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-xs text-text-secondary mb-2">
               <button
@@ -133,7 +150,7 @@ export default function PersonDetail() {
 
           {/* LHKPN quick stat */}
           {person.lhkpn_latest && (
-            <div className="text-center flex-shrink-0 bg-bg-card rounded-xl px-5 py-4 border border-border" style={{ boxShadow: 'var(--shadow-card)' }}>
+            <div className="text-center flex-shrink-0 self-stretch flex flex-col justify-center bg-bg-card rounded-xl px-5 py-4 border border-border" style={{ boxShadow: 'var(--shadow-card)' }}>
               <p className="text-xs text-text-secondary uppercase tracking-wider">LHKPN {person.lhkpn_year}</p>
               <p className="text-2xl font-bold mt-1" style={{ color: 'var(--accent-gold)' }}>
                 {formatIDR(person.lhkpn_latest)}
@@ -256,11 +273,13 @@ export default function PersonDetail() {
                 Graf Koneksi — {personConnections.length} relasi terpetakan
               </h3>
               <div style={{ height: 400 }}>
-                <NetworkGraph
-                  nodes={networkNodes}
-                  edges={networkEdges}
-                  centerNodeId={person.id}
-                />
+                <ErrorBoundary>
+                  <NetworkGraph
+                    nodes={networkNodes}
+                    edges={safeEdges}
+                    centerNodeId={person.id}
+                  />
+                </ErrorBoundary>
               </div>
             </Card>
 

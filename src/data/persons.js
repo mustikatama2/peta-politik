@@ -1,7 +1,7 @@
 export const PERSONS = [
   // ─── NASIONAL — EKSEKUTIF ───────────────────────────────────────────────
   {
-    id:"prabowo", name:"Prabowo Subianto", photo_url:null, photo_placeholder:"PS",
+    id:"prabowo", name:"Prabowo Subianto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Prabowo_Subianto_2024_official_portrait.jpg/400px-Prabowo_Subianto_2024_official_portrait.jpg", photo_placeholder:"PS",
     born:"17 Oct 1951", born_place:"Jakarta", religion:"Islam",
     education:"Akademi Militer Magelang (1974); Fort Benning USA",
     party_id:"ger", party_role:"Ketua Umum",
@@ -25,7 +25,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"gibran", name:"Gibran Rakabuming Raka", photo_url:null, photo_placeholder:"GR",
+    id:"gibran", name:"Gibran Rakabuming Raka", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Gibran_Rakabuming_Raka_2024_official_portrait.jpg/400px-Gibran_Rakabuming_Raka_2024_official_portrait.jpg", photo_placeholder:"GR",
     born:"1 Oct 1987", born_place:"Surakarta", religion:"Islam",
     education:"S1 Manajemen, Universitas Gadjah Mada (2010)",
     party_id:"gol", party_role:"Anggota",
@@ -70,7 +70,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sri_mulyani", name:"Sri Mulyani Indrawati", photo_url:null, photo_placeholder:"SM",
+    id:"sri_mulyani", name:"Sri Mulyani Indrawati", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sri_Mulyani_Indrawati_official_portrait_2022.jpg/400px-Sri_Mulyani_Indrawati_official_portrait_2022.jpg", photo_placeholder:"SM",
     born:"26 Aug 1962", born_place:"Lampung", religion:"Islam",
     education:"S1 FE UI; PhD Ekonomi University of Illinois (1992)",
     party_id:null, party_role:null,
@@ -294,7 +294,7 @@ export const PERSONS = [
   },
   // ─── NASIONAL — LEGISLATIF ──────────────────────────────────────────────
   {
-    id:"puan", name:"Puan Maharani", photo_url:null, photo_placeholder:"PM",
+    id:"puan", name:"Puan Maharani", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Puan_Maharani.jpg/400px-Puan_Maharani.jpg", photo_placeholder:"PM",
     born:"6 Sep 1973", born_place:"Jakarta", religion:"Islam",
     education:"S1 Komunikasi FISIP UI",
     party_id:"pdip", party_role:"DPP",
@@ -430,7 +430,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"megawati", name:"Megawati Soekarnoputri", photo_url:null, photo_placeholder:"MS",
+    id:"megawati", name:"Megawati Soekarnoputri", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Megawati_Soekarnoputri.jpg/400px-Megawati_Soekarnoputri.jpg", photo_placeholder:"MS",
     born:"23 Jan 1947", born_place:"Yogyakarta", religion:"Islam",
     education:"S1 Pertanian, Universitas Padjadjaran (tidak selesai)",
     party_id:"pdip", party_role:"Ketua Umum",
@@ -453,7 +453,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"anies", name:"Anies Baswedan", photo_url:null, photo_placeholder:"AB",
+    id:"anies", name:"Anies Baswedan", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Anies_Baswedan_2024.jpg/400px-Anies_Baswedan_2024.jpg", photo_placeholder:"AB",
     born:"7 May 1969", born_place:"Kuningan", religion:"Islam",
     education:"S1 Ekonomi UGM; MA Ilmu Kebijakan, University of Maryland; PhD Ilmu Pemerintahan, UMD",
     party_id:null, party_role:null,
@@ -629,7 +629,7 @@ export const PERSONS = [
   },
   // ─── JAWA TIMUR — PROVINSI ───────────────────────────────────────────────
   {
-    id:"khofifah", name:"Khofifah Indar Parawansa", photo_url:null, photo_placeholder:"KI",
+    id:"khofifah", name:"Khofifah Indar Parawansa", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Khofifah_Indar_Parawansa.jpg/400px-Khofifah_Indar_Parawansa.jpg", photo_placeholder:"KI",
     born:"19 May 1965", born_place:"Surabaya", religion:"Islam",
     education:"S1 FISIP Unair; S2 Administrasi Negara, Universitas Brawijaya",
     party_id:"pkb", party_role:"Anggota",

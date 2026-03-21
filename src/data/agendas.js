@@ -105,6 +105,62 @@ export const AGENDAS = [
     status:"proses", budget_idr:null,
     source:"RPJMD Jatim 2019-2024", year:2019,
   },
+  {
+    id:"a16", subject_id:"gibran", subject_type:"person",
+    title:"Program Riset dan Inovasi Nasional",
+    description:"Gibran mendukung pengembangan ekosistem startup dan inovasi digital nasional sebagai Wapres. Fokus pada generasi muda dan ekonomi kreatif.",
+    status:"proses", budget_idr:null,
+    source:"Visi Misi Prabowo-Gibran 2024", year:2024,
+  },
+  {
+    id:"a17", subject_id:"sri_mulyani", subject_type:"person",
+    title:"Rasio Pajak 18% PDB",
+    description:"Target meningkatkan tax ratio Indonesia dari 10% menjadi 18% PDB dalam 5 tahun. Reformasi perpajakan melalui pembentukan Badan Penerimaan Negara.",
+    status:"proses", budget_idr:null,
+    source:"APBN 2025 & Program Kemenkeu", year:2024,
+  },
+  {
+    id:"a18", subject_id:"mahfud_md", subject_type:"person",
+    title:"Reformasi Sistem Peradilan",
+    description:"Selama menjabat Menko Polhukam, Mahfud mendorong agenda reformasi hukum dan pemberantasan mafia peradilan. Mengundurkan diri Feb 2024 sebagai protes atas kondisi demokrasi.",
+    status:"ingkar", budget_idr:null,
+    source:"Program Menko Polhukam 2019-2024", year:2019,
+  },
+  {
+    id:"a19", subject_id:"ganjar", subject_type:"person",
+    title:"Pendidikan Gratis Jateng",
+    description:"Program beasiswa dan sekolah gratis untuk SMA/SMK di Jawa Tengah. Tercatat sebagai salah satu keberhasilan Ganjar sebagai Gubernur Jateng.",
+    status:"selesai", budget_idr:null,
+    source:"Program Gubernur Jateng 2013-2023", year:2013,
+  },
+  {
+    id:"a20", subject_id:"megawati", subject_type:"person",
+    title:"PDI-P sebagai Oposisi Konstruktif",
+    description:"Megawati menetapkan PDI-P sebagai oposisi pemerintahan Prabowo-Gibran, menolak bergabung dalam koalisi pemerintah setelah Pilpres 2024.",
+    status:"proses", budget_idr:null,
+    source:"Pernyataan Ketum PDI-P 2024", year:2024,
+  },
+  {
+    id:"a21", subject_id:"puan", subject_type:"person",
+    title:"DPR Sahkan UU Kesejahteraan Ibu dan Anak",
+    description:"Di bawah kepemimpinan Puan Maharani, DPR mengesahkan UU Kesejahteraan Ibu dan Anak sebagai salah satu legislasi prioritas 2024.",
+    status:"selesai", budget_idr:null,
+    source:"DPR RI 2024", year:2024,
+  },
+  {
+    id:"a22", subject_id:"kaesang", subject_type:"person",
+    title:"PSI Lolos Parlemen 2029",
+    description:"Target Kaesang sebagai Ketum PSI untuk membawa partai lolos ambang batas parlemen 4% pada Pemilu 2029 setelah gagal di 2024.",
+    status:"janji", budget_idr:null,
+    source:"Pernyataan Ketum PSI 2024", year:2024,
+  },
+  {
+    id:"a23", subject_id:"anies", subject_type:"person",
+    title:"Jakarta Bebas Banjir",
+    description:"Janji Anies saat kampanye Gubernur DKI: bebas banjir melalui normalisasi sungai dan sumur resapan. Banjir masih terjadi; program berjalan sebagian.",
+    status:"ingkar", budget_idr:null,
+    source:"Kampanye Gubernur DKI 2017", year:2017,
+  },
 ]
 
 export const AGENDA_STATUS_CONFIG = {
