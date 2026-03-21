@@ -1,0 +1,296 @@
+import { useState, useEffect, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+// ── Button ───────────────────────────────────────────────────────────────────
+export function Btn({ variant = 'primary', className = '', children, ...props }) {
+  const base = 'inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-bg-card'
+  const variants = {
+    primary: 'bg-accent-red hover:bg-red-700 text-white focus:ring-accent-red',
+    secondary: 'border border-border text-text-secondary hover:text-text-primary hover:border-gray-500 bg-transparent focus:ring-gray-500',
+    ghost: 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated bg-transparent focus:ring-gray-500',
+    danger: 'bg-red-900 hover:bg-red-800 text-red-200 border border-red-700 focus:ring-red-500',
+  }
+  return (
+    <button className={`${base} ${variants[variant]} ${className}`} {...props}>
+      {children}
+    </button>
+  )
+}
+
+// ── Card ─────────────────────────────────────────────────────────────────────
+export function Card({ children, className = '', colorLeft, ...props }) {
+  return (
+    <div
+      className={`bg-bg-card rounded-xl border border-border ${colorLeft ? 'border-l-4' : ''} ${className}`}
+      style={colorLeft ? { borderLeftColor: colorLeft } : {}}
+      {...props}
+    >
+      {children}
+    </div>
+  )
+}
+
+// ── Badge ─────────────────────────────────────────────────────────────────────
+export function Badge({ variant = 'default', color, children, className = '' }) {
+  const base = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium'
+  if (color) {
+    return (
+      <span
+        className={`${base} ${className}`}
+        style={{ backgroundColor: color + '22', color: color, border: `1px solid ${color}44` }}
+      >
+        {children}
+      </span>
+    )
+  }
+  const variants = {
+    default: 'bg-gray-800 text-gray-300',
+    role: 'bg-blue-900/40 text-blue-300 border border-blue-700/30',
+    'status-janji': 'bg-blue-900/40 text-blue-300 border border-blue-700/30',
+    'status-proses': 'bg-yellow-900/40 text-yellow-300 border border-yellow-700/30',
+    'status-selesai': 'bg-green-900/40 text-green-300 border border-green-700/30',
+    'status-ingkar': 'bg-red-900/40 text-red-300 border border-red-700/30 animate-pulse-slow',
+    'status-batal': 'bg-gray-800 text-gray-400 border border-gray-700',
+    'risk-rendah': 'bg-green-900/40 text-green-300',
+    'risk-sedang': 'bg-yellow-900/40 text-yellow-300',
+    'risk-tinggi': 'bg-orange-900/40 text-orange-300',
+    'risk-tersangka': 'bg-red-900/60 text-red-300 border border-red-600/40',
+    'risk-terpidana': 'bg-red-950 text-red-200 border border-red-500 animate-pulse-slow',
+  }
+  return (
+    <span className={`${base} ${variants[variant] || variants.default} ${className}`}>
+      {children}
+    </span>
+  )
+}
+
+// ── KPICard ───────────────────────────────────────────────────────────────────
+export function KPICard({ label, value, sub, icon, trend, color }) {
+  return (
+    <Card className="p-5">
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-text-secondary text-xs uppercase tracking-wider mb-1">{label}</p>
+          <p className="text-2xl font-bold text-text-primary" style={color ? { color } : {}}>{value}</p>
+          {sub && <p className="text-xs text-text-secondary mt-1">{sub}</p>}
+        </div>
+        {icon && (
+          <span className="text-2xl opacity-70">{icon}</span>
+        )}
+      </div>
+      {trend && (
+        <p className={`text-xs mt-2 ${trend > 0 ? 'text-green-400' : 'text-red-400'}`}>
+          {trend > 0 ? '↑' : '↓'} {Math.abs(trend)}%
+        </p>
+      )}
+    </Card>
+  )
+}
+
+// ── SearchBar ─────────────────────────────────────────────────────────────────
+export function SearchBar({ value, onChange, placeholder = 'Cari...', className = '' }) {
+  return (
+    <div className={`relative ${className}`}>
+      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary">🔍</span>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full bg-bg-elevated border border-border rounded-lg pl-10 pr-4 py-2.5 text-text-primary placeholder-text-secondary text-sm focus:outline-none focus:border-accent-blue transition-colors"
+      />
+    </div>
+  )
+}
+
+// ── Modal ─────────────────────────────────────────────────────────────────────
+export function Modal({ open, onClose, title, children, className = '' }) {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose?.() }
+    if (open) document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [open, onClose])
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        >
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+          <motion.div
+            className={`relative bg-bg-elevated border border-border rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto ${className}`}
+            initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
+          >
+            {title && (
+              <div className="flex items-center justify-between p-5 border-b border-border">
+                <h2 className="text-lg font-semibold text-text-primary">{title}</h2>
+                <button onClick={onClose} className="text-text-secondary hover:text-text-primary text-xl">×</button>
+              </div>
+            )}
+            <div className="p-5">{children}</div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+// ── Avatar ────────────────────────────────────────────────────────────────────
+export function Avatar({ name, photoUrl, color, size = 'md', className = '' }) {
+  const initials = name?.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() || '?'
+  const sizes = { sm: 'w-8 h-8 text-xs', md: 'w-10 h-10 text-sm', lg: 'w-16 h-16 text-xl', xl: 'w-24 h-24 text-3xl' }
+  return (
+    <div
+      className={`${sizes[size]} rounded-full flex items-center justify-center font-bold text-white flex-shrink-0 ${className}`}
+      style={{ backgroundColor: color || '#374151' }}
+    >
+      {photoUrl ? (
+        <img src={photoUrl} alt={name} className="w-full h-full rounded-full object-cover" />
+      ) : initials}
+    </div>
+  )
+}
+
+// ── PageHeader ────────────────────────────────────────────────────────────────
+export function PageHeader({ title, subtitle, actions, className = '' }) {
+  return (
+    <div className={`flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 ${className}`}>
+      <div>
+        <h1 className="text-2xl font-bold text-text-primary">{title}</h1>
+        {subtitle && <p className="text-text-secondary mt-1 text-sm">{subtitle}</p>}
+      </div>
+      {actions && <div className="flex items-center gap-3">{actions}</div>}
+    </div>
+  )
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+export function Tabs({ tabs, active, onChange, className = '' }) {
+  return (
+    <div className={`flex gap-1 border-b border-border ${className}`}>
+      {tabs.map(tab => (
+        <button
+          key={tab.id}
+          onClick={() => onChange(tab.id)}
+          className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors -mb-px ${
+            active === tab.id
+              ? 'border-accent-red text-accent-red'
+              : 'border-transparent text-text-secondary hover:text-text-primary'
+          }`}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+let _setToasts = null
+
+export function ToastContainer() {
+  const [toasts, setToasts] = useState([])
+  _setToasts = setToasts
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+      <AnimatePresence>
+        {toasts.map(t => (
+          <motion.div
+            key={t.id}
+            initial={{ opacity: 0, x: 80 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 80 }}
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border text-sm font-medium max-w-xs ${
+              t.type === 'error' ? 'bg-red-900 border-red-700 text-red-100' :
+              t.type === 'success' ? 'bg-green-900 border-green-700 text-green-100' :
+              'bg-bg-elevated border-border text-text-primary'
+            }`}
+          >
+            <span>{t.type === 'error' ? '❌' : t.type === 'success' ? '✅' : 'ℹ️'}</span>
+            {t.message}
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+export function toast(message, type = 'info') {
+  if (!_setToasts) return
+  const id = Date.now()
+  _setToasts(prev => [...prev, { id, message, type }])
+  setTimeout(() => _setToasts(prev => prev.filter(t => t.id !== id)), 3000)
+}
+
+// ── Spinner ───────────────────────────────────────────────────────────────────
+export function Spinner({ size = 'md', className = '' }) {
+  const sizes = { sm: 'w-4 h-4', md: 'w-8 h-8', lg: 'w-12 h-12' }
+  return (
+    <div className={`${sizes[size]} border-2 border-border border-t-accent-red rounded-full animate-spin ${className}`} />
+  )
+}
+
+// ── EmptyState ────────────────────────────────────────────────────────────────
+export function EmptyState({ icon = '🔍', title = 'Tidak ada data', message, action }) {
+  return (
+    <div className="flex flex-col items-center justify-center py-16 text-center">
+      <div className="text-5xl mb-4 opacity-60">{icon}</div>
+      <h3 className="text-lg font-semibold text-text-primary mb-2">{title}</h3>
+      {message && <p className="text-text-secondary text-sm mb-6 max-w-xs">{message}</p>}
+      {action}
+    </div>
+  )
+}
+
+// ── Select ────────────────────────────────────────────────────────────────────
+export function Select({ value, onChange, options, className = '', placeholder = 'Pilih...' }) {
+  return (
+    <select
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      className={`bg-bg-elevated border border-border rounded-lg px-3 py-2 text-text-primary text-sm focus:outline-none focus:border-accent-blue ${className}`}
+    >
+      <option value="">{placeholder}</option>
+      {options.map(opt => (
+        <option key={opt.value} value={opt.value}>{opt.label}</option>
+      ))}
+    </select>
+  )
+}
+
+// ── Tag chip ──────────────────────────────────────────────────────────────────
+export function Tag({ children, className = '' }) {
+  return (
+    <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs bg-bg-elevated text-text-secondary border border-border ${className}`}>
+      {children}
+    </span>
+  )
+}
+
+// ── Risk indicator ────────────────────────────────────────────────────────────
+export function RiskDot({ risk }) {
+  const dots = {
+    rendah:    { color: '#10B981', label: 'Rendah' },
+    sedang:    { color: '#F59E0B', label: 'Sedang' },
+    tinggi:    { color: '#EF4444', label: 'Tinggi' },
+    tersangka: { color: '#DC2626', label: 'Tersangka' },
+    terpidana: { color: '#7F1D1D', label: 'Terpidana' },
+  }
+  const cfg = dots[risk] || dots.rendah
+  return (
+    <span className="flex items-center gap-1.5 text-xs" title={`Risiko Korupsi: ${cfg.label}`}>
+      <span className="w-2 h-2 rounded-full inline-block" style={{ backgroundColor: cfg.color }} />
+      <span style={{ color: cfg.color }}>{cfg.label}</span>
+    </span>
+  )
+}
+
+// ── Format IDR ────────────────────────────────────────────────────────────────
+export function formatIDR(amount) {
+  if (!amount) return 'Tidak tersedia'
+  if (amount >= 1_000_000_000_000) return `Rp ${(amount / 1_000_000_000_000).toFixed(1)} T`
+  if (amount >= 1_000_000_000) return `Rp ${(amount / 1_000_000_000).toFixed(0)} M`
+  if (amount >= 1_000_000) return `Rp ${(amount / 1_000_000).toFixed(0)} Jt`
+  return `Rp ${amount.toLocaleString('id-ID')}`
+}
