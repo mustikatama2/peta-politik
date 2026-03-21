@@ -161,6 +161,100 @@ export const AGENDAS = [
     status:"ingkar", budget_idr:null,
     source:"Kampanye Gubernur DKI 2017", year:2017,
   },
+
+  // ── Dedi Mulyadi — Gubernur Jawa Barat ──────────────────────────────────
+  {
+    id:"a_dm1", subject_id:"dedi_mulyadi", subject_type:"person",
+    title:"Hapus Pungutan Liar Sekolah",
+    description:"Menghapus semua pungutan tidak resmi di sekolah negeri Jabar. Orang tua tidak boleh dimintai uang untuk gedung, seragam, buku di luar ketentuan.",
+    status:"proses", budget_idr:null,
+    source:"Debat Pilkada Jabar 2024", year:2024,
+  },
+  {
+    id:"a_dm2", subject_id:"dedi_mulyadi", subject_type:"person",
+    title:"Beasiswa 10.000 Siswa Miskin",
+    description:"Program beasiswa penuh untuk 10.000 siswa berprestasi dari keluarga tidak mampu di seluruh Jawa Barat.",
+    status:"janji", budget_idr:500_000_000_000,
+    source:"Visi Misi Pilkada Jabar 2024", year:2024,
+  },
+  {
+    id:"a_dm3", subject_id:"dedi_mulyadi", subject_type:"person",
+    title:"Militarisasi Disiplin Pelajar",
+    description:"Program pembinaan disiplin pelajar bermasalah melalui bimbingan militer — kontroversial karena melibatkan TNI dalam pendidikan sipil.",
+    status:"proses", budget_idr:null,
+    source:"Kompas, 2025", year:2025,
+  },
+
+  // ── Ahmad Luthfi — Gubernur Jawa Tengah ─────────────────────────────────
+  {
+    id:"a_al1", subject_id:"ahmad_luthfi", subject_type:"person",
+    title:"10.000 UMKM Naik Kelas",
+    description:"Program akselerasi 10.000 UMKM Jateng untuk naik ke skala menengah melalui akses pembiayaan, pelatihan, dan pasar ekspor.",
+    status:"janji", budget_idr:200_000_000_000,
+    source:"Visi Misi Pilkada Jateng 2024", year:2024,
+  },
+  {
+    id:"a_al2", subject_id:"ahmad_luthfi", subject_type:"person",
+    title:"Satu Desa Satu Polisi",
+    description:"Menempatkan satu anggota Polri aktif atau purna di setiap desa untuk keamanan dan pelayanan masyarakat. Refleksi latar belakang Luthfi sebagai mantan Kapolda.",
+    status:"janji", budget_idr:null,
+    source:"Debat Pilkada Jateng 2024", year:2024,
+  },
+
+  // ── Pramono Anung — Gubernur DKI Jakarta ────────────────────────────────
+  {
+    id:"a_pa1", subject_id:"pramono_anung", subject_type:"person",
+    title:"Transjakarta Gratis untuk Semua",
+    description:"Melanjutkan dan memperluas program Transjakarta gratis untuk lansia, pelajar, dan penyandang disabilitas. Target: gratis untuk seluruh warga DKI.",
+    status:"proses", budget_idr:2_000_000_000_000,
+    source:"Program 100 Hari Pramono 2024", year:2024,
+  },
+  {
+    id:"a_pa2", subject_id:"pramono_anung", subject_type:"person",
+    title:"100.000 Rumah Terjangkau untuk Warga DKI",
+    description:"Program pembangunan 100.000 unit hunian terjangkau bagi warga berpenghasilan rendah di Jakarta dalam 5 tahun. Respons atas krisis perumahan ibu kota.",
+    status:"janji", budget_idr:50_000_000_000_000,
+    source:"Visi Misi Pilkada DKI 2024", year:2024,
+  },
+  {
+    id:"a_pa3", subject_id:"pramono_anung", subject_type:"person",
+    title:"Jakarta Bebas Banjir 2027",
+    description:"Target bebas banjir Jakarta melalui normalisasi sungai, pembangunan waduk, dan sistem drainase. Warisan masalah dari gubernur sebelumnya.",
+    status:"janji", budget_idr:8_000_000_000_000,
+    source:"Debat Pilkada DKI 2024", year:2024,
+  },
+
+  // ── Bobby Nasution — Gubernur Sumatera Utara ─────────────────────────────
+  {
+    id:"a_bn1", subject_id:"bobby_nasution", subject_type:"person",
+    title:"Sumut Jadi Hub Investasi ASEAN",
+    description:"Menjadikan Sumatera Utara sebagai gateway investasi asing ke Indonesia bagian barat. Target: Rp 50 triliun investasi baru dalam 5 tahun.",
+    status:"janji", budget_idr:null,
+    source:"Visi Misi Pilkada Sumut 2024", year:2024,
+  },
+  {
+    id:"a_bn2", subject_id:"bobby_nasution", subject_type:"person",
+    title:"Danau Toba sebagai Destinasi Wisata Dunia",
+    description:"Akselerasi pengembangan Danau Toba sebagai destinasi wisata internasional kelas dunia. Target: 3 juta kunjungan wisatawan 2025.",
+    status:"proses", budget_idr:1_500_000_000_000,
+    source:"Program Gubernur Sumut 2024", year:2024,
+  },
+
+  // ── Khofifah — Gubernur Jawa Timur (tambahan) ───────────────────────────
+  {
+    id:"a_kf3", subject_id:"khofifah", subject_type:"person",
+    title:"Jatim Lumbung Pangan Nasional 2029",
+    description:"Menjaga Jawa Timur sebagai kontributor terbesar pangan nasional. Target surplus beras 2 juta ton dan jagung 3.5 juta ton per tahun.",
+    status:"proses", budget_idr:3_000_000_000_000,
+    source:"Visi Misi Pilkada Jatim 2024", year:2024,
+  },
+  {
+    id:"a_kf4", subject_id:"khofifah", subject_type:"person",
+    title:"100 Ribu Wirausaha Baru Jatim",
+    description:"Cetak 100.000 wirausahawan baru berbasis pesantren dan komunitas NU. Integrasi antara pendidikan keagamaan dan ekonomi produktif.",
+    status:"janji", budget_idr:500_000_000_000,
+    source:"Debat Pilkada Jatim 2024", year:2024,
+  },
 ]
 
 export const AGENDA_STATUS_CONFIG = {
