@@ -134,6 +134,13 @@ export default function AgendaTracker() {
       </p>
 
       {/* Agenda Cards */}
+      {filtered.length === 0 ? (
+        <div className="text-center py-20 text-text-secondary">
+          <div className="text-5xl mb-4">📋</div>
+          <p className="font-medium">🔍 Tidak ada agenda ditemukan untuk filter ini</p>
+          <p className="text-sm mt-1">Coba ubah filter status atau tokoh</p>
+        </div>
+      ) : null}
       <div className="space-y-3">
         {filtered.map(a => {
           const person = PERSONS.find(p => p.id === a.subject_id)

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
   LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
@@ -8,7 +9,7 @@ import { AGENDAS } from '../../data/agendas'
 import { PILEG_HISTORY } from '../../data/elections'
 import { NEWS } from '../../data/news'
 import PersonCard from '../../components/PersonCard'
-import { Card, Badge, Btn, KPICard } from '../../components/ui'
+import { Card, Badge, Btn, KPICard, Breadcrumb } from '../../components/ui'
 
 // Party ideology compass positions (ekonomi x: kiri=-10..kanan=10, sosial y: progresif=10..konservatif=-10)
 const PARTY_COMPASS = {
@@ -45,6 +46,12 @@ export default function PartyDetail() {
   const navigate = useNavigate()
 
   const party = PARTIES.find(p => p.id === id)
+
+  // Page title — called unconditionally (hooks rule)
+  useEffect(() => {
+    if (party) document.title = `${party.abbr} — PetaPolitik`
+    return () => { document.title = 'PetaPolitik Indonesia' }
+  }, [party])
 
   if (!party) {
     return (
@@ -110,12 +117,11 @@ export default function PartyDetail() {
 
   return (
     <div className="space-y-6">
-      <button
-        onClick={() => navigate('/parties')}
-        className="text-text-secondary hover:text-text-primary text-sm flex items-center gap-2 transition-colors"
-      >
-        ← Kembali ke Daftar Partai
-      </button>
+      <Breadcrumb items={[
+        { label: 'Beranda', to: '/' },
+        { label: 'Partai', to: '/parties' },
+        { label: party.abbr },
+      ]} />
 
       {/* Header */}
       <Card className="p-5" style={{ borderLeftColor: party.color, borderLeftWidth: 4 }}>

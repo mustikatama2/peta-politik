@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // ── Button ───────────────────────────────────────────────────────────────────
@@ -282,6 +283,24 @@ export function RiskDot({ risk }) {
       <span className="w-2 h-2 rounded-full inline-block" style={{ backgroundColor: cfg.color }} />
       <span style={{ color: cfg.color }}>{cfg.label}</span>
     </span>
+  )
+}
+
+// ── Breadcrumb ────────────────────────────────────────────────────────────────
+export function Breadcrumb({ items }) {
+  // items = [{ label, to? }]
+  return (
+    <nav className="flex items-center gap-1.5 text-xs text-text-secondary mb-4 flex-wrap">
+      {items.map((item, i) => (
+        <span key={i} className="flex items-center gap-1.5">
+          {i > 0 && <span className="opacity-40">/</span>}
+          {item.to
+            ? <Link to={item.to} className="hover:text-text-primary transition-colors">{item.label}</Link>
+            : <span className="text-text-primary">{item.label}</span>
+          }
+        </span>
+      ))}
+    </nav>
   )
 }
 

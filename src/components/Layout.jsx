@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import { useTheme } from '../contexts/ThemeContext'
@@ -43,6 +43,25 @@ const MOBILE_NAV = [
   { to:'/news',     icon:'📰', label:'Berita' },
 ]
 
+function BackToTop() {
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 300)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  if (!visible) return null
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="fixed bottom-20 right-4 z-50 w-10 h-10 rounded-full bg-accent-red text-white flex items-center justify-center shadow-lg hover:scale-110 transition-transform md:bottom-6"
+      aria-label="Back to top"
+    >
+      ↑
+    </button>
+  )
+}
+
 export default function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -85,7 +104,7 @@ export default function Layout({ children }) {
               className={({ isActive }) =>
                 `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 group relative ${
                   isActive
-                    ? 'bg-white/10 text-white border-l-2 border-red-500'
+                    ? 'bg-white/10 text-white font-semibold border-l-2 border-red-500'
                     : 'text-white/50 hover:text-white hover:bg-white/5'
                 }`
               }
@@ -255,6 +274,7 @@ export default function Layout({ children }) {
         ))}
       </nav>
 
+      <BackToTop />
       <ToastContainer />
     </div>
   )

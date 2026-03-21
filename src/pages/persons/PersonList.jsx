@@ -303,7 +303,7 @@ export default function PersonList() {
         <div className="text-center py-20 text-text-secondary">
           <div className="text-5xl mb-4">{showWatchlist ? '⭐' : '🔍'}</div>
           <p className="font-medium">
-            {showWatchlist ? 'Belum ada tokoh di pantauan' : 'Tidak ada tokoh ditemukan'}
+            {showWatchlist ? 'Belum ada tokoh di pantauan' : '🔍 Tidak ada tokoh ditemukan untuk filter ini'}
           </p>
           <p className="text-sm mt-1">
             {showWatchlist
@@ -312,7 +312,7 @@ export default function PersonList() {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
           {filtered.map(person => (
             <PersonCard
               key={person.id}

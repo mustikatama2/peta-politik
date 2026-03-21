@@ -14,7 +14,7 @@ import WealthBar from '../../components/WealthBar'
 import ConnectionBadge from '../../components/ConnectionBadge'
 import NewsCard from '../../components/NewsCard'
 import PersonCard from '../../components/PersonCard'
-import { Avatar, Badge, Tabs, Card, formatIDR, Tag, RiskDot, Btn } from '../../components/ui'
+import { Avatar, Badge, Tabs, Card, formatIDR, Tag, RiskDot, Btn, Breadcrumb } from '../../components/ui'
 
 function getRelatedPersons(person, allPersons, connections) {
   const scores = {}
@@ -227,6 +227,12 @@ export default function PersonDetail() {
       .finally(() => setNewsLoading(false))
   }, [activeTab, person])
 
+  // Page title
+  useEffect(() => {
+    if (person) document.title = `${person.name} — PetaPolitik`
+    return () => { document.title = 'PetaPolitik Indonesia' }
+  }, [person])
+
   if (!person) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
@@ -295,6 +301,12 @@ export default function PersonDetail() {
 
   return (
     <div className="space-y-5">
+      <Breadcrumb items={[
+        { label: 'Beranda', to: '/' },
+        { label: 'Tokoh', to: '/persons' },
+        { label: person.name },
+      ]} />
+
       {/* Hero section */}
       <div
         className="relative rounded-2xl overflow-hidden p-6 md:p-8"
@@ -318,17 +330,6 @@ export default function PersonDetail() {
 
           {/* Info */}
           <div className="flex-1 min-w-0">
-            {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-xs text-text-secondary mb-2">
-              <button
-                onClick={() => navigate('/persons')}
-                className="hover:text-text-primary transition-colors"
-              >
-                Tokoh
-              </button>
-              <span>/</span>
-              <span className="text-text-primary">{person.name}</span>
-            </div>
             <h1 className="text-2xl md:text-3xl font-bold text-text-primary">{person.name}</h1>
             {currentPos && (
               <p className="text-text-secondary mt-1">{currentPos.title} · {currentPos.institution}</p>
