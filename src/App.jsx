@@ -27,6 +27,7 @@ const COIScanner     = lazy(() => import('./pages/coi/COIScanner'))
 const ComparePage    = lazy(() => import('./pages/compare/ComparePage'))
 const RiskIndex      = lazy(() => import('./pages/risk/RiskIndex'))
 const ScenarioPage   = lazy(() => import('./pages/scenarios/ScenarioPage'))
+const VotingPage     = lazy(() => import('./pages/voting/VotingPage'))
 const BusinessPage   = lazy(() => import('./pages/business/BusinessPage'))
 
 // Loading fallback — skeleton style
@@ -69,6 +70,7 @@ export default function App() {
         <Route path="/media" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><MediaOwnership /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/dynasty" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><DynastyMapper /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/timeline" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Timeline /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/voting" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><VotingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/coi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><COIScanner /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/compare" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/compare/:id1" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />

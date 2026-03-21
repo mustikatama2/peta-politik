@@ -1,9 +1,20 @@
-import { useMemo } from 'react'
+import { useMemo, useState, useCallback } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { PERSONS } from '../../data/persons'
 import { PARTIES } from '../../data/parties'
 import PersonCard from '../../components/PersonCard'
 import { SearchBar, Select, PageHeader } from '../../components/ui'
+
+// ── Watchlist helpers ──────────────────────────────────────────────────────────
+const getWatchlist = () => JSON.parse(localStorage.getItem('pp_watchlist') || '[]')
+const saveWatchlist = (list) => localStorage.setItem('pp_watchlist', JSON.stringify(list))
+const toggleWatchlistItem = (id) => {
+  const w = getWatchlist()
+  const idx = w.indexOf(id)
+  if (idx >= 0) w.splice(idx, 1); else w.push(id)
+  saveWatchlist(w)
+  return [...w]
+}
 
 const RISK_ORDER = { rendah: 0, sedang: 1, tinggi: 2, tersangka: 3, terpidana: 4 }
 
@@ -34,6 +45,13 @@ function getJabatan(person) {
 
 export default function PersonList() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const [watchlist, setWatchlist] = useState(() => getWatchlist())
+  const [showWatchlist, setShowWatchlist] = useState(false)
+
+  const handleBookmark = useCallback((id) => {
+    const updated = toggleWatchlistItem(id)
+    setWatchlist(updated)
+  }, [])
 
   const search       = searchParams.get('q')       || ''
   const filterTier   = searchParams.get('tier')    || ''
@@ -114,6 +132,11 @@ export default function PersonList() {
   const filtered = useMemo(() => {
     let result = [...PERSONS]
 
+    // Watchlist filter: if active, only show bookmarked persons
+    if (showWatchlist) {
+      result = result.filter(p => watchlist.includes(p.id))
+    }
+
     if (search) {
       const q = search.toLowerCase()
       result = result.filter(p =>
@@ -155,7 +178,7 @@ export default function PersonList() {
     })
 
     return result
-  }, [search, filterTier, filterParty, filterRisk, filterTag, filterWilayah, filterJabatan, sortBy])
+  }, [search, filterTier, filterParty, filterRisk, filterTag, filterWilayah, filterJabatan, sortBy, showWatchlist, watchlist])
 
   const hasActiveFilter = search || filterTier || filterParty || filterRisk || filterTag || filterWilayah || filterJabatan
 
@@ -165,10 +188,27 @@ export default function PersonList() {
 
   return (
     <div className="space-y-5">
-      <PageHeader
-        title="👥 Tokoh Politik"
-        subtitle={`${PERSONS.length} tokoh terdaftar`}
-      />
+      <div className="flex items-start justify-between gap-4 flex-wrap">
+        <PageHeader
+          title="👥 Tokoh Politik"
+          subtitle={`${PERSONS.length} tokoh terdaftar`}
+        />
+        <button
+          onClick={() => setShowWatchlist(v => !v)}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border transition-all ${
+            showWatchlist
+              ? 'bg-yellow-500/20 text-yellow-400 border-yellow-500/40'
+              : 'bg-bg-card border-border text-text-secondary hover:text-text-primary'
+          }`}
+        >
+          {showWatchlist ? '⭐' : '☆'} Pantauan
+          {watchlist.length > 0 && (
+            <span className={`px-1.5 py-0.5 rounded-full text-[11px] font-bold ${
+              showWatchlist ? 'bg-yellow-500 text-black' : 'bg-bg-elevated text-text-secondary'
+            }`}>{watchlist.length}</span>
+          )}
+        </button>
+      </div>
 
       {/* Search */}
       <SearchBar value={search} onChange={setSearch} placeholder="Cari nama, jabatan, atau bio..." />
@@ -261,14 +301,25 @@ export default function PersonList() {
       {/* Grid */}
       {filtered.length === 0 ? (
         <div className="text-center py-20 text-text-secondary">
-          <div className="text-5xl mb-4">🔍</div>
-          <p className="font-medium">Tidak ada tokoh ditemukan</p>
-          <p className="text-sm mt-1">Coba ubah filter atau kata kunci pencarian</p>
+          <div className="text-5xl mb-4">{showWatchlist ? '⭐' : '🔍'}</div>
+          <p className="font-medium">
+            {showWatchlist ? 'Belum ada tokoh di pantauan' : 'Tidak ada tokoh ditemukan'}
+          </p>
+          <p className="text-sm mt-1">
+            {showWatchlist
+              ? 'Klik ☆ pada kartu tokoh untuk menambahkan ke pantauan'
+              : 'Coba ubah filter atau kata kunci pencarian'}
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {filtered.map(person => (
-            <PersonCard key={person.id} person={person} />
+            <PersonCard
+              key={person.id}
+              person={person}
+              bookmarked={watchlist.includes(person.id)}
+              onBookmark={handleBookmark}
+            />
           ))}
         </div>
       )}
