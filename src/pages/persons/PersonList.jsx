@@ -47,6 +47,18 @@ export default function PersonList() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [watchlist, setWatchlist] = useState(() => getWatchlist())
   const [showWatchlist, setShowWatchlist] = useState(false)
+  const [livePersonIds, setLivePersonIds] = useState(new Set())
+
+  useEffect(() => {
+    fetch('/api/news?limit=100')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => {
+        if (!data?.articles) return
+        const ids = new Set(data.articles.flatMap(a => a.person_ids || []))
+        setLivePersonIds(ids)
+      })
+      .catch(() => {})
+  }, [])
 
   const handleBookmark = useCallback((id) => {
     const updated = toggleWatchlistItem(id)
@@ -319,6 +331,7 @@ export default function PersonList() {
               person={person}
               bookmarked={watchlist.includes(person.id)}
               onBookmark={handleBookmark}
+              hasLiveNews={livePersonIds.has(person.id)}
             />
           ))}
         </div>

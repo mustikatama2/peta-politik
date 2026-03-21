@@ -30,6 +30,7 @@ const ScenarioPage   = lazy(() => import('./pages/scenarios/ScenarioPage'))
 const VotingPage     = lazy(() => import('./pages/voting/VotingPage'))
 const BusinessPage   = lazy(() => import('./pages/business/BusinessPage'))
 const KabinetPage    = lazy(() => import('./pages/kabinet/KabinetPage'))
+const BudgetPage     = lazy(() => import('./pages/budget/BudgetPage'))
 const SurveyPage     = lazy(() => import('./pages/surveys/SurveyPage'))
 
 // Loading fallback — skeleton style
@@ -82,6 +83,7 @@ export default function App() {
         <Route path="/scenarios" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScenarioPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/bisnis" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BusinessPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/kabinet" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KabinetPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/anggaran" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BudgetPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>

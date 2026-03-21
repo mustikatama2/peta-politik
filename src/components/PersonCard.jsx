@@ -11,7 +11,7 @@ const RISK_CONFIG = {
   terpidana: { label: '⛔ Terpidana', cls: 'risk-terpidana' },
 }
 
-export default function PersonCard({ person, compact, bookmarked, onBookmark }) {
+export default function PersonCard({ person, compact, bookmarked, onBookmark, hasLiveNews }) {
   const navigate = useNavigate()
   const party = person.party_id ? PARTY_MAP[person.party_id] : null
   const currentPos = person.positions?.find(p => p.is_current)
@@ -67,6 +67,12 @@ export default function PersonCard({ person, compact, bookmarked, onBookmark }) 
         >
           {bookmarked ? '⭐' : '☆'}
         </button>
+      )}
+      {hasLiveNews && (
+        <span className="absolute top-2 left-2 flex items-center gap-0.5 px-1.5 py-0.5 rounded-full bg-green-500/20 border border-green-500/30 z-10">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+          <span className="text-[10px] font-bold text-green-400">LIVE</span>
+        </span>
       )}
       {/* Party color top bar */}
       <div
