@@ -1,4 +1,4 @@
-import { useState, Component } from 'react'
+import { useState, Component, useMemo } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { PERSONS } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
@@ -10,7 +10,36 @@ import CharacterRadar from '../../components/CharacterRadar'
 import WealthBar from '../../components/WealthBar'
 import ConnectionBadge from '../../components/ConnectionBadge'
 import NewsCard from '../../components/NewsCard'
+import PersonCard from '../../components/PersonCard'
 import { Avatar, Badge, Tabs, Card, formatIDR, Tag, RiskDot, Btn } from '../../components/ui'
+
+function getRelatedPersons(person, allPersons, connections) {
+  const scores = {}
+
+  // 1. Direct connections (weight: 3)
+  connections
+    .filter(c => c.from === person.id || c.to === person.id)
+    .forEach(c => {
+      const otherId = c.from === person.id ? c.to : c.from
+      scores[otherId] = (scores[otherId] || 0) + 3 * ((c.strength || 5) / 10)
+    })
+
+  // 2. Same party (weight: 2)
+  allPersons
+    .filter(p => p.id !== person.id && p.party_id === person.party_id && p.party_id)
+    .forEach(p => { scores[p.id] = (scores[p.id] || 0) + 2 })
+
+  // 3. Same region (weight: 1)
+  allPersons
+    .filter(p => p.id !== person.id && p.region_id === person.region_id && p.region_id)
+    .forEach(p => { scores[p.id] = (scores[p.id] || 0) + 1 })
+
+  return Object.entries(scores)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6)
+    .map(([id]) => allPersons.find(p => p.id === id))
+    .filter(Boolean)
+}
 
 const MAX_WEALTH = Math.max(...PERSONS.filter(p => p.lhkpn_latest).map(p => p.lhkpn_latest))
 
@@ -50,8 +79,13 @@ export default function PersonDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('profil')
+  const [showExport, setShowExport] = useState(false)
 
   const person = PERSONS.find(p => p.id === id)
+  const relatedPersons = useMemo(() => {
+    if (!person) return []
+    return getRelatedPersons(person, PERSONS, CONNECTIONS)
+  }, [person])
 
   if (!person) {
     return (
@@ -96,6 +130,33 @@ export default function PersonDetail() {
     terpidana: { label: '⛔ Terpidana', cls: 'risk-terpidana' },
   }
   const riskKey = person.analysis?.corruption_risk || 'rendah'
+
+  const handlePrint = () => window.print()
+
+  const handleExportJSON = () => {
+    const data = {
+      person,
+      connections: personConnections,
+      news: personNews.slice(0, 10),
+      agendas: personAgendas,
+      exportedAt: new Date().toISOString(),
+      source: 'PetaPolitik v1.0',
+    }
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${person.id}-petapolitik.json`
+    a.click()
+    URL.revokeObjectURL(url)
+    setShowExport(false)
+  }
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href)
+    setShowExport(false)
+    alert('Link berhasil disalin!')
+  }
 
   return (
     <div className="space-y-5">
@@ -146,10 +207,37 @@ export default function PersonDetail() {
               <Badge variant="role">{person.tier}</Badge>
               {person.tags?.map(t => <Tag key={t}>#{t}</Tag>)}
             </div>
-            <div className="mt-4">
+            <div className="mt-4 flex items-center gap-2 flex-wrap">
               <Btn onClick={() => navigate(`/compare/${person.id}`)} variant="secondary" size="sm">
                 ⚖️ Bandingkan
               </Btn>
+              <div className="relative">
+                <Btn onClick={() => setShowExport(!showExport)} variant="secondary" size="sm">
+                  📤 Export ▾
+                </Btn>
+                {showExport && (
+                  <div className="absolute left-0 top-full mt-1 bg-bg-card border border-border rounded-lg shadow-xl z-10 min-w-36">
+                    <button
+                      onClick={handlePrint}
+                      className="w-full text-left px-4 py-2.5 text-sm text-text-primary hover:bg-bg-elevated rounded-t-lg"
+                    >
+                      🖨️ Print / PDF
+                    </button>
+                    <button
+                      onClick={handleExportJSON}
+                      className="w-full text-left px-4 py-2.5 text-sm text-text-primary hover:bg-bg-elevated"
+                    >
+                      📊 Export JSON
+                    </button>
+                    <button
+                      onClick={handleCopyLink}
+                      className="w-full text-left px-4 py-2.5 text-sm text-text-primary hover:bg-bg-elevated rounded-b-lg"
+                    >
+                      🔗 Copy Link
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

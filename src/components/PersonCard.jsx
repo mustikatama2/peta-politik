@@ -11,11 +11,45 @@ const RISK_CONFIG = {
   terpidana: { label: '⛔ Terpidana', cls: 'risk-terpidana' },
 }
 
-export default function PersonCard({ person }) {
+export default function PersonCard({ person, compact }) {
   const navigate = useNavigate()
   const party = person.party_id ? PARTY_MAP[person.party_id] : null
   const currentPos = person.positions?.find(p => p.is_current)
   const risk = RISK_CONFIG[person.analysis?.corruption_risk] || RISK_CONFIG.rendah
+
+  // Compact mode: just avatar + name + party badge
+  if (compact) {
+    return (
+      <motion.div
+        whileHover={{ y: -2 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 28 }}
+        className="bg-bg-card rounded-xl border border-border overflow-hidden cursor-pointer group"
+        style={{ boxShadow: 'var(--shadow-card)' }}
+      >
+        <div className="h-1" style={{ backgroundColor: party?.color || '#64748B' }} />
+        <div className="p-3 flex flex-col items-center text-center gap-2">
+          <Avatar
+            name={person.name}
+            photoUrl={person.photo_url}
+            color={party?.color}
+            size="md"
+            className="ring-2 ring-bg-app"
+          />
+          <p className="text-xs font-semibold text-text-primary group-hover:text-accent-red transition-colors line-clamp-2 leading-snug">
+            {person.name}
+          </p>
+          {party && (
+            <span
+              className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold text-white"
+              style={{ backgroundColor: party.color }}
+            >
+              {party.abbr}
+            </span>
+          )}
+        </div>
+      </motion.div>
+    )
+  }
 
   return (
     <motion.div

@@ -26,14 +26,15 @@ const Timeline       = lazy(() => import('./pages/timeline/Timeline'))
 const COIScanner     = lazy(() => import('./pages/coi/COIScanner'))
 const ComparePage    = lazy(() => import('./pages/compare/ComparePage'))
 
-// Loading fallback
+// Loading fallback — skeleton style
 function PageLoader() {
   return (
-    <div className="flex items-center justify-center h-64">
-      <div className="flex flex-col items-center gap-3">
-        <div className="w-8 h-8 border-2 border-accent-red border-t-transparent rounded-full animate-spin" />
-        <p className="text-text-secondary text-sm">Memuat...</p>
+    <div className="space-y-4 animate-pulse">
+      <div className="h-8 w-64 bg-bg-elevated rounded" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[...Array(4)].map((_, i) => <div key={i} className="h-24 bg-bg-elevated rounded-xl" />)}
       </div>
+      <div className="h-64 bg-bg-elevated rounded-xl" />
     </div>
   )
 }

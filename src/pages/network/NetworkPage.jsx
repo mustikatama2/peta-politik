@@ -16,12 +16,43 @@ const NETWORK_NODES = PERSONS.filter(p => connectedIds.has(p.id))
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
+// BFS shortest path
+function findShortestPath(connections, startId, endId) {
+  if (startId === endId) return [startId]
+  const adj = {}
+  connections.forEach(c => {
+    if (!adj[c.from]) adj[c.from] = []
+    if (!adj[c.to])   adj[c.to]   = []
+    adj[c.from].push({ id: c.to,   edge: c })
+    adj[c.to].push({   id: c.from, edge: c })
+  })
+  const visited = new Set([startId])
+  const queue = [[startId, [startId]]]
+  while (queue.length) {
+    const [current, path] = queue.shift()
+    const neighbors = adj[current] || []
+    for (const { id } of neighbors) {
+      if (id === endId) return [...path, id]
+      if (!visited.has(id)) {
+        visited.add(id)
+        queue.push([id, [...path, id]])
+      }
+    }
+  }
+  return null // no path found
+}
+
 export default function NetworkPage() {
   const navigate = useNavigate()
   const [filterType, setFilterType] = useState(null)
   const [filterParty, setFilterParty] = useState(null)
   const [filterTier, setFilterTier] = useState(null)
   const [selectedPerson, setSelectedPerson] = useState(null)
+
+  // Shortest path state
+  const [pathStart, setPathStart] = useState('')
+  const [pathEnd, setPathEnd] = useState('')
+  const [path, setPath] = useState(undefined) // undefined = not searched yet, null = no path
 
   const handleNodeClick = useCallback((person) => {
     setSelectedPerson(person)
@@ -32,6 +63,12 @@ export default function NetworkPage() {
     setFilterParty(null)
     setFilterTier(null)
     setSelectedPerson(null)
+  }
+
+  const computePath = () => {
+    if (!pathStart || !pathEnd) return
+    const result = findShortestPath(CONNECTIONS, pathStart, pathEnd)
+    setPath(result)
   }
 
   const connectionCounts = selectedPerson
@@ -47,6 +84,8 @@ export default function NetworkPage() {
   const partiesWithConnections = PARTIES.filter(p =>
     NETWORK_NODES.some(n => n.party_id === p.id)
   )
+
+  const highlightIds = Array.isArray(path) ? path : undefined
 
   return (
     <div className="flex h-[calc(100vh-8rem)] gap-0 -m-4 md:-m-6 overflow-hidden">
@@ -130,6 +169,53 @@ export default function NetworkPage() {
           </button>
         )}
 
+        {/* Shortest Path section */}
+        <div className="border-t border-border pt-4">
+          <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+            🔍 Jalur Terpendek
+          </h3>
+          <select
+            value={pathStart}
+            onChange={e => { setPathStart(e.target.value); setPath(undefined) }}
+            className="w-full text-xs bg-bg-elevated border border-border rounded px-2 py-1 mb-1 text-text-primary"
+          >
+            <option value="">Dari...</option>
+            {NETWORK_NODES.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
+          </select>
+          <select
+            value={pathEnd}
+            onChange={e => { setPathEnd(e.target.value); setPath(undefined) }}
+            className="w-full text-xs bg-bg-elevated border border-border rounded px-2 py-1 mb-2 text-text-primary"
+          >
+            <option value="">Ke...</option>
+            {NETWORK_NODES.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
+          </select>
+          <button
+            onClick={computePath}
+            disabled={!pathStart || !pathEnd}
+            className="w-full text-xs bg-accent-red text-white rounded py-1.5 hover:bg-red-700 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Cari Jalur
+          </button>
+          {Array.isArray(path) && (
+            <div className="mt-2 space-y-1">
+              <p className="text-xs text-text-secondary">{path.length - 1} derajat pemisah:</p>
+              {path.map((id, i) => {
+                const p = PERSONS.find(x => x.id === id)
+                return (
+                  <div key={id} className="flex items-center gap-1">
+                    {i > 0 && <span className="text-accent-red text-xs">→</span>}
+                    <span className="text-xs text-text-primary">{p?.name || id}</span>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+          {path === null && pathStart && pathEnd && (
+            <p className="text-xs text-text-secondary mt-2">Tidak ada jalur ditemukan</p>
+          )}
+        </div>
+
         {/* Legend */}
         <div>
           <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
@@ -170,12 +256,18 @@ export default function NetworkPage() {
               onNodeClick={handleNodeClick}
               filterType={filterType}
               filterParty={filterParty}
+              highlightIds={highlightIds}
             />
             {/* Stats overlay */}
             <div className="absolute top-3 left-3 flex gap-2">
               <span className="px-2 py-1 bg-bg-card/90 border border-border rounded text-xs text-text-secondary">
                 {NETWORK_NODES.length} tokoh · {CONNECTIONS.length} koneksi
               </span>
+              {Array.isArray(path) && (
+                <span className="px-2 py-1 bg-yellow-500/20 border border-yellow-500/40 rounded text-xs text-yellow-400">
+                  ✨ Jalur disorot: {path.length} tokoh
+                </span>
+              )}
             </div>
           </>
         )}

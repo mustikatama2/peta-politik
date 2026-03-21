@@ -424,6 +424,32 @@ export default function Dashboard() {
             </div>
           ))}
         </div>
+
+        {/* Aksi Cepat */}
+        <div className="mt-5 pt-4 border-t border-border">
+          <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">⚡ Aksi Cepat</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              { label: 'Cari Tokoh',      icon: '👤', path: '/persons' },
+              { label: 'Lihat Jaringan',  icon: '🕸️', path: '/network' },
+              { label: 'Bandingkan',      icon: '⚖️', path: '/compare' },
+              { label: 'Analitik',        icon: '📈', path: '/analitik' },
+              { label: 'KPK Cases',       icon: '🔍', path: '/kpk' },
+              { label: 'Linimasa',        icon: '📅', path: '/timeline' },
+              { label: 'Skenario 2029',   icon: '🔮', path: '/scenarios' },
+              { label: 'Risiko Provinsi', icon: '🚨', path: '/regions' },
+            ].map(a => (
+              <Link
+                key={a.path}
+                to={a.path}
+                className="bg-bg-elevated border border-border rounded-xl p-3 text-center hover:border-accent-red transition-colors"
+              >
+                <div className="text-2xl mb-1">{a.icon}</div>
+                <p className="text-xs text-text-secondary">{a.label}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
       </Card>
     </div>
   )

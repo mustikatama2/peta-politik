@@ -5,6 +5,8 @@ import { useTheme } from '../contexts/ThemeContext'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ToastContainer } from './ui'
 import GlobalSearch from './GlobalSearch'
+import { PERSONS } from '../data/persons'
+import { CONNECTIONS } from '../data/connections'
 
 const NAV = [
   { to:'/',         icon:'🏠', label:'Dashboard' },
@@ -93,6 +95,23 @@ export default function Layout({ children }) {
             </NavLink>
           ))}
         </nav>
+
+        {/* Sidebar footer — data info */}
+        {!collapsed && (
+          <div className="px-4 py-3 border-t border-white/5">
+            <p className="text-xs text-white/30">PetaPolitik v1.0</p>
+            <p className="text-xs text-white/30">Data: Maret 2026</p>
+            <p className="text-xs text-white/30">{PERSONS.length} tokoh · {CONNECTIONS.length} koneksi</p>
+            <a
+              href="https://github.com/mustikatama2/peta-politik"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-red-400 hover:underline mt-1 block"
+            >
+              GitHub →
+            </a>
+          </div>
+        )}
 
         {/* Footer */}
         <div className="p-3 border-t border-white/5 space-y-1">

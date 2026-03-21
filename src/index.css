@@ -146,3 +146,16 @@
   padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
 }
 @media (max-width: 768px) { .mobile-nav { display: flex; } }
+
+/* ── Print / PDF styles ─────────────────────────────────────────────────── */
+@media print {
+  /* Hide nav, sidebar, buttons */
+  nav, aside, button, .no-print { display: none !important; }
+  /* Show content full width */
+  main { width: 100% !important; margin: 0 !important; padding: 0 !important; }
+  /* Page breaks */
+  .page-break { page-break-before: always; }
+  /* Colors for print */
+  body { background: white !important; color: black !important; }
+  .bg-bg-card, .bg-bg-elevated { background: #f9f9f9 !important; border: 1px solid #ddd !important; }
+}

@@ -3,11 +3,12 @@ import * as d3 from 'd3'
 import { PARTY_MAP } from '../data/parties'
 import { CONNECTION_TYPES } from '../data/connections'
 
-export default function NetworkGraph({ nodes, edges, onNodeClick, filterType, filterParty, centerNodeId }) {
+export default function NetworkGraph({ nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds }) {
   const svgRef = useRef(null)
   const simulationRef = useRef(null)
 
   const draw = useCallback(() => {
+    const highlightSet = highlightIds ? new Set(highlightIds) : null
     if (!svgRef.current || !nodes?.length) return
 
     const container = svgRef.current.parentElement
@@ -119,14 +120,23 @@ export default function NetworkGraph({ nodes, edges, onNodeClick, filterType, fi
         onNodeClick?.(d)
       })
 
+    // Highlight glow ring
+    node.filter(d => highlightSet?.has(d.id))
+      .append('circle')
+      .attr('r', d => d.id === centerNodeId ? 26 : 20)
+      .attr('fill', 'none')
+      .attr('stroke', '#FBBF24')
+      .attr('stroke-width', 3)
+      .attr('opacity', 0.8)
+
     node.append('circle')
       .attr('r', d => d.id === centerNodeId ? 20 : 14)
       .attr('fill', d => {
         const party = d.party_id ? PARTY_MAP[d.party_id] : null
         return party?.color || '#374151'
       })
-      .attr('stroke', d => d.id === centerNodeId ? '#F59E0B' : '#1F2937')
-      .attr('stroke-width', d => d.id === centerNodeId ? 3 : 1.5)
+      .attr('stroke', d => highlightSet?.has(d.id) ? '#FBBF24' : (d.id === centerNodeId ? '#F59E0B' : '#1F2937'))
+      .attr('stroke-width', d => highlightSet?.has(d.id) ? 3 : (d.id === centerNodeId ? 3 : 1.5))
       .attr('fill-opacity', 0.9)
 
     node.append('text')
@@ -156,7 +166,7 @@ export default function NetworkGraph({ nodes, edges, onNodeClick, filterType, fi
 
       node.attr('transform', d => `translate(${d.x},${d.y})`)
     })
-  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId])
+  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds])
 
   useEffect(() => {
     draw()
