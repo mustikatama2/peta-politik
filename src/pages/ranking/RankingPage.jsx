@@ -298,7 +298,7 @@ function Methodology() {
             <h4 className="font-semibold text-red-400 mb-2">⚠️ Penalti Korupsi</h4>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
               <div><span className="text-red-300 font-bold">Terpidana: −40</span></div>
-              <div><span className="text-red-400 font-bold">Tersangka: −30</span></div>
+              <div><span className="text-red-400 font-bold">Tersangka: −35</span></div>
               <div><span className="text-orange-400 font-bold">Tinggi: −15</span></div>
               <div><span className="text-amber-400 font-bold">Sedang: −5</span></div>
             </div>
@@ -483,7 +483,7 @@ export default function RankingPage() {
             </div>
           </div>
           <div className="mt-2 text-[10px] text-red-400/80">
-            Penalti: Terpidana −40 | Tersangka −30 | Risiko Tinggi −15 | Sedang −5
+            Penalti: Terpidana −40 | Tersangka −35 | Risiko Tinggi −15 | Sedang −5
           </div>
         </div>
       )}

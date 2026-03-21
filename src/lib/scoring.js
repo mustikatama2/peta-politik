@@ -6,6 +6,41 @@ import { GDP_PROVINCES } from '../data/gdp'
 
 // ─── CONSTANTS ────────────────────────────────────────────────────────────────
 
+/**
+ * POSITION_SCORES — ordered by specificity (longer/more specific strings first).
+ * This prevents "Presiden" from matching "Wakil Presiden" via includes().
+ */
+const POSITION_SCORES = [
+  { match: 'wakil presiden',            score: 38 },  // must come BEFORE 'presiden'
+  { match: 'presiden ri',               score: 40 },
+  { match: 'presiden',                  score: 40 },
+  { match: 'wakil ketua dpr',           score: 22 },  // must come BEFORE 'ketua dpr'
+  { match: 'ketua dpr',                 score: 28 },
+  { match: 'wakil ketua mpr',           score: 20 },  // must come BEFORE 'ketua mpr'
+  { match: 'ketua mpr',                 score: 26 },
+  { match: 'ketua mahkamah konstitusi', score: 25 },
+  { match: 'ketua mahkamah agung',      score: 24 },
+  { match: 'menko',                     score: 26 },
+  { match: 'wakil menteri',             score: 16 },  // must come BEFORE 'menteri'
+  { match: 'menteri',                   score: 22 },
+  { match: 'wakil gubernur',            score: 14 },  // must come BEFORE 'gubernur'
+  { match: 'gubernur',                  score: 20 },
+  { match: 'kapolri',                   score: 24 },
+  { match: 'panglima tni',              score: 24 },
+  { match: 'kepala bin',                score: 22 },
+  { match: 'ketua kpk',                 score: 20 },
+  { match: 'ketua umum',                score: 15 },  // party chairs
+  { match: 'walikota',                  score: 14 },
+  { match: 'bupati',                    score: 12 },
+  { match: 'anggota dpr',               score: 10 },
+  { match: 'anggota dprd',              score:  8 },
+  { match: 'senator',                   score:  9 },
+]
+
+/**
+ * Legacy export kept for party scoring (still uses includes-based matching on
+ * party executive score section — different logic, no "Wakil" ambiguity there).
+ */
 export const POSITION_WEIGHTS = {
   'Presiden': 100,
   'Wakil Presiden': 90,
@@ -28,71 +63,120 @@ export const POSITION_WEIGHTS = {
 
 export const CORRUPTION_PENALTIES = {
   terpidana: -40,
-  tersangka: -30,
+  tersangka: -35,  // fixed: was -30
   tinggi:    -15,
   sedang:    -5,
   rendah:    0,
 }
 
+/** Tier bonus for historically significant figures without current positions */
+const TIER_BONUS = { historis: 10, nasional: 0, provinsi: 0, kabupaten: 0 }
+
+/** Connection type weights for network score */
+const CONN_TYPE_WEIGHTS = {
+  'koalisi':        1.5,
+  'keluarga':       2.0,
+  'mentor-murid':   1.8,
+  'bisnis':         1.3,
+  'rekan':          1.0,
+  'konflik':        0.5,   // visibility but not positive network
+  'mantan-koalisi': 0.3,
+}
+
 export const KIM_PLUS = ['ger', 'gol', 'nas', 'pan', 'dem', 'pks', 'pbb', 'pkb']
+
+// ─── HELPER FUNCTIONS ────────────────────────────────────────────────────────
+
+/** Score a single position title string (case-insensitive, priority-ordered) */
+function scorePosition(title) {
+  const lower = (title || '').toLowerCase()
+  for (const { match, score } of POSITION_SCORES) {
+    if (lower.includes(match)) return score
+  }
+  return 5 // default
+}
+
+/** Best position score across all current positions (or first position fallback) */
+function scorePositionForPerson(person) {
+  const currentPositions = (person.positions || []).filter(p => p.is_current)
+  if (currentPositions.length > 0) {
+    return Math.max(...currentPositions.map(p => scorePosition(p.title)))
+  }
+  // Fallback to first position if no current (e.g. historical figures)
+  const firstPos = person.positions?.[0]
+  return firstPos ? scorePosition(firstPos.title) : 5
+}
+
+/** Weighted network score based on connection type and strength */
+function networkScore(personId, connections) {
+  const personConns = connections.filter(c => c.from === personId || c.to === personId)
+  const weightedCount = personConns.reduce((sum, c) => {
+    const w = CONN_TYPE_WEIGHTS[c.type] || 1.0
+    return sum + w * ((c.strength || 5) / 10)
+  }, 0)
+  // Normalize: ~20 weighted connections = score of 20 (max)
+  return Math.min(20, weightedCount)
+}
+
+/** Party seat score (0–20) */
+function partyScore(person) {
+  const party = PARTY_MAP[person.party_id]
+  const seats = party?.seats_2024 || 0
+  return (seats / 580) * 20
+}
+
+/** LHKPN wealth score — log-normalized (Rp 1B ≈ 2.5, Rp 1T ≈ 10) */
+function wealthScore(person) {
+  const lhkpn = person.lhkpn_latest || 0
+  return lhkpn > 0
+    ? Math.min(10, Math.log10(lhkpn / 1_000_000_000) * 2.5)
+    : 0
+}
+
+/** Corruption adjustment (0 or negative) */
+function corruptionPenalty(person) {
+  const risk = person.analysis?.corruption_risk || 'rendah'
+  return CORRUPTION_PENALTIES[risk] || 0
+}
 
 // ─── INDIVIDUAL PERSON SCORE (0–100) ────────────────────────────────────────
 
 /**
  * Returns a score object for a single person.
  * Components:
- *   position_score  (0–40): weight of current position / 100 * 40
- *   network_score   (0–20): connection centrality
+ *   position_score  (0–40): best current position score (priority-ordered, no Wakil bug)
+ *   network_score   (0–20): connection centrality weighted by type + strength
  *   party_score     (0–20): party DPR seat share
  *   lhkpn_score     (0–10): log-normalized wealth
  *   corruption_adj  (negative): penalty per risk level
+ *   tier_bonus      (0–10): bonus for historis tier figures
  *   total           (0–100): clamped sum
  */
 export function scoreIndividu(person, allConnections) {
-  // 1. Position score
-  const currentPos = person.positions?.find(p => p.is_current)
-  let positionKey = 'default'
-  if (currentPos) {
-    const title = currentPos.title || ''
-    positionKey = Object.keys(POSITION_WEIGHTS).find(k => title.includes(k)) || 'default'
-  }
-  const position_score = (POSITION_WEIGHTS[positionKey] / 100) * 40
+  const position_score = scorePositionForPerson(person)
+  const network_score  = networkScore(person.id, allConnections)
+  const party_score    = partyScore(person)
+  const lhkpn_score    = wealthScore(person)
+  const corruption_adj = corruptionPenalty(person)
+  const tier_bonus     = TIER_BONUS[person.tier] || 0
 
-  // 2. Network score — connections weighted by strength
-  const myEdges = allConnections.filter(c => c.from === person.id || c.to === person.id)
-  const totalStrength = myEdges.reduce((sum, c) => sum + (c.strength || 5), 0)
-  const network_score = Math.min(20, (myEdges.length * 2) + (totalStrength / 10))
-
-  // 3. Party score — DPR seat share normalized to 20
-  const party = PARTY_MAP[person.party_id]
-  const seats = party?.seats_2024 || 0
-  const party_score = (seats / 580) * 20
-
-  // 4. LHKPN score — log scale (Rp 1B = ~5, Rp 1T = ~10)
-  const lhkpn = person.lhkpn_latest || 0
-  const lhkpn_score = lhkpn > 0
-    ? Math.min(10, Math.log10(lhkpn / 1_000_000_000) * 2.5)
-    : 0
-
-  // 5. Corruption adjustment
-  const risk = person.analysis?.corruption_risk || 'rendah'
-  const corruption_adj = CORRUPTION_PENALTIES[risk] || 0
-
-  const raw = position_score + network_score + party_score + lhkpn_score + corruption_adj
+  const raw   = position_score + network_score + party_score + lhkpn_score + corruption_adj + tier_bonus
   const total = Math.max(0, Math.min(100, raw))
 
-  // Get current position title
+  const currentPos   = person.positions?.find(p => p.is_current)
   const currentTitle = currentPos?.title || '-'
+  const risk         = person.analysis?.corruption_risk || 'rendah'
 
   return {
     id: person.id,
     name: person.name,
     position_title: currentTitle,
     position_score: Math.round(position_score * 10) / 10,
-    network_score:  Math.round(network_score * 10) / 10,
-    party_score:    Math.round(party_score * 10) / 10,
-    lhkpn_score:    Math.round(lhkpn_score * 10) / 10,
+    network_score:  Math.round(network_score  * 10) / 10,
+    party_score:    Math.round(party_score    * 10) / 10,
+    lhkpn_score:    Math.round(lhkpn_score   * 10) / 10,
     corruption_adj,
+    tier_bonus,
     total:          Math.round(total * 10) / 10,
     tier: person.tier,
     party_id: person.party_id,
@@ -100,6 +184,20 @@ export function scoreIndividu(person, allConnections) {
     corruption_risk: risk,
     photo_placeholder: person.photo_placeholder,
   }
+}
+
+/**
+ * Thin breakdown export for PersonDetail live score display.
+ * Returns { total, pos, net, party, wealth, corruption }
+ */
+export function scoreOnePerson(person, allConnections) {
+  const pos        = scorePositionForPerson(person)
+  const net        = networkScore(person.id, allConnections)
+  const party      = partyScore(person)
+  const wealth     = wealthScore(person)
+  const corruption = corruptionPenalty(person)
+  const total      = Math.max(0, Math.min(100, pos + net + party + wealth + corruption))
+  return { total, pos, net, party, wealth, corruption }
 }
 
 export function scoreAllPersons() {
