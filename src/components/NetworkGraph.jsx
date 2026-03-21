@@ -1,93 +1,151 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback, useState } from 'react'
 import * as d3 from 'd3'
 import { PARTY_MAP } from '../data/parties'
 import { CONNECTION_TYPES } from '../data/connections'
+import { PERSONS } from '../data/persons'
 
-export default function NetworkGraph({ nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds }) {
-  const svgRef = useRef(null)
+const LINK_COLORS = {
+  koalisi:         '#3B82F6',
+  keluarga:        '#EC4899',
+  bisnis:          '#F59E0B',
+  konflik:         '#EF4444',
+  'mentor-murid':  '#8B5CF6',
+  rekan:           '#6B7280',
+  'mantan-koalisi':'#D97706',
+}
+
+function getPersonInfo(id) {
+  const p = PERSONS.find(x => x.id === id)
+  if (!p) return null
+  const currentPos = p.positions?.find(pos => pos.is_current) || p.positions?.[0]
+  return {
+    name: p.name,
+    party: PARTY_MAP[p.party_id]?.name || p.party_id || '–',
+    position: currentPos?.title || '–',
+  }
+}
+
+export default function NetworkGraph({
+  nodes, edges, onNodeClick,
+  filterType, filterParty,
+  centerNodeId, highlightIds,
+  visibleTypes, focusNodeId,
+}) {
+  const svgRef      = useRef(null)
   const simulationRef = useRef(null)
+  const zoomRef     = useRef(null)
+  const [hoveredNode, setHoveredNode] = useState(null)
+  const [tooltipPos, setTooltipPos]   = useState({ x: 0, y: 0 })
 
   const draw = useCallback(() => {
     const highlightSet = highlightIds ? new Set(highlightIds) : null
     if (!svgRef.current || !nodes?.length) return
 
     const container = svgRef.current.parentElement
-    const width = container.clientWidth || 800
+    const width  = container.clientWidth  || 800
     const height = container.clientHeight || 600
 
-    // Clear
     d3.select(svgRef.current).selectAll('*').remove()
 
-    // Filter edges
+    // --- Filter edges (legacy single-type filter + new visibleTypes multi-filter) ---
     let filteredEdges = edges || []
-    if (filterType) filteredEdges = filteredEdges.filter(e => e.type === filterType)
-    if (filterParty) filteredEdges = filteredEdges.filter(e => {
-      const fn = nodes.find(n => n.id === e.from)
-      const tn = nodes.find(n => n.id === e.to)
-      return fn?.party_id === filterParty || tn?.party_id === filterParty
-    })
+    if (filterType)    filteredEdges = filteredEdges.filter(e => e.type === filterType)
+    if (visibleTypes?.length) filteredEdges = filteredEdges.filter(e => visibleTypes.includes(e.type))
+    if (filterParty) {
+      filteredEdges = filteredEdges.filter(e => {
+        const fn = nodes.find(n => n.id === e.from)
+        const tn = nodes.find(n => n.id === e.to)
+        return fn?.party_id === filterParty || tn?.party_id === filterParty
+      })
+    }
 
-    // Get active node ids
+    // --- Active node ids ---
     const activeIds = new Set()
     if (centerNodeId) {
       activeIds.add(centerNodeId)
       filteredEdges.forEach(e => {
         if (e.from === centerNodeId) activeIds.add(e.to)
-        if (e.to === centerNodeId) activeIds.add(e.from)
+        if (e.to   === centerNodeId) activeIds.add(e.from)
       })
     } else {
       nodes.forEach(n => activeIds.add(n.id))
     }
 
-    const filteredNodes = nodes.filter(n => activeIds.has(n.id))
+    const filteredNodes  = nodes.filter(n => activeIds.has(n.id))
     const filteredEdges2 = filteredEdges.filter(e => activeIds.has(e.from) && activeIds.has(e.to))
 
+    // --- Pre-compute connection count per node (for sizing) ---
+    const linksByNode = {}
+    filteredEdges2.forEach(e => {
+      linksByNode[e.from] = (linksByNode[e.from] || 0) + 1
+      linksByNode[e.to]   = (linksByNode[e.to]   || 0) + 1
+    })
+    const radius = d => Math.max(8, Math.min(24, 8 + (linksByNode[d.id] || 0) * 1.5))
+
+    // --- Nodes that have NO visible connections → dim ---
+    const dimmedIds = new Set()
+    if (visibleTypes?.length) {
+      nodes.forEach(n => {
+        const hasConn = filteredEdges2.some(e => e.from === n.id || e.to === n.id)
+        if (!hasConn) dimmedIds.add(n.id)
+      })
+    }
+
+    // --- SVG setup ---
     const svg = d3.select(svgRef.current)
       .attr('width', width)
       .attr('height', height)
 
     const g = svg.append('g')
 
-    // Zoom
     const zoom = d3.zoom()
       .scaleExtent([0.3, 3])
-      .on('zoom', (event) => g.attr('transform', event.transform))
+      .on('zoom', event => g.attr('transform', event.transform))
     svg.call(zoom)
+    zoomRef.current = zoom
 
-    // Arrow markers
+    // --- Arrow markers ---
     const defs = svg.append('defs')
-    Object.entries(CONNECTION_TYPES).forEach(([type, cfg]) => {
+
+    // Glow filter for highlighted nodes
+    const glowFilter = defs.append('filter').attr('id', 'glow')
+    glowFilter.append('feGaussianBlur').attr('stdDeviation', 4).attr('result', 'coloredBlur')
+    const feMerge = glowFilter.append('feMerge')
+    feMerge.append('feMergeNode').attr('in', 'coloredBlur')
+    feMerge.append('feMergeNode').attr('in', 'SourceGraphic')
+
+    Object.entries(LINK_COLORS).forEach(([type, color]) => {
       defs.append('marker')
         .attr('id', `arrow-${type}`)
         .attr('viewBox', '0 -4 8 8')
-        .attr('refX', 18)
+        .attr('refX', 22)
         .attr('refY', 0)
         .attr('markerWidth', 6)
         .attr('markerHeight', 6)
         .attr('orient', 'auto')
         .append('path')
         .attr('d', 'M0,-4L8,0L0,4')
-        .attr('fill', cfg.color)
+        .attr('fill', color)
         .attr('opacity', 0.8)
     })
 
-    // Simulation
+    // --- Simulation ---
     simulationRef.current = d3.forceSimulation(filteredNodes)
       .force('link', d3.forceLink(filteredEdges2).id(d => d.id).distance(d => 100 / (d.strength || 5) * 60))
       .force('charge', d3.forceManyBody().strength(-200))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide(35))
+      .force('collision', d3.forceCollide(d => radius(d) + 12))
 
-    // Links
+    // --- Links ---
     const link = g.append('g').selectAll('line')
       .data(filteredEdges2)
       .join('line')
-      .attr('stroke', d => CONNECTION_TYPES[d.type]?.color || '#6B7280')
-      .attr('stroke-opacity', 0.6)
+      .attr('stroke', d => LINK_COLORS[d.type] || '#6B7280')
+      .attr('stroke-opacity', 0.65)
       .attr('stroke-width', d => Math.sqrt(d.strength || 3) * 0.8)
       .attr('marker-end', d => `url(#arrow-${d.type})`)
 
-    // Link labels
+    // --- Link labels ---
     const linkLabel = g.append('g').selectAll('text')
       .data(filteredEdges2)
       .join('text')
@@ -99,48 +157,81 @@ export default function NetworkGraph({ nodes, edges, onNodeClick, filterType, fi
       .style('pointer-events', 'none')
       .style('display', filteredNodes.length > 30 ? 'none' : 'block')
 
-    // Nodes
+    // --- Nodes ---
     const node = g.append('g').selectAll('g')
       .data(filteredNodes)
       .join('g')
       .attr('cursor', 'pointer')
-      .call(d3.drag()
-        .on('start', (event, d) => {
-          if (!event.active) simulationRef.current?.alphaTarget(0.3).restart()
-          d.fx = d.x; d.fy = d.y
-        })
-        .on('drag', (event, d) => { d.fx = event.x; d.fy = event.y })
-        .on('end', (event, d) => {
-          if (!event.active) simulationRef.current?.alphaTarget(0)
-          d.fx = null; d.fy = null
-        })
+      .attr('opacity', d => dimmedIds.has(d.id) ? 0.2 : 1)
+      .call(
+        d3.drag()
+          .on('start', (event, d) => {
+            if (!event.active) simulationRef.current?.alphaTarget(0.3).restart()
+            d.fx = d.x; d.fy = d.y
+          })
+          .on('drag', (event, d) => { d.fx = event.x; d.fy = event.y })
+          .on('end', (event, d) => {
+            if (!event.active) simulationRef.current?.alphaTarget(0)
+            d.fx = null; d.fy = null
+          })
       )
       .on('click', (event, d) => {
         event.stopPropagation()
         onNodeClick?.(d)
       })
+      .on('mouseover', (event, d) => {
+        setHoveredNode(d)
+        setTooltipPos({ x: event.pageX, y: event.pageY })
+      })
+      .on('mousemove', event => {
+        setTooltipPos({ x: event.pageX, y: event.pageY })
+      })
+      .on('mouseout', () => setHoveredNode(null))
 
-    // Highlight glow ring
+    // Gold glow ring for highlighted path nodes
     node.filter(d => highlightSet?.has(d.id))
       .append('circle')
-      .attr('r', d => d.id === centerNodeId ? 26 : 20)
+      .attr('r', d => radius(d) + 8)
       .attr('fill', 'none')
-      .attr('stroke', '#FBBF24')
-      .attr('stroke-width', 3)
-      .attr('opacity', 0.8)
+      .attr('stroke', '#F0C200')
+      .attr('stroke-width', 4)
+      .attr('opacity', 0.85)
+      .attr('filter', 'url(#glow)')
 
+    // Focus pulse ring
+    node.filter(d => d.id === focusNodeId)
+      .append('circle')
+      .attr('r', d => radius(d) + 12)
+      .attr('fill', 'none')
+      .attr('stroke', '#60A5FA')
+      .attr('stroke-width', 2.5)
+      .attr('opacity', 0.7)
+      .attr('class', 'focus-ring')
+
+    // Main circle
     node.append('circle')
-      .attr('r', d => d.id === centerNodeId ? 20 : 14)
+      .attr('r', d => d.id === centerNodeId ? radius(d) + 6 : radius(d))
       .attr('fill', d => {
         const party = d.party_id ? PARTY_MAP[d.party_id] : null
         return party?.color || '#374151'
       })
-      .attr('stroke', d => highlightSet?.has(d.id) ? '#FBBF24' : (d.id === centerNodeId ? '#F59E0B' : '#1F2937'))
-      .attr('stroke-width', d => highlightSet?.has(d.id) ? 3 : (d.id === centerNodeId ? 3 : 1.5))
+      .attr('stroke', d => {
+        if (d.id === focusNodeId)        return '#60A5FA'
+        if (highlightSet?.has(d.id))     return '#F0C200'
+        if (d.id === centerNodeId)       return '#F59E0B'
+        return '#1F2937'
+      })
+      .attr('stroke-width', d => {
+        if (d.id === focusNodeId)        return 3
+        if (highlightSet?.has(d.id))     return 3
+        if (d.id === centerNodeId)       return 3
+        return 1.5
+      })
       .attr('fill-opacity', 0.9)
 
+    // Node labels
     node.append('text')
-      .attr('dy', 28)
+      .attr('dy', d => (d.id === centerNodeId ? radius(d) + 6 : radius(d)) + 14)
       .attr('text-anchor', 'middle')
       .attr('fill', '#F9FAFB')
       .attr('font-size', 10)
@@ -152,7 +243,7 @@ export default function NetworkGraph({ nodes, edges, onNodeClick, filterType, fi
       .style('pointer-events', 'none')
       .style('text-shadow', '1px 1px 2px rgba(0,0,0,0.8)')
 
-    // Simulation tick
+    // --- Tick ---
     simulationRef.current.on('tick', () => {
       link
         .attr('x1', d => d.source.x)
@@ -166,12 +257,54 @@ export default function NetworkGraph({ nodes, edges, onNodeClick, filterType, fi
 
       node.attr('transform', d => `translate(${d.x},${d.y})`)
     })
-  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds])
+  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds, visibleTypes, focusNodeId])
+
+  // Focus zoom effect — runs after draw settles
+  useEffect(() => {
+    if (!focusNodeId || !svgRef.current || !simulationRef.current || !zoomRef.current) return
+    const wait = setTimeout(() => {
+      const found = simulationRef.current?.nodes().find(n => n.id === focusNodeId)
+      if (!found) return
+      const container = svgRef.current.parentElement
+      const w = container.clientWidth  || 800
+      const h = container.clientHeight || 600
+      const scale = 1.8
+      const tx = w / 2 - found.x * scale
+      const ty = h / 2 - found.y * scale
+      d3.select(svgRef.current)
+        .transition().duration(750)
+        .call(zoomRef.current.transform, d3.zoomIdentity.translate(tx, ty).scale(scale))
+    }, 600)
+    return () => clearTimeout(wait)
+  }, [focusNodeId])
 
   useEffect(() => {
     draw()
     return () => simulationRef.current?.stop()
   }, [draw])
 
-  return <svg ref={svgRef} className="w-full h-full" />
+  const info = hoveredNode ? getPersonInfo(hoveredNode.id) : null
+
+  return (
+    <div className="w-full h-full relative">
+      <style>{`
+        @keyframes focusPulse {
+          0%, 100% { opacity: 0.7; r: calc(var(--r) + 12px); }
+          50% { opacity: 0.2; r: calc(var(--r) + 20px); }
+        }
+        .focus-ring { animation: focusPulse 1.6s ease-in-out infinite; }
+      `}</style>
+      <svg ref={svgRef} className="w-full h-full" />
+      {info && (
+        <div
+          className="fixed z-50 pointer-events-none rounded-xl border border-border bg-bg-card/95 backdrop-blur-sm shadow-xl p-3 text-xs space-y-1"
+          style={{ left: tooltipPos.x + 14, top: tooltipPos.y - 14, minWidth: 180, maxWidth: 240 }}
+        >
+          <p className="font-semibold text-text-primary text-sm">{info.name}</p>
+          <p className="text-text-secondary">🏛 {info.party}</p>
+          <p className="text-text-secondary">📌 {info.position}</p>
+        </div>
+      )}
+    </div>
+  )
 }
