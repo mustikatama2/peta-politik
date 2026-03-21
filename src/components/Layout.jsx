@@ -202,10 +202,10 @@ export default function Layout({ children }) {
             {/* Pencarian link — full search results page */}
             <Link
               to="/pencarian"
-              title="Halaman Pencarian"
-              className="hidden md:flex w-9 h-9 rounded-lg border border-border bg-bg-elevated hover:bg-bg-hover hover:border-accent-red items-center justify-center text-base transition-all"
+              title="Halaman Pencarian Lengkap"
+              className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-bg-elevated hover:bg-bg-hover hover:border-accent-red text-text-secondary hover:text-accent-red text-xs font-medium transition-all"
             >
-              📋
+              🔎 <span>Pencarian</span>
             </Link>
 
             {/* Theme toggle */}

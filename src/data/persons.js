@@ -11,7 +11,13 @@ export const PERSONS = [
     tags:["historis","proklamator","presiden"],
     lhkpn_latest:null, lhkpn_year:null,
     connections_summary:"Proklamator RI, ayah Megawati",
-    analysis:{ ideology_score:3, populism_score:10, corruption_risk:"rendah", nationalism:10, religiosity:5, track_record:"Pemimpin revolusi kemerdekaan RI 1945.", policy_direction:"Nasionalis-Marhaenis" }
+    analysis:{ ideology_score:3, populism_score:10, corruption_risk:"rendah", nationalism:10, religiosity:5, track_record:"Pemimpin revolusi kemerdekaan RI 1945.", policy_direction:"Nasionalis-Marhaenis",
+      style:'Populis',
+      risk:'low',
+      influence:5,
+      controversy_level:6,
+      notes:"Pemimpin revolusi kemerdekaan RI 1945."
+    }
   },
   {
     id:"sumitro", name:"Sumitro Djojohadikusumo", photo_url:null, photo_placeholder:"SD",
@@ -24,7 +30,13 @@ export const PERSONS = [
     tags:["historis","ekonom","akademisi"],
     lhkpn_latest:null, lhkpn_year:null,
     connections_summary:"Ekonom senior; ayah Prabowo dan Hashim",
-    analysis:{ ideology_score:5, populism_score:3, corruption_risk:"rendah", nationalism:8, religiosity:4, track_record:"Teknokrat ekonomi RI.", policy_direction:"Teknokratis" }
+    analysis:{ ideology_score:5, populism_score:3, corruption_risk:"rendah", nationalism:8, religiosity:4, track_record:"Teknokrat ekonomi RI.", policy_direction:"Teknokratis",
+      style:'Teknokrat',
+      risk:'low',
+      influence:5,
+      controversy_level:3,
+      notes:"Teknokrat ekonomi RI."
+    }
   },
   {
     id:"prananda", name:"Prananda Prabowo", photo_url:null, photo_placeholder:"PP",
@@ -37,7 +49,13 @@ export const PERSONS = [
     tags:["pdip","legislatif"],
     lhkpn_latest:null, lhkpn_year:null,
     connections_summary:"Anak Megawati, adik Puan; strategis di PDIP",
-    analysis:{ ideology_score:3, populism_score:5, corruption_risk:"rendah", nationalism:7, religiosity:4, track_record:"Berperan di balik layar PDIP.", policy_direction:"Nasionalis-PDIP" }
+    analysis:{ ideology_score:3, populism_score:5, corruption_risk:"rendah", nationalism:7, religiosity:4, track_record:"Berperan di balik layar PDIP.", policy_direction:"Nasionalis-PDIP",
+      style:'Nasionalis',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Berperan di balik layar PDIP."
+    }
   },
   {
     id:"guruh", name:"Guruh Soekarnoputra", photo_url:null, photo_placeholder:"GS",
@@ -50,7 +68,13 @@ export const PERSONS = [
     tags:["pdip","legislatif","seniman"],
     lhkpn_latest:null, lhkpn_year:null,
     connections_summary:"Anak Soekarno, adik Megawati",
-    analysis:{ ideology_score:3, populism_score:4, corruption_risk:"rendah", nationalism:8, religiosity:4, track_record:"Anggota DPR PDIP sejak 2004.", policy_direction:"Nasionalis-Soekarnoisme" }
+    analysis:{ ideology_score:3, populism_score:4, corruption_risk:"rendah", nationalism:8, religiosity:4, track_record:"Anggota DPR PDIP sejak 2004.", policy_direction:"Nasionalis-Soekarnoisme",
+      style:'Nasionalis',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Anggota DPR PDIP sejak 2004."
+    }
   },
 
   // ─── NASIONAL — EKSEKUTIF ───────────────────────────────────────────────
@@ -99,7 +123,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:6, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Walikota Solo dengan popularitas tinggi. Dinilai minim pengalaman untuk posisi Wapres namun diuntungkan jalur politik ayahnya.",
-      policy_direction:"Pro-investasi"
+      policy_direction:"Pro-investasi",
+      style:'Oligarkis',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Walikota Solo dengan popularitas tinggi. Dinilai minim pengalaman untuk posisi Wapres namun diuntungkan jalur politik ayahnya."
     }
   },
   {
@@ -124,7 +153,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:8, corruption_risk:"rendah",
       nationalism:8, religiosity:6,
       track_record:"Presiden 2 periode. Warisannya: infrastruktur masif, IKN, hilirisasi nikel. Dikenal dekat dengan oligarki tertentu. Menantu Bobby, anak Gibran jadi VP — memunculkan narasi dinasti.",
-      policy_direction:"Pragmatis-Nasionalis"
+      policy_direction:"Pragmatis-Nasionalis",
+      style:'Populis',
+      risk:'low',
+      influence:9,
+      controversy_level:6,
+      notes:"Presiden 2 periode. Warisannya: infrastruktur masif, IKN, hilirisasi nikel. Dikenal dekat dengan oligarki tertentu. Menantu Bobby, anak Gibran jadi VP — memunculkan narasi dinasti."
     }
   },
   {
@@ -149,7 +183,12 @@ export const PERSONS = [
       ideology_score:1, populism_score:2, corruption_risk:"rendah",
       nationalism:5, religiosity:4,
       track_record:"Disiplin fiskal ketat, manajemen APBN terpuji. Salah satu Menteri Keuangan paling berpengaruh di Asia Tenggara.",
-      policy_direction:"Pro-investasi asing, disiplin fiskal"
+      policy_direction:"Pro-investasi asing, disiplin fiskal",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Disiplin fiskal ketat, manajemen APBN terpuji. Salah satu Menteri Keuangan paling berpengaruh di Asia Tenggara."
     }
   },
   {
@@ -172,7 +211,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:4, corruption_risk:"rendah",
       nationalism:8, religiosity:5,
       track_record:"Latar belakang militer dan DPR. Kebijakan luar negeri cenderung asertif dan nasionalis.",
-      policy_direction:"Nasionalis ekonomi"
+      policy_direction:"Nasionalis ekonomi",
+      style:'Militeristik',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Latar belakang militer dan DPR. Kebijakan luar negeri cenderung asertif dan nasionalis."
     }
   },
   {
@@ -196,7 +240,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:2, corruption_risk:"sedang",
       nationalism:9, religiosity:5,
       track_record:"Kontroversial atas peran di peristiwa 1998. Kini fokus modernisasi alutsista.",
-      policy_direction:"Nasionalis pertahanan"
+      policy_direction:"Nasionalis pertahanan",
+      style:'Militeristik',
+      risk:'medium',
+      influence:6,
+      controversy_level:5,
+      notes:"Kontroversial atas peran di peristiwa 1998. Kini fokus modernisasi alutsista."
     }
   },
   {
@@ -219,7 +268,12 @@ export const PERSONS = [
       ideology_score:6, populism_score:3, corruption_risk:"tinggi",
       nationalism:8, religiosity:5,
       track_record:"Mantan Kepala BIN. Pernah jadi tersangka KPK 2015 atas dugaan gratifikasi, namun kasus di-SP3. Dekat PDIP era Jokowi; kini Menko Polkam era Prabowo.",
-      policy_direction:"Keamanan-Konservatif"
+      policy_direction:"Keamanan-Konservatif",
+      style:'Militeristik',
+      risk:'high',
+      influence:8,
+      controversy_level:7,
+      notes:"Mantan Kepala BIN. Pernah jadi tersangka KPK 2015 atas dugaan gratifikasi, namun kasus di-SP3. Dekat PDIP era Jokowi; kini Menko Polkam era Prabowo."
     }
   },
   {
@@ -241,7 +295,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:3, corruption_risk:"rendah",
       nationalism:6, religiosity:4,
       track_record:"Dorong kebijakan hilirisasi nikel dan mineral. Dinilai kompeten di bidang industri.",
-      policy_direction:"Pro-hilirisasi, nasionalis ekonomi"
+      policy_direction:"Pro-hilirisasi, nasionalis ekonomi",
+      style:'Oligarkis',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Dorong kebijakan hilirisasi nikel dan mineral. Dinilai kompeten di bidang industri."
     }
   },
   {
@@ -265,7 +324,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:6, corruption_risk:"sedang",
       nationalism:7, religiosity:5,
       track_record:"Kontroversial soal pencabutan IUP dan konflik kepentingan bisnis. Sangat cepat naik kekuasaan.",
-      policy_direction:"Pro-investasi, nasionalis sumber daya"
+      policy_direction:"Pro-investasi, nasionalis sumber daya",
+      style:'Oligarkis',
+      risk:'medium',
+      influence:7,
+      controversy_level:5,
+      notes:"Kontroversial soal pencabutan IUP dan konflik kepentingan bisnis. Sangat cepat naik kekuasaan."
     }
   },
   {
@@ -289,7 +353,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Rekam jejak panjang di legislatif dan eksekutif. Kebijakan perdagangan dinilai pro-stabilitas harga.",
-      policy_direction:"Pro-ketahanan pangan"
+      policy_direction:"Pro-ketahanan pangan",
+      style:'Teknokrat',
+      risk:'low',
+      influence:8,
+      controversy_level:3,
+      notes:"Rekam jejak panjang di legislatif dan eksekutif. Kebijakan perdagangan dinilai pro-stabilitas harga."
     }
   },
   {
@@ -312,7 +381,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:3, corruption_risk:"rendah",
       nationalism:7, religiosity:8,
       track_record:"Akademisi dan politisi. Pernah ditetapkan tersangka KPK kasus korupsi Sistem Administrasi Badan Hukum namun akhirnya bebas.",
-      policy_direction:"Reformasi hukum, nasionalis-islami"
+      policy_direction:"Reformasi hukum, nasionalis-islami",
+      style:'Religius',
+      risk:'low',
+      influence:8,
+      controversy_level:3,
+      notes:"Akademisi dan politisi. Pernah ditetapkan tersangka KPK kasus korupsi Sistem Administrasi Badan Hukum namun akhirnya bebas."
     }
   },
   {
@@ -335,7 +409,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:5, corruption_risk:"rendah",
       nationalism:8, religiosity:6,
       track_record:"Karir militer singkat, terjun ke politik mengikuti jejak ayah. Berhasil mempertahankan Demokrat dari upaya kudeta Moeldoko.",
-      policy_direction:"Nasionalis-reformis"
+      policy_direction:"Nasionalis-reformis",
+      style:'Militeristik',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Karir militer singkat, terjun ke politik mengikuti jejak ayah. Berhasil mempertahankan Demokrat dari upaya kudeta Moeldoko."
     }
   },
   {
@@ -359,7 +438,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:6, corruption_risk:"rendah",
       nationalism:7, religiosity:7,
       track_record:"Dua periode presiden relatif stabil. Dikritik soal gaya kepemimpinan ragu-ragu dan korupsi dalam partainya.",
-      policy_direction:"Nasionalis demokratis"
+      policy_direction:"Nasionalis demokratis",
+      style:'Militeristik',
+      risk:'low',
+      influence:9,
+      controversy_level:3,
+      notes:"Dua periode presiden relatif stabil. Dikritik soal gaya kepemimpinan ragu-ragu dan korupsi dalam partainya."
     }
   },
   // ─── NASIONAL — LEGISLATIF ──────────────────────────────────────────────
@@ -407,7 +491,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:4, corruption_risk:"rendah",
       nationalism:7, religiosity:5,
       track_record:"Operator politik Gerindra yang handal. Berperan dalam konsolidasi koalisi pro-Prabowo.",
-      policy_direction:"Nasionalis"
+      policy_direction:"Nasionalis",
+      style:'Nasionalis',
+      risk:'low',
+      influence:8,
+      controversy_level:3,
+      notes:"Operator politik Gerindra yang handal. Berperan dalam konsolidasi koalisi pro-Prabowo."
     }
   },
   {
@@ -431,7 +520,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:3, corruption_risk:"sedang",
       nationalism:6, religiosity:4,
       track_record:"Kelola ekonomi RI melewati pandemi COVID-19. Diduga terlibat kasus korupsi minyak goreng namun tidak tersangka resmi.",
-      policy_direction:"Pro-investasi, pragmatis"
+      policy_direction:"Pro-investasi, pragmatis",
+      style:'Oligarkis',
+      risk:'medium',
+      influence:8,
+      controversy_level:5,
+      notes:"Kelola ekonomi RI melewati pandemi COVID-19. Diduga terlibat kasus korupsi minyak goreng namun tidak tersangka resmi."
     }
   },
   {
@@ -456,7 +550,12 @@ export const PERSONS = [
       ideology_score:-1, populism_score:8, corruption_risk:"sedang",
       nationalism:6, religiosity:9,
       track_record:"Pemimpin PKB selama dua dekade. Pernah berkonflik dengan Gus Dur. Kasus korupsi transmigrasi pernah muncul namun tidak berlanjut.",
-      policy_direction:"Nasionalis-religius, pro-NU"
+      policy_direction:"Nasionalis-religius, pro-NU",
+      style:'Religius',
+      risk:'medium',
+      influence:8,
+      controversy_level:6,
+      notes:"Pemimpin PKB selama dua dekade. Pernah berkonflik dengan Gus Dur. Kasus korupsi transmigrasi pernah muncul namun tidak berlanjut."
     }
   },
   {
@@ -478,7 +577,12 @@ export const PERSONS = [
       ideology_score:7, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:9,
       track_record:"Reputasi bersih di PKS. Konsisten pada posisi oposisi dan kritik terhadap kebijakan pemerintah.",
-      policy_direction:"Islam, keadilan sosial"
+      policy_direction:"Islam, keadilan sosial",
+      style:'Religius',
+      risk:'low',
+      influence:9,
+      controversy_level:3,
+      notes:"Reputasi bersih di PKS. Konsisten pada posisi oposisi dan kritik terhadap kebijakan pemerintah."
     }
   },
   {
@@ -501,7 +605,12 @@ export const PERSONS = [
       ideology_score:1, populism_score:5, corruption_risk:"rendah",
       nationalism:7, religiosity:4,
       track_record:"Awalnya pendukung Jokowi, berseberangan 2023. Dukung Anies Baswedan untuk Pilpres 2024.",
-      policy_direction:"Nasionalis demokratis, pro-media bebas"
+      policy_direction:"Nasionalis demokratis, pro-media bebas",
+      style:'Oligarkis',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Awalnya pendukung Jokowi, berseberangan 2023. Dukung Anies Baswedan untuk Pilpres 2024."
     }
   },
   {
@@ -525,7 +634,12 @@ export const PERSONS = [
       ideology_score:-5, populism_score:7, corruption_risk:"rendah",
       nationalism:9, religiosity:4,
       track_record:"Era kepresidenan relatif singkat tapi stabil. Kini lebih banyak di balik layar menentukan arah PDIP. Berseberangan dengan Jokowi-Prabowo.",
-      policy_direction:"Nasionalis-marhaenis, Soekarnoisme"
+      policy_direction:"Nasionalis-marhaenis, Soekarnoisme",
+      style:'Nasionalis',
+      risk:'low',
+      influence:9,
+      controversy_level:5,
+      notes:"Era kepresidenan relatif singkat tapi stabil. Kini lebih banyak di balik layar menentukan arah PDIP. Berseberangan dengan Jokowi-Prabowo."
     }
   },
   {
@@ -548,7 +662,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:9, corruption_risk:"sedang",
       nationalism:7, religiosity:7,
       track_record:"Gubernur DKI penuh kontroversi: proyek Tanah Abang, Formula E, reklamasi. Didukung koalisi beragam ideologi dari Islam konservatif hingga liberal.",
-      policy_direction:"Demokrasi substantif, keadilan sosial"
+      policy_direction:"Demokrasi substantif, keadilan sosial",
+      style:'Religius',
+      risk:'medium',
+      influence:6,
+      controversy_level:6,
+      notes:"Gubernur DKI penuh kontroversi: proyek Tanah Abang, Formula E, reklamasi. Didukung koalisi beragam ideologi dari Islam konservatif hingga liberal."
     }
   },
   {
@@ -571,7 +690,12 @@ export const PERSONS = [
       ideology_score:-2, populism_score:8, corruption_risk:"sedang",
       nationalism:7, religiosity:5,
       track_record:"Dua periode gubernur dengan Jateng membaik di berbagai indikator. Kontroversial soal e-KTP dan penundaan pemilu.",
-      policy_direction:"Sosial-demokrat, pro-rakyat kecil"
+      policy_direction:"Sosial-demokrat, pro-rakyat kecil",
+      style:'Religius',
+      risk:'medium',
+      influence:7,
+      controversy_level:6,
+      notes:"Dua periode gubernur dengan Jateng membaik di berbagai indikator. Kontroversial soal e-KTP dan penundaan pemilu."
     }
   },
   {
@@ -593,7 +717,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:5, corruption_risk:"rendah",
       nationalism:7, religiosity:6,
       track_record:"Ketua DPD RI 2024. Mantan Wakil Gubernur Bengkulu. Tokoh Golkar dari Bengkulu.",
-      policy_direction:"Pragmatis, otonomi daerah"
+      policy_direction:"Pragmatis, otonomi daerah",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Ketua DPD RI 2024. Mantan Wakil Gubernur Bengkulu. Tokoh Golkar dari Bengkulu."
     }
   },
   // ─── NASIONAL — HUKUM & KEAMANAN ────────────────────────────────────────
@@ -640,7 +769,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:2, corruption_risk:"rendah",
       nationalism:9, religiosity:6,
       track_record:"Rekam jejak militer solid. Prioritas modernisasi alutsista dan TNI profesional.",
-      policy_direction:"Pertahanan nasional, keamanan"
+      policy_direction:"Pertahanan nasional, keamanan",
+      style:'Militeristik',
+      risk:'low',
+      influence:7,
+      controversy_level:5,
+      notes:"Rekam jejak militer solid. Prioritas modernisasi alutsista dan TNI profesional."
     }
   },
   {
@@ -662,7 +796,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:2, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Memimpin KPK di era paling sulit pasca-revisi UU 2019: indeks persepsi korupsi Indonesia merosot, kewenangan penyadapan dibatasi, dan SP3 membuka celah penghentian kasus. Nawawi berupaya mempertahankan integritas dengan menetapkan tersangka Hasto Kristiyanto (Sekjen PDI-P) Januari 2025 — langkah berani yang membuktikan KPK masih bisa bergerak, meski dalam koridor yang jauh lebih sempit dari sebelumnya.",
-      policy_direction:"Penegakan hukum antikorupsi"
+      policy_direction:"Penegakan hukum antikorupsi",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:8,
+      notes:"Memimpin KPK di era paling sulit pasca-revisi UU 2019: indeks persepsi korupsi Indonesia merosot, kewenangan penyadapan dibatasi, dan SP3 membuka celah penghentian kasus. Nawawi berupaya mempertahankan integritas dengan menetapkan tersangka Hasto Kristiyanto (Sekjen PDI-P) Januari 2025 — langkah berani yang membuktikan KPK masih bisa bergerak, meski dalam koridor yang jauh lebih sempit dari sebelumnya."
     }
   },
   {
@@ -683,7 +822,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:1, corruption_risk:"rendah",
       nationalism:5, religiosity:6,
       track_record:"Fokus reformasi peradilan dan transparansi MA.",
-      policy_direction:"Reformasi peradilan"
+      policy_direction:"Reformasi peradilan",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Fokus reformasi peradilan dan transparansi MA."
     }
   },
   {
@@ -704,7 +848,12 @@ export const PERSONS = [
       ideology_score:1, populism_score:1, corruption_risk:"rendah",
       nationalism:5, religiosity:6,
       track_record:"Diangkat sebagai Ketua MK pengganti. Diharapkan pulihkan marwah MK pasca-kontroversi Pilpres 2024.",
-      policy_direction:"Konstitusional, independen"
+      policy_direction:"Konstitusional, independen",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Diangkat sebagai Ketua MK pengganti. Diharapkan pulihkan marwah MK pasca-kontroversi Pilpres 2024."
     }
   },
   // ─── JAWA TIMUR — PROVINSI ───────────────────────────────────────────────
@@ -751,7 +900,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:6, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Bupati Trenggalek inovatif, populer di generasi muda. Berambisi Gubernur Jatim.",
-      policy_direction:"Pro-investasi, teknokrat"
+      policy_direction:"Pro-investasi, teknokrat",
+      style:'Teknokrat',
+      risk:'low',
+      influence:5,
+      controversy_level:3,
+      notes:"Bupati Trenggalek inovatif, populer di generasi muda. Berambisi Gubernur Jatim."
     }
   },
   {
@@ -773,7 +927,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:5, corruption_risk:"terpidana",
       nationalism:4, religiosity:5,
       track_record:"Terbukti korupsi jual beli jabatan. Dijatuhkan hukuman penjara bersama istri Puput Tantriana Sari.",
-      policy_direction:"N/A"
+      policy_direction:"N/A",
+      style:'Teknokrat',
+      risk:'low',
+      influence:5,
+      controversy_level:8,
+      notes:"Terbukti korupsi jual beli jabatan. Dijatuhkan hukuman penjara bersama istri Puput Tantriana Sari."
     }
   },
   // ─── JATIM — DPR RI ─────────────────────────────────────────────────────
@@ -818,7 +977,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:5, corruption_risk:"rendah",
       nationalism:7, religiosity:5,
       track_record:"Operator politik Gerindra yang andal. Konsisten mendukung Prabowo dari 2009.",
-      policy_direction:"Nasionalis"
+      policy_direction:"Nasionalis",
+      style:'Nasionalis',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Operator politik Gerindra yang andal. Konsisten mendukung Prabowo dari 2009."
     }
   },
   {
@@ -840,7 +1004,12 @@ export const PERSONS = [
       ideology_score:6, populism_score:7, corruption_risk:"rendah",
       nationalism:9, religiosity:8,
       track_record:"Sebagai Panglima TNI 2015–2017, Gatot kerap membuat pernyataan provokatif soal ancaman kebangkitan PKI dan pemutaran film G30S/PKI yang ia inisiasi ulang. Hubungannya dengan Jokowi memburuk setelah ia mendukung Aksi Bela Islam 212 dan membatalkan pengiriman pasukan ke Australia tanpa sepengetahuan pemerintah — berujung pada pencopotannya oleh Presiden Jokowi pada Oktober 2017, setahun sebelum masa jabatan berakhir. Pascapensiun aktif di gerakan sipil-Islam konservatif.",
-      policy_direction:"Nasionalis-religius, konservatif"
+      policy_direction:"Nasionalis-religius, konservatif",
+      style:'Militeristik',
+      risk:'low',
+      influence:7,
+      controversy_level:5,
+      notes:"Sebagai Panglima TNI 2015–2017, Gatot kerap membuat pernyataan provokatif soal ancaman kebangkitan PKI dan pemutaran film G30S/PKI yang ia inisiasi ulang. Hubungannya dengan Jokowi memburuk setelah ia mendukung Aksi Bela Islam 212 dan membatalkan pengiriman pasukan ke Australia tanpa sepengetahuan pemerintah — berujung pada pencopotannya oleh Presiden Jokowi pada Oktober 2017, setahun sebelum masa jabatan berakhir. Pascapensiun aktif di gerakan sipil-Islam konservatif."
     }
   },
   {
@@ -861,7 +1030,12 @@ export const PERSONS = [
       ideology_score:-1, populism_score:4, corruption_risk:"rendah",
       nationalism:5, religiosity:7,
       track_record:"Karir legislatif di PKB. Fokus pada kepentingan basis NU.",
-      policy_direction:"Nasionalis-religius"
+      policy_direction:"Nasionalis-religius",
+      style:'Religius',
+      risk:'low',
+      influence:8,
+      controversy_level:3,
+      notes:"Karir legislatif di PKB. Fokus pada kepentingan basis NU."
     }
   },
   // ─── JATIM — DPD ────────────────────────────────────────────────────────
@@ -926,7 +1100,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:1, corruption_risk:"rendah",
       nationalism:9, religiosity:6,
       track_record:"Komando militer Jatim yang aktif mendukung stabilitas daerah.",
-      policy_direction:"Pertahanan, stabilitas wilayah"
+      policy_direction:"Pertahanan, stabilitas wilayah",
+      style:'Militeristik',
+      risk:'low',
+      influence:5,
+      controversy_level:5,
+      notes:"Komando militer Jatim yang aktif mendukung stabilitas daerah."
     }
   },
   // ─── JATIM — KABUPATEN/KOTA ──────────────────────────────────────────────
@@ -969,7 +1148,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:7, corruption_risk:"tersangka",
       nationalism:6, religiosity:8,
       track_record:"Bupati Sidoarjo. Ditangkap KPK dalam OTT April 2024 atas dugaan pemotongan insentif ASN Pemkab Sidoarjo. Sebelumnya dikenal aktif di PKB.",
-      policy_direction:"Populis-Regional"
+      policy_direction:"Populis-Regional",
+      style:'Religius',
+      risk:'high',
+      influence:4,
+      controversy_level:8,
+      notes:"Bupati Sidoarjo. Ditangkap KPK dalam OTT April 2024 atas dugaan pemotongan insentif ASN Pemkab Sidoarjo. Sebelumnya dikenal aktif di PKB."
     }
   },
   {
@@ -990,7 +1174,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:5, corruption_risk:"rendah",
       nationalism:7, religiosity:7,
       track_record:"Kepemimpinan muda di Gresik, dorong investasi kawasan industri.",
-      policy_direction:"Pro-industri, pembangunan pesisir"
+      policy_direction:"Pro-industri, pembangunan pesisir",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan muda di Gresik, dorong investasi kawasan industri."
     }
   },
   {
@@ -1011,7 +1200,12 @@ export const PERSONS = [
       ideology_score:-2, populism_score:6, corruption_risk:"rendah",
       nationalism:5, religiosity:5,
       track_record:"Lanjutkan program inovasi Banyuwangi. Kota Banyuwangi dikenal sebagai best practice tata kota.",
-      policy_direction:"Pro-pariwisata, inovasi daerah"
+      policy_direction:"Pro-pariwisata, inovasi daerah",
+      style:'Populis',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Lanjutkan program inovasi Banyuwangi. Kota Banyuwangi dikenal sebagai best practice tata kota."
     }
   },
   {
@@ -1034,7 +1228,12 @@ export const PERSONS = [
       ideology_score:-1, populism_score:6, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Best practice kepala daerah inovatif. Banyuwangi jadi benchmark daerah baik.",
-      policy_direction:"Reformasi birokrasi, pro-inovasi"
+      policy_direction:"Reformasi birokrasi, pro-inovasi",
+      style:'Populis',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Best practice kepala daerah inovatif. Banyuwangi jadi benchmark daerah baik."
     }
   },
   {
@@ -1055,7 +1254,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:5, corruption_risk:"rendah",
       nationalism:5, religiosity:7,
       track_record:"Kepemimpinan cukup stabil di Jember. Fokus pada pertanian dan pendidikan.",
-      policy_direction:"Pro-pertanian, pembangunan daerah"
+      policy_direction:"Pro-pertanian, pembangunan daerah",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan cukup stabil di Jember. Fokus pada pertanian dan pendidikan."
     }
   },
   {
@@ -1076,7 +1280,12 @@ export const PERSONS = [
       ideology_score:-2, populism_score:7, corruption_risk:"rendah",
       nationalism:5, religiosity:5,
       track_record:"Kepemimpinan segar dengan latar atlet. Fokus pengembangan Kediri termasuk Bandara Dhoho.",
-      policy_direction:"Pro-investasi daerah, infrastruktur"
+      policy_direction:"Pro-investasi daerah, infrastruktur",
+      style:'Populis',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan segar dengan latar atlet. Fokus pengembangan Kediri termasuk Bandara Dhoho."
     }
   },
   {
@@ -1099,7 +1308,12 @@ export const PERSONS = [
       ideology_score:-1, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Karir panjang di PDIP dan eksekutif. Menang Pilkada DKI 2024 lawan Ridwan Kamil.",
-      policy_direction:"Nasionalis, pro-rakyat"
+      policy_direction:"Nasionalis, pro-rakyat",
+      style:'Nasionalis',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Karir panjang di PDIP dan eksekutif. Menang Pilkada DKI 2024 lawan Ridwan Kamil."
     }
   },
   {
@@ -1120,7 +1334,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:6, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Madiun dikenal sebagai kota percontohan pembangunan. Tata kota dan kebersihan terpuji.",
-      policy_direction:"Pro-pembangunan kota"
+      policy_direction:"Pro-pembangunan kota",
+      style:'Populis',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Madiun dikenal sebagai kota percontohan pembangunan. Tata kota dan kebersihan terpuji."
     }
   },
   {
@@ -1141,7 +1360,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:5, corruption_risk:"rendah",
       nationalism:5, religiosity:7,
       track_record:"Kepemimpinan berbasis kesehatan dan pemberdayaan masyarakat.",
-      policy_direction:"Pro-kesehatan, pemberdayaan desa"
+      policy_direction:"Pro-kesehatan, pemberdayaan desa",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan berbasis kesehatan dan pemberdayaan masyarakat."
     }
   },
   {
@@ -1162,7 +1386,12 @@ export const PERSONS = [
       ideology_score:-1, populism_score:6, corruption_risk:"rendah",
       nationalism:6, religiosity:9,
       track_record:"Kepemimpinan berbasis nilai-nilai NU. Jombang sebagai kota asal pesantren dan NU.",
-      policy_direction:"Pro-pesantren, nasionalis-NU"
+      policy_direction:"Pro-pesantren, nasionalis-NU",
+      style:'Religius',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan berbasis nilai-nilai NU. Jombang sebagai kota asal pesantren dan NU."
     }
   },
   {
@@ -1183,7 +1412,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:5, religiosity:5,
       track_record:"Malang sebagai kota pelajar terus berkembang. Fokus pariwisata dan pendidikan.",
-      policy_direction:"Pro-pendidikan, pariwisata"
+      policy_direction:"Pro-pendidikan, pariwisata",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Malang sebagai kota pelajar terus berkembang. Fokus pariwisata dan pendidikan."
     }
   },
   {
@@ -1205,7 +1439,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"terpidana",
       nationalism:4, religiosity:4,
       track_record:"Terpidana suap namun kembali terpilih. Menggambarkan tantangan antikorupsi di level kabupaten.",
-      policy_direction:"Pembangunan daerah"
+      policy_direction:"Pembangunan daerah",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:8,
+      notes:"Terpidana suap namun kembali terpilih. Menggambarkan tantangan antikorupsi di level kabupaten."
     }
   },
   // ─── JATIM — Kabupaten/Kota Lainnya (data ringkas) ──────────────────────
@@ -1229,7 +1468,13 @@ export const PERSONS = [
     bio:"Bupati Pasuruan dari PDIP, melanjutkan pembangunan industri dan pertanian di Kabupaten Pasuruan.",
     tags:["jatim","pasuruan","pdip"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Bupati Pasuruan, kader PDIP", twitter:null,
-    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:5, track_record:"Kepemimpinan stabil di Pasuruan.", policy_direction:"Pro-industri"}
+    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:5, track_record:"Kepemimpinan stabil di Pasuruan.", policy_direction:"Pro-industri",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan stabil di Pasuruan."
+    }
   },
   {
     id:"saiful_ilah", name:"Saiful Ilah", photo_url:null, photo_placeholder:"SI",
@@ -1240,7 +1485,13 @@ export const PERSONS = [
     bio:"Mantan Bupati Sidoarjo terlama. Tersangka korupsi dan kini dalam proses hukum.",
     tags:["jatim","sidoarjo","korupsi","tersangka"], lhkpn_latest:null, lhkpn_year:null,
     connections_summary:"Mantan Bupati Sidoarjo, tersangka korupsi", twitter:null,
-    analysis:{ideology_score:4, populism_score:5, corruption_risk:"tersangka", nationalism:4, religiosity:5, track_record:"Bupati lama, tersangka korupsi.", policy_direction:"N/A"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"tersangka", nationalism:4, religiosity:5, track_record:"Bupati lama, tersangka korupsi.", policy_direction:"N/A",
+      style:'Teknokrat',
+      risk:'high',
+      influence:4,
+      controversy_level:8,
+      notes:"Bupati lama, tersangka korupsi."
+    }
   },
   {
     id:"yuhronur_efendi", name:"Yuhronur Efendi", photo_url:null, photo_placeholder:"YE",
@@ -1251,7 +1502,13 @@ export const PERSONS = [
     bio:"Bupati Lamongan kader PKB, fokus pengembangan pertanian dan nelayan di wilayah pesisir utara Jatim.",
     tags:["jatim","lamongan","pkb"], lhkpn_latest:4000000000, lhkpn_year:2023,
     connections_summary:"Bupati Lamongan, kader PKB", twitter:null,
-    analysis:{ideology_score:4, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:7, track_record:"Kepemimpinan fokus pertanian-perikanan.", policy_direction:"Pro-pertanian, nelayan"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:7, track_record:"Kepemimpinan fokus pertanian-perikanan.", policy_direction:"Pro-pertanian, nelayan",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan fokus pertanian-perikanan."
+    }
   },
   {
     id:"ipong_muchlissoni", name:"Ipong Muchlissoni", photo_url:null, photo_placeholder:"IM",
@@ -1262,7 +1519,13 @@ export const PERSONS = [
     bio:"Bupati Ponorogo dari Gerindra, terkenal dengan festival Reog Ponorogo yang mendapat pengakuan UNESCO.",
     tags:["jatim","ponorogo","gerindra","budaya"], lhkpn_latest:5000000000, lhkpn_year:2023,
     connections_summary:"Bupati Ponorogo, Gerindra", twitter:null,
-    analysis:{ideology_score:3, populism_score:6, corruption_risk:"rendah", nationalism:7, religiosity:5, track_record:"Reog Ponorogo raih UNESCO. Pariwisata meningkat.", policy_direction:"Pro-budaya, pariwisata"}
+    analysis:{ideology_score:3, populism_score:6, corruption_risk:"rendah", nationalism:7, religiosity:5, track_record:"Reog Ponorogo raih UNESCO. Pariwisata meningkat.", policy_direction:"Pro-budaya, pariwisata",
+      style:'Populis',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Reog Ponorogo raih UNESCO. Pariwisata meningkat."
+    }
   },
   {
     id:"joko_suroto", name:"Joko Suroto", photo_url:null, photo_placeholder:"JS",
@@ -1273,7 +1536,13 @@ export const PERSONS = [
     bio:"Bupati Tulungagung pengganti setelah bupati sebelumnya tersangkut kasus korupsi.",
     tags:["jatim","tulungagung","pdip"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Bupati Tulungagung, PDIP", twitter:null,
-    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus kepemimpinan Tulungagung.", policy_direction:"Pembangunan daerah"}
+    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus kepemimpinan Tulungagung.", policy_direction:"Pembangunan daerah",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Penerus kepemimpinan Tulungagung."
+    }
   },
   {
     id:"karna_suswandi", name:"Karna Suswandi", photo_url:null, photo_placeholder:"KS",
@@ -1284,7 +1553,13 @@ export const PERSONS = [
     bio:"Bupati Situbondo dari NasDem, fokus pada pertanian dan pariwisata di Situbondo.",
     tags:["jatim","situbondo","nasdem"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Bupati Situbondo, NasDem", twitter:null,
-    analysis:{ideology_score:1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Kepemimpinan relatif bersih.", policy_direction:"Pro-pertanian, pariwisata"}
+    analysis:{ideology_score:1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Kepemimpinan relatif bersih.", policy_direction:"Pro-pertanian, pariwisata",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan relatif bersih."
+    }
   },
   {
     id:"andri_wahyudi", name:"Andri Wahyudi Hamid", photo_url:null, photo_placeholder:"AW",
@@ -1295,7 +1570,13 @@ export const PERSONS = [
     bio:"Bupati Bondowoso dari PKB, melanjutkan program pertanian kopi Arabika yang terkenal.",
     tags:["jatim","bondowoso","pkb"], lhkpn_latest:2000000000, lhkpn_year:2023,
     connections_summary:"Bupati Bondowoso, PKB", twitter:null,
-    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Fokus pada kopi dan pertanian.", policy_direction:"Pro-pertanian"}
+    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Fokus pada kopi dan pertanian.", policy_direction:"Pro-pertanian",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Fokus pada kopi dan pertanian."
+    }
   },
   {
     id:"suwandy", name:"Suwandy", photo_url:null, photo_placeholder:"SW",
@@ -1306,7 +1587,13 @@ export const PERSONS = [
     bio:"Walikota Probolinggo dari NasDem, mengisi kekosongan setelah Walikota sebelumnya tersangkut kasus korupsi.",
     tags:["jatim","probolinggo","nasdem"], lhkpn_latest:2500000000, lhkpn_year:2023,
     connections_summary:"Walikota Probolinggo, NasDem", twitter:null,
-    analysis:{ideology_score:1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus Walikota Probolinggo.", policy_direction:"Pembangunan kota"}
+    analysis:{ideology_score:1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus Walikota Probolinggo.", policy_direction:"Pembangunan kota",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Penerus Walikota Probolinggo."
+    }
   },
   {
     id:"wahid_cahyono", name:"Wahid Cahyono", photo_url:null, photo_placeholder:"WC",
@@ -1317,7 +1604,13 @@ export const PERSONS = [
     bio:"Bupati Probolinggo pengganti setelah Hasan Aminuddin dan istrinya terpidana kasus korupsi jual beli jabatan.",
     tags:["jatim","probolinggo","pdip"], lhkpn_latest:2000000000, lhkpn_year:2023,
     connections_summary:"Bupati Probolinggo, pengganti terpidana", twitter:null,
-    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus reformasi Probolinggo pasca-korupsi.", policy_direction:"Reformasi tata kelola"}
+    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus reformasi Probolinggo pasca-korupsi.", policy_direction:"Reformasi tata kelola",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Penerus reformasi Probolinggo pasca-korupsi."
+    }
   },
   {
     id:"dawam_ridho", name:"H. Dawam Ridho", photo_url:null, photo_placeholder:"DR",
@@ -1328,7 +1621,13 @@ export const PERSONS = [
     bio:"Bupati Lumajang dari PDIP, fokus rekonstruksi pasca-bencana erupsi Gunung Semeru.",
     tags:["jatim","lumajang","pdip","bencana"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Bupati Lumajang, PDIP", twitter:null,
-    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:5, track_record:"Pasca-erupsi Semeru, rekonstruksi berjalan.", policy_direction:"Penanggulangan bencana"}
+    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:5, track_record:"Pasca-erupsi Semeru, rekonstruksi berjalan.", policy_direction:"Penanggulangan bencana",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Pasca-erupsi Semeru, rekonstruksi berjalan."
+    }
   },
   {
     id:"sandhika", name:"Sandhika Artadita", photo_url:null, photo_placeholder:"SA",
@@ -1339,7 +1638,13 @@ export const PERSONS = [
     bio:"Bupati Blitar dari PDIP, melanjutkan tradisi kekuatan PDIP di wilayah Blitar.",
     tags:["jatim","blitar","pdip"], lhkpn_latest:2500000000, lhkpn_year:2023,
     connections_summary:"Bupati Blitar, PDIP", twitter:null,
-    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:4, track_record:"Blitar sebagai kandang PDIP historis.", policy_direction:"Pro-PDIP, pertanian"}
+    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:4, track_record:"Blitar sebagai kandang PDIP historis.", policy_direction:"Pro-PDIP, pertanian",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Blitar sebagai kandang PDIP historis."
+    }
   },
   {
     id:"santoso_blitar", name:"Santoso", photo_url:null, photo_placeholder:"SB",
@@ -1350,7 +1655,13 @@ export const PERSONS = [
     bio:"Walikota Blitar dari PDIP. Blitar merupakan kota kelahiran Bung Karno, pusat sejarah nasionalisme Indonesia.",
     tags:["jatim","blitar","pdip","nasionalis"], lhkpn_latest:2000000000, lhkpn_year:2023,
     connections_summary:"Walikota Blitar, PDIP", twitter:null,
-    analysis:{ideology_score:-2, populism_score:6, corruption_risk:"rendah", nationalism:8, religiosity:4, track_record:"Blitar kota bersejarah. Pariwisata makam Bung Karno.", policy_direction:"Pro-nasionalisme, pariwisata"}
+    analysis:{ideology_score:-2, populism_score:6, corruption_risk:"rendah", nationalism:8, religiosity:4, track_record:"Blitar kota bersejarah. Pariwisata makam Bung Karno.", policy_direction:"Pro-nasionalisme, pariwisata",
+      style:'Nasionalis',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Blitar kota bersejarah. Pariwisata makam Bung Karno."
+    }
   },
   {
     id:"budhabar", name:"Budhabar", photo_url:null, photo_placeholder:"BD",
@@ -1361,7 +1672,13 @@ export const PERSONS = [
     bio:"Bupati Nganjuk dari PDIP.",
     tags:["jatim","nganjuk","pdip"], lhkpn_latest:2000000000, lhkpn_year:2023,
     connections_summary:"Bupati Nganjuk, PDIP", twitter:null,
-    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Kepemimpinan Nganjuk.", policy_direction:"Pembangunan daerah"}
+    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Kepemimpinan Nganjuk.", policy_direction:"Pembangunan daerah",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan Nganjuk."
+    }
   },
   {
     id:"hariyanto_bojonegoro", name:"Setyo Wahono", photo_url:null, photo_placeholder:"SW",
@@ -1372,7 +1689,13 @@ export const PERSONS = [
     bio:"Bupati Bojonegoro, daerah penghasil minyak bumi terbesar di Jatim.",
     tags:["jatim","bojonegoro","pdip","migas"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Bupati Bojonegoro, PDIP", twitter:null,
-    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:5, track_record:"Bojonegoro sebagai daerah migas.", policy_direction:"Pro-energi, pembangunan"}
+    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:5, track_record:"Bojonegoro sebagai daerah migas.", policy_direction:"Pro-energi, pembangunan",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Bojonegoro sebagai daerah migas."
+    }
   },
   {
     id:"arifin_tuban", name:"Aditya Halindra Faridzky", photo_url:null, photo_placeholder:"AF",
@@ -1383,7 +1706,13 @@ export const PERSONS = [
     bio:"Bupati Tuban muda dari PKB. Tuban terkenal dengan industri petrokimia dan semen.",
     tags:["jatim","tuban","pkb","muda"], lhkpn_latest:4000000000, lhkpn_year:2023,
     connections_summary:"Bupati Tuban, PKB", twitter:null,
-    analysis:{ideology_score:4, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:6, track_record:"Kepemimpinan muda Tuban.", policy_direction:"Pro-industri"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:6, track_record:"Kepemimpinan muda Tuban.", policy_direction:"Pro-industri",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan muda Tuban."
+    }
   },
   {
     id:"fauzi_ngawi", name:"Ony Anwar Harsono", photo_url:null, photo_placeholder:"OA",
@@ -1394,7 +1723,13 @@ export const PERSONS = [
     bio:"Bupati Ngawi dari PKB. Ngawi dikenal sebagai daerah pertanian dan fosil manusia purba.",
     tags:["jatim","ngawi","pkb"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Bupati Ngawi, PKB", twitter:null,
-    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:5, religiosity:6, track_record:"Kepemimpinan Ngawi.", policy_direction:"Pro-pertanian"}
+    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:5, religiosity:6, track_record:"Kepemimpinan Ngawi.", policy_direction:"Pro-pertanian",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan Ngawi."
+    }
   },
   {
     id:"dedy_magetan", name:"Nanik Endang Rusminingsih", photo_url:null, photo_placeholder:"NE",
@@ -1405,7 +1740,13 @@ export const PERSONS = [
     bio:"Bupati Magetan perempuan dari PDIP. Magetan dikenal dengan produk kulit dan pariwisata Telaga Sarangan.",
     tags:["jatim","magetan","pdip","perempuan"], lhkpn_latest:2500000000, lhkpn_year:2023,
     connections_summary:"Bupati Magetan, PDIP, perempuan", twitter:null,
-    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Kepemimpinan Magetan.", policy_direction:"Pro-pariwisata, UMKM"}
+    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Kepemimpinan Magetan.", policy_direction:"Pro-pariwisata, UMKM",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan Magetan."
+    }
   },
   {
     id:"tri_sragen", name:"M. Erfan Wahyudi", photo_url:null, photo_placeholder:"EW",
@@ -1416,7 +1757,13 @@ export const PERSONS = [
     bio:"Bupati Pacitan. Pacitan adalah kota kelahiran SBY yang kini dikuasai PDIP.",
     tags:["jatim","pacitan","pdip"], lhkpn_latest:2000000000, lhkpn_year:2023,
     connections_summary:"Bupati Pacitan, PDIP (kota asal SBY)", twitter:null,
-    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:5, religiosity:5, track_record:"Pacitan daerah berprestasi pariwisata.", policy_direction:"Pro-pariwisata"}
+    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:5, religiosity:5, track_record:"Pacitan daerah berprestasi pariwisata.", policy_direction:"Pro-pariwisata",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Pacitan daerah berprestasi pariwisata."
+    }
   },
   {
     id:"daryono_trenggalek", name:"Mochamad Nur Arifin", photo_url:null, photo_placeholder:"MN",
@@ -1427,7 +1774,13 @@ export const PERSONS = [
     bio:"Bupati Trenggalek muda dari PDIP, penerus Emil Dardak yang kini menjadi Wagub Jatim.",
     tags:["jatim","trenggalek","pdip","muda"], lhkpn_latest:2500000000, lhkpn_year:2023,
     connections_summary:"Bupati Trenggalek, PDIP", twitter:null,
-    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus Trenggalek pasca-Emil Dardak.", policy_direction:"Pembangunan daerah"}
+    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus Trenggalek pasca-Emil Dardak.", policy_direction:"Pembangunan daerah",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Penerus Trenggalek pasca-Emil Dardak."
+    }
   },
   {
     id:"winarso_kediri", name:"Hanindhito Pramana (Kota Kediri)", photo_url:null, photo_placeholder:"KK",
@@ -1438,7 +1791,13 @@ export const PERSONS = [
     bio:"Walikota Kediri dari PKB. Kota Kediri dikenal dengan Industri Gudang Garam dan pabrik rokok.",
     tags:["jatim","kota-kediri","pkb"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Walikota Kediri, PKB", twitter:null,
-    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Kepemimpinan Kota Kediri.", policy_direction:"Pro-industri"}
+    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:6, track_record:"Kepemimpinan Kota Kediri.", policy_direction:"Pro-industri",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Kepemimpinan Kota Kediri."
+    }
   },
   {
     id:"slamet_batu", name:"Rudi Hartono", photo_url:null, photo_placeholder:"RH",
@@ -1449,7 +1808,13 @@ export const PERSONS = [
     bio:"Walikota Batu yang menggantikan setelah walikota sebelumnya tersangkut kasus korupsi. Kota Batu terkenal dengan wisata apel dan taman rekreasi.",
     tags:["jatim","batu","pdip"], lhkpn_latest:2500000000, lhkpn_year:2023,
     connections_summary:"Walikota Batu, PDIP (penerus)", twitter:null,
-    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus kepemimpinan Kota Batu.", policy_direction:"Pro-pariwisata, agrowisata"}
+    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:4, religiosity:5, track_record:"Penerus kepemimpinan Kota Batu.", policy_direction:"Pro-pariwisata, agrowisata",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Penerus kepemimpinan Kota Batu."
+    }
   },
   {
     id:"taufiq_pamekasan", name:"Badrut Tamam", photo_url:null, photo_placeholder:"BT",
@@ -1460,7 +1825,13 @@ export const PERSONS = [
     bio:"Bupati Pamekasan dari PKB berlatar belakang pesantren. Pamekasan merupakan bagian Madura yang dikenal dengan batik dan tembakau.",
     tags:["jatim","pamekasan","pkb","madura","santri"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Bupati Pamekasan, PKB, Madura", twitter:null,
-    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:8, track_record:"Pamekasan pusat batik dan tembakau Madura.", policy_direction:"Pro-UMKM, pesantren"}
+    analysis:{ideology_score:-1, populism_score:5, corruption_risk:"rendah", nationalism:5, religiosity:8, track_record:"Pamekasan pusat batik dan tembakau Madura.", policy_direction:"Pro-UMKM, pesantren",
+      style:'Religius',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Pamekasan pusat batik dan tembakau Madura."
+    }
   },
   {
     id:"busyro_sumenep", name:"Achmad Fauzi", photo_url:null, photo_placeholder:"AF",
@@ -1471,7 +1842,13 @@ export const PERSONS = [
     bio:"Bupati Sumenep dari PDIP. Sumenep adalah ujung timur Madura dengan banyak pulau dan potensi bahari.",
     tags:["jatim","sumenep","pdip","madura"], lhkpn_latest:3000000000, lhkpn_year:2023,
     connections_summary:"Bupati Sumenep, PDIP, Madura", twitter:null,
-    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:7, track_record:"Sumenep dengan kepulauan dan budaya Madura.", policy_direction:"Pro-bahari, budaya"}
+    analysis:{ideology_score:-1, populism_score:4, corruption_risk:"rendah", nationalism:4, religiosity:7, track_record:"Sumenep dengan kepulauan dan budaya Madura.", policy_direction:"Pro-bahari, budaya",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Sumenep dengan kepulauan dan budaya Madura."
+    }
   },
   {
     id:"fauzi_sampang", name:"H. Slamet Junaidi", photo_url:null, photo_placeholder:"SJ",
@@ -1482,7 +1859,13 @@ export const PERSONS = [
     bio:"Bupati Sampang dari PKB. Sampang merupakan kabupaten dengan angka kemiskinan tertinggi di Jatim.",
     tags:["jatim","sampang","pkb","madura"], lhkpn_latest:2000000000, lhkpn_year:2023,
     connections_summary:"Bupati Sampang, PKB, Madura", twitter:null,
-    analysis:{ideology_score:4, populism_score:5, corruption_risk:"rendah", nationalism:4, religiosity:7, track_record:"Tantangan kemiskinan di Sampang.", policy_direction:"Pro-pengentasan kemiskinan"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"rendah", nationalism:4, religiosity:7, track_record:"Tantangan kemiskinan di Sampang.", policy_direction:"Pro-pengentasan kemiskinan",
+      style:'Teknokrat',
+      risk:'low',
+      influence:4,
+      controversy_level:3,
+      notes:"Tantangan kemiskinan di Sampang."
+    }
   },
   {
     id:"bangkalan_bupati", name:"Ra Abd Latif Amin Imron", photo_url:null, photo_placeholder:"AL",
@@ -1493,7 +1876,13 @@ export const PERSONS = [
     bio:"Bupati Bangkalan dari PKB, cucu KH Fuad Amin (mantan Bupati yang terjerat korupsi). Bangkalan adalah pintu masuk Madura via Jembatan Suramadu.",
     tags:["jatim","bangkalan","pkb","madura","pesantren"], lhkpn_latest:4000000000, lhkpn_year:2023,
     connections_summary:"Bupati Bangkalan, PKB, cucu eks-Bupati koruptor", twitter:null,
-    analysis:{ideology_score:4, populism_score:5, corruption_risk:"sedang", nationalism:4, religiosity:8, track_record:"Warisan keluarga Amin di Bangkalan. Fokus pembangunan pasca-Suramadu.", policy_direction:"Pro-pesantren, infrastruktur"}
+    analysis:{ideology_score:4, populism_score:5, corruption_risk:"sedang", nationalism:4, religiosity:8, track_record:"Warisan keluarga Amin di Bangkalan. Fokus pembangunan pasca-Suramadu.", policy_direction:"Pro-pesantren, infrastruktur",
+      style:'Religius',
+      risk:'medium',
+      influence:4,
+      controversy_level:5,
+      notes:"Warisan keluarga Amin di Bangkalan. Fokus pembangunan pasca-Suramadu."
+    }
   },
   // ─── JATIM — Kota lainnya ────────────────────────────────────────────────
   {
@@ -1548,7 +1937,12 @@ export const PERSONS = [
       ideology_score:1, populism_score:3, corruption_risk:"rendah",
       nationalism:7, religiosity:9,
       track_record:"Muhammadiyah di bawah Haedar fokus pada pendidikan dan kesehatan. Posisi moderat namun kritis terhadap kebijakan pemerintah.",
-      policy_direction:"Islam berkemajuan, pendidikan"
+      policy_direction:"Islam berkemajuan, pendidikan",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Muhammadiyah di bawah Haedar fokus pada pendidikan dan kesehatan. Posisi moderat namun kritis terhadap kebijakan pemerintah."
     }
   },
   {
@@ -1569,7 +1963,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:6, corruption_risk:"rendah",
       nationalism:6, religiosity:9,
       track_record:"Kritis terhadap kebijakan ekonomi dan sosial. Sering jadi suara paling keras dari MUI.",
-      policy_direction:"Islam konservatif, ekonomi syariah"
+      policy_direction:"Islam konservatif, ekonomi syariah",
+      style:'Religius',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Kritis terhadap kebijakan ekonomi dan sosial. Sering jadi suara paling keras dari MUI."
     }
   },
   {
@@ -1591,7 +1990,12 @@ export const PERSONS = [
       ideology_score:-7, populism_score:9, corruption_risk:"rendah",
       nationalism:5, religiosity:5,
       track_record:"Konsisten memperjuangkan hak buruh. Tolak UU Cipta Kerja omnibus. Partai Buruh gagal lolos ambang batas 4% Pemilu 2024.",
-      policy_direction:"Sosialis, pro-buruh, anti-neoliberal"
+      policy_direction:"Sosialis, pro-buruh, anti-neoliberal",
+      style:'Populis',
+      risk:'low',
+      influence:9,
+      controversy_level:6,
+      notes:"Konsisten memperjuangkan hak buruh. Tolak UU Cipta Kerja omnibus. Partai Buruh gagal lolos ambang batas 4% Pemilu 2024."
     }
   },
   // ─── NASIONAL — TOKOH PENTING LAINNYA ───────────────────────────────────
@@ -1635,7 +2039,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:5, corruption_risk:"rendah",
       nationalism:4, religiosity:3,
       track_record:"Naik cepat ke pucuk PSI tanpa rekam jejak politik. Dikritik sebagai perpanjangan tangan dinasti Jokowi.",
-      policy_direction:"Progresif, pro-generasi muda"
+      policy_direction:"Progresif, pro-generasi muda",
+      style:'Oligarkis',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Naik cepat ke pucuk PSI tanpa rekam jejak politik. Dikritik sebagai perpanjangan tangan dinasti Jokowi."
     }
   },
 
@@ -1691,7 +2100,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:4, corruption_risk:"tersangka",
       nationalism:5, religiosity:3,
       track_record:"Sebagai Mendag 2015–2016, Tom mengeluarkan izin impor gula kristal mentah untuk PT Angels Products — yang menjadi dasar dakwaan Kejagung. Ditangkap November 2024, berbulan-bulan setelah Prabowo menjabat, dan tiga tahun setelah Tom aktif mengkritik pemerintah. Kasusnya menjadi salah satu simbol paling kuat kekhawatiran kriminalisasi oposisi; sejumlah guru besar hukum menyebut dakwaan lemah secara substansi.",
-      policy_direction:"Pro-pasar bebas, liberal ekonomi"
+      policy_direction:"Pro-pasar bebas, liberal ekonomi",
+      style:'Teknokrat',
+      risk:'high',
+      influence:6,
+      controversy_level:8,
+      notes:"Sebagai Mendag 2015–2016, Tom mengeluarkan izin impor gula kristal mentah untuk PT Angels Products — yang menjadi dasar dakwaan Kejagung. Ditangkap November 2024, berbulan-bulan setelah Prabowo menjabat, dan tiga tahun setelah Tom aktif mengkritik pemerintah. Kasusnya menjadi salah satu simbol paling kuat kekhawatiran kriminalisasi oposisi; sejumlah guru besar hukum menyebut dakwaan lemah secara substansi."
     }
   },
   {
@@ -1715,7 +2129,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:6, corruption_risk:"rendah",
       nationalism:7, religiosity:8,
       track_record:"Salah satu negarawan paling dihormati. Berani mundur dari kabinet sebagai protes. Akar kuat di komunitas NU Madura-Jatim.",
-      policy_direction:"Hukum konstitusional, anti-korupsi"
+      policy_direction:"Hukum konstitusional, anti-korupsi",
+      style:'Religius',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Salah satu negarawan paling dihormati. Berani mundur dari kabinet sebagai protes. Akar kuat di komunitas NU Madura-Jatim."
     }
   },
   {
@@ -1742,7 +2161,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:2, corruption_risk:"tinggi",
       nationalism:5, religiosity:6,
       track_record:"Putusan MK No. 90/2023 yang mengubah syarat usia Capres-Cawapres secara langsung meloloskan Gibran Rakabuming — keponakannya sendiri — maju Pilpres 2024. MKMK menyatakan Anwar terbukti melanggar prinsip imparsialitas dan kode etik hakim secara berat; ia dicopot dari posisi Ketua MK namun tidak diberhentikan sebagai hakim. Peristiwa ini dinilai sebagai momen tergelap Mahkamah Konstitusi sejak era Reformasi.",
-      policy_direction:"N/A (yudisial)"
+      policy_direction:"N/A (yudisial)",
+      style:'Teknokrat',
+      risk:'high',
+      influence:6,
+      controversy_level:7,
+      notes:"Putusan MK No. 90/2023 yang mengubah syarat usia Capres-Cawapres secara langsung meloloskan Gibran Rakabuming — keponakannya sendiri — maju Pilpres 2024. MKMK menyatakan Anwar terbukti melanggar prinsip imparsialitas dan kode etik hakim secara berat; ia dicopot dari posisi Ketua MK namun tidak diberhentikan sebagai hakim. Peristiwa ini dinilai sebagai momen tergelap Mahkamah Konstitusi sejak era Reformasi."
     }
   },
 
@@ -1792,7 +2216,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:8, corruption_risk:"rendah",
       nationalism:7, religiosity:6,
       track_record:"Gubernur Jabar populer dengan berbagai inovasi. Kalah tipis di DKI 2024. Dianggap kandidat potensial Pilpres masa depan.",
-      policy_direction:"Pro-inovasi, smart city"
+      policy_direction:"Pro-inovasi, smart city",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:6,
+      notes:"Gubernur Jabar populer dengan berbagai inovasi. Kalah tipis di DKI 2024. Dianggap kandidat potensial Pilpres masa depan."
     }
   },
   {
@@ -1816,7 +2245,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:9, corruption_risk:"rendah",
       nationalism:7, religiosity:7,
       track_record:"Bupati Purwakarta inovatif 10 tahun. Anggota DPR 2019-2024. Gubernur Jabar terpilih 2024 dengan margin besar.",
-      policy_direction:"Populis, pro-rakyat kecil, nasionalis budaya"
+      policy_direction:"Populis, pro-rakyat kecil, nasionalis budaya",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:6,
+      notes:"Bupati Purwakarta inovatif 10 tahun. Anggota DPR 2019-2024. Gubernur Jabar terpilih 2024 dengan margin besar."
     }
   },
   {
@@ -1840,7 +2274,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:5, corruption_risk:"rendah",
       nationalism:8, religiosity:6,
       track_record:"Kapolda Jateng kemudian Kapolda Kalsel. Menang Pilgub Jateng 2024 mengalahkan Andika Perkasa, simbol kekalahan PDI-P di basis tradisionalnya.",
-      policy_direction:"Pro-keamanan, investasi"
+      policy_direction:"Pro-keamanan, investasi",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Kapolda Jateng kemudian Kapolda Kalsel. Menang Pilgub Jateng 2024 mengalahkan Andika Perkasa, simbol kekalahan PDI-P di basis tradisionalnya."
     }
   },
   {
@@ -1862,7 +2301,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Politisi Banten berlatar DPRD. Menang Pilkada 2024 diusung Gerindra.",
-      policy_direction:"Pro-investasi, infrastruktur"
+      policy_direction:"Pro-investasi, infrastruktur",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Politisi Banten berlatar DPRD. Menang Pilkada 2024 diusung Gerindra."
     }
   },
   {
@@ -1885,7 +2329,12 @@ export const PERSONS = [
       ideology_score:-2, populism_score:6, corruption_risk:"sedang",
       nationalism:6, religiosity:7,
       track_record:"Gubernur Bali periode pertama 2018-2023. Menang kembali 2024. PDI-P mempertahankan Bali meski kalah di banyak provinsi lain.",
-      policy_direction:"Pro-budaya Bali, pariwisata berkelanjutan"
+      policy_direction:"Pro-budaya Bali, pariwisata berkelanjutan",
+      style:'Religius',
+      risk:'medium',
+      influence:7,
+      controversy_level:5,
+      notes:"Gubernur Bali periode pertama 2018-2023. Menang kembali 2024. PDI-P mempertahankan Bali meski kalah di banyak provinsi lain."
     }
   },
   {
@@ -1908,7 +2357,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:7, corruption_risk:"sedang",
       nationalism:5, religiosity:8,
       track_record:"Dari panglima GAM ke Wagub ke Gubernur. Tokoh kunci rekonsiliasi Aceh pasca-MoU Helsinki. Menang Pilgub Aceh 2024.",
-      policy_direction:"Otonomi Aceh, syariat Islam, pro-rakyat"
+      policy_direction:"Otonomi Aceh, syariat Islam, pro-rakyat",
+      style:'Religius',
+      risk:'medium',
+      influence:7,
+      controversy_level:5,
+      notes:"Dari panglima GAM ke Wagub ke Gubernur. Tokoh kunci rekonsiliasi Aceh pasca-MoU Helsinki. Menang Pilgub Aceh 2024."
     }
   },
   {
@@ -1930,7 +2384,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:7, religiosity:5,
       track_record:"Empat periode DPR RI. Gubernur Kaltim strategis karena IKN Nusantara di wilayahnya.",
-      policy_direction:"Pro-investasi, dukungan IKN"
+      policy_direction:"Pro-investasi, dukungan IKN",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Empat periode DPR RI. Gubernur Kaltim strategis karena IKN Nusantara di wilayahnya."
     }
   },
   {
@@ -1953,7 +2412,12 @@ export const PERSONS = [
       ideology_score:6, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:8,
       track_record:"Walikota Padang lalu Gubernur Sumbar. PKS dominan di Sumbar.",
-      policy_direction:"Berbasis nilai Islam moderat"
+      policy_direction:"Berbasis nilai Islam moderat",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Walikota Padang lalu Gubernur Sumbar. PKS dominan di Sumbar."
     }
   },
   {
@@ -1975,7 +2439,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Politisi daerah Riau dari PKB. Menang Pilgub Riau 2024.",
-      policy_direction:"Pro-pengembangan daerah, perkebunan"
+      policy_direction:"Pro-pengembangan daerah, perkebunan",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Politisi daerah Riau dari PKB. Menang Pilgub Riau 2024."
     }
   },
   {
@@ -1998,7 +2467,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Bupati Merangin lalu Gubernur Jambi dua periode.",
-      policy_direction:"Pembangunan daerah, infrastruktur"
+      policy_direction:"Pembangunan daerah, infrastruktur",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Bupati Merangin lalu Gubernur Jambi dua periode."
     }
   },
   {
@@ -2020,7 +2494,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:5, corruption_risk:"sedang",
       nationalism:6, religiosity:5,
       track_record:"Dua periode Gubernur Sumsel. NasDem pertahankan Sumsel di Pilkada 2024.",
-      policy_direction:"Pro-energi, pembangunan"
+      policy_direction:"Pro-energi, pembangunan",
+      style:'Religius',
+      risk:'medium',
+      influence:7,
+      controversy_level:5,
+      notes:"Dua periode Gubernur Sumsel. NasDem pertahankan Sumsel di Pilkada 2024."
     }
   },
   {
@@ -2042,7 +2521,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:7,
       track_record:"Walikota Bengkulu lalu Gubernur Bengkulu 2024.",
-      policy_direction:"Pro-tata kelola, nilai Islam"
+      policy_direction:"Pro-tata kelola, nilai Islam",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Walikota Bengkulu lalu Gubernur Bengkulu 2024."
     }
   },
   {
@@ -2064,7 +2548,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Anggota DPR Gerindra lalu Gubernur Lampung 2024.",
-      policy_direction:"Pro-agroindustri, investasi"
+      policy_direction:"Pro-agroindustri, investasi",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Anggota DPR Gerindra lalu Gubernur Lampung 2024."
     }
   },
   {
@@ -2086,7 +2575,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:4, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Wagub lalu Gubernur Babel 2024.",
-      policy_direction:"Pro-pengelolaan tambang berkelanjutan"
+      policy_direction:"Pro-pengelolaan tambang berkelanjutan",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Wagub lalu Gubernur Babel 2024."
     }
   },
   {
@@ -2109,7 +2603,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Bupati Bintan lalu Gubernur Kepri. Fokus investasi kawasan ekonomi khusus.",
-      policy_direction:"Pro-investasi, kawasan ekonomi"
+      policy_direction:"Pro-investasi, kawasan ekonomi",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Bupati Bintan lalu Gubernur Kepri. Fokus investasi kawasan ekonomi khusus."
     }
   },
   {
@@ -2131,7 +2630,12 @@ export const PERSONS = [
       ideology_score:1, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Karir diplomatik panjang. Gubernur NTB terpilih 2024.",
-      policy_direction:"Pro-pariwisata, ekonomi kerakyatan"
+      policy_direction:"Pro-pariwisata, ekonomi kerakyatan",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Karir diplomatik panjang. Gubernur NTB terpilih 2024."
     }
   },
   {
@@ -2153,7 +2657,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:7,
       track_record:"Dua periode DPR lalu Gubernur NTT 2024.",
-      policy_direction:"Pro-pembangunan, pariwisata Flores-Komodo"
+      policy_direction:"Pro-pembangunan, pariwisata Flores-Komodo",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Dua periode DPR lalu Gubernur NTT 2024."
     }
   },
   {
@@ -2176,7 +2685,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:5, corruption_risk:"rendah",
       nationalism:7, religiosity:5,
       track_record:"Bupati Mempawah lalu Gubernur Kalbar. Fokus perbatasan Indonesia-Malaysia.",
-      policy_direction:"Pro-perbatasan, investasi"
+      policy_direction:"Pro-perbatasan, investasi",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Bupati Mempawah lalu Gubernur Kalbar. Fokus perbatasan Indonesia-Malaysia."
     }
   },
   {
@@ -2198,7 +2712,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Anggota DPR Gerindra lalu Gubernur Kalteng 2024.",
-      policy_direction:"Pro-pembangunan, dukungan IKN"
+      policy_direction:"Pro-pembangunan, dukungan IKN",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Anggota DPR Gerindra lalu Gubernur Kalteng 2024."
     }
   },
   {
@@ -2220,7 +2739,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:4, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Bupati Balangan lalu Gubernur Kalsel 2024.",
-      policy_direction:"Pro-energi, tambang berkelanjutan"
+      policy_direction:"Pro-energi, tambang berkelanjutan",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Bupati Balangan lalu Gubernur Kalsel 2024."
     }
   },
   {
@@ -2242,7 +2766,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:4, corruption_risk:"rendah",
       nationalism:8, religiosity:5,
       track_record:"Dua periode Gubernur Kaltara. Fokus perbatasan dan PLTA Kayan.",
-      policy_direction:"Pro-perbatasan, energi terbarukan"
+      policy_direction:"Pro-perbatasan, energi terbarukan",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Dua periode Gubernur Kaltara. Fokus perbatasan dan PLTA Kayan."
     }
   },
   {
@@ -2263,7 +2792,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:7, religiosity:6,
       track_record:"Terpilih Gubernur Sulut 2024.",
-      policy_direction:"Pro-pariwisata, investasi Pasifik"
+      policy_direction:"Pro-pariwisata, investasi Pasifik",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Terpilih Gubernur Sulut 2024."
     }
   },
   {
@@ -2285,7 +2819,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Bupati Morowali Utara lalu Gubernur Sulteng 2024.",
-      policy_direction:"Pro-industri nikel, investasi"
+      policy_direction:"Pro-industri nikel, investasi",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Bupati Morowali Utara lalu Gubernur Sulteng 2024."
     }
   },
   {
@@ -2307,7 +2846,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:6, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Gubernur Sulsel termuda. Diusung NasDem. Fokus infrastruktur dan investasi KTI.",
-      policy_direction:"Pro-investasi KTI, infrastruktur"
+      policy_direction:"Pro-investasi KTI, infrastruktur",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Gubernur Sulsel termuda. Diusung NasDem. Fokus infrastruktur dan investasi KTI."
     }
   },
   {
@@ -2328,7 +2872,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:4, corruption_risk:"rendah",
       nationalism:7, religiosity:5,
       track_record:"Terpilih Gubernur Sultra 2024 dari Gerindra.",
-      policy_direction:"Pro-pertambangan, investasi"
+      policy_direction:"Pro-pertambangan, investasi",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Terpilih Gubernur Sultra 2024 dari Gerindra."
     }
   },
   {
@@ -2350,7 +2899,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:4, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Wagub lalu Gubernur Gorontalo 2024.",
-      policy_direction:"Pro-pertanian, jagung"
+      policy_direction:"Pro-pertanian, jagung",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Wagub lalu Gubernur Gorontalo 2024."
     }
   },
   {
@@ -2372,7 +2926,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:4, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"DPRD lalu Gubernur Sulbar 2024.",
-      policy_direction:"Pembangunan daerah, infrastruktur"
+      policy_direction:"Pembangunan daerah, infrastruktur",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"DPRD lalu Gubernur Sulbar 2024."
     }
   },
   {
@@ -2394,7 +2953,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:5, corruption_risk:"rendah",
       nationalism:7, religiosity:6,
       track_record:"Tiga periode DPR RI lalu Gubernur Maluku 2024.",
-      policy_direction:"Pro-kelautan, pariwisata"
+      policy_direction:"Pro-kelautan, pariwisata",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Tiga periode DPR RI lalu Gubernur Maluku 2024."
     }
   },
   {
@@ -2416,7 +2980,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:4, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
       track_record:"Naik dari cawagub ke gubernur setelah calon gubernurnya meninggal kecelakaan. Malut kaya nikel.",
-      policy_direction:"Pro-nikel, pembangunan"
+      policy_direction:"Pro-nikel, pembangunan",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Naik dari cawagub ke gubernur setelah calon gubernurnya meninggal kecelakaan. Malut kaya nikel."
     }
   },
   {
@@ -2438,7 +3007,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:6, corruption_risk:"rendah",
       nationalism:8, religiosity:7,
       track_record:"Gubernur DIY sejak 1998. Keistimewaan DIY berdasarkan sejarah Sultan bergabung dengan RI 1945.",
-      policy_direction:"Keistimewaan, budaya, pariwisata"
+      policy_direction:"Keistimewaan, budaya, pariwisata",
+      style:'Religius',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Gubernur DIY sejak 1998. Keistimewaan DIY berdasarkan sejarah Sultan bergabung dengan RI 1945."
     }
   },
 
@@ -2488,7 +3062,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:6, corruption_risk:"sedang",
       nationalism:7, religiosity:6,
       track_record:"Sebagai Menteri BUMN, Erick melakukan restrukturisasi besar: jumlah BUMN dipangkas dari 142 menjadi sekitar 40 holding, merger Bank Syariah BUMN menjadi BSI, dan konsolidasi Pelindo. Reformasi PSSI-nya menghasilkan Timnas Indonesia masuk 16 besar kualifikasi Piala Dunia 2026 — pencapaian bersejarah. Danantara yang ia pimpin sebagai CEO menargetkan kelola aset BUMN senilai $900 miliar, tetapi transparansi dan tata kelolanya terus dipertanyakan publik.",
-      policy_direction:"Pro-privatisasi BUMN, investasi asing"
+      policy_direction:"Pro-privatisasi BUMN, investasi asing",
+      style:'Oligarkis',
+      risk:'medium',
+      influence:7,
+      controversy_level:5,
+      notes:"Sebagai Menteri BUMN, Erick melakukan restrukturisasi besar: jumlah BUMN dipangkas dari 142 menjadi sekitar 40 holding, merger Bank Syariah BUMN menjadi BSI, dan konsolidasi Pelindo. Reformasi PSSI-nya menghasilkan Timnas Indonesia masuk 16 besar kualifikasi Piala Dunia 2026 — pencapaian bersejarah. Danantara yang ia pimpin sebagai CEO menargetkan kelola aset BUMN senilai $900 miliar, tetapi transparansi dan tata kelolanya terus dipertanyakan publik."
     }
   },
   {
@@ -2511,7 +3090,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:2, corruption_risk:"rendah",
       nationalism:8, religiosity:5,
       track_record:"Selama 10 tahun sebagai Menteri PUPR, Basuki mengawal 2.000+ km jalan tol baru, 61 bendungan, dan ratusan ribu unit rumah rakyat — warisan infrastruktur terbesar sejak era Soeharto. Sebelum era PUPR, ia memimpin pembangunan Semen Gresik/Semen Indonesia serta berbagai proyek bendungan strategis. Kini sebagai Kepala OIKN, ia berhadapan dengan lambatnya realisasi investasi swasta dan tekanan efisiensi anggaran yang memangkas alokasi IKN drastis.",
-      policy_direction:"Pro-infrastruktur, teknokrat"
+      policy_direction:"Pro-infrastruktur, teknokrat",
+      style:'Teknokrat',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Selama 10 tahun sebagai Menteri PUPR, Basuki mengawal 2.000+ km jalan tol baru, 61 bendungan, dan ratusan ribu unit rumah rakyat — warisan infrastruktur terbesar sejak era Soeharto. Sebelum era PUPR, ia memimpin pembangunan Semen Gresik/Semen Indonesia serta berbagai proyek bendungan strategis. Kini sebagai Kepala OIKN, ia berhadapan dengan lambatnya realisasi investasi swasta dan tekanan efisiensi anggaran yang memangkas alokasi IKN drastis."
     }
   },
 
@@ -2560,7 +3144,12 @@ export const PERSONS = [
       ideology_score:-2, populism_score:4, corruption_risk:"rendah",
       nationalism:5, religiosity:4,
       track_record:"Grandmaster catur bertaraf internasional, pernah peringkat ke-2 dunia. Anggota DPR dari PDIP sejak 2009. Komisi II mengawasi Kemendagri dan KPU.",
-      policy_direction:"Pro-PDIP, otonomi daerah"
+      policy_direction:"Pro-PDIP, otonomi daerah",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Grandmaster catur bertaraf internasional, pernah peringkat ke-2 dunia. Anggota DPR dari PDIP sejak 2009. Komisi II mengawasi Kemendagri dan KPU."
     }
   },
   {
@@ -2584,7 +3173,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:6, corruption_risk:"rendah",
       nationalism:7, religiosity:5,
       track_record:"Dikenal sebagai debater ulung di DPR. Vokal membela kepentingan Gerindra dan Prabowo di Komisi III yang mengawasi Kemenkumham dan Polri.",
-      policy_direction:"Pro-Prabowo, penegakan hukum"
+      policy_direction:"Pro-Prabowo, penegakan hukum",
+      style:'Populis',
+      risk:'low',
+      influence:7,
+      controversy_level:3,
+      notes:"Dikenal sebagai debater ulung di DPR. Vokal membela kepentingan Gerindra dan Prabowo di Komisi III yang mengawasi Kemenkumham dan Polri."
     }
   },
   {
@@ -2606,7 +3200,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:3, corruption_risk:"sedang",
       nationalism:6, religiosity:4,
       track_record:"Latar belakang dinasti politik Soeharto. Mantan istri Prabowo (menikah 1983, bercerai 1998). Aktif di Golkar lalu pindah ke Gerindra. Komisi IV mengawasi Kementan dan KKP.",
-      policy_direction:"Pro-pertanian, ketahanan pangan"
+      policy_direction:"Pro-pertanian, ketahanan pangan",
+      style:'Teknokrat',
+      risk:'medium',
+      influence:6,
+      controversy_level:5,
+      notes:"Latar belakang dinasti politik Soeharto. Mantan istri Prabowo (menikah 1983, bercerai 1998). Aktif di Golkar lalu pindah ke Gerindra. Komisi IV mengawasi Kementan dan KKP."
     }
   },
   {
@@ -2628,7 +3227,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:4, corruption_risk:"rendah",
       nationalism:6, religiosity:4,
       track_record:"Anggota DPR dari Gerindra dengan fokus ekonomi dan industri. Komisi VI mengawasi Kementerian BUMN, Kemendag, dan BUMN-BUMN besar Indonesia.",
-      policy_direction:"Pro-BUMN, industri nasional"
+      policy_direction:"Pro-BUMN, industri nasional",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Anggota DPR dari Gerindra dengan fokus ekonomi dan industri. Komisi VI mengawasi Kementerian BUMN, Kemendag, dan BUMN-BUMN besar Indonesia."
     }
   },
   {
@@ -2651,7 +3255,12 @@ export const PERSONS = [
       ideology_score:1, populism_score:5, corruption_risk:"rendah",
       nationalism:5, religiosity:7,
       track_record:"Politisi PKB berlatar belakang pesantren. Komisi VIII mengawasi Kemenag, Kemensos, dan KemenPPPA. Konsisten pada isu keagamaan dan kesejahteraan sosial.",
-      policy_direction:"Pro-pesantren, kesejahteraan sosial"
+      policy_direction:"Pro-pesantren, kesejahteraan sosial",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Politisi PKB berlatar belakang pesantren. Komisi VIII mengawasi Kemenag, Kemensos, dan KemenPPPA. Konsisten pada isu keagamaan dan kesejahteraan sosial."
     }
   },
   {
@@ -2673,7 +3282,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Eks-anggota PKS yang pindah ke Golkar. Dikenal ahli perpajakan. Komisi XI mengawasi Kemenkeu, BI, OJK, dan BPS — posisi sangat strategis untuk kebijakan fiskal nasional.",
-      policy_direction:"Pro-fiskal, pengawasan sektor keuangan"
+      policy_direction:"Pro-fiskal, pengawasan sektor keuangan",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:3,
+      notes:"Eks-anggota PKS yang pindah ke Golkar. Dikenal ahli perpajakan. Komisi XI mengawasi Kemenkeu, BI, OJK, dan BPS — posisi sangat strategis untuk kebijakan fiskal nasional."
     }
   },
   {
@@ -2695,7 +3309,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:6, corruption_risk:"sedang",
       nationalism:5, religiosity:3,
       track_record:"Salah satu orang terkaya Indonesia. Pernah gabung Hanura lalu dirikan Perindo. MNC Group menguasai TV terrestrial dengan jangkauan terbesar di Indonesia. Mendukung koalisi Prabowo (KIM Plus).",
-      policy_direction:"Pro-bisnis, media konglomerat"
+      policy_direction:"Pro-bisnis, media konglomerat",
+      style:'Oligarkis',
+      risk:'medium',
+      influence:6,
+      controversy_level:5,
+      notes:"Salah satu orang terkaya Indonesia. Pernah gabung Hanura lalu dirikan Perindo. MNC Group menguasai TV terrestrial dengan jangkauan terbesar di Indonesia. Mendukung koalisi Prabowo (KIM Plus)."
     }
   },
 ]
