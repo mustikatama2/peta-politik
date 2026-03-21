@@ -122,6 +122,53 @@ function PersonPill({ id }) {
   )
 }
 
+// Copy-to-clipboard button with toast
+function CopyButton({ text }) {
+  const [copied, setCopied] = useState(false)
+
+  function handleCopy(e) {
+    e.preventDefault()
+    e.stopPropagation()
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }).catch(() => {
+      // fallback for older browsers
+      const ta = document.createElement('textarea')
+      ta.value = text
+      ta.style.position = 'fixed'
+      ta.style.opacity = '0'
+      document.body.appendChild(ta)
+      ta.select()
+      document.execCommand('copy')
+      document.body.removeChild(ta)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
+
+  return (
+    <button
+      onClick={handleCopy}
+      title="Salin judul"
+      className={`flex-shrink-0 p-1 rounded transition-all text-xs ${
+        copied
+          ? 'text-green-400 bg-green-400/10'
+          : 'text-text-secondary/50 hover:text-text-secondary hover:bg-bg-elevated'
+      }`}
+    >
+      {copied ? (
+        <span className="text-[10px] font-medium whitespace-nowrap">✓ Tersalin!</span>
+      ) : (
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+      )}
+    </button>
+  )
+}
+
 // Article card — full or compact mode
 function ArticleCard({ article, compact }) {
   const isLiveArticle = article.source_id !== 'static'
@@ -135,9 +182,12 @@ function ArticleCard({ article, compact }) {
         className="flex gap-3 p-3 rounded-lg border border-border hover:border-accent-red/50 hover:bg-bg-elevated transition-all group"
       >
         <div className="flex-1 min-w-0">
-          <p className="text-sm text-text-primary group-hover:text-accent-red line-clamp-2 transition-colors">
-            {article.title}
-          </p>
+          <div className="flex items-start gap-1">
+            <p className="flex-1 text-sm text-text-primary group-hover:text-accent-red line-clamp-2 transition-colors">
+              {article.title}
+            </p>
+            <CopyButton text={article.title} />
+          </div>
           <div className="flex items-center gap-2 mt-1 flex-wrap">
             <span className="text-xs text-text-secondary">{relTime(article.date)}</span>
             <SourceBadge sourceId={article.source_id} sourceName={article.source} />
@@ -157,10 +207,13 @@ function ArticleCard({ article, compact }) {
       className="block p-4 rounded-xl border border-border bg-bg-card hover:border-accent-red/50 hover:bg-bg-elevated transition-all group"
     >
       <div className="flex items-start justify-between gap-3 mb-2">
-        <h3 className="text-sm font-semibold text-text-primary group-hover:text-accent-red line-clamp-2 transition-colors leading-snug">
+        <h3 className="text-sm font-semibold text-text-primary group-hover:text-accent-red line-clamp-2 transition-colors leading-snug flex-1">
           {article.title}
         </h3>
-        <SentimentBadge s={article.sentiment} />
+        <div className="flex items-start gap-1 flex-shrink-0">
+          <CopyButton text={article.title} />
+          <SentimentBadge s={article.sentiment} />
+        </div>
       </div>
       {article.excerpt && (
         <p className="text-xs text-text-secondary line-clamp-2 mb-3">{article.excerpt}</p>
@@ -202,6 +255,9 @@ export default function NewsFeed() {
   const [search, setSearch] = useState('')
   const [compact, setCompact] = useState(false)
   const [topic, setTopic] = useState('semua')
+
+  // Load-more state
+  const [visibleCount, setVisibleCount] = useState(10)
 
   // Auto-refresh countdown
   const [nextRefresh, setNextRefresh] = useState(REFRESH_INTERVAL_MS)
@@ -246,6 +302,20 @@ export default function NewsFeed() {
       clearInterval(countdownTimer.current)
     }
   }, [loadNews])
+
+  // Reset visible count when filters change
+  useEffect(() => {
+    setVisibleCount(10)
+  }, [category, source, sentiment, search, topic])
+
+  // Per-source article counts (from full articles array)
+  const sourceCounts = useMemo(() => {
+    const counts = {}
+    articles.forEach(a => {
+      counts[a.source_id] = (counts[a.source_id] || 0) + 1
+    })
+    return counts
+  }, [articles])
 
   // Trending topics derived from all loaded articles
   const trendingTopics = useMemo(() => {
@@ -452,28 +522,34 @@ export default function NewsFeed() {
 
         {/* Source filter */}
         <div className="flex gap-2 flex-wrap">
-          {NEWS_SOURCES.map(s => (
-            <button
-              key={s.id}
-              onClick={() => setSource(s.id)}
-              className={`px-3 py-1 text-xs rounded-full border transition-all font-medium ${
-                source === s.id ? 'opacity-100' : 'opacity-50 hover:opacity-80'
-              }`}
-              style={
-                s.color
-                  ? {
-                      borderColor: s.color + '80',
-                      color: source === s.id ? s.color : undefined,
-                    }
-                  : {
-                      borderColor: 'var(--border)',
-                      color: 'var(--text-secondary)',
-                    }
-              }
-            >
-              {s.name}
-            </button>
-          ))}
+          {NEWS_SOURCES.map(s => {
+            const cnt = s.id === 'semua' ? articles.length : (sourceCounts[s.id] || 0)
+            return (
+              <button
+                key={s.id}
+                onClick={() => setSource(s.id)}
+                className={`px-3 py-1 text-xs rounded-full border transition-all font-medium ${
+                  source === s.id ? 'opacity-100' : 'opacity-50 hover:opacity-80'
+                }`}
+                style={
+                  s.color
+                    ? {
+                        borderColor: s.color + '80',
+                        color: source === s.id ? s.color : undefined,
+                      }
+                    : {
+                        borderColor: 'var(--border)',
+                        color: 'var(--text-secondary)',
+                      }
+                }
+              >
+                {s.name}
+                {cnt > 0 && (
+                  <span className="ml-1 opacity-70">({cnt})</span>
+                )}
+              </button>
+            )
+          })}
         </div>
       </div>
 
@@ -509,24 +585,40 @@ export default function NewsFeed() {
         <div className="text-center py-16 text-text-secondary">
           <p className="text-4xl mb-3">📰</p>
           <p className="text-lg font-medium">Tidak ada berita ditemukan</p>
-          <p className="text-sm mt-1">Coba ubah filter atau refresh feed</p>
+          <p className="text-sm mt-1">
+            {source !== 'semua'
+              ? `Tidak ada berita dari ${NEWS_SOURCES.find(s => s.id === source)?.name || source} saat ini. Coba sumber lain atau refresh.`
+              : 'Coba ubah filter atau refresh feed'}
+          </p>
         </div>
       ) : (
-        <div
-          className={
-            compact
-              ? 'space-y-1.5'
-              : 'grid grid-cols-1 md:grid-cols-2 gap-3'
-          }
-        >
-          {filtered.map(article => (
-            <ArticleCard
-              key={article.id}
-              article={article}
-              compact={compact}
-            />
-          ))}
-        </div>
+        <>
+          <div
+            className={
+              compact
+                ? 'space-y-1.5'
+                : 'grid grid-cols-1 md:grid-cols-2 gap-3'
+            }
+          >
+            {filtered.slice(0, visibleCount).map(article => (
+              <ArticleCard
+                key={article.id}
+                article={article}
+                compact={compact}
+              />
+            ))}
+          </div>
+          {filtered.length > visibleCount && (
+            <div className="mt-4 text-center">
+              <button
+                onClick={() => setVisibleCount(filtered.length)}
+                className="px-4 py-2 text-sm rounded-lg border border-border text-text-secondary hover:border-accent-red/50 hover:text-text-primary transition-all"
+              >
+                Lihat {filtered.length - visibleCount} artikel lainnya
+              </button>
+            </div>
+          )}
+        </>
       )}
     </div>
   )

@@ -108,6 +108,7 @@ export const PERSONS = [
     education:"S1 Kehutanan, Universitas Gadjah Mada (1985)",
     party_id:"pdip", party_role:"Anggota",
     positions:[
+      {title:"Anggota Wantimpres",       institution:"Wantimpres",       region:"Nasional",    start:"2024", end:null,   is_current:true},
       {title:"Presiden RI ke-7",        institution:"Istana Negara",    region:"Nasional",    start:"2014", end:"2024", is_current:false},
       {title:"Gubernur DKI Jakarta",    institution:"Pemprov DKI",      region:"DKI Jakarta", start:"2012", end:"2014", is_current:false},
       {title:"Walikota Surakarta",       institution:"Pemkot Surakarta", region:"Jawa Tengah", start:"2005", end:"2012", is_current:false},
@@ -343,6 +344,7 @@ export const PERSONS = [
     education:"Akademi Militer Magelang; Master Manajemen Webster University; PhD IPB",
     party_id:"dem", party_role:"Pembina",
     positions:[
+      {title:"Ketua Majelis Tinggi",     institution:"Partai Demokrat",  region:"Nasional",    start:"2014", end:null,   is_current:true},
       {title:"Presiden RI ke-6",        institution:"Istana Negara",    region:"Nasional",    start:"2004", end:"2014", is_current:false},
       {title:"Menkopolhukam",           institution:"Kemenko Polhukam", region:"Nasional",    start:"2000", end:"2004", is_current:false},
     ],

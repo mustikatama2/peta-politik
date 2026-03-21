@@ -71,6 +71,7 @@ const RSS_SOURCES = [
     id: 'jpnn',
     name: 'JPNN',
     urls: [
+      'https://www.jpnn.com/rss',
       'https://www.jpnn.com/rss/news',
       'https://www.jpnn.com/feed',
       'https://www.jpnn.com/feed/nasional',
@@ -104,7 +105,7 @@ const RSS_SOURCES = [
   {
     id: 'rmol',
     name: 'RMOL',
-    urls: ['https://rmol.id/rss/nasional', 'https://rmol.id/feed'],
+    urls: ['https://www.rmol.id/rss', 'https://rmol.id/rss/nasional', 'https://rmol.id/feed'],
     bias: 'kritis',
   },
   {
@@ -134,6 +135,26 @@ const RSS_SOURCES = [
       'https://www.inews.id/feed/nasional',
       'https://inews.id/rss/nasional',
       'https://www.inews.id/rss',
+    ],
+    bias: 'tengah',
+  },
+  {
+    id: 'tirto',
+    name: 'Tirto.id',
+    urls: [
+      'https://tirto.id/rss',
+      'https://tirto.id/feed',
+      'https://tirto.id/rss/politik',
+    ],
+    bias: 'kritis',
+  },
+  {
+    id: 'katadata',
+    name: 'Katadata',
+    urls: [
+      'https://katadata.co.id/rss',
+      'https://katadata.co.id/feed',
+      'https://katadata.co.id/rss/nasional',
     ],
     bias: 'tengah',
   },
@@ -209,6 +230,11 @@ const PERSON_NAME_INDEX = {
   'basuki': 'basuki',
   'hashim': 'hashim',
   'hashim djojohadikusumo': 'hashim',
+  'supratman': 'supratman',
+  'supratman andi agtas': 'supratman',
+  'menkumham': 'supratman',
+  'hanafi rais': 'hanafi_rais',
+  'ketua pan': 'hanafi_rais',
 
   // ── KAPOLRI / TNI / KPK / MA ──────────────────────────────────────
   'listyo sigit': 'listyo_sigit',
@@ -476,6 +502,25 @@ const TOPIC_KEYWORDS = {
   'tambang ilegal': 'lingkungan',
   'amdal': 'lingkungan',
   'perubahan iklim': 'lingkungan',
+  // ── TAMBAHAN KEYWORD POLITIK ─────────────────────────────────────
+  'omnibus law': 'legislatif',
+  'perppu': 'legislatif',
+  'amandemen': 'legislatif',
+  'pilkada serentak': 'pemilu',
+  'money politics': 'pemilu',
+  'serangan fajar': 'pemilu',
+  'bansos': 'sosial',
+  'dana desa': 'sosial',
+  'oligarki': 'politik',
+  'dinasti': 'politik',
+  'reshuffle kabinet': 'kabinet',
+  'paripurna': 'legislatif',
+  'interpelasi': 'legislatif',
+  'hak angket': 'legislatif',
+  'pemakzulan': 'hukum',
+  'pengadilan tipikor': 'korupsi',
+  'polda': 'keamanan',
+  'polres': 'keamanan',
 };
 
 // Minimum political keywords required to consider article relevant
