@@ -10,10 +10,12 @@ import { CONNECTIONS } from '../../data/connections'
 import { PROVINCES } from '../../data/regions'
 import { GDP_PROVINCES } from '../../data/gdp'
 import { BILLS } from '../../data/voting_records'
+import { PILPRES_2029_POLLS } from '../../data/polls'
+import { PROVINCE_SCORECARD, calculateScores } from '../../data/scorecard'
 import {
   scoreAllPersons, scoreAllParties, scoreAllProvincesFromData,
   pearsonR, spearmanR, linearRegression, interpretR, descStats, KIM_PLUS,
-  scoreIndividu, CORRUPTION_PENALTIES,
+  scoreIndividu, scoreOnePerson, CORRUPTION_PENALTIES,
 } from '../../lib/scoring'
 
 // ─── ISLAND COLORS ────────────────────────────────────────────────────────────
@@ -110,14 +112,17 @@ function ScatterTooltip({ active, payload }) {
 
 // ─── TABS ─────────────────────────────────────────────────────────────────────
 const TABS = [
-  { id: 'individu',   label: 'Skor Individu',      icon: '👤' },
-  { id: 'partai',     label: 'Skor Partai',        icon: '🎭' },
-  { id: 'provinsi',   label: 'Skor Provinsi',      icon: '🗺️' },
-  { id: 'lhkpn',     label: 'Ketimpangan LHKPN',  icon: '💰' },
-  { id: 'gdp',        label: 'Korelasi GDP',       icon: '📈' },
-  { id: 'metodologi', label: 'Metodologi',         icon: '📖' },
-  { id: 'afinitas',   label: 'Afinitas Partai',    icon: '🤝' },
-  { id: 'tren_skor',  label: 'Tren Skor',          icon: '🎚️' },
+  { id: 'individu',          label: 'Skor Individu',      icon: '👤' },
+  { id: 'partai',            label: 'Skor Partai',        icon: '🎭' },
+  { id: 'provinsi',          label: 'Skor Provinsi',      icon: '🗺️' },
+  { id: 'lhkpn',            label: 'Ketimpangan LHKPN',  icon: '💰' },
+  { id: 'gdp',               label: 'Korelasi GDP',       icon: '📈' },
+  { id: 'metodologi',        label: 'Metodologi',         icon: '📖' },
+  { id: 'afinitas',          label: 'Afinitas Partai',    icon: '🤝' },
+  { id: 'tren_skor',         label: 'Tren Skor',          icon: '🎚️' },
+  { id: 'prediksi_2029',     label: 'Prediksi 2029',      icon: '🔮' },
+  { id: 'korelasi_stat',     label: 'Korelasi',           icon: '📐' },
+  { id: 'perbandingan_cepat',label: 'Perbandingan Cepat', icon: '🏆' },
 ]
 
 // ═══════════════════════════════════════════════════════════════════════════════

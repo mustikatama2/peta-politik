@@ -49,6 +49,7 @@ const TentangPage      = lazy(() => import('./pages/tentang/TentangPage'))
 const FramingPage      = lazy(() => import('./pages/framing/FramingPage'))
 const GlosariumPage    = lazy(() => import('./pages/glosarium/GlosariumPage'))
 const ScorecardPage    = lazy(() => import('./pages/scorecard/ScorecardPage'))
+const QuickFactsPage   = lazy(() => import('./pages/quickfacts/QuickFactsPage'))
 
 // Loading fallback — branded spinner + skeleton
 function PageLoader() {
@@ -125,6 +126,7 @@ export default function App() {
         <Route path="/tentang" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><TentangPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/glosarium" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><GlosariumPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/arsip" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ArsipPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/quick-facts" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><QuickFactsPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

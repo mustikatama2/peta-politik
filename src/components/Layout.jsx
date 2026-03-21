@@ -43,6 +43,7 @@ const NAV = [
   { to:'/bisnis',   icon:'🏢', label:'Kepemilikan Bisnis' },
   { to:'/bumn',     icon:'🏢', label:'BUMN & Bisnis' },
   { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
+  { to:'/quick-facts', icon:'⚡', label:'Fakta Cepat' },
   { to:'/news',     icon:'📰', label:'Berita' },
   { to:'/agendas',  icon:'📋', label:'Agenda' },
   { to:'/ormas',    icon:'🏛️', label:'Ormas' },

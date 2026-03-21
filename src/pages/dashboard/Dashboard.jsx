@@ -14,6 +14,7 @@ import { NEWS } from '../../data/news'
 import { AGENDAS } from '../../data/agendas'
 import { KPK_CASES } from '../../data/kpk_cases'
 import { TIMELINE_EVENTS } from '../../data/timeline_events'
+import { QUICK_FACTS, CATEGORY_META } from '../../data/quick_facts'
 import PersonCard from '../../components/PersonCard'
 import NewsCard from '../../components/NewsCard'
 import { KPICard, Card } from '../../components/ui'
@@ -285,6 +286,159 @@ function LiveRecentNews() {
   )
 }
 
+// ── Fakta Hari Ini ────────────────────────────────────────────────────────
+function FaktaHariIni() {
+  // Seed by date string → deterministic daily rotation
+  const dateStr = new Date().toDateString()
+  let hash = 0
+  for (let i = 0; i < dateStr.length; i++) {
+    hash = (hash * 31 + dateStr.charCodeAt(i)) >>> 0
+  }
+  const highImportance = QUICK_FACTS.filter(f => f.importance === 'high')
+  const fact = highImportance[hash % highImportance.length] || QUICK_FACTS[0]
+  const meta = CATEGORY_META[fact.category] || { color: '#6B7280', bg: '#F3F4F6', icon: '📌' }
+
+  return (
+    <Card className="p-5">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-semibold text-text-primary flex items-center gap-2">
+          ⚡ Fakta Hari Ini
+        </h2>
+        <Link to="/quick-facts" className="text-xs text-accent-blue hover:underline whitespace-nowrap">
+          Lihat semua fakta →
+        </Link>
+      </div>
+      <div className="p-4 rounded-xl border border-border bg-bg-elevated">
+        <span
+          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold mb-2"
+          style={{ background: meta.bg, color: meta.color }}
+        >
+          {meta.icon} {fact.category}
+        </span>
+        <p className="text-sm text-text-primary leading-relaxed">{fact.fact}</p>
+        <p className="text-[11px] text-text-muted mt-2">📌 {fact.source}</p>
+      </div>
+    </Card>
+  )
+}
+
+// ── Tokoh Terpanas Minggu Ini ─────────────────────────────────────────────
+function TokohTerpanas() {
+  // Count agendas per person subject
+  const counts = {}
+  AGENDAS.forEach(a => {
+    if (a.subject_type === 'person' && a.subject_id) {
+      counts[a.subject_id] = (counts[a.subject_id] || 0) + 1
+    }
+  })
+
+  const top3 = Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([id, count]) => ({ person: PERSONS.find(p => p.id === id), count, id }))
+    .filter(x => x.person)
+
+  if (!top3.length) return null
+
+  return (
+    <Card className="p-5">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-semibold text-text-primary flex items-center gap-2">
+          🔥 Tokoh Terpanas Minggu Ini
+          <span className="text-xs font-normal text-text-secondary">berdasarkan agenda aktif</span>
+        </h2>
+        <Link to="/persons" className="text-xs text-accent-blue hover:underline">Semua tokoh →</Link>
+      </div>
+      <div className="space-y-3">
+        {top3.map(({ person, count, id }, rank) => {
+          const party = PARTY_MAP[person.party_id]
+          return (
+            <Link
+              key={id}
+              to={`/persons/${id}`}
+              className="flex items-center gap-3 p-3 rounded-xl border border-border bg-bg-elevated hover:border-accent-red/50 transition-all group"
+            >
+              {/* Rank */}
+              <span className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-text-muted flex-shrink-0">
+                {rank + 1}
+              </span>
+              {/* Avatar */}
+              <div
+                className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0 overflow-hidden"
+                style={{ background: party?.color || '#374151' }}
+              >
+                {person.photo_url ? (
+                  <img
+                    src={person.photo_url}
+                    alt={person.name}
+                    className="w-10 h-10 rounded-full object-cover"
+                    onError={e => { e.target.style.display = 'none' }}
+                  />
+                ) : (
+                  person.photo_placeholder || person.name[0]
+                )}
+              </div>
+              {/* Info */}
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-text-primary group-hover:text-accent-red truncate">
+                  {person.name}
+                </p>
+                <div className="flex items-center gap-1.5 mt-0.5">
+                  {party && (
+                    <span
+                      className="text-[10px] font-bold px-1.5 py-0.5 rounded"
+                      style={{ background: (party.color || '#374151') + '20', color: party.color || '#9CA3AF' }}
+                    >
+                      {party.abbr}
+                    </span>
+                  )}
+                  <span className="text-[10px] text-text-muted">{person.positions?.[0]?.title || ''}</span>
+                </div>
+              </div>
+              {/* Agenda count */}
+              <div className="text-right flex-shrink-0">
+                <span className="text-lg font-bold text-accent-red">{count}</span>
+                <p className="text-[10px] text-text-muted">agenda</p>
+              </div>
+            </Link>
+          )
+        })}
+      </div>
+    </Card>
+  )
+}
+
+// ── Angka Kunci Strip ─────────────────────────────────────────────────────
+function AngkaKunci() {
+  const stats = [
+    { label: 'Total Tokoh',        value: PERSONS.length,    icon: '👥', color: '#3B82F6' },
+    { label: 'Total Koneksi',      value: CONNECTIONS.length, icon: '🕸️', color: '#10B981' },
+    { label: 'Kasus KPK',          value: KPK_CASES_COUNT,   icon: '⚖️', color: '#EF4444' },
+    { label: 'Anggaran Dipotong',  value: 'Rp 306T',         icon: '✂️', color: '#F59E0B' },
+    { label: 'Pilkada Daerah',     value: '545',             icon: '🗳️', color: '#8B5CF6' },
+    { label: 'Partai DPR',         value: '8',               icon: '🏛️', color: '#EC4899' },
+  ]
+
+  return (
+    <div className="overflow-x-auto mb-2">
+      <div className="flex gap-3 pb-1 min-w-max">
+        {stats.map((s, i) => (
+          <div
+            key={i}
+            className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-bg-card whitespace-nowrap"
+          >
+            <span className="text-lg">{s.icon}</span>
+            <div>
+              <p className="text-base font-bold" style={{ color: s.color }}>{s.value}</p>
+              <p className="text-[10px] text-text-muted">{s.label}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Dashboard() {
   const { user } = useAuth()
   const today = new Date().toLocaleDateString('id-ID', {
@@ -385,6 +539,15 @@ export default function Dashboard() {
           </p>
           <p className="text-xs text-text-secondary mt-1">Tersangka/Terpidana</p>
         </div>
+      </div>
+
+      {/* ── Angka Kunci Strip ── */}
+      <AngkaKunci />
+
+      {/* ── Fakta Hari Ini + Tokoh Terpanas ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <FaktaHariIni />
+        <TokohTerpanas />
       </div>
 
       {/* ── Trending Politicians ── */}
