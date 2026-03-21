@@ -6,6 +6,7 @@ import { PARTIES } from '../../data/parties'
 import NetworkGraph from '../../components/NetworkGraph'
 import PersonCard from '../../components/PersonCard'
 import { Btn, Badge } from '../../components/ui'
+import MetaTags from '../../components/MetaTags'
 
 // Only nodes that have at least one connection
 const connectedIds = new Set([
@@ -119,7 +120,7 @@ export default function NetworkPage() {
 
   return (
     <div className="flex h-[calc(100vh-8rem)] gap-0 -m-4 md:-m-6 overflow-hidden">
-
+      <MetaTags title="Jaringan Politik" description="Visualisasi jaringan hubungan antar tokoh politik Indonesia — koneksi, koalisi, dan pengaruh" />
       {/* ── Left Filter Panel ─────────────────────────────────────────── */}
       <div className="w-56 flex-shrink-0 bg-bg-sidebar border-r border-border overflow-y-auto p-4 space-y-5">
 

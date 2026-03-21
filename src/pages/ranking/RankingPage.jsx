@@ -8,6 +8,7 @@ import { PERSONS } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
 import { exportToCSV } from '../../lib/exportUtils'
 import ShareButton from '../../components/ShareButton'
+import MetaTags from '../../components/MetaTags'
 
 // ─── Static trending data ──────────────────────────────────────────────────────
 const RISING = [
@@ -436,6 +437,7 @@ export default function RankingPage() {
 
   return (
     <div className="space-y-6 pb-12">
+      <MetaTags title="Power Rankings" description="Top 50 politisi paling berpengaruh Indonesia berdasarkan skor kekuasaan multi-dimensi" />
       {/* ── Section 1: Header ── */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div>

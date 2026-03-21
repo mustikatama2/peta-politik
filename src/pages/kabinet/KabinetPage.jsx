@@ -5,6 +5,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
 } from 'recharts'
 import { PageHeader, Card, Badge, KPICard, Avatar } from '../../components/ui'
+import MetaTags from '../../components/MetaTags'
 import { KABINET_MERAH_PUTIH, KABINET_CATEGORIES } from '../../data/cabinet'
 import { PERSONS, PERSONS_MAP } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
@@ -212,6 +213,7 @@ export default function KabinetPage() {
 
   return (
     <div className="space-y-6">
+      <MetaTags title="Kabinet Merah Putih" description="Kabinet Prabowo–Gibran: daftar lengkap menteri, komposisi partai, dan profil anggota kabinet Indonesia 2024–2029" />
       {/* ── Hero Header ───────────────────────────────────────────────────────── */}
       <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-red-900/80 via-bg-card to-bg-card border border-border p-6 md:p-8">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(185,28,28,0.15)_0%,_transparent_60%)]" />

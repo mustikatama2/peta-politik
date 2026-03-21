@@ -18,6 +18,7 @@ import CareerTimeline from '../../components/CareerTimeline'
 import { Avatar, Badge, Tabs, Card, formatIDR, Tag, RiskDot, Btn, Breadcrumb } from '../../components/ui'
 import { printElement, exportToJSON } from '../../lib/exportUtils'
 import ShareButton from '../../components/ShareButton'
+import MetaTags from '../../components/MetaTags'
 
 function getRelatedPersons(person, allPersons, connections) {
   const scores = {}
@@ -302,6 +303,7 @@ export default function PersonDetail() {
 
   return (
     <div className="space-y-5">
+      <MetaTags title={person.name} description={person.bio} />
       <Breadcrumb items={[
         { label: 'Beranda', to: '/' },
         { label: 'Tokoh', to: '/persons' },
