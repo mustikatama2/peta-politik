@@ -9,6 +9,7 @@ import GlobalSearch from './GlobalSearch'
 const NAV = [
   { to:'/',         icon:'🏠', label:'Dashboard' },
   { to:'/persons',  icon:'👥', label:'Tokoh' },
+  { to:'/compare',  icon:'⚖️', label:'Bandingkan' },
   { to:'/parties',  icon:'🎭', label:'Partai' },
   { to:'/network',  icon:'🕸️', label:'Jaringan' },
   { to:'/regions',  icon:'🗺️', label:'Wilayah' },

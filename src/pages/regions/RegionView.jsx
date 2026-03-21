@@ -1,10 +1,15 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, LineChart, Line, XAxis, YAxis } from 'recharts'
 import * as RegionsData from '../../data/regions'
 import { PERSONS } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
-import { SearchBar, Card, Badge, PageHeader } from '../../components/ui'
+import { GDP_PROVINCES } from '../../data/gdp'
+import { NEWS } from '../../data/news'
+import { PILKADA_2024 } from '../../data/elections'
+import { SearchBar, Card, Badge, PageHeader, Avatar } from '../../components/ui'
+
+const KIM_PLUS = ['ger', 'gol', 'nas', 'pan', 'dem', 'pks', 'pbb', 'pkb']
 
 // Safe fallbacks for data that may not exist yet
 const JATIM_REGIONS = RegionsData.JATIM_REGIONS || []
@@ -72,6 +77,305 @@ const pieData = Object.entries(partyDist).map(([pid, count]) => ({
   value: count,
   color: PARTY_MAP[pid]?.color || '#6B7280',
 })).sort((a, b) => b.value - a.value)
+
+const RISK_CONFIG = {
+  rendah:    { label: '✓ Bersih',     cls: 'risk-rendah' },
+  sedang:    { label: '⚠ Sedang',     cls: 'risk-sedang' },
+  tinggi:    { label: '⚠ Tinggi',     cls: 'risk-tinggi' },
+  tersangka: { label: '🔴 Tersangka', cls: 'risk-tersangka' },
+  terpidana: { label: '⛔ Terpidana', cls: 'risk-terpidana' },
+}
+
+const SECTOR_ICONS = {
+  'pertanian': '🌾', 'pertanian-perikanan': '🎣', 'pertanian-perdagangan': '🌾',
+  'pertanian-perkebunan': '🌿', 'migas': '⛽', 'migas-sawit': '⛽', 'migas-batubara-ikn': '⛽',
+  'migas-perikanan': '⛽', 'sawit-batubara': '🌿', 'sawit-bauksit': '🌿',
+  'sawit-kakao': '🌿', 'batubara-sawit': '⚫', 'nikel-pertambangan': '⚙️',
+  'nikel-pertanian': '⚙️', 'pertambangan': '⛏️', 'pertambangan-timah': '⛏️',
+  'pertambangan-tembaga': '⛏️', 'emas-tembaga': '🥇', 'manufaktur': '🏭',
+  'manufaktur-tekstil': '🏭', 'manufaktur-perdagangan': '🏭', 'manufaktur-industri': '🏭',
+  'manufaktur-pertanian': '🏭', 'jasa-keuangan': '🏦', 'industri-perdagangan': '🏭',
+  'pariwisata': '🏖️', 'pariwisata-perikanan': '🏖️', 'pendidikan-pariwisata': '🎓',
+  'perikanan-gas': '🐟', 'perikanan-pariwisata': '🐟', 'pertanian-subsisten': '🌱',
+}
+
+function ProvinceDetail({ prov, islandColor }) {
+  // GDP data — province IDs in PROVINCES use underscore, matching GDP_PROVINCES keys
+  const gdp = GDP_PROVINCES[prov.id] || {}
+  const govPerson = prov.governor_id ? PERSONS.find(p => p.id === prov.governor_id) : null
+  const govParty = PARTY_MAP[prov.party_id]
+  const govRisk = govPerson?.analysis?.corruption_risk || 'rendah'
+
+  // Pilkada 2024 result — match by province name
+  const pilkada = PILKADA_2024.find(p => p.region === prov.name)
+
+  // Recent news — filtered by governor's person_id
+  const regionNews = prov.governor_id
+    ? NEWS
+        .filter(n => n.person_ids?.includes(prov.governor_id))
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 3)
+    : []
+
+  // GDP sparkline data
+  const sparkData = [
+    { year: '2021', growth: gdp.growth_2021 ?? null },
+    { year: '2022', growth: gdp.growth_2022 ?? null },
+    { year: '2023', growth: gdp.growth_2023 ?? null },
+  ].filter(d => d.growth !== null)
+
+  const isKimPlus = KIM_PLUS.includes(prov.party_id)
+  const sectorIcon = SECTOR_ICONS[gdp.sector] || '📊'
+
+  return (
+    <div className="space-y-5">
+      {/* Section A: Quick Stats */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {prov.pop && (
+          <div className="bg-bg-card border border-border rounded-xl p-4 text-center">
+            <p className="text-xl font-bold text-text-primary">{formatPop(prov.pop || prov.population)}</p>
+            <p className="text-xs text-text-secondary mt-1">👥 Populasi</p>
+          </div>
+        )}
+        {prov.dpr_seats && (
+          <div className="bg-bg-card border border-border rounded-xl p-4 text-center">
+            <p className="text-xl font-bold text-text-primary">{prov.dpr_seats}</p>
+            <p className="text-xs text-text-secondary mt-1">🏛️ Kursi DPR</p>
+          </div>
+        )}
+        {gdp.pdrb_per_kapita_2023 && (
+          <div className="bg-bg-card border border-border rounded-xl p-4 text-center">
+            <p className="text-xl font-bold text-text-primary">Rp {gdp.pdrb_per_kapita_2023}jt</p>
+            <p className="text-xs text-text-secondary mt-1">💵 PDRB/Kapita</p>
+          </div>
+        )}
+        {gdp.growth_2023 && (
+          <div className="bg-bg-card border border-border rounded-xl p-4 text-center">
+            <p className="text-xl font-bold" style={{ color: gdp.growth_2023 > 5 ? '#22c55e' : gdp.growth_2023 > 3 ? '#f59e0b' : '#ef4444' }}>
+              {gdp.growth_2023 > 0 ? '↑' : '↓'} {Math.abs(gdp.growth_2023)}%
+            </p>
+            <p className="text-xs text-text-secondary mt-1">📈 PDRB Growth 2023</p>
+          </div>
+        )}
+      </div>
+
+      {/* Section B: Economic Profile */}
+      {Object.keys(gdp).length > 0 && (
+        <Card className="p-5">
+          <h3 className="text-sm font-semibold text-text-primary mb-4">📊 Profil Ekonomi</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="space-y-3">
+              {gdp.sector && (
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">{sectorIcon}</span>
+                  <div>
+                    <p className="text-xs text-text-secondary">Sektor Dominan</p>
+                    <p className="text-sm font-semibold text-text-primary capitalize">{gdp.sector.replace(/-/g, ' ')}</p>
+                  </div>
+                </div>
+              )}
+              {gdp.pdrb_per_kapita_2023 && (
+                <div>
+                  <p className="text-xs text-text-secondary">PDRB Per Kapita 2023</p>
+                  <p className="text-lg font-bold text-accent-gold">Rp {gdp.pdrb_per_kapita_2023} juta</p>
+                </div>
+              )}
+              {gdp.growth_2023 && (
+                <div>
+                  <p className="text-xs text-text-secondary">Pertumbuhan PDRB 2023</p>
+                  <p className="text-lg font-bold" style={{ color: gdp.growth_2023 > 5 ? '#22c55e' : '#f59e0b' }}>
+                    {gdp.growth_2023 > 0 ? '+' : ''}{gdp.growth_2023}%
+                  </p>
+                </div>
+              )}
+              {gdp.notes && (
+                <p className="text-xs text-text-secondary leading-relaxed bg-bg-elevated rounded-lg p-3">
+                  💡 {gdp.notes}
+                </p>
+              )}
+            </div>
+            {/* GDP Sparkline */}
+            {sparkData.length > 1 && (
+              <div>
+                <p className="text-xs text-text-secondary mb-2">Tren Pertumbuhan PDRB</p>
+                <ResponsiveContainer width="100%" height={100}>
+                  <LineChart data={sparkData}>
+                    <XAxis dataKey="year" tick={{ fill: 'var(--text-secondary)', fontSize: 10 }} />
+                    <YAxis
+                      tick={{ fill: 'var(--text-secondary)', fontSize: 10 }}
+                      domain={['auto', 'auto']}
+                      width={30}
+                    />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: '#1E2235', border: '1px solid #2D3748', borderRadius: 8, fontSize: 11 }}
+                      formatter={(v) => [`${v}%`, 'Growth']}
+                    />
+                    <Line
+                      dataKey="growth"
+                      stroke={islandColor}
+                      strokeWidth={2}
+                      dot={{ fill: islandColor, r: 4 }}
+                      type="monotone"
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+            )}
+          </div>
+        </Card>
+      )}
+
+      {/* Section C: Political Profile */}
+      <Card className="p-5">
+        <h3 className="text-sm font-semibold text-text-primary mb-4">🏛️ Profil Politik</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* Governor risk */}
+          <div className="bg-bg-elevated rounded-lg p-3 text-center">
+            <p className="text-xs text-text-secondary mb-2">Risiko Korupsi Gubernur</p>
+            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${RISK_CONFIG[govRisk]?.cls}`}>
+              {RISK_CONFIG[govRisk]?.label}
+            </span>
+          </div>
+          {/* Coalition */}
+          <div className="bg-bg-elevated rounded-lg p-3 text-center">
+            <p className="text-xs text-text-secondary mb-2">Koalisi</p>
+            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium ${
+              isKimPlus
+                ? 'bg-green-500/10 text-green-400 border border-green-500/20'
+                : 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
+            }`}>
+              {isKimPlus ? '✅ KIM Plus' : '⚠️ Oposisi/Independen'}
+            </span>
+          </div>
+          {/* Party */}
+          {govParty && (
+            <div className="bg-bg-elevated rounded-lg p-3 text-center">
+              <p className="text-xs text-text-secondary mb-2">Partai Gubernur</p>
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium"
+                style={{ backgroundColor: govParty.color + '22', color: govParty.color, border: `1px solid ${govParty.color}44` }}>
+                {govParty.logo_emoji} {govParty.abbr}
+              </span>
+            </div>
+          )}
+          {/* DPR seats */}
+          {prov.dpr_seats && (
+            <div className="bg-bg-elevated rounded-lg p-3 text-center">
+              <p className="text-xs text-text-secondary mb-2">Kursi DPR</p>
+              <p className="text-xl font-bold text-text-primary">{prov.dpr_seats}</p>
+            </div>
+          )}
+        </div>
+
+        {/* Pilkada 2024 result */}
+        {pilkada && (
+          <div className="mt-4 border border-border rounded-xl p-4">
+            <p className="text-xs font-semibold text-text-secondary mb-3">📊 Hasil Pilkada 2024</p>
+            <div className="space-y-2">
+              <div>
+                <div className="flex justify-between text-xs mb-1">
+                  <span className="font-medium text-text-primary">🥇 {pilkada.winner.name}</span>
+                  <span className="text-green-400 font-bold">{pilkada.winner.pct}%</span>
+                </div>
+                <div className="h-2 rounded-full bg-bg-elevated overflow-hidden">
+                  <div className="h-full rounded-full bg-green-500" style={{ width: `${pilkada.winner.pct}%` }} />
+                </div>
+                <p className="text-[10px] text-text-muted mt-0.5">{pilkada.winner.party}</p>
+              </div>
+              {pilkada.runner_up && (
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-text-secondary">{pilkada.runner_up.name}</span>
+                    <span className="text-text-secondary">{pilkada.runner_up.pct}%</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-bg-elevated overflow-hidden">
+                    <div className="h-full rounded-full bg-gray-500" style={{ width: `${pilkada.runner_up.pct}%` }} />
+                  </div>
+                  <p className="text-[10px] text-text-muted mt-0.5">{pilkada.runner_up.party}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </Card>
+
+      {/* Governor enhanced card */}
+      {govPerson && (
+        <Card className="p-5">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">👤 Gubernur — Profil Lengkap</h3>
+          <div className="flex items-start gap-4">
+            <Link to={`/persons/${govPerson.id}`}>
+              <Avatar
+                name={govPerson.name}
+                photoUrl={govPerson.photo_url}
+                color={govParty?.color}
+                size="lg"
+                className="ring-2 ring-bg-card flex-shrink-0 hover:ring-accent-blue transition-all"
+              />
+            </Link>
+            <div className="flex-1 min-w-0">
+              <Link to={`/persons/${govPerson.id}`}>
+                <h4 className="text-base font-bold text-accent-blue hover:underline">{govPerson.name}</h4>
+              </Link>
+              <p className="text-xs text-text-secondary mt-0.5">
+                Gubernur {prov.name}
+                {prov.wakil_gubernur && ` · Wakil: ${prov.wakil_gubernur}`}
+              </p>
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                {govParty && (
+                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium"
+                    style={{ backgroundColor: govParty.color + '22', color: govParty.color }}>
+                    {govParty.logo_emoji} {govParty.abbr}
+                  </span>
+                )}
+                <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${RISK_CONFIG[govRisk]?.cls}`}>
+                  {RISK_CONFIG[govRisk]?.label}
+                </span>
+              </div>
+              {govPerson.bio && (
+                <p className="text-xs text-text-secondary mt-2 leading-relaxed line-clamp-3">{govPerson.bio}</p>
+              )}
+            </div>
+          </div>
+        </Card>
+      )}
+
+      {/* Section D: Recent News */}
+      {regionNews.length > 0 && (
+        <Card className="p-5">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">📰 Berita Terkini</h3>
+          <div className="space-y-3">
+            {regionNews.map(n => (
+              <div key={n.id} className="border-b border-border/50 pb-3 last:border-0 last:pb-0">
+                <div className="flex items-start gap-2">
+                  <span className={`mt-0.5 flex-shrink-0 w-1.5 h-1.5 rounded-full ${
+                    n.sentiment === 'positif' ? 'bg-green-400' : n.sentiment === 'negatif' ? 'bg-red-400' : 'bg-gray-400'
+                  }`} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-text-primary leading-snug">{n.headline}</p>
+                    <p className="text-xs text-text-secondary mt-1 line-clamp-2">{n.summary}</p>
+                    <div className="flex items-center gap-2 mt-1 text-[10px] text-text-muted">
+                      <span>{n.source}</span>
+                      <span>·</span>
+                      <span>{n.date}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
+
+      {/* No data fallback */}
+      {Object.keys(gdp).length === 0 && !pilkada && regionNews.length === 0 && (
+        <Card className="p-6 text-center text-text-secondary">
+          <div className="text-4xl mb-3">📋</div>
+          <p className="text-sm">Data ekonomi dan politik sedang dilengkapi untuk {prov.name}.</p>
+        </Card>
+      )}
+    </div>
+  )
+}
 
 export default function RegionView() {
   const [search, setSearch] = useState('')
@@ -265,33 +569,7 @@ export default function RegionView() {
             </div>
           </div>
         ) : (
-          <Card className="p-10 text-center">
-            <div className="text-5xl mb-4">🏗️</div>
-            <h3 className="text-base font-semibold text-text-primary mb-2">Data Segera Hadir</h3>
-            <p className="text-sm text-text-secondary">
-              Data kabupaten/kota {prov.name} sedang disiapkan.
-            </p>
-            {prov.population && (
-              <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3 max-w-md mx-auto">
-                <div className="bg-bg-elevated rounded-lg p-3">
-                  <p className="text-lg font-bold text-text-primary">{formatPop(prov.population)}</p>
-                  <p className="text-xs text-text-secondary">Populasi</p>
-                </div>
-                {prov.dpr_seats && (
-                  <div className="bg-bg-elevated rounded-lg p-3">
-                    <p className="text-lg font-bold text-text-primary">{prov.dpr_seats}</p>
-                    <p className="text-xs text-text-secondary">Kursi DPR</p>
-                  </div>
-                )}
-                {prov.island && (
-                  <div className="bg-bg-elevated rounded-lg p-3">
-                    <p className="text-lg font-bold" style={{ color: islandColor }}>{prov.island}</p>
-                    <p className="text-xs text-text-secondary">Kepulauan</p>
-                  </div>
-                )}
-              </div>
-            )}
-          </Card>
+          <ProvinceDetail prov={prov} islandColor={islandColor} govParty={govParty} />
         )}
       </div>
     )

@@ -47,7 +47,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"jokowi", name:"Joko Widodo", photo_url:null, photo_placeholder:"JW",
+    id:"jokowi", name:"Joko Widodo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Joko_Widodo_2019_official_portrait.jpg?width=400", photo_placeholder:"JW",
     born:"21 Jun 1961", born_place:"Surakarta", religion:"Islam",
     education:"S1 Kehutanan, Universitas Gadjah Mada (1985)",
     party_id:"pdip", party_role:"Anggota",
@@ -317,7 +317,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sufmi_dasco", name:"Sufmi Dasco Ahmad", photo_url:null, photo_placeholder:"SD",
+    id:"sufmi_dasco", name:"Sufmi Dasco Ahmad", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Sufmi_Dasco_Ahmad%2C_Wakil_Ketua_DPR-RI_%282024%E2%80%932029%29.jpg/400px-Sufmi_Dasco_Ahmad%2C_Wakil_Ketua_DPR-RI_%282024%E2%80%932029%29.jpg", photo_placeholder:"SD",
     born:"1972", born_place:"Sumatera Selatan", religion:"Islam",
     education:"S1 Hukum, Universitas Indonesia",
     party_id:"ger", party_role:"Sekretaris Jenderal",
@@ -386,7 +386,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ahmad_syaikhu", name:"Ahmad Syaikhu", photo_url:null, photo_placeholder:"AS",
+    id:"ahmad_syaikhu", name:"Ahmad Syaikhu", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KPU_Ahmad_Syaikhu.jpg?width=400", photo_placeholder:"AS",
     born:"1965", born_place:"Bekasi", religion:"Islam",
     education:"S1 Teknik Sipil, ITB",
     party_id:"pks", party_role:"Presiden Partai",
@@ -1425,7 +1425,7 @@ export const PERSONS = [
   },
   // ─── ORMAS & RELIGIOUS LEADERS ──────────────────────────────────────────
   {
-    id:"gus_yahya", name:"Yahya Cholil Staquf", photo_url:null, photo_placeholder:"YC",
+    id:"gus_yahya", name:"Yahya Cholil Staquf", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wantimpres_Gus-Yahya.jpg?width=400", photo_placeholder:"YC",
     born:"1966", born_place:"Rembang", religion:"Islam",
     education:"Pesantren Raudlatut Thalabah; S1 Filsafat UGM",
     party_id:null, party_role:null,
@@ -1447,7 +1447,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"haedar_nashir", name:"Haedar Nashir", photo_url:null, photo_placeholder:"HN",
+    id:"haedar_nashir", name:"Haedar Nashir", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Haedar_Nashir.jpg?width=400", photo_placeholder:"HN",
     born:"1965", born_place:"Bandung", religion:"Islam",
     education:"S1 Sosiologi UGM; PhD Sosiologi UGM",
     party_id:null, party_role:null,
@@ -1753,7 +1753,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"andra_soni", name:"Andra Soni", photo_url:null, photo_placeholder:"AS",
+    id:"andra_soni", name:"Andra Soni", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Andra_soni_gubernur_banten_(2).jpg?width=400", photo_placeholder:"AS",
     born:"1975", born_place:"Banten", religion:"Islam",
     education:"S1 Ilmu Politik",
     party_id:"ger", party_role:"Kader",
@@ -1775,7 +1775,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"koster", name:"I Wayan Koster", photo_url:null, photo_placeholder:"IK",
+    id:"koster", name:"I Wayan Koster", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wayan-Koster_Gubernur-Bali-768x961.png?width=400", photo_placeholder:"IK",
     born:"8 Sep 1971", born_place:"Buleleng, Bali", religion:"Hindu",
     education:"S1 Matematika ITB; S3 Universitas Pendidikan Ganesha",
     party_id:"pdip", party_role:"Anggota DPR",
@@ -1798,7 +1798,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"muzakir_manaf", name:"Muzakir Manaf", photo_url:null, photo_placeholder:"MM",
+    id:"muzakir_manaf", name:"Muzakir Manaf", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Aceh_Muzakir_Manaf_Mualem_(cropped).png?width=400", photo_placeholder:"MM",
     born:"1966", born_place:"Aceh", religion:"Islam",
     education:"SMA; Militer GAM",
     party_id:"ger", party_role:"Kader",
@@ -1821,7 +1821,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"rudy_masud", name:"Rudy Mas'ud", photo_url:null, photo_placeholder:"RM",
+    id:"rudy_masud", name:"Rudy Mas'ud", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Rudy_Mas'ud,_Governor_of_East_Kalimantan.jpg?width=400", photo_placeholder:"RM",
     born:"1972", born_place:"Samarinda, Kalimantan Timur", religion:"Islam",
     education:"S1 Hukum",
     party_id:"ger", party_role:"Ketua DPD Gerindra Kaltim",
@@ -2424,7 +2424,7 @@ export const PERSONS = [
 
   // ─── DPR COMMISSION CHAIRS (2024–2029) ──────────────────────────────────
   {
-    id:"meutya_hafid", name:"Meutya Viada Hafid", photo_url:null, photo_placeholder:"MH",
+    id:"meutya_hafid", name:"Meutya Viada Hafid", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menteri_Komunikasi_dan_Digital_Indonesia_Meutya_Viada_Hafid.jpg?width=400", photo_placeholder:"MH",
     born:"1978", born_place:"Bandung", religion:"Islam",
     education:"S1 Komunikasi, Universitas Indonesia",
     party_id:"gol", party_role:"Ketua Komisi I DPR / Menkomdigi",
@@ -2469,7 +2469,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"habiburokhman", name:"Habiburokhman", photo_url:null, photo_placeholder:"HB",
+    id:"habiburokhman", name:"Habiburokhman", photo_url:"https://upload.wikimedia.org/wikipedia/id/thumb/1/11/Habiburokhman_Ketua_Komisi_III_DPR_RI.jpeg/400px-Habiburokhman_Ketua_Komisi_III_DPR_RI.jpeg", photo_placeholder:"HB",
     born:"1979", born_place:"Aceh", religion:"Islam",
     education:"S1 Hukum, Universitas Syiah Kuala; S2 Hukum",
     party_id:"ger", party_role:"Ketua Komisi III DPR",
@@ -2492,7 +2492,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"titiek_soeharto", name:"Siti Hediati Hariyadi (Titiek Soeharto)", photo_url:null, photo_placeholder:"TS",
+    id:"titiek_soeharto", name:"Siti Hediati Hariyadi (Titiek Soeharto)", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KPU_Siti_Hediati_Hariyadi.jpg?width=400", photo_placeholder:"TS",
     born:"1959", born_place:"Jakarta", religion:"Islam",
     education:"S1 Peternakan, Institut Pertanian Bogor",
     party_id:"ger", party_role:"Ketua Komisi IV DPR",

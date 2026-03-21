@@ -146,6 +146,11 @@ export default function PersonDetail() {
               <Badge variant="role">{person.tier}</Badge>
               {person.tags?.map(t => <Tag key={t}>#{t}</Tag>)}
             </div>
+            <div className="mt-4">
+              <Btn onClick={() => navigate(`/compare/${person.id}`)} variant="secondary" size="sm">
+                ⚖️ Bandingkan
+              </Btn>
+            </div>
           </div>
 
           {/* LHKPN quick stat */}
