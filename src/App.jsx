@@ -32,6 +32,7 @@ const BusinessPage   = lazy(() => import('./pages/business/BusinessPage'))
 const KabinetPage    = lazy(() => import('./pages/kabinet/KabinetPage'))
 const BudgetPage     = lazy(() => import('./pages/budget/BudgetPage'))
 const SurveyPage     = lazy(() => import('./pages/surveys/SurveyPage'))
+const RankingPage    = lazy(() => import('./pages/ranking/RankingPage'))
 
 // Loading fallback — skeleton style
 function PageLoader() {
@@ -57,6 +58,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute><ErrorBoundary><Dashboard /></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/ranking" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RankingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/persons" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PersonList /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/persons/:id" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PersonDetail /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/parties" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PartyList /></Suspense></ErrorBoundary></ProtectedRoute>} />
