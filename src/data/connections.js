@@ -278,6 +278,17 @@ export const CONNECTIONS = [
   { from:"prabowo",         to:"ahmad_syaikhu", type:"mantan-koalisi", label:"PKS gabung KIM Plus setelah Pilpres 2024",strength:5 },
   { from:"airlangga",       to:"bahlil",        type:"konflik", label:"Pergantian Ketum Golkar — Bahlil gantikan Airlangga 2024", strength:5 },
   { from:"cakimin",         to:"anies",         type:"konflik", label:"Paslon 2024 gagal; PKB kemudian gabung KIM Plus", strength:4 },
+
+  // ── DPR Commission Chairs ─────────────────────────────────────────────────
+  { from:"meutya_hafid",    to:"airlangga",     type:"koalisi", label:"Golkar — Meutya Ketua Komisi I, kini Menkomdigi",   strength:8 },
+  { from:"utut_adianto",    to:"megawati",      type:"koalisi", label:"PDIP — Utut Ketua Komisi II DPR, kader PDIP",       strength:7 },
+  { from:"habiburokhman",   to:"prabowo",       type:"koalisi", label:"Gerindra — Habiburokhman Ketua Komisi III, loyalis", strength:9 },
+  { from:"titiek_soeharto", to:"prabowo",       type:"keluarga",label:"Mantan istri Prabowo; keduanya di Gerindra",         strength:6 },
+  { from:"titiek_soeharto", to:"prabowo",       type:"koalisi", label:"Gerindra — Titiek Ketua Komisi IV DPR",              strength:7 },
+  { from:"sartono_hutomo",  to:"prabowo",       type:"koalisi", label:"Gerindra — Sartono Ketua Komisi VI DPR",             strength:7 },
+  { from:"marwan_dasopang", to:"cakimin",       type:"koalisi", label:"PKB — Marwan Ketua Komisi VIII DPR",                 strength:7 },
+  { from:"misbakhun",       to:"airlangga",     type:"koalisi", label:"Golkar — Misbakhun Ketua Komisi XI DPR",             strength:7 },
+  { from:"hary_tanoe",      to:"prabowo",       type:"koalisi", label:"Perindo dukung KIM Plus; MNC Group pro-pemerintah",  strength:6 },
 ]
 
 export const CONNECTION_TYPES = {

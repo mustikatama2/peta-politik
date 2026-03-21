@@ -2421,6 +2421,187 @@ export const PERSONS = [
       policy_direction:"Pro-infrastruktur, teknokrat"
     }
   },
+
+  // ─── DPR COMMISSION CHAIRS (2024–2029) ──────────────────────────────────
+  {
+    id:"meutya_hafid", name:"Meutya Viada Hafid", photo_url:null, photo_placeholder:"MH",
+    born:"1978", born_place:"Bandung", religion:"Islam",
+    education:"S1 Komunikasi, Universitas Indonesia",
+    party_id:"gol", party_role:"Ketua Komisi I DPR / Menkomdigi",
+    positions:[
+      {title:"Menteri Komunikasi dan Digital RI", institution:"Kemenkomdigi RI", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Ketua Komisi I DPR RI", institution:"DPR RI", region:"Nasional", start:"2024", end:"2024", is_current:false},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Sumatera Utara", start:"2009", end:"2024", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Mantan jurnalis Metro TV yang beralih ke politik. Sempat menjabat Ketua Komisi I DPR yang membidangi pertahanan, intelijen, luar negeri sebelum diangkat sebagai Menteri Komunikasi dan Digital dalam Kabinet Merah Putih Prabowo.",
+    tags:["dpr","perempuan","jurnalis","komisi-1","menteri"],
+    lhkpn_latest:8500000000, lhkpn_year:2023,
+    connections_summary:"Menkomdigi, eks-Ketua Komisi I DPR, Golkar",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:4, corruption_risk:"rendah",
+      nationalism:6, religiosity:4,
+      track_record:"Mantan jurnalis Metro TV. Karir DPR sejak 2009. Dikenal vokal soal pertahanan dan kebebasan pers. Ditunjuk Prabowo sebagai Menkomdigi.",
+      policy_direction:"Pro-pertahanan, Nasionalis"
+    }
+  },
+  {
+    id:"utut_adianto", name:"Utut Adianto", photo_url:null, photo_placeholder:"UA",
+    born:"1965", born_place:"Surakarta", religion:"Islam",
+    education:"Grandmaster Catur Internasional (FIDE)",
+    party_id:"pdip", party_role:"Ketua Komisi II DPR",
+    positions:[
+      {title:"Ketua Komisi II DPR RI", institution:"DPR RI", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Jawa Tengah", start:"2009", end:null, is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Grandmaster catur Indonesia peringkat dunia yang beralih ke politik bersama PDIP. Ketua Komisi II DPR yang membidangi pemerintahan dalam negeri, otonomi daerah, aparatur negara, dan kepemiluan.",
+    tags:["dpr","pdip","komisi-2","unik"],
+    lhkpn_latest:5000000000, lhkpn_year:2023,
+    connections_summary:"Ketua Komisi II DPR, PDIP, Grandmaster Catur",
+    twitter:null,
+    analysis:{
+      ideology_score:-2, populism_score:4, corruption_risk:"rendah",
+      nationalism:5, religiosity:4,
+      track_record:"Grandmaster catur bertaraf internasional, pernah peringkat ke-2 dunia. Anggota DPR dari PDIP sejak 2009. Komisi II mengawasi Kemendagri dan KPU.",
+      policy_direction:"Pro-PDIP, otonomi daerah"
+    }
+  },
+  {
+    id:"habiburokhman", name:"Habiburokhman", photo_url:null, photo_placeholder:"HB",
+    born:"1979", born_place:"Aceh", religion:"Islam",
+    education:"S1 Hukum, Universitas Syiah Kuala; S2 Hukum",
+    party_id:"ger", party_role:"Ketua Komisi III DPR",
+    positions:[
+      {title:"Ketua Komisi III DPR RI", institution:"DPR RI", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Wakil Ketua Umum Gerindra", institution:"Partai Gerindra", region:"Nasional", start:"2020", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"DKI Jakarta", start:"2014", end:null, is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Politisi Gerindra yang dikenal vokal dan blak-blakan di parlemen. Ketua Komisi III DPR yang membidangi hukum, HAM, dan keamanan. Salah satu loyalis utama Prabowo di DPR.",
+    tags:["dpr","gerindra","komisi-3","hukum","loyalis-prabowo"],
+    lhkpn_latest:12000000000, lhkpn_year:2023,
+    connections_summary:"Ketua Komisi III DPR, Waketum Gerindra, loyalis Prabowo",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:6, corruption_risk:"rendah",
+      nationalism:7, religiosity:5,
+      track_record:"Dikenal sebagai debater ulung di DPR. Vokal membela kepentingan Gerindra dan Prabowo di Komisi III yang mengawasi Kemenkumham dan Polri.",
+      policy_direction:"Pro-Prabowo, penegakan hukum"
+    }
+  },
+  {
+    id:"titiek_soeharto", name:"Siti Hediati Hariyadi (Titiek Soeharto)", photo_url:null, photo_placeholder:"TS",
+    born:"1959", born_place:"Jakarta", religion:"Islam",
+    education:"S1 Peternakan, Institut Pertanian Bogor",
+    party_id:"ger", party_role:"Ketua Komisi IV DPR",
+    positions:[
+      {title:"Ketua Komisi IV DPR RI", institution:"DPR RI", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"DI Yogyakarta", start:"2014", end:null, is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Putri mantan Presiden Soeharto dan mantan istri Prabowo Subianto. Ketua Komisi IV DPR yang membidangi pertanian, pangan, lingkungan hidup, dan kelautan. Politisi Gerindra yang kembali ke parlemen mewakili warisan dinasti Soeharto.",
+    tags:["dpr","gerindra","komisi-4","perempuan","dinasti","eks-soeharto"],
+    lhkpn_latest:35000000000, lhkpn_year:2023,
+    connections_summary:"Putri Soeharto, eks-istri Prabowo, Ketua Komisi IV DPR",
+    twitter:null,
+    analysis:{
+      ideology_score:4, populism_score:3, corruption_risk:"sedang",
+      nationalism:6, religiosity:4,
+      track_record:"Latar belakang dinasti politik Soeharto. Mantan istri Prabowo (menikah 1983, bercerai 1998). Aktif di Golkar lalu pindah ke Gerindra. Komisi IV mengawasi Kementan dan KKP.",
+      policy_direction:"Pro-pertanian, ketahanan pangan"
+    }
+  },
+  {
+    id:"sartono_hutomo", name:"Sartono Hutomo", photo_url:null, photo_placeholder:"SH2",
+    born:"1972", born_place:"Jawa Tengah", religion:"Islam",
+    education:"S1 Ekonomi",
+    party_id:"ger", party_role:"Ketua Komisi VI DPR",
+    positions:[
+      {title:"Ketua Komisi VI DPR RI", institution:"DPR RI", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Jawa Tengah", start:"2014", end:null, is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Politisi Gerindra yang menjabat Ketua Komisi VI DPR yang membidangi perindustrian, perdagangan dalam negeri, investasi, koperasi/UKM, dan pengawasan BUMN. Posisi strategis karena mengawasi ratusan BUMN Indonesia.",
+    tags:["dpr","gerindra","komisi-6","bumn","industri"],
+    lhkpn_latest:8000000000, lhkpn_year:2023,
+    connections_summary:"Ketua Komisi VI DPR, Gerindra, pengawas BUMN",
+    twitter:null,
+    analysis:{
+      ideology_score:4, populism_score:4, corruption_risk:"rendah",
+      nationalism:6, religiosity:4,
+      track_record:"Anggota DPR dari Gerindra dengan fokus ekonomi dan industri. Komisi VI mengawasi Kementerian BUMN, Kemendag, dan BUMN-BUMN besar Indonesia.",
+      policy_direction:"Pro-BUMN, industri nasional"
+    }
+  },
+  {
+    id:"marwan_dasopang", name:"Marwan Dasopang", photo_url:null, photo_placeholder:"MD2",
+    born:"1966", born_place:"Sumatera Utara", religion:"Islam",
+    education:"S1 Ekonomi, Universitas Muhammadiyah Sumatera Utara",
+    party_id:"pkb", party_role:"Ketua Komisi VIII DPR",
+    positions:[
+      {title:"Ketua Komisi VIII DPR RI", institution:"DPR RI", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Wakil Ketua Komisi VIII DPR RI", institution:"DPR RI", region:"Nasional", start:"2019", end:"2024", is_current:false},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Sumatera Utara", start:"2014", end:null, is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Politisi PKB dari Sumatera Utara yang menjabat Ketua Komisi VIII DPR yang membidangi agama, sosial, pemberdayaan perempuan, dan perlindungan anak. Sebelumnya menjabat sebagai Wakil Ketua Komisi VIII pada periode 2019-2024.",
+    tags:["dpr","pkb","komisi-8","agama","sosial"],
+    lhkpn_latest:6000000000, lhkpn_year:2023,
+    connections_summary:"Ketua Komisi VIII DPR, PKB, Sumatera Utara",
+    twitter:null,
+    analysis:{
+      ideology_score:1, populism_score:5, corruption_risk:"rendah",
+      nationalism:5, religiosity:7,
+      track_record:"Politisi PKB berlatar belakang pesantren. Komisi VIII mengawasi Kemenag, Kemensos, dan KemenPPPA. Konsisten pada isu keagamaan dan kesejahteraan sosial.",
+      policy_direction:"Pro-pesantren, kesejahteraan sosial"
+    }
+  },
+  {
+    id:"misbakhun", name:"Mukhamad Misbakhun", photo_url:null, photo_placeholder:"MB",
+    born:"1970", born_place:"Pasuruan, Jawa Timur", religion:"Islam",
+    education:"S1 Ekonomi; S2 Akuntansi",
+    party_id:"gol", party_role:"Ketua Komisi XI DPR",
+    positions:[
+      {title:"Ketua Komisi XI DPR RI", institution:"DPR RI", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Jawa Timur", start:"2009", end:null, is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Politisi Golkar eks-PKS yang dikenal vokal di isu perpajakan dan fiskal. Ketua Komisi XI DPR yang membidangi keuangan, perbankan, perencanaan pembangunan, OJK, dan BI. Mantan pejabat yang pindah ke dunia politik.",
+    tags:["dpr","gol","komisi-11","fiskal","perbankan"],
+    lhkpn_latest:15000000000, lhkpn_year:2023,
+    connections_summary:"Ketua Komisi XI DPR, Golkar, pengawas BI dan OJK",
+    twitter:null,
+    analysis:{
+      ideology_score:2, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:5,
+      track_record:"Eks-anggota PKS yang pindah ke Golkar. Dikenal ahli perpajakan. Komisi XI mengawasi Kemenkeu, BI, OJK, dan BPS — posisi sangat strategis untuk kebijakan fiskal nasional.",
+      policy_direction:"Pro-fiskal, pengawasan sektor keuangan"
+    }
+  },
+  {
+    id:"hary_tanoe", name:"Hary Tanoesoedibjo", photo_url:null, photo_placeholder:"HT",
+    born:"26 Sep 1965", born_place:"Surabaya", religion:"Kristen",
+    education:"S1 Bisnis, Carleton University Ottawa, Kanada; MBA, University of Ottawa",
+    party_id:"per", party_role:"Ketua Umum",
+    positions:[
+      {title:"Ketua Umum Partai Perindo", institution:"Partai Perindo", region:"Nasional", start:"2015", end:null, is_current:true},
+      {title:"CEO MNC Group", institution:"MNC Group", region:"Nasional", start:"2002", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Konglomerat media terbesar Indonesia berdasarkan jangkauan (MNC Group — RCTI, MNCTV, Global TV, iNews, Okezone). Mendirikan Partai Perindo 2015. Pemilik media yang sekaligus ketua partai menciptakan konflik kepentingan antara kebebasan pers dan kepentingan politik.",
+    tags:["pengusaha","media","ketum-partai","perindo"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Ketum Perindo, CEO MNC Group (RCTI, MNCTV), media mogul",
+    twitter:"@hary_tanoe",
+    analysis:{
+      ideology_score:3, populism_score:6, corruption_risk:"sedang",
+      nationalism:5, religiosity:3,
+      track_record:"Salah satu orang terkaya Indonesia. Pernah gabung Hanura lalu dirikan Perindo. MNC Group menguasai TV terrestrial dengan jangkauan terbesar di Indonesia. Mendukung koalisi Prabowo (KIM Plus).",
+      policy_direction:"Pro-bisnis, media konglomerat"
+    }
+  },
 ]
 
 export const PERSONS_MAP = Object.fromEntries(PERSONS.map(p => [p.id, p]))

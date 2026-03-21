@@ -17,6 +17,7 @@ const NAV = [
   { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
   { to:'/timeline', icon:'📅', label:'Linimasa' },
   { to:'/kpk',      icon:'⚖️', label:'KPK Cases' },
+  { to:'/coi',      icon:'🔍', label:'Konflik Kepentingan' },
   { to:'/media',    icon:'📡', label:'Kepemilikan Media' },
   { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
   { to:'/news',     icon:'📰', label:'Berita' },

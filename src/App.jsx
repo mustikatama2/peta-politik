@@ -23,6 +23,7 @@ const KPKCases       = lazy(() => import('./pages/kpk/KPKCases'))
 const MediaOwnership = lazy(() => import('./pages/media/MediaOwnership'))
 const DynastyMapper  = lazy(() => import('./pages/dynasty/DynastyMapper'))
 const Timeline       = lazy(() => import('./pages/timeline/Timeline'))
+const COIScanner     = lazy(() => import('./pages/coi/COIScanner'))
 
 // Loading fallback
 function PageLoader() {
@@ -63,6 +64,7 @@ export default function App() {
         <Route path="/media" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><MediaOwnership /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/dynasty" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><DynastyMapper /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/timeline" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Timeline /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/coi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><COIScanner /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>

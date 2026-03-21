@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import {
   ComposedChart, ScatterChart, Scatter, XAxis, YAxis, ZAxis,
   CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-  BarChart, Bar, Cell, ReferenceLine, Line,
+  BarChart, Bar, Cell, ReferenceLine, Line, LineChart, Area, AreaChart,
 } from 'recharts'
 import { PERSONS } from '../../data/persons'
 import { PARTIES, PARTY_MAP } from '../../data/parties'
@@ -108,11 +108,12 @@ function ScatterTooltip({ active, payload }) {
 
 // ─── TABS ─────────────────────────────────────────────────────────────────────
 const TABS = [
-  { id: 'individu',   label: 'Skor Individu',  icon: '👤' },
-  { id: 'partai',     label: 'Skor Partai',    icon: '🎭' },
-  { id: 'provinsi',   label: 'Skor Provinsi',  icon: '🗺️' },
-  { id: 'gdp',        label: 'Korelasi GDP',   icon: '📈' },
-  { id: 'metodologi', label: 'Metodologi',     icon: '📖' },
+  { id: 'individu',   label: 'Skor Individu',      icon: '👤' },
+  { id: 'partai',     label: 'Skor Partai',        icon: '🎭' },
+  { id: 'provinsi',   label: 'Skor Provinsi',      icon: '🗺️' },
+  { id: 'lhkpn',     label: 'Ketimpangan LHKPN',  icon: '💰' },
+  { id: 'gdp',        label: 'Korelasi GDP',       icon: '📈' },
+  { id: 'metodologi', label: 'Metodologi',         icon: '📖' },
 ]
 
 // ═══════════════════════════════════════════════════════════════════════════════
