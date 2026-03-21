@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 
 // ── Button ───────────────────────────────────────────────────────────────────
-export function Btn({ variant = 'primary', className = '', children, ...props }) {
+export function Btn({ variant = 'primary', className = '', children, 'aria-label': ariaLabel, ...props }) {
   const base = 'inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-bg-card min-h-[44px] md:min-h-0'
   const variants = {
     primary:   'bg-accent-red hover:opacity-90 text-white focus:ring-accent-red',
@@ -12,7 +12,12 @@ export function Btn({ variant = 'primary', className = '', children, ...props })
     danger:    'bg-red-100 hover:bg-red-200 text-red-700 border border-red-200 focus:ring-red-500',
   }
   return (
-    <button className={`${base} ${variants[variant]} ${className}`} {...props}>
+    <button
+      role="button"
+      aria-label={ariaLabel}
+      className={`${base} ${variants[variant]} ${className}`}
+      {...props}
+    >
       {children}
     </button>
   )
@@ -105,7 +110,7 @@ export function SearchBar({ value, onChange, placeholder = 'Cari...', className 
 }
 
 // ── Modal ─────────────────────────────────────────────────────────────────────
-export function Modal({ open, onClose, title, children, className = '' }) {
+export function Modal({ open, onClose, title, children, className = '', 'aria-label': ariaLabel }) {
   useEffect(() => {
     const handler = (e) => { if (e.key === 'Escape') onClose?.() }
     if (open) document.addEventListener('keydown', handler)
@@ -121,13 +126,16 @@ export function Modal({ open, onClose, title, children, className = '' }) {
         >
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={ariaLabel || title}
             className={`relative bg-bg-card border border-border rounded-2xl shadow-modal w-full max-w-lg max-h-[90vh] overflow-y-auto ${className}`}
             initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
           >
             {title && (
               <div className="flex items-center justify-between p-5 border-b border-border">
                 <h2 className="text-lg font-semibold text-text-primary">{title}</h2>
-                <button onClick={onClose} className="text-text-secondary hover:text-text-primary text-xl">×</button>
+                <button onClick={onClose} className="text-text-secondary hover:text-text-primary text-xl" aria-label="Tutup modal">×</button>
               </div>
             )}
             <div className="p-5">{children}</div>
@@ -331,6 +339,17 @@ export function SkeletonCard({ lines = 3 }) {
           className={`h-3 bg-bg-elevated rounded mb-2 ${i === lines - 1 ? 'w-1/2' : 'w-full'}`}
         />
       ))}
+    </div>
+  )
+}
+
+// ── Table ─────────────────────────────────────────────────────────────────────
+export function Table({ children, label = 'Tabel data', className = '' }) {
+  return (
+    <div role="region" aria-label={label} className={`overflow-x-auto ${className}`}>
+      <table className="w-full text-sm text-left">
+        {children}
+      </table>
     </div>
   )
 }

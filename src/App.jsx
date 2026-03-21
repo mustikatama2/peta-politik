@@ -5,6 +5,7 @@ import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
 import Login from './pages/auth/Login'
 import Dashboard from './pages/dashboard/Dashboard'
+import NotFound from './pages/NotFound'
 
 // Lazy load all other pages
 const PersonList     = lazy(() => import('./pages/persons/PersonList'))
@@ -45,18 +46,27 @@ const DanaKampanyePage = lazy(() => import('./pages/dana/DanaKampanyePage'))
 const BUMNPage         = lazy(() => import('./pages/bumn/BUMNPage'))
 const ArsipPage        = lazy(() => import('./pages/arsip/ArsipPage'))
 const TentangPage      = lazy(() => import('./pages/tentang/TentangPage'))
+const FramingPage      = lazy(() => import('./pages/framing/FramingPage'))
 const GlosariumPage    = lazy(() => import('./pages/glosarium/GlosariumPage'))
 const ScorecardPage    = lazy(() => import('./pages/scorecard/ScorecardPage'))
 
-// Loading fallback — skeleton style
+// Loading fallback — branded spinner + skeleton
 function PageLoader() {
   return (
-    <div className="space-y-4 animate-pulse">
-      <div className="h-8 w-64 bg-bg-elevated rounded" />
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[...Array(4)].map((_, i) => <div key={i} className="h-24 bg-bg-elevated rounded-xl" />)}
+    <div className="min-h-screen bg-bg-base flex flex-col items-center justify-center gap-4">
+      <div className="text-5xl mb-1 animate-bounce">🗺️</div>
+      <div className="w-10 h-10 border-2 border-border border-t-accent-red rounded-full animate-spin" />
+      <div className="text-center">
+        <p className="text-text-primary font-semibold">PetaPolitik</p>
+        <p className="text-text-secondary text-sm mt-0.5">Memuat PetaPolitik...</p>
       </div>
-      <div className="h-64 bg-bg-elevated rounded-xl" />
+      <div className="mt-4 w-full max-w-lg px-6 space-y-3 animate-pulse">
+        <div className="h-6 w-1/2 bg-bg-elevated rounded" />
+        <div className="grid grid-cols-4 gap-3">
+          {[...Array(4)].map((_, i) => <div key={i} className="h-20 bg-bg-elevated rounded-xl" />)}
+        </div>
+        <div className="h-48 bg-bg-elevated rounded-xl" />
+      </div>
     </div>
   )
 }
@@ -93,6 +103,7 @@ export default function App() {
         <Route path="/kpk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KPKCases /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/investigasi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><InvestigasiPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/media" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><MediaOwnership /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/framing" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><FramingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/dynasty" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><DynastyMapper /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/timeline" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Timeline /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/voting" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><VotingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
@@ -114,7 +125,7 @@ export default function App() {
         <Route path="/tentang" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><TentangPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/glosarium" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><GlosariumPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/arsip" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ArsipPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   )

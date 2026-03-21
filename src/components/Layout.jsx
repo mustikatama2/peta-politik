@@ -39,6 +39,7 @@ const NAV = [
   { to:'/investigasi', icon:'🔍', label:'Investigasi' },
   { to:'/coi',      icon:'🔍', label:'Konflik Kepentingan' },
   { to:'/media',    icon:'📡', label:'Kepemilikan Media' },
+  { to:'/framing',  icon:'🗞️', label:'Framing Media' },
   { to:'/bisnis',   icon:'🏢', label:'Kepemilikan Bisnis' },
   { to:'/bumn',     icon:'🏢', label:'BUMN & Bisnis' },
   { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
@@ -98,6 +99,13 @@ export default function Layout({ children }) {
 
   return (
     <div className="flex h-screen overflow-hidden bg-bg-app">
+      {/* ── Skip to main content (screen-reader / keyboard) ── */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-accent-red focus:text-white focus:rounded-lg focus:font-semibold focus:shadow-lg"
+      >
+        Lewati ke konten utama
+      </a>
       {/* ── Desktop Sidebar ── */}
       <aside
         className="hidden md:flex flex-col flex-shrink-0 bg-bg-sidebar transition-all duration-300 overflow-hidden"
@@ -115,7 +123,7 @@ export default function Layout({ children }) {
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 px-2 py-3 overflow-y-auto space-y-0.5">
+        <nav className="flex-1 px-2 py-3 overflow-y-auto space-y-0.5" aria-label="Navigasi utama">
           {NAV.map(link => (
             <NavLink
               key={link.to}
@@ -279,7 +287,7 @@ export default function Layout({ children }) {
         </AnimatePresence>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6 animate-fade-in">
+        <main id="main-content" className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6 animate-fade-in">
           {children}
           <Footer />
         </main>

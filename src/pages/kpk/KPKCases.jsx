@@ -303,7 +303,13 @@ export default function KPKCases() {
       ) : (
         <Card className="p-6">
           <h2 className="text-text-primary font-semibold mb-6">📅 Timeline Kronologi</h2>
-          {filtered.map((k, i) => (
+          {filtered.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <div className="text-5xl mb-4 opacity-60">⚖️</div>
+              <p className="text-text-primary font-semibold mb-1">Tidak ada kasus ditemukan</p>
+              <p className="text-text-secondary text-sm">Coba ubah filter status, lembaga, atau wilayah</p>
+            </div>
+          ) : filtered.map((k, i) => (
             <TimelineItem key={k.id} kasus={k} isLast={i === filtered.length - 1} />
           ))}
         </Card>
