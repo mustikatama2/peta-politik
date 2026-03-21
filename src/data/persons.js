@@ -181,7 +181,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"bahlil", name:"Bahlil Lahadalia", photo_url:null, photo_placeholder:"BL",
+    id:"bahlil", name:"Bahlil Lahadalia", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Bahlil_Lahadalia_at_the_Indonesia_Naik_Kelas_book_launching,_21_November_2025_24_(cropped).jpg?width=400", photo_placeholder:"BL",
     born:"1975", born_place:"Papua", religion:"Islam",
     education:"S1 Ekonomi, Universitas Yapis Papua",
     party_id:"gol", party_role:"Ketua Umum",
@@ -204,7 +204,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"zulhas", name:"Zulkifli Hasan", photo_url:null, photo_placeholder:"ZH",
+    id:"zulhas", name:"Zulkifli Hasan", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wakil_Ketua_MPR_Zulkifli_Hasan_(2019).jpg?width=400", photo_placeholder:"ZH",
     born:"1962", born_place:"Lampung", religion:"Islam",
     education:"S1 Ilmu Sosial, STIA LPPN Jakarta",
     party_id:"pan", party_role:"Ketua Umum",
@@ -227,7 +227,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"yusril", name:"Yusril Ihza Mahendra", photo_url:null, photo_placeholder:"YI",
+    id:"yusril", name:"Yusril Ihza Mahendra", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Yusril_Ihza_Mahendra,_Menko_Kumham_Imipas.png?width=400", photo_placeholder:"YI",
     born:"5 Feb 1956", born_place:"Bangka", religion:"Islam",
     education:"S1 Hukum UI; PhD Hukum Tata Negara UI",
     party_id:"pbb", party_role:"Ketua Umum",
@@ -249,7 +249,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ahy", name:"Agus Harimurti Yudhoyono", photo_url:null, photo_placeholder:"AH",
+    id:"ahy", name:"Agus Harimurti Yudhoyono", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menteri_Koordinator_Bidang_Infrastruktur_dan_Pembangunan_Kewilayahan_Indonesia_Agus_Harimurti_Yudhoyono.jpg?width=400", photo_placeholder:"AH",
     born:"10 Aug 1978", born_place:"Bandung", religion:"Islam",
     education:"Akademi Militer Magelang; Master JF Kennedy School Harvard; Master Strategic Studies, Nanyang NTU",
     party_id:"dem", party_role:"Ketua Umum",
@@ -271,7 +271,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sby", name:"Susilo Bambang Yudhoyono", photo_url:null, photo_placeholder:"SB",
+    id:"sby", name:"Susilo Bambang Yudhoyono", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Susilo_Bambang_Yudhoyono,_official_presidential_portrait_(2009).jpg?width=400", photo_placeholder:"SB",
     born:"9 Sep 1949", born_place:"Pacitan", religion:"Islam",
     education:"Akademi Militer Magelang; Master Manajemen Webster University; PhD IPB",
     party_id:"dem", party_role:"Pembina",
@@ -339,7 +339,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"airlangga", name:"Airlangga Hartarto", photo_url:null, photo_placeholder:"AH",
+    id:"airlangga", name:"Airlangga Hartarto", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KIM_Airlangga_Hartarto.jpg?width=400", photo_placeholder:"AH",
     born:"1 Aug 1962", born_place:"Surabaya", religion:"Islam",
     education:"S1 Teknik Mesin UGM; MBA Melbourne University",
     party_id:"gol", party_role:"mantan Ketua Umum",
@@ -362,7 +362,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"cakimin", name:"Muhaimin Iskandar", photo_url:null, photo_placeholder:"MI",
+    id:"cakimin", name:"Muhaimin Iskandar", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Muhaimin_Iskandar%2C_Candidate_for_Indonesia%27s_Vice_President_in_2024.jpg/400px-Muhaimin_Iskandar%2C_Candidate_for_Indonesia%27s_Vice_President_in_2024.jpg", photo_placeholder:"MI",
     born:"24 Sep 1966", born_place:"Jombang", religion:"Islam",
     education:"S1 Ilmu Sosial, UGM",
     party_id:"pkb", party_role:"Ketua Umum",
@@ -408,7 +408,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"surya_paloh", name:"Surya Paloh", photo_url:null, photo_placeholder:"SP",
+    id:"surya_paloh", name:"Surya Paloh", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Surya_Dharma_Paloh.jpg?width=400", photo_placeholder:"SP",
     born:"16 Jul 1951", born_place:"Aceh", religion:"Islam",
     education:"S1 Hukum, Universitas Indonesia",
     party_id:"nas", party_role:"Ketua Umum",
@@ -476,7 +476,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ganjar", name:"Ganjar Pranowo", photo_url:null, photo_placeholder:"GP",
+    id:"ganjar", name:"Ganjar Pranowo", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Ganjar_Pranowo_Candidate_for_Indonesia%27s_President_in_2024.jpg/400px-Ganjar_Pranowo_Candidate_for_Indonesia%27s_President_in_2024.jpg", photo_placeholder:"GP",
     born:"28 Oct 1968", born_place:"Karanganyar", religion:"Islam",
     education:"S1 Hukum, Universitas Gadjah Mada",
     party_id:"pdip", party_role:"Anggota",
@@ -997,7 +997,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"pramono_anung", name:"Pramono Anung Wibowo", photo_url:null, photo_placeholder:"PA",
+    id:"pramono_anung", name:"Pramono Anung Wibowo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Pramono_Anung_Gubernur_DKI.jpg?width=400", photo_placeholder:"PA",
     born:"25 Jun 1963", born_place:"Kediri", religion:"Islam",
     education:"S1 Teknik Pertambangan, ITB",
     party_id:"pdip", party_role:"DPP",
@@ -1512,7 +1512,7 @@ export const PERSONS = [
   },
   // ─── NASIONAL — TOKOH PENTING LAINNYA ───────────────────────────────────
   {
-    id:"hashim", name:"Hashim Djojohadikusumo", photo_url:null, photo_placeholder:"HD",
+    id:"hashim", name:"Hashim Djojohadikusumo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Hashim-djojohadikusumo-2802af37-0f0c-47ef-b9c4-f47aec1bde5-resize-750.jpg?width=400", photo_placeholder:"HD",
     born:"1954", born_place:"Jakarta", religion:"Islam",
     education:"S1 Ekonomi, Williams College USA",
     party_id:"ger", party_role:"Ketua Dewan Pembina",
@@ -1533,7 +1533,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"kaesang", name:"Kaesang Pangarep", photo_url:null, photo_placeholder:"KP",
+    id:"kaesang", name:"Kaesang Pangarep", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Kaesang_Pangarep_in_2016.jpg?width=400", photo_placeholder:"KP",
     born:"25 Dec 1994", born_place:"Surakarta", religion:"Islam",
     education:"S1 Ilmu Komputer, Nanyang Technological University (tidak selesai)",
     party_id:"psi", party_role:"Ketua Umum",
@@ -1556,7 +1556,7 @@ export const PERSONS = [
 
   // ─── TAMBAHAN: TOKOH KRITIS UNTUK TRANSPARANSI ──────────────────────────
   {
-    id:"hasto", name:"Hasto Kristiyanto", photo_url:null, photo_placeholder:"HK",
+    id:"hasto", name:"Hasto Kristiyanto", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Hasto_Kristiyanto_di_kediaman_Presiden_ke-5_Megawati_Soekarnoputri_(2023).jpg?width=400", photo_placeholder:"HK",
     born:"7 Jul 1973", born_place:"Klaten", religion:"Islam",
     education:"S2 Universitas Indonesia",
     party_id:"pdip", party_role:"Sekretaris Jenderal",
@@ -1609,7 +1609,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"mahfud_md", name:"Mohammad Mahfud MD", photo_url:null, photo_placeholder:"MM",
+    id:"mahfud_md", name:"Mohammad Mahfud MD", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Mahfud_MD%2C_Candidate_for_Indonesia%27s_Vice_President_in_2024.jpg/400px-Mahfud_MD%2C_Candidate_for_Indonesia%27s_Vice_President_in_2024.jpg", photo_placeholder:"MM",
     born:"13 May 1957", born_place:"Sampang, Jawa Timur", religion:"Islam",
     education:"S1 Hukum UII; S3 Ilmu Politik UGM",
     party_id:"pkb", party_role:"Anggota",
@@ -1662,7 +1662,7 @@ export const PERSONS = [
   // ─── GUBERNUR PROVINSI — NASIONAL POST-PILKADA 2024 ────────────────────
 
   {
-    id:"bobby_nasution", name:"Bobby Nasution", photo_url:null, photo_placeholder:"BN",
+    id:"bobby_nasution", name:"Bobby Nasution", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Sumatera_Utara_Muhammad_Bobby_Afif_Nasution_Sutan_Porang_Gunung_Baringin_Naposo.jpg?width=400", photo_placeholder:"BN",
     born:"1991", born_place:"Sumatera Utara", religion:"Islam",
     education:"S1 Teknik Sipil, Universitas Sumatera Utara",
     party_id:"ger", party_role:"Kader",
@@ -1684,7 +1684,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ridwan_kamil", name:"Ridwan Kamil", photo_url:null, photo_placeholder:"RK",
+    id:"ridwan_kamil", name:"Ridwan Kamil", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Governor_of_West_Java_Ridwan_Kamil.png?width=400", photo_placeholder:"RK",
     born:"4 Oct 1971", born_place:"Bandung", religion:"Islam",
     education:"S1 Arsitektur ITB; Master Arsitektur UC Berkeley",
     party_id:"gol", party_role:"Kader",
@@ -1707,7 +1707,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"dedi_mulyadi", name:"Dedi Mulyadi", photo_url:null, photo_placeholder:"DM",
+    id:"dedi_mulyadi", name:"Dedi Mulyadi", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Dedi_Mulyadi,_Gubernur_Jawa_barat_2025-2030.jpg?width=400", photo_placeholder:"DM",
     born:"11 Apr 1971", born_place:"Subang, Jawa Barat", religion:"Islam",
     education:"S1 Hukum, Universitas Pasundan",
     party_id:"ger", party_role:"Kader",
@@ -1730,7 +1730,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ahmad_luthfi", name:"Ahmad Luthfi", photo_url:null, photo_placeholder:"AL",
+    id:"ahmad_luthfi", name:"Ahmad Luthfi", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Ahmad_Luthfi_Official_portrait_as_governor_of_Central_Java.png?width=400", photo_placeholder:"AL",
     born:"1965", born_place:"Klaten, Jawa Tengah", religion:"Islam",
     education:"Akademi Kepolisian",
     party_id:"ger", party_role:"Kader",
@@ -2377,7 +2377,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"erick_thohir", name:"Erick Thohir", photo_url:null, photo_placeholder:"ET",
+    id:"erick_thohir", name:"Erick Thohir", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menteri_Pemuda_dan_Olahraga_Indonesia_Erick_Thohir.png?width=400", photo_placeholder:"ET",
     born:"30 May 1970", born_place:"Jakarta", religion:"Islam",
     education:"S1 Bisnis, Glendale University; MBA, National University USA",
     party_id:"ger", party_role:"Kader",
@@ -2400,7 +2400,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"basuki", name:"Basuki Hadimuljono", photo_url:null, photo_placeholder:"BHM",
+    id:"basuki", name:"Basuki Hadimuljono", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KIM_Basuki_Hadimuljono.jpg?width=400", photo_placeholder:"BHM",
     born:"5 Nov 1954", born_place:"Surakarta, Jawa Tengah", religion:"Islam",
     education:"S1 Teknik Sipil UGM; PhD Teknik Sipil Colorado State University",
     party_id:null, party_role:null,
