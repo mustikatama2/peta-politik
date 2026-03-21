@@ -151,7 +151,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sugiono", name:"Sugiono", photo_url:null, photo_placeholder:"SG",
+    id:"sugiono", name:"Sugiono", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menteri_Luar_Negeri_Sugiono.jpg?width=400", photo_placeholder:"SG",
     born:"1969", born_place:"Jakarta", religion:"Islam",
     education:"Akademi Militer Magelang",
     party_id:"ger", party_role:"Anggota DPR",
@@ -173,7 +173,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sjafrie", name:"Sjafrie Sjamsoeddin", photo_url:null, photo_placeholder:"SS",
+    id:"sjafrie", name:"Sjafrie Sjamsoeddin", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Sjafrie_Sjamsoeddin_2025_Portrait.png?width=400", photo_placeholder:"SS",
     born:"1952", born_place:"Makassar", religion:"Islam",
     education:"Akademi Militer Magelang",
     party_id:null, party_role:null,
@@ -196,7 +196,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"budi_gunawan", name:"Budi Gunawan", photo_url:null, photo_placeholder:"BG",
+    id:"budi_gunawan", name:"Budi Gunawan", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menkopolkam_Budi_Gunawan_(cropped).jpg?width=400", photo_placeholder:"BG",
     born:"1959", born_place:"Surakarta", religion:"Islam",
     education:"Akademi Kepolisian",
     party_id:null, party_role:null,
@@ -205,7 +205,7 @@ export const PERSONS = [
       {title:"Wakapolri",               institution:"Polri",            region:"Nasional",    start:"2015", end:"2016", is_current:false},
     ],
     tier:"nasional", region_id:null,
-    bio:"Kepala Badan Intelijen Negara sejak 2016. Mantan Wakapolri yang pernah ditetapkan sebagai tersangka KPK namun perkaranya dilimpahkan ke Polri. Figur berpengaruh di lingkaran kekuasaan.",
+    bio:"Kepala Badan Intelijen Negara sejak 2016. Mantan Wakapolri yang pernah ditetapkan sebagai tersangka KPK pada 2015 dalam kasus rekening gendut — memicu konflik 'cicak vs buaya' jilid kedua antara Polri dan KPK. Perkaranya akhirnya dilimpahkan ke Polri dan dihentikan, dan ia justru naik ke puncak karir sebagai Ka BIN — simbol pengaruhannya yang melampaui proses hukum.",
     tags:["polri","intelijen"],
     lhkpn_latest:73000000000, lhkpn_year:2023,
     connections_summary:"Ka BIN, eks-Wakapolri, dekat kekuasaan",
@@ -213,12 +213,12 @@ export const PERSONS = [
     analysis:{
       ideology_score:0, populism_score:3, corruption_risk:"tinggi",
       nationalism:7, religiosity:4,
-      track_record:"Kasus rekening gendut dan penetapan tersangka KPK yang kandas. Dianggap salah satu figur paling berpengaruh di intelijen RI.",
+      track_record:"Penetapan tersangka KPK 2015 atas dugaan gratifikasi dan rekening gendut memicu konflik 'cicak vs buaya' jilid II — KPK dikriminalisasi balik lewat Bareskrim. Kasus dihentikan Polri; Budi justru diangkat Jokowi sebagai Ka BIN 2016, posisi yang dipegangnya hingga era Prabowo. Dianggap salah satu figur paling berpengaruh dan paling terlindungi di intelijen RI.",
       policy_direction:"Status quo, pro-keamanan"
     }
   },
   {
-    id:"agus_gumiwang", name:"Agus Gumiwang Kartasasmita", photo_url:null, photo_placeholder:"AG",
+    id:"agus_gumiwang", name:"Agus Gumiwang Kartasasmita", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menteri_Perindustrian_Agus_G._Kartasasmita.jpg?width=400", photo_placeholder:"AG",
     born:"1971", born_place:"Bandung", religion:"Islam",
     education:"S1 Hukum, Universitas Padjajaran",
     party_id:"gol", party_role:"Anggota",
@@ -587,7 +587,7 @@ export const PERSONS = [
   },
   // ─── NASIONAL — HUKUM & KEAMANAN ────────────────────────────────────────
   {
-    id:"listyo_sigit", name:"Listyo Sigit Prabowo", photo_url:null, photo_placeholder:"LS",
+    id:"listyo_sigit", name:"Listyo Sigit Prabowo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KAPOLRI,Jenderal_POL_Listyo_Sigit_Prabowo.jpg?width=400", photo_placeholder:"LS",
     born:"5 May 1969", born_place:"Ambon", religion:"Kristen",
     education:"Akademi Kepolisian 1991",
     party_id:null, party_role:null,
@@ -596,7 +596,7 @@ export const PERSONS = [
       {title:"Kabareskrim",             institution:"Mabes Polri",      region:"Nasional",    start:"2020", end:"2021", is_current:false},
     ],
     tier:"nasional", region_id:null,
-    bio:"Kapolri sejak 2021. Mantan Kabareskrim yang dikenal dekat dengan Presiden Jokowi. Polisi Kristen pertama yang menjabat Kapolri. Menghadapi berbagai kontroversi terkait kasus Ferdy Sambo dan penanganan unjuk rasa.",
+    bio:"Kapolri sejak Januari 2021 — polisi Kristen pertama yang menjabat posisi tertinggi Polri, diangkat Jokowi secara kontroversial melewati senioritas. Era kepemimpinannya diwarnai skandal besar Ferdy Sambo (2022), mantan Kadiv Propam yang membunuh ajudannya dan melakukan obstruction of justice dengan melibatkan ratusan anggota Polri. Meski Sambo dihukum mati, pertanyaan tentang lemahnya pengawasan internal Polri dan reformasi kelembagaan terus menghantui kepemimpinan Listyo.",
     tags:["polri","keamanan"],
     lhkpn_latest:18000000000, lhkpn_year:2023,
     connections_summary:"Kapolri, dekat Jokowi, eks-Kabareskrim",
@@ -604,12 +604,12 @@ export const PERSONS = [
     analysis:{
       ideology_score:0, populism_score:3, corruption_risk:"sedang",
       nationalism:8, religiosity:3,
-      track_record:"Era Kapolrinya diwarnai kasus Ferdy Sambo dan isu polisi bayar promosi jabatan. Pengungkapan teroris cukup aktif.",
+      track_record:"Skandal Ferdy Sambo 2022 menjadi ujian terberat era Listyo: Kadiv Propam Polri membunuh ajudannya Brigadir J dan menggerakkan ratusan polisi untuk menutup-nutupi. Listyo menghadapi tekanan publik dahsyat dan harus merombak struktur Propam. Di sisi lain, prestasinya meliputi pengungkapan jaringan teroris dan penanganan kasus judi online, meski isu jual-beli jabatan internal tetap membebani citra Polri di era kepemimpinannya.",
       policy_direction:"Penegakan hukum, ketertiban"
     }
   },
   {
-    id:"agus_subiyanto", name:"Agus Subiyanto", photo_url:null, photo_placeholder:"AB",
+    id:"agus_subiyanto", name:"Agus Subiyanto", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Panglima_TNI_Jenderal_TNI_Agus_Subiyanto.jpg?width=400", photo_placeholder:"AB",
     born:"5 Aug 1967", born_place:"Cimahi", religion:"Islam",
     education:"Akademi Militer Magelang 1991",
     party_id:null, party_role:null,
@@ -631,7 +631,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"nawawi", name:"Nawawi Pomolango", photo_url:null, photo_placeholder:"NP",
+    id:"nawawi", name:"Nawawi Pomolango", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wakil_Ketua_KPK_RI_Nawawi_Pomolango.jpg?width=400", photo_placeholder:"NP",
     born:"1961", born_place:"Gorontalo", religion:"Islam",
     education:"S1 Hukum, Universitas Indonesia",
     party_id:null, party_role:null,
@@ -639,7 +639,7 @@ export const PERSONS = [
       {title:"Ketua KPK RI",            institution:"KPK RI",           region:"Nasional",    start:"2023", end:null,   is_current:true},
     ],
     tier:"nasional", region_id:null,
-    bio:"Ketua KPK sejak 2023. Hakim karir yang dipercaya memimpin lembaga antikorupsi Indonesia di tengah berbagai kontroversi pasca-revisi UU KPK.",
+    bio:"Ketua KPK sejak Desember 2023. Hakim karir dari Gorontalo yang terpilih DPR untuk memimpin lembaga antikorupsi di tengah krisis kepercayaan publik pasca-revisi UU KPK 2019 yang memangkas independensi lembaga. Nawawi mewarisi KPK yang lemah: penyadapan butuh izin Dewan Pengawas, kasus lama bisa di-SP3, dan seluruh pegawai kini berstatus ASN yang rawan intervensi.",
     tags:["antikorupsi","hukum"],
     lhkpn_latest:8000000000, lhkpn_year:2023,
     connections_summary:"Ketua KPK RI",
@@ -647,7 +647,7 @@ export const PERSONS = [
     analysis:{
       ideology_score:2, populism_score:2, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
-      track_record:"Berusaha menjaga independensi KPK pasca-pelemahan UU. Menghadapi kritik soal kinerja KPK yang menurun.",
+      track_record:"Memimpin KPK di era paling sulit pasca-revisi UU 2019: indeks persepsi korupsi Indonesia merosot, kewenangan penyadapan dibatasi, dan SP3 membuka celah penghentian kasus. Nawawi berupaya mempertahankan integritas dengan menetapkan tersangka Hasto Kristiyanto (Sekjen PDI-P) Januari 2025 — langkah berani yang membuktikan KPK masih bisa bergerak, meski dalam koridor yang jauh lebih sempit dari sebelumnya.",
       policy_direction:"Penegakan hukum antikorupsi"
     }
   },
@@ -673,7 +673,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"suhartoyo", name:"Suhartoyo", photo_url:null, photo_placeholder:"SH",
+    id:"suhartoyo", name:"Suhartoyo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Suhartoyo_(1)_(cropped).png?width=400", photo_placeholder:"SH",
     born:"1965", born_place:"Sleman", religion:"Islam",
     education:"S1 Hukum, Universitas Gadjah Mada",
     party_id:null, party_role:null,
@@ -719,7 +719,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"emil_dardak", name:"Emil Elestianto Dardak", photo_url:null, photo_placeholder:"ED",
+    id:"emil_dardak", name:"Emil Elestianto Dardak", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wakil_Gubernur_Jatim_Emil_Dardak.jpg?width=400", photo_placeholder:"ED",
     born:"20 Oct 1985", born_place:"Tokyo", religion:"Islam",
     education:"S1 Teknik Sipil, University of Tokyo; S2 Pembangunan Ekonomi, Keio University",
     party_id:"dem", party_role:"Anggota",
@@ -764,7 +764,7 @@ export const PERSONS = [
   },
   // ─── JATIM — DPR RI ─────────────────────────────────────────────────────
   {
-    id:"faisol_riza", name:"Faisol Riza", photo_url:null, photo_placeholder:"FR",
+    id:"faisol_riza", name:"Faisol Riza", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KPU_Faisol_Reza.png?width=400", photo_placeholder:"FR",
     born:"1970", born_place:"Jember", religion:"Islam",
     education:"Pondok Pesantren; S1 Ilmu Politik",
     party_id:"pkb", party_role:"Anggota DPR RI",
@@ -785,7 +785,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ahmad_muzani", name:"Ahmad Muzani", photo_url:null, photo_placeholder:"AM",
+    id:"ahmad_muzani", name:"Ahmad Muzani", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Ahmad_Muzani,_Ketua_MPR_RI.jpg?width=400", photo_placeholder:"AM",
     born:"1968", born_place:"Lampung", religion:"Islam",
     education:"S1 Ilmu Sosial",
     party_id:"ger", party_role:"Sekretaris Jenderal",
@@ -807,7 +807,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"gatot_nurmantyo", name:"Gatot Subroto Nurmantyo", photo_url:null, photo_placeholder:"GN",
+    id:"gatot_nurmantyo", name:"Gatot Subroto Nurmantyo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Panglima_TNI_Gatot_Nurmantyo_(Foto_Puspen).jpg?width=400", photo_placeholder:"GN",
     born:"13 Mar 1960", born_place:"Tegal", religion:"Islam",
     education:"Akademi Militer Magelang 1982; Sesko TNI",
     party_id:null, party_role:null,
@@ -816,7 +816,7 @@ export const PERSONS = [
       {title:"KSAD",                    institution:"Mabes AD",         region:"Nasional",    start:"2014", end:"2015", is_current:false},
     ],
     tier:"nasional", region_id:null,
-    bio:"Mantan Panglima TNI era Jokowi yang dicopot lebih awal. Kini aktif di ormas dan gerakan sipil, sering memberikan pernyataan kritis terhadap pemerintah.",
+    bio:"Mantan Panglima TNI era Jokowi yang dicopot lebih awal pada Oktober 2017 — diduga karena sikapnya yang sering berbeda dengan garis kebijakan pemerintah dan kedekatannya dengan gerakan 212. Setelah pensiun, Gatot tampil sebagai tokoh kritis, membela kebebasan sipil serta menggemakan retorika anti-PKI dan ancaman ideologi komunisme. Sempat dikaitkan dengan gerakan oposisi jelang Pemilu 2019 dan 2024.",
     tags:["eks-militer","ormas","kritis"],
     lhkpn_latest:12000000000, lhkpn_year:2017,
     connections_summary:"Eks-Panglima TNI, aktif di gerakan sipil, kritis pemerintah",
@@ -824,12 +824,12 @@ export const PERSONS = [
     analysis:{
       ideology_score:6, populism_score:7, corruption_risk:"rendah",
       nationalism:9, religiosity:8,
-      track_record:"Panglima TNI yang provokatif soal ideologi dan ancaman komunisme. Dicopot Jokowi sebelum masa jabatan selesai.",
+      track_record:"Sebagai Panglima TNI 2015–2017, Gatot kerap membuat pernyataan provokatif soal ancaman kebangkitan PKI dan pemutaran film G30S/PKI yang ia inisiasi ulang. Hubungannya dengan Jokowi memburuk setelah ia mendukung Aksi Bela Islam 212 dan membatalkan pengiriman pasukan ke Australia tanpa sepengetahuan pemerintah — berujung pada pencopotannya oleh Presiden Jokowi pada Oktober 2017, setahun sebelum masa jabatan berakhir. Pascapensiun aktif di gerakan sipil-Islam konservatif.",
       policy_direction:"Nasionalis-religius, konservatif"
     }
   },
   {
-    id:"cucun_syamsurijal", name:"Cucun Ahmad Syamsurijal", photo_url:null, photo_placeholder:"CS",
+    id:"cucun_syamsurijal", name:"Cucun Ahmad Syamsurijal", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Cucun_Ahmad_Syamsurijal,_Wakil_Ketua_DPR-RI_(2024–2029).jpg?width=400", photo_placeholder:"CS",
     born:"1975", born_place:"Bandung", religion:"Islam",
     education:"S1 Ilmu Politik",
     party_id:"pkb", party_role:"Anggota DPR RI",
@@ -916,7 +916,7 @@ export const PERSONS = [
   },
   // ─── JATIM — KABUPATEN/KOTA ──────────────────────────────────────────────
   {
-    id:"eri_cahyadi", name:"Eri Cahyadi", photo_url:null, photo_placeholder:"EC",
+    id:"eri_cahyadi", name:"Eri Cahyadi", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wali_Kota_Eri.jpg?width=400", photo_placeholder:"EC",
     born:"1980", born_place:"Surabaya", religion:"Islam",
     education:"S1 Teknik Sipil, ITS Surabaya",
     party_id:"pdip", party_role:"Anggota",
@@ -1000,7 +1000,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"azwar_anas", name:"Abdullah Azwar Anas", photo_url:null, photo_placeholder:"AA",
+    id:"azwar_anas", name:"Abdullah Azwar Anas", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menteri_Pendayagunaan_Aparatur_Negara_dan_Reformasi_Birokrasi_Indonesia_Abdullah_Azwar_Anas.png?width=400", photo_placeholder:"AA",
     born:"1972", born_place:"Banyuwangi", religion:"Islam",
     education:"S1 Hukum, Universitas Brawijaya",
     party_id:"pdip", party_role:"Anggota",
@@ -1632,7 +1632,7 @@ export const PERSONS = [
       {title:"Sekretaris Jenderal PDI-P", institution:"DPP PDI-P", region:"Nasional", start:"2014", end:null, is_current:true},
     ],
     tier:"nasional", region_id:null,
-    bio:"Sekretaris Jenderal PDI-P dan operator utama mesin politik Megawati. Ditetapkan sebagai tersangka KPK Januari 2025 atas dugaan obstruction of justice dalam kasus Harun Masiku yang buron sejak 2020.",
+    bio:"Sekretaris Jenderal PDI-P dan operator utama mesin politik Megawati selama lebih dari satu dekade. Ditetapkan sebagai tersangka KPK pada Januari 2025 atas dugaan obstruction of justice dalam kasus suap PAW (Pergantian Antar Waktu) DPR yang melibatkan Harun Masiku — kader PDI-P yang buron sejak KPK hendak menangkapnya di bandara pada Januari 2020. Hasto diduga memerintahkan Masiku merendam ponselnya agar tidak terlacak, serta menginstruksikan penghancuran barang bukti.",
     tags:["tersangka","pdip","politisi"],
     lhkpn_latest:12000000000, lhkpn_year:2023,
     connections_summary:"Sekjen PDIP, tersangka KPK kasus Harun Masiku",
@@ -1645,12 +1645,12 @@ export const PERSONS = [
     analysis:{
       ideology_score:-4, populism_score:5, corruption_risk:"tersangka",
       nationalism:6, religiosity:4,
-      track_record:"Operator politik handal di balik layar PDI-P. Kasus Harun Masiku menjadi batu sandungan serius bagi partai yang mengklaim anti-korupsi.",
+      track_record:"Sebagai Sekjen PDI-P, Hasto mengelola mesin partai Megawati dengan tangan besi — koordinasi Pilkada, penentuan calon, dan disiplin fraksi. Namun kasus Harun Masiku menghantamnya langsung: KPK menduga Hasto tidak hanya mengetahui keberadaan buronan tersebut, tetapi aktif menghalang-halangi penangkapan selama bertahun-tahun. Penetapan tersangka Januari 2025 mempermalukan PDI-P yang selama ini memposisikan diri sebagai partai anti-korupsi.",
       policy_direction:"Nasionalis-Marhaenis (PDI-P)"
     }
   },
   {
-    id:"tom_lembong", name:"Thomas Trikasih Lembong", photo_url:null, photo_placeholder:"TL",
+    id:"tom_lembong", name:"Thomas Trikasih Lembong", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Thomas_Lembong_(cropped).jpg?width=400", photo_placeholder:"TL",
     born:"4 Mar 1971", born_place:"Jakarta", religion:"Kristen",
     education:"S1 Arsitektur Harvard University; MBA Harvard Business School",
     party_id:"nas", party_role:"Anggota",
@@ -1659,7 +1659,7 @@ export const PERSONS = [
       {title:"Menteri Perdagangan", institution:"Kemendag", region:"Nasional", start:"2015", end:"2016", is_current:false},
     ],
     tier:"nasional", region_id:null,
-    bio:"Eks-bankir dan ekonom yang menjabat Mendag dan Kepala BKPM di era Jokowi. Dekat dengan gerakan Anies Baswedan. Ditangkap Kejaksaan Agung November 2024 atas dugaan korupsi impor gula 2015-2016. Banyak pihak menduga kriminalisasi politik karena posisinya sebagai kritikus pemerintah.",
+    bio:"Eks-bankir Goldman Sachs dan ekonom Harvard yang menjabat Menteri Perdagangan 2015–2016 dan Kepala BKPM 2016–2019 di era Jokowi. Ditangkap Kejaksaan Agung pada November 2024 atas dugaan korupsi izin impor gula yang diterbitkannya — diduga merugikan negara Rp 194,7 miliar. Penangkapannya menimbulkan kecurigaan luas akan kriminalisasi politik, karena Tom adalah pendukung vokal Anies Baswedan dan kerap mengkritik kebijakan Prabowo di media sosial serta podcast.",
     tags:["tersangka","eks-menteri","nasdem","ekonom"],
     lhkpn_latest:35000000000, lhkpn_year:2019,
     connections_summary:"Eks-Mendag, tersangka Kejagung, dekat Anies",
@@ -1672,7 +1672,7 @@ export const PERSONS = [
     analysis:{
       ideology_score:2, populism_score:4, corruption_risk:"tersangka",
       nationalism:5, religiosity:3,
-      track_record:"Teknokrat pro-pasar yang karirnya terhenti akibat jeratan hukum. Kasusnya menjadi simbol kekhawatiran kriminalisasi lawan politik.",
+      track_record:"Sebagai Mendag 2015–2016, Tom mengeluarkan izin impor gula kristal mentah untuk PT Angels Products — yang menjadi dasar dakwaan Kejagung. Ditangkap November 2024, berbulan-bulan setelah Prabowo menjabat, dan tiga tahun setelah Tom aktif mengkritik pemerintah. Kasusnya menjadi salah satu simbol paling kuat kekhawatiran kriminalisasi oposisi; sejumlah guru besar hukum menyebut dakwaan lemah secara substansi.",
       policy_direction:"Pro-pasar bebas, liberal ekonomi"
     }
   },
@@ -1701,7 +1701,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"anwar_usman", name:"Anwar Usman", photo_url:null, photo_placeholder:"AU",
+    id:"anwar_usman", name:"Anwar Usman", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Hakim_Konstitusi_Republik_Indonesia_Anwar_Usman_Resmi.png?width=400", photo_placeholder:"AU",
     born:"31 Dec 1956", born_place:"Bima, NTB", religion:"Islam",
     education:"S1 Hukum IAIN Jakarta; S3 Universitas Jayabaya",
     party_id:null, party_role:null,
@@ -1710,7 +1710,7 @@ export const PERSONS = [
       {title:"Ketua MK (dicopot)",         institution:"MK", region:"Nasional", start:"2018", end:"2023", is_current:false},
     ],
     tier:"nasional", region_id:null,
-    bio:"Ipar Presiden Jokowi yang dicopot dari jabatan Ketua MK November 2023 karena pelanggaran etik berat. Memimpin sidang yang mengubah syarat usia minimum Capres-Cawapres, meloloskan Gibran (putra Jokowi) maju sebagai Cawapres.",
+    bio:"Ipar Presiden Jokowi yang dicopot dari jabatan Ketua MK November 2023 karena pelanggaran etik berat. Memimpin sidang MK Nomor 90/PUU-XXI/2023 yang mengubah syarat usia minimum Capres-Cawapres dari 40 tahun menjadi 'pernah/sedang menjabat kepala daerah' — secara spesifik dan langsung meloloskan Gibran Rakabuming Raka (putra Jokowi, sekaligus keponakan Anwar Usman) maju sebagai Cawapres Prabowo. Majelis Kehormatan MK (MKMK) menyatakan Anwar terbukti melanggar etik berat dan mencopot jabatannya sebagai Ketua MK, namun ia tetap bertahan sebagai hakim anggota.",
     tags:["hakim","mk","ipar-presiden","kontroversi"],
     lhkpn_latest:8000000000, lhkpn_year:2023,
     connections_summary:"Ipar Jokowi, eks-Ketua MK, dicopot karena konflik kepentingan Gibran",
@@ -1723,7 +1723,7 @@ export const PERSONS = [
     analysis:{
       ideology_score:3, populism_score:2, corruption_risk:"tinggi",
       nationalism:5, religiosity:6,
-      track_record:"Karir kehakiman ternoda oleh keputusan kontroversial yang menguntungkan keluarga Jokowi. Momen paling gelap MK di era Reformasi.",
+      track_record:"Putusan MK No. 90/2023 yang mengubah syarat usia Capres-Cawapres secara langsung meloloskan Gibran Rakabuming — keponakannya sendiri — maju Pilpres 2024. MKMK menyatakan Anwar terbukti melanggar prinsip imparsialitas dan kode etik hakim secara berat; ia dicopot dari posisi Ketua MK namun tidak diberhentikan sebagai hakim. Peristiwa ini dinilai sebagai momen tergelap Mahkamah Konstitusi sejak era Reformasi.",
       policy_direction:"N/A (yudisial)"
     }
   },
@@ -1912,7 +1912,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"mahyeldi", name:"Mahyeldi Ansharullah", photo_url:null, photo_placeholder:"MA",
+    id:"mahyeldi", name:"Mahyeldi Ansharullah", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Sumatera_Barat_Mahyeldi_2025.jpg?width=400", photo_placeholder:"MA",
     born:"1966", born_place:"Sumatera Barat", religion:"Islam",
     education:"S1 Pertanian, Universitas Andalas",
     party_id:"pks", party_role:"Kader",
@@ -1957,7 +1957,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"al_haris", name:"Al Haris", photo_url:null, photo_placeholder:"AH",
+    id:"al_haris", name:"Al Haris", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Jambi_Al_Haris.jpg?width=400", photo_placeholder:"AH",
     born:"1972", born_place:"Jambi", religion:"Islam",
     education:"S1 Ekonomi",
     party_id:"ger", party_role:"Kader",
@@ -1980,7 +1980,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"herman_deru", name:"Herman Deru", photo_url:null, photo_placeholder:"HD",
+    id:"herman_deru", name:"Herman Deru", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Herman_Deru,_Gubernur_Sumatera_Selatan.jpg?width=400", photo_placeholder:"HD",
     born:"1966", born_place:"Sumatera Selatan", religion:"Islam",
     education:"S1 Pertanian",
     party_id:"nas", party_role:"Kader",
@@ -2002,7 +2002,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"helmi_hasan", name:"Helmi Hasan", photo_url:null, photo_placeholder:"HH",
+    id:"helmi_hasan", name:"Helmi Hasan", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Helmi_Hasan,_Gubernur_Bengkulu.png?width=400", photo_placeholder:"HH",
     born:"1970", born_place:"Bengkulu", religion:"Islam",
     education:"S1 Hukum",
     party_id:"pks", party_role:"Kader",
@@ -2024,7 +2024,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"rahmat_mirzani", name:"Rahmat Mirzani Djausal", photo_url:null, photo_placeholder:"RMD",
+    id:"rahmat_mirzani", name:"Rahmat Mirzani Djausal", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KPU_Rahmat_Mirzani_Djausal_(cropped).jpg?width=400", photo_placeholder:"RMD",
     born:"1975", born_place:"Lampung", religion:"Islam",
     education:"S1 Teknik",
     party_id:"ger", party_role:"Ketua DPD Gerindra Lampung",
@@ -2046,7 +2046,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hidayat_arsani", name:"Hidayat Arsani", photo_url:null, photo_placeholder:"HA",
+    id:"hidayat_arsani", name:"Hidayat Arsani", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Hidayat_Arsani_Gubernur_Provinsi_Kepulauan_Bangka_Belitung.jpg?width=400", photo_placeholder:"HA",
     born:"1973", born_place:"Bangka Belitung", religion:"Islam",
     education:"S1 Hukum",
     party_id:"ger", party_role:"Kader",
@@ -2068,7 +2068,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ansar_ahmad", name:"Ansar Ahmad", photo_url:null, photo_placeholder:"AA",
+    id:"ansar_ahmad", name:"Ansar Ahmad", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Ansar_Ahmad_Gubernur_Kepri.png?width=400", photo_placeholder:"AA",
     born:"1966", born_place:"Kepulauan Riau", religion:"Islam",
     education:"S1 Teknik Sipil",
     party_id:"gol", party_role:"Kader",
@@ -2091,7 +2091,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"lalu_iqbal", name:"Lalu Muhamad Iqbal", photo_url:null, photo_placeholder:"LI",
+    id:"lalu_iqbal", name:"Lalu Muhamad Iqbal", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Lalu_Muhammad_Iqbal,_Gubernur_Nusa_Tenggara_Barat_(cropped).jpg?width=400", photo_placeholder:"LI",
     born:"1974", born_place:"Lombok, NTB", religion:"Islam",
     education:"S1 Hubungan Internasional; Diplomat Karir Kemlu",
     party_id:"nas", party_role:"Kader",
@@ -2113,7 +2113,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"melkiades", name:"Emanuel Melkiades Laka Lena", photo_url:null, photo_placeholder:"EML",
+    id:"melkiades", name:"Emanuel Melkiades Laka Lena", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Melki_Laka_Lena.jpg?width=400", photo_placeholder:"EML",
     born:"1970", born_place:"Flores, NTT", religion:"Katolik",
     education:"S1 Ekonomi",
     party_id:"gol", party_role:"Anggota DPR",
@@ -2135,7 +2135,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ria_norsan", name:"Ria Norsan", photo_url:null, photo_placeholder:"RN",
+    id:"ria_norsan", name:"Ria Norsan", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Ria_Norsan_Gubernur_Kalimantan_Barat.jpg?width=400", photo_placeholder:"RN",
     born:"1965", born_place:"Kalimantan Barat", religion:"Islam",
     education:"S1 Administrasi Negara",
     party_id:"gol", party_role:"Kader",
@@ -2158,7 +2158,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"agustiar_sabran", name:"Agustiar Sabran", photo_url:null, photo_placeholder:"AGS",
+    id:"agustiar_sabran", name:"Agustiar Sabran", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Kalimantan_Tengah_Agustiar_Sabran.png?width=400", photo_placeholder:"AGS",
     born:"1972", born_place:"Kalimantan Tengah", religion:"Islam",
     education:"S1 Hukum",
     party_id:"ger", party_role:"Kader",
@@ -2202,7 +2202,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"zainal_arifin", name:"Zainal Arifin Paliwang", photo_url:null, photo_placeholder:"ZAP",
+    id:"zainal_arifin", name:"Zainal Arifin Paliwang", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Kaltara_Zainal_Arifin_Paliwang.png?width=400", photo_placeholder:"ZAP",
     born:"1965", born_place:"Kalimantan Utara", religion:"Islam",
     education:"Akademi Kepolisian",
     party_id:"ger", party_role:"Kader",
@@ -2224,7 +2224,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"yulius_selvanus", name:"Yulius Selvanus", photo_url:null, photo_placeholder:"YS",
+    id:"yulius_selvanus", name:"Yulius Selvanus", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Yulius_Selvanus,_Gubernur_Sulawesi_Utara.png?width=400", photo_placeholder:"YS",
     born:"1972", born_place:"Sulawesi Utara", religion:"Kristen",
     education:"Akademi Kepolisian",
     party_id:"ger", party_role:"Kader",
@@ -2245,7 +2245,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"anwar_hafid", name:"Anwar Hafid", photo_url:null, photo_placeholder:"ANH",
+    id:"anwar_hafid", name:"Anwar Hafid", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Anwar_Hafid,_Portrait_Governor_of_Central_Sulawesi.png?width=400", photo_placeholder:"ANH",
     born:"1970", born_place:"Sulawesi Tengah", religion:"Islam",
     education:"S1 Hukum",
     party_id:"ger", party_role:"Kader",
@@ -2267,7 +2267,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"andi_sudirman", name:"Andi Sudirman Sulaiman", photo_url:null, photo_placeholder:"ASS",
+    id:"andi_sudirman", name:"Andi Sudirman Sulaiman", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Official_Portrait_of_Andi_Sudirman_Sulaiman,_Governor_of_South_Sulawesi.jpg?width=400", photo_placeholder:"ASS",
     born:"1986", born_place:"Makassar, Sulawesi Selatan", religion:"Islam",
     education:"S1 Teknik Sipil ITB; S2 Teknik Sipil ITB",
     party_id:"nas", party_role:"Kader",
@@ -2289,7 +2289,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"andi_sumangerukka", name:"Andi Sumangerukka", photo_url:null, photo_placeholder:"ASUK",
+    id:"andi_sumangerukka", name:"Andi Sumangerukka", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Official_Portrait_of_Andi_Sumangerukka,_Governor_of_Southeast_Sulawesi.jpg?width=400", photo_placeholder:"ASUK",
     born:"1968", born_place:"Sulawesi Tenggara", religion:"Islam",
     education:"Akademi Kepolisian",
     party_id:"ger", party_role:"Kader",
@@ -2310,7 +2310,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"gusnar_ismail", name:"Gusnar Ismail", photo_url:null, photo_placeholder:"GI",
+    id:"gusnar_ismail", name:"Gusnar Ismail", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gusnar_Ismail,_Gubernur_Gorontalo.jpg?width=400", photo_placeholder:"GI",
     born:"1965", born_place:"Gorontalo", religion:"Islam",
     education:"S1 Ekonomi",
     party_id:"gol", party_role:"Kader",
@@ -2376,7 +2376,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sherly_tjoanda", name:"Sherly Tjoanda", photo_url:null, photo_placeholder:"ST",
+    id:"sherly_tjoanda", name:"Sherly Tjoanda", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Maluku_Utara,_Sherly_Tjoanda.jpg?width=400", photo_placeholder:"ST",
     born:"1975", born_place:"Maluku Utara", religion:"Kristen",
     education:"S1 Ekonomi",
     party_id:"ger", party_role:"Kader",
@@ -2398,7 +2398,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sultan_hb10", name:"Sri Sultan Hamengkubuwono X", photo_url:null, photo_placeholder:"SHX",
+    id:"sultan_hb10", name:"Sri Sultan Hamengkubuwono X", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Sultan_Hamengkubuwono_X,_Governor_of_Special_Region_of_Yogyakarta.jpg?width=400", photo_placeholder:"SHX",
     born:"2 Apr 1946", born_place:"Yogyakarta", religion:"Islam",
     education:"S1 Hukum UGM; S3 Hukum UGM",
     party_id:null, party_role:null,
@@ -2423,7 +2423,7 @@ export const PERSONS = [
   // ─── MENTERI & PEJABAT NASIONAL TAMBAHAN ────────────────────────────────
 
   {
-    id:"budi_arie", name:"Budi Arie Setiadi", photo_url:null, photo_placeholder:"BA",
+    id:"budi_arie", name:"Budi Arie Setiadi", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Budi_Arie,_Menkominfo.jpg?width=400", photo_placeholder:"BA",
     born:"1972", born_place:"Jakarta", religion:"Islam",
     education:"S1 Fisip UI",
     party_id:"psi", party_role:"Ketua Umum Dewan Pembina",
@@ -2456,7 +2456,7 @@ export const PERSONS = [
       {title:"Ketua Umum PSSI", institution:"PSSI", region:"Nasional", start:"2023", end:null, is_current:true},
     ],
     tier:"nasional", region_id:null,
-    bio:"Pengusaha media dan olahraga. Pemilik Inter Milan (2013-2018), Anfield (saham Liverpool), dan media grup iNews/ANTV. Menteri BUMN dua periode: era Jokowi dan Prabowo. Ketua PSSI reformis sejak 2023. Dikenal dekat Prabowo dan Jokowi.",
+    bio:"Konglomerat media dan olahraga yang menjabat Menteri BUMN dua periode (2019–2024 era Jokowi, 2024–sekarang era Prabowo). Mantan pemilik saham mayoritas Inter Milan (2013-2018) dan pemegang saham Liverpool FC. Di bawah kepemimpinannya, ia mendorong restrukturisasi ratusan BUMN, konsolidasi perbankan (merger Bank Syariah BUMN menjadi BSI), dan menginisiasi pembentukan Danantara — sovereign wealth fund Indonesia yang ia jabat sebagai CEO pada 2025.",
     tags:["menteri","pengusaha","bumn","pssi","olahraga"],
     lhkpn_latest:2500000000000, lhkpn_year:2023,
     lhkpn_history:[{year:2019,amount:1800000000000},{year:2020,amount:1950000000000},{year:2021,amount:2100000000000},{year:2022,amount:2300000000000},{year:2023,amount:2500000000000}],
@@ -2465,7 +2465,7 @@ export const PERSONS = [
     analysis:{
       ideology_score:2, populism_score:6, corruption_risk:"sedang",
       nationalism:7, religiosity:6,
-      track_record:"Menteri BUMN dua periode. Reformasi GoTo, BRI, Telkom. Ketum PSSI reformis. Pengusaha sukses internasional.",
+      track_record:"Sebagai Menteri BUMN, Erick melakukan restrukturisasi besar: jumlah BUMN dipangkas dari 142 menjadi sekitar 40 holding, merger Bank Syariah BUMN menjadi BSI, dan konsolidasi Pelindo. Reformasi PSSI-nya menghasilkan Timnas Indonesia masuk 16 besar kualifikasi Piala Dunia 2026 — pencapaian bersejarah. Danantara yang ia pimpin sebagai CEO menargetkan kelola aset BUMN senilai $900 miliar, tetapi transparansi dan tata kelolanya terus dipertanyakan publik.",
       policy_direction:"Pro-privatisasi BUMN, investasi asing"
     }
   },
@@ -2479,7 +2479,7 @@ export const PERSONS = [
       {title:"Menteri PUPR", institution:"Kementerian PUPR", region:"Nasional", start:"2014", end:"2024", is_current:false},
     ],
     tier:"nasional", region_id:null,
-    bio:"Teknokrat infrastruktur andalan Jokowi selama 10 tahun (2014-2024). Menteri PUPR yang mengawal ribuan proyek infrastruktur nasional. Ditunjuk Prabowo sebagai Kepala Otorita IKN Nusantara untuk melanjutkan mega-proyek ibu kota baru di Kalimantan Timur.",
+    bio:"Teknokrat infrastruktur andalan Jokowi selama satu dekade (2014–2024) sebagai Menteri PUPR. Doktor teknik sipil dari Colorado State University yang karirnya dimulai di Dirjen SDA Kementerian PU. Ditunjuk Prabowo sebagai Kepala Otorita IKN (OIKN) Nusantara untuk melanjutkan mega-proyek pemindahan ibu kota di Kalimantan Timur — proyek ambisius senilai Rp 466 triliun yang ia harus jaga momentumnya di tengah keterbatasan anggaran efisiensi Prabowo.",
     tags:["teknokrat","infrastruktur","ikn","pupr"],
     lhkpn_latest:45000000000, lhkpn_year:2023,
     connections_summary:"Kepala OIKN Nusantara, eks-Menteri PUPR 10 tahun",
@@ -2487,7 +2487,7 @@ export const PERSONS = [
     analysis:{
       ideology_score:0, populism_score:2, corruption_risk:"rendah",
       nationalism:8, religiosity:5,
-      track_record:"Menteri PUPR terlama dan paling produktif era Jokowi. Memimpin ribuan km jalan tol, bendungan, dan proyek infrastruktur. Kini amanahkan pindahkan IKN Nusantara.",
+      track_record:"Selama 10 tahun sebagai Menteri PUPR, Basuki mengawal 2.000+ km jalan tol baru, 61 bendungan, dan ratusan ribu unit rumah rakyat — warisan infrastruktur terbesar sejak era Soeharto. Sebelum era PUPR, ia memimpin pembangunan Semen Gresik/Semen Indonesia serta berbagai proyek bendungan strategis. Kini sebagai Kepala OIKN, ia berhadapan dengan lambatnya realisasi investasi swasta dan tekanan efisiensi anggaran yang memangkas alokasi IKN drastis.",
       policy_direction:"Pro-infrastruktur, teknokrat"
     }
   },
@@ -2504,7 +2504,7 @@ export const PERSONS = [
       {title:"Anggota DPR RI", institution:"DPR RI", region:"Sumatera Utara", start:"2009", end:"2024", is_current:false},
     ],
     tier:"nasional", region_id:null,
-    bio:"Mantan jurnalis Metro TV yang beralih ke politik. Sempat menjabat Ketua Komisi I DPR yang membidangi pertahanan, intelijen, luar negeri sebelum diangkat sebagai Menteri Komunikasi dan Digital dalam Kabinet Merah Putih Prabowo.",
+    bio:"Mantan jurnalis Metro TV yang beralih ke politik sejak 2009 via Golkar. Selama 15 tahun di DPR, Meutya menjadi wajah Komisi I yang membidangi pertahanan, intelijen, dan luar negeri — membuatnya paham ekosistem keamanan siber dan regulasi digital. Diangkat Prabowo sebagai Menteri Komunikasi dan Digital (Menkomdigi) Oktober 2024, Meutya kini menghadapi tantangan besar: mengatur AI, konten digital, dan keamanan siber dalam era disrupsi teknologi yang cepat.",
     tags:["dpr","perempuan","jurnalis","komisi-1","menteri"],
     lhkpn_latest:8500000000, lhkpn_year:2023,
     connections_summary:"Menkomdigi, eks-Ketua Komisi I DPR, Golkar",
@@ -2512,12 +2512,12 @@ export const PERSONS = [
     analysis:{
       ideology_score:3, populism_score:4, corruption_risk:"rendah",
       nationalism:6, religiosity:4,
-      track_record:"Mantan jurnalis Metro TV. Karir DPR sejak 2009. Dikenal vokal soal pertahanan dan kebebasan pers. Ditunjuk Prabowo sebagai Menkomdigi.",
+      track_record:"15 tahun di Komisi I DPR membuatnya fasih soal regulasi pertahanan, intelijen, dan keamanan siber — latar ideal untuk Menkomdigi. Sebagai kader Golkar loyalis, Meutya berperan menjembatani koalisi pemerintahan Prabowo-Golkar. Sebagai Menkomdigi, ia menghadapi tekanan besar terkait regulasi konten, pemberantasan judi online, dan implementasi Perpres AI — di tengah warisan RUU Penyiaran kontroversial yang mengancam kebebasan jurnalisme investigatif.",
       policy_direction:"Pro-pertahanan, Nasionalis"
     }
   },
   {
-    id:"utut_adianto", name:"Utut Adianto", photo_url:null, photo_placeholder:"UA",
+    id:"utut_adianto", name:"Utut Adianto", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KPU_Utut_Adianto.jpg?width=400", photo_placeholder:"UA",
     born:"1965", born_place:"Surakarta", religion:"Islam",
     education:"Grandmaster Catur Internasional (FIDE)",
     party_id:"pdip", party_role:"Ketua Komisi II DPR",
@@ -2651,7 +2651,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hary_tanoe", name:"Hary Tanoesoedibjo", photo_url:null, photo_placeholder:"HT",
+    id:"hary_tanoe", name:"Hary Tanoesoedibjo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KPU_Hary_Tanoesoedibjo.jpg?width=400", photo_placeholder:"HT",
     born:"26 Sep 1965", born_place:"Surabaya", religion:"Kristen",
     education:"S1 Bisnis, Carleton University Ottawa, Kanada; MBA, University of Ottawa",
     party_id:"per", party_role:"Ketua Umum",
