@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
@@ -43,6 +44,7 @@ const kimSeats = KIM_PARTIES.reduce((sum, id) => {
 const pdipSeats = PARTY_MAP['pdip']?.seats_2024 || 0
 
 export default function Dashboard() {
+  const { user } = useAuth()
   const today = new Date().toLocaleDateString('id-ID', {
     weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
   })
@@ -56,7 +58,7 @@ export default function Dashboard() {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
           <div>
             <h1 className="text-xl font-bold text-text-primary">
-              Selamat datang, Admin 👋
+              Selamat datang, {user?.name || 'Analis'} 👋
             </h1>
             <p className="text-text-secondary text-sm mt-1">
               Platform pemantauan transparansi &amp; akuntabilitas politik Indonesia
@@ -64,6 +66,17 @@ export default function Dashboard() {
           </div>
           <span className="text-text-secondary text-sm">{today}</span>
         </div>
+      </div>
+
+      {/* CPI Transparency Banner */}
+      <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-50 border border-amber-200 text-sm">
+        <span className="text-amber-600 text-lg flex-shrink-0">📊</span>
+        <div className="flex-1 min-w-0">
+          <span className="font-semibold text-amber-800">Indeks Persepsi Korupsi Indonesia 2023: </span>
+          <span className="text-amber-700">34/100 (Peringkat 115 dari 180 negara) — </span>
+          <span className="text-amber-600">Menurun dari skor 40 pada 2019</span>
+        </div>
+        <span className="ml-auto text-xs text-amber-500 flex-shrink-0 hidden sm:block">Transparency International</span>
       </div>
 
       {/* KPI Cards */}

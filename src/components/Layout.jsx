@@ -1,141 +1,233 @@
 import { useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import { useTheme } from '../contexts/ThemeContext'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ToastContainer } from './ui'
 
-const NAV_LINKS = [
-  { to: '/',         label: 'Dashboard',         icon: '🏠' },
-  { to: '/persons',  label: 'Tokoh',             icon: '👥' },
-  { to: '/parties',  label: 'Partai',            icon: '🎭' },
-  { to: '/network',  label: 'Jaringan Politik',  icon: '🕸️' },
-  { to: '/regions',  label: 'Peta Wilayah',      icon: '🗺️' },
-  { to: '/elections',label: 'Pemilu',            icon: '📊' },
-  { to: '/lhkpn',   label: 'LHKPN',             icon: '💰' },
-  { to: '/news',     label: 'Berita',            icon: '📰' },
-  { to: '/agendas',  label: 'Agenda & Janji',    icon: '📋' },
-  { to: '/ormas',    label: 'Ormas & Agama',     icon: '🏛️' },
+const NAV = [
+  { to:'/',         icon:'🏠', label:'Dashboard' },
+  { to:'/persons',  icon:'👥', label:'Tokoh' },
+  { to:'/parties',  icon:'🎭', label:'Partai' },
+  { to:'/network',  icon:'🕸️', label:'Jaringan' },
+  { to:'/regions',  icon:'🗺️', label:'Wilayah' },
+  { to:'/elections',icon:'📊', label:'Pemilu' },
+  { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
+  { to:'/news',     icon:'📰', label:'Berita' },
+  { to:'/agendas',  icon:'📋', label:'Agenda' },
+  { to:'/ormas',    icon:'🏛️', label:'Ormas' },
+]
+
+// Bottom nav: 5 most important for mobile
+const MOBILE_NAV = [
+  { to:'/',        icon:'🏠', label:'Beranda' },
+  { to:'/persons', icon:'👥', label:'Tokoh' },
+  { to:'/network', icon:'🕸️', label:'Jaringan' },
+  { to:'/lhkpn',  icon:'💰', label:'LHKPN' },
+  { to:'/news',   icon:'📰', label:'Berita' },
 ]
 
 export default function Layout({ children }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const { logout } = useAuth()
+  const [collapsed, setCollapsed] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const { logout, user } = useAuth()
+  const { toggleTheme, isDark } = useTheme()
   const navigate = useNavigate()
+  const location = useLocation()
 
-  const handleLogout = () => {
-    logout()
-    navigate('/login')
-  }
+  // Breadcrumb
+  const pageLabel = NAV.find(n =>
+    n.to !== '/' ? location.pathname.startsWith(n.to) : location.pathname === '/'
+  )?.label || 'PetaPolitik'
 
-  const SidebarContent = () => (
-    <>
-      {/* Logo */}
-      <div className="px-5 py-5 border-b border-border/50">
-        <div className="flex items-center gap-3">
-          <span className="text-2xl">🗺️</span>
-          <div>
-            <h1 className="text-base font-bold text-text-primary">PetaPolitik</h1>
-            <p className="text-[10px] text-text-secondary leading-none">Platform Intelijen Politik Indonesia</p>
-          </div>
+  return (
+    <div className="flex h-screen overflow-hidden bg-bg-app">
+      {/* ── Desktop Sidebar ── */}
+      <aside
+        className="hidden md:flex flex-col flex-shrink-0 bg-bg-sidebar transition-all duration-300 overflow-hidden"
+        style={{ width: collapsed ? 64 : 256 }}
+      >
+        {/* Logo */}
+        <div className="flex items-center gap-3 px-4 py-5 border-b border-white/5">
+          <span className="text-2xl flex-shrink-0">🗺️</span>
+          {!collapsed && (
+            <div className="overflow-hidden">
+              <h1 className="text-sm font-bold text-white leading-tight">PetaPolitik</h1>
+              <p className="text-[10px] text-white/40 leading-none truncate">Intelijen Politik Indonesia</p>
+            </div>
+          )}
         </div>
+
+        {/* Nav */}
+        <nav className="flex-1 px-2 py-3 overflow-y-auto space-y-0.5">
+          {NAV.map(link => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.to === '/'}
+              title={collapsed ? link.label : undefined}
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 group relative ${
+                  isActive
+                    ? 'bg-white/10 text-white border-l-2 border-red-500'
+                    : 'text-white/50 hover:text-white hover:bg-white/5'
+                }`
+              }
+            >
+              <span className="text-base flex-shrink-0">{link.icon}</span>
+              {!collapsed && <span className="truncate">{link.label}</span>}
+              {/* Tooltip when collapsed */}
+              {collapsed && (
+                <div className="absolute left-full ml-2 px-2.5 py-1.5 bg-gray-900 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 transition-opacity">
+                  {link.label}
+                </div>
+              )}
+            </NavLink>
+          ))}
+        </nav>
+
+        {/* Footer */}
+        <div className="p-3 border-t border-white/5 space-y-1">
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-white/40 hover:text-white hover:bg-white/5 text-xs transition-all"
+          >
+            <span className="text-base flex-shrink-0">{collapsed ? '→' : '←'}</span>
+            {!collapsed && <span>Kecilkan</span>}
+          </button>
+          <button
+            onClick={() => { logout(); navigate('/login'); }}
+            className="flex items-center gap-3 w-full px-3 py-2 rounded-lg text-white/40 hover:text-red-400 hover:bg-red-900/20 text-xs transition-all"
+          >
+            <span className="text-base flex-shrink-0">🚪</span>
+            {!collapsed && <span>Keluar</span>}
+          </button>
+        </div>
+      </aside>
+
+      {/* ── Main area ── */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Topbar */}
+        <header className="flex-shrink-0 h-14 flex items-center justify-between px-4 bg-bg-card border-b border-border shadow-sm">
+          {/* Left: mobile menu + breadcrumb */}
+          <div className="flex items-center gap-3">
+            {/* Mobile hamburger */}
+            <button
+              className="md:hidden text-xl p-1 text-text-primary"
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >☰</button>
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-text-muted hidden sm:block">PetaPolitik</span>
+              <span className="text-text-muted hidden sm:block">/</span>
+              <span className="text-text-primary font-medium">{pageLabel}</span>
+            </div>
+          </div>
+
+          {/* Right: search pill + theme + avatar */}
+          <div className="flex items-center gap-2">
+            {/* CPI badge */}
+            <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-xs text-orange-700">
+              <span>⚠️</span>
+              <span>CPI 34/100</span>
+            </div>
+
+            {/* Search pill */}
+            <button
+              className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-bg-elevated text-text-secondary hover:border-border-strong text-xs transition-colors"
+            >
+              <span>🔍</span>
+              <span>Cari...</span>
+              <kbd className="px-1.5 py-0.5 rounded text-[10px] border border-border bg-bg-card text-text-muted">⌘K</kbd>
+            </button>
+
+            {/* Theme toggle */}
+            <button
+              onClick={toggleTheme}
+              className="w-9 h-9 rounded-lg border border-border bg-bg-elevated hover:bg-bg-hover flex items-center justify-center text-base transition-all"
+              title={isDark ? 'Ganti ke mode terang' : 'Ganti ke mode gelap'}
+            >
+              {isDark ? '☀️' : '🌙'}
+            </button>
+
+            {/* User avatar */}
+            <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white text-xs font-bold">
+              {user?.name?.[0]?.toUpperCase() || 'A'}
+            </div>
+          </div>
+        </header>
+
+        {/* Mobile slide-out */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <>
+              <motion.div
+                className="fixed inset-0 bg-black/50 z-40 md:hidden"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                onClick={() => setMobileOpen(false)}
+              />
+              <motion.div
+                className="fixed left-0 top-0 bottom-0 w-64 bg-bg-sidebar z-50 md:hidden flex flex-col"
+                initial={{ x: -256 }} animate={{ x: 0 }} exit={{ x: -256 }}
+                transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+              >
+                <div className="flex items-center justify-between p-4 border-b border-white/5">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">🗺️</span>
+                    <span className="text-white font-bold text-sm">PetaPolitik</span>
+                  </div>
+                  <button onClick={() => setMobileOpen(false)} className="text-white/50 text-xl">×</button>
+                </div>
+                <nav className="flex-1 px-2 py-3 overflow-y-auto space-y-0.5">
+                  {NAV.map(link => (
+                    <NavLink
+                      key={link.to}
+                      to={link.to}
+                      end={link.to === '/'}
+                      onClick={() => setMobileOpen(false)}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm ${
+                          isActive
+                            ? 'bg-white/10 text-white border-l-2 border-red-500'
+                            : 'text-white/50 hover:text-white hover:bg-white/5'
+                        }`
+                      }
+                    >
+                      <span>{link.icon}</span>{link.label}
+                    </NavLink>
+                  ))}
+                </nav>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+
+        {/* Page content */}
+        <main className="flex-1 overflow-y-auto p-4 md:p-6 pb-20 md:pb-6 animate-fade-in">
+          {children}
+        </main>
       </div>
 
-      {/* Nav links */}
-      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-0.5">
-        {NAV_LINKS.map(link => (
+      {/* ── Mobile Bottom Navigation ── */}
+      <nav className="mobile-nav justify-around">
+        {MOBILE_NAV.map(link => (
           <NavLink
             key={link.to}
             to={link.to}
             end={link.to === '/'}
-            onClick={() => setSidebarOpen(false)}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
-                isActive
-                  ? 'bg-accent-red/10 text-accent-red border-l-2 border-accent-red pl-2.5 font-medium'
-                  : 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated'
+              `flex flex-col items-center gap-0.5 px-3 py-1 rounded-lg transition-all ${
+                isActive ? 'text-red-400' : 'text-white/40'
               }`
             }
           >
-            <span className="text-base">{link.icon}</span>
-            {link.label}
+            <span className="text-xl">{link.icon}</span>
+            <span className="text-[10px]">{link.label}</span>
           </NavLink>
         ))}
       </nav>
 
-      {/* Footer */}
-      <div className="px-4 py-4 border-t border-border/50 text-xs text-text-secondary">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="w-7 h-7 rounded-full bg-accent-red/20 flex items-center justify-center text-accent-red text-xs font-bold">A</div>
-          <div>
-            <p className="text-text-primary text-xs font-medium">Admin</p>
-            <p className="text-[10px]">Analis Politik</p>
-          </div>
-        </div>
-        <button
-          onClick={handleLogout}
-          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-red-400 hover:bg-red-900/20 transition-colors"
-        >
-          <span>🚪</span> Keluar
-        </button>
-      </div>
-    </>
-  )
-
-  return (
-    <div className="flex h-screen bg-bg-app text-text-primary overflow-hidden">
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:flex w-64 flex-col bg-bg-sidebar border-r border-border flex-shrink-0">
-        <SidebarContent />
-      </aside>
-
-      {/* Mobile Sidebar Overlay */}
-      <AnimatePresence>
-        {sidebarOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 z-40 bg-black/60 lg:hidden"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              onClick={() => setSidebarOpen(false)}
-            />
-            <motion.aside
-              className="fixed left-0 top-0 h-full z-50 w-64 flex flex-col bg-bg-sidebar border-r border-border lg:hidden"
-              initial={{ x: -256 }} animate={{ x: 0 }} exit={{ x: -256 }}
-              transition={{ type: 'tween', duration: 0.2 }}
-            >
-              <SidebarContent />
-            </motion.aside>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Bar */}
-        <header className="h-14 bg-bg-sidebar border-b border-border flex items-center justify-between px-4 flex-shrink-0">
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-bg-elevated text-text-secondary"
-            onClick={() => setSidebarOpen(true)}
-          >
-            ☰
-          </button>
-
-          <div className="flex items-center gap-3 ml-auto">
-            <span className="flex items-center gap-1.5 px-3 py-1 bg-red-900/20 border border-red-800/40 rounded-full text-xs text-red-400">
-              Indonesia 🇮🇩
-            </span>
-            <span className="text-xs text-text-secondary hidden sm:block">
-              {new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
-            </span>
-            <div className="w-8 h-8 rounded-full bg-accent-red/20 flex items-center justify-center text-accent-red text-xs font-bold">A</div>
-          </div>
-        </header>
-
-        {/* Page Content */}
-        <main className="flex-1 overflow-y-auto">
-          <div className="p-4 md:p-6 max-w-screen-2xl mx-auto">
-            {children}
-          </div>
-        </main>
-      </div>
+      <ToastContainer />
     </div>
   )
 }

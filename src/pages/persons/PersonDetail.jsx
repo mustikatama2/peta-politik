@@ -71,48 +71,90 @@ export default function PersonDetail() {
   // Related agendas
   const personAgendas = AGENDAS.filter(a => a.subject_id === person.id)
 
+  const RISK_CONFIG = {
+    rendah:    { label: '✓ Bersih',     cls: 'risk-rendah' },
+    sedang:    { label: '⚠ Sedang',     cls: 'risk-sedang' },
+    tinggi:    { label: '⚠ Tinggi',     cls: 'risk-tinggi' },
+    tersangka: { label: '🔴 Tersangka', cls: 'risk-tersangka' },
+    terpidana: { label: '⛔ Terpidana', cls: 'risk-terpidana' },
+  }
+  const riskKey = person.analysis?.corruption_risk || 'rendah'
+
   return (
     <div className="space-y-5">
-      {/* Back button */}
-      <button
-        onClick={() => navigate('/persons')}
-        className="text-text-secondary hover:text-text-primary text-sm flex items-center gap-2 transition-colors"
+      {/* Hero section */}
+      <div
+        className="relative rounded-2xl overflow-hidden p-6 md:p-8"
+        style={{
+          background: party
+            ? `linear-gradient(135deg, ${party.color}22 0%, ${party.color}08 100%)`
+            : 'var(--bg-elevated)',
+          border: `1px solid ${party ? party.color + '33' : 'var(--border)'}`,
+          borderLeft: party ? `4px solid ${party.color}` : undefined,
+        }}
       >
-        ← Kembali ke Daftar Tokoh
-      </button>
-
-      {/* Header */}
-      <Card className="p-5">
-        <div className="flex flex-col sm:flex-row gap-5">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+          {/* Large avatar */}
           <Avatar
             name={person.name}
             photoUrl={person.photo_url}
             color={party?.color}
             size="xl"
+            className="ring-4 ring-bg-card flex-shrink-0"
           />
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-start justify-between gap-2">
-              <div>
-                <h1 className="text-2xl font-bold text-text-primary">{person.name}</h1>
-                {currentPos && (
-                  <p className="text-text-secondary mt-1">{currentPos.title} · {currentPos.institution}</p>
-                )}
-              </div>
-              <RiskDot risk={person.analysis?.corruption_risk} />
+
+          {/* Info */}
+          <div className="flex-1">
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-xs text-text-secondary mb-2">
+              <button
+                onClick={() => navigate('/persons')}
+                className="hover:text-text-primary transition-colors"
+              >
+                Tokoh
+              </button>
+              <span>/</span>
+              <span className="text-text-primary">{person.name}</span>
             </div>
+            <h1 className="text-2xl md:text-3xl font-bold text-text-primary">{person.name}</h1>
+            {currentPos && (
+              <p className="text-text-secondary mt-1">{currentPos.title} · {currentPos.institution}</p>
+            )}
+
             <div className="flex flex-wrap gap-2 mt-3">
               {party && <Badge color={party.color}>{party.logo_emoji} {party.abbr}</Badge>}
-              <Badge variant={`risk-${person.analysis?.corruption_risk || 'rendah'}`}>
-                Risiko: {person.analysis?.corruption_risk || 'rendah'}
-              </Badge>
+              <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${RISK_CONFIG[riskKey]?.cls}`}>
+                {RISK_CONFIG[riskKey]?.label}
+              </span>
               <Badge variant="role">{person.tier}</Badge>
-              {person.tags?.map(t => (
-                <Tag key={t}>#{t}</Tag>
-              ))}
+              {person.tags?.map(t => <Tag key={t}>#{t}</Tag>)}
             </div>
           </div>
+
+          {/* LHKPN quick stat */}
+          {person.lhkpn_latest && (
+            <div className="text-center flex-shrink-0 bg-bg-card rounded-xl px-5 py-4 border border-border" style={{ boxShadow: 'var(--shadow-card)' }}>
+              <p className="text-xs text-text-secondary uppercase tracking-wider">LHKPN {person.lhkpn_year}</p>
+              <p className="text-2xl font-bold mt-1" style={{ color: 'var(--accent-gold)' }}>
+                {formatIDR(person.lhkpn_latest)}
+              </p>
+            </div>
+          )}
         </div>
-      </Card>
+
+        {/* Controversy alert banner */}
+        {person.controversies?.length > 0 && (
+          <div className="mt-5 flex items-start gap-3 bg-red-50 border border-red-200 rounded-lg p-3">
+            <span className="text-red-500 flex-shrink-0 mt-0.5">⚠️</span>
+            <div>
+              <p className="text-sm font-semibold text-red-800">Catatan Penting</p>
+              <p className="text-xs text-red-700 mt-0.5">
+                {person.controversies.length} kontroversi tercatat. Lihat tab Analisis untuk detail lengkap.
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* Tabs */}
       <Tabs tabs={TABS} active={activeTab} onChange={setActiveTab} />

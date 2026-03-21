@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 export function Btn({ variant = 'primary', className = '', children, ...props }) {
   const base = 'inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-offset-bg-card'
   const variants = {
-    primary: 'bg-accent-red hover:bg-red-700 text-white focus:ring-accent-red',
-    secondary: 'border border-border text-text-secondary hover:text-text-primary hover:border-gray-500 bg-transparent focus:ring-gray-500',
-    ghost: 'text-text-secondary hover:text-text-primary hover:bg-bg-elevated bg-transparent focus:ring-gray-500',
-    danger: 'bg-red-900 hover:bg-red-800 text-red-200 border border-red-700 focus:ring-red-500',
+    primary:   'bg-accent-red hover:opacity-90 text-white focus:ring-accent-red',
+    secondary: 'border border-border text-text-secondary hover:text-text-primary hover:bg-bg-hover bg-transparent focus:ring-border',
+    ghost:     'text-text-secondary hover:text-text-primary hover:bg-bg-hover bg-transparent focus:ring-border',
+    danger:    'bg-red-100 hover:bg-red-200 text-red-700 border border-red-200 focus:ring-red-500',
   }
   return (
     <button className={`${base} ${variants[variant]} ${className}`} {...props}>
@@ -44,18 +44,18 @@ export function Badge({ variant = 'default', color, children, className = '' }) 
     )
   }
   const variants = {
-    default: 'bg-gray-800 text-gray-300',
-    role: 'bg-blue-900/40 text-blue-300 border border-blue-700/30',
-    'status-janji': 'bg-blue-900/40 text-blue-300 border border-blue-700/30',
-    'status-proses': 'bg-yellow-900/40 text-yellow-300 border border-yellow-700/30',
-    'status-selesai': 'bg-green-900/40 text-green-300 border border-green-700/30',
-    'status-ingkar': 'bg-red-900/40 text-red-300 border border-red-700/30 animate-pulse-slow',
-    'status-batal': 'bg-gray-800 text-gray-400 border border-gray-700',
-    'risk-rendah': 'bg-green-900/40 text-green-300',
-    'risk-sedang': 'bg-yellow-900/40 text-yellow-300',
-    'risk-tinggi': 'bg-orange-900/40 text-orange-300',
-    'risk-tersangka': 'bg-red-900/60 text-red-300 border border-red-600/40',
-    'risk-terpidana': 'bg-red-950 text-red-200 border border-red-500 animate-pulse-slow',
+    default:         'bg-bg-elevated text-text-secondary border border-border',
+    role:            'bg-blue-50 text-blue-700 border border-blue-200',
+    'status-janji':  'status-janji',
+    'status-proses': 'status-proses',
+    'status-selesai':'status-selesai',
+    'status-ingkar': 'status-ingkar animate-pulse-slow',
+    'status-batal':  'status-batal',
+    'risk-rendah':   'risk-rendah',
+    'risk-sedang':   'risk-sedang',
+    'risk-tinggi':   'risk-tinggi',
+    'risk-tersangka':'risk-tersangka',
+    'risk-terpidana':'risk-terpidana animate-pulse-slow',
   }
   return (
     <span className={`${base} ${variants[variant] || variants.default} ${className}`}>
@@ -97,7 +97,7 @@ export function SearchBar({ value, onChange, placeholder = 'Cari...', className 
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-bg-elevated border border-border rounded-lg pl-10 pr-4 py-2.5 text-text-primary placeholder-text-secondary text-sm focus:outline-none focus:border-accent-blue transition-colors"
+        className="w-full bg-bg-elevated border border-border rounded-lg pl-10 pr-4 py-2.5 text-text-primary placeholder-text-muted text-sm focus:outline-none focus:border-accent-red transition-colors"
       />
     </div>
   )
@@ -118,9 +118,9 @@ export function Modal({ open, onClose, title, children, className = '' }) {
           className="fixed inset-0 z-50 flex items-center justify-center p-4"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         >
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
           <motion.div
-            className={`relative bg-bg-elevated border border-border rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto ${className}`}
+            className={`relative bg-bg-card border border-border rounded-2xl shadow-modal w-full max-w-lg max-h-[90vh] overflow-y-auto ${className}`}
             initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
           >
             {title && (
@@ -201,10 +201,9 @@ export function ToastContainer() {
           <motion.div
             key={t.id}
             initial={{ opacity: 0, x: 80 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 80 }}
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border text-sm font-medium max-w-xs ${
-              t.type === 'error' ? 'bg-red-900 border-red-700 text-red-100' :
-              t.type === 'success' ? 'bg-green-900 border-green-700 text-green-100' :
-              'bg-bg-elevated border-border text-text-primary'
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg border text-sm font-medium max-w-xs bg-bg-card border-border text-text-primary ${
+              t.type === 'error' ? 'border-l-4 !border-l-red-500' :
+              t.type === 'success' ? 'border-l-4 !border-l-green-500' : ''
             }`}
           >
             <span>{t.type === 'error' ? '❌' : t.type === 'success' ? '✅' : 'ℹ️'}</span>
@@ -249,7 +248,7 @@ export function Select({ value, onChange, options, className = '', placeholder =
     <select
       value={value}
       onChange={e => onChange(e.target.value)}
-      className={`bg-bg-elevated border border-border rounded-lg px-3 py-2 text-text-primary text-sm focus:outline-none focus:border-accent-blue ${className}`}
+      className={`bg-bg-elevated border border-border rounded-lg px-3 py-2 text-text-primary text-sm focus:outline-none focus:border-accent-red ${className}`}
     >
       <option value="">{placeholder}</option>
       {options.map(opt => (
