@@ -13,6 +13,7 @@ const NAV = [
   { to:'/',         icon:'🏠', label:'Dashboard' },
   { to:'/ranking',  icon:'🏆', label:'Power Rankings' },
   { to:'/kabinet',  icon:'🏛️', label:'Kabinet Merah Putih' },
+  { to:'/pemerintah', icon:'🏛️', label:'Pemerintahan' },
   { to:'/anggaran', icon:'💰', label:'Efisiensi APBN 2025' },
   { to:'/persons',  icon:'👥', label:'Tokoh' },
   { to:'/compare',  icon:'⚖️', label:'Bandingkan' },
@@ -37,16 +38,21 @@ const NAV = [
   { to:'/news',     icon:'📰', label:'Berita' },
   { to:'/agendas',  icon:'📋', label:'Agenda' },
   { to:'/ormas',    icon:'🏛️', label:'Ormas' },
+  { to:'/indikator',icon:'📊', label:'Indikator' },
 ]
 
-// Bottom nav: 5 most important for mobile
+// Bottom nav: 5 most important tabs for mobile
 const MOBILE_NAV = [
-  { to:'/',         icon:'🏠', label:'Beranda' },
-  { to:'/persons',  icon:'👥', label:'Tokoh' },
-  { to:'/network',  icon:'🕸️', label:'Jaringan' },
-  { to:'/analitik', icon:'📈', label:'Analitik' },
-  { to:'/news',     icon:'📰', label:'Berita' },
+  { to:'/',        icon:'🏠', label:'Beranda' },
+  { to:'/persons', icon:'👥', label:'Tokoh' },
+  { to:'/network', icon:'🕸️', label:'Jaringan' },
+  { to:'/news',    icon:'📰', label:'Berita' },
 ]
+
+// Remaining nav items shown in the "Lainnya" slide-up drawer
+const NAV_LAINNYA = NAV.filter(n =>
+  !['/', '/persons', '/network', '/news'].includes(n.to)
+)
 
 function BackToTop() {
   const [visible, setVisible] = useState(false)
@@ -70,6 +76,7 @@ function BackToTop() {
 export default function Layout({ children }) {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
   const { logout, user } = useAuth()
   const { toggleTheme, isDark } = useTheme()
   const navigate = useNavigate()
@@ -268,8 +275,10 @@ export default function Layout({ children }) {
             to={link.to}
             end={link.to === '/'}
             className={({ isActive }) =>
-              `flex flex-col items-center gap-0.5 px-3 py-1 rounded-lg transition-all ${
-                isActive ? 'text-red-400' : 'text-white/40'
+              `flex flex-col items-center gap-0.5 px-3 py-2 min-h-[44px] justify-center rounded-lg transition-all ${
+                isActive
+                  ? 'text-red-400 border-t-2 border-red-400'
+                  : 'text-white/40 border-t-2 border-transparent'
               }`
             }
           >
@@ -277,7 +286,70 @@ export default function Layout({ children }) {
             <span className="text-[10px]">{link.label}</span>
           </NavLink>
         ))}
+
+        {/* ── Lainnya tab ── */}
+        <button
+          onClick={() => setMoreOpen(true)}
+          className={`flex flex-col items-center gap-0.5 px-3 py-2 min-h-[44px] justify-center rounded-lg transition-all border-t-2 ${
+            moreOpen ? 'text-red-400 border-red-400' : 'text-white/40 border-transparent'
+          }`}
+        >
+          <span className="text-xl">☰</span>
+          <span className="text-[10px]">Lainnya</span>
+        </button>
       </nav>
+
+      {/* ── Lainnya Slide-up Drawer ── */}
+      <AnimatePresence>
+        {moreOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 bg-black/60 z-40 md:hidden"
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setMoreOpen(false)}
+            />
+            {/* Drawer */}
+            <motion.div
+              className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-bg-sidebar rounded-t-2xl"
+              style={{ maxHeight: '75vh' }}
+              initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            >
+              {/* Drag handle */}
+              <div className="flex justify-center pt-3 pb-1">
+                <div className="w-10 h-1 rounded-full bg-white/20" />
+              </div>
+              <div className="flex items-center justify-between px-4 py-2 border-b border-white/5">
+                <span className="text-white font-semibold text-sm">Menu Lainnya</span>
+                <button onClick={() => setMoreOpen(false)} className="text-white/50 text-xl p-1">×</button>
+              </div>
+              <div className="overflow-y-auto pb-6" style={{ maxHeight: 'calc(75vh - 80px)' }}>
+                <div className="grid grid-cols-2 gap-1 p-3">
+                  {NAV_LAINNYA.map(link => (
+                    <NavLink
+                      key={link.to}
+                      to={link.to}
+                      end={link.to === '/'}
+                      onClick={() => setMoreOpen(false)}
+                      className={({ isActive }) =>
+                        `flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm transition-all ${
+                          isActive
+                            ? 'bg-white/10 text-white border-l-2 border-red-500'
+                            : 'text-white/50 hover:text-white hover:bg-white/5'
+                        }`
+                      }
+                    >
+                      <span className="text-base flex-shrink-0">{link.icon}</span>
+                      <span className="truncate text-xs">{link.label}</span>
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       <BackToTop />
       <ToastContainer />
