@@ -20,7 +20,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sumitro", name:"Sumitro Djojohadikusumo", photo_url:null, photo_placeholder:"SD",
+    id:"sumitro", name:"Sumitro Djojohadikusumo", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Soemitro_Djojohadikoesoemo%2C_Menteri_Negara_Riset_%281973%29_%28cropped%29.jpg/330px-Soemitro_Djojohadikoesoemo%2C_Menteri_Negara_Riset_%281973%29_%28cropped%29.jpg", photo_placeholder:"SD",
     born:"29 Mei 1917", born_place:"Kebumen", religion:"Islam",
     education:"Ekonomi Rotterdam Belanda",
     party_id:"ger", party_role:"Ekonom",
@@ -39,7 +39,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"prananda", name:"Prananda Prabowo", photo_url:null, photo_placeholder:"PP",
+    id:"prananda", name:"Prananda Prabowo", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/M_Prananda_Prabowo.png/330px-M_Prananda_Prabowo.png", photo_placeholder:"PP",
     born:"8 Apr 1970", born_place:"Jakarta", religion:"Islam",
     education:"Universitas Indonesia",
     party_id:"pdip", party_role:"Wakil Ketua Bidang Pemenangan",
@@ -58,7 +58,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"guruh", name:"Guruh Soekarnoputra", photo_url:null, photo_placeholder:"GS",
+    id:"guruh", name:"Guruh Soekarnoputra", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/GuruhSukarno_%28crop%29.jpg/330px-GuruhSukarno_%28crop%29.jpg", photo_placeholder:"GS",
     born:"13 Jan 1953", born_place:"Jakarta", religion:"Islam",
     education:"ASKI Yogyakarta (seni)",
     party_id:"pdip", party_role:"Anggota DPR",
@@ -1234,7 +1234,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"fandi_yani", name:"Fandi Akhmad Yani", photo_url:null, photo_placeholder:"FY",
+    id:"fandi_yani", name:"Fandi Akhmad Yani", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Fandi_Akhmad_Yani_%282025%29.png/330px-Fandi_Akhmad_Yani_%282025%29.png", photo_placeholder:"FY",
     born:"1988", born_place:"Gresik", religion:"Islam",
     education:"S1 Ilmu Hukum",
     party_id:"pkb", party_role:"Anggota",
@@ -1315,7 +1315,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hendy_siswanto", name:"Hendy Siswanto", photo_url:null, photo_placeholder:"HS",
+    id:"hendy_siswanto", name:"Hendy Siswanto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Official_Portrait_of_Hendy_Siswanto%2C_Regent_of_Jember.jpg/330px-Official_Portrait_of_Hendy_Siswanto%2C_Regent_of_Jember.jpg", photo_placeholder:"HS",
     born:"1970", born_place:"Jember", religion:"Islam",
     education:"S1 Ilmu Politik, Universitas Brawijaya",
     party_id:"pkb", party_role:"Anggota",
@@ -1423,7 +1423,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ikfina", name:"Ikfina Fahmawati", photo_url:null, photo_placeholder:"IK",
+    id:"ikfina", name:"Ikfina Fahmawati", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Official_Portrait_of_Ikfina_Fahmawati%2C_Regent_of_Mojokerto.jpg/330px-Official_Portrait_of_Ikfina_Fahmawati%2C_Regent_of_Mojokerto.jpg", photo_placeholder:"IK",
     born:"1978", born_place:"Mojokerto", religion:"Islam",
     education:"S1 Kedokteran, Universitas Airlangga",
     party_id:"pkb", party_role:"Anggota",
@@ -1529,7 +1529,7 @@ export const PERSONS = [
   },
   // ─── JATIM — Kabupaten/Kota Lainnya (data ringkas) ──────────────────────
   {
-    id:"rendra_kresna", name:"Rendra Kresna", photo_url:null, photo_placeholder:"RK",
+    id:"rendra_kresna", name:"Rendra Kresna", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Rendrakresnabupati.jpg/330px-Rendrakresnabupati.jpg", photo_placeholder:"RK",
     born:"1965", born_place:"Malang", religion:"Islam",
     education:"S1", party_id:"gol", party_role:"Anggota",
     positions:[{title:"Mantan Bupati Malang", institution:"Pemkab Malang", region:"Malang", start:"2010", end:"2020", is_current:false}],
@@ -1574,7 +1574,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"yuhronur_efendi", name:"Yuhronur Efendi", photo_url:null, photo_placeholder:"YE",
+    id:"yuhronur_efendi", name:"Yuhronur Efendi", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Yuhronur_Efendi_Bupati_Lamongan.jpg/330px-Yuhronur_Efendi_Bupati_Lamongan.jpg", photo_placeholder:"YE",
     born:"1970", born_place:"Lamongan", religion:"Islam", education:"S1 Hukum",
     party_id:"pkb", party_role:"Anggota",
     positions:[{title:"Bupati Lamongan", institution:"Pemkab Lamongan", region:"Lamongan", start:"2021", end:null, is_current:true}],
@@ -1591,7 +1591,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"ipong_muchlissoni", name:"Ipong Muchlissoni", photo_url:null, photo_placeholder:"IM",
+    id:"ipong_muchlissoni", name:"Ipong Muchlissoni", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/KPU_Ipong_Muchlissoni.jpg/330px-KPU_Ipong_Muchlissoni.jpg", photo_placeholder:"IM",
     born:"1968", born_place:"Ponorogo", religion:"Islam", education:"S1",
     party_id:"ger", party_role:"Anggota",
     positions:[{title:"Bupati Ponorogo", institution:"Pemkab Ponorogo", region:"Ponorogo", start:"2021", end:null, is_current:true}],
@@ -1966,7 +1966,7 @@ export const PERSONS = [
   },
   // ─── JATIM — Kota lainnya ────────────────────────────────────────────────
   {
-    id:"bambang_haryo", name:"Bambang Haryo Soekartono", photo_url:null, photo_placeholder:"BH",
+    id:"bambang_haryo", name:"Bambang Haryo Soekartono", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/KPU_Bambang_Haryo_Soekartono.jpg/330px-KPU_Bambang_Haryo_Soekartono.jpg", photo_placeholder:"BH",
     born:"1966", born_place:"Surabaya", religion:"Islam", education:"S1",
     party_id:"ger", party_role:"Anggota DPR",
     positions:[{title:"Anggota DPR RI", institution:"DPR RI", region:"Jawa Timur", start:"2019", end:null, is_current:true}],
@@ -2059,7 +2059,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"anwar_abbas", name:"Anwar Abbas", photo_url:null, photo_placeholder:"AW",
+    id:"anwar_abbas", name:"Anwar Abbas", photo_url:"https://upload.wikimedia.org/wikipedia/id/thumb/b/bf/Dr._H._Anwar_Abbas.jpg/330px-Dr._H._Anwar_Abbas.jpg", photo_placeholder:"AW",
     born:"1960", born_place:"Sumatera Barat", religion:"Islam",
     education:"Pesantren; S1 Syariah IAIN; PhD Sosiologi",
     party_id:null, party_role:null,
@@ -2085,7 +2085,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"said_iqbal", name:"Said Iqbal", photo_url:null, photo_placeholder:"SQ",
+    id:"said_iqbal", name:"Said Iqbal", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/2024_Indonesian_local_election_law_protests%2C_22_August_2024%2C_Jeromi_Mikhael_28_%28cropped%29.jpg/330px-2024_Indonesian_local_election_law_protests%2C_22_August_2024%2C_Jeromi_Mikhael_28_%28cropped%29.jpg", photo_placeholder:"SQ",
     born:"1970", born_place:"Jakarta", religion:"Islam",
     education:"S1 Teknik Kimia, IPB",
     party_id:"bur", party_role:"Ketua Umum",
@@ -2549,7 +2549,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"abdul_wahid", name:"Abdul Wahid", photo_url:null, photo_placeholder:"AW",
+    id:"abdul_wahid", name:"Abdul Wahid", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Gubernur_Riau_Abdul_Wahid.jpg/330px-Gubernur_Riau_Abdul_Wahid.jpg", photo_placeholder:"AW",
     born:"1970", born_place:"Riau", religion:"Islam",
     education:"S1 Hukum",
     party_id:"pkb", party_role:"Kader",
@@ -3036,7 +3036,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sitti_sutinah", name:"Sitti Sutinah Suhardi", photo_url:null, photo_placeholder:"SSS",
+    id:"sitti_sutinah", name:"Sitti Sutinah Suhardi", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Bupati_Mamuju_Sitti_Sutinah_Suhardi.jpg/330px-Bupati_Mamuju_Sitti_Sutinah_Suhardi.jpg", photo_placeholder:"SSS",
     born:"1972", born_place:"Sulawesi Barat", religion:"Islam",
     education:"S1 Hukum",
     party_id:"ger", party_role:"Kader",
@@ -3063,7 +3063,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hendrik_lewerissa", name:"Hendrik Lewerissa", photo_url:null, photo_placeholder:"HL",
+    id:"hendrik_lewerissa", name:"Hendrik Lewerissa", photo_url:"https://upload.wikimedia.org/wikipedia/commons/e/eb/Gubernur_Maluku%2C_Hendrik_Lewerissa.jpg", photo_placeholder:"HL",
     born:"1970", born_place:"Maluku", religion:"Kristen",
     education:"S1 Hukum Universitas Pattimura",
     party_id:"ger", party_role:"Kader",
@@ -3376,7 +3376,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"marwan_dasopang", name:"Marwan Dasopang", photo_url:null, photo_placeholder:"MD2",
+    id:"marwan_dasopang", name:"Marwan Dasopang", photo_url:"https://upload.wikimedia.org/wikipedia/id/thumb/5/51/Marwan_Dasopang1333.webp/330px-Marwan_Dasopang1333.webp.png", photo_placeholder:"MD2",
     born:"1966", born_place:"Sumatera Utara", religion:"Islam",
     education:"S1 Ekonomi, Universitas Muhammadiyah Sumatera Utara",
     party_id:"pkb", party_role:"Ketua Komisi VIII DPR",
@@ -3543,7 +3543,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hanafi_rais", name:"Hanafi Rais", photo_url:null, photo_placeholder:"HR",
+    id:"hanafi_rais", name:"Hanafi Rais", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Anggota_DPR_Ahmad_Hanafi_Rais.jpg/330px-Anggota_DPR_Ahmad_Hanafi_Rais.jpg", photo_placeholder:"HR",
     born:"1973", born_place:"Yogyakarta", religion:"Islam",
     education:"S2 Kebijakan Publik, Universitas Gadjah Mada",
     party_id:"pan", party_role:"Ketua Fraksi PAN DPR RI",
@@ -3598,7 +3598,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"adies_kadir", name:"Adies Kadir", photo_url:null, photo_placeholder:"AK",
+    id:"adies_kadir", name:"Adies Kadir", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Adies_Kadir%2C_Hakim_Konstitusi_%282026%29_%28cropped%29.jpg/330px-Adies_Kadir%2C_Hakim_Konstitusi_%282026%29_%28cropped%29.jpg", photo_placeholder:"AK",
     born:"1967", born_place:"Surabaya, Jawa Timur", religion:"Islam",
     education:"S1 Hukum, Universitas Airlangga",
     party_id:"gol", party_role:"Anggota DPR RI",
@@ -3626,7 +3626,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"lodewijk_paulus", name:"Lodewijk F. Paulus", photo_url:null, photo_placeholder:"LP",
+    id:"lodewijk_paulus", name:"Lodewijk F. Paulus", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Wamenko-Polkam-Lodewijk_Freidrich_Paulus_%282025%29.webp/330px-Wamenko-Polkam-Lodewijk_Freidrich_Paulus_%282025%29.webp.png", photo_placeholder:"LP",
     born:"1965", born_place:"Makassar, Sulawesi Selatan", religion:"Kristen",
     education:"Akademi Militer, Magelang; berbagai pendidikan militer lanjutan",
     party_id:"gol", party_role:"Sekretaris Jenderal",
@@ -3655,7 +3655,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"novelino", name:"Novel Baswedan", photo_url:null, photo_placeholder:"NB",
+    id:"novelino", name:"Novel Baswedan", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Novel_Baswedan%2C_Sorgemagz.com_-_Wawancara_dengan_Novel_Baswedan.jpg/330px-Novel_Baswedan%2C_Sorgemagz.com_-_Wawancara_dengan_Novel_Baswedan.jpg", photo_placeholder:"NB",
     born:"1977", born_place:"Semarang, Jawa Tengah", religion:"Islam",
     education:"S1 Teknik Fisika, Institut Teknologi Bandung",
     party_id:null, party_role:null,
@@ -3682,7 +3682,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"alexander_marwata", name:"Alexander Marwata", photo_url:null, photo_placeholder:"AM",
+    id:"alexander_marwata", name:"Alexander Marwata", photo_url:"https://upload.wikimedia.org/wikipedia/commons/c/ce/Alexander_Marwata_KPK_2015-2019.gif", photo_placeholder:"AM",
     born:"1967", born_place:"Klaten, Jawa Tengah", religion:"Kristen",
     education:"S1 Akuntansi, Universitas Gadjah Mada; S2 Akuntansi, Universitas Indonesia",
     party_id:null, party_role:null,
@@ -3710,7 +3710,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"johny_plate", name:"Johny Gerard Plate", photo_url:null, photo_placeholder:"JP",
+    id:"johny_plate", name:"Johny Gerard Plate", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Menteri_Komunikasi_dan_Informatika%2C_Johnny_G._Plate.jpg/330px-Menteri_Komunikasi_dan_Informatika%2C_Johnny_G._Plate.jpg", photo_placeholder:"JP",
     born:"1956", born_place:"Manggarai, NTT", religion:"Katolik",
     education:"S1 Ekonomi, Universitas Atma Jaya; S2 Manajemen",
     party_id:"nas", party_role:"Sekretaris Jenderal",
@@ -4034,7 +4034,7 @@ export const PERSONS = [
   },
 
   {
-    id:"novel_baswedan", name:"Novel Baswedan", photo_url:null, photo_placeholder:"NB",
+    id:"novel_baswedan", name:"Novel Baswedan", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Novel_Baswedan%2C_Sorgemagz.com_-_Wawancara_dengan_Novel_Baswedan.jpg/330px-Novel_Baswedan%2C_Sorgemagz.com_-_Wawancara_dengan_Novel_Baswedan.jpg", photo_placeholder:"NB",
     born:"22 Jun 1977", born_place:"Jakarta", religion:"Islam",
     education:"S1 Teknik, Universitas Bengkulu",
     party_id:"independent", party_role:"Non-Partai",
