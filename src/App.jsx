@@ -65,6 +65,7 @@ const QuickFactsPage   = lazy(() => import('./pages/quickfacts/QuickFactsPage'))
 const BriefingPage     = lazy(() => import('./pages/briefing/BriefingPage'))
 const APBNPage         = lazy(() => import('./pages/apbn/APBNPage'))
 const PrediksiPage     = lazy(() => import('./pages/prediksi/PrediksiPage'))
+const EmbedPage        = lazy(() => import('./pages/EmbedPage'))
 
 // Loading fallback — branded spinner + skeleton
 function PageLoader() {
@@ -149,6 +150,7 @@ export default function App() {
         <Route path="/faq" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><FAQPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/arsip" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ArsipPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/quick-facts" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><QuickFactsPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/embed" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><EmbedPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

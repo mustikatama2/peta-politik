@@ -57,6 +57,7 @@ const NAV = [
   { to:'/glosarium',icon:'📖', label:'Glosarium' },
   { to:'/faq',      icon:'❓', label:'FAQ' },
   { to:'/tentang',  icon:'ℹ️', label:'Tentang' },
+  { to:'/embed',    icon:'🔗', label:'Bagikan Profil' },
 ]
 
 // Bottom nav: 5 most important tabs for mobile
