@@ -699,6 +699,131 @@ export const CONNECTIONS = [
   { from:"cakimin",        to:"jokowi",       type:"rival",          label:"PKB oposisi Jokowi 2014 sebelum bergabung", since:2014, strength:6 },
   { from:"zulhas",         to:"prabowo",      type:"koalisi",        label:"PAN gabung KIM Plus — dukung Prabowo-Gibran", since:2024, strength:8 },
   { from:"gus_yahya",      to:"megawati",     type:"kolega",         label:"PBNU dan PDIP — hubungan NU-PDIP dalam politik", since:2019, strength:6 },
+
+  // ── R31: PRAMONO ANUNG EXPANDED ─────────────────────────────────────────
+  { from:"pramono_anung",  to:"jokowi",       type:"mentor-murid",   label:"Seskab Jokowi 2014-2024 sebelum jadi Gubernur DKI", since:2014, strength:8 },
+  { from:"pramono_anung",  to:"eri_cahyadi",  type:"rekan",          label:"Gubernur DKI-Walikota Surabaya, sesama PDIP Jatim", since:2024, strength:6 },
+  { from:"pramono_anung",  to:"gus_ipul",     type:"rekan",          label:"Gubernur DKI dan Gubernur Jatim — koordinasi lintas provinsi", since:2024, strength:6 },
+
+  // ── R32: AHY / DEMOKRAT EXPANDED ────────────────────────────────────────
+  { from:"ahy",            to:"prabowo",      type:"koalisi",        label:"Demokrat bergabung KIM Plus, AHY Menteri ATR/BPN", since:2024, strength:8 },
+  { from:"ahy",            to:"jokowi",       type:"rival",          label:"Demokrat berseberangan dengan Jokowi-PDIP 2014-2019", since:2014, strength:5 },
+  { from:"ahy",            to:"megawati",     type:"rival",          label:"Demokrat vs PDIP — oposisi era Jokowi", since:2014, strength:5 },
+
+  // ── R33: GOLKAR EXPANDED ────────────────────────────────────────────────
+  { from:"airlangga",      to:"sby",          type:"kolega",         label:"Golkar mendukung dan bergabung kabinet SBY, Airlangga Menperindag", since:2009, strength:6 },
+  { from:"nusron_wahid",   to:"jokowi",       type:"rekan",          label:"Loyalis Jokowi di Golkar — koordinasi DPP Golkar era Jokowi", since:2014, strength:6 },
+  { from:"nusron_wahid",   to:"prabowo",      type:"koalisi",        label:"Golkar KIM Plus — Nusron Menteri ATR/BPN era Prabowo", since:2024, strength:7 },
+  { from:"zulhas",         to:"sby",          type:"kolega",         label:"PAN berkoalisi dengan Demokrat-SBY di beberapa pemerintahan", since:2004, strength:6 },
+  { from:"misbakhun",      to:"jokowi",       type:"rekan",          label:"Komisi XI DPR loyalis Golkar-Jokowi", since:2019, strength:6 },
+
+  // ── R34: GERINDRA LOYALISTS ──────────────────────────────────────────────
+  { from:"sugiono",        to:"prabowo",      type:"rekan",          label:"Menlu, kader dan loyalis Gerindra sejak awal", since:2009, strength:8 },
+  { from:"sugiono",        to:"jokowi",       type:"rekan",          label:"Komisi I DPR era Jokowi, wakili Gerindra", since:2019, strength:5 },
+  { from:"fadli_zon",      to:"prabowo",      type:"rekan",          label:"Loyalis Gerindra, oposisi keras era Jokowi bersama Prabowo", since:2009, strength:9 },
+  { from:"supratman_andi", to:"ahy",          type:"rekan",          label:"Koalisi KIM Plus — Demokrat-Gerindra, Supratman Menkumham", since:2024, strength:6 },
+  { from:"dito_ariotedjo", to:"jokowi",       type:"rekan",          label:"Menpora Kabinet Jokowi 2023-2024", since:2023, strength:7 },
+  { from:"dito_ariotedjo", to:"prabowo",      type:"koalisi",        label:"Golkar mendukung KIM Plus, Dito Menpora dilanjutkan Prabowo", since:2024, strength:7 },
+
+  // ── R35: KPK NETWORK EXPANDED ───────────────────────────────────────────
+  { from:"nawawi",         to:"hasto_kristiyanto", type:"konflik",   label:"Ketua KPK mengejar kasus Harun Masiku — PDIP berseteru", since:2023, strength:7 },
+  { from:"novel_baswedan", to:"jokowi",       type:"konflik",        label:"Pelemahan KPK 2019, revisi UU KPK — Novel eksplisit kritik Jokowi", since:2019, strength:6 },
+
+  // ── R36: CENDANA / ORDE BARU CONNECTIONS ────────────────────────────────
+  { from:"titiek_soeharto",to:"tommy_soeharto",type:"keluarga",      label:"Kakak-Adik Cendana, putra-putri Soeharto", since:1962, strength:9 },
+  { from:"titiek_soeharto",to:"tutut",        type:"keluarga",       label:"Adik-Kakak Cendana, kedua putri Soeharto", since:1959, strength:9 },
+  { from:"titiek_soeharto",to:"megawati",     type:"rival",          label:"Cendana vs putri Soekarno — era reformasi dan sesudahnya", since:1998, strength:5 },
+  { from:"tommy_soeharto", to:"habibie",      type:"rival",          label:"Tommy vs reformasi — Habibie era transisi, Tommy tersangkut kasus", since:1999, strength:5 },
+  { from:"tutut",          to:"habibie",      type:"kolega",         label:"Cendana mendukung Habibie di awal transisi 1998", since:1998, strength:5 },
+  { from:"tutut",          to:"megawati",     type:"rival",          label:"Cendana vs Soekarno-putri — perseteruan era reformasi", since:1998, strength:5 },
+  { from:"tutut",          to:"prabowo",      type:"kolega",         label:"Sesama jaringan Cendana-Orde Baru, mendukung Prabowo", since:2014, strength:6 },
+  { from:"habibie",        to:"prabowo",      type:"rival",          label:"Habibie pecat dan copot Prabowo dari TNI pasca-Reformasi 1998", since:1998, strength:7 },
+
+  // ── R37: GUS DUR / HABIBIE / MEGAWATI ERA ────────────────────────────────
+  { from:"gus_dur",        to:"mahfud_md",    type:"mentor-murid",   label:"Gus Dur angkat Mahfud sebagai Menhan dan Menkopolhukam 1999", since:1999, strength:8 },
+  { from:"megawati",       to:"gus_dur",      type:"rival",          label:"Megawati vs Gus Dur — Wapres akhirnya gantikan Gus Dur 2001", since:1999, strength:6 },
+  { from:"megawati",       to:"habibie",      type:"rival",          label:"Rival MPR 1999 — Mega kecewa tidak terpilih lebih dahulu", since:1999, strength:5 },
+  { from:"megawati",       to:"sby",          type:"rival",          label:"Rival Pilpres 2004 dan 2009 — Megawati kalah dari SBY", since:2004, strength:7 },
+  { from:"mahfud_md",      to:"habibie",      type:"kolega",         label:"Mahfud dikenal di lingkaran akademik dan hukum era Habibie", since:1998, strength:5 },
+  { from:"mahfud_md",      to:"gus_dur",      type:"mentor-murid",   label:"Gus Dur mentor Mahfud; Mahfud Menhan pertama era reformasi", since:1999, strength:8 },
+  { from:"mahfud_md",      to:"sby",          type:"rekan",          label:"Mahfud Ketua MK era SBY — hubungan baik institusional", since:2008, strength:6 },
+  { from:"mahfud_md",      to:"prabowo",      type:"rival",          label:"Cawapres Ganjar-Mahfud vs Prabowo di Pilpres 2024", since:2024, strength:7 },
+
+  // ── R38: MEDIA NETWORKS ──────────────────────────────────────────────────
+  { from:"surya_paloh",    to:"anies",        type:"koalisi",        label:"NasDem mengusung Anies sebagai capres 2024", since:2023, strength:9 },
+  { from:"hary_tanoe",     to:"anies",        type:"rival",          label:"Perindo vs Koalisi Perubahan — beda kubu Pilpres 2024", since:2024, strength:4 },
+  { from:"hary_tanoe",     to:"surya_paloh",  type:"rival",          label:"Persaingan media Perindo-Nasdem dan politik berbeda kubu", since:2014, strength:4 },
+  { from:"hary_tanoe",     to:"sby",          type:"kolega",         label:"Perindo sempat berkoalisi dengan Demokrat dalam beberapa momen", since:2014, strength:5 },
+
+  // ── R39: NU / ISLAM NETWORKS ────────────────────────────────────────────
+  { from:"haedar_nashir",  to:"jokowi",       type:"rekan",          label:"Muhammadiyah-Pemerintah dialog kebijakan era Jokowi", since:2019, strength:6 },
+  { from:"anwar_abbas",    to:"jokowi",       type:"rekan",          label:"MUI berinteraksi dengan Pemerintah Jokowi kebijakan keagamaan", since:2019, strength:5 },
+  { from:"ahmad_syaikhu",  to:"anies",        type:"koalisi",        label:"PKS mengusung Anies sebagai capres dalam Koalisi Perubahan 2024", since:2023, strength:9 },
+  { from:"ahmad_syaikhu",  to:"prabowo",      type:"rival",          label:"PKS oposisi Prabowo — dukung Anies di Pilpres 2024", since:2024, strength:6 },
+  { from:"ahmad_syaikhu",  to:"megawati",     type:"rival",          label:"PKS vs PDIP — sering berhadapan beda koalisi", since:2014, strength:5 },
+  { from:"hanafi_rais",    to:"anies",        type:"koalisi",        label:"PAN mendukung Anies di Koalisi Perubahan sebelum pindah ke KIM", since:2023, strength:6 },
+  { from:"hanafi_rais",    to:"cakimin",      type:"rekan",          label:"Sesama tokoh Islam-kebangsaan, PAN-PKB rekan koalisi", since:2019, strength:5 },
+
+  // ── R40: GUS IPUL / JATIM ────────────────────────────────────────────────
+  { from:"gus_ipul",       to:"jokowi",       type:"rekan",          label:"Gubernur Jatim era Prabowo, dekat Jokowi sebelumnya", since:2024, strength:6 },
+  { from:"gus_ipul",       to:"khofifah",     type:"kolega",         label:"Pengganti Khofifah — sesama Gubernur Jatim", since:2024, strength:7 },
+  { from:"gus_ipul",       to:"prabowo",      type:"koalisi",        label:"Gubernur Jatim 2024 dari koalisi KIM Plus", since:2024, strength:7 },
+  { from:"gus_ipul",       to:"megawati",     type:"rekan",          label:"PPP-PDIP pernah berkoalisi; Gus Ipul dekat PDIP Jatim", since:2009, strength:5 },
+  { from:"khofifah",       to:"megawati",     type:"rival",          label:"PKB Gubernur Jatim vs PDIP — beda koalisi nasional", since:2018, strength:5 },
+  { from:"khofifah",       to:"ganjar",       type:"rekan",          label:"Sesama gubernur PDIP-PKB pro-Jokowi era 2019-2024", since:2019, strength:6 },
+
+  // ── R41: TOM LEMBONG / AKTIVIS ───────────────────────────────────────────
+  { from:"tom_lembong",    to:"anies",        type:"koalisi",        label:"Tom Lembong tim kampanye Anies Pilpres 2024", since:2024, strength:8 },
+  { from:"said_iqbal",     to:"jokowi",       type:"konflik",        label:"Buruh demo era Jokowi — KSPI melawan kebijakan tenaga kerja", since:2017, strength:5 },
+  { from:"said_iqbal",     to:"prabowo",      type:"konflik",        label:"Buruh demo era Prabowo — KSPI menentang kebijakan upah", since:2024, strength:5 },
+
+  // ── R42: PKB NETWORK ─────────────────────────────────────────────────────
+  { from:"cakimin",        to:"prabowo",      type:"koalisi",        label:"PKB bergabung koalisi Prabowo pasca-Pilpres 2024", since:2024, strength:7 },
+  { from:"cakimin",        to:"megawati",     type:"rekan",          label:"PKB-PDIP pernah berkoalisi beberapa periode", since:2009, strength:5 },
+
+  // ── R43: GUBERNUR REGIONAL ───────────────────────────────────────────────
+  { from:"ahmad_luthfi",   to:"jokowi",       type:"rekan",          label:"Kapolda Jateng era Jokowi sebelum maju Pilgub Jateng 2024", since:2023, strength:6 },
+  { from:"ridwan_kamil",   to:"megawati",     type:"rekan",          label:"KIM Plus vs PDIP — RK maju Pilgub DKI atas dukungan Golkar-Gerindra", since:2024, strength:4 },
+  { from:"koster",         to:"megawati",     type:"rekan",          label:"Gubernur Bali PDIP — loyalis Megawati kuat di Bali", since:2018, strength:8 },
+  { from:"bobby_nasution", to:"ganjar",       type:"rival",          label:"Bobby ex-PDIP keluar ke Gerindra saat PDIP usung Ganjar 2024", since:2024, strength:4 },
+
+  // ── R44: MILITER / KEAMANAN ─────────────────────────────────────────────
+  { from:"prabowo",        to:"sjafrie",      type:"mentor-murid",   label:"Prabowo angkat Sjafrie sebagai Menhan — sesama eks Kopassus", since:2024, strength:8 },
+  { from:"prabowo",        to:"gatot_nurmantyo", type:"rival",       label:"Rival eks-militer — beda blok politik pasca-Reformasi", since:2014, strength:5 },
+  { from:"prabowo",        to:"agus_subiyanto", type:"atasan-bawahan", label:"Panglima TNI di bawah Prabowo sebagai Presiden", since:2024, strength:8 },
+  { from:"jokowi",         to:"listyo_sigit", type:"mentor-murid",   label:"Jokowi angkat Listyo Sigit jadi Kapolri 2021", since:2021, strength:8 },
+  { from:"jokowi",         to:"agus_subiyanto", type:"mentor-murid", label:"Jokowi angkat Agus Subiyanto sebagai Panglima TNI 2023", since:2023, strength:8 },
+  { from:"jokowi",         to:"budi_gunawan", type:"rekan",          label:"Jokowi angkat Budi Gunawan sebagai Kepala BIN 2016", since:2016, strength:7 },
+  { from:"listyo_sigit",   to:"jokowi",       type:"mentor-murid",   label:"Loyalis Jokowi; diangkat Kapolri 2021 oleh Jokowi", since:2021, strength:8 },
+  { from:"listyo_sigit",   to:"prabowo",      type:"rekan",          label:"Kapolri dilanjutkan di awal era Prabowo", since:2024, strength:6 },
+  { from:"sby",            to:"gatot_nurmantyo", type:"rekan",       label:"Era SBY — Gatot Nurmantyo berkarier naik di TNI era SBY", since:2010, strength:6 },
+  { from:"sby",            to:"budi_gunawan", type:"konflik",        label:"SBY masa KPK-BG — Demokrat berseberangan era Jokowi", since:2015, strength:4 },
+  { from:"sby",            to:"tito_karnavian", type:"rekan",        label:"Tito Karnavian karier polisi, dikenal di era SBY", since:2009, strength:5 },
+
+  // ── R45: PDIP INTERNAL EXTENDED ─────────────────────────────────────────
+  { from:"megawati",       to:"hasto",        type:"atasan-bawahan", label:"Megawati Ketua Umum PDIP, Hasto Sekjen langsung di bawah Mega", since:2014, strength:9 },
+  { from:"megawati",       to:"pramono_anung",type:"mentor-murid",   label:"Mega orbitkan Pramono Anung dari DPR ke Seskab dan Gubernur DKI", since:2009, strength:8 },
+  { from:"puan",           to:"ganjar",       type:"rekan",          label:"Puan Ketua DPR koordinasi capres PDIP Ganjar 2024", since:2023, strength:7 },
+  { from:"puan",           to:"hasto",        type:"rekan",          label:"PDIP — Puan Ketua DPR dan Hasto Sekjen koordinasi partai", since:2019, strength:8 },
+  { from:"puan",           to:"jokowi",       type:"rival",          label:"PDIP vs Jokowi pasca-Gibran — Puan representasi Megawati berseberangan", since:2023, strength:5 },
+
+  // ── R46: ANIES EXTENDED ──────────────────────────────────────────────────
+  { from:"anies",          to:"megawati",     type:"konflik",        label:"PDIP tidak usung Anies, Megawati dukung Ganjar melawan Anies 2024", since:2023, strength:5 },
+  { from:"anies",          to:"ahy",          type:"rekan",          label:"Koalisi Perubahan sesama oposisi sebelum Demokrat pindah ke KIM", since:2023, strength:6 },
+  { from:"ganjar",         to:"anies",        type:"rival",          label:"Rival Pilpres 2024 — Ganjar dan Anies keduanya kalah dari Prabowo", since:2024, strength:6 },
+
+  // ── R47: JOHNY PLATE / NASDEM ────────────────────────────────────────────
+  { from:"johny_plate",    to:"surya_paloh",  type:"kolega",         label:"NasDem — Johny Plate Mensesneg era Jokowi, NasDem loyalis Surya Paloh", since:2019, strength:7 },
+
+  // ── R48: YUSRIL EXTENDED ─────────────────────────────────────────────────
+  { from:"yusril",         to:"jokowi",       type:"rekan",          label:"Jokowi angkat Yusril sebagai Menko Hukum sebelum Prabowo", since:2024, strength:7 },
+  { from:"yusril",         to:"sby",          type:"rival",          label:"Kompetitor masa awal Reformasi — beda haluan PBB vs Demokrat", since:2004, strength:5 },
+
+  // ── R49: SRI MULYANI / EKONOMI ───────────────────────────────────────────
+  { from:"sri_mulyani",    to:"bahlil",       type:"rekan",          label:"Kemenkeu-Menko Energi koordinasi investasi energi dan fiskal", since:2024, strength:6 },
+
+  // ── R50: SHERLY TJOANDA EXTENDED ────────────────────────────────────────
+  { from:"sherly_tjoanda", to:"ahy",          type:"koalisi",        label:"Gubernur Malut dari Demokrat-Gerindra, AHY ketua Demokrat", since:2024, strength:7 },
 ];
 
 export const CONNECTION_TYPES = {
