@@ -648,6 +648,57 @@ export const CONNECTIONS = [
   { from:"budi_gunadi",    to:"jokowi",       type:"mentor-murid",   label:"Jokowi angkat Budi Gunadi Sadikin sebagai Menkes (2020)", since:2020, strength:8 },
   { from:"budi_gunadi",    to:"prabowo",      type:"atasan-bawahan", label:"Menkes bertahan di kabinet Merah Putih Prabowo", since:2024, strength:7 },
   { from:"sjafrie",        to:"sby",          type:"kolega",         label:"Pernah bertugas di lingkungan militer era SBY", since:2004, strength:5 },
+
+  // ── R29: SOEHARTO ERA EXTENDED ───────────────────────────────────────────
+  { from:"soeharto",       to:"sby",          type:"mentor-murid",   label:"SBY berkarier di TNI era Orde Baru Soeharto", since:1980, strength:7 },
+  { from:"soeharto",       to:"hary_tanoe",   type:"bisnis",         label:"MNC Group berkembang pesat di era Orde Baru", since:1989, strength:6 },
+  { from:"habibie",        to:"sby",          type:"kolega",         label:"Transisi 1998-1999 — SBY Menko Polsoskam era Habibie", since:1998, strength:6 },
+  { from:"gus_dur",        to:"sby",          type:"rival",          label:"Gus Dur dicopot DPR — SBY Menko Polkam saat itu", since:2001, strength:7 },
+  { from:"megawati",       to:"jokowi",       type:"mentor-murid",   label:"PDIP endorses Jokowi — dari Solo ke Jakarta ke RI-1", since:2012, strength:9 },
+  { from:"megawati",       to:"ganjar",       type:"mentor-murid",   label:"Mega pilih Ganjar sebagai capres PDIP 2024", since:2023, strength:8 },
+  { from:"megawati",       to:"hasto_kristiyanto", type:"mentor-murid", label:"Sekjen PDIP pilihan langsung Megawati", since:2010, strength:8 },
+
+  // ── R29: PDIP INTERNAL NETWORK ───────────────────────────────────────────
+  { from:"puan",           to:"hasto_kristiyanto", type:"kolega",    label:"Ketua DPR dan Sekjen PDIP — pimpinan partai bersama", since:2014, strength:8 },
+  { from:"puan",           to:"ganjar",       type:"rival",          label:"Kompetisi internal PDIP — Puan vs Ganjar capres 2024", since:2022, strength:7 },
+  { from:"puan",           to:"eri_cahyadi",  type:"atasan-bawahan", label:"PDIP — Puan dukung Eri Cahyadi Walikota Surabaya", since:2020, strength:6 },
+  { from:"ganjar",         to:"jokowi",       type:"kolega",         label:"Sesama PDIP — Gubernur Jateng & Presiden berkolaborasi", since:2014, strength:8 },
+  { from:"bobby_nasution", to:"megawati",     type:"rival",          label:"Bobby ex-PDIP pindah ke koalisi Gerindra 2024", since:2024, strength:6 },
+
+  // ── R29: GOLKAR INTERNAL ─────────────────────────────────────────────────
+  { from:"airlangga",      to:"agus_gumiwang", type:"kolega",        label:"Sesama Golkar di kabinet Prabowo", since:2024, strength:7 },
+  { from:"airlangga",      to:"ridwan_kamil",  type:"kolega",        label:"Golkar — Ridwan Kamil kader Golkar DKI 2024", since:2024, strength:7 },
+  { from:"airlangga",      to:"nusron_wahid",  type:"kolega",        label:"Sesama Golkar di kabinet Merah Putih", since:2024, strength:7 },
+  { from:"airlangga",      to:"meutya_hafid",  type:"kolega",        label:"Sesama Golkar — Ketum dan Menkomdigi", since:2019, strength:6 },
+
+  // ── R29: GERINDRA INTERNAL ───────────────────────────────────────────────
+  { from:"sufmi_dasco",    to:"prabowo",       type:"atasan-bawahan", label:"Ketua Fraksi Gerindra DPR — bawahan Prabowo", since:2014, strength:8 },
+  { from:"ahmad_muzani",   to:"prabowo",       type:"atasan-bawahan", label:"Sekjen Gerindra — loyalis utama Prabowo", since:2008, strength:8 },
+  { from:"sufmi_dasco",    to:"ahmad_muzani",  type:"kolega",         label:"Pimpinan Gerindra DPR — Ketua dan Sekjen", since:2019, strength:7 },
+  { from:"rachmat_pambudy", to:"bahlil",       type:"kolega",         label:"Sesama Gerindra di kabinet — Bappenas dan ESDM", since:2024, strength:6 },
+
+  // ── R29: KPK/HUKUM EXTENDED ─────────────────────────────────────────────
+  { from:"saldi_isra",     to:"anies",        type:"kolega",         label:"Dissenting opinion MK No.90 — Anies dirugikan putusan itu", since:2023, strength:5 },
+  { from:"wahiduddin",     to:"anies",        type:"kolega",         label:"Hakim MK dissent No.90 — keduanya dirugikan putusan", since:2023, strength:5 },
+  { from:"alexander_marwata", to:"prabowo",   type:"kolega",         label:"KPK di bawah koordinasi Menko Polkam era Prabowo", since:2024, strength:5 },
+
+  // ── R29: REGIONAL LEADERS ────────────────────────────────────────────────
+  { from:"ridwan_kamil",   to:"jokowi",       type:"kolega",         label:"Gubernur Jabar di era Jokowi — sering berkolaborasi", since:2018, strength:7 },
+  { from:"ridwan_kamil",   to:"ahy",          type:"koalisi",        label:"Gubernur DKI dan Menko Infrastruktur — koalisi Prabowo", since:2024, strength:6 },
+  { from:"khofifah",       to:"jokowi",       type:"mentor-murid",   label:"Mensos era Jokowi sebelum jadi Gubernur Jatim", since:2018, strength:7 },
+  { from:"eri_cahyadi",    to:"khofifah",     type:"kolega",         label:"Walikota Surabaya dan Gubernur Jatim — satu wilayah", since:2021, strength:7 },
+  { from:"bobby_nasution", to:"ridwan_kamil", type:"kolega",         label:"Sesama gubernur terpilih Pilkada 2024", since:2024, strength:6 },
+
+  // ── R29: MEDIA OWNERS ────────────────────────────────────────────────────
+  { from:"surya_paloh",    to:"anies",        type:"mentor-murid",   label:"Nasdem endorses Anies — gubernur Jakarta dan capres", since:2021, strength:8 },
+  { from:"surya_paloh",    to:"prabowo",      type:"koalisi",        label:"Nasdem akhirnya merapat ke koalisi pemerintah Prabowo", since:2023, strength:6 },
+  { from:"hary_tanoe",     to:"prabowo",      type:"koalisi",        label:"Hanura + MNC Media pro-pemerintah Prabowo", since:2024, strength:6 },
+
+  // ── R29: PKB/PAN NETWORKS ────────────────────────────────────────────────
+  { from:"cakimin",        to:"anies",        type:"koalisi",        label:"Pasangan Capres-Cawapres Anies-Cak Imin Pilpres 2024", since:2023, strength:9 },
+  { from:"cakimin",        to:"jokowi",       type:"rival",          label:"PKB oposisi Jokowi 2014 sebelum bergabung", since:2014, strength:6 },
+  { from:"zulhas",         to:"prabowo",      type:"koalisi",        label:"PAN gabung KIM Plus — dukung Prabowo-Gibran", since:2024, strength:8 },
+  { from:"gus_yahya",      to:"megawati",     type:"kolega",         label:"PBNU dan PDIP — hubungan NU-PDIP dalam politik", since:2019, strength:6 },
 ];
 
 export const CONNECTION_TYPES = {
