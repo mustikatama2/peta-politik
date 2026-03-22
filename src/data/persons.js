@@ -3820,7 +3820,7 @@ export const PERSONS = [
   },
   // ─── NEW PERSONS: Prabowo Cabinet & Key Figures ──────────────────────────
   {
-    id:"dody_hanggodo", name:"Dody Hanggodo", photo_url:null, photo_placeholder:"DH",
+    id:"dody_hanggodo", name:"Dody Hanggodo", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Menteri_Pekerjaan_Umum_Dody_Hanggodo.jpg/330px-Menteri_Pekerjaan_Umum_Dody_Hanggodo.jpg", photo_placeholder:"DH",
     born:"1970", born_place:"Indonesia", religion:"Islam",
     education:null,
     party_id:"ger", party_role:"Kader",
@@ -3846,7 +3846,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"rachmat_pambudy", name:"Rachmat Pambudy", photo_url:null, photo_placeholder:"RP",
+    id:"rachmat_pambudy", name:"Rachmat Pambudy", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Rachmat_Pambudy%2C_Menteri_Perencanaan_Pembangunan_%282025%29.png/330px-Rachmat_Pambudy%2C_Menteri_Perencanaan_Pembangunan_%282025%29.png", photo_placeholder:"RP",
     born:"1960", born_place:"Indonesia", religion:"Islam",
     education:"Institut Pertanian Bogor (IPB)",
     party_id:"ger", party_role:"Kader",
@@ -3872,7 +3872,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"yandri_susanto", name:"Yandri Susanto", photo_url:null, photo_placeholder:"YS",
+    id:"yandri_susanto", name:"Yandri Susanto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Yandri_Susanto%2C_MPR_RI.jpg/330px-Yandri_Susanto%2C_MPR_RI.jpg", photo_placeholder:"YS",
     born:"1972", born_place:"Banten", religion:"Islam",
     education:"Universitas Sultan Ageng Tirtayasa",
     party_id:"pan", party_role:"Wakil Ketua Umum",
@@ -3899,7 +3899,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"abdul_muti", name:"Abdul Mu'ti", photo_url:null, photo_placeholder:"AM",
+    id:"abdul_muti", name:"Abdul Mu'ti", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Menteri_pendidikan_indonesia.jpg/330px-Menteri_pendidikan_indonesia.jpg", photo_placeholder:"AM",
     born:"2 Sep 1968", born_place:"Kudus", religion:"Islam",
     education:"IAIN Semarang; S3 Universitas Indonesia",
     party_id:"dem", party_role:"Kader",
@@ -3926,7 +3926,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"gus_ipul", name:"Saifullah Yusuf", photo_url:null, photo_placeholder:"GI",
+    id:"gus_ipul", name:"Saifullah Yusuf", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Menteri_Sosial_Saifullah_Yusuf.jpg/330px-Menteri_Sosial_Saifullah_Yusuf.jpg", photo_placeholder:"GI",
     born:"28 Agu 1965", born_place:"Pasuruan", religion:"Islam",
     education:"Universitas Islam Malang",
     party_id:"pkb", party_role:"Kader Senior",
@@ -3954,7 +3954,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"dadan_hindayana", name:"Dadan Hindayana", photo_url:null, photo_placeholder:"DH",
+    id:"dadan_hindayana", name:"Dadan Hindayana", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Kepala_Badan_Gizi_Nasional%2C_Dadan_Hindayana.%28cropped%29.png/330px-Kepala_Badan_Gizi_Nasional%2C_Dadan_Hindayana.%28cropped%29.png", photo_placeholder:"DH",
     born:"1968", born_place:"Indonesia", religion:"Islam",
     education:"Institut Pertanian Bogor (IPB)",
     party_id:null, party_role:null,
@@ -3980,7 +3980,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"thomas_djiwandono", name:"Thomas Djiwandono", photo_url:null, photo_placeholder:"TD",
+    id:"thomas_djiwandono", name:"Thomas Djiwandono", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Thomas_Djiwandono%2C_Wakil_Menteri_Keuangan_II_RI_%282024%29.png/330px-Thomas_Djiwandono%2C_Wakil_Menteri_Keuangan_II_RI_%282024%29.png", photo_placeholder:"TD",
     born:"1990", born_place:"Jakarta", religion:"Islam",
     education:"Universitas luar negeri (AS)",
     party_id:null, party_role:null,
@@ -4034,7 +4034,7 @@ export const PERSONS = [
   },
 
   {
-    id:"wahiduddin", name:"Wahiduddin Adams", photo_url:null, photo_placeholder:"WA",
+    id:"wahiduddin", name:"Wahiduddin Adams", photo_url:"https://upload.wikimedia.org/wikipedia/commons/5/51/Wahidudin_Adams.jpg", photo_placeholder:"WA",
     born:"1956", born_place:"Indonesia", religion:"Islam",
     education:"Hukum",
     party_id:null, party_role:null,
@@ -4060,7 +4060,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"saldi_isra", name:"Saldi Isra", photo_url:null, photo_placeholder:"SI",
+    id:"saldi_isra", name:"Saldi Isra", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Hakim_Konstitusi_Republik_Indonesia_Saldi_Isra.webp/330px-Hakim_Konstitusi_Republik_Indonesia_Saldi_Isra.webp.png", photo_placeholder:"SI",
     born:"1968", born_place:"Sumatera Barat", religion:"Islam",
     education:"Hukum Tata Negara, Universitas Andalas; S3 Universitas Gadjah Mada",
     party_id:null, party_role:null,
@@ -4086,7 +4086,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"budi_gunadi", name:"Budi Gunadi Sadikin", photo_url:null, photo_placeholder:"BG",
+    id:"budi_gunadi", name:"Budi Gunadi Sadikin", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Menteri_Kesehatan_Indonesia_Budi_Gunadi_Sadikin.png/330px-Menteri_Kesehatan_Indonesia_Budi_Gunadi_Sadikin.png", photo_placeholder:"BG",
     born:"1964", born_place:"Bogor", religion:"Islam",
     education:"Fisika Nuklir, ITB; MBA",
     party_id:null, party_role:null,
@@ -4112,7 +4112,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"tito_karnavian", name:"Tito Karnavian", photo_url:null, photo_placeholder:"TK",
+    id:"tito_karnavian", name:"Tito Karnavian", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Prof_Tito_Karnavian.jpg/330px-Prof_Tito_Karnavian.jpg", photo_placeholder:"TK",
     born:"1964", born_place:"Palembang", religion:"Islam",
     education:"AKPOL 1987; S2 Kepolisian; S3 Universitas Malay",
     party_id:null, party_role:null,
