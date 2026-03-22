@@ -716,6 +716,199 @@ function ProvinceDetail({ prov, islandColor }) {
   )
 }
 
+// ── Province Comparison Panel ───────────────────────────────────────────────
+function ProvinceCompare({ provinces }) {
+  const [provA, setProvA] = useState(provinces.find(p => p.id === 'dki_jakarta') || provinces[0])
+  const [provB, setProvB] = useState(provinces.find(p => p.id === 'jawa_timur') || provinces[1])
+
+  function getEcon(p) {
+    const e = PROVINCE_ECON[p.id] || {}
+    return {
+      pdrb:         e.pdrb_2023        ?? 0,
+      ipm:          e.ipm              ?? p.hdi ?? 0,
+      pengangguran: e.pengangguran_pct ?? 0,
+      kemiskinan:   e.kemiskinan_pct   ?? 0,
+      korupsi:      e.korupsi_cases_2024 ?? p.corruption_cases ?? 0,
+      demokrasi:    e.indeks_demokrasi ?? 0,
+    }
+  }
+
+  const eA = getEcon(provA)
+  const eB = getEcon(provB)
+
+  // Normalize 0-100 for radar
+  const maxPdrb = Math.max(...provinces.map(p => PROVINCE_ECON[p.id]?.pdrb_2023 || 0)) || 1
+  const radarData = [
+    {
+      dim: 'PDRB',
+      A: Math.round((eA.pdrb / maxPdrb) * 100),
+      B: Math.round((eB.pdrb / maxPdrb) * 100),
+    },
+    {
+      dim: 'IPM',
+      A: Math.round(((eA.ipm - 30) / (90 - 30)) * 100),
+      B: Math.round(((eB.ipm - 30) / (90 - 30)) * 100),
+    },
+    {
+      dim: 'Rendah Pengangguran',
+      A: Math.round(Math.max(0, (10 - eA.pengangguran) / 10 * 100)),
+      B: Math.round(Math.max(0, (10 - eB.pengangguran) / 10 * 100)),
+    },
+    {
+      dim: 'Rendah Kemiskinan',
+      A: Math.round(Math.max(0, (45 - eA.kemiskinan) / 45 * 100)),
+      B: Math.round(Math.max(0, (45 - eB.kemiskinan) / 45 * 100)),
+    },
+    {
+      dim: 'Integritas',
+      A: Math.round(Math.max(0, (10 - Math.min(eA.korupsi, 10)) / 10 * 100)),
+      B: Math.round(Math.max(0, (10 - Math.min(eB.korupsi, 10)) / 10 * 100)),
+    },
+  ]
+
+  const metrics = [
+    { key: 'pdrb',         label: 'PDRB 2023',         fmt: v => `Rp ${v.toLocaleString('id-ID')} T`,  win: 'high' },
+    { key: 'ipm',          label: 'IPM',                fmt: v => v.toFixed(2),                         win: 'high' },
+    { key: 'pengangguran', label: 'Pengangguran %',     fmt: v => `${v}%`,                              win: 'low'  },
+    { key: 'kemiskinan',   label: 'Kemiskinan %',       fmt: v => `${v}%`,                              win: 'low'  },
+    { key: 'korupsi',      label: 'Kasus KPK 2024',     fmt: v => `${v} kasus`,                         win: 'low'  },
+    { key: 'demokrasi',    label: 'Indeks Demokrasi',   fmt: v => v.toFixed(1),                         win: 'high' },
+  ]
+
+  const colorA = '#3B82F6'
+  const colorB = '#F59E0B'
+
+  return (
+    <Card className="p-5 space-y-4">
+      <h2 className="text-sm font-semibold text-text-secondary uppercase tracking-wider">⚖️ Bandingkan Provinsi</h2>
+
+      {/* Dropdowns */}
+      <div className="grid grid-cols-2 gap-3">
+        {[{ val: provA, set: setProvA, color: colorA, label: 'Provinsi A' },
+          { val: provB, set: setProvB, color: colorB, label: 'Provinsi B' }].map(({ val, set, color, label }) => (
+          <div key={label}>
+            <p className="text-xs text-text-secondary mb-1" style={{ color }}>{label}</p>
+            <select
+              value={val.id}
+              onChange={e => {
+                const found = provinces.find(p => p.id === e.target.value)
+                if (found) set(found)
+              }}
+              className="w-full px-3 py-2 rounded-lg text-xs bg-bg-elevated border border-border text-text-primary focus:outline-none focus:border-gray-500 cursor-pointer"
+              style={{ borderLeftColor: color, borderLeftWidth: 3 }}
+            >
+              {provinces.map(p => (
+                <option key={p.id} value={p.id}>{p.name}</option>
+              ))}
+            </select>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        {/* Side-by-side metrics table */}
+        <div className="space-y-2">
+          {metrics.map(m => {
+            const vA = eA[m.key]
+            const vB = eB[m.key]
+            const aWins = m.win === 'high' ? vA > vB : vA < vB
+            const bWins = m.win === 'high' ? vB > vA : vB < vA
+            return (
+              <div key={m.key} className="bg-bg-elevated rounded-lg px-3 py-2">
+                <p className="text-[10px] text-text-secondary mb-1">{m.label}</p>
+                <div className="flex items-center justify-between gap-2">
+                  <span className={`text-sm font-bold ${aWins ? 'text-green-400' : 'text-text-primary'}`}
+                    style={!aWins ? { color: colorA } : {}}>
+                    {m.fmt(vA)} {aWins ? '✓' : ''}
+                  </span>
+                  <span className="text-xs text-text-muted">vs</span>
+                  <span className={`text-sm font-bold ${bWins ? 'text-green-400' : 'text-text-primary'}`}
+                    style={!bWins ? { color: colorB } : {}}>
+                    {bWins ? '✓ ' : ''}{m.fmt(vB)}
+                  </span>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Radar chart */}
+        <div>
+          <p className="text-xs text-text-secondary mb-2 text-center">📡 Radar 5 Dimensi (nilai dinormalisasi 0–100)</p>
+          <div className="flex justify-center gap-4 mb-2 text-xs">
+            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full" style={{ backgroundColor: colorA }} />{provA.name.split(' ').slice(-1)[0]}</span>
+            <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full" style={{ backgroundColor: colorB }} />{provB.name.split(' ').slice(-1)[0]}</span>
+          </div>
+          <ResponsiveContainer width="100%" height={200}>
+            <RadarChart data={radarData} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
+              <PolarGrid stroke="#2D3748" />
+              <PolarAngleAxis dataKey="dim" tick={{ fill: 'var(--text-secondary)', fontSize: 9 }} />
+              <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
+              <Radar name={provA.name} dataKey="A" stroke={colorA} fill={colorA} fillOpacity={0.15} strokeWidth={2} />
+              <Radar name={provB.name} dataKey="B" stroke={colorB} fill={colorB} fillOpacity={0.15} strokeWidth={2} />
+              <Tooltip contentStyle={{ backgroundColor: '#1E2235', border: '1px solid #2D3748', borderRadius: 8, fontSize: 11 }} />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    </Card>
+  )
+}
+
+// ── Political Risk Top 5 ────────────────────────────────────────────────────
+function PoliticalRiskCards({ provinces }) {
+  const withRisk = provinces
+    .map(p => ({ ...p, risikoScore: risikoProvinsi(p) }))
+    .filter(p => p.risikoScore > 0)
+    .sort((a, b) => b.risikoScore - a.risikoScore)
+    .slice(0, 5)
+
+  if (withRisk.length === 0) return null
+
+  function getRiskLabel(score) {
+    if (score >= 60) return { label: '🔴 Sangat Tinggi', cls: 'bg-red-500/15 border-red-500/30 text-red-400' }
+    if (score >= 40) return { label: '🟠 Tinggi',        cls: 'bg-orange-500/15 border-orange-500/30 text-orange-400' }
+    return                { label: '🟡 Sedang',          cls: 'bg-yellow-500/15 border-yellow-500/30 text-yellow-400' }
+  }
+
+  return (
+    <div className="space-y-3">
+      <h2 className="text-sm font-semibold text-text-secondary uppercase tracking-wider">⚠️ Risiko Politik Provinsi Tertinggi</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3">
+        {withRisk.map((p, i) => {
+          const econ = PROVINCE_ECON[p.id] || {}
+          const { label, cls } = getRiskLabel(p.risikoScore)
+          const island = p.island || ISLAND_MAP[p.id] || 'Lainnya'
+          const islandColor = ISLAND_COLORS[island] || '#6B7280'
+          return (
+            <div key={p.id} className={`rounded-xl p-4 border space-y-2 ${cls}`}>
+              <div className="flex items-start justify-between">
+                <div>
+                  <p className="text-[10px] text-text-muted">#{i + 1} Risiko</p>
+                  <p className="text-sm font-bold text-text-primary leading-tight">{p.name}</p>
+                  <span className="text-[9px] px-1 py-0.5 rounded font-medium mt-0.5 inline-block"
+                    style={{ backgroundColor: islandColor + '20', color: islandColor }}>{island}</span>
+                </div>
+                <div className="text-right">
+                  <p className="text-xl font-bold text-text-primary">{p.risikoScore}</p>
+                  <p className="text-[9px] text-text-muted">skor</p>
+                </div>
+              </div>
+              <p className="text-xs font-medium">{label}</p>
+              <div className="space-y-1 text-[10px] text-text-secondary">
+                {econ.kemiskinan_pct  != null && <p>💸 Kemiskinan: <span className={econ.kemiskinan_pct > 15 ? 'text-red-400 font-semibold' : 'text-text-primary'}>{econ.kemiskinan_pct}%</span></p>}
+                {econ.pengangguran_pct!= null && <p>📉 Pengangguran: <span className={econ.pengangguran_pct > 7 ? 'text-orange-400 font-semibold' : 'text-text-primary'}>{econ.pengangguran_pct}%</span></p>}
+                {econ.korupsi_cases_2024!=null && <p>⚖️ Kasus KPK: <span className={econ.korupsi_cases_2024 > 5 ? 'text-red-400 font-semibold' : 'text-text-primary'}>{econ.korupsi_cases_2024}</span></p>}
+                {(econ.ipm ?? p.hdi) != null   && <p>📈 IPM: <span className={(econ.ipm ?? p.hdi) < 70 ? 'text-orange-400 font-semibold' : 'text-text-primary'}>{(econ.ipm ?? p.hdi)?.toFixed(1)}</span></p>}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 // ── Main Component ──────────────────────────────────────────────────────────
 export default function RegionView() {
   const [search, setSearch] = useState('')
@@ -901,6 +1094,12 @@ export default function RegionView() {
 
       {/* National Stats */}
       <NasionalStats provinces={provinces} />
+
+      {/* Political Risk Top 5 */}
+      <PoliticalRiskCards provinces={provinces} />
+
+      {/* Province Compare */}
+      <ProvinceCompare provinces={provinces} />
 
       {/* Filters row */}
       <div className="space-y-3">
