@@ -4,7 +4,8 @@ import {
   ResponsiveContainer, ReferenceLine, BarChart, Bar, Cell
 } from 'recharts'
 import {
-  POLLSTERS, PILPRES_2024_POLLS, APPROVAL_POLLS, PILPRES_2029_POLLS, PARTY_POLLS
+  POLLSTERS, PILPRES_2024_POLLS, APPROVAL_POLLS, PILPRES_2029_POLLS, PARTY_POLLS,
+  APPROVAL_POLLS_MULTILEMBAGA, PARTY_POLLS_2025, CAPRES_2029_POLLS, ISU_POLLS,
 } from '../../data/polls'
 import { PARTY_MAP } from '../../data/parties'
 import { PageHeader, Tabs, Card, KPICard } from '../../components/ui'

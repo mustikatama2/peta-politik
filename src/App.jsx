@@ -58,6 +58,7 @@ const BUMNPage         = lazy(() => import('./pages/bumn/BUMNPage'))
 const ArsipPage        = lazy(() => import('./pages/arsip/ArsipPage'))
 const TentangPage      = lazy(() => import('./pages/tentang/TentangPage'))
 const FramingPage      = lazy(() => import('./pages/framing/FramingPage'))
+const MediaMonitorPage = lazy(() => import('./pages/MediaMonitorPage'))
 const GlosariumPage    = lazy(() => import('./pages/glosarium/GlosariumPage'))
 const FAQPage          = lazy(() => import('./pages/faq/FAQPage'))
 const ScorecardPage    = lazy(() => import('./pages/scorecard/ScorecardPage'))
@@ -123,6 +124,7 @@ export default function App() {
         <Route path="/kpk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KPKCases /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/investigasi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><InvestigasiPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/media" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><MediaOwnership /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/media-monitor" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><MediaMonitorPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/framing" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><FramingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/dynasty" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><DynastyMapper /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/timeline" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Timeline /></Suspense></ErrorBoundary></ProtectedRoute>} />
