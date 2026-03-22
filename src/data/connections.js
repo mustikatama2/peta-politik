@@ -997,6 +997,71 @@ export const CONNECTIONS = [
   // ── FADLI ZON KONEKSI (new) ──────────────────────────────────────────────
   { from:"fadli_zon",      to:"sufmi_dasco",     type:"rekan",           label:"Sesama pimpinan senior Gerindra, rekan legislatif DPR",                       strength:8  },
   { from:"fadli_zon",      to:"ahmad_muzani",    type:"rekan",           label:"Sesama tokoh senior Gerindra, kolega DPR sejak 2009",                         strength:8  },
+
+  // ── R25: CABINET TIES (Prabowo → new ministers) ─────────────────────────
+  { from:"prabowo",        to:"dody_hanggodo",   type:"atasan-bawahan",  label:"Menteri PUPR di kabinet Merah Putih",                                          strength:8  },
+  { from:"prabowo",        to:"rachmat_pambudy", type:"atasan-bawahan",  label:"Kepala Bappenas di kabinet Merah Putih",                                       strength:8  },
+  { from:"prabowo",        to:"yandri_susanto",  type:"atasan-bawahan",  label:"Mendes PDT di kabinet Merah Putih",                                            strength:7  },
+  { from:"prabowo",        to:"abdul_muti",      type:"atasan-bawahan",  label:"Mendikdasmen di kabinet Merah Putih",                                          strength:7  },
+  { from:"prabowo",        to:"gus_ipul",        type:"atasan-bawahan",  label:"Mensos di kabinet Merah Putih",                                                strength:7  },
+  { from:"prabowo",        to:"dadan_hindayana", type:"atasan-bawahan",  label:"Kepala BGN (Makan Bergizi Gratis)",                                            strength:7  },
+  { from:"prabowo",        to:"thomas_djiwandono",type:"keluarga",       label:"Keponakan — Wamenkeu era Prabowo",                                             strength:9  },
+  { from:"prabowo",        to:"tito_karnavian",  type:"atasan-bawahan",  label:"Mendagri di kabinet Merah Putih",                                              strength:8  },
+  { from:"prabowo",        to:"budi_gunadi",     type:"atasan-bawahan",  label:"Menkes bertahan dari kabinet Jokowi",                                          strength:7  },
+  { from:"prabowo",        to:"sri_mulyani",     type:"atasan-bawahan",  label:"Menkeu bertahan dari kabinet Jokowi",                                          strength:9  },
+  { from:"prabowo",        to:"nusron_wahid",    type:"atasan-bawahan",  label:"Menteri ATR/BPN di kabinet Merah Putih",                                       strength:7  },
+
+  // ── R25: KELUARGA DJOJOHADIKUSUMO ────────────────────────────────────────
+  { from:"hashim",         to:"thomas_djiwandono",type:"keluarga",       label:"Paman-keponakan — keluarga Djojohadikusumo",                                   strength:9  },
+  { from:"prabowo",        to:"hashim",          type:"keluarga",        label:"Kakak-adik kandung — keluarga Djojohadikusumo",                                strength:10 },
+  { from:"thomas_djiwandono",to:"sri_mulyani",   type:"kolega",          label:"Wamenkeu-Menkeu — satu atap di Kemenkeu",                                      strength:8  },
+
+  // ── R25: JOKOWI NETWORK ───────────────────────────────────────────────────
+  { from:"jokowi",         to:"bahlil",          type:"mentor-murid",    label:"Jokowi angkat Bahlil sebagai Kepala BKPM",                                     strength:8  },
+  { from:"jokowi",         to:"nusron_wahid",    type:"kolega",          label:"Golkar pendukung era Jokowi",                                                  strength:6  },
+  { from:"jokowi",         to:"budi_arie",       type:"mentor-murid",    label:"Projo relawan Jokowi — Menkominfo 2023",                                       strength:8  },
+  { from:"jokowi",         to:"bobby_nasution",  type:"keluarga",        label:"Menantu Jokowi — Gubernur Sumut 2024",                                         strength:10 },
+  { from:"jokowi",         to:"sri_mulyani",     type:"mentor-murid",    label:"Sri Mulyani Menkeu 2x era Jokowi",                                             strength:9  },
+  { from:"jokowi",         to:"tito_karnavian",  type:"mentor-murid",    label:"Jokowi angkat Tito Kapolri lalu Mendagri",                                     strength:8  },
+  { from:"bobby_nasution", to:"prabowo",         type:"koalisi",         label:"Gubernur Sumut — dukung Prabowo-Gibran 2024",                                  strength:7  },
+  { from:"bobby_nasution", to:"ridwan_kamil",    type:"kolega",          label:"Sesama gubernur terpilih Pilkada 2024",                                        strength:6  },
+
+  // ── R25: DPR/PARTY NETWORKS ───────────────────────────────────────────────
+  { from:"ahy",            to:"abdul_muti",      type:"kolega",          label:"Sesama Demokrat — AHY Ketum, Abdul Mu'ti tokoh PP Muhammadiyah",               strength:7  },
+  { from:"zulhas",         to:"yandri_susanto",  type:"mentor-murid",    label:"Ketua PAN — kader PAN jadi Mendes",                                            strength:8  },
+  { from:"cakimin",        to:"gus_ipul",        type:"kolega",          label:"Sesama kader PKB — cakimin ketum, ipul mensos",                                strength:8  },
+  { from:"cakimin",        to:"gus_yahya",       type:"rival",           label:"PKB vs PBNU — konflik institusional NU",                                       strength:7  },
+  { from:"gus_yahya",      to:"gus_ipul",        type:"kolega",          label:"Sesama tokoh NU — PBNU dan Mensos PKB",                                        strength:7  },
+  { from:"puan",           to:"megawati",        type:"keluarga",        label:"Anak-ibu — penerus dinasti Soekarno di PDIP",                                  strength:10 },
+
+  // ── R25: KPK/HUKUM NETWORK ───────────────────────────────────────────────
+  { from:"hasto_kristiyanto",to:"novel_baswedan",type:"rival",           label:"Tersangka KPK vs mantan penyidik KPK",                                         strength:7  },
+  { from:"hasto_kristiyanto",to:"alexander_marwata",type:"rival",        label:"PDIP vs pimpinan KPK — konflik institusional",                                 strength:8  },
+  { from:"novel_baswedan", to:"alexander_marwata",type:"kolega",         label:"Sesama mantan pejabat KPK",                                                    strength:6  },
+  { from:"tito_karnavian", to:"sjafrie",         type:"kolega",          label:"Sesama kepala keamanan negara era Prabowo",                                    strength:6  },
+
+  // ── R25: BISNIS & POLITIK ─────────────────────────────────────────────────
+  { from:"hashim",         to:"bahlil",          type:"bisnis",          label:"Kepentingan tambang nikel — Arsari Group vs kebijakan ESDM",                   strength:7  },
+  { from:"hashim",         to:"rachmat_pambudy", type:"bisnis",          label:"Arsari Group — kepentingan agribisnis dan Bappenas",                           strength:6  },
+
+  // ── R25: REGIONAL LEADERS ────────────────────────────────────────────────
+  { from:"khofifah",       to:"gus_ipul",        type:"rival",           label:"Rival Pilkada Jatim 2018 — kini sama-sama di pemerintah",                     strength:7  },
+  { from:"khofifah",       to:"cakimin",         type:"kolega",          label:"PKB Jatim — basis NU terkuat",                                                 strength:7  },
+  { from:"eri_cahyadi",    to:"gus_ipul",        type:"kolega",          label:"Walikota Surabaya — ex-Gubernur Jatim era sama",                               strength:6  },
+  { from:"ridwan_kamil",   to:"prabowo",         type:"koalisi",         label:"Gubernur DKI Jakarta — Golkar dukung Prabowo",                                 strength:7  },
+
+  // ── R25: MUHAMMADIYAH/ORMAS NETWORK ──────────────────────────────────────
+  { from:"abdul_muti",     to:"anwar_abbas",     type:"kolega",          label:"Sesama tokoh senior Muhammadiyah",                                             strength:8  },
+
+  // ── R25: MK JUDGES ───────────────────────────────────────────────────────
+  { from:"saldi_isra",     to:"wahiduddin",      type:"kolega",          label:"Sesama hakim MK — keduanya dissenting opinion MK No.90",                      strength:7  },
+  { from:"saldi_isra",     to:"prabowo",         type:"rival",           label:"Dissenting opinion putusan MK No.90 yang meloloskan Gibran",                  strength:5  },
+
+  // ── R25: CROSS-CABINET TIES ───────────────────────────────────────────────
+  { from:"bahlil",         to:"rachmat_pambudy", type:"kolega",          label:"Sesama Gerindra di kabinet — ESDM dan Bappenas",                               strength:7  },
+  { from:"agus_gumiwang",  to:"prabowo",         type:"atasan-bawahan",  label:"Menperin di kabinet Merah Putih",                                              strength:7  },
+  { from:"agus_gumiwang",  to:"nusron_wahid",    type:"kolega",          label:"Sesama Golkar di kabinet Prabowo",                                             strength:6  },
+  { from:"budi_arie",      to:"jokowi",          type:"mentor-murid",    label:"Relawan Projo sejak 2012 — diangkat Menkominfo",                               strength:8  },
 ]
 
 export const CONNECTION_TYPES = {
