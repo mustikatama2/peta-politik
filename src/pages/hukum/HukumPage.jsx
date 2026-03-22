@@ -7,6 +7,8 @@ import {
   getTopControversial,
   getPartyRejectionCount,
   getDemoTriggeredBills,
+  getProlegnas2025Stats,
+  getProlegnas2025Bills,
 } from '../../data/legislation'
 import { PageHeader } from '../../components/ui'
 
@@ -115,6 +117,123 @@ function StatsStrip() {
           <div className="text-xs text-text-secondary mt-1">{s.label}</div>
         </div>
       ))}
+    </div>
+  )
+}
+
+// ── Prolegnas 2025 Banner ─────────────────────────────────────────────────────
+function ProlegnasBanner() {
+  const stats = getProlegnas2025Stats()
+  const bills = getProlegnas2025Bills()
+
+  return (
+    <div className="bg-gradient-to-r from-blue-900/30 via-blue-800/20 to-indigo-900/30 border border-blue-500/30 rounded-2xl p-5">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-blue-400 font-bold text-xs uppercase tracking-widest">📋 Prolegnas Prioritas 2025</span>
+          </div>
+          <h3 className="text-lg font-bold text-text-primary">
+            {stats.total} RUU dalam daftar prioritas legislasi nasional 2025
+          </h3>
+          <p className="text-xs text-text-secondary mt-1">
+            Ditetapkan oleh DPR RI dan pemerintah sebagai agenda legislasi prioritas tahun 2025
+          </p>
+        </div>
+        <div className="flex gap-3 flex-shrink-0">
+          <div className="text-center bg-green-500/15 border border-green-500/30 rounded-xl px-4 py-3 min-w-[80px]">
+            <div className="text-2xl font-bold text-green-400">{stats.disahkan}</div>
+            <div className="text-[11px] text-green-300 mt-0.5">Disahkan</div>
+          </div>
+          <div className="text-center bg-yellow-500/15 border border-yellow-500/30 rounded-xl px-4 py-3 min-w-[80px]">
+            <div className="text-2xl font-bold text-yellow-400">{stats.dibahas}</div>
+            <div className="text-[11px] text-yellow-300 mt-0.5">Dibahas</div>
+          </div>
+          <div className="text-center bg-orange-500/15 border border-orange-500/30 rounded-xl px-4 py-3 min-w-[80px]">
+            <div className="text-2xl font-bold text-orange-400">{stats.mandek}</div>
+            <div className="text-[11px] text-orange-300 mt-0.5">Mandek</div>
+          </div>
+        </div>
+      </div>
+      <div className="mt-4 pt-4 border-t border-blue-500/20">
+        <div className="flex flex-wrap gap-2">
+          {bills.map(b => (
+            <span key={b.id} className="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full border"
+              style={{
+                backgroundColor: b.status === 'disahkan' ? 'rgba(34,197,94,0.1)' :
+                                  b.status === 'ditunda' || b.status === 'ditolak' ? 'rgba(249,115,22,0.1)' :
+                                  'rgba(234,179,8,0.1)',
+                borderColor: b.status === 'disahkan' ? 'rgba(34,197,94,0.3)' :
+                             b.status === 'ditunda' || b.status === 'ditolak' ? 'rgba(249,115,22,0.3)' :
+                             'rgba(234,179,8,0.3)',
+                color: b.status === 'disahkan' ? '#86efac' :
+                       b.status === 'ditunda' || b.status === 'ditolak' ? '#fdba74' :
+                       '#fde047',
+              }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{
+                backgroundColor: b.status === 'disahkan' ? '#22c55e' :
+                                 b.status === 'ditunda' || b.status === 'ditolak' ? '#f97316' :
+                                 '#eab308'
+              }} />
+              {b.title}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ── Top 3 Kontroversial Highlight Cards ───────────────────────────────────────
+function Top3KontroversialHighlight() {
+  const top3 = getTopControversial(3)
+  const colors = [
+    { bg: 'from-red-900/40 to-red-800/20', border: 'border-red-500/40', badge: 'bg-red-500', text: 'text-red-300', label: '🔥 #1 Paling Kontroversial' },
+    { bg: 'from-orange-900/40 to-orange-800/20', border: 'border-orange-500/40', badge: 'bg-orange-500', text: 'text-orange-300', label: '⚠️ #2 Kontroversial' },
+    { bg: 'from-amber-900/40 to-amber-800/20', border: 'border-amber-500/40', badge: 'bg-amber-500', text: 'text-amber-300', label: '📢 #3 Kontroversial' },
+  ]
+
+  return (
+    <div>
+      <h2 className="text-lg font-bold text-text-primary mb-4">🔥 RUU/UU Paling Kontroversial</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {top3.map((bill, idx) => {
+          const c = colors[idx]
+          return (
+            <div key={bill.id} className={`bg-gradient-to-br ${c.bg} border ${c.border} rounded-2xl p-5 relative overflow-hidden`}>
+              <div className={`absolute top-0 right-0 w-20 h-20 rounded-full opacity-10 ${c.badge}`} style={{ transform: 'translate(30%, -30%)' }} />
+              <div className="relative">
+                <span className={`text-[11px] font-bold uppercase tracking-wider ${c.text} mb-2 block`}>{c.label}</span>
+                <h3 className="text-base font-bold text-text-primary mb-2 leading-tight">{bill.title}</h3>
+                <div className="flex items-center gap-2 mb-3">
+                  <StatusBadge status={bill.status} />
+                  <CategoryBadge catId={bill.category} />
+                </div>
+                {/* Controversy bar */}
+                <div className="flex items-center gap-2 mb-3">
+                  <div className="flex-1 h-2 bg-black/30 rounded-full overflow-hidden">
+                    <div className={`h-full rounded-full ${c.badge}`} style={{ width: `${bill.controversy_level * 10}%` }} />
+                  </div>
+                  <span className={`text-sm font-bold ${c.text}`}>{bill.controversy_level}/10</span>
+                </div>
+                {/* Top criticism */}
+                {bill.criticism?.slice(0, 2).map((crit, i) => (
+                  <div key={i} className="flex items-start gap-1.5 mb-1.5">
+                    <span className={`${c.text} flex-shrink-0 mt-0.5`}>▸</span>
+                    <span className="text-xs text-text-secondary leading-relaxed">{crit}</span>
+                  </div>
+                ))}
+                {bill.demo_triggered && (
+                  <div className="mt-3 flex items-center gap-1.5 text-orange-400 text-xs font-medium">
+                    <span>✊</span> Memicu demonstrasi
+                  </div>
+                )}
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }
@@ -614,6 +733,9 @@ export default function HukumPage() {
       {/* Stats strip */}
       <StatsStrip />
 
+      {/* Prolegnas 2025 Banner */}
+      <ProlegnasBanner />
+
       {/* Section 1: Kanban pipeline */}
       <div className="bg-bg-card border border-border rounded-2xl p-5">
         <KanbanPipeline onSelectBill={handleSelectBill} />
@@ -622,6 +744,11 @@ export default function HukumPage() {
       {/* Section 2: Bills table */}
       <div id="bills-table-section" className="bg-bg-card border border-border rounded-2xl p-5">
         <BillsTable expandedId={expandedId} onToggle={handleToggle} />
+      </div>
+
+      {/* Section 2.5: Top 3 Kontroversial Highlight */}
+      <div className="bg-bg-card border border-border rounded-2xl p-5">
+        <Top3KontroversialHighlight />
       </div>
 
       {/* Section 3: Controversy ranking */}

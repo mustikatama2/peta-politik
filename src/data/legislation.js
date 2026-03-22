@@ -61,6 +61,7 @@ export const BILLS = [
     support: ['Modernisasi TNI', 'Kebutuhan keamanan siber', 'Efisiensi komando'],
     person_ids: ['prabowo'],
     demo_triggered: true,
+    prolegnas_2025: true,
     source: 'DPR RI',
   },
 
@@ -226,6 +227,7 @@ export const BILLS = [
     ],
     person_ids: [],
     demo_triggered: true,
+    prolegnas_2025: true,
     source: 'DPR RI',
   },
 
@@ -553,6 +555,7 @@ export const BILLS = [
     ],
     person_ids: [],
     demo_triggered: false,
+    prolegnas_2025: true,
     source: 'Pemerintah / DPR RI',
   },
 
@@ -592,6 +595,7 @@ export const BILLS = [
     ],
     person_ids: [],
     demo_triggered: false,
+    prolegnas_2025: true,
     source: 'DPR RI',
   },
 
@@ -753,6 +757,7 @@ export const BILLS = [
     ],
     person_ids: [],
     demo_triggered: false,
+    prolegnas_2025: true,
     source: 'Pemerintah / DPR RI',
   },
 
@@ -793,6 +798,7 @@ export const BILLS = [
     ],
     person_ids: ['prabowo'],
     demo_triggered: true,
+    prolegnas_2025: true,
     source: 'DPR RI',
   },
 
@@ -871,6 +877,133 @@ export const BILLS = [
     demo_triggered: false,
     source: 'Pemerintah / DPR RI',
   },
+  // ─────────────────────────────────────────────────────────
+  // 22. RUU KEIMIGRASIAN 2024
+  // ─────────────────────────────────────────────────────────
+  {
+    id: 'uu_keimigrasian_2024',
+    title: 'UU Keimigrasian (Revisi 2024)',
+    full_title: 'Undang-Undang Nomor 63 Tahun 2024 tentang Perubahan atas UU Keimigrasian',
+    category: 'hukum',
+    status: 'disahkan',
+    date_submitted: '2024-06-01',
+    date_passed: '2024-09-17',
+    sponsor: ['pemerintah'],
+    committee: 'Komisi III DPR',
+    votes_for: 380,
+    votes_against: 20,
+    abstain: 5,
+    party_votes: {
+      ger: 'setuju', pdip: 'setuju', gol: 'setuju', nas: 'setuju',
+      pkb: 'setuju', pks: 'abstain', pan: 'setuju', dem: 'setuju', han: 'setuju',
+    },
+    controversy_level: 6,
+    key_provisions: [
+      'Pengetatan prosedur visa dan izin tinggal WNA',
+      'Deportasi dipercepat untuk pelanggaran imigrasi',
+      'Kewenangan cekal dan cegah diperluas',
+      'Penegakan hukum di kawasan perbatasan diperkuat',
+    ],
+    criticism: [
+      'Dianggap diskriminatif terhadap WNA tertentu',
+      'Berpotensi hambat investor dan wisatawan asing',
+      'Prosedur banding deportasi dianggap terlalu singkat',
+    ],
+    support: [
+      'Keamanan nasional dan kedaulatan perbatasan',
+      'Mencegah masuknya pelaku kejahatan transnasional',
+      'Modernisasi sistem imigrasi digital',
+    ],
+    person_ids: [],
+    demo_triggered: false,
+    source: 'Pemerintah / DPR RI',
+  },
+
+  // ─────────────────────────────────────────────────────────
+  // 23. RUU KEJAKSAAN 2025
+  // ─────────────────────────────────────────────────────────
+  {
+    id: 'ruu_kejaksaan_2025',
+    title: 'RUU Kejaksaan 2025',
+    full_title: 'Rancangan Undang-Undang tentang Perubahan atas Undang-Undang Nomor 16 Tahun 2004 tentang Kejaksaan',
+    category: 'hukum',
+    status: 'pembahasan',
+    date_submitted: '2025-01-20',
+    date_passed: null,
+    sponsor: ['pemerintah'],
+    committee: 'Komisi III DPR',
+    votes_for: 0,
+    votes_against: 0,
+    abstain: 0,
+    party_votes: {},
+    controversy_level: 7,
+    key_provisions: [
+      'Perluasan kewenangan Jaksa Agung dalam penuntutan',
+      'Jaksa dapat menerbitkan surat perintah penghentian penuntutan (SKPP) lebih luas',
+      'Koordinasi antar lembaga penegak hukum diperkuat',
+      'Kewenangan kejaksaan bidang perdata dan tata usaha negara diperluas',
+    ],
+    criticism: [
+      'Berpotensi politisasi Kejaksaan oleh eksekutif',
+      'Diskresi SKPP yang luas rawan digunakan untuk lindungi pihak tertentu',
+      'LSM antikorupsi khawatir melemahkan akuntabilitas jaksa',
+      'Draf dibahas tanpa konsultasi publik yang luas',
+    ],
+    support: [
+      'Modernisasi institusi kejaksaan yang sudah ketinggalan zaman',
+      'Efisiensi penuntutan perkara',
+      'Kejelasan kewenangan koordinasi dengan KPK dan Polri',
+    ],
+    person_ids: [],
+    demo_triggered: false,
+    prolegnas_2025: true,
+    source: 'Pemerintah / DPR RI',
+  },
+
+  // ─────────────────────────────────────────────────────────
+  // 24. UU IKN 2022 & REVISI 2024
+  // ─────────────────────────────────────────────────────────
+  {
+    id: 'uu_ikn_2022',
+    title: 'UU IKN (& Revisi 2024)',
+    full_title: 'Undang-Undang Nomor 3 Tahun 2022 tentang Ibu Kota Negara, direvisi dengan UU Nomor 21 Tahun 2023',
+    category: 'politik',
+    status: 'disahkan',
+    date_submitted: '2021-09-29',
+    date_passed: '2022-01-18',
+    sponsor: ['pemerintah'],
+    committee: 'Panitia Khusus IKN DPR',
+    votes_for: 360,
+    votes_against: 94,
+    abstain: 0,
+    party_votes: {
+      ger: 'setuju', pdip: 'setuju', gol: 'setuju', nas: 'setuju',
+      pkb: 'setuju', pks: 'tolak', pan: 'setuju', dem: 'setuju', han: 'setuju',
+    },
+    controversy_level: 8,
+    key_provisions: [
+      'Pemindahan ibu kota RI ke Nusantara, Kalimantan Timur',
+      'Pembentukan Otorita Ibu Kota Nusantara (OIKN)',
+      'Revisi 2023: membuka kepemilikan lahan bagi investor asing di IKN',
+      'Anggaran APBN + swasta + asing untuk pembiayaan',
+    ],
+    criticism: [
+      'Proses legislasi kilat tanpa kajian dampak lingkungan memadai',
+      'Ancaman terhadap masyarakat adat Kalimantan Timur',
+      'Pembiayaan tidak jelas — investor asing banyak yang mundur',
+      'Revisi 2023 dinilai menjual kedaulatan tanah kepada asing',
+      'PKS dan sejumlah akademisi menolak sejak awal',
+    ],
+    support: [
+      'Pemerataan pembangunan keluar dari Jawa',
+      'Misi besar warisan Presiden Jokowi',
+      'Potensi pusat ekonomi baru di Kalimantan',
+    ],
+    person_ids: ['jokowi', 'prabowo'],
+    demo_triggered: false,
+    source: 'Pemerintah / DPR RI',
+  },
+
 ]
 
 // ── Computed helpers ──────────────────────────────────────────────────────────
@@ -899,4 +1032,16 @@ export function getPartyRejectionCount() {
 
 export function getDemoTriggeredBills() {
   return BILLS.filter(b => b.demo_triggered)
+}
+
+export function getProlegnas2025Bills() {
+  return BILLS.filter(b => b.prolegnas_2025 === true)
+}
+
+export function getProlegnas2025Stats() {
+  const bills = getProlegnas2025Bills()
+  const disahkan  = bills.filter(b => b.status === 'disahkan').length
+  const dibahas   = bills.filter(b => ['ruu', 'pembahasan'].includes(b.status)).length
+  const mandek    = bills.filter(b => ['ditunda', 'ditolak', 'dicabut'].includes(b.status)).length
+  return { total: bills.length, disahkan, dibahas, mandek }
 }
