@@ -30,6 +30,7 @@ const NAV = [
   { to:'/koalisi',  icon:'🤝', label:'Sejarah Koalisi' },
   { to:'/survei',   icon:'📉', label:'Survei & Polling' },
   { to:'/analitik', icon:'📈', label:'Analitik' },
+  { to:'/stats',    icon:'📊', label:'Statistik DB' },
   { to:'/risk',     icon:'🚨', label:'Indeks Risiko' },
   { to:'/scorecard',icon:'🏆', label:'Rapor Provinsi' },
   { to:'/scenarios',icon:'🔮', label:'Skenario 2029' },

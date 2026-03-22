@@ -21,6 +21,7 @@ import { KPICard, Card } from '../../components/ui'
 import WatchlistAlerts from '../../components/WatchlistAlerts'
 import QuickSearch from '../../components/QuickSearch'
 import MetaTags from '../../components/MetaTags'
+import { scoreAllPersons } from '../../lib/scoring'
 
 // Safe fallback for PROVINCES (data agent may not have committed yet)
 const PROVINCES = RegionsData.PROVINCES || []
@@ -82,6 +83,10 @@ function buildPetaKekuatan() {
       fill: PARTY_MAP[pid]?.color || '#6B7280',
     }))
 }
+
+// ── Precomputed module-level data ──────────────────────────────────────────
+const kpk2025Cases = KPK_CASES.filter(c => c.date_start?.startsWith('2025'))
+const top5Persons  = scoreAllPersons().slice(0, 5)
 
 // ── Bloomberg-style Live News Ticker ──────────────────────────────────────
 function NewsTicker() {
@@ -439,6 +444,220 @@ function AngkaKunci() {
   )
 }
 
+// ── E. Alert Banner ───────────────────────────────────────────────────────
+function AlertBanner() {
+  const berlangsung = AGENDAS.filter(a => a.status === 'berlangsung')
+  if (!berlangsung.length && !kpk2025Cases.length) return null
+
+  return (
+    <div className="space-y-2">
+      {berlangsung.map(a => (
+        <div key={a.id} className="flex items-center gap-3 p-3 rounded-lg bg-red-500/10 border border-red-500/40 text-sm">
+          <span className="flex items-center gap-1.5 text-red-400 font-bold text-xs flex-shrink-0">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+            BERLANGSUNG
+          </span>
+          <span className="text-text-primary truncate">{a.title}</span>
+          <Link to="/agendas" className="ml-auto text-xs text-red-400 hover:underline whitespace-nowrap flex-shrink-0">Detail →</Link>
+        </div>
+      ))}
+      {kpk2025Cases.length > 0 && (
+        <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-500/10 border border-amber-500/40 text-sm">
+          <span className="text-amber-400 font-bold text-xs flex-shrink-0">
+            ⚠️ {kpk2025Cases.length} kasus KPK baru di 2025
+          </span>
+          <span className="text-text-secondary text-xs hidden sm:block">Termasuk Tom Lembong, Hasto Kristiyanto, dan lainnya</span>
+          <Link to="/kpk" className="ml-auto text-xs text-amber-400 hover:underline whitespace-nowrap flex-shrink-0">Lihat →</Link>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── A. Agenda Politik Terkini ──────────────────────────────────────────────
+function HariIniDiPolitik() {
+  const agendas = [
+    ...AGENDAS.filter(a => a.status === 'berlangsung'),
+    ...AGENDAS.filter(a => a.status === 'mendatang'),
+    ...AGENDAS.filter(a => a.status === 'proses' && a.year >= 2025),
+  ].slice(0, 3)
+
+  const statusCfg = {
+    berlangsung: { color: '#EF4444', label: 'Berlangsung', bg: '#EF444420' },
+    mendatang:   { color: '#8B5CF6', label: 'Mendatang',   bg: '#8B5CF620' },
+    proses:      { color: '#F59E0B', label: 'Proses',      bg: '#F59E0B20' },
+  }
+
+  return (
+    <Card className="p-5">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-semibold text-text-primary flex items-center gap-2">
+          📅 Hari Ini di Politik
+        </h2>
+        <Link to="/agendas" className="text-xs text-accent-blue hover:underline">Semua agenda →</Link>
+      </div>
+      {agendas.length === 0 ? (
+        <p className="text-text-secondary text-sm py-2 text-center">Tidak ada agenda terjadwal minggu ini</p>
+      ) : (
+        <div className="space-y-3">
+          {agendas.map(a => {
+            const person = a.subject_type === 'person' ? PERSONS.find(p => p.id === a.subject_id) : null
+            const cfg = statusCfg[a.status] || { color: '#6B7280', label: a.status, bg: '#6B728020' }
+            return (
+              <div key={a.id} className="flex items-start gap-3 p-3 rounded-xl border border-border bg-bg-elevated">
+                <span
+                  className="text-[10px] px-2 py-0.5 rounded-full font-medium flex-shrink-0 mt-0.5"
+                  style={{ background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.color}60` }}
+                >
+                  {cfg.label}
+                </span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-text-primary leading-snug">{a.title}</p>
+                  {person && (
+                    <Link to={`/persons/${person.id}`} className="text-xs text-accent-blue hover:underline mt-0.5 block">
+                      {person.name}
+                    </Link>
+                  )}
+                </div>
+                <span className="text-xs text-text-muted flex-shrink-0">{a.year}</span>
+              </div>
+            )
+          })}
+        </div>
+      )}
+    </Card>
+  )
+}
+
+// ── B. DB Stats Strip (clickable) ─────────────────────────────────────────
+function DBStatsStrip() {
+  const stats = [
+    { label: 'Tokoh',     value: PERSONS.length,         icon: '👥', to: '/persons' },
+    { label: 'Koneksi',   value: CONNECTIONS.length,     icon: '🕸️', to: '/network' },
+    { label: 'Partai',    value: PARTIES.length,         icon: '🎭', to: '/parties' },
+    { label: 'Kasus KPK', value: KPK_CASES.length,       icon: '⚖️', to: '/kpk' },
+    { label: 'Agenda',    value: AGENDAS.length,         icon: '📋', to: '/agendas' },
+    { label: 'Peristiwa', value: TIMELINE_EVENTS.length, icon: '📅', to: '/timeline' },
+  ]
+
+  return (
+    <div className="overflow-x-auto">
+      <div className="flex rounded-xl border border-border bg-bg-card overflow-hidden min-w-[480px]">
+        {stats.map((s, i) => (
+          <Link
+            key={s.to}
+            to={s.to}
+            className={`flex flex-col items-center px-3 py-3 flex-1 min-w-[80px] hover:bg-bg-elevated transition-colors ${i < stats.length - 1 ? 'border-r border-border' : ''}`}
+          >
+            <span className="text-xl mb-1">{s.icon}</span>
+            <span className="text-xl font-bold text-text-primary">{s.value}</span>
+            <span className="text-[10px] text-text-muted mt-0.5 text-center">{s.label}</span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ── C. Berita Paling Relevan ──────────────────────────────────────────────
+function BeritaPalingRelevan() {
+  const topNews = [...NEWS].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3)
+
+  const sentimentCfg = {
+    positif: { color: '#10B981', label: 'Positif' },
+    negatif: { color: '#EF4444', label: 'Negatif' },
+    netral:  { color: '#6B7280', label: 'Netral'  },
+  }
+
+  return (
+    <Card className="p-5">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-semibold text-text-primary">📰 Berita Paling Relevan</h2>
+        <Link to="/news" className="text-xs text-accent-blue hover:underline">Lihat semua →</Link>
+      </div>
+      <div className="space-y-3">
+        {topNews.map((article, i) => {
+          const cfg = sentimentCfg[article.sentiment] || sentimentCfg.netral
+          const headline = article.headline.length > 80
+            ? article.headline.slice(0, 80) + '…'
+            : article.headline
+          return (
+            <div key={article.id || i} className="p-3 rounded-xl border border-border bg-bg-elevated">
+              <p className="text-sm font-medium text-text-primary leading-snug">{headline}</p>
+              <div className="flex items-center gap-2 mt-1.5">
+                <span className="text-[10px] px-2 py-0.5 rounded border border-border text-text-muted bg-bg-card">
+                  {article.source}
+                </span>
+                <span
+                  className="text-[10px] px-2 py-0.5 rounded font-medium"
+                  style={{ background: cfg.color + '20', color: cfg.color }}
+                >
+                  {cfg.label}
+                </span>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </Card>
+  )
+}
+
+// ── D. Power Rankings Preview ─────────────────────────────────────────────
+function PowerRankingsPreview() {
+  const maxScore = top5Persons[0]?.total || 100
+
+  return (
+    <Card className="p-5">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-semibold text-text-primary">🏆 Power Rankings</h2>
+        <Link to="/ranking" className="text-xs text-accent-blue hover:underline">Lihat ranking lengkap →</Link>
+      </div>
+      <div className="space-y-1">
+        {top5Persons.map((p, i) => {
+          const party = PARTY_MAP[p.party_id]
+          const pctWidth = `${(p.total / maxScore) * 100}%`
+          return (
+            <Link
+              key={p.id}
+              to={`/persons/${p.id}`}
+              className="flex items-center gap-3 p-2 rounded-xl hover:bg-bg-elevated transition-colors group"
+            >
+              <span className="w-6 text-center text-sm font-bold text-text-muted flex-shrink-0">#{i + 1}</span>
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+                style={{ background: party?.color || '#374151' }}
+              >
+                {p.photo_placeholder || p.name[0]}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-text-primary group-hover:text-accent-red truncate">{p.name}</p>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <div className="flex-1 h-1.5 bg-bg-elevated rounded-full overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all"
+                      style={{ width: pctWidth, background: party?.color || '#3B82F6' }}
+                    />
+                  </div>
+                  <span className="text-[10px] text-text-muted flex-shrink-0 w-6 text-right">{p.total}</span>
+                </div>
+              </div>
+              {party && (
+                <span
+                  className="text-[10px] font-bold px-1.5 py-0.5 rounded flex-shrink-0"
+                  style={{ background: (party.color || '#374151') + '20', color: party.color || '#9CA3AF' }}
+                >
+                  {party.abbr}
+                </span>
+              )}
+            </Link>
+          )
+        })}
+      </div>
+    </Card>
+  )
+}
+
 export default function Dashboard() {
   const { user } = useAuth()
   const today = new Date().toLocaleDateString('id-ID', {
@@ -456,6 +675,10 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <MetaTags title="Dashboard" description="Ringkasan intelijen politik Indonesia — tokoh, partai, koalisi, dan berita terkini" />
+
+      {/* ── E. Alert Banner (conditional) ── */}
+      <AlertBanner />
+
       {/* ── Live News Ticker ── */}
       <NewsTicker />
 
@@ -544,10 +767,20 @@ export default function Dashboard() {
       {/* ── Angka Kunci Strip ── */}
       <AngkaKunci />
 
+      {/* ── B. DB Stats Strip (clickable → relevant pages) ── */}
+      <DBStatsStrip />
+
       {/* ── Fakta Hari Ini + Tokoh Terpanas ── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <FaktaHariIni />
         <TokohTerpanas />
+      </div>
+
+      {/* ── A/C/D. Agenda + Berita + Rankings ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <HariIniDiPolitik />
+        <BeritaPalingRelevan />
+        <PowerRankingsPreview />
       </div>
 
       {/* ── Trending Politicians ── */}
