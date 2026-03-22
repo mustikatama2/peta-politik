@@ -79,7 +79,7 @@ export const PERSONS = [
 
   // ─── NASIONAL — EKSEKUTIF ───────────────────────────────────────────────
   {
-    id:"prabowo", name:"Prabowo Subianto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Prabowo_Subianto_2024_official_portrait.jpg/400px-Prabowo_Subianto_2024_official_portrait.jpg", photo_placeholder:"PS",
+    id:"prabowo", name:"Prabowo Subianto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Prabowo_Subianto_2024_official_portrait.jpg/330px-Prabowo_Subianto_2024_official_portrait.jpg", photo_placeholder:"PS",
     born:"17 Oct 1951", born_place:"Jakarta", religion:"Islam",
     education:"Akademi Militer Magelang (1974); Fort Benning USA",
     party_id:"ger", party_role:"Ketua Umum",
@@ -112,7 +112,7 @@ export const PERSONS = [
     data_sources:["id.wikipedia.org/wiki/Prabowo_Subianto","lhkpn.kpk.go.id","kpu.go.id/pilpres-2024"]
   },
   {
-    id:"gibran", name:"Gibran Rakabuming Raka", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Gibran_Rakabuming_Raka_2024_official_portrait.jpg/400px-Gibran_Rakabuming_Raka_2024_official_portrait.jpg", photo_placeholder:"GR",
+    id:"gibran", name:"Gibran Rakabuming Raka", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Gibran_Rakabuming_2024_official_portrait.jpg/330px-Gibran_Rakabuming_2024_official_portrait.jpg", photo_placeholder:"GR",
     born:"1 Oct 1987", born_place:"Surakarta", religion:"Islam",
     education:"S1 Manajemen, Universitas Gadjah Mada (2010)",
     party_id:null, party_role:null,
@@ -1108,7 +1108,7 @@ export const PERSONS = [
   },
   // ─── JATIM — DPD ────────────────────────────────────────────────────────
   {
-    id:"lia_istifhama", name:"Lia Istifhama", photo_url:null, photo_placeholder:"LI",
+    id:"lia_istifhama", name:"Lia Istifhama", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/DR_Lia_Istifhama.jpg/330px-DR_Lia_Istifhama.jpg", photo_placeholder:"LI",
     born:"1985", born_place:"Surabaya", religion:"Islam",
     education:"S1 Ilmu Komunikasi, Universitas Airlangga",
     party_id:null, party_role:null,
@@ -1161,7 +1161,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"rudy_saladin", name:"Rudy Saladin", photo_url:null, photo_placeholder:"RS",
+    id:"rudy_saladin", name:"Rudy Saladin", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Pangdam_V_Brawijaya_Mayjen_TNI_Rudy_Saladin.jpg/330px-Pangdam_V_Brawijaya_Mayjen_TNI_Rudy_Saladin.jpg", photo_placeholder:"RS",
     born:"1968", born_place:"Jawa Barat", religion:"Islam",
     education:"Akademi Militer Magelang",
     party_id:null, party_role:null,
@@ -1405,7 +1405,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"maidi", name:"Maidi", photo_url:null, photo_placeholder:"MD",
+    id:"maidi", name:"Maidi", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Wali_Kota_Madiun%2C_Maidi.png/330px-Wali_Kota_Madiun%2C_Maidi.png", photo_placeholder:"MD",
     born:"1965", born_place:"Madiun", religion:"Islam",
     education:"S1 Administrasi Negara, STIA",
     party_id:"ger", party_role:"Anggota",
@@ -1457,7 +1457,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"mundjidah", name:"Mundjidah Wahab", photo_url:null, photo_placeholder:"MW",
+    id:"mundjidah", name:"Mundjidah Wahab", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Mundjidah_Wahab.jpg/330px-Mundjidah_Wahab.jpg", photo_placeholder:"MW",
     born:"1970", born_place:"Jombang", religion:"Islam",
     education:"Pesantren Mambaul Maarif Denanyar Jombang",
     party_id:"pkb", party_role:"Anggota",
@@ -1483,7 +1483,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sutiaji", name:"Sutiaji", photo_url:null, photo_placeholder:"ST",
+    id:"sutiaji", name:"Sutiaji", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Walikota_Sutiaji.jpg/330px-Walikota_Sutiaji.jpg", photo_placeholder:"ST",
     born:"1963", born_place:"Malang", religion:"Islam",
     education:"S1 Ilmu Pemerintahan, Universitas Brawijaya",
     party_id:"dem", party_role:"Anggota",
@@ -1548,7 +1548,7 @@ export const PERSONS = [
     analysis:{ideology_score:2, populism_score:4, corruption_risk:"terpidana", nationalism:4, religiosity:4, track_record:"Terpidana korupsi DAK.", policy_direction:"N/A", style:'Birokrat', risk:'high', influence:2, controversy_level:8, notes:"Rendra Kresna adalah mantan Bupati Malang dua periode yang telah ditetapkan sebagai terpidana kasus korupsi Dana Alokasi Khusus Dinas Pendidikan Kabupaten Malang. Kasusnya menjadi contoh nyata penyalahgunaan anggaran pendidikan di level kabupaten. Pasca vonis bersalah, karir politiknya berakhir dan menjadi salah satu catatan kelam korupsi kepala daerah di Jawa Timur."}
   },
   {
-    id:"timbul_prihanjoko", name:"Timbul Prihanjoko", photo_url:null, photo_placeholder:"TP",
+    id:"timbul_prihanjoko", name:"Timbul Prihanjoko", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Wakil_Bupati_Probolinggo_A._Timbul_Prihanjoko.jpg/330px-Wakil_Bupati_Probolinggo_A._Timbul_Prihanjoko.jpg", photo_placeholder:"TP",
     born:"1970", born_place:"Pasuruan", religion:"Islam", education:"S1",
     party_id:"pdip", party_role:"Anggota",
     positions:[{title:"Bupati Pasuruan", institution:"Pemkab Pasuruan", region:"Pasuruan", start:"2021", end:null, is_current:true}],
@@ -1565,7 +1565,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"saiful_ilah", name:"Saiful Ilah", photo_url:null, photo_placeholder:"SI",
+    id:"saiful_ilah", name:"Saiful Ilah", photo_url:"https://upload.wikimedia.org/wikipedia/id/thumb/6/6d/Saiful_Ilah.jpeg/330px-Saiful_Ilah.jpeg", photo_placeholder:"SI",
     born:"1955", born_place:"Sidoarjo", religion:"Islam", education:"S1",
     party_id:"pkb", party_role:"Anggota",
     positions:[{title:"Mantan Bupati Sidoarjo", institution:"Pemkab Sidoarjo", region:"Sidoarjo", start:"2000", end:"2021", is_current:false}],
@@ -1633,7 +1633,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"karna_suswandi", name:"Karna Suswandi", photo_url:null, photo_placeholder:"KS",
+    id:"karna_suswandi", name:"Karna Suswandi", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Bupati_Situbondo_17.jpg/330px-Bupati_Situbondo_17.jpg", photo_placeholder:"KS",
     born:"1969", born_place:"Situbondo", religion:"Islam", education:"S1",
     party_id:"nas", party_role:"Anggota",
     positions:[{title:"Bupati Situbondo", institution:"Pemkab Situbondo", region:"Situbondo", start:"2021", end:null, is_current:true}],
@@ -1769,7 +1769,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hariyanto_bojonegoro", name:"Setyo Wahono", photo_url:null, photo_placeholder:"SW",
+    id:"hariyanto_bojonegoro", name:"Setyo Wahono", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Setyo_Wahono_-_Bupati_Bojonegoro.png/330px-Setyo_Wahono_-_Bupati_Bojonegoro.png", photo_placeholder:"SW",
     born:"1972", born_place:"Bojonegoro", religion:"Islam", education:"S1",
     party_id:"pdip", party_role:"Anggota",
     positions:[{title:"Bupati Bojonegoro", institution:"Pemkab Bojonegoro", region:"Bojonegoro", start:"2023", end:null, is_current:true}],
@@ -1786,7 +1786,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"arifin_tuban", name:"Aditya Halindra Faridzky", photo_url:null, photo_placeholder:"AF",
+    id:"arifin_tuban", name:"Aditya Halindra Faridzky", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Aditya_Halindra_Faridzky.png/330px-Aditya_Halindra_Faridzky.png", photo_placeholder:"AF",
     born:"1990", born_place:"Tuban", religion:"Islam", education:"S1",
     party_id:"pkb", party_role:"Anggota",
     positions:[{title:"Bupati Tuban", institution:"Pemkab Tuban", region:"Tuban", start:"2021", end:null, is_current:true}],
@@ -1803,7 +1803,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"fauzi_ngawi", name:"Ony Anwar Harsono", photo_url:null, photo_placeholder:"OA",
+    id:"fauzi_ngawi", name:"Ony Anwar Harsono", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Ony_Harsono%2C_Regent_of_Ngawi_Regency.jpg/330px-Ony_Harsono%2C_Regent_of_Ngawi_Regency.jpg", photo_placeholder:"OA",
     born:"1975", born_place:"Ngawi", religion:"Islam", education:"S1",
     party_id:"pkb", party_role:"Anggota",
     positions:[{title:"Bupati Ngawi", institution:"Pemkab Ngawi", region:"Ngawi", start:"2021", end:null, is_current:true}],
@@ -1854,7 +1854,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"daryono_trenggalek", name:"Mochamad Nur Arifin", photo_url:null, photo_placeholder:"MN",
+    id:"daryono_trenggalek", name:"Mochamad Nur Arifin", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Bupati_Trenggalek_Mochamad_Nur_Arifin.png/330px-Bupati_Trenggalek_Mochamad_Nur_Arifin.png", photo_placeholder:"MN",
     born:"1990", born_place:"Trenggalek", religion:"Islam", education:"S1",
     party_id:"pdip", party_role:"Anggota",
     positions:[{title:"Bupati Trenggalek", institution:"Pemkab Trenggalek", region:"Trenggalek", start:"2021", end:null, is_current:true}],
@@ -1871,7 +1871,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"winarso_kediri", name:"Hanindhito Pramana (Kota Kediri)", photo_url:null, photo_placeholder:"KK",
+    id:"winarso_kediri", name:"Hanindhito Pramana (Kota Kediri)", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Hanindhito_Himawan_Pramana.jpg/330px-Hanindhito_Himawan_Pramana.jpg", photo_placeholder:"KK",
     born:"1976", born_place:"Kediri", religion:"Islam", education:"S1",
     party_id:"pkb", party_role:"Anggota",
     positions:[{title:"Walikota Kediri", institution:"Pemkot Kediri", region:"Kediri", start:"2021", end:null, is_current:true}],
@@ -1939,7 +1939,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"fauzi_sampang", name:"H. Slamet Junaidi", photo_url:null, photo_placeholder:"SJ",
+    id:"fauzi_sampang", name:"H. Slamet Junaidi", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Bupati_Sampang_Slamet_Junaidi.png/330px-Bupati_Sampang_Slamet_Junaidi.png", photo_placeholder:"SJ",
     born:"1971", born_place:"Sampang", religion:"Islam", education:"S1",
     party_id:"pkb", party_role:"Anggota",
     positions:[{title:"Bupati Sampang", institution:"Pemkab Sampang", region:"Sampang", start:"2019", end:null, is_current:true}],
@@ -3761,7 +3761,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"lukas_enembe", name:"Lukas Enembe", photo_url:null, photo_placeholder:"LE",
+    id:"lukas_enembe", name:"Lukas Enembe", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Joseph_R._Donovan_Jr_dengan_Lukas_Enembe_%28Lukas_Enembe%29.jpg/330px-Joseph_R._Donovan_Jr_dengan_Lukas_Enembe_%28Lukas_Enembe%29.jpg", photo_placeholder:"LE",
     born:"1967", born_place:"Puncak Jaya, Papua", religion:"Kristen",
     education:"S1 Administrasi Negara",
     party_id:"dem", party_role:"Anggota",
@@ -4266,7 +4266,7 @@ export const PERSONS = [
 
   // ── KELUARGA CENDANA ──────────────────────────────────────────────────────
   {
-    id:"tutut", name:"Siti Hardiyanti Rukmana (Tutut)", photo_url:null, photo_placeholder:"TT",
+    id:"tutut", name:"Siti Hardiyanti Rukmana (Tutut)", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tutut_Soeharto%2C_Antara_TV%2C_00.35.jpg/330px-Tutut_Soeharto%2C_Antara_TV%2C_00.35.jpg", photo_placeholder:"TT",
     born:"1949", born_place:"Yogyakarta", religion:"Islam",
     education:"S1 Administrasi Niaga UI",
     party_id:"gol", party_role:"Pengusaha / Putri Soeharto",
@@ -4296,7 +4296,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"tommy_soeharto", name:"Hutomo Mandala Putra (Tommy Soeharto)", photo_url:null, photo_placeholder:"TS",
+    id:"tommy_soeharto", name:"Hutomo Mandala Putra (Tommy Soeharto)", photo_url:"https://upload.wikimedia.org/wikipedia/commons/6/6d/Tommy_Suharto_Central_Aceh.png", photo_placeholder:"TS",
     born:"1962", born_place:"Jakarta", religion:"Islam",
     education:"S1 Ekonomi Pertanian UC Davis, California",
     party_id:"berkarya", party_role:"Pengusaha / Ketua Umum Partai Berkarya",
