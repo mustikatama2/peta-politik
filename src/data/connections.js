@@ -895,6 +895,48 @@ export const CONNECTIONS = [
   { from:"agus_subiyanto",  to:"jokowi",      type:"mentor-murid",   label:"Jokowi angkat Agus Subiyanto Panglima TNI", since:2023, strength:8 },
   { from:"agus_subiyanto",  to:"prabowo",     type:"atasan-bawahan", label:"Panglima TNI di era Presiden Prabowo", since:2024, strength:8 },
   { from:"agus_subiyanto",  to:"sjafrie",     type:"kolega",         label:"Sesama perwira senior TNI AD", since:2024, strength:7 },
+
+  // ── R34: SBY (SUSILO BAMBANG YUDHOYONO) ────────────────────────────────
+  { from:"susilo_bambang_yudhoyono", to:"ahy",                    type:"keluarga",       label:"Ayah-Anak, Presiden-Ketua Umum", strength:10 },
+  { from:"susilo_bambang_yudhoyono", to:"prabowo",                type:"kolega",         label:"Rekan TNI, koalisi 2009", strength:7 },
+  { from:"susilo_bambang_yudhoyono", to:"moeldoko",               type:"atasan-bawahan", label:"SBY menunjuk Moeldoko sebagai Panglima TNI 2013", strength:8 },
+  { from:"susilo_bambang_yudhoyono", to:"megawati",               type:"konflik",        label:"Rivalitas politik sejak 2001 pilpres tak langsung", strength:6 },
+  { from:"susilo_bambang_yudhoyono", to:"anas_urbaningrum",       type:"konflik",        label:"Konflik internal Demokrat, Anas ditangkap KPK era SBY", strength:7 },
+  { from:"susilo_bambang_yudhoyono", to:"akbar_tandjung",         type:"ideologi",       label:"Tokoh senior partai berbeda, relasi reformasi", strength:5 },
+
+  // ── R34: SANDIAGA UNO ──────────────────────────────────────────────────
+  { from:"sandiaga_uno", to:"anies",            type:"koalisi",  label:"Pasangan Wagub-Gubernur DKI 2017-2018", strength:9 },
+  { from:"sandiaga_uno", to:"prabowo",          type:"koalisi",  label:"Pasangan Capres-Cawapres 2019", strength:9 },
+  { from:"sandiaga_uno", to:"hashim",           type:"bisnis",   label:"Jaringan bisnis keluarga Djojohadikusumo", strength:6 },
+  { from:"sandiaga_uno", to:"hary_tanoe",       type:"bisnis",   label:"Konglomerasi media dan properti", strength:5 },
+  { from:"sandiaga_uno", to:"chairul_tanjung",  type:"bisnis",   label:"Jaringan pengusaha Jakarta", strength:5 },
+
+  // ── R34: CHAIRUL TANJUNG ───────────────────────────────────────────────
+  { from:"chairul_tanjung", to:"susilo_bambang_yudhoyono", type:"kolega",   label:"Menko Perekonomian era SBY 2014", strength:8 },
+  { from:"chairul_tanjung", to:"jokowi",                   type:"kolega",   label:"Hubungan bisnis dan kebijakan", strength:6 },
+  { from:"chairul_tanjung", to:"hary_tanoe",               type:"konflik",  label:"Rivalitas media (Trans Corp vs MNC Group)", strength:7 },
+  { from:"chairul_tanjung", to:"erick_thohir",             type:"bisnis",   label:"Jaringan konglomerat media Indonesia", strength:6 },
+  { from:"chairul_tanjung", to:"surya_paloh",              type:"bisnis",   label:"Jaringan media — Trans Corp vs Metro TV", strength:6 },
+
+  // ── R34: MOELDOKO ─────────────────────────────────────────────────────
+  { from:"moeldoko", to:"jokowi",                    type:"atasan-bawahan", label:"Kepala KSP di bawah Jokowi 2018-2024", strength:9 },
+  { from:"moeldoko", to:"ahy",                       type:"konflik",        label:"KLB Demokrat ilegal 2021 — Moeldoko coba ambil alih partai", strength:9 },
+  { from:"moeldoko", to:"susilo_bambang_yudhoyono",  type:"atasan-bawahan", label:"SBY menunjuk Moeldoko Panglima TNI 2013", strength:8 },
+
+  // ── R34: AMIEN RAIS ───────────────────────────────────────────────────
+  { from:"amien_rais", to:"zulhas",    type:"konflik",  label:"Perpecahan PAN, Zulhas menang kongres, Amien dirikan Partai Ummat", strength:9 },
+  { from:"amien_rais", to:"megawati",  type:"konflik",  label:"Rivalitas reformasi — Amien dukung Gus Dur lawan Mega 2001", strength:7 },
+  { from:"amien_rais", to:"gus_yahya", type:"ideologi", label:"Hubungan Islam modernis — Muhammadiyah vs NU", strength:5 },
+  { from:"amien_rais", to:"jokowi",    type:"oposisi",  label:"Amien salah satu pengkritik keras pemerintahan Jokowi", strength:8 },
+
+  // ── R34: AKBAR TANDJUNG ───────────────────────────────────────────────
+  { from:"akbar_tandjung", to:"airlangga", type:"mentor-murid", label:"Senior Golkar — Akbar mentor generasi Airlangga", strength:7 },
+  { from:"akbar_tandjung", to:"bahlil",    type:"kolega",       label:"Senior-junior Golkar", strength:5 },
+
+  // ── R34: YENNY WAHID ──────────────────────────────────────────────────
+  { from:"yenny_wahid", to:"gus_yahya", type:"ideologi", label:"Sama-sama keturunan NU, beda jalur", strength:6 },
+  { from:"yenny_wahid", to:"anies",     type:"koalisi",  label:"Mendukung Anies pada Pilpres 2024", strength:7 },
+  { from:"yenny_wahid", to:"cakimin",   type:"konflik",  label:"Kompetisi pengaruh di komunitas NU non-PKB", strength:6 },
 ];
 
 export const CONNECTION_TYPES = {
