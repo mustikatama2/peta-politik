@@ -185,6 +185,7 @@ export default function NetworkPage() {
             {ALL_TYPES.map(type => {
               const info = TYPE_INFO[type]
               const checked = visibleTypes.includes(type)
+              const count = TYPE_COUNTS[type] || 0
               return (
                 <label
                   key={type}
@@ -200,8 +201,11 @@ export default function NetworkPage() {
                     className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                     style={{ backgroundColor: info.color }}
                   />
-                  <span className={`text-xs ${checked ? 'text-text-primary' : 'text-text-secondary'}`}>
+                  <span className={`text-xs flex-1 ${checked ? 'text-text-primary' : 'text-text-secondary'}`}>
                     {info.label}
+                  </span>
+                  <span className="text-[10px] text-text-secondary tabular-nums">
+                    {count}
                   </span>
                 </label>
               )
@@ -308,21 +312,50 @@ export default function NetworkPage() {
             Cari Jalur
           </button>
           {Array.isArray(path) && (
-            <div className="mt-2 space-y-1">
-              <p className="text-xs text-text-secondary">{path.length - 1} derajat pemisah:</p>
-              {path.map((id, i) => {
-                const p = PERSONS.find(x => x.id === id)
-                return (
-                  <div key={id} className="flex items-center gap-1">
-                    {i > 0 && <span className="text-accent-red text-xs">→</span>}
-                    <span className="text-xs text-text-primary">{p?.name || id}</span>
-                  </div>
-                )
-              })}
+            <div className="mt-2 space-y-1.5">
+              {/* Summary line */}
+              <div className="text-xs text-yellow-400 font-medium bg-yellow-500/10 border border-yellow-500/20 rounded px-2 py-1.5">
+                {(() => {
+                  const startName = PERSONS.find(x => x.id === path[0])?.name || path[0]
+                  const endName   = PERSONS.find(x => x.id === path[path.length - 1])?.name || path[path.length - 1]
+                  const steps     = path.length - 1
+                  const via       = path.slice(1, -1).map(id => PERSONS.find(x => x.id === id)?.name || id)
+                  return (
+                    <>
+                      <span>{startName} → {endName}: <strong>{steps} langkah</strong></span>
+                      {via.length > 0 && (
+                        <span className="block text-yellow-300/80 text-[10px] mt-0.5">
+                          via {via.join(', ')}
+                        </span>
+                      )}
+                    </>
+                  )
+                })()}
+              </div>
+              {/* Step-by-step */}
+              <div className="flex flex-wrap items-center gap-1">
+                {path.map((id, i) => {
+                  const p = PERSONS.find(x => x.id === id)
+                  return (
+                    <span key={id} className="flex items-center gap-1">
+                      {i > 0 && <span className="text-accent-red text-[10px]">→</span>}
+                      <span className="text-[10px] text-text-primary bg-bg-elevated rounded px-1.5 py-0.5">
+                        {p?.name || id}
+                      </span>
+                    </span>
+                  )
+                })}
+              </div>
+              <button
+                onClick={() => { setPath(undefined); setPathStart(''); setPathEnd('') }}
+                className="w-full text-[10px] text-text-secondary hover:text-red-400 transition-colors mt-1"
+              >
+                ✕ Reset Jalur
+              </button>
             </div>
           )}
           {path === null && pathStart && pathEnd && (
-            <p className="text-xs text-text-secondary mt-2">Tidak ada jalur ditemukan</p>
+            <p className="text-xs text-red-400/80 mt-2">Tidak ada jalur ditemukan antara kedua tokoh ini.</p>
           )}
         </div>
       </div>

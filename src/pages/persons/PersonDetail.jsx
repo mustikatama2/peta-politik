@@ -587,13 +587,20 @@ function RingkasanSidebar({ person, party, personConnections, navigate }) {
     navigate(`/compare/${person.id}`)
   }
 
-  // Top 3 connected persons
-  const top3 = useMemo(() => {
-    return personConnections
-      .slice(0, 3)
-      .map(c => {
-        const pid = c.from === person.id ? c.to : c.from
-        return PERSONS.find(p => p.id === pid)
+  // Top 5 most-connected persons (by strength, then count)
+  const top5 = useMemo(() => {
+    const scoreMap = {}
+    personConnections.forEach(c => {
+      const pid = c.from === person.id ? c.to : c.from
+      if (!scoreMap[pid]) scoreMap[pid] = { pid, strength: 0, conn: c }
+      scoreMap[pid].strength += (c.strength || 5)
+    })
+    return Object.values(scoreMap)
+      .sort((a, b) => b.strength - a.strength)
+      .slice(0, 5)
+      .map(({ pid, conn }) => {
+        const p = PERSONS.find(x => x.id === pid)
+        return p ? { person: p, conn } : null
       })
       .filter(Boolean)
   }, [person, personConnections])
@@ -1576,6 +1583,9 @@ export default function PersonDetail() {
           </div>
         </div>
       )}
+
+      {/* Berita Terkait */}
+      <BeritaTerkait person={person} />
     </div>
   )
 }
