@@ -1,5 +1,9 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
+  PieChart, Pie, Legend,
+} from 'recharts'
 import { KEY_BUMN, DANANTARA_INFO, SECTOR_CONCENTRATION } from '../../data/bumn'
 import { POLITICAL_BUSINESS_TIES, COMPANIES } from '../../data/business'
 import { PERSONS } from '../../data/persons'
@@ -22,6 +26,14 @@ const fmtShort = (n) => {
   return n.toLocaleString('id-ID')
 }
 
+// Format Triliun value (new 2024 data stored as Triliun numbers)
+const fmtT = (t) => {
+  if (t === undefined || t === null) return '—'
+  if (Math.abs(t) >= 1000) return `Rp ${t.toFixed(0)}T`
+  if (Math.abs(t) >= 1) return `Rp ${t.toFixed(1)}T`
+  return `Rp ${(t * 1000).toFixed(0)}M`
+}
+
 const RISK_CONFIG = {
   tinggi: { label: 'Tinggi', color: 'text-red-400', bg: 'bg-red-900/30 border-red-700/40', dot: '🔴' },
   high:   { label: 'Tinggi', color: 'text-red-400', bg: 'bg-red-900/30 border-red-700/40', dot: '🔴' },
@@ -37,9 +49,91 @@ const CONTROVERSY_CONFIG = {
   low:    { label: 'Bersih',             color: 'text-green-400',   bg: 'bg-green-900/20 border-green-800/30' },
 }
 
+const PARTY_BADGES = {
+  ger: { label: 'Gerindra', color: 'bg-red-800/50 text-red-300 border-red-700/40' },
+  pdip: { label: 'PDIP', color: 'bg-red-900/50 text-red-200 border-red-800/40' },
+  golkar: { label: 'Golkar', color: 'bg-yellow-800/50 text-yellow-300 border-yellow-700/40' },
+  pkb: { label: 'PKB', color: 'bg-green-900/50 text-green-300 border-green-700/40' },
+  nasdem: { label: 'NasDem', color: 'bg-blue-900/50 text-blue-300 border-blue-700/40' },
+  demokrat: { label: 'Demokrat', color: 'bg-blue-800/50 text-blue-200 border-blue-700/40' },
+}
+
+const BG_LABEL = {
+  'ex-TNI': { label: 'ex-TNI/Polri', color: 'bg-orange-900/40 text-orange-300 border-orange-700/40' },
+  teknokrat: { label: 'Teknokrat', color: 'bg-blue-900/40 text-blue-300 border-blue-700/40' },
+  profesional: { label: 'Profesional', color: 'bg-green-900/40 text-green-300 border-green-700/40' },
+  politisi: { label: 'Politisi', color: 'bg-red-900/40 text-red-300 border-red-700/40' },
+}
+
 const PERSON_MAP = Object.fromEntries(PERSONS.map(p => [p.id, p]))
 
-// ─── Section 0 — KPI Banner ───────────────────────────────────────────────────
+// ─── Section 0 — Financial Overview Cards (2024 data) ────────────────────────
+
+function FinancialOverviewCards() {
+  const totalAset = KEY_BUMN.reduce((s, b) => s + (b.aset_2024 || 0), 0)
+  const totalRevenue = KEY_BUMN.reduce((s, b) => s + (b.revenue_2024 || 0), 0)
+  const totalProfit = KEY_BUMN.reduce((s, b) => s + (b.profit_2024 || 0), 0)
+  const danantaraCount = KEY_BUMN.filter(b => b.status_danantara).length
+  const rugiBUMN = KEY_BUMN.filter(b => (b.profit_2024 || 0) < 0).length
+
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+      {[
+        {
+          label: 'Total Aset 2024',
+          value: `Rp ${totalAset.toFixed(0)}T`,
+          sub: `${KEY_BUMN.length} BUMN`,
+          icon: '🏛️',
+          color: 'text-blue-400',
+          bg: 'bg-blue-900/20 border-blue-800/30',
+        },
+        {
+          label: 'Total Revenue 2024',
+          value: `Rp ${totalRevenue.toFixed(0)}T`,
+          sub: 'estimasi',
+          icon: '💰',
+          color: 'text-yellow-400',
+          bg: 'bg-yellow-900/20 border-yellow-800/30',
+        },
+        {
+          label: 'Total Laba 2024',
+          value: `Rp ${totalProfit.toFixed(1)}T`,
+          sub: totalProfit >= 0 ? 'net profit' : 'NET RUGI',
+          icon: totalProfit >= 0 ? '📈' : '📉',
+          color: totalProfit >= 0 ? 'text-green-400' : 'text-red-400',
+          bg: totalProfit >= 0 ? 'bg-green-900/20 border-green-800/30' : 'bg-red-900/20 border-red-800/30',
+        },
+        {
+          label: 'Di bawah Danantara',
+          value: `${danantaraCount} BUMN`,
+          sub: `dari ${KEY_BUMN.length} total`,
+          icon: '🔄',
+          color: 'text-red-400',
+          bg: 'bg-red-900/20 border-red-800/30',
+        },
+        {
+          label: 'BUMN Merugi',
+          value: `${rugiBUMN} BUMN`,
+          sub: 'profit negatif 2024',
+          icon: '⚠️',
+          color: rugiBUMN > 0 ? 'text-orange-400' : 'text-green-400',
+          bg: rugiBUMN > 0 ? 'bg-orange-900/20 border-orange-800/30' : 'bg-green-900/20 border-green-800/30',
+        },
+      ].map(({ label, value, sub, icon, color, bg }) => (
+        <div key={label} className={`rounded-xl border p-4 ${bg}`}>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-xl">{icon}</span>
+            <span className="text-xs text-white/50">{label}</span>
+          </div>
+          <div className={`text-lg font-bold ${color} leading-tight`}>{value}</div>
+          <div className="text-[10px] text-white/30 mt-0.5">{sub}</div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ─── Legacy KPI Banner (kept for backward compat) ─────────────────────────────
 
 function KPIBanner() {
   const totalAssets = KEY_BUMN.reduce((s, b) => s + (b.assets_2023 || 0), 0)
@@ -51,9 +145,9 @@ function KPIBanner() {
     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
       {[
         { label: 'Aset Danantara (Klaim)', value: fmt(DANANTARA_INFO.claimed_assets), icon: '🏛️', color: 'text-red-400', bg: 'bg-red-900/20' },
-        { label: 'Total Revenue 10 BUMN', value: fmt(totalRevenue), icon: '💰', color: 'text-yellow-400', bg: 'bg-yellow-900/20' },
-        { label: 'Total Profit 10 BUMN', value: fmt(totalProfit), icon: '📈', color: 'text-green-400', bg: 'bg-green-900/20' },
-        { label: 'BUMN ke Danantara', value: `${danantaraTransferCount} dari 10`, icon: '🔄', color: 'text-blue-400', bg: 'bg-blue-900/20' },
+        { label: 'Total Revenue (2023)', value: fmt(totalRevenue), icon: '💰', color: 'text-yellow-400', bg: 'bg-yellow-900/20' },
+        { label: 'Total Profit (2023)', value: fmt(totalProfit), icon: '📈', color: 'text-green-400', bg: 'bg-green-900/20' },
+        { label: 'BUMN ke Danantara', value: `${danantaraTransferCount} dari ${KEY_BUMN.length}`, icon: '🔄', color: 'text-blue-400', bg: 'bg-blue-900/20' },
       ].map(({ label, value, icon, color, bg }) => (
         <div key={label} className={`rounded-xl border border-white/10 p-4 ${bg}`}>
           <div className="flex items-center gap-2 mb-1">
@@ -221,7 +315,11 @@ function DanantaraSpotlight() {
 // ─── Section 2 — Key BUMN Cards ───────────────────────────────────────────────
 
 function BUMNCard({ bumn }) {
+  const [showDetail, setShowDetail] = useState(false)
   const controversy = CONTROVERSY_CONFIG[bumn.controversy_level] || CONTROVERSY_CONFIG.low
+  const riskCfg = RISK_CONFIG[bumn.risiko || bumn.controversy_level] || RISK_CONFIG.rendah
+  const bgLabel = BG_LABEL[bumn.dirut_background]
+  const partyBadge = bumn.dirut_partai ? PARTY_BADGES[bumn.dirut_partai] : null
 
   return (
     <div className="rounded-xl border border-white/10 bg-bg-card hover:border-white/20 transition-all hover:shadow-lg overflow-hidden flex flex-col">
@@ -236,64 +334,104 @@ function BUMNCard({ bumn }) {
             <p className="text-xs text-white/40 mt-0.5">{bumn.sector}</p>
           </div>
         </div>
-        {bumn.danantara_transfer && (
-          <span className="flex-shrink-0 px-2 py-0.5 rounded-full bg-red-900/30 border border-red-800/30 text-red-300 text-[10px] font-medium whitespace-nowrap">
-            Danantara
+        <div className="flex flex-col items-end gap-1 flex-shrink-0">
+          {bumn.status_danantara && (
+            <span className="px-2 py-0.5 rounded-full bg-red-900/30 border border-red-800/30 text-red-300 text-[10px] font-medium whitespace-nowrap">
+              Danantara
+            </span>
+          )}
+          <span className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md border text-[10px] font-medium ${riskCfg.bg}`}>
+            <span>{riskCfg.dot}</span>
+            <span className={riskCfg.color}>{riskCfg.label}</span>
           </span>
-        )}
+        </div>
       </div>
 
-      {/* Financial data */}
+      {/* 2024 Financial data */}
       <div className="px-4 py-3 grid grid-cols-2 gap-3 border-b border-white/5">
         <div>
-          <p className="text-[10px] text-white/40 uppercase tracking-wide">Revenue 2023</p>
-          <p className="text-sm font-bold text-blue-300">{fmtShort(bumn.revenue_2023)}</p>
+          <p className="text-[10px] text-white/40 uppercase tracking-wide">Revenue 2024</p>
+          <p className="text-sm font-bold text-blue-300">{fmtT(bumn.revenue_2024)}</p>
         </div>
         <div>
-          <p className="text-[10px] text-white/40 uppercase tracking-wide">Profit 2023</p>
-          <p className="text-sm font-bold text-green-300">{fmtShort(bumn.profit_2023)}</p>
+          <p className="text-[10px] text-white/40 uppercase tracking-wide">Laba/Rugi 2024</p>
+          <p className={`text-sm font-bold ${(bumn.profit_2024 || 0) < 0 ? 'text-red-400' : 'text-green-300'}`}>
+            {fmtT(bumn.profit_2024)}
+          </p>
         </div>
         <div>
           <p className="text-[10px] text-white/40 uppercase tracking-wide">Total Aset</p>
-          <p className="text-sm font-bold text-purple-300">{fmtShort(bumn.assets_2023)}</p>
+          <p className="text-sm font-bold text-purple-300">{fmtT(bumn.aset_2024)}</p>
         </div>
         <div>
           <p className="text-[10px] text-white/40 uppercase tracking-wide">Karyawan</p>
-          <p className="text-sm font-bold text-white/80">{bumn.employees?.toLocaleString('id-ID') || '—'}</p>
+          <p className="text-sm font-bold text-white/80">{(bumn.karyawan || bumn.employees)?.toLocaleString('id-ID') || '—'}</p>
         </div>
       </div>
 
-      {/* CEO & oversight */}
+      {/* Dirut */}
       <div className="px-4 py-3 border-b border-white/5">
-        <p className="text-[10px] text-white/40 uppercase tracking-wide mb-1">CEO / Direktur Utama</p>
-        <p className="text-sm text-white font-medium">{bumn.ceo}</p>
-        <p className="text-xs text-white/40 mt-1 leading-snug">{bumn.political_oversight}</p>
+        <p className="text-[10px] text-white/40 uppercase tracking-wide mb-1">Direktur Utama</p>
+        <p className="text-sm text-white font-medium">{bumn.direktur_utama || bumn.ceo}</p>
+        <div className="flex flex-wrap gap-1 mt-1.5">
+          {bgLabel && (
+            <span className={`px-2 py-0.5 rounded border text-[10px] font-medium ${bgLabel.color}`}>
+              {bgLabel.label}
+            </span>
+          )}
+          {partyBadge && (
+            <span className={`px-2 py-0.5 rounded border text-[10px] font-medium ${partyBadge.color}`}>
+              {partyBadge.label}
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Controversy */}
       <div className={`px-4 py-3 flex-1 ${controversy.bg} border-t-0`}>
-        <div className="flex items-center gap-1.5 mb-1">
+        <div className="flex items-center justify-between mb-1">
           <span className={`text-[10px] font-bold uppercase tracking-wide ${controversy.color}`}>
             {controversy.label}
           </span>
+          {bumn.kontroversi && bumn.kontroversi.length > 0 && (
+            <button
+              onClick={() => setShowDetail(!showDetail)}
+              className="text-[10px] text-white/30 hover:text-white/60 underline transition-colors"
+            >
+              {bumn.kontroversi.length} isu {showDetail ? '▲' : '▼'}
+            </button>
+          )}
         </div>
-        <p className="text-xs text-white/60 leading-relaxed line-clamp-3">{bumn.controversy}</p>
+        {showDetail && bumn.kontroversi ? (
+          <ul className="space-y-1">
+            {bumn.kontroversi.map((k, i) => (
+              <li key={i} className="text-xs text-white/60 flex gap-1.5">
+                <span className="text-red-500 flex-shrink-0">•</span>
+                {k}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-xs text-white/60 leading-relaxed line-clamp-2">{bumn.controversy}</p>
+        )}
       </div>
 
-      {/* Key projects (collapsed) */}
-      <div className="px-4 py-3 bg-bg-elevated/30">
-        <p className="text-[10px] text-white/30 uppercase tracking-wide mb-1.5">Proyek Kunci</p>
-        <ul className="space-y-0.5">
-          {bumn.key_projects.slice(0, 2).map((p, i) => (
-            <li key={i} className="text-xs text-white/50 flex gap-1.5">
-              <span className="text-white/20">→</span>{p}
-            </li>
-          ))}
-          {bumn.key_projects.length > 2 && (
-            <li className="text-xs text-white/30">+{bumn.key_projects.length - 2} lainnya</li>
-          )}
-        </ul>
-      </div>
+      {/* Key projects */}
+      {bumn.key_projects && (
+        <div className="px-4 py-3 bg-bg-elevated/30">
+          <p className="text-[10px] text-white/30 uppercase tracking-wide mb-1.5">Proyek Kunci</p>
+          <ul className="space-y-0.5">
+            {bumn.key_projects.slice(0, 2).map((p, i) => (
+              <li key={i} className="text-xs text-white/50 flex gap-1.5">
+                <span className="text-white/20">→</span>{p}
+              </li>
+            ))}
+            {bumn.key_projects.length > 2 && (
+              <li className="text-xs text-white/30">+{bumn.key_projects.length - 2} lainnya</li>
+            )}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
@@ -304,10 +442,10 @@ function BUMNGrid() {
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-white flex items-center gap-2">
           <span className="text-2xl">🏢</span>
-          10 BUMN Strategis Utama
+          {KEY_BUMN.length} BUMN Strategis Utama
         </h2>
         <span className="text-xs text-white/40 bg-bg-elevated px-3 py-1.5 rounded-full border border-white/10">
-          Data 2023
+          Data 2024
         </span>
       </div>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -317,7 +455,396 @@ function BUMNGrid() {
   )
 }
 
-// ─── Section 3 — Political Business Network ───────────────────────────────────
+// ─── Section 3 — Performance Table ───────────────────────────────────────────
+
+function PerformanceTable() {
+  const [expandedId, setExpandedId] = useState(null)
+  const sorted = [...KEY_BUMN].sort((a, b) => (b.revenue_2024 || 0) - (a.revenue_2024 || 0))
+
+  return (
+    <section className="mb-8">
+      <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+        <span className="text-2xl">📊</span>
+        Tabel Performa Keuangan BUMN 2024
+      </h2>
+      <div className="rounded-xl border border-white/10 overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-xs text-white/40 bg-bg-elevated border-b border-white/10">
+                <th className="px-4 py-3 font-medium">BUMN</th>
+                <th className="px-4 py-3 font-medium">Revenue 2024</th>
+                <th className="px-4 py-3 font-medium">Laba / Rugi</th>
+                <th className="px-4 py-3 font-medium">Direktur Utama</th>
+                <th className="px-4 py-3 font-medium">Risiko</th>
+                <th className="px-4 py-3 font-medium text-center">Kontroversi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sorted.map((b) => {
+                const riskCfg = RISK_CONFIG[b.risiko || b.controversy_level] || RISK_CONFIG.rendah
+                const bgLabel = BG_LABEL[b.dirut_background]
+                const partyBadge = b.dirut_partai ? PARTY_BADGES[b.dirut_partai] : null
+                const isExpanded = expandedId === b.id
+                const kontroversiCount = (b.kontroversi || []).length
+
+                return (
+                  <>
+                    <tr
+                      key={b.id}
+                      className="border-b border-white/5 hover:bg-white/3 transition-colors"
+                    >
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-2">
+                          <span>{b.sector_icon}</span>
+                          <div>
+                            <div className="text-white font-medium text-xs leading-snug">{b.name}</div>
+                            {b.status_danantara && (
+                              <span className="text-[10px] text-red-400">● Danantara</span>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-blue-300 font-medium">{fmtT(b.revenue_2024)}</td>
+                      <td className="px-4 py-3">
+                        <span className={`font-bold ${(b.profit_2024 || 0) < 0 ? 'text-red-400' : 'text-green-400'}`}>
+                          {(b.profit_2024 || 0) < 0 ? '▼ ' : '▲ '}{fmtT(b.profit_2024)}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="text-white/80 text-xs">{b.direktur_utama || b.ceo}</div>
+                        <div className="flex flex-wrap gap-1 mt-1">
+                          {bgLabel && (
+                            <span className={`px-1.5 py-0.5 rounded border text-[10px] ${bgLabel.color}`}>
+                              {bgLabel.label}
+                            </span>
+                          )}
+                          {partyBadge && (
+                            <span className={`px-1.5 py-0.5 rounded border text-[10px] ${partyBadge.color}`}>
+                              {partyBadge.label}
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium border ${riskCfg.bg}`}>
+                          {riskCfg.dot} <span className={riskCfg.color}>{riskCfg.label}</span>
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        {kontroversiCount > 0 ? (
+                          <button
+                            onClick={() => setExpandedId(isExpanded ? null : b.id)}
+                            className="px-2.5 py-1 rounded-lg bg-red-900/30 border border-red-800/40 text-red-300 text-xs font-medium hover:bg-red-900/50 transition-colors"
+                          >
+                            {kontroversiCount} isu {isExpanded ? '▲' : '▼'}
+                          </button>
+                        ) : (
+                          <span className="text-white/20 text-xs">—</span>
+                        )}
+                      </td>
+                    </tr>
+                    {isExpanded && (
+                      <tr key={`${b.id}-detail`} className="border-b border-white/5 bg-red-950/20">
+                        <td colSpan={6} className="px-6 py-3">
+                          <ul className="space-y-1">
+                            {(b.kontroversi || []).map((k, i) => (
+                              <li key={i} className="text-xs text-white/60 flex gap-2">
+                                <span className="text-red-500 flex-shrink-0">•</span>
+                                {k}
+                              </li>
+                            ))}
+                          </ul>
+                        </td>
+                      </tr>
+                    )}
+                  </>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─── Section 4 — Political Appointment Tracker ────────────────────────────────
+
+const CUSTOM_TOOLTIP_STYLE = {
+  contentStyle: { backgroundColor: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff' },
+  labelStyle: { color: 'rgba(255,255,255,0.6)' },
+  itemStyle: { color: '#93c5fd' },
+}
+
+function PoliticalAppointmentTracker() {
+  const bgCounts = useMemo(() => {
+    const counts = {}
+    KEY_BUMN.forEach(b => {
+      const bg = b.dirut_background || 'tidak diketahui'
+      counts[bg] = (counts[bg] || 0) + 1
+    })
+    return Object.entries(counts).map(([name, value]) => ({ name, value }))
+  }, [])
+
+  const bgColors = {
+    'ex-TNI': '#f97316',
+    'teknokrat': '#3b82f6',
+    'profesional': '#10b981',
+    'politisi': '#ef4444',
+    'tidak diketahui': '#6b7280',
+  }
+
+  const tniCount = KEY_BUMN.filter(b => b.dirut_background === 'ex-TNI').length
+  const politisiCount = KEY_BUMN.filter(b => b.dirut_background === 'politisi').length
+
+  return (
+    <section className="mb-8">
+      <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+        <span className="text-2xl">🎖️</span>
+        Pelacak Pengangkatan Direksi Politik
+      </h2>
+      <p className="text-sm text-white/40 mb-5">
+        Latar belakang Direktur Utama BUMN — indikator politisasi kepemimpinan BUMN.
+      </p>
+
+      {/* Alert flags */}
+      {(tniCount > 0 || politisiCount > 0) && (
+        <div className="flex flex-wrap gap-3 mb-5">
+          {tniCount > 0 && (
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-900/30 border border-orange-700/40">
+              <span className="text-lg">🎖️</span>
+              <span className="text-sm text-orange-300 font-medium">
+                <span className="font-black text-orange-200">{tniCount}</span> Dirut berlatar belakang militer/TNI
+              </span>
+            </div>
+          )}
+          {politisiCount > 0 && (
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-900/30 border border-red-700/40">
+              <span className="text-lg">🏛️</span>
+              <span className="text-sm text-red-300 font-medium">
+                <span className="font-black text-red-200">{politisiCount}</span> Dirut berlatar belakang politisi
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="grid md:grid-cols-2 gap-6 mb-6">
+        {/* Bar Chart */}
+        <div className="rounded-xl border border-white/10 bg-bg-card p-5">
+          <h3 className="text-sm font-bold text-white/70 mb-4">Distribusi Latar Belakang Dirut</h3>
+          <ResponsiveContainer width="100%" height={220}>
+            <BarChart data={bgCounts} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
+              <XAxis dataKey="name" tick={{ fill: 'rgba(255,255,255,0.5)', fontSize: 11 }} />
+              <YAxis tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 11 }} allowDecimals={false} />
+              <Tooltip {...CUSTOM_TOOLTIP_STYLE} />
+              <Bar dataKey="value" name="Jumlah" radius={[4, 4, 0, 0]}>
+                {bgCounts.map((entry, idx) => (
+                  <Cell key={idx} fill={bgColors[entry.name] || '#6b7280'} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Summary stats */}
+        <div className="rounded-xl border border-white/10 bg-bg-card p-5">
+          <h3 className="text-sm font-bold text-white/70 mb-4">Ringkasan Profil Direksi</h3>
+          <div className="space-y-3">
+            {bgCounts.map(({ name, value }) => {
+              const cfg = BG_LABEL[name] || { label: name, color: 'bg-gray-800/40 text-gray-300 border-gray-700/40' }
+              const pct = Math.round((value / KEY_BUMN.length) * 100)
+              return (
+                <div key={name}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className={`px-2 py-0.5 rounded border text-xs font-medium ${cfg.color}`}>{cfg.label || name}</span>
+                    <span className="text-xs text-white/50">{value} BUMN ({pct}%)</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-bg-elevated overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all"
+                      style={{ width: `${pct}%`, backgroundColor: bgColors[name] || '#6b7280' }}
+                    />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Direksi Table */}
+      <div className="rounded-xl border border-white/10 overflow-hidden">
+        <div className="px-4 py-3 bg-bg-elevated border-b border-white/10">
+          <h3 className="text-sm font-bold text-white/70">Daftar Direktur Utama BUMN</h3>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-left text-xs text-white/40 border-b border-white/10">
+                <th className="px-4 py-3 font-medium">BUMN</th>
+                <th className="px-4 py-3 font-medium">Direktur Utama</th>
+                <th className="px-4 py-3 font-medium">Latar Belakang</th>
+                <th className="px-4 py-3 font-medium">Afiliasi Partai</th>
+                <th className="px-4 py-3 font-medium">Status Danantara</th>
+              </tr>
+            </thead>
+            <tbody>
+              {KEY_BUMN.map((b) => {
+                const bgLabel = BG_LABEL[b.dirut_background]
+                const partyBadge = b.dirut_partai ? PARTY_BADGES[b.dirut_partai] : null
+                return (
+                  <tr key={b.id} className="border-b border-white/5 hover:bg-white/3 transition-colors">
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-2">
+                        <span>{b.sector_icon}</span>
+                        <span className="text-white/80 text-xs">{b.name}</span>
+                      </div>
+                    </td>
+                    <td className="px-4 py-3 text-white font-medium text-xs">{b.direktur_utama || b.ceo}</td>
+                    <td className="px-4 py-3">
+                      {bgLabel ? (
+                        <span className={`px-2 py-0.5 rounded border text-xs font-medium ${bgLabel.color}`}>
+                          {bgLabel.label}
+                        </span>
+                      ) : (
+                        <span className="text-white/30 text-xs">—</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      {partyBadge ? (
+                        <span className={`px-2 py-0.5 rounded border text-xs font-medium ${partyBadge.color}`}>
+                          {partyBadge.label}
+                        </span>
+                      ) : (
+                        <span className="text-white/30 text-xs">Non-partisan</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      {b.status_danantara ? (
+                        <span className="px-2 py-0.5 rounded-full bg-red-900/30 border border-red-800/30 text-red-300 text-[10px] font-medium">
+                          ● Danantara
+                        </span>
+                      ) : (
+                        <span className="text-white/30 text-[10px]">Independen</span>
+                      )}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─── Section 5 — Danantara AUM Chart ─────────────────────────────────────────
+
+const RADIAN = Math.PI / 180
+const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, name }) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5
+  const x = cx + radius * Math.cos(-midAngle * RADIAN)
+  const y = cy + radius * Math.sin(-midAngle * RADIAN)
+  if (percent < 0.06) return null
+  return (
+    <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central" fontSize={11} fontWeight="bold">
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  )
+}
+
+function DanantaraAUMChart() {
+  const data = DANANTARA_INFO.aum_by_sector
+
+  return (
+    <section className="mb-8">
+      <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
+        <span className="text-2xl">🥧</span>
+        Danantara — Distribusi AUM per Sektor
+      </h2>
+      <p className="text-sm text-white/40 mb-5">
+        Estimasi komposisi Asset Under Management Danantara berdasarkan sektor BUMN yang dialihkan.
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* Pie Chart */}
+        <div className="rounded-xl border border-white/10 bg-bg-card p-5">
+          <h3 className="text-sm font-bold text-white/70 mb-3 text-center">AUM Breakdown</h3>
+          <ResponsiveContainer width="100%" height={260}>
+            <PieChart>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="50%"
+                outerRadius={100}
+                dataKey="value"
+                labelLine={false}
+                label={renderCustomLabel}
+              >
+                {data.map((entry, idx) => (
+                  <Cell key={idx} fill={entry.color} />
+                ))}
+              </Pie>
+              <Legend
+                formatter={(value) => <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12 }}>{value}</span>}
+              />
+              <Tooltip
+                formatter={(v) => [`${v}%`, 'Porsi AUM']}
+                contentStyle={{ backgroundColor: '#1a1a2e', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, color: '#fff' }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* AUM Detail */}
+        <div className="rounded-xl border border-white/10 bg-bg-card p-5">
+          <h3 className="text-sm font-bold text-white/70 mb-4">Detail per Sektor</h3>
+          <div className="space-y-4">
+            {data.map((d) => {
+              const estimatedAum = (DANANTARA_INFO.claimed_assets / 1_000_000_000_000) * (d.value / 100)
+              return (
+                <div key={d.name}>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: d.color }} />
+                      <span className="text-sm text-white font-medium">{d.name}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-sm font-bold" style={{ color: d.color }}>{d.value}%</span>
+                      <span className="text-xs text-white/40 ml-2">~Rp {estimatedAum.toFixed(0)}T</span>
+                    </div>
+                  </div>
+                  <div className="h-2 rounded-full bg-bg-elevated overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all"
+                      style={{ width: `${d.value}%`, backgroundColor: d.color }}
+                    />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          <div className="mt-5 pt-4 border-t border-white/10">
+            <div className="flex justify-between text-xs text-white/50">
+              <span>Total AUM Diklaim</span>
+              <span className="text-red-400 font-bold">{fmtShort(DANANTARA_INFO.claimed_assets)}</span>
+            </div>
+            <p className="text-[10px] text-white/30 mt-2">
+              * Estimasi berdasarkan komposisi aset BUMN yang dialihkan ke Danantara.
+                Angka resmi belum dipublikasikan secara transparan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// ─── Section 6 — Political Business Network ───────────────────────────────────
 
 const RISK_ORDER = { tinggi: 0, high: 0, sedang: 1, medium: 1, rendah: 2, low: 2 }
 const COMPANY_MAP = Object.fromEntries(COMPANIES.map(c => [c.id, c]))
@@ -527,7 +1054,7 @@ function PoliticalNetworkTable() {
   )
 }
 
-// ─── Section 4 — Sector Concentration Bar Chart ───────────────────────────────
+// ─── Section 7 — Sector Concentration Bar Chart ───────────────────────────────
 
 function SectorConcentrationChart() {
   return (
@@ -590,7 +1117,7 @@ function SectorConcentrationChart() {
 // ─── Page Root ────────────────────────────────────────────────────────────────
 
 export default function BUMNPage() {
-  const totalAssets = KEY_BUMN.reduce((s, b) => s + (b.assets_2023 || 0), 0)
+  const totalAset2024 = KEY_BUMN.reduce((s, b) => s + (b.aset_2024 || 0), 0)
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -607,7 +1134,7 @@ export default function BUMNPage() {
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
             <span className="px-4 py-2 rounded-xl bg-blue-900/30 border border-blue-800/40 text-blue-300 text-sm font-bold">
-              Total Aset 10 BUMN: {fmtShort(totalAssets)}
+              Total Aset {KEY_BUMN.length} BUMN: Rp {totalAset2024.toFixed(0)}T
             </span>
           </div>
         </div>
@@ -621,16 +1148,21 @@ export default function BUMNPage() {
         </div>
       </div>
 
-      <KPIBanner />
+      {/* 2024 Financial Overview */}
+      <FinancialOverviewCards />
+
       <DanantaraSpotlight />
+      <DanantaraAUMChart />
       <BUMNGrid />
+      <PerformanceTable />
+      <PoliticalAppointmentTracker />
       <PoliticalNetworkTable />
       <SectorConcentrationChart />
 
       {/* Footer note */}
       <div className="mt-6 p-4 rounded-xl bg-bg-elevated/50 border border-white/5">
         <p className="text-xs text-white/30 text-center">
-          Data berdasarkan laporan keuangan BUMN 2023, publikasi Kementerian BUMN, BPK, media investigasi. Angka revenue/aset adalah estimasi atau laporan yang dipublikasikan. Indeks koneksi politik adalah analisis editorial berdasarkan hubungan publik yang terverifikasi.
+          Data berdasarkan laporan keuangan BUMN 2023–2024, publikasi Kementerian BUMN, BPK, media investigasi. Angka revenue/aset adalah estimasi atau laporan yang dipublikasikan. Indeks koneksi politik adalah analisis editorial berdasarkan hubungan publik yang terverifikasi.
         </p>
       </div>
     </div>
