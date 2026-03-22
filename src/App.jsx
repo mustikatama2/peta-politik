@@ -69,6 +69,7 @@ const PrediksiPage     = lazy(() => import('./pages/prediksi/PrediksiPage'))
 const StatsPage             = lazy(() => import('./pages/stats/StatsPage'))
 const EmbedPage             = lazy(() => import('./pages/EmbedPage'))
 const TimelineKekuasaanPage = lazy(() => import('./pages/TimelineKekuasaanPage'))
+const PerbandinganPage      = lazy(() => import('./pages/PerbandinganPage'))
 
 // Loading fallback — branded spinner + skeleton
 function PageLoader() {
@@ -136,6 +137,7 @@ export default function App() {
         <Route path="/compare" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/compare/:id1" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/compare/:id1/:id2" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/perbandingan-tokoh" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PerbandinganPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/risk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RiskIndex /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/scorecard" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScorecardPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/scenarios" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScenarioPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
