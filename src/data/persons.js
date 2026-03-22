@@ -3507,7 +3507,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"luluk_nur", name:"Luluk Nur Hamidah", photo_url:null, photo_placeholder:"LN",
+    id:"luluk_nur", name:"Luluk Nur Hamidah", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Luluk_Nur_Hamidah.jpg", photo_placeholder:"LN",
     born:"1973", born_place:"Lamongan, Jawa Timur", religion:"Islam",
     education:"S2 Ilmu Politik, Universitas Indonesia",
     party_id:"pkb", party_role:"Anggota DPR RI",
