@@ -269,7 +269,8 @@ export const PERSONS = [
     education:"Akademi Kepolisian",
     party_id:null, party_role:null,
     positions:[
-      {title:"Kepala BIN",              institution:"BIN RI",           region:"Nasional",    start:"2016", end:null,   is_current:true},
+      {title:"Menko Polkam",            institution:"Kemenko Polkam",   region:"Nasional",    start:"2024", end:null,   is_current:true},
+      {title:"Kepala BIN",              institution:"BIN RI",           region:"Nasional",    start:"2016", end:"2024", is_current:false},
       {title:"Wakapolri",               institution:"Polri",            region:"Nasional",    start:"2015", end:"2016", is_current:false},
     ],
     tier:"nasional", region_id:null,
@@ -414,7 +415,8 @@ export const PERSONS = [
     education:"Akademi Militer Magelang; Master JF Kennedy School Harvard; Master Strategic Studies, Nanyang NTU",
     party_id:"dem", party_role:"Ketua Umum",
     positions:[
-      {title:"Menteri ATR/Kepala BPN",  institution:"Kemen ATR/BPN RI", region:"Nasional",    start:"2024", end:null,   is_current:true},
+      {title:"Menko Infrastruktur dan Pembangunan Kewilayahan", institution:"Kemenko Infrastruktur", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Menteri ATR/Kepala BPN",  institution:"Kemen ATR/BPN RI", region:"Nasional",    start:"2024", end:"2024", is_current:false},
       {title:"Ketua Umum Partai Demokrat", institution:"DPP Demokrat", region:"Nasional",     start:"2020", end:null,   is_current:true},
     ],
     tier:"nasional", region_id:null,
@@ -778,7 +780,7 @@ export const PERSONS = [
     education:"Akademi Kepolisian 1991",
     party_id:null, party_role:null,
     positions:[
-      {title:"Kapolri",                 institution:"Mabes Polri",      region:"Nasional",    start:"2021", end:null,   is_current:true},
+      {title:"Kapolri",                 institution:"Mabes Polri",      region:"Nasional",    start:"2021", end:"2025", is_current:false},
       {title:"Kabareskrim",             institution:"Mabes Polri",      region:"Nasional",    start:"2020", end:"2021", is_current:false},
     ],
     tier:"nasional", region_id:null,
@@ -1129,33 +1131,6 @@ export const PERSONS = [
       influence:4,
       controversy_level:2,
       notes:"Lia Istifhama merepresentasikan suara Jawa Timur di DPD RI dengan fokus pada pemberdayaan perempuan dan UMKM yang relevan dengan basis konstituennya. Berlatar belakang pengusaha dan aktivis, ia memiliki jaringan di kalangan pelaku usaha kecil-menengah di Jatim. Posisinya di DPD — yang memiliki pengaruh terbatas dibanding DPR — membatasi kapasitasnya dalam membentuk kebijakan nasional, namun cukup untuk advokasi kepentingan daerah."
-    }
-  },
-  // ─── JATIM — KEAMANAN ────────────────────────────────────────────────────
-  {
-    id:"imam_sugianto", name:"Imam Sugianto", photo_url:null, photo_placeholder:"IS",
-    born:"1968", born_place:"Jawa Timur", religion:"Islam",
-    education:"Akademi Kepolisian",
-    party_id:null, party_role:null,
-    positions:[
-      {title:"Kapolda Jawa Timur",      institution:"Polda Jatim",      region:"Jawa Timur",  start:"2023", end:null,   is_current:true},
-    ],
-    tier:"provinsi", region_id:"jawa-timur",
-    bio:"Kepala Kepolisian Daerah Jawa Timur. Pejabat Polri senior yang memimpin pengamanan di salah satu provinsi terbesar Indonesia.",
-    tags:["polri","jatim","keamanan"],
-    lhkpn_latest:8000000000, lhkpn_year:2023,
-    connections_summary:"Kapolda Jatim",
-    twitter:null,
-    analysis:{
-      ideology_score:3, populism_score:2, corruption_risk:"rendah",
-      nationalism:7, religiosity:5,
-      track_record:"Pengamanan Jatim terutama menjelang Pilkada 2024.",
-      policy_direction:"Ketertiban, keamanan",
-      style:'Militeristik',
-      risk:'low',
-      influence:5,
-      controversy_level:2,
-      notes:"Sebagai Kapolda Jawa Timur, Imam Sugianto memimpin kekuatan kepolisian di salah satu provinsi dengan populasi terbesar Indonesia. Peran strategisnya mencakup pengamanan Pilkada Serentak 2024 di 38 kabupaten/kota Jatim. Posisi Kapolda Jatim sering menjadi batu loncatan menuju jabatan tinggi di Mabes Polri."
     }
   },
   // ─── JATIM — KEAMANAN ────────────────────────────────────────────────────
@@ -2008,34 +1983,6 @@ export const PERSONS = [
     tags:["jatim","gerindra","pengusaha"], lhkpn_latest:15000000000, lhkpn_year:2023,
     connections_summary:"DPR RI Gerindra Jatim, pengusaha", twitter:null,
     analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:6, religiosity:4, track_record:"Fokus pada transportasi dan infrastruktur.", policy_direction:"Pro-infrastruktur", style:'Teknokrat', risk:'low', influence:4, controversy_level:2, notes:"Bambang Haryo Soekartono adalah anggota DPR RI dari Gerindra yang aktif mengadvokasi isu transportasi dan infrastruktur, sesuai latar belakangnya sebagai pengusaha di sektor tersebut. Sebagai kader Gerindra di Jatim, ia bagian dari mesin politik partai yang kini berkuasa di era Prabowo. Perannya di parlemen lebih bersifat teknis legislatif dibanding figur publik yang menonjol di skena nasional."}
-  },
-  // ─── ORMAS & RELIGIOUS LEADERS ──────────────────────────────────────────
-  {
-    id:"gus_yahya", name:"Yahya Cholil Staquf", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wantimpres_Gus-Yahya.jpg?width=400", photo_placeholder:"YC",
-    born:"1966", born_place:"Rembang", religion:"Islam",
-    education:"Pesantren Raudlatut Thalabah; S1 Filsafat UGM",
-    party_id:null, party_role:null,
-    positions:[
-      {title:"Ketua Umum PBNU",         institution:"PBNU",             region:"Nasional",    start:"2021", end:null,   is_current:true},
-      {title:"Juru Bicara Kepresidenan", institution:"Istana Negara",    region:"Nasional",    start:"2007", end:"2014", is_current:false},
-    ],
-    tier:"nasional", region_id:null,
-    bio:"Ketua Umum PBNU sejak 2021. Tokoh muda NU yang dikenal karena pandangan moderat dan dialog antaragama internasional. Cucu KH Bisri Mustofa, kakak ipar Muhaimin Iskandar (secara tidak langsung via jaringan NU).",
-    tags:["nu","ulama","moderat","internasional"],
-    lhkpn_latest:null, lhkpn_year:null,
-    connections_summary:"Ketum PBNU, cucu KH Bisri Mustofa Rembang",
-    twitter:"@gusyahya",
-    analysis:{
-      ideology_score:-3, populism_score:4, corruption_risk:"rendah",
-      nationalism:8, religiosity:10,
-      track_record:"Reformis dalam NU. Mendorong islam moderat inklusif. Tur global soal perdamaian dan dialog Islam.",
-      policy_direction:"Islam moderat, inklusif, nasionalis",
-      style:'Religius',
-      risk:'low',
-      influence:9,
-      controversy_level:3,
-      notes:"Yahya Cholil Staquf (Gus Yahya) adalah Ketua Umum PBNU yang dikenal dengan sikap moderat dan visi Islam rahmatan lil alamin yang inklusif secara global. Posisinya sebagai pemimpin organisasi Islam terbesar di dunia menjadikan ia aktor yang sangat diperhitungkan dalam peta politik agama Indonesia — meski PBNU secara formal menjaga jarak dari partisan. Keterkaitannya dengan dinamika internal NU dan PKB menjadi faktor penting yang memengaruhi konsolidasi suara Muslim tradisional di pemilu mendatang."
-    }
   },
   // ─── ORMAS & RELIGIOUS LEADERS ──────────────────────────────────────────
   {
@@ -3220,7 +3167,7 @@ export const PERSONS = [
     id:"erick_thohir", name:"Erick Thohir", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menteri_Pemuda_dan_Olahraga_Indonesia_Erick_Thohir.png?width=400", photo_placeholder:"ET",
     born:"30 May 1970", born_place:"Jakarta", religion:"Islam",
     education:"S1 Bisnis, Glendale University; MBA, National University USA",
-    party_id:"ger", party_role:"Kader",
+    party_id:null, party_role:null,
     positions:[
       {title:"Menteri Badan Usaha Milik Negara", institution:"Kementerian BUMN", region:"Nasional", start:"2024", end:null, is_current:true},
       {title:"Menteri BUMN (Periode I)", institution:"Kementerian BUMN", region:"Nasional", start:"2019", end:"2024", is_current:false},
