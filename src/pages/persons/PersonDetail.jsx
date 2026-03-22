@@ -419,6 +419,140 @@ function VotingTab({ person }) {
   )
 }
 
+// ─── RINGKASAN AWAM ───────────────────────────────────────────────────────────
+function RingkasanAwam({ person, party }) {
+  const firstYear = (person.positions || []).reduce((min, p) => {
+    const y = parseInt(p.year_start || p.start || '9999', 10)
+    return y < min ? y : min
+  }, 9999)
+
+  const jabatan = (person.positions?.find(p => p.is_current)?.title)
+    || (person.positions?.[0]?.title)
+    || person.party_role
+    || 'politisi'
+
+  const partaiLabel = party?.name || 'jalur independen'
+
+  const lhkpn = person.lhkpn_latest
+    ? `Rp${(person.lhkpn_latest / 1_000_000).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')} juta`
+    : null
+
+  const sejak = firstYear < 9999 ? firstYear : null
+  const kontroversi = person.controversies?.[0]
+
+  let summary = `${person.name} adalah ${jabatan}`
+  if (party) {
+    summary += ` dari partai ${partaiLabel}.`
+  } else {
+    summary += `, tokoh ${partaiLabel}.`
+  }
+  if (lhkpn) {
+    summary += ` Ia memiliki kekayaan ${lhkpn}`
+    if (sejak) {
+      summary += ` dan telah berkarier sejak tahun ${sejak}.`
+    } else {
+      summary += `.`
+    }
+  } else if (sejak) {
+    summary += ` Ia telah berkarier sejak tahun ${sejak}.`
+  }
+  if (kontroversi) {
+    const judulKontroversi = typeof kontroversi === 'string' ? kontroversi : (kontroversi.title || '')
+    if (judulKontroversi) {
+      summary += ` Pernah terlibat dalam: ${judulKontroversi}.`
+    }
+  }
+
+  return (
+    <div
+      className="rounded-xl p-4 border"
+      style={{ backgroundColor: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.30)' }}
+    >
+      <p className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: '#D97706' }}>
+        ℹ️ Ringkasan Sederhana
+      </p>
+      <p className="text-sm text-text-primary leading-relaxed">{summary}</p>
+      <p className="text-[11px] text-text-secondary mt-2 italic">
+        Ringkasan singkat untuk pembaca umum. Informasi lengkap ada di tab Profil &amp; Analisis.
+      </p>
+    </div>
+  )
+}
+
+// ─── BERITA TERKAIT ──────────────────────────────────────────────────────────
+function BeritaTerkait({ person }) {
+  const firstName = person.name.split(' ')[0].toLowerCase()
+  const matchedNews = NEWS.filter(n => {
+    if (n.person_ids?.includes(person.id)) return true
+    const headline = (n.headline || '').toLowerCase()
+    return headline.includes(firstName) && firstName.length > 3
+  }).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
+
+  return (
+    <div className="mt-6 pt-6 border-t border-border">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-semibold text-text-primary">📰 Berita Terkait</h3>
+        <Link
+          to={`/news?person=${person.id}`}
+          className="text-xs text-accent-blue hover:underline"
+        >
+          Semua berita →
+        </Link>
+      </div>
+      {matchedNews.length === 0 ? (
+        <div className="rounded-xl border border-border bg-bg-card p-5 text-center">
+          <p className="text-text-secondary text-sm mb-2">Tidak ada berita statis cocok untuk tokoh ini.</p>
+          <Link
+            to={`/news?person=${person.id}`}
+            className="inline-flex items-center gap-1.5 text-xs text-accent-blue hover:underline"
+          >
+            🔍 Cari berita terbaru di tab Berita →
+          </Link>
+        </div>
+      ) : (
+        <div className="space-y-2">
+          {matchedNews.map(n => (
+            <a
+              key={n.id}
+              href={n.url || '#'}
+              target={n.url && n.url !== '#' ? '_blank' : undefined}
+              rel="noopener noreferrer"
+              className="flex gap-3 p-3 rounded-xl border border-border bg-bg-card hover:border-accent-blue/40 hover:bg-bg-elevated transition-all group"
+            >
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-text-primary group-hover:text-accent-blue transition-colors line-clamp-2 leading-snug">
+                  {n.headline}
+                </p>
+                <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                  <span className="text-xs font-medium text-accent-blue">{n.source}</span>
+                  <span className="text-xs text-text-secondary">{n.date}</span>
+                  {n.sentiment && (
+                    <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
+                      n.sentiment === 'positif' ? 'text-green-400 bg-green-400/10' :
+                      n.sentiment === 'negatif' ? 'text-red-400 bg-red-400/10' :
+                      'text-gray-400 bg-gray-400/10'
+                    }`}>
+                      {n.sentiment === 'positif' ? '▲' : n.sentiment === 'negatif' ? '▼' : '●'} {n.sentiment}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </a>
+          ))}
+          <div className="pt-1 text-center">
+            <Link
+              to={`/news?person=${person.id}`}
+              className="text-xs text-text-secondary hover:text-accent-blue transition-colors"
+            >
+              Cari berita terbaru di tab Berita →
+            </Link>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ─── RINGKASAN SIDEBAR ────────────────────────────────────────────────────────
 function RingkasanSidebar({ person, party, personConnections, navigate }) {
   const [inWatchlist, setInWatchlist] = useState(() => {
@@ -840,6 +974,9 @@ export default function PersonDetail() {
           {/* PROFIL */}
           {activeTab === 'profil' && (
             <div className="space-y-5">
+              {/* Ringkasan Awam — plain language card for general audience */}
+              <RingkasanAwam person={person} party={party} />
+
               <Card className="p-5">
                 <h3 className="text-sm font-semibold text-text-primary mb-2">Bio</h3>
                 <p className="text-text-secondary text-sm leading-relaxed">{person.bio}</p>
@@ -1117,89 +1254,128 @@ export default function PersonDetail() {
                 </h3>
                 {personConnections.length === 0 ? (
                   <p className="text-text-secondary text-sm">Belum ada koneksi terpetakan.</p>
-                ) : (
-                  <div className="space-y-2">
-                    {personConnections.map((c, i) => {
-                      const partnerId = c.from === person.id ? c.to : c.from
-                      const partner = PERSONS.find(p => p.id === partnerId)
-                      const partnerParty = partner?.party_id ? PARTY_MAP[partner.party_id] : null
-                      const initials = partner ? partner.name.split(' ').slice(0, 2).map(w => w[0]).join('') : '?'
-                      const typeColor = CONN_TYPE_COLORS[c.type] || '#6B7280'
-                      const strength = c.strength || 5
-
-                      return (
-                        <div
-                          key={i}
-                          className="flex items-center gap-3 p-3 rounded-xl border border-border bg-bg-elevated hover:bg-bg-card transition-colors"
-                        >
-                          {/* Avatar */}
-                          {partner?.photo_url ? (
-                            <img
-                              src={partner.photo_url}
-                              alt={partner.name}
-                              className="w-10 h-10 rounded-full object-cover flex-shrink-0 border border-border"
-                              onError={e => { e.target.style.display = 'none' }}
-                            />
-                          ) : (
-                            <div
-                              className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold text-white"
-                              style={{ backgroundColor: partnerParty?.color || '#374151' }}
-                            >
-                              {initials}
+                ) : (() => {
+                  // Group connections by type
+                  const grouped = personConnections.reduce((acc, c) => {
+                    const t = c.type || 'rekan'
+                    if (!acc[t]) acc[t] = []
+                    acc[t].push(c)
+                    return acc
+                  }, {})
+                  const TYPE_ORDER = ['keluarga','koalisi','bisnis','mentor-murid','rekan','mantan-koalisi','konflik','atasan-bawahan']
+                  const sortedTypes = Object.keys(grouped).sort((a, b) => {
+                    const ai = TYPE_ORDER.indexOf(a); const bi = TYPE_ORDER.indexOf(b)
+                    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi)
+                  })
+                  return (
+                    <div className="space-y-5">
+                      {sortedTypes.map(type => {
+                        const typeColor = CONN_TYPE_COLORS[type] || '#6B7280'
+                        return (
+                          <div key={type}>
+                            {/* Group header */}
+                            <div className="flex items-center gap-2 mb-2">
+                              <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: typeColor }} />
+                              <span className="text-xs font-bold uppercase tracking-wider" style={{ color: typeColor }}>
+                                {type}
+                              </span>
+                              <span className="text-xs text-text-secondary">({grouped[type].length})</span>
                             </div>
-                          )}
-
-                          {/* Connection info */}
-                          <div className="flex-1 min-w-0">
-                            {partner ? (
-                              <Link
-                                to={`/persons/${partner.id}`}
-                                className="text-sm font-semibold text-text-primary hover:text-accent-blue transition-colors"
-                              >
-                                {partner.name}
-                              </Link>
-                            ) : (
-                              <span className="text-sm text-text-secondary">{partnerId}</span>
-                            )}
-                            {c.label && (
-                              <p className="text-xs text-text-secondary line-clamp-1 mt-0.5">{c.label}</p>
-                            )}
-                            {/* Strength meter */}
-                            <div className="flex items-center gap-1.5 mt-1.5">
-                              <div className="flex gap-0.5">
-                                {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                            <div className="space-y-2 pl-4 border-l-2" style={{ borderColor: typeColor + '40' }}>
+                              {grouped[type].map((c, i) => {
+                                const partnerId = c.from === person.id ? c.to : c.from
+                                const partner = PERSONS.find(p => p.id === partnerId)
+                                const partnerParty = partner?.party_id ? PARTY_MAP[partner.party_id] : null
+                                const initials = partner ? partner.name.split(' ').slice(0, 2).map(w => w[0]).join('') : '?'
+                                const strength = c.strength || 5
+                                const sinceMatch = (c.label || '').match(/\b(19|20)\d{2}\b/)
+                                const sinceYear = sinceMatch ? sinceMatch[0] : null
+                                return (
                                   <div
-                                    key={n}
-                                    className="w-1.5 h-2 rounded-sm"
-                                    style={{
-                                      backgroundColor: n <= strength
-                                        ? typeColor
-                                        : 'var(--border)',
-                                      opacity: n <= strength ? 1 : 0.4,
-                                    }}
-                                  />
-                                ))}
-                              </div>
-                              <span className="text-[10px] text-text-secondary">{strength}/10</span>
+                                    key={i}
+                                    className="flex items-center gap-3 p-3 rounded-xl border border-border bg-bg-elevated hover:bg-bg-card transition-colors"
+                                  >
+                                    {/* Avatar */}
+                                    {partner?.photo_url ? (
+                                      <img
+                                        src={partner.photo_url}
+                                        alt={partner.name}
+                                        className="w-10 h-10 rounded-full object-cover flex-shrink-0 border border-border"
+                                        onError={e => { e.target.style.display = 'none' }}
+                                      />
+                                    ) : (
+                                      <div
+                                        className="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center text-xs font-bold text-white"
+                                        style={{ backgroundColor: partnerParty?.color || '#374151' }}
+                                      >
+                                        {initials}
+                                      </div>
+                                    )}
+                                    {/* Connection info */}
+                                    <div className="flex-1 min-w-0">
+                                      <div className="flex items-center gap-2 flex-wrap">
+                                        {partner ? (
+                                          <Link
+                                            to={`/persons/${partner.id}`}
+                                            className="text-sm font-semibold text-text-primary hover:text-accent-blue transition-colors"
+                                          >
+                                            {partner.name}
+                                          </Link>
+                                        ) : (
+                                          <span className="text-sm text-text-secondary">{partnerId}</span>
+                                        )}
+                                        {sinceYear && (
+                                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-bg-card border border-border text-text-secondary">
+                                            sejak {sinceYear}
+                                          </span>
+                                        )}
+                                        {partnerParty && (
+                                          <span className="text-[10px] font-medium" style={{ color: partnerParty.color }}>
+                                            {partnerParty.abbr}
+                                          </span>
+                                        )}
+                                      </div>
+                                      {c.label && (
+                                        <p className="text-xs text-text-secondary line-clamp-1 mt-0.5">{c.label}</p>
+                                      )}
+                                      {/* Strength meter */}
+                                      <div className="flex items-center gap-1.5 mt-1.5">
+                                        <div className="flex gap-0.5">
+                                          {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                                            <div
+                                              key={n}
+                                              className="w-1.5 h-2 rounded-sm"
+                                              style={{
+                                                backgroundColor: n <= strength ? typeColor : 'var(--border)',
+                                                opacity: n <= strength ? 1 : 0.4,
+                                              }}
+                                            />
+                                          ))}
+                                        </div>
+                                        <span className="text-[10px] text-text-secondary">{strength}/10</span>
+                                      </div>
+                                    </div>
+                                    {/* Type badge */}
+                                    <span
+                                      className="flex-shrink-0 text-[10px] font-bold uppercase px-2 py-1 rounded-full"
+                                      style={{
+                                        backgroundColor: typeColor + '20',
+                                        color: typeColor,
+                                        border: `1px solid ${typeColor}40`,
+                                      }}
+                                    >
+                                      {type}
+                                    </span>
+                                  </div>
+                                )
+                              })}
                             </div>
                           </div>
-
-                          {/* Type badge */}
-                          <span
-                            className="flex-shrink-0 text-[10px] font-bold uppercase px-2 py-1 rounded-full"
-                            style={{
-                              backgroundColor: typeColor + '20',
-                              color: typeColor,
-                              border: `1px solid ${typeColor}40`,
-                            }}
-                          >
-                            {c.type}
-                          </span>
-                        </div>
-                      )
-                    })}
-                  </div>
-                )}
+                        )
+                      })}
+                    </div>
+                  )
+                })()}
               </Card>
             </div>
           )}

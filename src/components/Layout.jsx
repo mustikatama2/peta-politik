@@ -33,6 +33,7 @@ const NAV = [
   { to:'/risk',     icon:'🚨', label:'Indeks Risiko' },
   { to:'/scorecard',icon:'🏆', label:'Rapor Provinsi' },
   { to:'/scenarios',icon:'🔮', label:'Skenario 2029' },
+  { to:'/prediksi', icon:'🔮', label:'Prediksi 2029' },
   { to:'/simulator',icon:'⚙️', label:'Simulator Koalisi' },
   { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
   { to:'/timeline', icon:'📅', label:'Linimasa' },

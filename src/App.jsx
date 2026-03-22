@@ -64,6 +64,7 @@ const ScorecardPage    = lazy(() => import('./pages/scorecard/ScorecardPage'))
 const QuickFactsPage   = lazy(() => import('./pages/quickfacts/QuickFactsPage'))
 const BriefingPage     = lazy(() => import('./pages/briefing/BriefingPage'))
 const APBNPage         = lazy(() => import('./pages/apbn/APBNPage'))
+const PrediksiPage     = lazy(() => import('./pages/prediksi/PrediksiPage'))
 
 // Loading fallback — branded spinner + skeleton
 function PageLoader() {
@@ -132,6 +133,7 @@ export default function App() {
         <Route path="/risk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RiskIndex /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/scorecard" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScorecardPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/scenarios" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScenarioPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/prediksi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PrediksiPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/simulator" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><SimulatorPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/bisnis" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BusinessPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/bumn" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BUMNPage /></Suspense></ErrorBoundary></ProtectedRoute>} />

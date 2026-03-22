@@ -17,17 +17,24 @@ const NETWORK_NODES = PERSONS.filter(p => connectedIds.has(p.id))
 
 const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
-// Type labels + colors
+// Type labels + colors (all types present in CONNECTIONS)
 const TYPE_INFO = {
-  koalisi:          { label: 'Koalisi',       color: '#3B82F6' },
-  keluarga:         { label: 'Keluarga',       color: '#EC4899' },
-  bisnis:           { label: 'Bisnis',         color: '#F59E0B' },
-  konflik:          { label: 'Konflik',        color: '#EF4444' },
-  'mentor-murid':   { label: 'Mentor-Murid',   color: '#8B5CF6' },
-  rekan:            { label: 'Rekan',          color: '#6B7280' },
-  'mantan-koalisi': { label: 'Mantan Koalisi', color: '#D97706' },
+  koalisi:           { label: 'Koalisi',         color: '#3B82F6' },
+  keluarga:          { label: 'Keluarga',         color: '#EC4899' },
+  bisnis:            { label: 'Bisnis',           color: '#F59E0B' },
+  konflik:           { label: 'Konflik',          color: '#EF4444' },
+  'mentor-murid':    { label: 'Mentor-Murid',     color: '#8B5CF6' },
+  rekan:             { label: 'Rekan',            color: '#6B7280' },
+  'mantan-koalisi':  { label: 'Mantan Koalisi',   color: '#D97706' },
+  'atasan-bawahan':  { label: 'Atasan-Bawahan',   color: '#14B8A6' },
 }
 const ALL_TYPES = Object.keys(TYPE_INFO)
+
+// Pre-compute count per connection type
+const TYPE_COUNTS = ALL_TYPES.reduce((acc, type) => {
+  acc[type] = CONNECTIONS.filter(c => c.type === type).length
+  return acc
+}, {})
 
 // BFS shortest path
 function findShortestPath(connections, startId, endId) {

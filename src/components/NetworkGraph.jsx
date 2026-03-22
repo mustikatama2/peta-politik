@@ -1,8 +1,9 @@
-import { useEffect, useRef, useCallback, useState } from 'react'
+import { useEffect, useRef, useCallback, useState, useMemo } from 'react'
 import * as d3 from 'd3'
 import { PARTY_MAP } from '../data/parties'
-import { CONNECTION_TYPES } from '../data/connections'
+import { CONNECTIONS } from '../data/connections'
 import { PERSONS } from '../data/persons'
+import { scoreOnePerson } from '../lib/scoring'
 
 // Political bloc cluster definitions
 const CLUSTERS = {
@@ -21,14 +22,19 @@ function getNodeCluster(node) {
 }
 
 const LINK_COLORS = {
-  koalisi:         '#3B82F6',
-  keluarga:        '#EC4899',
-  bisnis:          '#F59E0B',
-  konflik:         '#EF4444',
-  'mentor-murid':  '#8B5CF6',
-  rekan:           '#6B7280',
-  'mantan-koalisi':'#D97706',
+  koalisi:           '#3B82F6',
+  keluarga:          '#EC4899',
+  bisnis:            '#F59E0B',
+  konflik:           '#EF4444',
+  'mentor-murid':    '#8B5CF6',
+  rekan:             '#6B7280',
+  'mantan-koalisi':  '#D97706',
+  'atasan-bawahan':  '#14B8A6',
 }
+
+// Mini-map dimensions
+const MM_W = 160
+const MM_H = 110
 
 function getPersonInfo(id) {
   const p = PERSONS.find(x => x.id === id)
@@ -48,11 +54,107 @@ export default function NetworkGraph({
   visibleTypes, focusNodeId,
   showClusters,
 }) {
-  const svgRef      = useRef(null)
+  const svgRef        = useRef(null)
   const simulationRef = useRef(null)
-  const zoomRef     = useRef(null)
+  const zoomRef       = useRef(null)
+  const minimapRef    = useRef(null)
+  const mmStateRef    = useRef(null) // { scale, offX, offY, minX, minY, w, h }
   const [hoveredNode, setHoveredNode] = useState(null)
   const [tooltipPos, setTooltipPos]   = useState({ x: 0, y: 0 })
+
+  // ── Pre-compute influence scores for all persons ──────────────────────────
+  const scoreMap = useMemo(() => {
+    const map = {}
+    ;(nodes || []).forEach(n => {
+      try {
+        const result = scoreOnePerson(n, CONNECTIONS)
+        map[n.id] = result.total
+      } catch {
+        map[n.id] = 0
+      }
+    })
+    return map
+  }, [nodes])
+
+  // ── Score → radius (4–20 px) ─────────────────────────────────────────────
+  const scoreToRadius = useCallback((nodeId) => {
+    const score = scoreMap[nodeId] || 0
+    return 4 + (score / 100) * 16  // score 0→4px, score 100→20px
+  }, [scoreMap])
+
+  // ── Mini-map draw function (stored in ref so it can be called from tick) ─
+  const drawMinimap = useCallback((filteredNodes2, filteredEdges2, width, height) => {
+    const canvas = minimapRef.current
+    if (!canvas || !filteredNodes2?.length) return
+
+    const xs = filteredNodes2.map(n => n.x).filter(Number.isFinite)
+    const ys = filteredNodes2.map(n => n.y).filter(Number.isFinite)
+    if (!xs.length) return
+
+    const minX = Math.min(...xs), maxX = Math.max(...xs)
+    const minY = Math.min(...ys), maxY = Math.max(...ys)
+    const rangeX = maxX - minX || 1
+    const rangeY = maxY - minY || 1
+
+    const scaleX = (MM_W * 0.88) / rangeX
+    const scaleY = (MM_H * 0.88) / rangeY
+    const scale  = Math.min(scaleX, scaleY)
+
+    const offX = (MM_W - rangeX * scale) / 2 - minX * scale
+    const offY = (MM_H - rangeY * scale) / 2 - minY * scale
+
+    // Store for click-to-navigate
+    mmStateRef.current = { scale, offX, offY, width, height }
+
+    const ctx = canvas.getContext('2d')
+    ctx.clearRect(0, 0, MM_W, MM_H)
+    ctx.fillStyle = 'rgba(15, 20, 30, 0.96)'
+    ctx.fillRect(0, 0, MM_W, MM_H)
+
+    // Thin border
+    ctx.strokeStyle = 'rgba(100,100,100,0.5)'
+    ctx.lineWidth = 0.5
+    ctx.strokeRect(0, 0, MM_W, MM_H)
+
+    // Edges
+    filteredEdges2.forEach(e => {
+      const src = e.source, tgt = e.target
+      if (!src || !tgt || !Number.isFinite(src.x)) return
+      ctx.beginPath()
+      ctx.moveTo(src.x * scale + offX, src.y * scale + offY)
+      ctx.lineTo(tgt.x * scale + offX, tgt.y * scale + offY)
+      ctx.strokeStyle = 'rgba(100,100,100,0.25)'
+      ctx.lineWidth = 0.4
+      ctx.stroke()
+    })
+
+    // Nodes
+    filteredNodes2.forEach(n => {
+      if (!Number.isFinite(n.x)) return
+      const x = n.x * scale + offX
+      const y = n.y * scale + offY
+      const r = Math.max(1, (scoreToRadius(n.id) / 20) * 3.5)
+      const party = n.party_id ? PARTY_MAP[n.party_id] : null
+      ctx.beginPath()
+      ctx.arc(x, y, r, 0, Math.PI * 2)
+      ctx.fillStyle = party?.color || '#374151'
+      ctx.fill()
+    })
+
+    // Viewport rectangle
+    if (svgRef.current && zoomRef.current) {
+      try {
+        const t = d3.zoomTransform(svgRef.current)
+        const vx0 = (-t.x / t.k) * scale + offX
+        const vy0 = (-t.y / t.k) * scale + offY
+        const vw  = (width  / t.k) * scale
+        const vh  = (height / t.k) * scale
+        ctx.strokeStyle = 'rgba(239,68,68,0.9)'
+        ctx.lineWidth = 1.5
+        ctx.strokeRect(vx0, vy0, vw, vh)
+      } catch (_) { /* ignore */ }
+    }
+  }, [scoreToRadius])
 
   const draw = useCallback(() => {
     const highlightSet = highlightIds ? new Set(highlightIds) : null
@@ -64,7 +166,7 @@ export default function NetworkGraph({
 
     d3.select(svgRef.current).selectAll('*').remove()
 
-    // --- Filter edges (legacy single-type filter + new visibleTypes multi-filter) ---
+    // --- Filter edges ---
     let filteredEdges = edges || []
     if (filterType)    filteredEdges = filteredEdges.filter(e => e.type === filterType)
     if (visibleTypes?.length) filteredEdges = filteredEdges.filter(e => visibleTypes.includes(e.type))
@@ -91,15 +193,7 @@ export default function NetworkGraph({
     const filteredNodes  = nodes.filter(n => activeIds.has(n.id))
     const filteredEdges2 = filteredEdges.filter(e => activeIds.has(e.from) && activeIds.has(e.to))
 
-    // --- Pre-compute connection count per node (for sizing) ---
-    const linksByNode = {}
-    filteredEdges2.forEach(e => {
-      linksByNode[e.from] = (linksByNode[e.from] || 0) + 1
-      linksByNode[e.to]   = (linksByNode[e.to]   || 0) + 1
-    })
-    const radius = d => Math.max(8, Math.min(24, 8 + (linksByNode[d.id] || 0) * 1.5))
-
-    // --- Nodes that have NO visible connections → dim ---
+    // --- Nodes with no visible connections → dim ---
     const dimmedIds = new Set()
     if (visibleTypes?.length) {
       nodes.forEach(n => {
@@ -108,14 +202,20 @@ export default function NetworkGraph({
       })
     }
 
+    // --- Score-based radius (4–20 px) ---
+    const radius = d => {
+      const r = scoreToRadius(d.id)
+      return d.id === centerNodeId ? r + 4 : r
+    }
+
     // --- SVG setup ---
     const svg = d3.select(svgRef.current)
-      .attr('width', width)
+      .attr('width',  width)
       .attr('height', height)
 
     const g = svg.append('g')
 
-    // ── Hull layers (drawn first so they appear behind nodes/links) ──
+    // ── Hull layers ──
     const hullLayer      = g.append('g').attr('class', 'hull-layer')
     const hullLabelLayer = g.append('g').attr('class', 'hull-label-layer')
 
@@ -145,15 +245,18 @@ export default function NetworkGraph({
     }
 
     const zoom = d3.zoom()
-      .scaleExtent([0.3, 3])
-      .on('zoom', event => g.attr('transform', event.transform))
+      .scaleExtent([0.15, 4])
+      .on('zoom', event => {
+        g.attr('transform', event.transform)
+        // Refresh minimap viewport rect on zoom/pan
+        drawMinimap(filteredNodes, filteredEdges2, width, height)
+      })
     svg.call(zoom)
     zoomRef.current = zoom
 
-    // --- Arrow markers ---
+    // --- Defs: glow + arrows ---
     const defs = svg.append('defs')
 
-    // Glow filter for highlighted nodes
     const glowFilter = defs.append('filter').attr('id', 'glow')
     glowFilter.append('feGaussianBlur').attr('stdDeviation', 4).attr('result', 'coloredBlur')
     const feMerge = glowFilter.append('feMerge')
@@ -180,18 +283,37 @@ export default function NetworkGraph({
       .force('link', d3.forceLink(filteredEdges2).id(d => d.id).distance(d => 100 / (d.strength || 5) * 60))
       .force('charge', d3.forceManyBody().strength(-200))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide(d => radius(d) + 12))
+      .force('collision', d3.forceCollide(d => radius(d) + 10))
 
     // --- Links ---
     const link = g.append('g').selectAll('line')
       .data(filteredEdges2)
       .join('line')
-      .attr('stroke', d => LINK_COLORS[d.type] || '#6B7280')
-      .attr('stroke-opacity', 0.65)
-      .attr('stroke-width', d => Math.sqrt(d.strength || 3) * 0.8)
+      .attr('stroke', d => {
+        if (highlightSet) {
+          // Path edges: thick red; others: dimmed
+          const onPath = highlightSet.has(d.source?.id || d.from) && highlightSet.has(d.target?.id || d.to)
+          if (onPath) return '#EF4444'
+        }
+        return LINK_COLORS[d.type] || '#6B7280'
+      })
+      .attr('stroke-opacity', d => {
+        if (highlightSet) {
+          const onPath = highlightSet.has(d.source?.id || d.from) && highlightSet.has(d.target?.id || d.to)
+          return onPath ? 1 : 0.12
+        }
+        return 0.65
+      })
+      .attr('stroke-width', d => {
+        if (highlightSet) {
+          const onPath = highlightSet.has(d.source?.id || d.from) && highlightSet.has(d.target?.id || d.to)
+          return onPath ? 4 : Math.sqrt(d.strength || 3) * 0.5
+        }
+        return Math.sqrt(d.strength || 3) * 0.8
+      })
       .attr('marker-end', d => `url(#arrow-${d.type})`)
 
-    // --- Link labels ---
+    // --- Link labels (only when few nodes) ---
     const linkLabel = g.append('g').selectAll('text')
       .data(filteredEdges2)
       .join('text')
@@ -208,7 +330,11 @@ export default function NetworkGraph({
       .data(filteredNodes)
       .join('g')
       .attr('cursor', 'pointer')
-      .attr('opacity', d => dimmedIds.has(d.id) ? 0.2 : 1)
+      .attr('opacity', d => {
+        if (highlightSet && !highlightSet.has(d.id)) return 0.15
+        if (dimmedIds.has(d.id)) return 0.2
+        return 1
+      })
       .call(
         d3.drag()
           .on('start', (event, d) => {
@@ -229,12 +355,10 @@ export default function NetworkGraph({
         setHoveredNode(d)
         setTooltipPos({ x: event.pageX, y: event.pageY })
       })
-      .on('mousemove', event => {
-        setTooltipPos({ x: event.pageX, y: event.pageY })
-      })
+      .on('mousemove', event => setTooltipPos({ x: event.pageX, y: event.pageY }))
       .on('mouseout', () => setHoveredNode(null))
 
-    // Gold glow ring for highlighted path nodes
+    // Gold glow ring for path nodes
     node.filter(d => highlightSet?.has(d.id))
       .append('circle')
       .attr('r', d => radius(d) + 8)
@@ -256,28 +380,28 @@ export default function NetworkGraph({
 
     // Main circle
     node.append('circle')
-      .attr('r', d => d.id === centerNodeId ? radius(d) + 6 : radius(d))
+      .attr('r', d => radius(d))
       .attr('fill', d => {
         const party = d.party_id ? PARTY_MAP[d.party_id] : null
         return party?.color || '#374151'
       })
       .attr('stroke', d => {
-        if (d.id === focusNodeId)        return '#60A5FA'
-        if (highlightSet?.has(d.id))     return '#F0C200'
-        if (d.id === centerNodeId)       return '#F59E0B'
+        if (d.id === focusNodeId)    return '#60A5FA'
+        if (highlightSet?.has(d.id)) return '#F0C200'
+        if (d.id === centerNodeId)   return '#F59E0B'
         return '#1F2937'
       })
       .attr('stroke-width', d => {
-        if (d.id === focusNodeId)        return 3
-        if (highlightSet?.has(d.id))     return 3
-        if (d.id === centerNodeId)       return 3
+        if (d.id === focusNodeId)    return 3
+        if (highlightSet?.has(d.id)) return 3
+        if (d.id === centerNodeId)   return 3
         return 1.5
       })
       .attr('fill-opacity', 0.9)
 
     // Node labels
     node.append('text')
-      .attr('dy', d => (d.id === centerNodeId ? radius(d) + 6 : radius(d)) + 14)
+      .attr('dy', d => radius(d) + 14)
       .attr('text-anchor', 'middle')
       .attr('fill', '#F9FAFB')
       .attr('font-size', 10)
@@ -290,8 +414,9 @@ export default function NetworkGraph({
       .style('text-shadow', '1px 1px 2px rgba(0,0,0,0.8)')
 
     // --- Tick ---
+    let tickCount = 0
     simulationRef.current.on('tick', () => {
-      // Update cluster hulls
+      // Hull updates
       if (showClusters) {
         Object.entries(CLUSTERS).forEach(([key]) => {
           const clusterNodes = filteredNodes.filter(n => getNodeCluster(n) === key)
@@ -301,7 +426,6 @@ export default function NetworkGraph({
             return
           }
           const pts = clusterNodes.map(n => [n.x, n.y])
-          // Pad points outward slightly so hull doesn't hug nodes tightly
           const cx0 = pts.reduce((s, p) => s + p[0], 0) / pts.length
           const cy0 = pts.reduce((s, p) => s + p[1], 0) / pts.length
           const pad = 30
@@ -323,20 +447,35 @@ export default function NetworkGraph({
       }
 
       link
-        .attr('x1', d => d.source.x)
-        .attr('y1', d => d.source.y)
-        .attr('x2', d => d.target.x)
-        .attr('y2', d => d.target.y)
+        .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y)
 
       linkLabel
         .attr('x', d => (d.source.x + d.target.x) / 2)
         .attr('y', d => (d.source.y + d.target.y) / 2)
 
       node.attr('transform', d => `translate(${d.x},${d.y})`)
-    })
-  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds, visibleTypes, focusNodeId, showClusters])
 
-  // Focus zoom effect — runs after draw settles
+      // Update minimap every 5 ticks to avoid thrashing
+      tickCount++
+      if (tickCount % 5 === 0) {
+        drawMinimap(filteredNodes, filteredEdges2, width, height)
+      }
+    })
+
+    // Final minimap draw when simulation ends
+    simulationRef.current.on('end', () => {
+      drawMinimap(filteredNodes, filteredEdges2, width, height)
+    })
+
+    // Store refs for minimap click handler
+    minimapRef.current._filteredNodes  = filteredNodes
+    minimapRef.current._filteredEdges2 = filteredEdges2
+    minimapRef.current._width          = width
+    minimapRef.current._height         = height
+  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds, visibleTypes, focusNodeId, showClusters, scoreToRadius, drawMinimap])
+
+  // Focus zoom effect
   useEffect(() => {
     if (!focusNodeId || !svgRef.current || !simulationRef.current || !zoomRef.current) return
     const wait = setTimeout(() => {
@@ -360,18 +499,46 @@ export default function NetworkGraph({
     return () => simulationRef.current?.stop()
   }, [draw])
 
+  // Mini-map click → navigate viewport
+  const handleMinimapClick = useCallback((e) => {
+    const canvas = minimapRef.current
+    const state  = mmStateRef.current
+    if (!canvas || !state || !svgRef.current || !zoomRef.current) return
+
+    const rect = canvas.getBoundingClientRect()
+    const mx = e.clientX - rect.left
+    const my = e.clientY - rect.top
+
+    // Minimap px → graph coords
+    const gx = (mx - state.offX) / state.scale
+    const gy = (my - state.offY) / state.scale
+
+    const currentT = d3.zoomTransform(svgRef.current)
+    const k = currentT.k
+    const tx = state.width  / 2 - gx * k
+    const ty = state.height / 2 - gy * k
+
+    d3.select(svgRef.current)
+      .transition().duration(300)
+      .call(zoomRef.current.transform, d3.zoomIdentity.translate(tx, ty).scale(k))
+  }, [])
+
   const info = hoveredNode ? getPersonInfo(hoveredNode.id) : null
+  const hoveredScore = hoveredNode ? (scoreMap[hoveredNode.id] ?? null) : null
 
   return (
     <div className="w-full h-full relative">
       <style>{`
         @keyframes focusPulse {
-          0%, 100% { opacity: 0.7; r: calc(var(--r) + 12px); }
-          50% { opacity: 0.2; r: calc(var(--r) + 20px); }
+          0%, 100% { opacity: 0.7; }
+          50%       { opacity: 0.2; }
         }
         .focus-ring { animation: focusPulse 1.6s ease-in-out infinite; }
       `}</style>
+
       <svg ref={svgRef} className="w-full h-full" />
+
+      {/* Tooltip */}
       {info && (
         <div
           className="fixed z-50 pointer-events-none rounded-xl border border-border bg-bg-card/95 backdrop-blur-sm shadow-xl p-3 text-xs space-y-1"
@@ -380,8 +547,32 @@ export default function NetworkGraph({
           <p className="font-semibold text-text-primary text-sm">{info.name}</p>
           <p className="text-text-secondary">🏛 {info.party}</p>
           <p className="text-text-secondary">📌 {info.position}</p>
+          {hoveredScore !== null && (
+            <div className="flex items-center gap-2 pt-1 border-t border-border">
+              <span className="text-text-secondary">⚡ Skor Pengaruh:</span>
+              <span className="font-bold text-yellow-400">{hoveredScore.toFixed(1)}</span>
+            </div>
+          )}
         </div>
       )}
+
+      {/* Mini-map */}
+      <div
+        className="absolute bottom-3 right-3 rounded-lg overflow-hidden border border-border/60 shadow-lg"
+        style={{ width: MM_W, height: MM_H }}
+        title="Klik untuk navigasi"
+      >
+        <canvas
+          ref={minimapRef}
+          width={MM_W}
+          height={MM_H}
+          onClick={handleMinimapClick}
+          style={{ cursor: 'crosshair', display: 'block' }}
+        />
+        <div className="absolute top-1 left-1.5 text-[9px] text-gray-500 pointer-events-none select-none font-medium tracking-wide">
+          MINI-MAP
+        </div>
+      </div>
     </div>
   )
 }
