@@ -30,6 +30,7 @@ const COIScanner     = lazy(() => import('./pages/coi/COIScanner'))
 const ComparePage    = lazy(() => import('./pages/compare/ComparePage'))
 const RiskIndex      = lazy(() => import('./pages/risk/RiskIndex'))
 const ScenarioPage   = lazy(() => import('./pages/scenarios/ScenarioPage'))
+const SimulatorPage  = lazy(() => import('./pages/simulator/SimulatorPage'))
 const VotingPage     = lazy(() => import('./pages/voting/VotingPage'))
 const BusinessPage   = lazy(() => import('./pages/business/BusinessPage'))
 const KabinetPage    = lazy(() => import('./pages/kabinet/KabinetPage'))
@@ -119,6 +120,7 @@ export default function App() {
         <Route path="/risk" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RiskIndex /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/scorecard" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScorecardPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/scenarios" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ScenarioPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/simulator" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><SimulatorPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/bisnis" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BusinessPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/bumn" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BUMNPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/kabinet" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KabinetPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
