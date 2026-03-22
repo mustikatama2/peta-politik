@@ -123,6 +123,8 @@ const TABS = [
   { id: 'prediksi_2029',     label: 'Prediksi 2029',      icon: '🔮' },
   { id: 'korelasi_stat',     label: 'Korelasi',           icon: '📐' },
   { id: 'perbandingan_cepat',label: 'Perbandingan Cepat', icon: '🏆' },
+  { id: 'jaringan_pengaruh', label: 'Jaringan Pengaruh',  icon: '🕸️' },
+  { id: 'risiko_2029',       label: 'Risiko 2029',        icon: '⚡' },
 ]
 
 // ═══════════════════════════════════════════════════════════════════════════════
@@ -2531,6 +2533,487 @@ function TabPerbandinganCepat() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// TAB 12: JARINGAN PENGARUH
+// ═══════════════════════════════════════════════════════════════════════════════
+const KIM_PLUS_PARTIES  = ['ger', 'gol', 'nas', 'pan', 'dem', 'pks', 'pkb', 'pbb']
+const OPOSISI_PARTIES   = ['pdip', 'psi']
+const MILITER_TAGS      = ['eks-militer', 'tni', 'polri', 'keamanan', 'intelijen', 'pertahanan']
+const BISNIS_TAGS       = ['pengusaha', 'bisnis', 'teknokrat']
+
+function getCluster(person) {
+  if (KIM_PLUS_PARTIES.includes(person.party_id)) return 'KIM Plus'
+  if (OPOSISI_PARTIES.includes(person.party_id))  return 'Oposisi'
+  const tags = person.tags || []
+  if (MILITER_TAGS.some(t => tags.includes(t)))   return 'Militer/Keamanan'
+  if (BISNIS_TAGS.some(t => tags.includes(t)))    return 'Bisnis'
+  return 'Lainnya'
+}
+
+function TabJaringanPengaruh() {
+  // ── A: Degree Distribution ──
+  const connCountMap = useMemo(() => {
+    const map = {}
+    PERSONS.forEach(p => { map[p.id] = 0 })
+    CONNECTIONS.forEach(c => {
+      if (map[c.from] !== undefined) map[c.from]++
+      if (map[c.to]   !== undefined) map[c.to]++
+    })
+    return map
+  }, [])
+
+  const degBuckets = useMemo(() => {
+    const buckets = { '1': 0, '2–5': 0, '6–10': 0, '11–20': 0, '20+': 0, '0': 0 }
+    Object.values(connCountMap).forEach(n => {
+      if (n === 0)       buckets['0']++
+      else if (n === 1)  buckets['1']++
+      else if (n <= 5)   buckets['2–5']++
+      else if (n <= 10)  buckets['6–10']++
+      else if (n <= 20)  buckets['11–20']++
+      else               buckets['20+']++
+    })
+    return [
+      { label: '0', count: buckets['0'],   color: '#6b7280' },
+      { label: '1', count: buckets['1'],   color: '#3b82f6' },
+      { label: '2–5', count: buckets['2–5'],  color: '#8b5cf6' },
+      { label: '6–10', count: buckets['6–10'], color: '#f59e0b' },
+      { label: '11–20', count: buckets['11–20'], color: '#ef4444' },
+      { label: '20+',  count: buckets['20+'],  color: '#e11d48' },
+    ]
+  }, [connCountMap])
+
+  const top10 = useMemo(() =>
+    Object.entries(connCountMap)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([id, cnt]) => {
+        const p = PERSONS.find(x => x.id === id)
+        return { id, name: p?.name || id, party_id: p?.party_id, cnt }
+      }),
+    [connCountMap]
+  )
+
+  // ── B: Bridge Nodes ──
+  const bridgeNodes = useMemo(() => {
+    const clusterMap = {}
+    PERSONS.forEach(p => { clusterMap[p.id] = getCluster(p) })
+
+    // For each person, count how many distinct clusters their connections touch
+    const bridgeScore = {}
+    PERSONS.forEach(p => { bridgeScore[p.id] = new Set() })
+
+    CONNECTIONS.forEach(c => {
+      const clFrom = clusterMap[c.from]
+      const clTo   = clusterMap[c.to]
+      if (clFrom && clTo && clFrom !== clTo) {
+        bridgeScore[c.from]?.add(clTo)
+        bridgeScore[c.to]?.add(clFrom)
+      }
+    })
+
+    return Object.entries(bridgeScore)
+      .filter(([, s]) => s.size >= 2)
+      .sort((a, b) => b[1].size - a[1].size)
+      .slice(0, 8)
+      .map(([id, clustersSet]) => {
+        const p = PERSONS.find(x => x.id === id)
+        const myCluster = clusterMap[id]
+        const bridges = [...clustersSet].filter(c => c !== myCluster)
+        return {
+          id,
+          name: p?.name || id,
+          party_id: p?.party_id,
+          myCluster,
+          bridges,
+          score: clustersSet.size,
+          connCount: connCountMap[id] || 0,
+        }
+      })
+  }, [connCountMap])
+
+  // ── C: Cluster Summary ──
+  const clusterStats = useMemo(() => {
+    const clusterMap = {}
+    PERSONS.forEach(p => { clusterMap[p.id] = getCluster(p) })
+
+    const clusters = ['KIM Plus', 'Oposisi', 'Militer/Keamanan', 'Bisnis', 'Lainnya']
+    const sizes = {}
+    clusters.forEach(c => { sizes[c] = 0 })
+    PERSONS.forEach(p => { sizes[getCluster(p)]++ })
+
+    // Cross-cluster connection counts
+    const crossMap = {}
+    clusters.forEach(cA => {
+      clusters.forEach(cB => {
+        if (cA <= cB) crossMap[`${cA}|${cB}`] = 0
+      })
+    })
+    CONNECTIONS.forEach(c => {
+      const cA = clusterMap[c.from]
+      const cB = clusterMap[c.to]
+      if (!cA || !cB) return
+      const key = cA <= cB ? `${cA}|${cB}` : `${cB}|${cA}`
+      if (crossMap[key] !== undefined) crossMap[key]++
+    })
+
+    const crossLinks = Object.entries(crossMap)
+      .filter(([k]) => !k.split('|').every((x, _, arr) => x === arr[0]))
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 8)
+      .map(([k, v]) => {
+        const [a, b] = k.split('|')
+        return { from: a, to: b, count: v }
+      })
+
+    const clusterColors = {
+      'KIM Plus':        '#3b82f6',
+      'Oposisi':         '#ef4444',
+      'Militer/Keamanan':'#f59e0b',
+      'Bisnis':          '#10b981',
+      'Lainnya':         '#8b5cf6',
+    }
+
+    return { sizes, clusters, crossLinks, clusterColors }
+  }, [])
+
+  const maxDeg = Math.max(...degBuckets.map(b => b.count))
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">🕸️ Analisis Jaringan Pengaruh</h2>
+        <p className="text-sm text-text-muted mt-1">
+          Distribusi derajat koneksi, bridge nodes, dan korelasi antar klaster politik
+        </p>
+      </div>
+
+      {/* ── A: Degree Distribution ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">A. Distribusi Derajat Koneksi</h3>
+        <p className="text-xs text-text-muted mb-4">Berapa banyak tokoh yang memiliki jumlah koneksi tertentu?</p>
+        <ResponsiveContainer width="100%" height={220}>
+          <BarChart data={degBuckets} margin={{ top: 8, right: 16, left: 0, bottom: 8 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff0f" />
+            <XAxis dataKey="label" tick={{ fill: '#9ca3af', fontSize: 11 }} label={{ value: 'Jumlah Koneksi', position: 'insideBottom', offset: -3, fill: '#9ca3af', fontSize: 11 }} />
+            <YAxis tick={{ fill: '#9ca3af', fontSize: 11 }} label={{ value: 'Jumlah Tokoh', angle: -90, position: 'insideLeft', fill: '#9ca3af', fontSize: 11 }} />
+            <Tooltip
+              content={({ active, payload }) => {
+                if (!active || !payload?.length) return null
+                const d = payload[0]?.payload
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 text-xs shadow-xl">
+                    <p className="font-bold text-text-primary">{d.count} tokoh</p>
+                    <p className="text-text-muted">dengan {d.label} koneksi</p>
+                  </div>
+                )
+              }}
+            />
+            <Bar dataKey="count" radius={[4, 4, 0, 0]}>
+              {degBuckets.map((b, i) => <Cell key={i} fill={b.color} />)}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+
+        <div className="mt-5">
+          <h4 className="text-xs font-semibold text-text-primary mb-3">🔗 Top 10 Tokoh Paling Terkoneksi</h4>
+          <div className="space-y-2">
+            {top10.map((item, i) => (
+              <div key={item.id} className="flex items-center gap-3">
+                <span className="text-xs text-text-muted w-5 text-right">{i + 1}</span>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-0.5">
+                    <span className="text-xs font-medium text-text-primary truncate mr-2">{item.name}</span>
+                    <span className="text-xs font-bold text-accent-red shrink-0">{item.cnt}</span>
+                  </div>
+                  <ProgressBar value={item.cnt} max={top10[0]?.cnt || 1} color={PARTY_MAP[item.party_id]?.color || '#6366f1'} height={4} />
+                </div>
+                <PartyBadge partyId={item.party_id} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── B: Bridge Nodes ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">B. Bridge Nodes — Penghubung Klaster</h3>
+        <p className="text-xs text-text-muted mb-4">
+          Tokoh yang menjembatani klaster politik berbeda — semakin banyak klaster yang dihubungkan, semakin strategis posisinya.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {bridgeNodes.map((node, i) => (
+            <div key={node.id} className="bg-bg-elevated rounded-xl p-4 border border-border">
+              <div className="flex items-start justify-between mb-2">
+                <div>
+                  <p className="text-sm font-semibold text-text-primary">{node.name}</p>
+                  <p className="text-[11px] text-text-muted">Klaster: {node.myCluster} · {node.connCount} koneksi</p>
+                </div>
+                <span className="text-lg font-black text-accent-red">#{i + 1}</span>
+              </div>
+              <div className="flex flex-wrap gap-1 mb-2">
+                {node.bridges.map(cl => (
+                  <span key={cl} className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-accent-red/10 text-accent-red border border-accent-red/20">
+                    {cl}
+                  </span>
+                ))}
+              </div>
+              <p className="text-[11px] text-text-muted">
+                {node.name.split(' ')[0]} menghubungkan <strong className="text-text-primary">{node.score}</strong> klaster berbeda
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── C: Cluster Summary ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">C. Ringkasan Klaster & Koneksi Lintas-Klaster</h3>
+        <p className="text-xs text-text-muted mb-4">
+          Distribusi tokoh per klaster dan jumlah koneksi yang menghubungkan klaster berbeda
+        </p>
+
+        {/* Cluster sizes */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
+          {clusterStats.clusters.map(cl => (
+            <div key={cl} className="bg-bg-elevated rounded-xl p-3 border border-border text-center">
+              <div className="text-2xl font-black mb-1" style={{ color: clusterStats.clusterColors[cl] }}>
+                {clusterStats.sizes[cl]}
+              </div>
+              <div className="text-[11px] text-text-muted leading-tight">{cl}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Cross-cluster connections */}
+        <h4 className="text-xs font-semibold text-text-primary mb-3">🔀 Koneksi Lintas-Klaster Terkuat</h4>
+        <div className="space-y-2">
+          {clusterStats.crossLinks.map((link, i) => (
+            <div key={i} className="flex items-center gap-3 bg-bg-elevated rounded-lg px-3 py-2">
+              <span className="text-xs text-text-muted w-4">{i + 1}</span>
+              <span className="text-xs font-medium" style={{ color: clusterStats.clusterColors[link.from] }}>{link.from}</span>
+              <span className="text-text-muted text-xs">↔</span>
+              <span className="text-xs font-medium" style={{ color: clusterStats.clusterColors[link.to] }}>{link.to}</span>
+              <div className="flex-1">
+                <ProgressBar value={link.count} max={clusterStats.crossLinks[0]?.count || 1} color="#6366f1" height={4} />
+              </div>
+              <span className="text-xs font-bold text-text-primary shrink-0">{link.count}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// TAB 13: RISIKO 2029
+// ═══════════════════════════════════════════════════════════════════════════════
+function TabRisiko2029() {
+  // ── A: Succession Risk (Ticking Time Bombs) ──
+  const ticking = useMemo(() => {
+    return PERSONS
+      .filter(p => p.tier === 'nasional' && p.analysis?.controversy_level != null && p.analysis?.influence != null)
+      .map(p => {
+        const s = scoreOnePerson(p, CONNECTIONS)
+        const risk_score = (p.analysis.controversy_level / 10) * 0.5 + (p.analysis.influence / 100) * 0.5
+        return {
+          id: p.id,
+          name: p.name,
+          party_id: p.party_id,
+          controversy: p.analysis.controversy_level,
+          influence: p.analysis.influence,
+          corruption_risk: p.analysis.corruption_risk,
+          total: s.total,
+          risk_score,
+        }
+      })
+      .sort((a, b) => b.risk_score - a.risk_score)
+      .slice(0, 8)
+  }, [])
+
+  // ── B: Coalition Stability ──
+  const coalitionStability = useMemo(() => {
+    const personCluster = {}
+    PERSONS.forEach(p => { personCluster[p.id] = getCluster(p) })
+
+    const coalitions = ['KIM Plus', 'Oposisi']
+    return coalitions.map(coalition => {
+      const members = PERSONS.filter(p => getCluster(p) === coalition).map(p => p.id)
+      const memberSet = new Set(members)
+
+      let internalConns = 0
+      let totalConns    = 0
+
+      CONNECTIONS.forEach(c => {
+        const fromMember = memberSet.has(c.from)
+        const toMember   = memberSet.has(c.to)
+        if (fromMember || toMember) {
+          totalConns++
+          if (fromMember && toMember) internalConns++
+        }
+      })
+
+      const cohesion = totalConns > 0 ? Math.round((internalConns / totalConns) * 100) : 0
+      const risk = cohesion >= 70 ? 'rendah' : cohesion >= 50 ? 'sedang' : 'tinggi'
+      const riskLabel = cohesion >= 70 ? '✅ Risiko perpecahan rendah' : cohesion >= 50 ? '⚠️ Risiko perpecahan sedang' : '🚨 Risiko perpecahan tinggi'
+      const color = cohesion >= 70 ? '#22c55e' : cohesion >= 50 ? '#f59e0b' : '#ef4444'
+
+      return {
+        coalition,
+        members: members.length,
+        internalConns,
+        totalConns,
+        cohesion,
+        risk,
+        riskLabel,
+        color,
+      }
+    })
+  }, [])
+
+  // ── C: Dark Horse Candidates ──
+  const darkHorses = useMemo(() => {
+    return PERSONS
+      .filter(p =>
+        p.tier === 'nasional' &&
+        p.analysis?.influence != null &&
+        p.analysis.influence > 60 &&
+        (p.analysis.controversy_level == null || p.analysis.controversy_level < 3)
+      )
+      .map(p => {
+        const s = scoreOnePerson(p, CONNECTIONS)
+        const connCount = CONNECTIONS.filter(c => c.from === p.id || c.to === p.id).length
+        return { ...p, total: s.total, connCount }
+      })
+      .sort((a, b) => b.analysis.influence - a.analysis.influence)
+      .slice(0, 6)
+  }, [])
+
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">⚡ Dashboard Risiko 2029</h2>
+        <p className="text-sm text-text-muted mt-1">
+          Analisis risiko menuju Pemilu 2029 — suksesi, stabilitas koalisi, dan kandidat dark horse
+        </p>
+      </div>
+
+      {/* ── A: Ticking Time Bombs ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">A. 💣 Succession Risk — "Ticking Time Bombs"</h3>
+        <p className="text-xs text-text-muted mb-4">
+          Tokoh dengan influence tinggi DAN controversy level tinggi — berpotensi memicu krisis politik menjelang 2029
+        </p>
+        <div className="space-y-3">
+          {ticking.map((p, i) => (
+            <div key={p.id} className="bg-bg-elevated rounded-xl p-4 border border-border">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg font-black text-accent-red">#{i + 1}</span>
+                  <div>
+                    <p className="text-sm font-semibold text-text-primary">{p.name}</p>
+                    <p className="text-[11px] text-text-muted">{PARTY_MAP[p.party_id]?.abbr || '—'}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RiskBadge risk={p.corruption_risk || 'rendah'} />
+                  <span className="text-xs px-2 py-0.5 rounded font-bold bg-red-500/10 text-red-400 border border-red-500/20">
+                    Risk {(p.risk_score * 100).toFixed(0)}%
+                  </span>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <p className="text-[10px] text-text-muted mb-1">Controversy Level</p>
+                  <ProgressBar value={p.controversy} max={10} color="#ef4444" />
+                  <p className="text-[10px] text-text-muted mt-0.5">{p.controversy}/10</p>
+                </div>
+                <div>
+                  <p className="text-[10px] text-text-muted mb-1">Influence Score</p>
+                  <ProgressBar value={p.influence} max={100} color="#f59e0b" />
+                  <p className="text-[10px] text-text-muted mt-0.5">{p.influence}/100</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── B: Coalition Stability ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">B. 🤝 Stabilitas Koalisi</h3>
+        <p className="text-xs text-text-muted mb-4">
+          Kohesi internal koalisi — rasio koneksi dalam koalisi vs total koneksi anggota
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {coalitionStability.map(cs => (
+            <div key={cs.coalition} className="bg-bg-elevated rounded-xl p-5 border border-border">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <p className="text-base font-bold text-text-primary">{cs.coalition}</p>
+                  <p className="text-[11px] text-text-muted">{cs.members} anggota · {cs.totalConns} total koneksi</p>
+                </div>
+                <span className="text-3xl font-black" style={{ color: cs.color }}>{cs.cohesion}%</span>
+              </div>
+              <ProgressBar value={cs.cohesion} max={100} color={cs.color} height={10} />
+              <p className="text-xs mt-2" style={{ color: cs.color }}>{cs.riskLabel}</p>
+              <p className="text-[11px] text-text-muted mt-1">
+                {cs.internalConns} koneksi internal dari {cs.totalConns} total
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── C: Dark Horse Candidates ── */}
+      <div className="bg-bg-card rounded-xl border border-border p-5">
+        <h3 className="text-base font-semibold text-text-primary mb-1">C. 🐴 Dark Horse Candidates 2029</h3>
+        <p className="text-xs text-text-muted mb-4">
+          Tokoh dengan influence &gt; 60, controversy &lt; 3, tier nasional — berpotensi muncul sebagai kandidat yang underrated menjelang 2029
+        </p>
+        {darkHorses.length === 0 ? (
+          <p className="text-sm text-text-muted text-center py-8">Tidak ada kandidat yang memenuhi kriteria dark horse saat ini.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {darkHorses.map((p, i) => (
+              <div key={p.id} className="bg-bg-elevated rounded-xl p-4 border border-border hover:border-green-500/30 transition-all">
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <p className="text-sm font-semibold text-text-primary leading-tight">{p.name}</p>
+                    <p className="text-[11px] text-text-muted">{p.positions?.[0]?.title || '—'}</p>
+                  </div>
+                  <PartyBadge partyId={p.party_id} />
+                </div>
+                <div className="flex items-center gap-4 mt-3">
+                  <div className="flex-1">
+                    <p className="text-[10px] text-text-muted mb-1">Influence</p>
+                    <ProgressBar value={p.analysis.influence} max={100} color="#22c55e" />
+                    <p className="text-[10px] text-green-400 mt-0.5 font-bold">{p.analysis.influence}</p>
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[10px] text-text-muted mb-1">Kontroversi</p>
+                    <ProgressBar value={p.analysis.controversy_level ?? 0} max={10} color="#10b981" />
+                    <p className="text-[10px] text-green-400 mt-0.5 font-bold">{p.analysis.controversy_level ?? 0}/10</p>
+                  </div>
+                </div>
+                <p className="text-[11px] text-text-muted mt-2">{p.connCount} koneksi · Skor total {p.total.toFixed(0)}</p>
+              </div>
+            ))}
+          </div>
+        )}
+        {darkHorses.length === 0 && (
+          <div className="mt-4 bg-bg-elevated rounded-lg p-4 border border-border">
+            <p className="text-xs text-text-muted">
+              💡 <strong className="text-text-primary">Catatan metodologi:</strong> Kriteria dark horse sangat ketat (influence &gt; 60 + kontroversi &lt; 3 + tier nasional).
+              Pertimbangkan untuk mengendurkan threshold jika database berkembang.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // MAIN COMPONENT
 // ═══════════════════════════════════════════════════════════════════════════════
 export default function AnalitikPage() {
@@ -2581,6 +3064,8 @@ export default function AnalitikPage() {
         {activeTab === 'prediksi_2029'     && <TabPrediksi2029 />}
         {activeTab === 'korelasi_stat'     && <TabKorelasiStat />}
         {activeTab === 'perbandingan_cepat' && <TabPerbandinganCepat />}
+        {activeTab === 'jaringan_pengaruh' && <TabJaringanPengaruh />}
+        {activeTab === 'risiko_2029'       && <TabRisiko2029 />}
       </div>
     </div>
   )
