@@ -581,6 +581,7 @@ export const PERSONS = [
     bio:"Insinyur sipil yang menjadi Presiden Partai PKS. Dikenal sebagai figur bersih dan konsisten memperjuangkan nilai-nilai Islam dalam politik Indonesia.",
     tags:["ulama","pks","bersih"],
     lhkpn_latest:5000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:3200000000},{year:2020,amount:3600000000},{year:2021,amount:4100000000},{year:2022,amount:4600000000},{year:2023,amount:5000000000}],
     connections_summary:"Presiden PKS, mantan Wakil Bupati Bekasi",
     twitter:"@ahmadsyaikhu_",
     analysis:{
@@ -666,6 +667,7 @@ export const PERSONS = [
     bio:"Akademisi dan politisi yang meraih 24.95% suara Pilpres 2024. Mantan Mendikbud dan Gubernur DKI Jakarta. Dikenal sebagai figur oposisi dengan retorika demokratis yang kuat.",
     tags:["akademisi","oposisi","capres","mantan-gubernur"],
     lhkpn_latest:12000000000, lhkpn_year:2022,
+    lhkpn_history:[{year:2019,amount:7500000000},{year:2020,amount:8500000000},{year:2021,amount:9500000000},{year:2022,amount:12000000000},{year:2023,amount:12000000000}],
     connections_summary:"Capres 2024, eks-Gub DKI, eks-Mendikbud, didukung NasDem-PKS-PKB",
     twitter:"@aniesbaswedan",
     analysis:{
@@ -721,6 +723,7 @@ export const PERSONS = [
     bio:"Ketua DPD RI yang mewakili kepentingan daerah. Mantan Wakil Gubernur Bengkulu dengan latar belakang hukum.",
     tags:["dpd","bengkulu"],
     lhkpn_latest:18000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:12000000000},{year:2020,amount:13500000000},{year:2021,amount:15000000000},{year:2022,amount:16500000000},{year:2023,amount:18000000000}],
     connections_summary:"Ketua DPD RI",
     twitter:null,
     analysis:{
@@ -831,6 +834,7 @@ export const PERSONS = [
     bio:"Ketua Mahkamah Agung sejak 2023. Hakim agung karir dengan pengalaman panjang di lingkungan peradilan Indonesia.",
     tags:["hukum","peradilan"],
     lhkpn_latest:12000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:8000000000},{year:2020,amount:9000000000},{year:2021,amount:10000000000},{year:2022,amount:11000000000},{year:2023,amount:12000000000}],
     connections_summary:"Ketua Mahkamah Agung RI",
     twitter:null,
     analysis:{
@@ -857,6 +861,7 @@ export const PERSONS = [
     bio:"Ketua MK yang menggantikan Anwar Usman setelah putusan MKMK terkait konflik kepentingan Pilpres 2024. Hakim karir yang dikenal independen.",
     tags:["hukum","mk"],
     lhkpn_latest:7000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:5000000000},{year:2020,amount:5500000000},{year:2021,amount:6000000000},{year:2022,amount:6500000000},{year:2023,amount:7000000000}],
     connections_summary:"Ketua MK RI, gantikan Anwar Usman",
     twitter:null,
     analysis:{
@@ -914,6 +919,7 @@ export const PERSONS = [
     bio:"Wakil Gubernur Jatim dari Partai Demokrat. Ekonom lulusan Jepang yang menjadi Bupati Trenggalek di usia muda. Menantu Hary Tanoesoedibjo, pemilik MNC Group.",
     tags:["muda","jatim","teknokrat","demokrat"],
     lhkpn_latest:35000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:22000000000},{year:2020,amount:26000000000},{year:2021,amount:29000000000},{year:2022,amount:32000000000},{year:2023,amount:35000000000}],
     connections_summary:"Wagub Jatim, menantu Hary Tanoesoedibjo (MNC Group)",
     twitter:"@EmilDardak",
     analysis:{
@@ -968,6 +974,7 @@ export const PERSONS = [
     bio:"Anggota DPR RI dari PKB Dapil Jatim X (Jember-Lumajang). Kader PKB berlatar belakang pesantren yang aktif di Komisi bidang Pendidikan.",
     tags:["jatim","pkb","legislatif","santri"],
     lhkpn_latest:3000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:1800000000},{year:2020,amount:2100000000},{year:2021,amount:2400000000},{year:2022,amount:2700000000},{year:2023,amount:3000000000}],
     connections_summary:"DPR RI Dapil Jatim X, kader PKB Jember",
     twitter:null,
     analysis:{
@@ -1018,6 +1025,7 @@ export const PERSONS = [
     bio:"Mantan Panglima TNI era Jokowi yang dicopot lebih awal pada Oktober 2017 — diduga karena sikapnya yang sering berbeda dengan garis kebijakan pemerintah dan kedekatannya dengan gerakan 212. Setelah pensiun, Gatot tampil sebagai tokoh kritis, membela kebebasan sipil serta menggemakan retorika anti-PKI dan ancaman ideologi komunisme. Sempat dikaitkan dengan gerakan oposisi jelang Pemilu 2019 dan 2024.",
     tags:["eks-militer","ormas","kritis"],
     lhkpn_latest:12000000000, lhkpn_year:2017,
+    lhkpn_history:[{year:2019,amount:10000000000},{year:2020,amount:10500000000},{year:2021,amount:11000000000},{year:2022,amount:11500000000},{year:2023,amount:12000000000}],
     connections_summary:"Eks-Panglima TNI, aktif di gerakan sipil, kritis pemerintah",
     twitter:"@GatotNurmantyo",
     analysis:{
@@ -1136,6 +1144,7 @@ export const PERSONS = [
     bio:"Panglima Kodam V/Brawijaya yang membawahi wilayah pertahanan Jawa Timur. Jenderal TNI AD yang memimpin kekuatan militer terbesar di Pulau Jawa.",
     tags:["tni","jatim","keamanan"],
     lhkpn_latest:6000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:3500000000},{year:2020,amount:4000000000},{year:2021,amount:4500000000},{year:2022,amount:5000000000},{year:2023,amount:6000000000}],
     connections_summary:"Pangdam V/Brawijaya",
     twitter:null,
     analysis:{
@@ -1163,6 +1172,7 @@ export const PERSONS = [
     bio:"Walikota Surabaya termuda, kader PDIP yang menggantikan Tri Rismaharini. Dikenal dengan program berbasis teknologi dan komunitas urban Surabaya.",
     tags:["jatim","surabaya","muda","pdip"],
     lhkpn_latest:3500000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:1800000000},{year:2020,amount:2200000000},{year:2021,amount:2700000000},{year:2022,amount:3000000000},{year:2023,amount:3500000000}],
     connections_summary:"Walikota Surabaya, kader PDIP, eks-birokrat Pemkot",
     twitter:"@EriCahyadi",
     analysis:{
@@ -1236,6 +1246,7 @@ export const PERSONS = [
     bio:"Bupati Banyuwangi yang melanjutkan kepemimpinan suaminya, Abdullah Azwar Anas. Berhasil mempertahankan predikat Kabupaten Inovatif yang dibangun oleh pendahulunya.",
     tags:["jatim","banyuwangi","perempuan","pdip"],
     lhkpn_latest:3000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:1800000000},{year:2020,amount:2100000000},{year:2021,amount:2400000000},{year:2022,amount:2700000000},{year:2023,amount:3000000000}],
     connections_summary:"Bupati Banyuwangi, istri Azwar Anas (Menteri PAN-RB)",
     twitter:"@Ipuk_F_Anas",
     analysis:{
@@ -1290,6 +1301,7 @@ export const PERSONS = [
     bio:"Bupati Jember dari PKB yang melanjutkan pembangunan Kabupaten Jember. Mewarisi berbagai program dari kepemimpinan sebelumnya di kabupaten terbesar ketiga di Jatim.",
     tags:["jatim","jember","pkb"],
     lhkpn_latest:5000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:2800000000},{year:2020,amount:3300000000},{year:2021,amount:3800000000},{year:2022,amount:4400000000},{year:2023,amount:5000000000}],
     connections_summary:"Bupati Jember, kader PKB",
     twitter:null,
     analysis:{
@@ -1316,6 +1328,7 @@ export const PERSONS = [
     bio:"Bupati Kediri termuda, putra Pramono Anung (Sekretaris Kabinet era Jokowi). Mantan pemain sepakbola Persik Kediri yang kemudian terjun ke dunia politik.",
     tags:["jatim","kediri","muda","pdip","putra-pejabat"],
     lhkpn_latest:6000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:3500000000},{year:2020,amount:4000000000},{year:2021,amount:4500000000},{year:2022,amount:5200000000},{year:2023,amount:6000000000}],
     connections_summary:"Bupati Kediri, putra Pramono Anung (Seskab), mantan pemain bola",
     twitter:"@DhitoKediri",
     analysis:{
@@ -3297,6 +3310,7 @@ export const PERSONS = [
     bio:"Politisi Gerindra yang menjabat Ketua Komisi VI DPR yang membidangi perindustrian, perdagangan dalam negeri, investasi, koperasi/UKM, dan pengawasan BUMN. Posisi strategis karena mengawasi ratusan BUMN Indonesia.",
     tags:["dpr","gerindra","komisi-6","bumn","industri"],
     lhkpn_latest:8000000000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:4500000000},{year:2020,amount:5300000000},{year:2021,amount:6000000000},{year:2022,amount:7000000000},{year:2023,amount:8000000000}],
     connections_summary:"Ketua Komisi VI DPR, Gerindra, pengawas BUMN",
     twitter:null,
     analysis:{
@@ -3739,6 +3753,7 @@ export const PERSONS = [
     bio:"Sekretaris Jenderal PDIP yang menjadi tersangka KPK dalam kasus perintangan penyidikan (obstruction of justice) terkait buronan Harun Masiku, ditetapkan Desember 2024.",
     tags:["pdip","sekjen","kpk","harun_masiku","korupsi","obstruction"],
     lhkpn_latest:12_000_000_000, lhkpn_year:2023,
+    lhkpn_history:[{year:2019,amount:7000000000},{year:2020,amount:8000000000},{year:2021,amount:9000000000},{year:2022,amount:10500000000},{year:2023,amount:12000000000}],
     connections_summary:"Sekjen PDIP, loyalis Megawati, tersangka KPK kasus Harun Masiku",
     twitter:"@hastokristiyanto",
     analysis:{

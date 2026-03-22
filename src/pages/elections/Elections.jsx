@@ -1,9 +1,9 @@
 import { useSearchParams } from 'react-router-dom'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell,
-  CartesianGrid
+  CartesianGrid, LineChart, Line, Legend, ReferenceLine,
 } from 'recharts'
-import { PILPRES_HISTORY, PILEG_2024, PILKADA_JATIM_2024 } from '../../data/elections'
+import { PILPRES_HISTORY, PILEG_HISTORY, PILEG_2024, PILKADA_JATIM_2024 } from '../../data/elections'
 import * as ElectionsData from '../../data/elections'
 import { PARTY_MAP } from '../../data/parties'
 import { PageHeader, Tabs, Card, Badge } from '../../components/ui'
@@ -11,13 +11,47 @@ import { PageHeader, Tabs, Card, Badge } from '../../components/ui'
 // Safe fallback for PILKADA_2024 (may not exist yet if data agent hasn't committed)
 const PILKADA_2024 = ElectionsData.PILKADA_2024 || []
 
-const PILPRES_TABS = [
-  { id: 'pilpres',  label: '🗳️ Pilpres' },
-  { id: 'pileg',   label: '🏛️ Pileg DPR' },
-  { id: 'pilkada', label: '🗺️ Pilkada Jatim' },
+const ALL_TABS = [
+  { id: 'pilpres',    label: '🗳️ Pilpres' },
+  { id: 'sejarah',   label: '📜 Sejarah Pilpres' },
+  { id: 'pileg',     label: '🏛️ Pileg DPR' },
+  { id: 'trenpileg', label: '📊 Tren Pileg' },
+  { id: 'statistik', label: '🔢 Statistik' },
+  { id: 'pilkada',   label: '🗺️ Pilkada Jatim' },
   { id: 'pilkada2024', label: '🌏 Pilkada 2024' },
 ]
 
+// ── Pilpres bar chart data ────────────────────────────────────────────────
+const pilpresBarData = [...PILPRES_HISTORY]
+  .sort((a, b) => a.year - b.year)
+  .map(p => ({
+    year: p.year,
+    winner_pct: p.pct,
+    runnerup_pct: p.runnerup_pct,
+    winner: p.winner,
+    runnerup: p.runnerup,
+  }))
+
+// ── "Evolusi Suara" — candidate vote % across years ───────────────────────
+const evolusiData = [
+  { year: 2004, SBY: 60.62, Megawati: 39.38 },
+  { year: 2009, SBY: 60.80, Megawati: 26.79, JK: 12.41 },
+  { year: 2014, Jokowi: 53.15, Prabowo: 46.85 },
+  { year: 2019, Jokowi: 55.50, Prabowo: 44.50 },
+  { year: 2024, Prabowo: 58.59, Anies: 24.95, Ganjar: 16.47 },
+]
+
+const CANDIDATE_COLORS = {
+  SBY:      '#3B82F6',
+  Megawati: '#EF4444',
+  JK:       '#F59E0B',
+  Jokowi:   '#10B981',
+  Prabowo:  '#8B0000',
+  Anies:    '#27AAE1',
+  Ganjar:   '#7C3AED',
+}
+
+// ── Pileg 2024 bar chart ──────────────────────────────────────────────────
 const pillegBarData = [...PILEG_2024]
   .filter(d => d.seats > 0)
   .sort((a, b) => b.seats - a.seats)
@@ -32,14 +66,55 @@ const SEATS_2019 = {
   pdip: 128, gol: 85, ger: 78, pkb: 58, nas: 59, pks: 50, dem: 54, pan: 44
 }
 
-const pilpresBarData = PILPRES_HISTORY.map(p => ({
-  year: p.year,
-  winner_pct: p.pct,
-  runnerup_pct: p.runnerup_pct,
-  winner: p.winner,
-  runnerup: p.runnerup,
-}))
+// ── Tren Pileg — grouped bar chart data ───────────────────────────────────
+const TOP_PARTIES = ['PDIP', 'Golkar', 'Gerindra', 'PKB', 'NasDem', 'PKS', 'Demokrat', 'PAN']
+const PARTY_COLORS_TREND = {
+  PDIP:      '#C8102E',
+  Golkar:    '#F5C518',
+  Gerindra:  '#8B0000',
+  PKB:       '#00A651',
+  NasDem:    '#27AAE1',
+  PKS:       '#F97316',
+  Demokrat:  '#3B82F6',
+  PAN:       '#F59E0B',
+}
 
+// Transform PILEG_HISTORY → { party, y2009, y2014, y2019, y2024 }
+const pilegTrendData = TOP_PARTIES.map(partyName => {
+  const row = { party: partyName }
+  for (const yearData of PILEG_HISTORY) {
+    const found = yearData.results.find(r => r.party === partyName)
+    row[`y${yearData.year}`] = found?.seats || 0
+  }
+  return row
+})
+
+// Peta Perubahan 2019→2024
+const perubahanData = TOP_PARTIES.map(partyName => {
+  const r2024 = PILEG_HISTORY.find(h => h.year === 2024)?.results.find(r => r.party === partyName)?.seats || 0
+  const r2019 = PILEG_HISTORY.find(h => h.year === 2019)?.results.find(r => r.party === partyName)?.seats || 0
+  return { party: partyName, change: r2024 - r2019, y2024: r2024, y2019: r2019 }
+}).sort((a, b) => b.change - a.change)
+
+// ── Statistik Pemilu ──────────────────────────────────────────────────────
+const turnoutData = [
+  { year: 2004, turnout: 76.6 },
+  { year: 2009, turnout: 70.9 },
+  { year: 2014, turnout: 75.1 },
+  { year: 2019, turnout: 81.9 },
+  { year: 2024, turnout: 81.8 },
+]
+
+const STATS_CARDS = [
+  { label: 'Pilpres Langsung Pertama', value: '2004', note: 'Sebelumnya dipilih MPR', icon: '🏛️' },
+  { label: 'Paling Kompetitif', value: '2014', note: 'Margin hanya 6.3% (Jokowi vs Prabowo)', icon: '⚔️' },
+  { label: 'Landslide Terbesar', value: '2009', note: 'SBY unggul 34.01% atas runner-up', icon: '🌊' },
+  { label: 'Turnout Tertinggi', value: '81.9%', note: 'Pilpres 2019 — antusiasme tinggi', icon: '📈' },
+  { label: 'Turnout Terendah', value: '70.9%', note: 'Pilpres 2009 — apatisme pemilih', icon: '📉' },
+  { label: 'Kemenangan Prabowo 2024', value: '+33.6%', note: 'Margin atas Anies (58.59% vs 24.95%)', icon: '🏆' },
+]
+
+// ── Jatim history ─────────────────────────────────────────────────────────
 const JATIM_HISTORY = [
   { year: 2024, winner: 'Khofifah Indar Parawansa', party: 'PKB/Koalisi', pct: 59.8 },
   { year: 2019, winner: 'Khofifah Indar Parawansa', party: 'PKB', pct: 52.9 },
@@ -48,7 +123,7 @@ const JATIM_HISTORY = [
   { year: 2004, winner: 'Imam Utomo', party: 'Golkar', pct: 62.7 },
 ]
 
-// Build party summary from PILKADA_2024 results
+// ── Pilkada party summary ─────────────────────────────────────────────────
 function buildPartySummary(data) {
   const counts = {}
   data.forEach(prov => {
@@ -58,6 +133,11 @@ function buildPartySummary(data) {
   return Object.entries(counts)
     .sort((a, b) => b[1] - a[1])
     .map(([pid, count]) => ({ pid, count, party: PARTY_MAP[pid] }))
+}
+
+// ── Initials helper ───────────────────────────────────────────────────────
+function initials(name) {
+  return name.split(' ').slice(0, 2).map(w => w[0]).join('')
 }
 
 export default function Elections() {
@@ -70,11 +150,13 @@ export default function Elections() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="📊 Data Pemilihan" subtitle="Pilpres · Pileg DPR · Pilkada Jatim · Pilkada 2024" />
+      <PageHeader title="📊 Data Pemilihan" subtitle="Pilpres · Pileg DPR · Sejarah · Statistik · Pilkada" />
 
-      <Tabs tabs={PILPRES_TABS} active={activeTab} onChange={setActiveTab} />
+      <Tabs tabs={ALL_TABS} active={activeTab} onChange={setActiveTab} />
 
-      {/* PILPRES */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          TAB: PILPRES 2024
+      ═══════════════════════════════════════════════════════════════════ */}
       {activeTab === 'pilpres' && (
         <div className="space-y-5">
           <Card className="p-5 border-l-4" style={{ borderLeftColor: '#8B0000' }}>
@@ -141,7 +223,127 @@ export default function Elections() {
         </div>
       )}
 
-      {/* PILEG */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          TAB: SEJARAH PILPRES 2004-2024
+      ═══════════════════════════════════════════════════════════════════ */}
+      {activeTab === 'sejarah' && (
+        <div className="space-y-6">
+          {/* Timeline Cards */}
+          <div>
+            <h3 className="text-sm font-semibold text-text-primary mb-3">🗓️ Timeline Pilpres 2004–2024</h3>
+            <div className="space-y-3">
+              {[...PILPRES_HISTORY].sort((a, b) => a.year - b.year).map((p, idx) => {
+                const margin = (p.pct - p.runnerup_pct).toFixed(2)
+                return (
+                  <div key={p.year} className="relative">
+                    {/* Connector line */}
+                    {idx < PILPRES_HISTORY.length - 1 && (
+                      <div className="absolute left-5 top-full w-px h-3 bg-border z-10" />
+                    )}
+                    <Card className="p-4 border-l-4" style={{ borderLeftColor: PARTY_COLORS_TREND.Golkar }}>
+                      <div className="flex items-start gap-4">
+                        {/* Year badge */}
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-bg-elevated flex items-center justify-center border border-border">
+                          <span className="text-xs font-bold text-text-primary">{String(p.year).slice(2)}</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm font-bold text-text-primary">{p.year}</span>
+                            {p.round === 2 && <Badge variant="status-selesai">Putaran 2</Badge>}
+                            {p.turnout_pct && (
+                              <span className="text-xs text-text-secondary">Partisipasi: {p.turnout_pct}%</span>
+                            )}
+                          </div>
+                          <div className="flex flex-wrap gap-4 mb-2">
+                            {/* Winner */}
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center text-xs font-bold text-green-400">
+                                {initials(p.winner)}
+                              </div>
+                              <div>
+                                <p className="text-sm font-semibold text-green-400">{p.winner}</p>
+                                <p className="text-lg font-bold text-green-400">{p.pct}%</p>
+                              </div>
+                            </div>
+                            {/* vs */}
+                            <div className="flex items-center text-text-secondary text-xs font-medium self-center">vs</div>
+                            {/* Runner-up */}
+                            <div className="flex items-center gap-2">
+                              <div className="w-8 h-8 rounded-full bg-red-500/20 border border-red-500/30 flex items-center justify-center text-xs font-bold text-red-400">
+                                {initials(p.runnerup)}
+                              </div>
+                              <div>
+                                <p className="text-sm text-text-secondary">{p.runnerup}</p>
+                                <p className="text-base font-semibold text-red-400">{p.runnerup_pct}%</p>
+                              </div>
+                            </div>
+                            {/* Third if exists */}
+                            {p.third && (
+                              <>
+                                <div className="flex items-center text-text-secondary text-xs self-center">·</div>
+                                <div>
+                                  <p className="text-xs text-text-secondary">{p.third}</p>
+                                  <p className="text-sm text-text-secondary">{p.third_pct}%</p>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <span className="text-xs px-2 py-0.5 bg-yellow-500/10 text-yellow-400 rounded border border-yellow-500/20">
+                              Margin: +{margin}%
+                            </span>
+                            {p.significance && (
+                              <p className="text-xs text-text-secondary italic">{p.significance}</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Evolusi Suara Line Chart */}
+          <Card className="p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-1">📈 Evolusi Suara per Kandidat 2004–2024</h3>
+            <p className="text-xs text-text-secondary mb-4">
+              Perjalanan Prabowo: <span className="text-red-400 font-semibold">46.85%</span> (2014) →{' '}
+              <span className="text-red-400 font-semibold">44.50%</span> (2019) →{' '}
+              <span className="text-green-400 font-bold">58.59%</span> (2024) 🏆
+            </p>
+            <ResponsiveContainer width="100%" height={260}>
+              <LineChart data={evolusiData} margin={{ top: 10, right: 20, left: -10, bottom: 5 }}>
+                <CartesianGrid stroke="#1F2937" strokeDasharray="3 3" />
+                <XAxis dataKey="year" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
+                <YAxis domain={[0, 75]} tick={{ fill: '#9CA3AF', fontSize: 11 }} tickFormatter={v => `${v}%`} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#1E2235', border: '1px solid #2D3748', borderRadius: 8 }}
+                  formatter={(v) => v ? [`${v}%`] : [null]}
+                />
+                <Legend wrapperStyle={{ fontSize: 11, color: '#9CA3AF' }} />
+                {Object.entries(CANDIDATE_COLORS).map(([name, color]) => (
+                  <Line
+                    key={name}
+                    type="monotone"
+                    dataKey={name}
+                    stroke={color}
+                    strokeWidth={name === 'Prabowo' ? 3 : 1.5}
+                    dot={{ r: 4, fill: color }}
+                    connectNulls={false}
+                    name={name}
+                  />
+                ))}
+              </LineChart>
+            </ResponsiveContainer>
+          </Card>
+        </div>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          TAB: PILEG 2024
+      ═══════════════════════════════════════════════════════════════════ */}
       {activeTab === 'pileg' && (
         <div className="space-y-5">
           <Card className="p-5">
@@ -213,7 +415,167 @@ export default function Elections() {
         </div>
       )}
 
-      {/* PILKADA JATIM */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          TAB: TREN PILEG 2009-2024
+      ═══════════════════════════════════════════════════════════════════ */}
+      {activeTab === 'trenpileg' && (
+        <div className="space-y-6">
+          {/* Grouped Bar Chart */}
+          <Card className="p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-1">📊 Perolehan Kursi DPR 2009–2024</h3>
+            <p className="text-xs text-text-secondary mb-4">
+              Demokrat: <span className="text-blue-400 font-semibold">150 → 61 → 54 → 44</span> (kolaps) ·
+              PDIP: <span className="text-red-400 font-semibold">95 → 109 → 128 → 94</span> (naik-turun) ·
+              Golkar: <span className="text-yellow-400 font-semibold">107 → 91 → 85 → 102</span> (rebound)
+            </p>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={pilegTrendData} margin={{ top: 10, right: 10, left: -15, bottom: 5 }}>
+                <CartesianGrid stroke="#1F2937" vertical={false} />
+                <XAxis dataKey="party" tick={{ fill: '#9CA3AF', fontSize: 10 }} />
+                <YAxis tick={{ fill: '#9CA3AF', fontSize: 11 }} label={{ value: 'Kursi', angle: -90, position: 'insideLeft', fill: '#6B7280', fontSize: 10 }} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#1E2235', border: '1px solid #2D3748', borderRadius: 8 }}
+                  formatter={(v, name) => [v + ' kursi', name]}
+                />
+                <Legend wrapperStyle={{ fontSize: 11, color: '#9CA3AF' }} />
+                <Bar dataKey="y2009" name="2009" fill="#6B7280" radius={[2, 2, 0, 0]} />
+                <Bar dataKey="y2014" name="2014" fill="#60A5FA" radius={[2, 2, 0, 0]} />
+                <Bar dataKey="y2019" name="2019" fill="#34D399" radius={[2, 2, 0, 0]} />
+                <Bar dataKey="y2024" name="2024" fill="#F59E0B" radius={[2, 2, 0, 0]} />
+              </BarChart>
+            </ResponsiveContainer>
+          </Card>
+
+          {/* Peta Perubahan 2019→2024 */}
+          <Card className="p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-1">🔀 Peta Perubahan Kursi 2019 → 2024</h3>
+            <p className="text-xs text-text-secondary mb-4">Siapa yang menang dan kalah kursi dalam satu siklus pemilu?</p>
+            <ResponsiveContainer width="100%" height={200}>
+              <BarChart data={perubahanData} margin={{ top: 10, right: 10, left: -15, bottom: 5 }}>
+                <CartesianGrid stroke="#1F2937" vertical={false} />
+                <XAxis dataKey="party" tick={{ fill: '#9CA3AF', fontSize: 10 }} />
+                <YAxis tick={{ fill: '#9CA3AF', fontSize: 11 }} tickFormatter={v => (v > 0 ? `+${v}` : `${v}`)} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#1E2235', border: '1px solid #2D3748', borderRadius: 8 }}
+                  formatter={(v) => [`${v > 0 ? '+' : ''}${v} kursi`, 'Perubahan']}
+                />
+                <ReferenceLine y={0} stroke="#4B5563" />
+                <Bar dataKey="change" name="Perubahan" radius={[4, 4, 0, 0]}>
+                  {perubahanData.map((entry, i) => (
+                    <Cell key={i} fill={entry.change >= 0 ? '#10B981' : '#EF4444'} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+
+            {/* Change list */}
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {perubahanData.map(d => (
+                <div key={d.party} className="p-2 bg-bg-elevated rounded-lg text-center">
+                  <p className="text-xs text-text-secondary">{d.party}</p>
+                  <p className={`text-base font-bold ${d.change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                    {d.change > 0 ? '+' : ''}{d.change}
+                  </p>
+                  <p className="text-xs text-text-secondary">{d.y2019} → {d.y2024}</p>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* 2009 Anno note */}
+          <Card className="p-4 bg-blue-500/5 border border-blue-500/20">
+            <p className="text-xs text-blue-300">
+              💡 <strong>2009:</strong> Demokrat meledak ke 150 kursi (20.85% suara) — efek kharisma SBY.
+              Lima belas tahun kemudian di 2024, tersisa 44 kursi. Pelajaran: dominasi satu tokoh tidak langgeng.
+            </p>
+          </Card>
+        </div>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          TAB: STATISTIK PEMILU
+      ═══════════════════════════════════════════════════════════════════ */}
+      {activeTab === 'statistik' && (
+        <div className="space-y-6">
+          {/* Turnout chart */}
+          <Card className="p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-4">📊 Tren Partisipasi Pemilih (Turnout) 2004–2024</h3>
+            <ResponsiveContainer width="100%" height={220}>
+              <BarChart data={turnoutData} margin={{ top: 10, right: 10, left: -10, bottom: 5 }}>
+                <CartesianGrid stroke="#1F2937" vertical={false} />
+                <XAxis dataKey="year" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
+                <YAxis domain={[60, 90]} tick={{ fill: '#9CA3AF', fontSize: 11 }} tickFormatter={v => `${v}%`} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#1E2235', border: '1px solid #2D3748', borderRadius: 8 }}
+                  formatter={(v) => [`${v}%`, 'Turnout']}
+                />
+                <Bar dataKey="turnout" name="Turnout" radius={[4, 4, 0, 0]}>
+                  {turnoutData.map((entry, i) => (
+                    <Cell key={i} fill={entry.turnout >= 80 ? '#10B981' : entry.turnout < 72 ? '#EF4444' : '#60A5FA'} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            <p className="text-xs text-text-secondary mt-2 text-center">
+              Hijau ≥ 80% · Biru 72-80% · Merah &lt; 72%
+            </p>
+          </Card>
+
+          {/* Stats cards grid */}
+          <div>
+            <h3 className="text-sm font-semibold text-text-primary mb-3">🔢 Fakta & Rekor Pemilu</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+              {STATS_CARDS.map((s, i) => (
+                <Card key={i} className="p-4">
+                  <div className="flex items-start gap-3">
+                    <span className="text-2xl">{s.icon}</span>
+                    <div>
+                      <p className="text-xs text-text-secondary mb-0.5">{s.label}</p>
+                      <p className="text-xl font-bold text-text-primary">{s.value}</p>
+                      <p className="text-xs text-text-secondary mt-1">{s.note}</p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          {/* Margin table */}
+          <Card className="p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-3">📐 Margin Kemenangan per Pilpres</h3>
+            <div className="space-y-2">
+              {[...PILPRES_HISTORY].sort((a, b) => a.year - b.year).map(p => {
+                const margin = p.pct - p.runnerup_pct
+                const maxMargin = 35
+                return (
+                  <div key={p.year} className="flex items-center gap-3">
+                    <span className="text-xs text-text-secondary w-10 flex-shrink-0">{p.year}</span>
+                    <div className="flex-1 h-5 bg-bg-elevated rounded-full overflow-hidden">
+                      <div
+                        className="h-full rounded-full flex items-center justify-end pr-2"
+                        style={{
+                          width: `${Math.min((margin / maxMargin) * 100, 100)}%`,
+                          backgroundColor: margin < 10 ? '#EF4444' : margin < 20 ? '#F59E0B' : '#10B981',
+                        }}
+                      >
+                        <span className="text-xs font-bold text-white">{margin.toFixed(1)}%</span>
+                      </div>
+                    </div>
+                    <span className="text-xs text-text-secondary w-24 flex-shrink-0 truncate">{p.winner.split(' ').slice(-1)[0]}</span>
+                  </div>
+                )
+              })}
+            </div>
+            <p className="text-xs text-text-secondary mt-3">
+              Merah = &lt;10% margin · Kuning = 10-20% · Hijau = &gt;20%
+            </p>
+          </Card>
+        </div>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════════════════
+          TAB: PILKADA JATIM
+      ═══════════════════════════════════════════════════════════════════ */}
       {activeTab === 'pilkada' && (
         <div className="space-y-5">
           <Card className="p-5 border-l-4 border-l-green-500">
@@ -262,7 +624,9 @@ export default function Elections() {
         </div>
       )}
 
-      {/* PILKADA 2024 — Nasional */}
+      {/* ═══════════════════════════════════════════════════════════════════
+          TAB: PILKADA 2024 NASIONAL
+      ═══════════════════════════════════════════════════════════════════ */}
       {activeTab === 'pilkada2024' && (
         <div className="space-y-5">
           {/* Banner */}
