@@ -3093,27 +3093,29 @@ export const PERSONS = [
     id:"sherly_tjoanda", name:"Sherly Tjoanda", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Maluku_Utara,_Sherly_Tjoanda.jpg?width=400", photo_placeholder:"ST",
     born:"1975", born_place:"Maluku Utara", religion:"Kristen",
     education:"S1 Ekonomi",
-    party_id:"ger", party_role:"Kader",
+    party_id:"dem", party_role:"Gubernur Maluku Utara",
     positions:[
       {title:"Gubernur Maluku Utara", institution:"Pemprov Malut", region:"Maluku Utara", start:"2025", end:null, is_current:true},
-      {title:"Calon Wakil Gubernur Maluku Utara", institution:"-", region:"Maluku Utara", start:"2024", end:"2024", is_current:false},
+      {title:"Calon Wakil Gubernur Maluku Utara (mendampingi Benny Laos)", institution:"Pilkada Malut 2024", region:"Maluku Utara", start:"2024", end:"2024", is_current:false},
     ],
     tier:"regional", region_id:"maluku_utara",
-    bio:"Gubernur Maluku Utara yang naik dari posisi calon Wakil Gubernur setelah calon gubernurnya, Benny Laos, meninggal akibat kecelakaan kapal dalam kampanye Oktober 2024. Dilantik sebagai Gubernur Malut awal 2025.",
-    tags:["gubernur","ger","malut","perempuan","naik-jabatan"],
-    lhkpn_latest:8000000000, lhkpn_year:2024,
-    connections_summary:"Gubernur Malut 2025, naik dari cawagub setelah Benny Laos meninggal",
+    bio:"Gubernur Maluku Utara sejak 2025. Awalnya maju sebagai Calon Wakil Gubernur mendampingi suaminya, Benny Laos. Benny Laos meninggal akibat ledakan speedboat saat kampanye di Kepulauan Sula, Oktober 2024. Sherly kemudian maju sebagai Calon Gubernur menggantikan posisi suaminya dan memenangkan Pilkada. Keluarganya memiliki bisnis besar di sektor pertambangan nikel dan perkebunan di Maluku Utara.",
+    tags:["gubernur","dem","malut","perempuan","naik-jabatan","nikel","pengusaha"],
+    lhkpn_latest:280000000000, lhkpn_year:2024,
+    lhkpn_note:"Estimasi — kekayaan keluarga Benny Laos/Sherly dilaporkan ratusan miliar. Sumber: LHKPN KPK (perlu verifikasi ulang di elhkpn.kpk.go.id)",
+    data_sources:["elhkpn.kpk.go.id","kpu.go.id/pilkada-2024","tribunnews.com/benny-laos"],
+    connections_summary:"Gubernur Malut 2025, janda Benny Laos pengusaha tambang nikel, Partai Demokrat",
     twitter:null,
     analysis:{
-      ideology_score:3, populism_score:4, corruption_risk:"rendah",
+      ideology_score:4, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:6,
-      track_record:"Naik dari cawagub ke gubernur setelah calon gubernurnya meninggal kecelakaan. Malut kaya nikel.",
-      policy_direction:"Pro-nikel, pembangunan",
-      style:'Religius',
-      risk:'low',
+      track_record:"Naik dari cawagub ke gubernur setelah suaminya Benny Laos meninggal kecelakaan kapal Oktober 2024. Keluarga memiliki bisnis nikel besar di Malut.",
+      policy_direction:"Pro-investasi nikel, pembangunan Maluku Utara",
+      style:"Pengusaha-politisi",
+      risk:"rendah",
       influence:7,
-      controversy_level:3,
-      notes:"Naik dari cawagub ke gubernur setelah calon gubernurnya meninggal kecelakaan. Malut kaya nikel."
+      controversy_level:2,
+      notes:"Figur tragis yang naik ke jabatan gubernur atas nama duka. Kekayaan keluarga dari nikel Malut menjadikannya salah satu gubernur terkaya Indonesia. Afiliasi Partai Demokrat."
     }
   },
   {
@@ -4164,6 +4166,96 @@ export const PERSONS = [
       influence:7,
       controversy_level:6,
       notes:"Novel Baswedan adalah mantan penyidik senior KPK yang menjadi korban penyiraman air keras pada April 2017 — sebuah teror yang menghancurkan penglihatan matanya dan menjadi simbol serangan terhadap pemberantasan korupsi Indonesia. Kasus ini bergulir bertahun-tahun; dua pelaku akhirnya divonis sangat ringan pada 2021, jauh dari rasa keadilan. Pasca dipecat dari KPK melalui TWK (Tes Wawasan Kebangsaan) 2021 yang kontroversial, Novel kini aktif di TPDI sebagai suara kritis antikorupsi dari luar lembaga."
+    }
+  },
+
+  // ── HISTORICAL FIGURES ────────────────────────────────────────────────────
+  {
+    id:"soeharto", name:"H.M. Soeharto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Soeharto%2C_1993.jpg/330px-Soeharto%2C_1993.jpg", photo_placeholder:"SH",
+    born:"1921", born_place:"Kemusuk, Yogyakarta", religion:"Islam",
+    education:"Akademi Militer",
+    party_id:null, party_role:"Presiden Ke-2 RI",
+    positions:[
+      {title:"Presiden Republik Indonesia ke-2", institution:"Negara RI", region:null, start:"1967", end:"1998", is_current:false},
+      {title:"Panglima TNI / Pangkopkamtib", institution:"TNI", region:null, start:"1965", end:"1967", is_current:false},
+    ],
+    tier:"historis", region_id:null,
+    bio:"Presiden RI ke-2 yang memerintah selama 32 tahun (1967-1998) dalam era Orde Baru. Memimpin pembangunan ekonomi pesat namun juga dikenal atas otoritarianisme, korupsi, dan pelanggaran HAM. Jatuh dari kekuasaan akibat krisis moneter 1998 dan reformasi mahasiswa. Meninggal 2008.",
+    tags:["historis","presiden","orba","orde_baru","militer","pembangunan","korupsi"],
+    lhkpn_latest:null, lhkpn_year:null,
+    data_sources:["id.wikipedia.org/wiki/Soeharto","transparency.org/en/cpi"],
+    connections_summary:"Presiden RI 32 tahun. Orde Baru. Ayah Tutut, Tommy, Bambang Trihatmodjo.",
+    twitter:null,
+    analysis:{
+      ideology_score:2, populism_score:5, corruption_risk:"sangat_tinggi",
+      nationalism:8, religiosity:5,
+      track_record:"32 tahun berkuasa. GDP per kapita naik pesat tapi korupsi sistemik, HAM dilanggar (1965, Timor-Timur, Aceh). Transparency International menempatkan Soeharto sebagai kepala negara terkorup sepanjang sejarah: estimasi USD 15-35 miliar.",
+      policy_direction:"Pembangunanisme, Dwifungsi ABRI, stabilitas politik melalui represi",
+      style:"Militer-Otokratis",
+      risk:"historis",
+      influence:10,
+      controversy_level:10,
+      notes:"Soeharto adalah figur paling kontroversial dalam sejarah Indonesia modern. Di satu sisi, era Orde Baru membawa pertumbuhan ekonomi dan stabilitas. Di sisi lain, ia memimpin salah satu rezim paling korup dan represif di Asia: pembantaian 1965-66, invasi Timor-Timur, penindasan Aceh dan Papua. Setelah 32 tahun, ia jatuh akibat krisis moneter 1998 dan gelombang reformasi. Warisannya masih diperdebatkan hingga kini.",
+      sources:["id.wikipedia.org/wiki/Soeharto","transparency.org — korupsi estimasi USD 15-35M","icj.org/timor-leste-human-rights"]
+    }
+  },
+  {
+    id:"habibie", name:"B.J. Habibie", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Habibie_Cropped.jpg/330px-Habibie_Cropped.jpg", photo_placeholder:"BH",
+    born:"1936", born_place:"Parepare, Sulawesi Selatan", religion:"Islam",
+    education:"Doktor Teknik Penerbangan, RWTH Aachen",
+    party_id:null, party_role:"Presiden Ke-3 RI",
+    positions:[
+      {title:"Presiden Republik Indonesia ke-3", institution:"Negara RI", region:null, start:"1998", end:"1999", is_current:false},
+      {title:"Wakil Presiden RI", institution:"Negara RI", region:null, start:"1998", end:"1998", is_current:false},
+      {title:"Menteri Riset dan Teknologi", institution:"Kabinet Soeharto", region:null, start:"1978", end:"1998", is_current:false},
+    ],
+    tier:"historis", region_id:null,
+    bio:"Presiden RI ke-3, ilmuwan dan insinyur penerbangan kelas dunia. Memerintah singkat (1998-1999) setelah Soeharto mundur, membuka kebebasan pers, membebaskan tahanan politik, dan mengizinkan referendum Timor-Timur. Meninggal 2019.",
+    tags:["historis","presiden","reformasi","teknokrat","pesawat","iptn"],
+    lhkpn_latest:null, lhkpn_year:null,
+    data_sources:["id.wikipedia.org/wiki/B.J._Habibie"],
+    connections_summary:"Presiden ke-3. Anak didik Soeharto. Bapak teknologi dirgantara Indonesia.",
+    twitter:null,
+    analysis:{
+      ideology_score:6, populism_score:4, corruption_risk:"rendah",
+      nationalism:9, religiosity:7,
+      track_record:"Memerintah 17 bulan. Demokratisasi awal: kebebasan pers, multipartai, otonomi daerah. Juga dianggap 'kehilangan' Timor-Timur. Inovatif di teknologi tapi era singkat.",
+      policy_direction:"Teknokrasi, demokratisasi awal reformasi, industri strategis",
+      style:"Teknokrat-Nasionalis",
+      risk:"historis",
+      influence:9,
+      controversy_level:5,
+      notes:"Habibie adalah anomali sejarah — ilmuwan brilian yang menjadi presiden. Meski era kepresidenannya singkat (1998-1999), ia meletakkan fondasi demokrasi Indonesia: kebebasan pers, pemilu bebas 1999, UU otonomi daerah. Kontroversial karena referendum Timor-Timur yang berujung kemerdekaan.",
+      sources:["id.wikipedia.org/wiki/B.J._Habibie"]
+    }
+  },
+  {
+    id:"gus_dur", name:"K.H. Abdurrahman Wahid", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Abdurrahman_Wahid_crop.jpg/330px-Abdurrahman_Wahid_crop.jpg", photo_placeholder:"GD",
+    born:"1940", born_place:"Jombang, Jawa Timur", religion:"Islam",
+    education:"Al-Azhar Kairo, Universitas Baghdad",
+    party_id:"pkb", party_role:"Pendiri PKB / Presiden Ke-4 RI",
+    positions:[
+      {title:"Presiden Republik Indonesia ke-4", institution:"Negara RI", region:null, start:"1999", end:"2001", is_current:false},
+      {title:"Ketua Umum PBNU", institution:"PBNU", region:null, start:"1984", end:"1999", is_current:false},
+    ],
+    tier:"historis", region_id:null,
+    bio:"Presiden RI ke-4 dan pendiri PKB. Ulama besar, Ketum PBNU, tokoh pluralisme dan demokrasi Indonesia. Memerintah 2000-2001 sebelum dimakzulkan DPR/MPR. Meninggal 2009.",
+    tags:["historis","presiden","nu","pkb","pluralisme","ulama","demokrasi"],
+    lhkpn_latest:null, lhkpn_year:null,
+    data_sources:["id.wikipedia.org/wiki/Abdurrahman_Wahid"],
+    connections_summary:"Presiden ke-4, Pendiri PKB, Ketum PBNU. Bapak Pluralisme Indonesia.",
+    twitter:null,
+    analysis:{
+      ideology_score:7, populism_score:6, corruption_risk:"rendah",
+      nationalism:7, religiosity:9,
+      track_record:"Memerintah 2 tahun sebelum dimakzulkan. Melindungi minoritas, membuka hubungan diplomatik baru, membubarkan Deppen dan Depsos. Dimakzulkan karena kasus Bruneigate dan Buloggate yang kontroversial.",
+      policy_direction:"Pluralisme, desentralisasi, civil society, demokrasi deliberatif",
+      style:"Kiai-Demokrat",
+      risk:"historis",
+      influence:10,
+      controversy_level:6,
+      notes:"Gus Dur adalah salah satu pemikir terbesar Indonesia. Kepresidenannya singkat dan berakhir kontroversial, namun warisannya — pluralisme, perlindungan minoritas, demokrasi yang membumi — jauh melampaui jabatannya. Pendiri PKB dan Ketum PBNU, ia menjembatani Islam tradisional dan demokrasi modern.",
+      sources:["id.wikipedia.org/wiki/Abdurrahman_Wahid","pbnu.or.id"]
     }
   },
 ]

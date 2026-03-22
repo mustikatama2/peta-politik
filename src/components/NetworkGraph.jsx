@@ -249,7 +249,7 @@ export default function NetworkGraph({
       .on('zoom', event => {
         g.attr('transform', event.transform)
         // Refresh minimap viewport rect on zoom/pan
-        drawMinimap(filteredNodes, filteredEdges2, width, height)
+        drawMinimap(filteredNodes, d3Edges, width, height)
       })
     svg.call(zoom)
     zoomRef.current = zoom
@@ -278,16 +278,19 @@ export default function NetworkGraph({
         .attr('opacity', 0.8)
     })
 
+    // --- D3 edges: must have source/target (not from/to) for forceLink ---
+    const d3Edges = filteredEdges2.map(e => ({ ...e, source: e.from, target: e.to }))
+
     // --- Simulation ---
     simulationRef.current = d3.forceSimulation(filteredNodes)
-      .force('link', d3.forceLink(filteredEdges2).id(d => d.id).distance(d => 100 / (d.strength || 5) * 60))
+      .force('link', d3.forceLink(d3Edges).id(d => d.id).distance(d => 100 / (d.strength || 5) * 60))
       .force('charge', d3.forceManyBody().strength(-200))
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('collision', d3.forceCollide(d => radius(d) + 10))
 
     // --- Links ---
     const link = g.append('g').selectAll('line')
-      .data(filteredEdges2)
+      .data(d3Edges)
       .join('line')
       .attr('stroke', d => {
         if (highlightSet) {
@@ -315,7 +318,7 @@ export default function NetworkGraph({
 
     // --- Link labels (only when few nodes) ---
     const linkLabel = g.append('g').selectAll('text')
-      .data(filteredEdges2)
+      .data(d3Edges)
       .join('text')
       .attr('fill', '#9CA3AF')
       .attr('font-size', 9)
@@ -459,18 +462,18 @@ export default function NetworkGraph({
       // Update minimap every 5 ticks to avoid thrashing
       tickCount++
       if (tickCount % 5 === 0) {
-        drawMinimap(filteredNodes, filteredEdges2, width, height)
+        drawMinimap(filteredNodes, d3Edges, width, height)
       }
     })
 
     // Final minimap draw when simulation ends
     simulationRef.current.on('end', () => {
-      drawMinimap(filteredNodes, filteredEdges2, width, height)
+      drawMinimap(filteredNodes, d3Edges, width, height)
     })
 
     // Store refs for minimap click handler
     minimapRef.current._filteredNodes  = filteredNodes
-    minimapRef.current._filteredEdges2 = filteredEdges2
+    minimapRef.current._filteredEdges2 = d3Edges
     minimapRef.current._width          = width
     minimapRef.current._height         = height
   }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds, visibleTypes, focusNodeId, showClusters, scoreToRadius, drawMinimap])
