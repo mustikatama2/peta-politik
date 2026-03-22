@@ -824,6 +824,42 @@ export const CONNECTIONS = [
 
   // ── R50: SHERLY TJOANDA EXTENDED ────────────────────────────────────────
   { from:"sherly_tjoanda", to:"ahy",          type:"koalisi",        label:"Gubernur Malut dari Demokrat-Gerindra, AHY ketua Demokrat", since:2024, strength:7 },
+
+  // ── R31: LUHUT BINSAR PANDJAITAN ────────────────────────────────────────
+  { from:"luhut",          to:"jokowi",        type:"mentor-murid",   label:"Tangan kanan Jokowi selama 10 tahun, multi-posisi kabinet", since:2014, strength:9 },
+  { from:"luhut",          to:"prabowo",       type:"kolega",         label:"Penasehat senior Prabowo — keduanya eks perwira", since:2024, strength:7 },
+  { from:"luhut",          to:"erick_thohir",  type:"kolega",         label:"Menko Maritim dan Menteri BUMN — sinergi investasi", since:2019, strength:7 },
+  { from:"luhut",          to:"bahlil",        type:"mentor-murid",   label:"Luhut mentor Bahlil saat BKPM dan ESDM", since:2020, strength:7 },
+  { from:"luhut",          to:"hashim",        type:"bisnis",         label:"Kepentingan nikel dan energi — Arsari vs Toba", since:2020, strength:6 },
+  { from:"luhut",          to:"sjafrie",       type:"kolega",         label:"Sesama perwira senior — lingkaran TNI Prabowo", since:2024, strength:6 },
+
+  // ── R31: FIRLI BAHURI ───────────────────────────────────────────────────
+  { from:"firli_bahuri",   to:"alexander_marwata", type:"rival",      label:"Ketua vs Wakil Ketua KPK — konflik internal besar", since:2019, strength:8 },
+  { from:"firli_bahuri",   to:"novel_baswedan", type:"rival",         label:"Firli Ketua KPK, Novel penyidik senior yang berseberangan", since:2019, strength:8 },
+  { from:"firli_bahuri",   to:"prabowo",       type:"kolega",         label:"Firli dari Polri — era reformasi KPK baru", since:2019, strength:5 },
+
+  // ── R31: AGUS RAHARDJO ──────────────────────────────────────────────────
+  { from:"agus_rahardjo",  to:"jokowi",        type:"rival",          label:"Pengakuan 2023: Jokowi intervensi kasus Setya Novanto", since:2017, strength:8 },
+  { from:"agus_rahardjo",  to:"hasto_kristiyanto", type:"rival",      label:"KPK era Agus vs PDIP", since:2018, strength:7 },
+  { from:"agus_rahardjo",  to:"alexander_marwata", type:"kolega",     label:"Sama-sama pimpinan KPK generasi berbeda", since:2019, strength:6 },
+
+  // ── R31: SETYA NOVANTO ──────────────────────────────────────────────────
+  { from:"setya_novanto",  to:"airlangga",     type:"rival",          label:"Persaingan Golkar — Setya vs Airlangga perebutan Ketum", since:2016, strength:8 },
+  { from:"setya_novanto",  to:"jokowi",        type:"rival",          label:"Ketua DPR Golkar — berbeda blok koalisi awal", since:2014, strength:7 },
+  { from:"setya_novanto",  to:"agus_rahardjo", type:"rival",          label:"Kasus e-KTP — KPK vs Ketua DPR", since:2016, strength:9 },
+  { from:"setya_novanto",  to:"prabowo",       type:"kolega",         label:"Golkar mendukung Gerindra di koalisi", since:2014, strength:6 },
+
+  // ── R31: WIRANTO ────────────────────────────────────────────────────────
+  { from:"wiranto",        to:"prabowo",       type:"rival",          label:"Rivalitas perwira TNI senior — Pangkostrad vs Panglima", since:1998, strength:8 },
+  { from:"wiranto",        to:"sby",           type:"rival",          label:"Kompetitor capres 2004 — keduanya maju pilpres", since:2004, strength:7 },
+  { from:"wiranto",        to:"jokowi",        type:"kolega",         label:"Menko Polhukam di kabinet Jokowi 2016-2019", since:2016, strength:7 },
+  { from:"wiranto",        to:"soeharto",      type:"mentor-murid",   label:"Wiranto berkarier di TNI era Soeharto", since:1985, strength:8 },
+  { from:"wiranto",        to:"habibie",       type:"kolega",         label:"Panglima TNI di era Presiden Habibie 1998-1999", since:1998, strength:8 },
+
+  // ── R31: ANAS URBANINGRUM ───────────────────────────────────────────────
+  { from:"anas_urbaningrum", to:"ahy",         type:"rival",          label:"Konflik internal Demokrat — Anas vs SBY/AHY", since:2012, strength:8 },
+  { from:"anas_urbaningrum", to:"sby",         type:"rival",          label:"Ketua Demokrat dicopot — konflik dengan Dewan Pembina SBY", since:2013, strength:9 },
+  { from:"anas_urbaningrum", to:"jokowi",      type:"rival",          label:"Demokrat berseberangan dengan PDIP-Jokowi", since:2014, strength:6 },
 ];
 
 export const CONNECTION_TYPES = {
