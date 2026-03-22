@@ -981,7 +981,12 @@ export const PERSONS = [
       ideology_score:-1, populism_score:5, corruption_risk:"rendah",
       nationalism:5, religiosity:8,
       track_record:"Anggota DPR aktif fokus pada pendidikan dan pesantren.",
-      policy_direction:"Pro-pesantren, nasionalis-NU"
+      policy_direction:"Pro-pesantren, nasionalis-NU",
+      style:'Religius',
+      risk:'low',
+      influence:4,
+      controversy_level:2,
+      notes:"Faisol Riza adalah kader PKB berlatar belakang pesantren yang mewakili Dapil Jatim X (Jember-Lumajang) di DPR RI. Jaringannya di kalangan pesantren menjadikannya representasi kuat basis sosial PKB di Jawa Timur. Fokus legislatifnya pada pendidikan dan pesantren selaras dengan agenda PKB yang konsisten memperjuangkan kepentingan NU di parlemen."
     }
   },
   {
@@ -1085,7 +1090,12 @@ export const PERSONS = [
       ideology_score:4, populism_score:5, corruption_risk:"rendah",
       nationalism:5, religiosity:6,
       track_record:"Representasi Jatim di DPD, fokus UMKM dan perempuan.",
-      policy_direction:"Pemberdayaan ekonomi rakyat"
+      policy_direction:"Pemberdayaan ekonomi rakyat",
+      style:'Aktivis',
+      risk:'low',
+      influence:4,
+      controversy_level:2,
+      notes:"Lia Istifhama merepresentasikan suara Jawa Timur di DPD RI dengan fokus pada pemberdayaan perempuan dan UMKM yang relevan dengan basis konstituennya. Berlatar belakang pengusaha dan aktivis, ia memiliki jaringan di kalangan pelaku usaha kecil-menengah di Jatim. Posisinya di DPD — yang memiliki pengaruh terbatas dibanding DPR — membatasi kapasitasnya dalam membentuk kebijakan nasional, namun cukup untuk advokasi kepentingan daerah."
     }
   },
   // ─── JATIM — KEAMANAN ────────────────────────────────────────────────────
@@ -1107,7 +1117,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:2, corruption_risk:"rendah",
       nationalism:7, religiosity:5,
       track_record:"Pengamanan Jatim terutama menjelang Pilkada 2024.",
-      policy_direction:"Ketertiban, keamanan"
+      policy_direction:"Ketertiban, keamanan",
+      style:'Militeristik',
+      risk:'low',
+      influence:5,
+      controversy_level:2,
+      notes:"Sebagai Kapolda Jawa Timur, Imam Sugianto memimpin kekuatan kepolisian di salah satu provinsi dengan populasi terbesar Indonesia. Peran strategisnya mencakup pengamanan Pilkada Serentak 2024 di 38 kabupaten/kota Jatim. Posisi Kapolda Jatim sering menjadi batu loncatan menuju jabatan tinggi di Mabes Polri."
     }
   },
   // ─── JATIM — KEAMANAN ────────────────────────────────────────────────────
@@ -1129,7 +1144,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:2, corruption_risk:"rendah",
       nationalism:7, religiosity:5,
       track_record:"Pengamanan Jatim terutama menjelang Pilkada 2024.",
-      policy_direction:"Ketertiban, keamanan"
+      policy_direction:"Ketertiban, keamanan",
+      style:'Militeristik',
+      risk:'low',
+      influence:5,
+      controversy_level:2,
+      notes:"Sebagai Kapolda Jawa Timur, Imam Sugianto memimpin kekuatan kepolisian di salah satu provinsi dengan populasi terbesar Indonesia. Peran strategisnya mencakup pengamanan Pilkada Serentak 2024 di 38 kabupaten/kota Jatim. Posisi Kapolda Jatim sering menjadi batu loncatan menuju jabatan tinggi di Mabes Polri."
     }
   },
   {
@@ -1179,7 +1199,12 @@ export const PERSONS = [
       ideology_score:-1, populism_score:7, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Melanjutkan program Risma, dorong digitalisasi kota. Populer di kalangan muda urban.",
-      policy_direction:"Pro-rakyat kota, digital governance"
+      policy_direction:"Pro-rakyat kota, digital governance",
+      style:'Populis',
+      risk:'low',
+      influence:6,
+      controversy_level:2,
+      notes:"Eri Cahyadi menjadi Walikota Surabaya termuda yang melanjutkan warisan kepemimpinan legendaris Tri Rismaharini. Kader PDIP yang berlatar birokrasi Pemkot Surabaya ini menonjolkan pendekatan digital governance dan program berbasis komunitas urban. Kedekatannya dengan mesin PDIP di Jatim dan rekam jejaknya sebagai pemimpin kota terbesar kedua Indonesia menempatkannya sebagai kandidat potensial untuk jabatan lebih tinggi di masa mendatang."
     }
   },
   {
@@ -1512,7 +1537,7 @@ export const PERSONS = [
     bio:"Mantan Bupati Malang dua periode, terpidana kasus korupsi DAK Disdik Malang.",
     tags:["jatim","malang","korupsi","terpidana"], lhkpn_latest:null, lhkpn_year:null,
     connections_summary:"Mantan Bupati Malang, terpidana", twitter:null,
-    analysis:{ideology_score:2, populism_score:4, corruption_risk:"terpidana", nationalism:4, religiosity:4, track_record:"Terpidana korupsi DAK.", policy_direction:"N/A"}
+    analysis:{ideology_score:2, populism_score:4, corruption_risk:"terpidana", nationalism:4, religiosity:4, track_record:"Terpidana korupsi DAK.", policy_direction:"N/A", style:'Birokrat', risk:'high', influence:2, controversy_level:8, notes:"Rendra Kresna adalah mantan Bupati Malang dua periode yang telah ditetapkan sebagai terpidana kasus korupsi Dana Alokasi Khusus Dinas Pendidikan Kabupaten Malang. Kasusnya menjadi contoh nyata penyalahgunaan anggaran pendidikan di level kabupaten. Pasca vonis bersalah, karir politiknya berakhir dan menjadi salah satu catatan kelam korupsi kepala daerah di Jawa Timur."}
   },
   {
     id:"timbul_prihanjoko", name:"Timbul Prihanjoko", photo_url:null, photo_placeholder:"TP",
@@ -1949,7 +1974,7 @@ export const PERSONS = [
     bio:"Anggota DPR RI dari Gerindra Dapil Jatim, pengusaha dan aktivis transportasi.",
     tags:["jatim","gerindra","pengusaha"], lhkpn_latest:15000000000, lhkpn_year:2023,
     connections_summary:"DPR RI Gerindra Jatim, pengusaha", twitter:null,
-    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:6, religiosity:4, track_record:"Fokus pada transportasi dan infrastruktur.", policy_direction:"Pro-infrastruktur"}
+    analysis:{ideology_score:4, populism_score:4, corruption_risk:"rendah", nationalism:6, religiosity:4, track_record:"Fokus pada transportasi dan infrastruktur.", policy_direction:"Pro-infrastruktur", style:'Teknokrat', risk:'low', influence:4, controversy_level:2, notes:"Bambang Haryo Soekartono adalah anggota DPR RI dari Gerindra yang aktif mengadvokasi isu transportasi dan infrastruktur, sesuai latar belakangnya sebagai pengusaha di sektor tersebut. Sebagai kader Gerindra di Jatim, ia bagian dari mesin politik partai yang kini berkuasa di era Prabowo. Perannya di parlemen lebih bersifat teknis legislatif dibanding figur publik yang menonjol di skena nasional."}
   },
   // ─── ORMAS & RELIGIOUS LEADERS ──────────────────────────────────────────
   {
@@ -1971,7 +1996,12 @@ export const PERSONS = [
       ideology_score:-3, populism_score:4, corruption_risk:"rendah",
       nationalism:8, religiosity:10,
       track_record:"Reformis dalam NU. Mendorong islam moderat inklusif. Tur global soal perdamaian dan dialog Islam.",
-      policy_direction:"Islam moderat, inklusif, nasionalis"
+      policy_direction:"Islam moderat, inklusif, nasionalis",
+      style:'Religius',
+      risk:'low',
+      influence:9,
+      controversy_level:3,
+      notes:"Yahya Cholil Staquf (Gus Yahya) adalah Ketua Umum PBNU yang dikenal dengan sikap moderat dan visi Islam rahmatan lil alamin yang inklusif secara global. Posisinya sebagai pemimpin organisasi Islam terbesar di dunia menjadikan ia aktor yang sangat diperhitungkan dalam peta politik agama Indonesia — meski PBNU secara formal menjaga jarak dari partisan. Keterkaitannya dengan dinamika internal NU dan PKB menjadi faktor penting yang memengaruhi konsolidasi suara Muslim tradisional di pemilu mendatang."
     }
   },
   // ─── ORMAS & RELIGIOUS LEADERS ──────────────────────────────────────────
@@ -1994,7 +2024,12 @@ export const PERSONS = [
       ideology_score:-3, populism_score:4, corruption_risk:"rendah",
       nationalism:8, religiosity:10,
       track_record:"Reformis dalam NU. Mendorong islam moderat inklusif. Tur global soal perdamaian dan dialog Islam.",
-      policy_direction:"Islam moderat, inklusif, nasionalis"
+      policy_direction:"Islam moderat, inklusif, nasionalis",
+      style:'Religius',
+      risk:'low',
+      influence:9,
+      controversy_level:3,
+      notes:"Yahya Cholil Staquf (Gus Yahya) adalah Ketua Umum PBNU yang dikenal dengan sikap moderat dan visi Islam rahmatan lil alamin yang inklusif secara global. Posisinya sebagai pemimpin organisasi Islam terbesar di dunia menjadikan ia aktor yang sangat diperhitungkan dalam peta politik agama Indonesia — meski PBNU secara formal menjaga jarak dari partisan. Keterkaitannya dengan dinamika internal NU dan PKB menjadi faktor penting yang memengaruhi konsolidasi suara Muslim tradisional di pemilu mendatang."
     }
   },
   {
@@ -2096,7 +2131,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:2, corruption_risk:"sedang",
       nationalism:6, religiosity:4,
       track_record:"Pengusaha sukses di berbagai sektor. Bagian tak terpisahkan dari mesin politik Gerindra-Prabowo.",
-      policy_direction:"Pro-bisnis, nasionalis"
+      policy_direction:"Pro-bisnis, nasionalis",
+      style:'Oligarkis',
+      risk:'medium',
+      influence:8,
+      controversy_level:5,
+      notes:"Hashim Djojohadikusumo adalah adik kandung Presiden Prabowo dan salah satu pengusaha terkaya Indonesia dengan jaringan bisnis di sektor tambang, perkebunan, dan energi melalui Arsari Group. Perannya sebagai Ketua Dewan Pembina Gerindra dan penyandang dana utama partai menjadikannya aktor bayangan yang sangat berpengaruh dalam politik Indonesia. Kedekatan bisnis dan saudaranya yang kini Presiden menempatkan Hashim di simpul kekuasaan dan kepentingan ekonomi yang tidak mudah dipisahkan."
     }
   },
   {
@@ -2275,7 +2315,12 @@ export const PERSONS = [
       ideology_score:2, populism_score:6, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
       track_record:"Walikota Medan 2020-2024 dengan program pro-rakyat. Pindah ke Gerindra jelang Pilkada 2024. Menang besar sebagai menantu eks-Presiden.",
-      policy_direction:"Pro-investasi, ekonomi inklusif"
+      policy_direction:"Pro-investasi, ekonomi inklusif",
+      style:'Populis',
+      risk:'low',
+      influence:6,
+      controversy_level:4,
+      notes:"Bobby Nasution adalah menantu Joko Widodo yang berhasil memenangkan Pilkada Gubernur Sumatera Utara 2024 dengan suara meyakinkan. Berpindah dari PDIP ke Gerindra jelang Pilkada, ia menunjukkan pragmatisme politik yang khas figur dari lingkaran keluarga Jokowi. Sebagai Gubernur Sumut sekaligus bagian dari jaringan keluarga Jokowi-Gibran, Bobby menjadi komponen penting dalam fenomena 'dinasti politik' yang semakin mengkristal di era pasca-Jokowi."
     }
   },
   {
@@ -3210,7 +3255,12 @@ export const PERSONS = [
       ideology_score:3, populism_score:4, corruption_risk:"rendah",
       nationalism:6, religiosity:4,
       track_record:"15 tahun di Komisi I DPR membuatnya fasih soal regulasi pertahanan, intelijen, dan keamanan siber — latar ideal untuk Menkomdigi. Sebagai kader Golkar loyalis, Meutya berperan menjembatani koalisi pemerintahan Prabowo-Golkar. Sebagai Menkomdigi, ia menghadapi tekanan besar terkait regulasi konten, pemberantasan judi online, dan implementasi Perpres AI — di tengah warisan RUU Penyiaran kontroversial yang mengancam kebebasan jurnalisme investigatif.",
-      policy_direction:"Pro-pertahanan, Nasionalis"
+      policy_direction:"Pro-pertahanan, Nasionalis",
+      style:'Teknokrat',
+      risk:'low',
+      influence:6,
+      controversy_level:4,
+      notes:"Meutya Hafid adalah mantan jurnalis Metro TV yang berkarir di DPR selama 15 tahun sebelum dipercaya sebagai Menteri Komunikasi dan Digital dalam kabinet Prabowo. Rekam jejaknya di Komisi I DPR memberinya pemahaman mendalam soal pertahanan, intelijen, dan regulasi digital. Sebagai wajah perempuan dari Golkar di kabinet Prabowo, ia menghadapi tantangan besar terkait tata kelola platform digital, keamanan siber, dan kebebasan pers di era disrupsi teknologi."
     }
   },
   {
@@ -3765,7 +3815,7 @@ export const PERSONS = [
       risk:"high",
       influence:7,
       controversy_level:9,
-      notes:"Penetapan tersangka Desember 2024 mengguncang internal PDIP menjelang Pilkada"
+      notes:"Hasto Kristiyanto adalah Sekretaris Jenderal PDIP yang ditetapkan sebagai tersangka KPK pada Desember 2024 atas dugaan obstruction of justice dan suap dalam kasus buronan Harun Masiku. Sebagai loyalis setia Megawati selama satu dekade, penetapan tersangka ini dipandang sebagian pihak sebagai serangan politik terhadap PDIP di tengah rivalitas dengan pemerintahan Prabowo. Kasus ini menempatkan PDIP dalam posisi defensif dan berpotensi memperlemah konsolidasi internal partai menjelang Pemilu 2029."
     }
   },
   // ─── NEW PERSONS: Prabowo Cabinet & Key Figures ──────────────────────────
@@ -4007,7 +4057,7 @@ export const PERSONS = [
       risk:"low",
       influence:7,
       controversy_level:6,
-      notes:"Kasus penyiraman air keras 2017 tidak tuntas, pelaku mendapat hukuman ringan"
+      notes:"Novel Baswedan adalah mantan penyidik senior KPK yang menjadi korban penyiraman air keras pada April 2017 — sebuah teror yang menghancurkan penglihatan matanya dan menjadi simbol serangan terhadap pemberantasan korupsi Indonesia. Kasus ini bergulir bertahun-tahun; dua pelaku akhirnya divonis sangat ringan pada 2021, jauh dari rasa keadilan. Pasca dipecat dari KPK melalui TWK (Tes Wawasan Kebangsaan) 2021 yang kontroversial, Novel kini aktif di TPDI sebagai suara kritis antikorupsi dari luar lembaga."
     }
   },
 ]
