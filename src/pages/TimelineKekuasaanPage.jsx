@@ -245,6 +245,56 @@ const KEBIJAKAN_SCORES = [
   { nama: "Prabowo",   person_id:"prabowo",   ekonomi:6,  ham:4,  korupsi:5, infrastruktur:7, stabilitas:7 },
 ]
 
+// ─── SOEHARTO ORDE BARU TIMELINE ─────────────────────────────────────────────
+const ORDE_BARU_EVENTS = [
+  { tahun: 1967, label: "Soeharto resmi jadi Pejabat Presiden", tag: "politik" },
+  { tahun: 1968, label: "Dilantik sebagai Presiden RI ke-2", tag: "politik" },
+  { tahun: 1971, label: "Golkar menang Pemilu pertama Orde Baru (62.8%)", tag: "politik" },
+  { tahun: 1974, label: "Peristiwa Malari — mahasiswa demo anti-Jepang, dibubarkan paksa", tag: "represi" },
+  { tahun: 1975, label: "Invasi Timor Timur — awal pendudukan 24 tahun", tag: "represi" },
+  { tahun: 1978, label: "NKK/BKK — kampus dilarang berpolitik, mahasiswa dibungkam", tag: "represi" },
+  { tahun: 1984, label: "Swasembada pangan — Indonesia mandiri beras, penghargaan FAO", tag: "ekonomi" },
+  { tahun: 1984, label: "Tragedi Tanjung Priok — penembakan massa Islam oleh tentara", tag: "represi" },
+  { tahun: 1988, label: "Prabowo Subianto menikahi Titiek Soeharto — jaringan kekuasaan meluas", tag: "dinasti" },
+  { tahun: 1991, label: "Pembantaian Santa Cruz, Dili — 271 orang tewas di Timor Timur", tag: "represi" },
+  { tahun: 1993, label: "Soeharto ke-7 kalinya 'dipilih' MPR sebagai Presiden", tag: "politik" },
+  { tahun: 1996, label: "Penyerangan kantor PDI — Megawati dikudeta Soeharto", tag: "represi" },
+  { tahun: 1997, label: "Krisis moneter Asia — rupiah anjlok 80%, ekonomi kolaps", tag: "ekonomi" },
+  { tahun: 1997, label: "Penculikan aktivis oleh Kopassus (Prabowo)", tag: "represi" },
+  { tahun: 1998, label: "Kerusuhan Mei 1998 — 1.000+ meninggal, ribuan perempuan Tionghoa diperkosa", tag: "represi" },
+  { tahun: 1998, label: "Soeharto mundur 21 Mei 1998 — 32 tahun kekuasaan berakhir", tag: "politik" },
+]
+
+const ORBA_CRONIES = [
+  { nama: "Liem Sioe Liong", bisnis: "Salim Group — BCA, Indofood, Bogasari", hubungan: "Mitra bisnis utama Cendana" },
+  { nama: "Bob Hasan", bisnis: "Monopoli kayu & plywood Indonesia", hubungan: "Sahabat golf Soeharto" },
+  { nama: "Tommy Soeharto", bisnis: "Timor mobil nasional, tambang, properti", hubungan: "Anak bungsu Soeharto" },
+  { nama: "Tutut Soeharto", bisnis: "Citra Lamtoro Gung, jalan tol", hubungan: "Anak sulung Soeharto" },
+  { nama: "Prabowo Subianto", bisnis: "Hak kuasa hutan via menantu", hubungan: "Mantan menantu" },
+]
+
+// ─── "SEJARAH MENILAI" RATINGS ────────────────────────────────────────────
+const SEJARAH_RATINGS = [
+  { person_id: "soekarno",  rating: 7.1, label: "Soekarno",  catatan: "Bapak Bangsa, namun demokrasi terpimpin otoriter & ekonomi hancur", warna: "#16A34A" },
+  { person_id: "soeharto",  rating: 5.2, label: "Soeharto",  catatan: "Ekonomi pesat, tapi korupsi masif & HAM kelam", warna: "#DC2626" },
+  { person_id: "habibie",   rating: 7.8, label: "Habibie",   catatan: "Reformis sejati, kebebasan pers & demokratisasi", warna: "#D97706" },
+  { person_id: "gus_dur",   rating: 7.5, label: "Gus Dur",   catatan: "Pluralisme & HAM kuat, namun singkat & kontroversial", warna: "#7C3AED" },
+  { person_id: "megawati",  rating: 6.5, label: "Megawati",  catatan: "Stabilisasi pasca Gus Dur, tapi diam dan stagnan", warna: "#DC2626" },
+  { person_id: "sby",       rating: 7.2, label: "SBY",       catatan: "Perdamaian Aceh & pertumbuhan stabil, korupsi partai jadi noda", warna: "#2563EB" },
+  { person_id: "jokowi",    rating: 6.8, label: "Jokowi",    catatan: "Infrastruktur masif, tapi KPK dilemahkan & akhir masa jabatan kontroversial", warna: "#DC2626" },
+  { person_id: "prabowo",   rating: null, label: "Prabowo",  catatan: "Masih menjabat — penilaian tertunda", warna: "#7C2D12" },
+]
+
+// ─── WARISAN VS LUKA DATA ─────────────────────────────────────────────────
+const WARISAN_LUKA = PRESIDEN_RI.map(p => ({
+  person_id: p.person_id,
+  nama: p.nama.split(' ').slice(-1)[0],
+  fullNama: p.nama,
+  achievements: p.pencapaian.length,
+  controversies: p.kontroversi.length,
+  warna: p.warna,
+}))
+
 // ─── HELPER ──────────────────────────────────────────────────────────────────
 function getDurasi(p) {
   const end = p.tahun_selesai || new Date().getFullYear()
@@ -319,6 +369,7 @@ export default function TimelineKekuasaanPage() {
     { id: 'timeline',  label: '⏳ Linimasa' },
     { id: 'ekonomi',   label: '📈 Warisan Ekonomi' },
     { id: 'kebijakan', label: '🎯 Perbandingan Kebijakan' },
+    { id: 'warisan',   label: '⚖️ Warisan & Penilaian' },
   ]
 
   return (
@@ -653,6 +704,179 @@ export default function TimelineKekuasaanPage() {
               Sumber: World Bank, BPS Indonesia. GDP per kapita dalam USD nominal.
               Data historis adalah estimasi berdasarkan sumber sekunder.
             </p>
+          </Card>
+        </>
+      )}
+
+      {/* ═══ TAB 4: WARISAN & PENILAIAN ════════════════════════════════════ */}
+      {activeTab === 'warisan' && (
+        <>
+          {/* ── "Sejarah Menilai" Ratings ──────────────────────────────── */}
+          <Card className="p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-1">⭐ Sejarah Menilai — Rating Presidensial</h3>
+            <p className="text-xs text-text-secondary mb-4">
+              Skor komposit (skala 1–10) berdasarkan pertumbuhan ekonomi, rekam HAM, korupsi, dan stabilitas.
+              Bersifat analitis — dikurasi dari sumber akademis & lembaga internasional.
+            </p>
+            <div className="space-y-3">
+              {SEJARAH_RATINGS.map(r => (
+                <div key={r.person_id} className="flex items-center gap-3">
+                  <div className="w-20 text-xs font-medium text-text-secondary text-right flex-shrink-0">{r.label}</div>
+                  <div className="flex-1 relative h-7 bg-bg-elevated rounded-lg overflow-hidden border border-border">
+                    {r.rating != null ? (
+                      <div
+                        className="h-full rounded-lg flex items-center justify-end pr-2 transition-all"
+                        style={{ width: `${(r.rating / 10) * 100}%`, backgroundColor: r.warna + 'CC' }}
+                      >
+                        <span className="text-xs font-bold text-white drop-shadow">{r.rating}</span>
+                      </div>
+                    ) : (
+                      <div className="h-full flex items-center px-3">
+                        <span className="text-xs text-text-muted italic">Masih menjabat…</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="w-6 text-xs font-bold text-text-primary flex-shrink-0 text-right">
+                    {r.rating != null ? `${r.rating}` : '—'}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 grid grid-cols-1 gap-2">
+              {SEJARAH_RATINGS.filter(r => r.rating != null).map(r => (
+                <div key={r.person_id} className="flex items-start gap-2 text-xs text-text-secondary">
+                  <div className="w-2 h-2 rounded-full flex-shrink-0 mt-0.5" style={{ backgroundColor: r.warna }} />
+                  <span><strong className="text-text-primary">{r.label}:</strong> {r.catatan}</span>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          {/* ── Warisan vs Luka Balance Meter ─────────────────────────── */}
+          <Card className="p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-1">⚖️ Warisan vs Luka — Balance Meter</h3>
+            <p className="text-xs text-text-secondary mb-4">
+              Jumlah pencapaian tercatat (hijau) vs kontroversi/pelanggaran (merah) per presiden.
+              Panjang bar proporsional terhadap jumlah item.
+            </p>
+            <div className="space-y-4">
+              {WARISAN_LUKA.map(item => {
+                const total = item.achievements + item.controversies
+                const achPct = (item.achievements / total) * 100
+                const conPct = (item.controversies / total) * 100
+                return (
+                  <div key={item.person_id}>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-medium text-text-primary">{item.fullNama}</span>
+                      <span className="text-xs text-text-secondary">
+                        <span className="text-green-400 font-semibold">{item.achievements}</span> pencapaian ·{' '}
+                        <span className="text-red-400 font-semibold">{item.controversies}</span> kontroversi
+                      </span>
+                    </div>
+                    <div className="flex h-5 rounded-lg overflow-hidden gap-px">
+                      <div
+                        className="flex items-center justify-center text-white text-[10px] font-bold transition-all"
+                        style={{ width: `${achPct}%`, backgroundColor: '#16A34A' }}
+                        title={`${item.achievements} pencapaian (${achPct.toFixed(0)}%)`}
+                      >
+                        {achPct > 30 ? `${item.achievements}` : ''}
+                      </div>
+                      <div
+                        className="flex items-center justify-center text-white text-[10px] font-bold transition-all"
+                        style={{ width: `${conPct}%`, backgroundColor: '#DC2626' }}
+                        title={`${item.controversies} kontroversi (${conPct.toFixed(0)}%)`}
+                      >
+                        {conPct > 20 ? `${item.controversies}` : ''}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+            <div className="flex items-center gap-4 mt-4 text-xs text-text-secondary">
+              <span><span className="inline-block w-3 h-3 rounded bg-green-600 mr-1 align-middle" />Pencapaian</span>
+              <span><span className="inline-block w-3 h-3 rounded bg-red-600 mr-1 align-middle" />Kontroversi</span>
+              <span className="ml-auto italic">Data berdasarkan literatur publik & dokumentasi lembaga HAM.</span>
+            </div>
+          </Card>
+
+          {/* ── Soeharto Orde Baru Deep Dive ──────────────────────────── */}
+          <Card className="p-5 border-2 border-red-800/40">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-xl bg-red-900/50 flex items-center justify-center text-xl flex-shrink-0">🔴</div>
+              <div>
+                <h3 className="text-sm font-bold text-red-400">Orde Baru — Deep Dive Soeharto (1967–1998)</h3>
+                <p className="text-xs text-text-secondary">32 tahun kekuasaan: pembangunan ekonomi di atas fondasi represi</p>
+              </div>
+            </div>
+
+            {/* Key Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+              {[
+                { label: "Rata-rata pertumbuhan GDP", value: "7%/tahun", color: "text-green-400" },
+                { label: "Estimasi korupsi KKN", value: "$15–35 M", color: "text-red-400" },
+                { label: "Korban Timor Timur", value: "180.000+", color: "text-red-400" },
+                { label: "Lama berkuasa", value: "32 tahun", color: "text-amber-400" },
+              ].map(s => (
+                <div key={s.label} className="bg-bg-elevated rounded-xl p-3 border border-border">
+                  <p className={`text-lg font-bold ${s.color}`}>{s.value}</p>
+                  <p className="text-xs text-text-secondary mt-0.5">{s.label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Cronies */}
+            <div className="mb-5">
+              <h4 className="text-xs font-semibold text-amber-400 mb-2">🕸️ Jaringan Kroni Utama (Cendana Network)</h4>
+              <div className="space-y-2">
+                {ORBA_CRONIES.map(c => (
+                  <div key={c.nama} className="flex items-start gap-2 p-2.5 bg-bg-elevated rounded-lg border border-border">
+                    <span className="text-amber-400 text-xs flex-shrink-0 mt-0.5">◈</span>
+                    <div>
+                      <p className="text-xs font-semibold text-text-primary">{c.nama}</p>
+                      <p className="text-xs text-text-secondary">{c.bisnis}</p>
+                      <p className="text-xs text-amber-500/80 italic">{c.hubungan}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-2 mt-3 flex-wrap">
+                <span className="text-xs text-text-secondary">Tokoh terkait:</span>
+                {['soeharto','habibie','prabowo','wiranto'].map(id => (
+                  <a
+                    key={id}
+                    href={`/persons/${id}`}
+                    className="text-xs px-2 py-0.5 rounded-full bg-red-900/30 text-red-400 border border-red-800/40 hover:bg-red-900/50 transition-colors"
+                  >
+                    {id.charAt(0).toUpperCase() + id.slice(1)} →
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Mini Timeline Orde Baru */}
+            <div>
+              <h4 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-3">Linimasa Orde Baru</h4>
+              <div className="relative pl-6 space-y-2">
+                <div className="absolute left-2 top-0 bottom-0 w-px bg-red-900/40" />
+                {ORDE_BARU_EVENTS.map((ev, i) => {
+                  const tagColor = ev.tag === 'represi' ? 'text-red-400 bg-red-900/20 border-red-800/30'
+                    : ev.tag === 'ekonomi' ? 'text-green-400 bg-green-900/20 border-green-800/30'
+                    : ev.tag === 'dinasti' ? 'text-amber-400 bg-amber-900/20 border-amber-800/30'
+                    : 'text-blue-400 bg-blue-900/20 border-blue-800/30'
+                  return (
+                    <div key={i} className="relative flex items-start gap-2">
+                      <div className="absolute -left-4 top-1.5 w-2 h-2 rounded-full bg-red-700 border border-red-900" />
+                      <div className="flex-shrink-0 w-8 text-xs font-mono text-text-muted">{ev.tahun}</div>
+                      <p className="text-xs text-text-secondary flex-1 leading-relaxed">{ev.label}</p>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded border flex-shrink-0 ${tagColor}`}>
+                        {ev.tag}
+                      </span>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
           </Card>
         </>
       )}
