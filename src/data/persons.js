@@ -4330,6 +4330,218 @@ export const PERSONS = [
       notes:"Putra bungsu Soeharto yang mendirikan Partai Berkarya. Pernah dipenjara atas kasus pembunuhan hakim. Kini aktif di bisnis otomotif. Pengaruh politiknya terbatas namun simbol nostalgia Orde Baru."
     }
   },
+  {
+    id:"firli_bahuri", name:"Firli Bahuri", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Firli_Bahuri_Ketua_KPK.jpg/400px-Firli_Bahuri_Ketua_KPK.jpg", photo_placeholder:"FB",
+    born:"1963", born_place:"Ogan Komering Ulu, Sumatera Selatan", religion:"Islam",
+    education:"S1 Ilmu Hukum Universitas Jenderal Soedirman; S2 Hukum Universitas Padjajaran",
+    party_id:null, party_role:"ex-Ketua KPK (2019-2023)",
+    positions:[
+      {title:"Ketua Komisi Pemberantasan Korupsi", institution:"KPK", region:null, start:"2019", end:"2023", is_current:false},
+      {title:"Deputi Penindakan KPK", institution:"KPK", region:null, start:"2018", end:"2019", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Firli Bahuri adalah perwira Polri yang terpilih menjadi Ketua KPK 2019-2023, menjadi ketua pertama dari kalangan kepolisian. Jabatannya berakhir kontroversial setelah ditetapkan sebagai tersangka oleh Polda Metro Jaya atas dugaan pemerasan Menteri Pertanian Syahrul Yasin Limpo. Ia mengundurkan diri dari KPK pada Desember 2023.",
+    tags:["kpk","polri","tersangka","korupsi","antikorupsi"],
+    lhkpn_latest:21000000000, lhkpn_year:2022,
+    lhkpn_note:"Source: elhkpn.kpk.go.id 2022 — Rp 21 miliar, dinilai tidak wajar untuk perwira Polri.",
+    kontroversi:[
+      "Tersangka pemerasan Mentan Syahrul Yasin Limpo — ditetapkan Polda Metro Jaya 2023",
+      "Mundur dari KPK Desember 2023 di tengah kasus hukum",
+      "Foto mewah di fasilitas KPK gate — langgar etik",
+      "Harta kekayaan Rp 21M dinilai tidak wajar untuk perwira Polri"
+    ],
+    data_sources:["polri.go.id","elhkpn.kpk.go.id","tempo.co","kompas.com"],
+    connections_summary:"Ketua KPK 2019-2023 dari Polri. Tersangka pemerasan Mentan SYL. Simbol melemahnya KPK pasca revisi UU.",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:4, corruption_risk:"tinggi",
+      nationalism:6, religiosity:5,
+      track_record:"Terpilih sebagai Ketua KPK 2019 dari jalur Polri. Jabatan dipenuhi kontroversi — pelanggaran etik berulang sebelum akhirnya ditetapkan tersangka pemerasan Mentan SYL 2023.",
+      policy_direction:"Penegakan hukum (nominal) — pemberantasan korupsi di bawah kepemimpinan kontroversial",
+      style:"polisi",
+      risk:"tinggi",
+      influence:55,
+      controversy_level:9,
+      notes:"Firli Bahuri menjadi Ketua KPK pertama dari kalangan Polri, namun jabatannya berakhir kontroversial setelah ditetapkan tersangka oleh Polda Metro Jaya atas dugaan pemerasan Mentan Syahrul Yasin Limpo. Kasusnya menjadi simbol paling nyata dari lemahnya KPK pasca revisi UU 2019."
+    }
+  },
+  {
+    id:"agus_rahardjo", name:"Agus Rahardjo", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/KPU_Agus_Raharjo.png/400px-KPU_Agus_Raharjo.png", photo_placeholder:"AR",
+    born:"1956", born_place:"Sukoharjo, Jawa Tengah", religion:"Islam",
+    education:"S1 Teknik Sipil ITS; S2 Management of Technology Asian Institute of Technology Thailand",
+    party_id:null, party_role:"ex-Ketua KPK (2015-2019)",
+    positions:[
+      {title:"Ketua Komisi Pemberantasan Korupsi", institution:"KPK", region:null, start:"2015", end:"2019", is_current:false},
+      {title:"Kepala Lembaga Kebijakan Pengadaan Barang/Jasa Pemerintah (LKPP)", institution:"LKPP", region:null, start:"2010", end:"2015", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Agus Rahardjo adalah teknokrat yang memimpin KPK periode 2015-2019, dikenal karena menuntaskan kasus e-KTP yang menjerat Setya Novanto. Pada 2023 ia membuat pengakuan mengejutkan bahwa Presiden Jokowi pernah memintanya menghentikan kasus e-KTP, yang mengguncang opini publik.",
+    tags:["kpk","teknokrat","antikorupsi","e-ktp","reformasi"],
+    lhkpn_latest:8500000000, lhkpn_year:2019,
+    lhkpn_note:"Source: elhkpn.kpk.go.id 2019",
+    kontroversi:[
+      "Pengakuan 2023: Jokowi pernah minta hentikan kasus e-KTP Setya Novanto — mengguncang opini publik"
+    ],
+    data_sources:["elhkpn.kpk.go.id","tempo.co","kompas.com","bbc.com/indonesia"],
+    connections_summary:"Ketua KPK 2015-2019. Memimpin penuntasan kasus e-KTP. Pengakuan intervensi Jokowi 2023.",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:3, corruption_risk:"rendah",
+      nationalism:6, religiosity:5,
+      track_record:"Memimpin KPK saat penuntasan landmark case e-KTP. Setelah masa jabatan berakhir, aktif sebagai kritikus kebijakan antikorupsi pemerintah.",
+      policy_direction:"Penegakan hukum independen, antikorupsi",
+      style:"teknokrat",
+      risk:"rendah",
+      influence:55,
+      controversy_level:6,
+      notes:"Agus Rahardjo memimpin KPK saat penuntasan kasus e-KTP yang menjerat Setya Novanto. Pengakuannya di 2023 bahwa Jokowi pernah memintanya menghentikan kasus e-KTP mengguncang opini publik."
+    }
+  },
+  {
+    id:"setya_novanto", name:"Setya Novanto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Setya_Novanto%2C_Ketua_DPR_RI.jpg/400px-Setya_Novanto%2C_Ketua_DPR_RI.jpg", photo_placeholder:"SN",
+    born:"1955", born_place:"Bandung, Jawa Barat", religion:"Kristen",
+    education:"S1 Akuntansi Universitas Terbuka",
+    party_id:"gol", party_role:"ex-Ketua DPR / Terpidana Korupsi e-KTP",
+    positions:[
+      {title:"Ketua DPR RI", institution:"DPR RI", region:null, start:"2014", end:"2017", is_current:false},
+      {title:"Ketua Umum Partai Golkar", institution:"Partai Golkar", region:null, start:"2016", end:"2017", is_current:false},
+      {title:"Terpidana Korupsi e-KTP", institution:"Pengadilan Tipikor", region:null, start:"2018", end:null, is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Setya Novanto adalah politisi Golkar yang menjabat Ketua DPR RI sebelum terjerat kasus korupsi e-KTP terbesar dalam sejarah Indonesia senilai Rp 2,3 triliun. Ia divonis 15 tahun penjara oleh Pengadilan Tipikor. Kasusnya terkenal dengan drama kecelakaan mobil saat berstatus tersangka yang diduga merupakan upaya menghindar dari pemeriksaan KPK.",
+    tags:["golkar","korupsi","e-ktp","terpidana","dpr","mantan-napi"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN terkini — aset disita terkait kasus e-KTP.",
+    kontroversi:[
+      "Terpidana korupsi e-KTP Rp 2,3 triliun — divonis 15 tahun penjara Pengadilan Tipikor 2018",
+      "Saka Gate — diduga terlibat dalam deal minyak dengan perusahaan AS",
+      "Mundur lalu kembali menjadi Ketua DPR dalam satu periode jabatan",
+      "Drama kecelakaan mobil saat berstatus tersangka — diduga untuk hindari pemeriksaan KPK"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Setya_Novanto","kpk.go.id","tempo.co","kompas.com"],
+    connections_summary:"Mantan Ketua DPR dan Ketum Golkar. Terpidana korupsi e-KTP Rp 2,3T — vonis 15 tahun.",
+    twitter:null,
+    analysis:{
+      ideology_score:4, populism_score:5, corruption_risk:"tinggi",
+      nationalism:5, religiosity:4,
+      track_record:"Membangun karir di Golkar hingga menjadi Ketua DPR dan Ketum Golkar. Terjerat kasus e-KTP terbesar dan divonis 15 tahun penjara. Menjadi simbol korupsi sistemik di lembaga legislatif.",
+      policy_direction:"Pragmatis politik — kepentingan bisnis dan partai",
+      style:"politisi",
+      risk:"tinggi",
+      influence:40,
+      controversy_level:10,
+      notes:"Setya Novanto adalah mantan Ketua DPR yang terpidana korupsi e-KTP terbesar dalam sejarah Indonesia. Kasusnya mengguncang Golkar dan menjadi landmark penegakan hukum KPK era Agus Rahardjo."
+    }
+  },
+  {
+    id:"wiranto", name:"Wiranto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Wiranto2.jpg/400px-Wiranto2.jpg", photo_placeholder:"WR",
+    born:"1947", born_place:"Yogyakarta", religion:"Islam",
+    education:"Akademi Militer (1968); S2 Universitas Jenderal Soedirman",
+    party_id:"hanura", party_role:"Ketua Umum Partai Hanura / ex-Panglima TNI",
+    positions:[
+      {title:"Menko Polhukam", institution:"Kabinet Kerja Jokowi", region:null, start:"2016", end:"2019", is_current:false},
+      {title:"Panglima TNI", institution:"TNI", region:null, start:"1998", end:"1999", is_current:false},
+      {title:"Calon Presiden", institution:"Pemilu 2004", region:null, start:"2004", end:"2004", is_current:false},
+      {title:"Ketua Umum Partai Hanura", institution:"Partai Hanura", region:null, start:"2006", end:"2019", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Wiranto adalah jenderal TNI yang menjabat Panglima TNI saat transisi reformasi 1998. Didakwa oleh Pengadilan Khusus Timor-Leste atas keterlibatan dalam pelanggaran HAM masa Timor-Timur 1999. Ia kemudian mendirikan Partai Hanura dan aktif di politik, termasuk menjabat Menko Polhukam era Jokowi.",
+    tags:["militer","tni","reformasi-1998","ham","hanura","polhukam"],
+    lhkpn_latest:35000000000, lhkpn_year:2018,
+    lhkpn_note:"Source: elhkpn.kpk.go.id 2018 — Rp 35 miliar saat menjabat Menko Polhukam.",
+    kontroversi:[
+      "Dakwaan Pengadilan Khusus Kejahatan Berat Timor-Leste terkait Timor-Timur 1999",
+      "Tuduhan pelanggaran HAM berat — kerusuhan Mei 1998 dan tragedi Semanggi",
+      "Pengendalian milisi pro-Indonesia di Timor-Timur pasca referendum 1999"
+    ],
+    data_sources:["elhkpn.kpk.go.id","id.wikipedia.org/wiki/Wiranto","kontras.org","amnesty.org"],
+    connections_summary:"Panglima TNI saat reformasi 1998. Ketum Partai Hanura. Menko Polhukam Jokowi. Terdakwa HAM Timor-Timur.",
+    twitter:null,
+    analysis:{
+      ideology_score:4, populism_score:5, corruption_risk:"sedang",
+      nationalism:8, religiosity:5,
+      track_record:"Panglima TNI saat reformasi 1998. Mendirikan Hanura dan maju capres 2004 & 2009. Menjabat Menko Polhukam 2016-2019. Tuntutan HAM internasional terkait Timor-Timur belum terselesaikan.",
+      policy_direction:"Keamanan nasional, stabilitas politik, nasionalisme militer",
+      style:"militer",
+      risk:"sedang",
+      influence:45,
+      controversy_level:7,
+      notes:"Wiranto adalah Panglima TNI saat reformasi 1998 yang kemudian aktif di politik via Partai Hanura. Ia pernah maju capres dan menjabat Menko Polhukam era Jokowi. Tuduhan pelanggaran HAM Timor-Timur 1999 menjadi bayangan panjang karir politiknya."
+    }
+  },
+  {
+    id:"luhut", name:"Luhut Binsar Pandjaitan", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Luhut_B._Pandjaitan%2C_Ketua_Dewan_Ekonomi_Nasional_%28cropped%29.png/400px-Luhut_B._Pandjaitan%2C_Ketua_Dewan_Ekonomi_Nasional_%28cropped%29.png", photo_placeholder:"LB",
+    born:"1947", born_place:"Silaen, Sumatera Utara", religion:"Kristen Protestan",
+    education:"Akademi Militer (1970); MBA Boston University",
+    party_id:null, party_role:"Penasehat Presiden / ex-Menko Maritim Investasi",
+    positions:[
+      {title:"Ketua Dewan Ekonomi Nasional", institution:"DEN", region:null, start:"2024", end:null, is_current:true},
+      {title:"Menko Bidang Maritim dan Investasi", institution:"Kabinet Indonesia Maju", region:null, start:"2019", end:"2024", is_current:false},
+      {title:"Menko Bidang Politik, Hukum, dan Keamanan", institution:"Kabinet Kerja", region:null, start:"2015", end:"2016", is_current:false},
+      {title:"Kepala Staf Kepresidenan", institution:"KSP", region:null, start:"2014", end:"2015", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Luhut Binsar Pandjaitan adalah jenderal purnawirawan TNI yang menjadi 'pembantu paling powerful' Presiden Jokowi selama 10 tahun. Ia memegang berbagai jabatan strategis dan dikenal sebagai operator investasi besar era Jokowi, terutama di sektor energi dan infrastruktur. Di era Prabowo ia menjadi Ketua Dewan Ekonomi Nasional.",
+    tags:["militer","teknokrat","investasi","nikel","jokowi","prabowo","omnibus"],
+    lhkpn_latest:420000000000, lhkpn_year:2023,
+    lhkpn_note:"Source: elhkpn.kpk.go.id 2023 — Rp 420 miliar, termasuk aset bisnis dan investasi.",
+    kontroversi:[
+      "Konflik kepentingan investasi China — bisnis nikel dan lithium di tengah kebijakan hilirisasi",
+      "Penguasaan sektor tambang nikel — tuduhan monopoli rantai pasok EV battery",
+      "Omnibus Man — hampir semua masalah besar ditangani Luhut di era Jokowi",
+      "Penundaan Pemilu 2024 — sempat mendorong wacana perpanjangan masa jabatan Jokowi"
+    ],
+    data_sources:["elhkpn.kpk.go.id","id.wikipedia.org/wiki/Luhut_Binsar_Pandjaitan","tempo.co","bloomberg.com"],
+    connections_summary:"Jenderal purnawirawan. Tangan kanan Jokowi 10 tahun. Kini Ketua Dewan Ekonomi Nasional era Prabowo.",
+    twitter:"@luhut_pandjaitan",
+    analysis:{
+      ideology_score:4, populism_score:4, corruption_risk:"sedang",
+      nationalism:8, religiosity:4,
+      track_record:"Memegang berbagai jabatan strategis di era Jokowi 2014-2024 — dari KSP, Menko Polhukam, hingga Menko Maritim Investasi. Dianggap sebagai arsitek utama kebijakan hilirisasi nikel dan investasi China.",
+      policy_direction:"Ekonomi nasionalis — hilirisasi sumber daya alam, investasi strategis, infrastruktur",
+      style:"militer/teknokrat",
+      risk:"sedang",
+      influence:80,
+      controversy_level:7,
+      notes:"Luhut adalah 'pembantu paling powerful' Jokowi selama 10 tahun — menjabat berbagai posisi dan mengendalikan investasi strategis. Di era Prabowo ia menjadi penasehat senior dengan pengaruh besar di balik layar."
+    }
+  },
+  {
+    id:"anas_urbaningrum", name:"Anas Urbaningrum", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Anas_Urbaningrum.JPG/400px-Anas_Urbaningrum.JPG", photo_placeholder:"AU",
+    born:"1969", born_place:"Blitar, Jawa Timur", religion:"Islam",
+    education:"S1 Ilmu Politik Universitas Airlangga; S2 Ketahanan Nasional Universitas Gadjah Mada",
+    party_id:null, party_role:"ex-Ketua Umum Demokrat / terpidana korupsi Hambalang",
+    positions:[
+      {title:"Ketua Umum Partai Demokrat", institution:"Partai Demokrat", region:null, start:"2010", end:"2013", is_current:false},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:null, start:"2004", end:"2010", is_current:false},
+      {title:"Terpidana Korupsi Hambalang", institution:"Pengadilan Tipikor", region:null, start:"2014", end:"2023", is_current:false},
+      {title:"Ketua Umum Partai Kebangkitan Nusantara (PKN)", institution:"PKN", region:null, start:"2023", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Anas Urbaningrum adalah politisi muda berbakat yang menjabat Ketua Umum Partai Demokrat sebelum tersangkut kasus korupsi proyek Hambalang dan divonis 8 tahun penjara. Setelah bebas pada 2023, ia mendirikan Partai Kebangkitan Nusantara dan kembali aktif di panggung politik nasional.",
+    tags:["demokrat","korupsi","hambalang","terpidana","pkn","mantan-napi"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN aktif — aset terdampak kasus Hambalang.",
+    kontroversi:[
+      "Terpidana korupsi proyek Hambalang — divonis 8 tahun penjara Pengadilan Tipikor 2014",
+      "Disebut M. Nazaruddin terlibat dalam kasus e-KTP",
+      "Bebas 2023 — langsung aktif mendirikan Partai Kebangkitan Nusantara"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Anas_Urbaningrum","kpk.go.id","tempo.co","detik.com"],
+    connections_summary:"Mantan Ketum Demokrat. Terpidana korupsi Hambalang 8 tahun. Kini Ketum PKN pasca bebas 2023.",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:6, corruption_risk:"tinggi",
+      nationalism:6, religiosity:6,
+      track_record:"Naik cepat di Demokrat hingga menjadi Ketua Umum. Jatuh akibat kasus Hambalang dan divonis 8 tahun. Setelah bebas mendirikan PKN dan kembali ke politik, namun pengaruhnya jauh berkurang.",
+      policy_direction:"Nasionalis moderat, Islam-inklusif",
+      style:"politisi",
+      risk:"tinggi",
+      influence:40,
+      controversy_level:8,
+      notes:"Anas Urbaningrum adalah politisi muda berbakat yang menjadi Ketua Demokrat sebelum jatuh akibat kasus korupsi Hambalang. Setelah bebas dari penjara, ia mendirikan partai baru dan kembali ke panggung politik."
+    }
+  },
 ]
 
 export const PERSONS_MAP = Object.fromEntries(PERSONS.map(p => [p.id, p]))
