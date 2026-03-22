@@ -4542,6 +4542,75 @@ export const PERSONS = [
       notes:"Anas Urbaningrum adalah politisi muda berbakat yang menjadi Ketua Demokrat sebelum jatuh akibat kasus korupsi Hambalang. Setelah bebas dari penjara, ia mendirikan partai baru dan kembali ke panggung politik."
     }
   },
+  {
+    id:"aburizal_bakrie", name:"Aburizal Bakrie", photo_url:"https://upload.wikimedia.org/wikipedia/commons/4/45/Aburizal_Bakrie_-_March_2011.jpeg", photo_placeholder:"AB",
+    born:"15 Nov 1946", born_place:"Jakarta", religion:"Islam",
+    education:"S1 Teknik Elektro, Institut Teknologi Bandung (1973)",
+    party_id:"gol", party_role:"ex-Ketua Umum",
+    positions:[
+      {title:"Ketua Umum Partai Golkar",    institution:"DPP Golkar",       region:"Nasional", start:"2009", end:"2016", is_current:false},
+      {title:"Menko Perekonomian",           institution:"Kabinet Indonesia Bersatu", region:"Nasional", start:"2004", end:"2005", is_current:false},
+      {title:"Menteri Koordinator Kesejahteraan Rakyat", institution:"Kabinet Indonesia Bersatu II", region:"Nasional", start:"2005", end:"2009", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Aburizal Bakrie adalah konglomerat dan politisi senior Indonesia. Pimpin Golkar 2009-2016. Nama Bakrie Group identik dengan Lumpur Lapindo yang merendam ribuan rumah di Sidoarjo sejak 2006.",
+    tags:["golkar","konglomerat","lumpur-lapindo","media","oligarki"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN — bukan pejabat aktif saat ini.",
+    kontroversi:[
+      "Lumpur Lapindo — Sidoarjo banjir lumpur 2006, ganti rugi mangkrak",
+      "Bisnis media tvOne/ANTV — conflict of interest",
+      "Perebutan Golkar vs Agung Laksono 2014"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Aburizal_Bakrie","tempo.co","detik.com"],
+    connections_summary:"ex-Ketua Umum Golkar 2009-2016. Konglomerat Bakrie Group. Terkait Lumpur Lapindo Sidoarjo.",
+    twitter:null,
+    analysis:{
+      ideology_score:4, populism_score:5, corruption_risk:"sedang",
+      nationalism:6, religiosity:4,
+      track_record:"Memimpin Golkar selama 7 tahun dan sempat disebut capres potensial. Namun reputasi hancur akibat Lumpur Lapindo yang tak kunjung selesai.",
+      policy_direction:"Pro-bisnis, nasionalis",
+      style:"pengusaha",
+      risk:"sedang",
+      influence:65,
+      controversy_level:8,
+      notes:"Aburizal Bakrie adalah salah satu konglomerat terbesar Indonesia yang memimpin Golkar 2009-2016. Namanya selalu dikaitkan dengan tragedi Lumpur Lapindo di Sidoarjo yang hingga kini belum tuntas penyelesaiannya."
+    }
+  },
+  {
+    id:"nazaruddin", name:"Muhammad Nazaruddin", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Muhammad_Nazaruddin.jpg/330px-Muhammad_Nazaruddin.jpg", photo_placeholder:"MN",
+    born:"26 Agu 1980", born_place:"Bandar Baru, Aceh Utara", religion:"Islam",
+    education:"S1 Ekonomi Akuntansi, Universitas Sumatera Utara",
+    party_id:"dem", party_role:"ex-Bendahara Umum",
+    positions:[
+      {title:"Bendahara Umum Partai Demokrat", institution:"DPP Demokrat",    region:"Nasional", start:"2010", end:"2011", is_current:false},
+      {title:"Anggota DPR RI",                 institution:"DPR RI",           region:"Nasional", start:"2009", end:"2011", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Muhammad Nazaruddin adalah mantan bendahara Partai Demokrat dan anggota DPR yang menjadi buronan Interpol sebelum ditangkap di Kolombia 2011. Divonis 7 tahun penjara atas korupsi proyek Wisma Atlet. Kesaksiannya menjatuhkan banyak tokoh Demokrat.",
+    tags:["demokrat","korupsi","wisma-atlet","terpidana","buronan","whistle-blower"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN aktif — aset disita terkait kasus korupsi.",
+    kontroversi:[
+      "Terpidana korupsi Wisma Atlet — 7 tahun",
+      "Buronan Interpol sebelum ditangkap di Kolombia",
+      "Whistle-blower Anas Urbaningrum dan Angelina Sondakh"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Muhammad_Nazaruddin","kpk.go.id","tempo.co","detik.com"],
+    connections_summary:"ex-Bendahara Demokrat. Terpidana korupsi Wisma Atlet. Buronan Interpol, ditangkap Kolombia 2011.",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:3, corruption_risk:"tinggi",
+      nationalism:4, religiosity:4,
+      track_record:"Naik cepat di Demokrat hingga menjadi bendahara umum. Jatuh akibat kasus korupsi Wisma Atlet dan menjadi buronan internasional. Kesaksiannya merusak banyak karir politisi Demokrat.",
+      policy_direction:"Tidak relevan — fokus kasus korupsi",
+      style:"politisi",
+      risk:"tinggi",
+      influence:30,
+      controversy_level:9,
+      notes:"Nazaruddin adalah mantan bendahara Partai Demokrat yang menjadi buronan internasional sebelum ditangkap di Kolombia 2011. Kesaksiannya menjatuhkan banyak politisi Demokrat termasuk Anas Urbaningrum."
+    }
+  }
 ]
 
 export const PERSONS_MAP = Object.fromEntries(PERSONS.map(p => [p.id, p]))
