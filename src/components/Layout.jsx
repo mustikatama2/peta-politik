@@ -11,6 +11,7 @@ import { CONNECTIONS } from '../data/connections'
 
 const NAV = [
   { to:'/',         icon:'🏠', label:'Dashboard' },
+  { to:'/briefing', icon:'📋', label:'Briefing Harian' },
   { to:'/ranking',  icon:'🏆', label:'Power Rankings' },
   { to:'/kabinet',  icon:'🏛️', label:'Kabinet Merah Putih' },
   { to:'/pemerintah', icon:'🏛️', label:'Pemerintahan' },

@@ -51,6 +51,7 @@ const FramingPage      = lazy(() => import('./pages/framing/FramingPage'))
 const GlosariumPage    = lazy(() => import('./pages/glosarium/GlosariumPage'))
 const ScorecardPage    = lazy(() => import('./pages/scorecard/ScorecardPage'))
 const QuickFactsPage   = lazy(() => import('./pages/quickfacts/QuickFactsPage'))
+const BriefingPage     = lazy(() => import('./pages/briefing/BriefingPage'))
 
 // Loading fallback — branded spinner + skeleton
 function PageLoader() {
@@ -84,6 +85,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<ProtectedRoute><ErrorBoundary><Dashboard /></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/briefing" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BriefingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/ranking" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RankingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/persons" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PersonList /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/persons/:id" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PersonDetail /></Suspense></ErrorBoundary></ProtectedRoute>} />
