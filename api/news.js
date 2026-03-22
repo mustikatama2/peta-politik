@@ -7,20 +7,8 @@ const RSS_SOURCES = [
     id: 'kompas',
     name: 'Kompas',
     urls: [
-      'https://rss.kompas.com/nasional/berita/nasional',
-      'https://rss.kompas.com/news/politik',
-      'https://indeks.kompas.com/?site=nasional&format=rss',
-      'https://rss.kompas.com/nasional',
-      'https://news.kompas.com/nasional/rss',
-      'https://www.kompas.com/rss/nasional.xml',
-      'https://rss.kompas.com/index.xml',
-      'https://kompas.com/rss/nasional',
+      'https://news.google.com/rss/search?q=politik+indonesia&hl=id&gl=ID&ceid=ID:id',
     ],
-    headers: {
-      'Accept': 'text/xml, application/xml, application/rss+xml, */*',
-      'Accept-Language': 'id-ID,id;q=0.9',
-      'Cache-Control': 'no-cache',
-    },
     bias: 'tengah',
   },
   {
@@ -72,33 +60,6 @@ const RSS_SOURCES = [
     name: 'JPNN',
     urls: [
       'https://www.jpnn.com/rss',
-      'https://www.jpnn.com/rss/news',
-      'https://www.jpnn.com/feed',
-      'https://www.jpnn.com/feed/nasional',
-      'https://jpnn.com/rss',
-    ],
-    bias: 'tengah',
-  },
-  {
-    id: 'suara',
-    name: 'Suara.com',
-    urls: [
-      'https://www.suara.com/rss',
-      'https://www.suara.com/feed/nasional.rss',
-      'https://suara.com/rss',
-      'https://www.suara.com/feed',
-      'https://www.suara.com/nasional/feed.rss',
-    ],
-    bias: 'tengah',
-  },
-  {
-    id: 'merdeka',
-    name: 'Merdeka',
-    urls: [
-      'https://merdeka.com/feeds/rss.xml',
-      'https://www.merdeka.com/rss/peristiwa.xml',
-      'https://merdeka.com/rss.xml',
-      'https://rss.merdeka.com/',
     ],
     bias: 'tengah',
   },
@@ -132,9 +93,8 @@ const RSS_SOURCES = [
     id: 'inews',
     name: 'iNews',
     urls: [
+      'https://www.inews.id/feed',
       'https://www.inews.id/feed/nasional',
-      'https://inews.id/rss/nasional',
-      'https://www.inews.id/rss',
     ],
     bias: 'tengah',
   },
@@ -246,6 +206,8 @@ const PERSON_NAME_INDEX = {
   'nawawi pomolango': 'nawawi',
   'ketua kpk': 'nawawi',
   'kepala bin': 'budi_gunawan',
+  'alexander marwata': 'alexander_marwata',
+  'novel baswedan': 'novel_baswedan',
   'anwar usman': 'anwar_usman',
   'mantan ketua mk': 'anwar_usman',
   'suhartoyo': 'suhartoyo',
@@ -255,6 +217,7 @@ const PERSON_NAME_INDEX = {
 
   // ── PARTAI / DPR / MPR ───────────────────────────────────────────
   'puan maharani': 'puan',
+  'puan': 'puan',
   'ketua dpr': 'puan',
   'sufmi dasco': 'sufmi_dasco',
   'dasco': 'sufmi_dasco',
@@ -380,6 +343,9 @@ const TOPIC_KEYWORDS = {
   'mpr': 'legislatif',
   'dprd': 'legislatif',
   'fraksi': 'legislatif',
+  'legislasi': 'legislatif',
+  'ruu penyiaran': 'legislatif',
+  'uu tni': 'legislatif',
   'rancangan undang': 'legislatif',
   'undang-undang': 'legislatif',
   'omnibus': 'legislatif',
@@ -400,6 +366,9 @@ const TOPIC_KEYWORDS = {
   'survei politik': 'pemilu',
   // ── HUKUM & KORUPSI ──────────────────────────────────────────────
   'tipikor': 'korupsi',
+  'sidang tipikor': 'korupsi',
+  'korupsi timah': 'korupsi',
+  'kpk': 'korupsi',
   'kejaksaan agung': 'korupsi',
   'tersangka': 'korupsi',
   'terdakwa': 'korupsi',
@@ -423,6 +392,7 @@ const TOPIC_KEYWORDS = {
   'apbd': 'ekonomi',
   'anggaran': 'ekonomi',
   'efisiensi anggaran': 'ekonomi',
+  'efisiensi apbn': 'ekonomi',
   'inflasi': 'ekonomi',
   'rupiah': 'ekonomi',
   'pajak': 'ekonomi',
@@ -460,6 +430,7 @@ const TOPIC_KEYWORDS = {
   'ksau': 'keamanan',
   // ── SOSIAL & KEBIJAKAN ───────────────────────────────────────────
   'makan bergizi gratis': 'sosial',
+  'makan bergizi': 'sosial',
   'mbg': 'sosial',
   'program makan': 'sosial',
   'bansos': 'sosial',
@@ -731,6 +702,14 @@ export default async function handler(req, res) {
       a.excerpt.toLowerCase().includes(searchLower)
     );
   }
+
+  // Deduplicate by URL (exact match, prevents the same article from multiple sources)
+  const seenUrls = new Set();
+  articles = articles.filter(a => {
+    if (seenUrls.has(a.url)) return false;
+    seenUrls.add(a.url);
+    return true;
+  });
 
   // Deduplicate by title prefix (simple, handles cross-source reposts)
   const seen = new Set();
