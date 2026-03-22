@@ -155,6 +155,10 @@ function computeStats() {
     ...APPROVAL_POLLS.map(p => p.date),
     ...PILPRES_2029_POLLS.map(p => p.date),
     ...PARTY_POLLS.map(p => p.date),
+    ...APPROVAL_POLLS_MULTILEMBAGA.map(p => p.date),
+    ...PARTY_POLLS_2025.map(p => p.date),
+    ...CAPRES_2029_POLLS.map(p => p.date),
+    ...ISU_POLLS.map(p => p.date),
   ].sort()
 
   const latestDate = allDates[allDates.length - 1]
@@ -162,16 +166,25 @@ function computeStats() {
   const totalDataPoints =
     PILPRES_2024_POLLS.reduce((s, p) => s + Object.keys(p.candidates).length, 0) +
     APPROVAL_POLLS.length +
+    APPROVAL_POLLS_MULTILEMBAGA.length +
     PILPRES_2029_POLLS.reduce((s, p) => s + Object.keys(p.candidates).length, 0) +
-    PARTY_POLLS.reduce((s, p) => s + Object.keys(p.parties).length, 0)
+    CAPRES_2029_POLLS.reduce((s, p) => s + Object.keys(p.candidates).length, 0) +
+    PARTY_POLLS.reduce((s, p) => s + Object.keys(p.parties).length, 0) +
+    PARTY_POLLS_2025.reduce((s, p) => s + Object.keys(p.parties).length, 0) +
+    ISU_POLLS.reduce((s, p) => s + p.isu.length, 0)
 
   const pollsterIds = new Set([
     ...PILPRES_2024_POLLS.map(p => p.pollster),
     ...APPROVAL_POLLS.map(p => p.pollster),
     ...PILPRES_2029_POLLS.map(p => p.pollster),
     ...PARTY_POLLS.map(p => p.pollster),
+    ...APPROVAL_POLLS_MULTILEMBAGA.map(p => p.pollster),
+    ...PARTY_POLLS_2025.map(p => p.pollster),
+    ...CAPRES_2029_POLLS.map(p => p.pollster),
+    ...ISU_POLLS.map(p => p.pollster),
   ])
   pollsterIds.delete('kpu')
+  pollsterIds.delete('proyeksi')
 
   return { latestDate, totalDataPoints, pollsterCount: pollsterIds.size }
 }
@@ -708,13 +721,520 @@ function PartyElectabilityTab() {
   )
 }
 
+// ── Tab 5: Tren Terkini ────────────────────────────────────────────────────────
+
+const POLLSTER_LINE_COLORS = {
+  indikator:      '#22c55e',
+  lsi:            '#3b82f6',
+  smrc:           '#a855f7',
+  poltracking:    '#f97316',
+  indo_barometer: '#14b8a6',
+  charta:         '#ec4899',
+  litbang_kompas: '#eab308',
+}
+
+function TrenTerkiniTab() {
+  const pollsterMap = useMemo(() => Object.fromEntries(POLLSTERS.map(p => [p.id, p.name])), [])
+
+  // Build per-pollster monthly series for the line chart
+  const allPollsters = useMemo(() =>
+    [...new Set(APPROVAL_POLLS_MULTILEMBAGA.map(p => p.pollster))], [])
+
+  const months = ['2025-01', '2025-02', '2025-03']
+  const monthLabels = { '2025-01': 'Jan 2025', '2025-02': 'Feb 2025', '2025-03': 'Mar 2025' }
+
+  const chartData = useMemo(() =>
+    months.map(m => {
+      const row = { date: monthLabels[m], rawDate: m }
+      APPROVAL_POLLS_MULTILEMBAGA.filter(p => p.date === m && p.person_id === 'prabowo')
+        .forEach(p => { row[p.pollster] = p.approval })
+      return row
+    }), [])
+
+  // Average per month
+  const avgData = useMemo(() =>
+    months.map(m => {
+      const polls = APPROVAL_POLLS_MULTILEMBAGA.filter(p => p.date === m && p.person_id === 'prabowo')
+      const avg = polls.reduce((s, p) => s + p.approval, 0) / (polls.length || 1)
+      return { date: monthLabels[m], avg: Math.round(avg * 10) / 10 }
+    }), [])
+
+  // Latest (Mar 2025) bar comparison
+  const mar2025 = APPROVAL_POLLS_MULTILEMBAGA
+    .filter(p => p.date === '2025-03' && p.person_id === 'prabowo')
+    .sort((a, b) => b.approval - a.approval)
+
+  return (
+    <div className="space-y-6">
+      <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/30 text-xs text-blue-300">
+        📡 <strong>Tren Terkini:</strong> Perbandingan approval rating Prabowo dari 6 lembaga survei, Jan–Mar 2025
+      </div>
+
+      {/* Multi-lembaga line chart */}
+      <Card className="p-4">
+        <h3 className="text-sm font-semibold text-text-primary mb-1">Tren Approval Prabowo — Multi-Lembaga (Jan–Mar 2025)</h3>
+        <p className="text-xs text-text-muted mb-4">Setiap garis mewakili satu lembaga survei. Perbandingan metodologi dan sampel berbeda.</p>
+
+        {/* Legend */}
+        <div className="flex flex-wrap gap-3 mb-4">
+          {allPollsters.map(id => (
+            <div key={id} className="flex items-center gap-1.5 text-xs">
+              <div className="w-3 h-3 rounded-full" style={{ background: POLLSTER_LINE_COLORS[id] || '#6b7280' }} />
+              <span className="text-text-muted">{pollsterMap[id] || id}</span>
+            </div>
+          ))}
+        </div>
+
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+            <XAxis dataKey="date" tick={{ fontSize: 11 }} stroke="rgba(255,255,255,0.2)" />
+            <YAxis domain={[65, 85]} tickFormatter={v => `${v}%`} tick={{ fontSize: 11 }} stroke="rgba(255,255,255,0.2)" />
+            <Tooltip
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 shadow-xl text-xs">
+                    <p className="font-bold mb-2">{label}</p>
+                    {payload.map(p => (
+                      <div key={p.dataKey} className="flex items-center gap-2 mt-0.5">
+                        <div className="w-2.5 h-2.5 rounded-full" style={{ background: p.color }} />
+                        <span className="text-text-muted">{pollsterMap[p.dataKey] || p.dataKey}:</span>
+                        <span className="font-semibold">{p.value}%</span>
+                      </div>
+                    ))}
+                  </div>
+                )
+              }}
+            />
+            {allPollsters.map(id => (
+              <Line
+                key={id}
+                type="monotone"
+                dataKey={id}
+                name={pollsterMap[id] || id}
+                stroke={POLLSTER_LINE_COLORS[id] || '#6b7280'}
+                strokeWidth={2}
+                dot={{ r: 5 }}
+                activeDot={{ r: 7 }}
+                connectNulls
+              />
+            ))}
+          </LineChart>
+        </ResponsiveContainer>
+      </Card>
+
+      {/* Bar chart: snapshot Mar 2025 comparison */}
+      <Card className="p-4">
+        <h3 className="text-sm font-semibold text-text-primary mb-3">Perbandingan Lembaga — Maret 2025</h3>
+        <div className="space-y-2">
+          {mar2025.map(p => (
+            <div key={p.pollster} className="flex items-center gap-3">
+              <div className="w-36 text-xs text-right text-text-muted truncate flex-shrink-0">
+                {pollsterMap[p.pollster] || p.pollster}
+              </div>
+              <div className="flex-1 h-7 rounded overflow-hidden bg-bg-elevated">
+                <div
+                  className="h-full rounded flex items-center px-2 text-xs text-white font-bold"
+                  style={{ width: `${p.approval}%`, background: POLLSTER_LINE_COLORS[p.pollster] || '#22c55e' }}
+                >
+                  {p.approval}%
+                </div>
+              </div>
+              {p.note && <span className="text-xs text-yellow-400/80 italic truncate max-w-[140px]">📌 {p.note}</span>}
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 pt-3 border-t border-border flex items-center justify-between text-xs text-text-muted">
+          <span>Rata-rata Maret 2025:</span>
+          <span className="text-green-400 font-bold text-sm">
+            {(mar2025.reduce((s, p) => s + p.approval, 0) / mar2025.length).toFixed(1)}%
+          </span>
+        </div>
+      </Card>
+
+      {/* Monthly average KPI */}
+      <div className="grid grid-cols-3 gap-3">
+        {avgData.map(d => (
+          <Card key={d.date} className="p-3 text-center">
+            <p className="text-xs text-text-muted mb-1">{d.date}</p>
+            <p className="text-2xl font-bold text-green-400">{d.avg}%</p>
+            <p className="text-xs text-text-muted">rata-rata approval</p>
+          </Card>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ── Tab 6: Horse Race Partai 2025 ─────────────────────────────────────────────
+
+function HorseRacePartaiTab() {
+  const pollsterMap = useMemo(() => {
+    const map = Object.fromEntries(POLLSTERS.map(p => [p.id, p.name]))
+    map['kpu'] = 'KPU (Hasil Resmi)'
+    return map
+  }, [])
+
+  function partyColor(id) {
+    return PARTY_COLORS_OVERRIDE[id] || PARTY_MAP[id]?.color || '#6b7280'
+  }
+  function partyLabel(id) {
+    return PARTY_MAP[id]?.abbr || PARTY_MAP[id]?.name || id.toUpperCase()
+  }
+
+  // Get top-6 parties from all 2025 polls combined (by average share)
+  const allParties = useMemo(() => {
+    const acc = {}
+    PARTY_POLLS_2025.forEach(poll => {
+      Object.entries(poll.parties).forEach(([p, v]) => {
+        if (p === 'lainnya') return
+        if (!acc[p]) acc[p] = []
+        acc[p].push(v)
+      })
+    })
+    return Object.entries(acc)
+      .map(([id, vals]) => ({ id, avg: vals.reduce((a, b) => a + b, 0) / vals.length }))
+      .sort((a, b) => b.avg - a.avg)
+      .slice(0, 8)
+      .map(x => x.id)
+  }, [])
+
+  // Build chart: each party gets bars per pollster
+  const chartData = useMemo(() =>
+    allParties.map(partyId => {
+      const row = { party: partyLabel(partyId), id: partyId }
+      PARTY_POLLS_2025.forEach(poll => {
+        const key = `${poll.pollster}_${poll.date.replace('-', '')}`
+        row[key] = poll.parties[partyId] ?? null
+      })
+      return row
+    }), [allParties])
+
+  // Unique pollster-date keys for bar groups
+  const pollKeys = useMemo(() =>
+    PARTY_POLLS_2025.map(p => ({
+      key: `${p.pollster}_${p.date.replace('-', '')}`,
+      label: `${pollsterMap[p.pollster] || p.pollster} (${p.date})`,
+      color: POLLSTER_LINE_COLORS[p.pollster] || '#6b7280',
+    })), [pollsterMap])
+
+  // Side-by-side snapshot: pick 3 lembaga for Mar 2025 (or latest)
+  const threePolls = PARTY_POLLS_2025.slice(-3)
+
+  return (
+    <div className="space-y-6">
+      <Card className="p-4">
+        <h3 className="text-sm font-semibold text-text-primary mb-1">Horse Race Partai — Perbandingan 3 Lembaga Terbaru</h3>
+        <p className="text-xs text-text-muted mb-4">Elektabilitas partai (Feb–Mar 2025) dari 3 survei berbeda. Proyeksi awal Pemilu 2029.</p>
+
+        <div className="flex flex-wrap gap-3 mb-4">
+          {threePolls.map(p => (
+            <div key={p.pollster + p.date} className="flex items-center gap-1.5 text-xs">
+              <div className="w-3 h-3 rounded-sm" style={{ background: POLLSTER_LINE_COLORS[p.pollster] || '#6b7280' }} />
+              <span className="text-text-muted">{pollsterMap[p.pollster] || p.pollster} ({p.date})</span>
+            </div>
+          ))}
+        </div>
+
+        <ResponsiveContainer width="100%" height={380}>
+          <BarChart
+            data={allParties.map(pid => {
+              const row = { party: partyLabel(pid), id: pid }
+              threePolls.forEach(poll => {
+                row[`${poll.pollster}_${poll.date}`] = poll.parties[pid] ?? null
+              })
+              return row
+            })}
+            margin={{ top: 5, right: 20, left: 0, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+            <XAxis dataKey="party" tick={{ fontSize: 11 }} stroke="rgba(255,255,255,0.2)" />
+            <YAxis tickFormatter={v => `${v}%`} tick={{ fontSize: 11 }} stroke="rgba(255,255,255,0.2)" />
+            <Tooltip
+              content={({ active, payload, label }) => {
+                if (!active || !payload?.length) return null
+                return (
+                  <div className="bg-bg-card border border-border rounded-lg p-3 shadow-xl text-xs">
+                    <p className="font-bold mb-2">{label}</p>
+                    {payload.filter(p => p.value != null).map(p => (
+                      <div key={p.dataKey} className="flex items-center gap-2 mt-0.5">
+                        <div className="w-2.5 h-2.5 rounded-sm" style={{ background: p.fill }} />
+                        <span className="text-text-muted">{p.name}:</span>
+                        <span className="font-semibold">{p.value?.toFixed(1)}%</span>
+                      </div>
+                    ))}
+                  </div>
+                )
+              }}
+            />
+            {threePolls.map(poll => (
+              <Bar
+                key={`${poll.pollster}_${poll.date}`}
+                dataKey={`${poll.pollster}_${poll.date}`}
+                name={`${pollsterMap[poll.pollster] || poll.pollster} (${poll.date})`}
+                fill={POLLSTER_LINE_COLORS[poll.pollster] || '#6b7280'}
+                radius={[3, 3, 0, 0]}
+              />
+            ))}
+          </BarChart>
+        </ResponsiveContainer>
+      </Card>
+
+      {/* Detailed table */}
+      <Card className="p-4 overflow-x-auto">
+        <h3 className="text-sm font-semibold text-text-primary mb-3">Detail Data — 6 Survei Partai 2025</h3>
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="border-b border-border">
+              <th className="text-left py-2 pr-3 text-text-muted">Partai</th>
+              {PARTY_POLLS_2025.map(p => (
+                <th key={p.pollster + p.date} className="text-right py-2 px-2 text-text-muted whitespace-nowrap">
+                  {(pollsterMap[p.pollster] || p.pollster).split(' ')[0]}
+                  <br />
+                  <span className="font-normal opacity-70">{p.date}</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {allParties.map(pid => (
+              <tr key={pid} className="border-b border-border/50">
+                <td className="py-1.5 pr-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-sm flex-shrink-0" style={{ background: partyColor(pid) }} />
+                    <span className="text-text-primary font-medium">{partyLabel(pid)}</span>
+                  </div>
+                </td>
+                {PARTY_POLLS_2025.map(p => (
+                  <td key={p.pollster + p.date} className="py-1.5 px-2 text-right font-mono">
+                    {p.parties[pid] != null ? `${p.parties[pid]}%` : '—'}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+    </div>
+  )
+}
+
+// ── Tab 7: Capres 2029 Table ──────────────────────────────────────────────────
+
+function Capres2029TableTab() {
+  const pollsterMap = useMemo(() => Object.fromEntries(POLLSTERS.map(p => [p.id, p.name])), [])
+
+  const allCandidates = useMemo(() => {
+    const set = new Set()
+    CAPRES_2029_POLLS.forEach(p => Object.keys(p.candidates).forEach(k => set.add(k)))
+    set.delete('lainnya')
+    return Array.from(set)
+  }, [])
+
+  // Average per candidate across all polls
+  const averages = useMemo(() => {
+    const acc = {}
+    CAPRES_2029_POLLS.forEach(poll =>
+      Object.entries(poll.candidates).forEach(([id, pct]) => {
+        if (!acc[id]) acc[id] = []
+        acc[id].push(pct)
+      })
+    )
+    return Object.fromEntries(
+      Object.entries(acc).map(([id, vals]) => [id, vals.reduce((a, b) => a + b, 0) / vals.length])
+    )
+  }, [])
+
+  const rankedCandidates = [...allCandidates]
+    .filter(c => c !== 'lainnya')
+    .sort((a, b) => (averages[b] || 0) - (averages[a] || 0))
+
+  return (
+    <div className="space-y-6">
+      <div className="p-3 rounded-lg bg-purple-500/10 border border-purple-500/30 text-xs text-purple-300">
+        🔮 <strong>Proyeksi Capres 2029:</strong> Kumpulan survei elektabilitas dari 6 lembaga, Jan–Mar 2025. Masih sangat awal — 4 tahun menjelang Pilpres 2029.
+      </div>
+
+      {/* Average ranking KPIs */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {rankedCandidates.slice(0, 6).map((cid, i) => (
+          <Card key={cid} className="p-3">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-lg font-bold text-text-muted">#{i + 1}</span>
+              <div className="w-2.5 h-2.5 rounded-full" style={{ background: CANDIDATE_COLORS_2029[cid] || '#6b7280' }} />
+            </div>
+            <p className="text-xs font-semibold text-text-primary">{CANDIDATE_LABELS_2029[cid] || cid}</p>
+            <p className="text-xl font-bold mt-1" style={{ color: CANDIDATE_COLORS_2029[cid] || '#fff' }}>
+              {averages[cid]?.toFixed(1)}%
+            </p>
+            <p className="text-xs text-text-muted">rata-rata 6 survei</p>
+          </Card>
+        ))}
+      </div>
+
+      {/* Full cross-poll table */}
+      <Card className="p-4 overflow-x-auto">
+        <h3 className="text-sm font-semibold text-text-primary mb-3">Tabel Lintas-Survei — Elektabilitas Capres 2029</h3>
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="border-b border-border">
+              <th className="text-left py-2 pr-4 text-text-muted min-w-[140px]">Tokoh</th>
+              {CAPRES_2029_POLLS.map(p => (
+                <th key={p.pollster + p.date} className="text-right py-2 px-2 text-text-muted whitespace-nowrap">
+                  {(pollsterMap[p.pollster] || p.pollster).split(' ')[0]}
+                  <br />
+                  <span className="font-normal opacity-70">{p.date}</span>
+                </th>
+              ))}
+              <th className="text-right py-2 pl-3 text-text-muted">Avg</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rankedCandidates.map(cid => (
+              <tr key={cid} className="border-b border-border/50">
+                <td className="py-2 pr-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ background: CANDIDATE_COLORS_2029[cid] || '#6b7280' }} />
+                    <span className="text-text-primary font-medium">{CANDIDATE_LABELS_2029[cid] || cid}</span>
+                  </div>
+                </td>
+                {CAPRES_2029_POLLS.map(p => (
+                  <td key={p.pollster + p.date} className="py-2 px-2 text-right font-mono">
+                    {p.candidates[cid] != null ? `${p.candidates[cid]}%` : '—'}
+                  </td>
+                ))}
+                <td className="py-2 pl-3 text-right font-mono font-bold" style={{ color: CANDIDATE_COLORS_2029[cid] || '#fff' }}>
+                  {averages[cid]?.toFixed(1)}%
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+
+      {/* Trend bar chart: average per candidate */}
+      <Card className="p-4">
+        <h3 className="text-sm font-semibold text-text-primary mb-3">Rata-rata Elektabilitas — 6 Survei Q1 2025</h3>
+        <div className="space-y-2">
+          {rankedCandidates.slice(0, 8).map((cid, i) => (
+            <div key={cid} className="flex items-center gap-3">
+              <span className="text-xs text-text-muted w-4 text-right">{i + 1}</span>
+              <div className="w-32 text-xs text-text-muted truncate">{CANDIDATE_LABELS_2029[cid] || cid}</div>
+              <div className="flex-1 h-6 rounded overflow-hidden bg-bg-elevated">
+                <div
+                  className="h-full rounded flex items-center px-2 text-xs text-white font-bold"
+                  style={{
+                    width: `${((averages[cid] || 0) / (averages[rankedCandidates[0]] || 1)) * 100}%`,
+                    background: CANDIDATE_COLORS_2029[cid] || '#6b7280',
+                  }}
+                >
+                  {averages[cid]?.toFixed(1)}%
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  )
+}
+
+// ── Tab 8: Isu Terpenting ────────────────────────────────────────────────────
+
+function IsuTerpentingTab() {
+  const pollsterMap = useMemo(() => Object.fromEntries(POLLSTERS.map(p => [p.id, p.name])), [])
+
+  // Latest poll (last entry)
+  const latestPoll = ISU_POLLS[ISU_POLLS.length - 1]
+  const sorted = [...latestPoll.isu].sort((a, b) => b.persen - a.persen)
+
+  return (
+    <div className="space-y-6">
+      <Card className="p-4">
+        <h3 className="text-sm font-semibold text-text-primary mb-1">Isu Terpenting — Persepsi Publik</h3>
+        <p className="text-xs text-text-muted mb-4">
+          {pollsterMap[latestPoll.pollster] || latestPoll.pollster} · {latestPoll.date} · n={latestPoll.n.toLocaleString()}
+        </p>
+
+        {/* Horizontal bar chart */}
+        <div className="space-y-3">
+          {sorted.map((item, i) => {
+            const barColors = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#14b8a6', '#3b82f6', '#a855f7']
+            const color = barColors[i] || '#6b7280'
+            return (
+              <div key={item.label}>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-xs font-medium text-text-primary">{item.label}</span>
+                  <span className="text-xs font-bold" style={{ color }}>{item.persen}%</span>
+                </div>
+                <div className="h-5 rounded overflow-hidden bg-bg-elevated">
+                  <div
+                    className="h-full rounded flex items-center px-2 text-xs text-white font-semibold transition-all"
+                    style={{ width: `${(item.persen / sorted[0].persen) * 100}%`, background: color }}
+                  >
+                    {item.persen >= 20 && `${item.persen}%`}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        <p className="text-xs text-text-muted mt-4 italic">
+          * Responden boleh memilih lebih dari satu isu, sehingga total &gt; 100%
+        </p>
+      </Card>
+
+      {/* Compare across polls */}
+      {ISU_POLLS.length > 1 && (
+        <Card className="p-4 overflow-x-auto">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">Perbandingan Lintas-Survei</h3>
+          <table className="w-full text-xs">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="text-left py-2 pr-4 text-text-muted">Isu</th>
+                {ISU_POLLS.map(p => (
+                  <th key={p.pollster + p.date} className="text-right py-2 px-2 text-text-muted whitespace-nowrap">
+                    {(pollsterMap[p.pollster] || p.pollster).split(' ')[0]}
+                    <br /><span className="font-normal opacity-70">{p.date}</span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {sorted.map(item => (
+                <tr key={item.label} className="border-b border-border/50">
+                  <td className="py-1.5 pr-4 text-text-primary font-medium">{item.label}</td>
+                  {ISU_POLLS.map(p => {
+                    const found = p.isu.find(x => x.label === item.label)
+                    return (
+                      <td key={p.pollster + p.date} className="py-1.5 px-2 text-right font-mono">
+                        {found ? `${found.persen}%` : '—'}
+                      </td>
+                    )
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </Card>
+      )}
+    </div>
+  )
+}
+
 // ── Main Page ─────────────────────────────────────────────────────────────────
 
 const TABS = [
-  { id: 'pilpres2024', label: '🗳️ Pilpres 2024' },
-  { id: 'approval',    label: '📊 Approval Rating' },
-  { id: 'pilpres2029', label: '🔮 Proyeksi 2029' },
-  { id: 'partai',      label: '🎭 Elektabilitas Partai' },
+  { id: 'pilpres2024',  label: '🗳️ Pilpres 2024' },
+  { id: 'approval',     label: '📊 Approval Rating' },
+  { id: 'tren2025',     label: '📡 Tren 2025' },
+  { id: 'pilpres2029',  label: '🔮 Proyeksi 2029' },
+  { id: 'capres2029',   label: '👤 Capres 2029' },
+  { id: 'partai',       label: '🎭 Partai' },
+  { id: 'horserace',    label: '🏇 Horse Race' },
+  { id: 'isu',          label: '⚡ Isu Publik' },
 ]
 
 export default function SurveyPage() {
@@ -751,9 +1271,9 @@ export default function SurveyPage() {
           color="purple"
         />
         <KPICard
-          label="Pemilihan Dipantau"
-          value={3}
-          sub="Pilpres 2024, 2029, Pileg"
+          label="Topik Dipantau"
+          value={6}
+          sub="Pilpres, Partai, Approval, Isu"
           icon="🗳️"
           color="red"
         />
@@ -765,8 +1285,12 @@ export default function SurveyPage() {
       {/* Tab content */}
       {activeTab === 'pilpres2024' && <Pilpres2024Tab />}
       {activeTab === 'approval'    && <ApprovalTab />}
+      {activeTab === 'tren2025'    && <TrenTerkiniTab />}
       {activeTab === 'pilpres2029' && <Pilpres2029Tab />}
+      {activeTab === 'capres2029'  && <Capres2029TableTab />}
       {activeTab === 'partai'      && <PartyElectabilityTab />}
+      {activeTab === 'horserace'   && <HorseRacePartaiTab />}
+      {activeTab === 'isu'         && <IsuTerpentingTab />}
     </div>
   )
 }
