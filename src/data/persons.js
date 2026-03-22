@@ -4034,6 +4034,112 @@ export const PERSONS = [
   },
 
   {
+    id:"wahiduddin", name:"Wahiduddin Adams", photo_url:null, photo_placeholder:"WA",
+    born:"1956", born_place:"Indonesia", religion:"Islam",
+    education:"Hukum",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Hakim Mahkamah Konstitusi", institution:"Mahkamah Konstitusi RI", region:"Nasional", start:"2014", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Hakim Mahkamah Konstitusi RI. Dikenal sebagai hakim konservatif dengan rekam jejak konsistensi terhadap nilai-nilai Islam dalam produk legislasi.",
+    tags:["mk","hakim","hukum","konstitusi"],
+    lhkpn_latest:8.5, lhkpn_year:2023,
+    connections_summary:"Hakim MK, diangkat DPR RI",
+    twitter:null,
+    analysis:{
+      ideology_score:6, populism_score:3, corruption_risk:"rendah",
+      nationalism:7, religiosity:8,
+      track_record:"Hakim MK sejak 2014, dikenal dengan pendekatan konservatif.",
+      policy_direction:"Konstitusionalisme, hukum Islam",
+      style:"Teknokrat",
+      risk:"low",
+      influence:6,
+      controversy_level:2,
+      notes:"Hakim MK dengan rekam jejak konsistensi terhadap nilai-nilai Islam dalam produk legislasi."
+    }
+  },
+  {
+    id:"saldi_isra", name:"Saldi Isra", photo_url:null, photo_placeholder:"SI",
+    born:"1968", born_place:"Sumatera Barat", religion:"Islam",
+    education:"Hukum Tata Negara, Universitas Andalas; S3 Universitas Gadjah Mada",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Wakil Ketua Mahkamah Konstitusi", institution:"Mahkamah Konstitusi RI", region:"Nasional", start:"2023", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Wakil Ketua Mahkamah Konstitusi RI. Akademisi hukum tata negara dari Universitas Andalas. Dikenal karena keberanian menyampaikan dissenting opinion, termasuk dalam putusan kontroversial MK Nomor 90/PUU-XXI/2023 soal batas usia capres-cawapres.",
+    tags:["mk","hakim","hukum","konstitusi","dissenting"],
+    lhkpn_latest:5.2, lhkpn_year:2023,
+    connections_summary:"Wakil Ketua MK, akademisi HTN Andalas",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:3, corruption_risk:"rendah",
+      nationalism:7, religiosity:6,
+      track_record:"Hakim MK sejak 2017, Wakil Ketua MK 2023. Dissenting opinion MK No.90.",
+      policy_direction:"Konstitusionalisme dan demokrasi",
+      style:"Teknokrat",
+      risk:"low",
+      influence:7,
+      controversy_level:5,
+      notes:"Dissenting opinion putusan MK No.90 yang meloloskan Gibran Rakabuming menjadi simbol integritas yudisial."
+    }
+  },
+  {
+    id:"budi_gunadi", name:"Budi Gunadi Sadikin", photo_url:null, photo_placeholder:"BG",
+    born:"1964", born_place:"Bogor", religion:"Islam",
+    education:"Fisika Nuklir, ITB; MBA",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Menteri Kesehatan", institution:"Kementerian Kesehatan RI", region:"Nasional", start:"2020", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Menteri Kesehatan RI sejak 2020. Mantan Direktur Utama Bank Mandiri dan Wakil Menteri BUMN. Memimpin program transformasi kesehatan nasional termasuk vaksinasi COVID-19 dan digitalisasi layanan kesehatan.",
+    tags:["kabinet","kesehatan","teknokrat","vaksinasi","covid"],
+    lhkpn_latest:120.3, lhkpn_year:2023,
+    connections_summary:"Menkes, mantan Dirut Bank Mandiri, Wamen BUMN",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:2, corruption_risk:"rendah",
+      nationalism:7, religiosity:5,
+      track_record:"Dirut Bank Mandiri 2019-2020, Wamen BUMN, Menkes 2020-kini.",
+      policy_direction:"Transformasi sistem kesehatan, UHC, digitalisasi",
+      style:"Teknokrat",
+      risk:"low",
+      influence:7,
+      controversy_level:3,
+      notes:"Teknokrat kesehatan dengan latar belakang perbankan dan BUMN. Mengelola vaksinasi COVID-19 skala besar."
+    }
+  },
+  {
+    id:"tito_karnavian", name:"Tito Karnavian", photo_url:null, photo_placeholder:"TK",
+    born:"1964", born_place:"Palembang", religion:"Islam",
+    education:"AKPOL 1987; S2 Kepolisian; S3 Universitas Malay",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Menteri Dalam Negeri", institution:"Kementerian Dalam Negeri RI", region:"Nasional", start:"2019", end:null, is_current:true},
+      {title:"Kepala Kepolisian Negara RI (Kapolri)", institution:"POLRI", region:"Nasional", start:"2016", end:"2019", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Mendagri RI sejak 2019. Mantan Kapolri 2016-2019 dan mantan Kepala BNPT. Dikenal berhasil membongkar jaringan terorisme JI dan ISIS di Indonesia. Mendagri termuda dan Kapolri paling berpengalaman dalam kontraterorisme.",
+    tags:["kabinet","mendagri","kapolri","polri","terorisme","kontraterorisme"],
+    lhkpn_latest:12.5, lhkpn_year:2023,
+    connections_summary:"Mendagri, ex-Kapolri, ex-Kepala BNPT",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:4, corruption_risk:"rendah",
+      nationalism:8, religiosity:6,
+      track_record:"Kapolri 2016-2019, Mendagri 2019-kini. Ahli kontraterorisme.",
+      policy_direction:"Pemerintahan daerah, stabilitas nasional, pemilu",
+      style:"Militer-Teknokrat",
+      risk:"low",
+      influence:7,
+      controversy_level:4,
+      notes:"Ex-Kapolri yang dikenal dalam penanganan terorisme. Sebagai Mendagri mengawasi pelaksanaan Pilkada serentak."
+    }
+  },
+
+  {
     id:"novel_baswedan", name:"Novel Baswedan", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Novel_Baswedan%2C_Sorgemagz.com_-_Wawancara_dengan_Novel_Baswedan.jpg/330px-Novel_Baswedan%2C_Sorgemagz.com_-_Wawancara_dengan_Novel_Baswedan.jpg", photo_placeholder:"NB",
     born:"22 Jun 1977", born_place:"Jakarta", religion:"Islam",
     education:"S1 Teknik, Universitas Bengkulu",
