@@ -55,6 +55,7 @@ const NAV = [
   { to:'/bumn',     icon:'🏢', label:'BUMN & Bisnis' },
   { to:'/lhkpn',      icon:'💰', label:'LHKPN' },
   { to:'/lhkpn-trend', icon:'📈', label:'Tren LHKPN' },
+  { to:'/jejak-jabatan', icon:'🗂️', label:'Jejak Jabatan' },
   { to:'/quick-facts', icon:'⚡', label:'Fakta Cepat' },
   { to:'/cek-fakta',  icon:'🔎', label:'Cek Fakta' },
   { to:'/news',     icon:'📰', label:'Berita' },

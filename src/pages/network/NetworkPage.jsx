@@ -366,9 +366,10 @@ export default function NetworkPage() {
       <div className="flex-1 relative overflow-hidden flex flex-col">
         {isMobile ? (
           <div className="flex-1 overflow-y-auto p-4 space-y-2">
-            <p className="text-text-secondary text-sm mb-3">
-              Graf tidak tersedia di layar kecil. Menampilkan daftar koneksi:
-            </p>
+            <div className="bg-amber-900/20 border border-amber-600/30 rounded-xl p-4 mb-3">
+              <p className="text-amber-400 text-sm font-semibold mb-1">📱 Buka di desktop untuk melihat grafik jaringan interaktif</p>
+              <p className="text-text-muted text-xs">Grafik D3 membutuhkan layar lebar. Di bawah ini daftar koneksi teks.</p>
+            </div>
             {NETWORK_NODES.slice(0, 40).map(node => {
               const nodeConns = CONNECTIONS.filter(c =>
                 (c.from === node.id || c.to === node.id) &&

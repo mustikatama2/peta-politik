@@ -149,6 +149,8 @@
   background: var(--bg-sidebar);
   border-top: 1px solid rgba(255,255,255,0.08);
   padding: 0.5rem 0 calc(0.5rem + env(safe-area-inset-bottom));
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 @media (max-width: 768px) { .mobile-nav { display: flex; } }
 
