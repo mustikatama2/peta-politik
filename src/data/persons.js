@@ -1135,7 +1135,7 @@ export const PERSONS = [
   },
   // ─── JATIM — KEAMANAN ────────────────────────────────────────────────────
   {
-    id:"imam_sugianto", name:"Imam Sugianto", photo_url:null, photo_placeholder:"IS",
+    id:"imam_sugianto", name:"Imam Sugianto", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Irjen_pol_drs_imam_sugianto_msi.jpg/330px-Irjen_pol_drs_imam_sugianto_msi.jpg", photo_placeholder:"IS",
     born:"1968", born_place:"Jawa Timur", religion:"Islam",
     education:"Akademi Kepolisian",
     party_id:null, party_role:null,
