@@ -481,17 +481,55 @@ function RingkasanAwam({ person, party }) {
 
 // ─── BERITA TERKAIT ──────────────────────────────────────────────────────────
 function BeritaTerkait({ person }) {
-  const firstName = person.name.split(' ')[0].toLowerCase()
-  const matchedNews = NEWS.filter(n => {
-    if (n.person_ids?.includes(person.id)) return true
-    const headline = (n.headline || '').toLowerCase()
-    return headline.includes(firstName) && firstName.length > 3
-  }).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
+  const [news, setNews] = useState([])
+  const [isLive, setIsLive] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      setLoading(true)
+      try {
+        const res = await fetch(`/api/news?person_id=${person.id}&limit=5`)
+        if (res.ok) {
+          const data = await res.json()
+          const articles = data.articles || data
+          if (Array.isArray(articles) && articles.length > 0) {
+            setNews(articles.slice(0, 5))
+            setIsLive(true)
+            setLoading(false)
+            return
+          }
+        }
+      } catch (_) {}
+      // Fallback to static data
+      const firstName = person.name.split(' ')[0].toLowerCase()
+      const staticNews = NEWS.filter(n => {
+        if (n.person_ids?.includes(person.id)) return true
+        const headline = (n.headline || '').toLowerCase()
+        return headline.includes(firstName) && firstName.length > 3
+      }).sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
+      setNews(staticNews)
+      setIsLive(false)
+      setLoading(false)
+    }
+    fetchNews()
+  }, [person.id])
 
   return (
     <div className="mt-6 pt-6 border-t border-border">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-text-primary">📰 Berita Terkait</h3>
+        <div className="flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-text-primary">📰 Berita Terkait</h3>
+          {!loading && (
+            <span className={`text-xs px-1.5 py-0.5 rounded font-bold tracking-wide ${
+              isLive
+                ? 'bg-green-500/20 text-green-400 border border-green-500/30'
+                : 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
+            }`}>
+              {isLive ? '● LIVE' : 'ARSIP'}
+            </span>
+          )}
+        </div>
         <Link
           to={`/news?person=${person.id}`}
           className="text-xs text-accent-blue hover:underline"
@@ -499,9 +537,24 @@ function BeritaTerkait({ person }) {
           Semua berita →
         </Link>
       </div>
-      {matchedNews.length === 0 ? (
+      {loading ? (
+        <div className="space-y-2">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="flex gap-3 p-3 rounded-xl border border-border bg-bg-card animate-pulse">
+              <div className="flex-1 space-y-2">
+                <div className="h-4 bg-bg-elevated rounded w-full" />
+                <div className="h-4 bg-bg-elevated rounded w-3/4" />
+                <div className="flex gap-2">
+                  <div className="h-3 bg-bg-elevated rounded w-20" />
+                  <div className="h-3 bg-bg-elevated rounded w-16" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : news.length === 0 ? (
         <div className="rounded-xl border border-border bg-bg-card p-5 text-center">
-          <p className="text-text-secondary text-sm mb-2">Tidak ada berita statis cocok untuk tokoh ini.</p>
+          <p className="text-text-secondary text-sm mb-2">Tidak ada berita tersedia untuk tokoh ini.</p>
           <Link
             to={`/news?person=${person.id}`}
             className="inline-flex items-center gap-1.5 text-xs text-accent-blue hover:underline"
@@ -511,40 +564,44 @@ function BeritaTerkait({ person }) {
         </div>
       ) : (
         <div className="space-y-2">
-          {matchedNews.map(n => (
-            <a
-              key={n.id}
-              href={n.url || '#'}
-              target={n.url && n.url !== '#' ? '_blank' : undefined}
-              rel="noopener noreferrer"
-              className="flex gap-3 p-3 rounded-xl border border-border bg-bg-card hover:border-accent-blue/40 hover:bg-bg-elevated transition-all group"
-            >
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-text-primary group-hover:text-accent-blue transition-colors line-clamp-2 leading-snug">
-                  {n.headline}
-                </p>
-                <div className="flex items-center gap-2 mt-1.5 flex-wrap">
-                  <span className="text-xs font-medium text-accent-blue">{n.source}</span>
-                  <span className="text-xs text-text-secondary">{n.date}</span>
-                  {n.sentiment && (
-                    <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
-                      n.sentiment === 'positif' ? 'text-green-400 bg-green-400/10' :
-                      n.sentiment === 'negatif' ? 'text-red-400 bg-red-400/10' :
-                      'text-gray-400 bg-gray-400/10'
-                    }`}>
-                      {n.sentiment === 'positif' ? '▲' : n.sentiment === 'negatif' ? '▼' : '●'} {n.sentiment}
-                    </span>
-                  )}
+          {news.map((n, idx) => {
+            const title = n.title || n.headline || ''
+            const date = n.date ? (n.date.length > 10 ? new Date(n.date).toLocaleDateString('id-ID', {day:'numeric',month:'short',year:'numeric'}) : n.date) : ''
+            return (
+              <a
+                key={n.id || idx}
+                href={n.url || '#'}
+                target={n.url && n.url !== '#' ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="flex gap-3 p-3 rounded-xl border border-border bg-bg-card hover:border-accent-blue/40 hover:bg-bg-elevated transition-all group"
+              >
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-text-primary group-hover:text-accent-blue transition-colors line-clamp-2 leading-snug">
+                    {title}
+                  </p>
+                  <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                    <span className="text-xs font-medium text-accent-blue">{n.source}</span>
+                    <span className="text-xs text-text-secondary">{date}</span>
+                    {n.sentiment && (
+                      <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${
+                        n.sentiment === 'positif' ? 'text-green-400 bg-green-400/10' :
+                        n.sentiment === 'negatif' ? 'text-red-400 bg-red-400/10' :
+                        'text-gray-400 bg-gray-400/10'
+                      }`}>
+                        {n.sentiment === 'positif' ? '▲' : n.sentiment === 'negatif' ? '▼' : '●'} {n.sentiment}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))}
+              </a>
+            )
+          })}
           <div className="pt-1 text-center">
             <Link
               to={`/news?person=${person.id}`}
               className="text-xs text-text-secondary hover:text-accent-blue transition-colors"
             >
-              Cari berita terbaru di tab Berita →
+              {isLive ? 'Lihat semua berita terbaru →' : 'Cari berita terbaru di tab Berita →'}
             </Link>
           </div>
         </div>
@@ -1552,6 +1609,14 @@ export default function PersonDetail() {
                   <h3 className="text-sm font-semibold text-text-primary mb-2">Track Record</h3>
                   <p className="text-text-secondary text-sm leading-relaxed">{person.analysis.track_record}</p>
                 </Card>
+              )}
+              {person.data_sources?.length > 0 && (
+                <div className="text-xs text-text-secondary mt-2 p-3 bg-bg-elevated border border-border rounded-lg">
+                  <span className="font-medium text-text-primary">Sumber:</span>{' '}
+                  {person.data_sources.map((s, i) => (
+                    <span key={i} className="mr-2 font-mono bg-bg-card px-1.5 py-0.5 rounded border border-border/60">{s}</span>
+                  ))}
+                </div>
               )}
               <div className="bg-bg-elevated border border-border rounded-lg p-3 text-xs text-text-secondary">
                 📊 Analisis berdasarkan rekam jejak publik dan data pemilihan. Diperbarui secara berkala oleh tim analis PetaPolitik.

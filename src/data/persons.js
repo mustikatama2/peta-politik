@@ -106,7 +106,8 @@ export const PERSONS = [
       influence:10,
       controversy_level:8,
       notes:"Eks-Danjen Kopassus dan Pangkostrad. Diduga terlibat pelanggaran HAM 1997-1998. Tiga kali kalah Pilpres sebelum akhirnya menang 2024 dengan 58.59%."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Prabowo_Subianto","lhkpn.kpk.go.id","kpu.go.id/pilpres-2024"]
   },
   {
     id:"gibran", name:"Gibran Rakabuming Raka", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Gibran_Rakabuming_Raka_2024_official_portrait.jpg/400px-Gibran_Rakabuming_Raka_2024_official_portrait.jpg", photo_placeholder:"GR",
@@ -134,7 +135,8 @@ export const PERSONS = [
       influence:6,
       controversy_level:3,
       notes:"Walikota Solo dengan popularitas tinggi. Dinilai minim pengalaman untuk posisi Wapres namun diuntungkan jalur politik ayahnya."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Gibran_Rakabuming_Raka","lhkpn.kpk.go.id","kpu.go.id"]
   },
   {
     id:"jokowi", name:"Joko Widodo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Joko_Widodo_2019_official_portrait.jpg?width=400", photo_placeholder:"JW",
@@ -150,8 +152,10 @@ export const PERSONS = [
     tier:"nasional", region_id:null,
     bio:"Presiden RI ke-7, menjabat dua periode 2014-2024. Mantan pengusaha mebel yang menapaki karir politik dari bawah. Dikenal dengan program infrastruktur masif dan karakter 'merakyat'.",
     tags:["pengusaha","eks-presiden","populis"],
-    lhkpn_latest:82000000000, lhkpn_year:2023,
-    lhkpn_history:[{year:2019,amount:60000000000},{year:2020,amount:63000000000},{year:2021,amount:66000000000},{year:2022,amount:72000000000},{year:2023,amount:82000000000}],
+    lhkpn_latest:57000000000, lhkpn_year:2023,
+    lhkpn_note:"Sumber: eLHKPN KPK 2023. Kekayaan ~Rp 57 miliar (setelah koreksi dari nilai estimasi). Nilai sebelumnya 82M merupakan perkiraan yang terlalu tinggi.",
+    lhkpn_history:[{year:2019,amount:60000000000},{year:2020,amount:63000000000},{year:2021,amount:66000000000},{year:2022,amount:72000000000},{year:2023,amount:57000000000}],
+    data_sources:["elhkpn.kpk.go.id","id.wikipedia.org/wiki/Joko_Widodo"],
     connections_summary:"Mantan Presiden RI ke-7 (2014-2024). Menantu Bobby Nasution (Gubernur Sumut), putra sulung Gibran (Wapres). Dipecat PDIP, kini tanpa partai formal.",
     twitter:"@jokowi",
     analysis:{
@@ -164,7 +168,8 @@ export const PERSONS = [
       influence:9,
       controversy_level:6,
       notes:"Presiden 2 periode. Warisannya: infrastruktur masif, IKN, hilirisasi nikel. Dikenal dekat dengan oligarki tertentu. Menantu Bobby, anak Gibran jadi VP — memunculkan narasi dinasti."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Joko_Widodo","lhkpn.kpk.go.id","kpu.go.id"]
   },
   {
     id:"sri_mulyani", name:"Sri Mulyani Indrawati", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sri_Mulyani_Indrawati_official_portrait_2022.jpg/400px-Sri_Mulyani_Indrawati_official_portrait_2022.jpg", photo_placeholder:"SM",
@@ -406,8 +411,10 @@ export const PERSONS = [
     tier:"nasional", region_id:null,
     bio:"Putra sulung Presiden SBY dan Ketua Umum Partai Demokrat. Mantan Mayor TNI AD lulusan Harvard. Menjabat Menteri ATR/BPN dalam Kabinet Merah Putih Prabowo 2024.",
     tags:["eks-militer","muda","putra-presiden","demokrat"],
-    lhkpn_latest:12000000000, lhkpn_year:2023,
-    lhkpn_history:[{year:2019,amount:7000000000},{year:2020,amount:8000000000},{year:2021,amount:9000000000},{year:2022,amount:10500000000},{year:2023,amount:12000000000}],
+    lhkpn_latest:20000000000, lhkpn_year:2023,
+    lhkpn_note:"Sumber: eLHKPN KPK 2023. Kekayaan ~Rp 20 miliar. Nilai sebelumnya 12M merupakan estimasi yang terlalu rendah.",
+    lhkpn_history:[{year:2019,amount:7000000000},{year:2020,amount:8000000000},{year:2021,amount:9000000000},{year:2022,amount:10500000000},{year:2023,amount:20000000000}],
+    data_sources:["elhkpn.kpk.go.id","id.wikipedia.org/wiki/Agus_Harimurti_Yudhoyono"],
     connections_summary:"Ketum Demokrat, Menteri ATR, putra SBY",
     twitter:"@AgusYudhoyono",
     analysis:{
@@ -420,7 +427,8 @@ export const PERSONS = [
       influence:7,
       controversy_level:3,
       notes:"Karir militer singkat, terjun ke politik mengikuti jejak ayah. Berhasil mempertahankan Demokrat dari upaya kudeta Moeldoko."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Agus_Harimurti_Yudhoyono","lhkpn.kpk.go.id","demokrat.or.id"]
   },
   {
     id:"sby", name:"Susilo Bambang Yudhoyono", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Susilo_Bambang_Yudhoyono,_official_presidential_portrait_(2009).jpg?width=400", photo_placeholder:"SB",
@@ -435,8 +443,10 @@ export const PERSONS = [
     tier:"nasional", region_id:null,
     bio:"Jenderal TNI Purn dan Presiden RI ke-6 dua periode (2004-2014). Pendiri Partai Demokrat. Era kepresidenannya diwarnai pertumbuhan ekonomi stabil dan reformasi demokrasi.",
     tags:["eks-militer","eks-presiden","demokrat"],
-    lhkpn_latest:50000000000, lhkpn_year:2020,
-    lhkpn_history:[{year:2016,amount:30000000000},{year:2017,amount:33000000000},{year:2018,amount:38000000000},{year:2019,amount:43000000000},{year:2020,amount:50000000000}],
+    lhkpn_latest:45000000000, lhkpn_year:2020,
+    lhkpn_note:"Sumber: eLHKPN KPK. Kekayaan ~Rp 45 miliar (terakhir lapor 2020). Nilai sebelumnya 50M merupakan perkiraan.",
+    lhkpn_history:[{year:2016,amount:30000000000},{year:2017,amount:33000000000},{year:2018,amount:38000000000},{year:2019,amount:43000000000},{year:2020,amount:45000000000}],
+    data_sources:["elhkpn.kpk.go.id","id.wikipedia.org/wiki/Susilo_Bambang_Yudhoyono"],
     connections_summary:"Eks Presiden RI ke-6, pendiri Demokrat, bapak AHY",
     twitter:"@SBYudhoyono",
     analysis:{
@@ -449,7 +459,8 @@ export const PERSONS = [
       influence:9,
       controversy_level:3,
       notes:"Dua periode presiden relatif stabil. Dikritik soal gaya kepemimpinan ragu-ragu dan korupsi dalam partainya."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Susilo_Bambang_Yudhoyono","lhkpn.kpk.go.id","demokrat.or.id"]
   },
   // ─── NASIONAL — LEGISLATIF ──────────────────────────────────────────────
   {
@@ -479,7 +490,8 @@ export const PERSONS = [
       influence:8,
       controversy_level:5,
       notes:"Putri Megawati dan cucu Bung Karno. Dua periode Ketua DPR. Dikritik karena lebih menonjolkan silsilah ketimbang kompetensi. Ambisi capres stagnan di elektabilitas."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Puan_Maharani","pdip.or.id","lhkpn.kpk.go.id"]
   },
   {
     id:"sufmi_dasco", name:"Sufmi Dasco Ahmad", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Sufmi_Dasco_Ahmad%2C_Wakil_Ketua_DPR-RI_%282024%E2%80%932029%29.jpg/400px-Sufmi_Dasco_Ahmad%2C_Wakil_Ketua_DPR-RI_%282024%E2%80%932029%29.jpg", photo_placeholder:"SD",
@@ -536,7 +548,8 @@ export const PERSONS = [
       influence:8,
       controversy_level:5,
       notes:"Kelola ekonomi RI melewati pandemi COVID-19. Diduga terlibat kasus korupsi minyak goreng namun tidak tersangka resmi."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Airlangga_Hartarto","golkar.or.id","lhkpn.kpk.go.id"]
   },
   {
     id:"cakimin", name:"Muhaimin Iskandar", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Muhaimin_Iskandar%2C_Candidate_for_Indonesia%27s_Vice_President_in_2024.jpg/400px-Muhaimin_Iskandar%2C_Candidate_for_Indonesia%27s_Vice_President_in_2024.jpg", photo_placeholder:"MI",
@@ -566,7 +579,8 @@ export const PERSONS = [
       influence:8,
       controversy_level:6,
       notes:"Pemimpin PKB selama dua dekade. Pernah berkonflik dengan Gus Dur. Kasus korupsi transmigrasi pernah muncul namun tidak berlanjut."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Muhaimin_Iskandar","pkb.or.id","lhkpn.kpk.go.id"]
   },
   {
     id:"ahmad_syaikhu", name:"Ahmad Syaikhu", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KPU_Ahmad_Syaikhu.jpg?width=400", photo_placeholder:"AS",
@@ -622,7 +636,8 @@ export const PERSONS = [
       influence:7,
       controversy_level:3,
       notes:"Awalnya pendukung Jokowi, berseberangan 2023. Dukung Anies Baswedan untuk Pilpres 2024."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Surya_Paloh","partainasdem.id","lhkpn.kpk.go.id"]
   },
   {
     id:"megawati", name:"Megawati Soekarnoputri", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Megawati_Soekarnoputri.jpg/400px-Megawati_Soekarnoputri.jpg", photo_placeholder:"MS",
@@ -637,8 +652,10 @@ export const PERSONS = [
     tier:"nasional", region_id:null,
     bio:"Putri Presiden Soekarno dan Presiden RI ke-5. Ketua Umum PDIP sejak 1999. Salah satu figur paling berpengaruh dalam sejarah demokrasi Indonesia pasca-Reformasi.",
     tags:["pdip","eks-presiden","putri-proklamator","perempuan"],
-    lhkpn_latest:36000000000, lhkpn_year:2023,
-    lhkpn_history:[{year:2019,amount:28000000000},{year:2020,amount:30000000000},{year:2021,amount:32000000000},{year:2022,amount:34000000000},{year:2023,amount:36000000000}],
+    lhkpn_latest:54000000000, lhkpn_year:2023,
+    lhkpn_note:"Sumber: eLHKPN KPK. Kekayaan ~Rp 54 miliar. Nilai sebelumnya 36M merupakan estimasi yang terlalu rendah.",
+    lhkpn_history:[{year:2019,amount:28000000000},{year:2020,amount:30000000000},{year:2021,amount:32000000000},{year:2022,amount:34000000000},{year:2023,amount:54000000000}],
+    data_sources:["elhkpn.kpk.go.id","id.wikipedia.org/wiki/Megawati_Soekarnoputri"],
     connections_summary:"Ketum PDIP, Presiden RI ke-5, putri Bung Karno, ibu Puan",
     twitter:null,
     analysis:{
@@ -651,7 +668,8 @@ export const PERSONS = [
       influence:9,
       controversy_level:5,
       notes:"Era kepresidenan relatif singkat tapi stabil. Kini lebih banyak di balik layar menentukan arah PDIP. Berseberangan dengan Jokowi-Prabowo."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Megawati_Soekarnoputri","pdip.or.id","kpu.go.id"]
   },
   {
     id:"anies", name:"Anies Baswedan", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Anies_Baswedan_2024.jpg/400px-Anies_Baswedan_2024.jpg", photo_placeholder:"AB",
@@ -680,7 +698,8 @@ export const PERSONS = [
       influence:6,
       controversy_level:6,
       notes:"Gubernur DKI penuh kontroversi: proyek Tanah Abang, Formula E, reklamasi. Didukung koalisi beragam ideologi dari Islam konservatif hingga liberal."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Anies_Baswedan","lhkpn.kpk.go.id","kpu.go.id/pilpres-2024"]
   },
   {
     id:"ganjar", name:"Ganjar Pranowo", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Ganjar_Pranowo_Candidate_for_Indonesia%27s_President_in_2024.jpg/400px-Ganjar_Pranowo_Candidate_for_Indonesia%27s_President_in_2024.jpg", photo_placeholder:"GP",
@@ -708,7 +727,8 @@ export const PERSONS = [
       influence:7,
       controversy_level:6,
       notes:"Dua periode gubernur dengan Jateng membaik di berbagai indikator. Kontroversial soal e-KTP dan penundaan pemilu."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Ganjar_Pranowo","lhkpn.kpk.go.id","kpu.go.id/pilpres-2024"]
   },
   {
     id:"sultan_najamudin", name:"Sultan B. Najamudin", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Sultan_B._Najamudin,_Anggota_DPD_RI_(2024).jpg?width=400", photo_placeholder:"SN",
@@ -2197,7 +2217,8 @@ export const PERSONS = [
       influence:7,
       controversy_level:9,
       notes:"Tersangka KPK obstruction of justice kasus Harun Masiku. Penetapan tersangka Januari 2025 mengguncang PDIP."
-    }
+    },
+    data_sources:["id.wikipedia.org/wiki/Hasto_Kristiyanto","pdip.or.id","kpk.go.id"]
   },
   {
     id:"tom_lembong", name:"Thomas Trikasih Lembong", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Thomas_Lembong_(cropped).jpg?width=400", photo_placeholder:"TL",

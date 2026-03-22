@@ -210,3 +210,83 @@ export const KONTEKS_POLITIK = [
     warna: "orange",
   },
 ];
+
+// ── APBN 2026 ─────────────────────────────────────────────────────────────────
+
+export const APBN_2026 = {
+  tahun: 2026,
+  pendapatan_target: 3005.1,  // Triliun Rp (estimasi RAPBN 2026)
+  pendapatan_realisasi: null,  // belum ada data realisasi
+  belanja_target: 3621.3,     // asumsi flat dari 2025 (RAPBN belum ditetapkan)
+  belanja_realisasi: null,
+  defisit_target: -616.2,
+  defisit_realisasi: null,
+  sumber_data: "RAPBN 2026 — proyeksi Kemenkeu (belum final, estimasi berdasarkan kebijakan fiskal 2025-2026)",
+  status: "proyeksi",  // proyeksi | realisasi
+  catatan: "APBN 2026 masih dalam tahap pembahasan. Angka mengacu pada KFIB dan nota keuangan 2026.",
+};
+
+export const DEPARTEMEN_2026 = [
+  { id: "kemendikbud", nama: "Kemendikbudristek", pagu: 95.0, realisasi: null, persen: null, menteri: "Abdul Mu'ti", partai: "dem", catatan: "Efisiensi 4%" },
+  { id: "kemenkes", nama: "Kemenkes", pagu: 92.0, realisasi: null, persen: null, menteri: "Budi Gunadi Sadikin", partai: null },
+  { id: "kemenpupr", nama: "Kemen PUPR", pagu: 115.0, realisasi: null, persen: null, menteri: "Dody Hanggodo", partai: "ger", catatan: "IKN Fase 2" },
+  { id: "kemenhan", nama: "Kemenhan", pagu: 170.0, realisasi: null, persen: null, menteri: "Sjafrie Sjamsoeddin", partai: null },
+  { id: "kemenkeu", nama: "Kemenkeu", pagu: 48.5, realisasi: null, persen: null, menteri: "Sri Mulyani", partai: null },
+  { id: "kemensos", nama: "Kemensos", pagu: 82.0, realisasi: null, persen: null, menteri: "Saifullah Yusuf", partai: "pkb" },
+  { id: "makan_bergizi", nama: "Program Makan Bergizi Gratis", pagu: 140.0, realisasi: null, persen: null, menteri: "Dadan Hindayana", partai: null, catatan: "Naik 2x dari 2025 — ekspansi nasional" },
+  { id: "transfer_daerah", nama: "Transfer ke Daerah", pagu: 950.0, realisasi: null, persen: null, menteri: "DAU/DAK/Dana Desa", partai: null },
+  { id: "kemenhub", nama: "Kemenhub", pagu: 33.0, realisasi: null, persen: null, menteri: "Dudy Purwagandhi", partai: null },
+  { id: "kementan", nama: "Kementan", pagu: 31.0, realisasi: null, persen: null, menteri: "Andi Amran Sulaiman", partai: "ger" },
+];
+
+export const PERBANDINGAN_TAHUNAN = [
+  { tahun: 2023, pendapatan: 2774.3, belanja: 3163.5, defisit: -389.2, gdp_growth: 5.05, inflasi: 3.36 },
+  { tahun: 2024, pendapatan: 2802.5, belanja: 3325.1, defisit: -522.6, gdp_growth: 5.03, inflasi: 2.84 },
+  { tahun: 2025, pendapatan: 2996.9, belanja: 3621.3, defisit: -624.4, gdp_growth: 5.2,  inflasi: 3.0 },
+  { tahun: 2026, pendapatan: 3005.1, belanja: 3621.3, defisit: -616.2, gdp_growth: null, inflasi: null, proyeksi: true },
+];
+
+export const TAHUN_OPTIONS = [2025, 2026];
+
+export const PERUBAHAN_KUNCI_2026 = [
+  {
+    id: "mbg_naik",
+    program: "Makan Bergizi Gratis",
+    nilai_2025: 71.0,
+    nilai_2026: 140.0,
+    perubahan: "+97%",
+    deskripsi: "Ekspansi nasional — dari program pilot menjadi cakupan penuh",
+    ikon: "🍱",
+    warna: "green",
+  },
+  {
+    id: "kemenhan_naik",
+    program: "Kemenhan",
+    nilai_2025: 165.9,
+    nilai_2026: 170.0,
+    perubahan: "+2,5%",
+    deskripsi: "Penguatan alutsista dan modernisasi TNI berlanjut",
+    ikon: "🛡️",
+    warna: "blue",
+  },
+  {
+    id: "efisiensi_kemenkeu",
+    program: "Efisiensi Kementerian",
+    nilai_2025: null,
+    nilai_2026: null,
+    perubahan: "Dipangkas",
+    deskripsi: "Sebagian kementerian mengalami pemangkasan — fokus ke program prioritas nasional",
+    ikon: "✂️",
+    warna: "red",
+  },
+  {
+    id: "transfer_daerah",
+    program: "Transfer ke Daerah",
+    nilai_2025: 919.9,
+    nilai_2026: 950.0,
+    perubahan: "+3,3%",
+    deskripsi: "Dana Desa, DAK, dan DAU meningkat untuk desentralisasi fiskal",
+    ikon: "🏘️",
+    warna: "orange",
+  },
+];
