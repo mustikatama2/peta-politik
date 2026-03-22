@@ -860,6 +860,41 @@ export const CONNECTIONS = [
   { from:"anas_urbaningrum", to:"ahy",         type:"rival",          label:"Konflik internal Demokrat — Anas vs SBY/AHY", since:2012, strength:8 },
   { from:"anas_urbaningrum", to:"sby",         type:"rival",          label:"Ketua Demokrat dicopot — konflik dengan Dewan Pembina SBY", since:2013, strength:9 },
   { from:"anas_urbaningrum", to:"jokowi",      type:"rival",          label:"Demokrat berseberangan dengan PDIP-Jokowi", since:2014, strength:6 },
+
+  // ── R32: ABURIZAL BAKRIE ────────────────────────────────────────────────
+  { from:"aburizal_bakrie", to:"airlangga",   type:"rival",          label:"Perebutan Ketum Golkar 2016 — Ical vs Airlangga", since:2016, strength:9 },
+  { from:"aburizal_bakrie", to:"prabowo",     type:"koalisi",        label:"Golkar dukung Prabowo pasca kalah rebut Golkar", since:2023, strength:7 },
+  { from:"aburizal_bakrie", to:"jokowi",      type:"rival",          label:"Golkar awalnya oposisi Jokowi 2014", since:2014, strength:7 },
+  { from:"aburizal_bakrie", to:"hary_tanoe",  type:"bisnis",         label:"Konglomerat media era Orde Baru — persaingan bisnis", since:1990, strength:6 },
+  { from:"aburizal_bakrie", to:"sby",         type:"kolega",         label:"Golkar di kabinet SBY — Menko Kesra", since:2004, strength:7 },
+
+  // ── R33: NAZARUDDIN ─────────────────────────────────────────────────────
+  { from:"nazaruddin",      to:"anas_urbaningrum", type:"rival",     label:"Whistleblower — bongkar Anas di kasus Hambalang", since:2011, strength:10 },
+  { from:"nazaruddin",      to:"ahy",         type:"rival",          label:"Demokrat — Nazaruddin merusak citra partai era SBY-AHY", since:2011, strength:7 },
+  { from:"nazaruddin",      to:"sby",         type:"rival",          label:"Demokrat — skandal Nazaruddin merusak Demokrat SBY", since:2011, strength:8 },
+
+  // ── R34: MAHFUD MD ──────────────────────────────────────────────────────
+  { from:"mahfud_md",       to:"jokowi",      type:"atasan-bawahan", label:"Menko Polhukam di kabinet Jokowi 2019-2024", since:2019, strength:8 },
+  { from:"mahfud_md",       to:"ganjar",      type:"koalisi",        label:"Cawapres Ganjar-Mahfud Pilpres 2024", since:2023, strength:9 },
+  { from:"mahfud_md",       to:"prabowo",     type:"rival",          label:"Kompetitor Pilpres 2024", since:2024, strength:8 },
+  { from:"mahfud_md",       to:"anies",       type:"rival",          label:"Kompetitor tiga paslon Pilpres 2024", since:2024, strength:7 },
+  { from:"mahfud_md",       to:"cakimin",     type:"kolega",         label:"PKB — Mahfud dikenal dekat PKB Jatim", since:2019, strength:6 },
+
+  // ── R35: KAESANG ────────────────────────────────────────────────────────
+  { from:"kaesang",         to:"jokowi",      type:"keluarga",       label:"Putra bungsu Jokowi — Ketum PSI", since:2023, strength:10 },
+  { from:"kaesang",         to:"gibran",      type:"keluarga",       label:"Kakak-adik, sama-sama di politik", since:2023, strength:10 },
+  { from:"kaesang",         to:"prabowo",     type:"koalisi",        label:"PSI dukung Prabowo-Gibran", since:2024, strength:7 },
+
+  // ── R36: GIBRAN ─────────────────────────────────────────────────────────
+  { from:"gibran",          to:"jokowi",      type:"keluarga",       label:"Putra sulung Jokowi — Wapres RI", since:2024, strength:10 },
+  { from:"gibran",          to:"prabowo",     type:"atasan-bawahan", label:"Pasangan Capres-Cawapres, kini Pres-Wapres", since:2024, strength:10 },
+  { from:"gibran",          to:"kaesang",     type:"keluarga",       label:"Kakak beradik Jokowi", since:2023, strength:10 },
+  { from:"gibran",          to:"bobby_nasution", type:"kolega",      label:"Menantu Jokowi — ipar", since:2020, strength:8 },
+
+  // ── R37: AGUS SUBIYANTO ─────────────────────────────────────────────────
+  { from:"agus_subiyanto",  to:"jokowi",      type:"mentor-murid",   label:"Jokowi angkat Agus Subiyanto Panglima TNI", since:2023, strength:8 },
+  { from:"agus_subiyanto",  to:"prabowo",     type:"atasan-bawahan", label:"Panglima TNI di era Presiden Prabowo", since:2024, strength:8 },
+  { from:"agus_subiyanto",  to:"sjafrie",     type:"kolega",         label:"Sesama perwira senior TNI AD", since:2024, strength:7 },
 ];
 
 export const CONNECTION_TYPES = {
