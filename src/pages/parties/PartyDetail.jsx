@@ -476,7 +476,7 @@ export default function PartyDetail() {
                       </div>
                       <div className="min-w-0">
                         <p className="text-xs font-semibold text-text-primary truncate">{p.name.split(' ').slice(0, 2).join(' ')}</p>
-                        <p className="text-xs text-text-secondary truncate">{p.jabatan || p.role || '–'}</p>
+                        <p className="text-xs text-text-secondary truncate">{p.party_role || p.positions?.[0]?.title || '–'}</p>
                       </div>
                     </div>
                   ))}
@@ -605,7 +605,45 @@ export default function PartyDetail() {
             </Card>
           )}
 
-          {currentCoalitions.length === 0 && historicalCoalitions.length === 0 && conflicts.length === 0 && (
+          {/* Coalition History Timeline */}
+          {party.koalisi_historis?.length > 0 && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-4">🕐 Riwayat Koalisi Pemilu</h3>
+              <div className="relative space-y-0">
+                {party.koalisi_historis.map((k, i) => (
+                  <div key={i} className="flex gap-4 items-start group">
+                    {/* Timeline line */}
+                    <div className="flex flex-col items-center flex-shrink-0">
+                      <div
+                        className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 z-10"
+                        style={{ backgroundColor: party.color + '22', borderColor: party.color, color: party.color }}
+                      >
+                        {String(k.tahun).slice(2)}
+                      </div>
+                      {i < party.koalisi_historis.length - 1 && (
+                        <div className="w-px flex-1 bg-border-subtle min-h-[24px]" />
+                      )}
+                    </div>
+                    {/* Content */}
+                    <div className="pb-5 flex-1 min-w-0">
+                      <div className="flex items-start gap-2 flex-wrap">
+                        <span className="text-xs font-bold text-text-primary">{k.tahun}</span>
+                        <span className={`text-xs px-2 py-0.5 rounded-full border font-semibold flex-shrink-0
+                          ${k.posisi === 'pemerintah'
+                            ? 'bg-green-900/40 text-green-300 border-green-700/50'
+                            : 'bg-red-900/30 text-red-400 border-red-800/40'}`}>
+                          {k.posisi === 'pemerintah' ? '🏛️ Pemerintah' : '⚔️ Oposisi'}
+                        </span>
+                      </div>
+                      <p className="text-xs text-text-secondary mt-1 leading-relaxed">{k.koalisi}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
+
+          {currentCoalitions.length === 0 && historicalCoalitions.length === 0 && conflicts.length === 0 && !party.koalisi_historis?.length && (
             <Card className="p-8 text-center">
               <p className="text-text-secondary text-sm">Belum ada data koalisi atau konflik antar-tokoh tercatat.</p>
             </Card>
