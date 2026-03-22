@@ -12,9 +12,13 @@ const SEVERITY_CONFIG = {
 
 // ── Status config ────────────────────────────────────────────────────────────
 const STATUS_CONFIG = {
-  ongoing: { label: 'BERLANGSUNG', color: 'text-orange-400', bg: 'bg-orange-900/30 border-orange-700/50', pulse: true },
-  closed:  { label: 'SELESAI',     color: 'text-slate-400',  bg: 'bg-slate-800/60 border-slate-700/50',   pulse: false },
-  verdict: { label: 'VONIS',       color: 'text-blue-400',   bg: 'bg-blue-900/30 border-blue-700/50',     pulse: false },
+  ongoing:   { label: 'BERLANGSUNG', color: 'text-orange-400', bg: 'bg-orange-900/30 border-orange-700/50', pulse: true },
+  closed:    { label: 'SELESAI',     color: 'text-slate-400',  bg: 'bg-slate-800/60 border-slate-700/50',   pulse: false },
+  verdict:   { label: 'VONIS',       color: 'text-blue-400',   bg: 'bg-blue-900/30 border-blue-700/50',     pulse: false },
+  terpidana: { label: 'TERPIDANA',   color: 'text-purple-400', bg: 'bg-purple-900/30 border-purple-700/50', pulse: false },
+  tersangka: { label: 'TERSANGKA',   color: 'text-yellow-400', bg: 'bg-yellow-900/30 border-yellow-700/50', pulse: true },
+  aktif:     { label: 'AKTIF',       color: 'text-orange-400', bg: 'bg-orange-900/30 border-orange-700/50', pulse: true },
+  banding:   { label: 'BANDING',     color: 'text-cyan-400',   bg: 'bg-cyan-900/30 border-cyan-700/50',     pulse: false },
 }
 
 // ── PersonChip ───────────────────────────────────────────────────────────────
@@ -92,6 +96,18 @@ function InvestigasiCard({ inv, isExpanded, onToggle }) {
             <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] bg-white/5 border border-white/10 text-white/50 tracking-wide">
               {inv.category}
             </span>
+            {/* Lembaga */}
+            {inv.lembaga && (
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] bg-blue-900/20 border border-blue-700/30 text-blue-300/70 tracking-wide">
+                ⚖️ {inv.lembaga}
+              </span>
+            )}
+            {/* Nilai Kerugian */}
+            {inv.nilai_kerugian && (
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] bg-red-900/20 border border-red-700/30 text-red-300/80 font-mono tracking-wide">
+                💰 {inv.nilai_kerugian}
+              </span>
+            )}
           </div>
 
           {/* Title */}
@@ -143,13 +159,27 @@ function InvestigasiCard({ inv, isExpanded, onToggle }) {
           {isExpanded && (
             <div className="mt-4 space-y-4 border-t border-white/5 pt-4">
 
+              {/* Tersangka */}
+              {inv.tersangka?.length > 0 && (
+                <div>
+                  <h4 className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">🎯 Tersangka / Terpidana</h4>
+                  <div className="flex flex-wrap gap-1.5">
+                    {inv.tersangka.map((name, i) => (
+                      <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-red-900/30 border border-red-700/30 text-red-300/80">
+                        {name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Full timeline */}
-              {inv.timeline?.length > 0 && (
+              {(inv.timeline || inv.kronologi)?.length > 0 && (
                 <div>
                   <h4 className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-2">📅 Linimasa</h4>
                   <div className="space-y-0">
-                    {inv.timeline.map((item, i) => (
-                      <TimelineItem key={i} item={item} isLast={i === inv.timeline.length - 1} />
+                    {(inv.timeline || []).map((item, i) => (
+                      <TimelineItem key={i} item={item} isLast={i === (inv.timeline || []).length - 1} />
                     ))}
                   </div>
                 </div>
@@ -170,12 +200,12 @@ function InvestigasiCard({ inv, isExpanded, onToggle }) {
                 </div>
               )}
 
-              {/* Impact */}
-              {inv.impact && (
+              {/* Dampak Politik */}
+              {(inv.dampak_politik || inv.impact) && (
                 <div>
-                  <h4 className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">⚡ Dampak</h4>
+                  <h4 className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">🗳️ Dampak Politik</h4>
                   <p className="text-xs text-amber-300/80 leading-relaxed bg-amber-900/20 border border-amber-700/30 rounded-lg p-2.5">
-                    {inv.impact}
+                    {inv.dampak_politik || inv.impact}
                   </p>
                 </div>
               )}
@@ -360,7 +390,15 @@ export default function InvestigasiPage() {
       }
       if (activeStatus !== 'Semua') {
         const map = { Berlangsung: 'ongoing', Selesai: 'closed', Vonis: 'verdict' }
-        if (inv.status !== map[activeStatus]) return false
+        const targetStatus = map[activeStatus]
+        // Match both old and new status values: "Berlangsung" matches ongoing/aktif/tersangka
+        if (activeStatus === 'Berlangsung') {
+          if (!['ongoing', 'aktif', 'tersangka'].includes(inv.status)) return false
+        } else if (activeStatus === 'Vonis') {
+          if (!['verdict', 'terpidana', 'banding'].includes(inv.status)) return false
+        } else if (targetStatus && inv.status !== targetStatus) {
+          return false
+        }
       }
       if (search.trim()) {
         const q = search.toLowerCase()
