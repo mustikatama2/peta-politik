@@ -115,7 +115,7 @@ export const PERSONS = [
     id:"gibran", name:"Gibran Rakabuming Raka", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Gibran_Rakabuming_Raka_2024_official_portrait.jpg/400px-Gibran_Rakabuming_Raka_2024_official_portrait.jpg", photo_placeholder:"GR",
     born:"1 Oct 1987", born_place:"Surakarta", religion:"Islam",
     education:"S1 Manajemen, Universitas Gadjah Mada (2010)",
-    party_id:"gol", party_role:"Anggota",
+    party_id:null, party_role:null,
     positions:[
       {title:"Wakil Presiden RI ke-6",  institution:"Istana Wapres",    region:"Nasional",    start:"2024", end:null,   is_current:true},
       {title:"Walikota Surakarta",       institution:"Pemkot Surakarta", region:"Jawa Tengah", start:"2021", end:"2024", is_current:false},

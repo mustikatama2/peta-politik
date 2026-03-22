@@ -68,6 +68,7 @@ const APBNPage         = lazy(() => import('./pages/apbn/APBNPage'))
 const PrediksiPage     = lazy(() => import('./pages/prediksi/PrediksiPage'))
 const StatsPage             = lazy(() => import('./pages/stats/StatsPage'))
 const EmbedPage             = lazy(() => import('./pages/EmbedPage'))
+const CekFaktaPage          = lazy(() => import('./pages/cek-fakta/CekFaktaPage'))
 const TimelineKekuasaanPage = lazy(() => import('./pages/TimelineKekuasaanPage'))
 const PerbandinganPage      = lazy(() => import('./pages/PerbandinganPage'))
 
@@ -159,6 +160,7 @@ export default function App() {
         <Route path="/quick-facts" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><QuickFactsPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/embed" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><EmbedPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/stats" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><StatsPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/cek-fakta" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><CekFaktaPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>

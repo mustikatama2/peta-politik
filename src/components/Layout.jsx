@@ -53,6 +53,7 @@ const NAV = [
   { to:'/bumn',     icon:'🏢', label:'BUMN & Bisnis' },
   { to:'/lhkpn',   icon:'💰', label:'LHKPN' },
   { to:'/quick-facts', icon:'⚡', label:'Fakta Cepat' },
+  { to:'/cek-fakta',  icon:'🔎', label:'Cek Fakta' },
   { to:'/news',     icon:'📰', label:'Berita' },
   { to:'/agendas',  icon:'📋', label:'Agenda' },
   { to:'/ormas',    icon:'🏛️', label:'Ormas' },

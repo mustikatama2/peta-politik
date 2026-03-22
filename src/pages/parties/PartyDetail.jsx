@@ -211,6 +211,57 @@ export default function PartyDetail() {
             <KPICard label="Markas" value={party.headquarters ?? '–'} sub="Kantor DPP" icon="📍" />
           </div>
 
+          {/* Sejarah Singkat */}
+          {party.sejarah && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-2">📖 Sejarah Singkat</h3>
+              <p className="text-sm text-text-secondary leading-relaxed">{party.sejarah}</p>
+            </Card>
+          )}
+
+          {/* Basis Pemilih & Kekuatan Wilayah */}
+          {(party.kekuatan_utama?.length > 0 || party.pemilih_utama || party.sumber_dana) && (
+            <Card className="p-5 space-y-4">
+              <h3 className="text-sm font-semibold text-text-primary">🗺️ Basis Pemilih & Wilayah</h3>
+              {party.kekuatan_utama?.length > 0 && (
+                <div>
+                  <p className="text-xs text-text-secondary mb-2 font-medium">💪 Basis Kuat:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {party.kekuatan_utama.map((r, i) => (
+                      <span key={i} className="px-2.5 py-1 rounded-full text-xs font-medium bg-green-900/40 text-green-300 border border-green-700/50">
+                        ✓ {r}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {party.kelemahan?.length > 0 && (
+                <div>
+                  <p className="text-xs text-text-secondary mb-2 font-medium">⚡ Wilayah Lemah:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {party.kelemahan.map((r, i) => (
+                      <span key={i} className="px-2.5 py-1 rounded-full text-xs font-medium bg-red-900/30 text-red-400 border border-red-800/40">
+                        – {r}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {party.pemilih_utama && (
+                <div className="flex items-start gap-2 text-sm">
+                  <span className="text-text-secondary font-medium whitespace-nowrap">👥 Segmen:</span>
+                  <span className="text-text-secondary">{party.pemilih_utama}</span>
+                </div>
+              )}
+              {party.sumber_dana && (
+                <div className="flex items-start gap-2 text-sm">
+                  <span className="text-text-secondary font-medium whitespace-nowrap">💰 Dana:</span>
+                  <span className="text-text-secondary">{party.sumber_dana}</span>
+                </div>
+              )}
+            </Card>
+          )}
+
           {/* Ideology Radar */}
           {radarData.length > 0 && (
             <Card className="p-5">
@@ -401,6 +452,40 @@ export default function PartyDetail() {
       ══════════════════════════════════════════════════════════════════════ */}
       {tab === 2 && (
         <div className="space-y-4">
+          {/* Key Figures Grid */}
+          {party.key_figures?.length > 0 && (() => {
+            const keyPersons = party.key_figures
+              .map(id => PERSONS.find(p => p.id === id))
+              .filter(Boolean)
+            if (!keyPersons.length) return null
+            return (
+              <Card className="p-5">
+                <h3 className="text-sm font-semibold text-text-primary mb-3">⭐ Tokoh Kunci</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {keyPersons.map(p => (
+                    <div
+                      key={p.id}
+                      className="flex items-center gap-3 p-3 rounded-lg bg-bg-page border border-border-subtle hover:border-border-default transition-colors cursor-pointer"
+                      onClick={() => navigate(`/persons/${p.id}`)}
+                    >
+                      <div
+                        className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0"
+                        style={{ backgroundColor: party.color + '22', border: `1.5px solid ${party.color}`, color: party.color }}
+                      >
+                        {initials(p.name)}
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold text-text-primary truncate">{p.name.split(' ').slice(0, 2).join(' ')}</p>
+                        <p className="text-xs text-text-secondary truncate">{p.jabatan || p.role || '–'}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )
+          })()}
+
+          {/* All Members */}
           {members.length > 0 ? (
             <>
               <p className="text-xs text-text-secondary">{members.length} tokoh terdaftar · diurutkan berdasarkan skor pengaruh</p>
