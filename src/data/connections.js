@@ -614,20 +614,40 @@ export const CONNECTIONS = [
 
   // ─── KONEKSI FIGUR HISTORIS ──────────────────────────────────────────────
   // Soeharto connections
-  { from:"soeharto", to:"habibie",  type:"mentor-murid", label:"Soeharto mendidik Habibie di Jerman, angkat sebagai Menpristek & Wapres", since:1974, strength:9 },
-  { from:"soeharto", to:"prabowo",  type:"keluarga",     label:"Mantan mertua — Prabowo menikahi Titiek Soeharto (cerai 1998)", since:1983, strength:8 },
-  { from:"soeharto", to:"megawati", type:"rival",        label:"Soeharto membubarkan PDI yang dipimpin Megawati (1996)", since:1996, strength:7 },
-  { from:"soeharto", to:"sby",      type:"mentor-murid", label:"SBY meniti karier militer di era Soeharto", since:1974, strength:6 },
+  { from:"soeharto", to:"habibie",       type:"mentor-murid", label:"Soeharto mendidik Habibie di Jerman, angkat sebagai Menpristek & Wapres", since:1974, strength:9 },
+  { from:"soeharto", to:"prabowo",       type:"keluarga",     label:"Mantan mertua — Prabowo menikahi Titiek Soeharto (cerai 1998)", since:1983, strength:8 },
+  { from:"soeharto", to:"megawati",      type:"rival",        label:"Soeharto membubarkan PDI yang dipimpin Megawati (1996)", since:1996, strength:7 },
+  { from:"soeharto", to:"sby",           type:"mentor-murid", label:"SBY meniti karier militer di era Soeharto", since:1974, strength:6 },
+  { from:"soeharto", to:"tutut",         type:"keluarga",     label:"Ayah-putri sulung Cendana", since:1949, strength:10 },
+  { from:"soeharto", to:"tommy_soeharto",type:"keluarga",     label:"Ayah-putra bungsu Cendana", since:1962, strength:10 },
+  { from:"soeharto", to:"gus_dur",       type:"rival",        label:"Orde Baru vs tokoh NU — Gus Dur jadi oposisi moral terhadap Soeharto", since:1984, strength:7 },
+  { from:"soeharto", to:"sumitro",       type:"kolega",       label:"Sesama perwira senior — Sumitro ekonom Orde Baru era awal", since:1966, strength:6 },
 
   // Habibie connections
-  { from:"habibie", to:"sby",       type:"kolega",       label:"Habibie dan SBY sama-sama tokoh transisi reformasi awal", since:1999, strength:6 },
-  { from:"habibie", to:"megawati",  type:"rival",        label:"Rival Pemilu 1999 — MPR pilih Gus Dur bukan Megawati maupun Habibie", since:1999, strength:5 },
+  { from:"habibie", to:"sby",       type:"kolega", label:"Habibie dan SBY sama-sama tokoh transisi reformasi awal", since:1999, strength:6 },
+  { from:"habibie", to:"megawati",  type:"rival",  label:"Rival Pemilu 1999 — MPR pilih Gus Dur bukan Megawati maupun Habibie", since:1999, strength:5 },
+  { from:"habibie", to:"gus_dur",   type:"rival",  label:"Habibie kalah dalam sidang MPR — Gus Dur terpilih jadi presiden", since:1999, strength:6 },
 
   // Gus Dur connections
   { from:"gus_dur", to:"cakimin",   type:"mentor-murid", label:"Gus Dur pendiri PKB bersama Cak Imin (1998), keponakan Gus Dur", since:1998, strength:9 },
   { from:"gus_dur", to:"megawati",  type:"kolega",       label:"Megawati Wapres di kabinet Gus Dur (1999) sebelum menggantikannya", since:1999, strength:7 },
   { from:"gus_dur", to:"gus_yahya", type:"mentor-murid", label:"Sama-sama tokoh NU — Gus Yahya penerus tradisi Gus Dur di PBNU", since:1985, strength:8 },
   { from:"gus_dur", to:"prabowo",   type:"rival",        label:"Gus Dur copot Wiranto (kolega Prabowo) saat Prabowo dekat dengan lingkaran Soeharto", since:2000, strength:4 },
+
+  // Tommy Soeharto connections
+  { from:"tommy_soeharto", to:"soeharto", type:"keluarga", label:"Putra bungsu Soeharto — Cendana", since:1962, strength:10 },
+  { from:"tommy_soeharto", to:"tutut",    type:"keluarga", label:"Saudara kandung — keluarga Cendana", since:1949, strength:9 },
+  { from:"tommy_soeharto", to:"prabowo",  type:"kolega",   label:"Sesama keluarga Orde Baru — bisnis dan jaringan politik", since:1990, strength:6 },
+
+  // Tutut connections
+  { from:"tutut", to:"soeharto",      type:"keluarga", label:"Putri sulung Soeharto — Cendana", since:1949, strength:10 },
+  { from:"tutut", to:"tommy_soeharto",type:"keluarga", label:"Saudara kandung Cendana", since:1962, strength:9 },
+
+  // Cabinet & security network additions
+  { from:"tito_karnavian", to:"listyo_sigit", type:"kolega",         label:"Tito Kapolri — lalu Tito angkat Listyo Sigit sebagai penggantinya", since:2021, strength:8 },
+  { from:"budi_gunadi",    to:"jokowi",       type:"mentor-murid",   label:"Jokowi angkat Budi Gunadi Sadikin sebagai Menkes (2020)", since:2020, strength:8 },
+  { from:"budi_gunadi",    to:"prabowo",      type:"atasan-bawahan", label:"Menkes bertahan di kabinet Merah Putih Prabowo", since:2024, strength:7 },
+  { from:"sjafrie",        to:"sby",          type:"kolega",         label:"Pernah bertugas di lingkungan militer era SBY", since:2004, strength:5 },
 ];
 
 export const CONNECTION_TYPES = {
