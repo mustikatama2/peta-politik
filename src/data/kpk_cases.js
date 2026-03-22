@@ -15,6 +15,8 @@ export const KPK_CASES = [
     region: "Jawa Timur",
     notes: "OTT pertama KPK di era Agus Joko Prabowo sebagai Ketua KPK baru",
     source: "KPK RI, Feb 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk002",
@@ -32,6 +34,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Ditangkap setelah Prabowo jadi Presiden. Lembong adalah co-captain Tim Anies 2024. Diduga kriminalisasi oposan.",
     source: "Kejagung RI, Nov 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk003",
@@ -49,6 +53,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Hasto ditetapkan tersangka Jan 2025. Harun Masiku masih buron sejak 2020. Kasus ini melibatkan dugaan suap Rp 600 juta untuk anggota KPU.",
     source: "KPK RI, Jan 2025",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk004",
@@ -66,6 +72,8 @@ export const KPK_CASES = [
     region: "Jawa Timur",
     notes: "OTT KPK 2020. Mantan Bupati Malang. Kini bebas bersyarat 2023.",
     source: "KPK RI, 2020-2021",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk005",
@@ -83,6 +91,8 @@ export const KPK_CASES = [
     region: "Jawa Timur",
     notes: "Mantan Bupati Probolinggo. Bersama istri Puput Tantriana Sari yang juga tersangka.",
     source: "KPK RI, 2021-2022",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk006",
@@ -100,6 +110,8 @@ export const KPK_CASES = [
     region: "Jawa Timur",
     notes: "Dinasti Bangkalan: Fuad Amin terpidana, anaknya Ra Abd Latif kini Bupati Bangkalan. Harta disita Rp 250M lebih.",
     source: "KPK RI, 2014-2016",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk007",
@@ -117,6 +129,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Dicopot sebagai Ketua MK oleh MKMK Nov 2023. Putusan MK 90/PUU-XXI/2023 membolehkan Gibran maju sebagai Cawapres.",
     source: "MKMK, Nov 2023",
+
+    sumber: ["mahkamahkonstitusi.go.id"],
   },
   {
     id: "kpk008",
@@ -134,6 +148,8 @@ export const KPK_CASES = [
     region: "Papua Barat Daya",
     notes: "Salah satu dari 13 OTT KPK tahun 2024",
     source: "KPK RI, 2024",
+
+    sumber: ["kpk.go.id"],
   },
   // ── KASUS BESAR NASIONAL ───────────────────────────────────────────────
   {
@@ -152,6 +168,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Kasus terbesar KPK era itu. Setya Novanto Ketua DPR saat itu. Sempat pura-pura kecelakaan untuk hindari pemeriksaan.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk010",
@@ -169,6 +187,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Kepala SKK Migas ditangkap OTT setelah 3 bulan menjabat. Salah satu OTT paling dramatis KPK.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk011",
@@ -186,6 +206,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Ketua Umum Partai Demokrat dijerat KPK. SBY 'murka'. Kasus Hambalang juga menjerat Menpora Andi Mallarangeng.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk012",
@@ -203,6 +225,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Menteri Sosial korupsi bantuan sosial di tengah pandemi COVID. Momen paling simbolis kegagalan integritas pejabat.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk013",
@@ -220,6 +244,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Menteri Pertanian era Jokowi. Kasus ini memperlihatkan pemerasan struktural di kementerian — staf hingga eselon dipaksa setor untuk kebutuhan menteri dan keluarganya.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk014",
@@ -237,6 +263,8 @@ export const KPK_CASES = [
     region: "Sumatera Utara",
     notes: "Kasus paling mengejutkan: OTT KPK menemukan 'kerangkeng manusia' di rumah Bupati Langkat — pekerja paksa di perkebunan sawit.",
     source: "KPK RI, Komnas HAM",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk015",
@@ -254,6 +282,8 @@ export const KPK_CASES = [
     region: "Papua",
     notes: "Gubernur Papua yang sempat bersembunyi di RSUD Jayapura. Kasus ini membuka betapa lemahnya pengawasan di daerah otonomi khusus.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk016",
@@ -266,11 +296,13 @@ export const KPK_CASES = [
     arrest_type: "tangkap",
     date_start: "2024-03-01",
     date_vonis: "2024-12-23",
-    vonis_years: 6,
+    vonis_years: 20,
     institution: "KPK",
     region: "Bangka Belitung",
-    notes: "Kasus korupsi TERBESAR dalam sejarah Indonesia (Rp 300 triliun). Harvey Moeis suami Sandra Dewi. Vonis 6.5 tahun dianggap terlalu ringan.",
+    notes: "Kasus korupsi TERBESAR dalam sejarah Indonesia (Rp 300 triliun). Harvey Moeis suami Sandra Dewi. Vonis pertama 6,5 tahun lalu diperberat banding menjadi 20 tahun penjara.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk017",
@@ -288,6 +320,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Kasus korupsi di Kemendag yang melibatkan izin impor baja.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   // ── KASUS REGIONAL — ACEH, SULAWESI, KALIMANTAN, NTT ──────────────────
   {
@@ -306,6 +340,8 @@ export const KPK_CASES = [
     region: "Aceh",
     notes: "Gubernur Aceh pertama yang diadili KPK. Kasus ini menjadi preseden kuat bahwa KPK bisa menjangkau kepala daerah di luar Jawa.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk019",
@@ -323,6 +359,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Ketua MK pertama yang ditangkap. Dihukum penjara seumur hidup. Pukulan terbesar kepercayaan publik terhadap peradilan.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk020",
@@ -340,6 +378,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Muhammad Nazaruddin buron ke luar negeri (Kolombia) sebelum tertangkap. Membongkar jaringan korupsi Partai Demokrat secara sistematis.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk021",
@@ -357,6 +397,8 @@ export const KPK_CASES = [
     region: "Sulawesi Selatan",
     notes: "Gubernur Sulsel yang sebelumnya dikenal 'bersih' dan meraih penghargaan antikorupsi. OTT KPK menghancurkan citra tersebut.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk022",
@@ -374,6 +416,8 @@ export const KPK_CASES = [
     region: "Kalimantan Timur",
     notes: "Putri mantan Bupati Kukar Syaukani yang juga koruptor. Dinasti politik Kutai Kartanegara dikenal sebagai salah satu yang paling korup di Indonesia.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk023",
@@ -391,6 +435,8 @@ export const KPK_CASES = [
     region: "Sumatera Barat",
     notes: "Ketua DPD RI pertama yang ditangkap KPK. Suap hanya Rp 100 juta namun skandal politiknya sangat besar. Irman dianggap berambisi jadi Presiden.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk024",
@@ -408,6 +454,8 @@ export const KPK_CASES = [
     region: "Sumatera Utara",
     notes: "Wali Kota Medan ditangkap OTT. Sumatera Utara konsisten masuk provinsi dengan kasus korupsi terbanyak.",
     source: "KPK RI",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk025",
@@ -425,6 +473,8 @@ export const KPK_CASES = [
     region: "Papua Tengah",
     notes: "Dana Otsus Papua yang mencapai triliunan rupiah per tahun ditengarai banyak diselewengkan. KPK investigasi beberapa kasus sekaligus.",
     source: "KPK RI, 2023",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk026",
@@ -442,6 +492,8 @@ export const KPK_CASES = [
     region: "Nusa Tenggara Timur",
     notes: "KPK menyelidiki penggunaan dana daerah NTT. Provinsi termiskin di Indonesia ini memiliki tata kelola APBD yang lemah.",
     source: "KPK RI, 2023",
+
+    sumber: ["kpk.go.id"],
   },
   // ── KASUS BARU 2019-2024 ──────────────────────────────────────────────────
   {
@@ -460,6 +512,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Ketua Umum PPP Muhammad Romahurmuziy (Romy) dicokok OTT KPK saat fit and proper test jabatan di Kemenag. Vonis 2 tahun dinilai terlalu ringan oleh aktivis antikorupsi.",
     source: "KPK RI, 2019",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk028",
@@ -477,6 +531,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Menteri Kelautan dan Perikanan yang juga kader Gerindra ditangkap KPK setelah pulang dari kunjungan ke Hawaii. Kasus ini mencederai citra Prabowo Subianto sebagai menteri.",
     source: "KPK RI, 2020-2021",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk029",
@@ -494,6 +550,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Wakil Ketua DPR RI dari Golkar menyuap penyidik KPK aktif untuk mengamankan kasus di daerah. Kasus ini membuktikan upaya suap langsung ke internal KPK.",
     source: "KPK RI, 2021-2022",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk030",
@@ -511,6 +569,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Harun Masiku kader DPP PDIP masih buron sejak Januari 2020. KPK menduga Harun berada di luar negeri. Hasto Kristiyanto (Sekjen PDIP) ditetapkan tersangka obstruction of justice Jan 2025.",
     source: "KPK RI, 2020",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk031",
@@ -528,6 +588,8 @@ export const KPK_CASES = [
     region: "Jawa Barat",
     notes: "Wali Kota Bekasi terjaring OTT KPK di awal 2022. Bekasi adalah kota termacet dan terbesar di Indonesia yang konsisten menghasilkan kasus korupsi pejabat.",
     source: "KPK RI, 2022",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk032",
@@ -545,6 +607,8 @@ export const KPK_CASES = [
     region: "Kalimantan Timur",
     notes: "Bupati PPU kabupaten yang berbatasan langsung dengan IKN Nusantara tertangkap OTT KPK. Ironis mengingat PPU sedang menjadi sorotan nasional akibat pembangunan IKN.",
     source: "KPK RI, 2022",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk033",
@@ -562,6 +626,8 @@ export const KPK_CASES = [
     region: "Kepulauan Riau",
     notes: "Gubernur Kepri ditangkap OTT KPK dalam kasus suap izin reklamasi. Kepri berbatasan langsung dengan Singapura dan menjadi jalur investasi asing penting.",
     source: "KPK RI, 2019",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk034",
@@ -579,6 +645,8 @@ export const KPK_CASES = [
     region: "Jawa Barat",
     notes: "Bupati Indramayu, daerah penghasil minyak terbesar di Jawa Barat, terkena OTT KPK. Indramayu termasuk wilayah rawan korupsi di Jabar.",
     source: "KPK RI, 2019",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk035",
@@ -596,6 +664,8 @@ export const KPK_CASES = [
     region: "Sumatera Utara",
     notes: "Wali Kota Tanjungbalai menyuap penyidik KPK aktif untuk menghentikan penyelidikan. Kasus ini satu rangkaian dengan kasus suap Azis Syamsuddin.",
     source: "KPK RI, 2021-2022",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk036",
@@ -613,6 +683,8 @@ export const KPK_CASES = [
     region: "Jawa Barat",
     notes: "Kasus korupsi perizinan megaproyek Meikarta yang melibatkan Lippo Group. Bupati Bekasi menerima suap dari pengembang properti terbesar Indonesia. Kasus landmark korupsi perizinan swasta.",
     source: "KPK RI, 2018-2019",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk037",
@@ -630,6 +702,8 @@ export const KPK_CASES = [
     region: "Jawa Timur",
     notes: "Mantan Menteri BUMN Dahlan Iskan divonis bebas oleh Pengadilan Tinggi Surabaya. Kasus ini sempat menjadi kontroversi besar. Kemudian Mahkamah Agung menguatkan vonis bebas.",
     source: "Pengadilan Tinggi Surabaya, 2017",
+
+    sumber: ["mahkamahagung.go.id"],
   },
   {
     id: "kpk038",
@@ -647,6 +721,8 @@ export const KPK_CASES = [
     region: "Maluku Utara",
     notes: "Gubernur Maluku Utara terjaring OTT KPK Desember 2023. Maluku Utara merupakan daerah kaya nikel yang menjadi primadona investasi. Kasus ini memperlihatkan korupsi marak di daerah kaya SDA.",
     source: "KPK RI, 2023-2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk039",
@@ -664,6 +740,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Airlangga Hartarto (Menko Perekonomian/Ketua Golkar) diperiksa Kejagung 12 jam pada Juli 2023. Beberapa minggu kemudian mengundurkan diri dari ketua Golkar. Kasus ini misterius karena Kejagung tidak melanjutkan.",
     source: "Kejaksaan Agung RI, 2023",
+
+    sumber: ["kejaksaan.go.id"],
   },
   {
     id: "kpk040",
@@ -681,6 +759,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Pejabat Kementerian Perdagangan terlibat korupsi impor tekstil. Kasus ini mengungkap modus 'jalur tol' di kepabeanan yang memfasilitasi importir besar.",
     source: "KPK RI, 2020-2021",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk041",
@@ -698,6 +778,8 @@ export const KPK_CASES = [
     region: "Jawa Timur",
     notes: "Pasangan suami-istri bupati dan mantan bupati Probolinggo ditangkap bersamaan. Hasan Aminuddin mantan bupati, Puput Tantriana Sari Bupati petahana. Kasus dinasti yang paling simbolis di Jawa Timur.",
     source: "KPK RI, 2021-2022",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk042",
@@ -715,6 +797,8 @@ export const KPK_CASES = [
     region: "Lampung",
     notes: "Bupati Lampung Tengah Mustafa menyuap anggota DPRD untuk meloloskan RAPBD. Kasus ini terhubung dengan jaringan Azis Syamsuddin yang kelak juga terjerat KPK.",
     source: "KPK RI, 2018-2019",
+
+    sumber: ["kpk.go.id"],
   },
 
   // ── EXPANSION BATCH ────────────────────────────────────────────────────────
@@ -729,11 +813,13 @@ export const KPK_CASES = [
     arrest_type: "tangkap",
     date_start: "2024-03-27",
     date_vonis: "2024-12-23",
-    vonis_years: 6.5,
+    vonis_years: 20,
     institution: "Kejaksaan Agung",
     region: "Nasional / Bangka Belitung",
-    notes: "Harvey Moeis, suami artis Sandra Dewi, divonis 6,5 tahun penjara. Kasus ini melibatkan 16 terdakwa dan mengungkap jaringan korupsi sistemik di industri timah. Kerugian Rp 271 triliun melampaui kasus Jiwasraya dan ASABRI.",
-    source: "Kejaksaan Agung RI, 2024",
+    notes: "Harvey Moeis, suami artis Sandra Dewi. Vonis pertama 6,5 tahun (Desember 2024) dianggap terlalu ringan untuk kasus Rp 271 triliun. Jaksa banding — Pengadilan Tinggi memperberat hukuman menjadi 20 tahun penjara. Kasus ini melibatkan 16 terdakwa dan mengungkap jaringan korupsi sistemik di industri timah.",
+    source: "Kejaksaan Agung RI, 2024-2025",
+
+    sumber: ["kejaksaan.go.id"],
   },
   {
     id: "kpk044",
@@ -751,6 +837,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Kasus viral berawal dari gaya hidup mewah anak Rafael (Mario Dandy). Rafael divonis 14 tahun penjara dan denda Rp 500 juta. Memicu audit LHKPN masif terhadap pejabat Kemenkeu.",
     source: "KPK RI, 2023-2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk045",
@@ -768,6 +856,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "SYL mundur dari kabinet Jokowi sebelum resmi ditahan. Kasus ini juga melibatkan Firli Bahuri (Ketua KPK) yang diduga memeras SYL — kasus bersejarah kepala lembaga anti-korupsi menjadi tersangka.",
     source: "KPK RI, 2023-2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk046",
@@ -785,6 +875,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Pertama kali dalam sejarah: Ketua KPK aktif (Firli Bahuri) jadi tersangka korupsi. Firli ditetapkan tersangka oleh Polda Metro Jaya, bukan oleh KPK sendiri. Kasusnya mandek di Polri hingga 2025.",
     source: "Polda Metro Jaya, November 2023",
+
+    sumber: ["polri.go.id"],
   },
   {
     id: "kpk047",
@@ -802,6 +894,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Eddy Hiariej, Wamenkumham era Jokowi, jadi tersangka suap. Kasus sempat SP3 namun KPK kemudian me-restart penyidikan. Eddy mengajukan praperadilan.",
     source: "KPK RI, 2023",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk048",
@@ -819,6 +913,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Hakim Agung Gazalba Saleh divonis 12 tahun penjara. Kasus ini bagian dari operasi besar KPK membongkar mafia peradilan di MA yang juga menerjunkan Hakim Agung Sudrajad Dimyati.",
     source: "KPK RI, 2023-2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk049",
@@ -836,6 +932,8 @@ export const KPK_CASES = [
     region: "Malaysia",
     notes: "Kasus korupsi di lingkungan Kementerian Luar Negeri dan KBRI — termasuk penyalahgunaan layanan dokumen WNI di Malaysia.",
     source: "KPK RI, 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk050",
@@ -853,6 +951,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Bagian dari serangkaian kasus korupsi impor pangan yang mencuat di Kementan era SYL. Importir dan pejabat Kementan terbukti bersekongkol.",
     source: "KPK RI, 2023-2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk051",
@@ -870,6 +970,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Korupsi di tengah pandemi: markup harga alkes, penunjukan langsung rekanan fiktif. Beberapa pejabat daerah dan pusat terjerat. Publik geram karena terjadi saat masyarakat berjuang melawan COVID.",
     source: "KPK RI, 2021-2022",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk052",
@@ -887,6 +989,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Direktur dan mantan direktur Waskita Karya dihukum penjara. Kasus ini mengungkap praktik korupsi sistemik di BUMN konstruksi yang terlibat proyek infrastruktur besar era Jokowi.",
     source: "Kejaksaan Agung RI, 2022-2023",
+
+    sumber: ["kejaksaan.go.id"],
   },
   {
     id: "kpk053",
@@ -904,6 +1008,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "OTT KPK di Bakamla: kepala Bakamla Laksda Madya Aris Rustandi dan beberapa pejabat ditetapkan tersangka. Melibatkan perusahaan asing dan broker pertahanan.",
     source: "KPK RI, 2020-2022",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk054",
@@ -921,6 +1027,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Johnny Plate (Menkominfo, Sekjen NasDem) divonis 15 tahun penjara. Selain Plate, Dirut BAKTI Anang Latif dan beberapa tersangka lain juga dihukum. Kasus terbesar di sektor telekomunikasi.",
     source: "Kejaksaan Agung RI, 2023-2024",
+
+    sumber: ["kejaksaan.go.id"],
   },
   {
     id: "kpk055",
@@ -938,6 +1046,8 @@ export const KPK_CASES = [
     region: "Jawa Barat",
     notes: "Kasus korupsi bansos Jabar melibatkan sejumlah pejabat daerah dan rekanan penyedia bansos. Modus: penerima fiktif dan markup nilai bansos.",
     source: "KPK RI, 2024",
+
+    sumber: ["kpk.go.id"],
   },
   // ── NEW ENTRIES R23 ──────────────────────────────────────────────────────
   {
@@ -956,6 +1066,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Hasto Kristiyanto (Sekjen PDIP) ditetapkan tersangka Jan 2025 setelah bertahun-tahun KPK menyelidiki kasus Harun Masiku. Harun Masiku sendiri masih buron sejak 2020.",
     source: "KPK RI, Januari 2025",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk057",
@@ -973,6 +1085,8 @@ export const KPK_CASES = [
     region: "Sumatera Utara",
     notes: "OTT KPK di Labuhanbatu menangkap Bupati beserta kontraktor pemberi suap. Modus klasik: fee proyek untuk kepala daerah.",
     source: "KPK RI, Juni 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk058",
@@ -990,6 +1104,8 @@ export const KPK_CASES = [
     region: "Jawa Tengah",
     notes: "KPK menggelar OTT di Semarang, mengamankan walikota dan sejumlah pihak swasta. Modus: fee perizinan IMB dan proyek APBD.",
     source: "KPK RI, Juli 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk059",
@@ -1007,6 +1123,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Beberapa pejabat Kemenkes dan rekanan swasta terbukti menyelewengkan anggaran alat kesehatan COVID-19. Kasus ini bagian dari audit besar penggunaan dana PEN.",
     source: "KPK RI, 2023-2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk060",
@@ -1024,6 +1142,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "KPK mengembangkan kasus e-KTP dengan menetapkan tersangka baru. Kasus e-KTP total merugikan negara Rp 2,3 triliun, melibatkan ratusan nama di DPR dan birokrasi.",
     source: "KPK RI, 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk061",
@@ -1041,6 +1161,8 @@ export const KPK_CASES = [
     region: "Jawa Timur",
     notes: "KPK menangani perkara Dana Desa di Jawa Timur sebagai bagian dari operasi pemberantasan korupsi di tingkat desa. Program Dana Desa rawan penyimpangan karena minimnya pengawasan.",
     source: "KPK RI, 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk062",
@@ -1058,6 +1180,8 @@ export const KPK_CASES = [
     region: "Banten",
     notes: "OTT pejabat Badan Pertanahan Nasional (BPN) di wilayah Tangerang. Modus: layanan penerbitan sertifikat tanah dipercepat dengan imbalan suap.",
     source: "KPK RI, April 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk063",
@@ -1075,6 +1199,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "KPK menggelar OTT di lingkungan Mahkamah Agung. Hakim dan panitera MA ditangkap menerima suap dari pengacara pihak berperkara. Mengikuti pola OTT panitera MA sebelumnya.",
     source: "KPK RI, Agustus 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk064",
@@ -1092,6 +1218,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Kasus bermula dari temuan BPK atas pengadaan di anak usaha PLN. KPK mengembangkan menjadi kasus korupsi dengan modus kickback antara direksi anak perusahaan dan rekanan.",
     source: "KPK RI, Oktober 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk065",
@@ -1109,6 +1237,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "Setelah kasus SYL (Syahrul Yasin Limpo) di Kementan, KPK menemukan dugaan korupsi lanjutan dalam program pupuk bersubsidi yang menyasar petani kecil.",
     source: "KPK RI, November 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk066",
@@ -1126,6 +1256,8 @@ export const KPK_CASES = [
     region: "Sumatera Utara",
     notes: "OTT kedua di Langkat—sebelumnya Bupati Langkat Terbit Rencana Perangin-angin ditangkap 2022 terkait kerangkeng manusia. Kasus ini menunjukkan pola korupsi perizinan tambang di Sumut.",
     source: "KPK RI, Desember 2024",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk067",
@@ -1143,6 +1275,8 @@ export const KPK_CASES = [
     region: "Nasional",
     notes: "KPK melakukan penyelidikan atas dugaan korupsi pengadaan IT internal Kejaksaan. Kasus ini sensitif karena melibatkan institusi penegak hukum itu sendiri.",
     source: "KPK RI, Januari 2025",
+
+    sumber: ["kpk.go.id"],
   },
   {
     id: "kpk068",
@@ -1160,6 +1294,8 @@ export const KPK_CASES = [
     region: "Jawa Timur",
     notes: "Pengurus KONI Jatim dan pejabat Dispora terbukti menyelewengkan dana hibah olahraga. Kasus ini mengungkap praktik korupsi di sektor pembinaan olahraga daerah.",
     source: "KPK RI / Pengadilan Tipikor Surabaya, 2024-2025",
+
+    sumber: ["kpk.go.id"],
   },
 ]
 
