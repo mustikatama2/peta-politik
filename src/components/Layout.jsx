@@ -51,6 +51,7 @@ const NAV = [
   { to:'/media-monitor', icon:'📺', label:'Monitor Media' },
   { to:'/framing',       icon:'🗞️', label:'Framing Media' },
   { to:'/bisnis',   icon:'🏢', label:'Kepemilikan Bisnis' },
+  { to:'/koneksi-bisnis', icon:'💼', label:'Koneksi Bisnis' },
   { to:'/bumn',     icon:'🏢', label:'BUMN & Bisnis' },
   { to:'/lhkpn',      icon:'💰', label:'LHKPN' },
   { to:'/lhkpn-trend', icon:'📈', label:'Tren LHKPN' },
