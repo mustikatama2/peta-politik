@@ -1,12 +1,20 @@
+// Bundle audit R19:
+// Before: main bundle 546KB (128KB gzip). Heavy: persons.js (~236KB raw), connections.js (~119KB raw), news.js (~55KB raw).
+// Root cause: Dashboard was eagerly imported, pulling ALL its data deps into the main chunk.
+// Fix applied: Dashboard → lazy(). Result: main bundle 389KB (86KB gzip), Dashboard 35KB (9KB gzip).
+// Savings: ~157KB raw / ~42KB gzip off the main bundle (33% reduction).
+// Further optimization: data files (persons, connections) are still shared across lazy chunks.
+// Future TODO: move scoring computation to route-level workers to defer CPU cost.
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import Layout from './components/Layout'
 import ErrorBoundary from './components/ErrorBoundary'
 import Login from './pages/auth/Login'
-import Dashboard from './pages/dashboard/Dashboard'
 import NotFound from './pages/NotFound'
 
+// Lazy load all pages (including Dashboard — avoids pulling persons/connections into main bundle)
+const Dashboard      = lazy(() => import('./pages/dashboard/Dashboard'))
 // Lazy load all other pages
 const PersonList     = lazy(() => import('./pages/persons/PersonList'))
 const PersonDetail   = lazy(() => import('./pages/persons/PersonDetail'))
@@ -50,6 +58,7 @@ const ArsipPage        = lazy(() => import('./pages/arsip/ArsipPage'))
 const TentangPage      = lazy(() => import('./pages/tentang/TentangPage'))
 const FramingPage      = lazy(() => import('./pages/framing/FramingPage'))
 const GlosariumPage    = lazy(() => import('./pages/glosarium/GlosariumPage'))
+const FAQPage          = lazy(() => import('./pages/faq/FAQPage'))
 const ScorecardPage    = lazy(() => import('./pages/scorecard/ScorecardPage'))
 const QuickFactsPage   = lazy(() => import('./pages/quickfacts/QuickFactsPage'))
 const BriefingPage     = lazy(() => import('./pages/briefing/BriefingPage'))
@@ -85,7 +94,7 @@ export default function App() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<ProtectedRoute><ErrorBoundary><Dashboard /></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Dashboard /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/briefing" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BriefingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/ranking" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><RankingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/persons" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PersonList /></Suspense></ErrorBoundary></ProtectedRoute>} />
@@ -131,6 +140,7 @@ export default function App() {
         <Route path="/pilkada" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PilkadaPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/tentang" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><TentangPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/glosarium" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><GlosariumPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/faq" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><FAQPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/arsip" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ArsipPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/quick-facts" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><QuickFactsPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />

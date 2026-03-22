@@ -56,14 +56,57 @@ export const PILEG_HISTORY = [
     { party:"Demokrat",votes_pct:10.19, seats:61  },
     { party:"PAN",     votes_pct:7.59,  seats:49  },
   ]},
+  { year:2009, results:[
+    { party:"Demokrat",votes_pct:20.85, seats:150 },
+    { party:"Golkar",  votes_pct:14.45, seats:107 },
+    { party:"PDIP",    votes_pct:14.03, seats:95  },
+    { party:"PKS",     votes_pct:7.88,  seats:57  },
+    { party:"PAN",     votes_pct:6.01,  seats:46  },
+    { party:"PKB",     votes_pct:4.94,  seats:28  },
+    { party:"Gerindra",votes_pct:4.46,  seats:26  },
+    { party:"NasDem",  votes_pct:0,     seats:0   },
+  ]},
 ]
 
 export const PILPRES_HISTORY = [
-  { year:2024, winner:"Prabowo Subianto",              pct:58.59, runnerup:"Anies Baswedan",              runnerup_pct:24.95 },
-  { year:2019, winner:"Joko Widodo",                   pct:55.50, runnerup:"Prabowo Subianto",            runnerup_pct:44.50 },
-  { year:2014, winner:"Joko Widodo",                   pct:53.15, runnerup:"Prabowo Subianto",            runnerup_pct:46.85 },
-  { year:2009, winner:"Susilo Bambang Yudhoyono",      pct:60.80, runnerup:"Megawati Soekarnoputri",      runnerup_pct:26.79 },
-  { year:2004, winner:"Susilo Bambang Yudhoyono",      pct:60.62, runnerup:"Megawati Soekarnoputri",      runnerup_pct:39.38 },
+  {
+    year: 2024, round: 1,
+    pct: 58.59, winner: 'Prabowo Subianto', person_id: 'prabowo',
+    runnerup: 'Anies Baswedan', person_id_ru: 'anies', runnerup_pct: 24.95,
+    third: 'Ganjar Pranowo', person_id_3: 'ganjar', third_pct: 16.47,
+    turnout_pct: 81.8,
+    significance: 'Prabowo akhirnya menang setelah 3× mencalonkan diri.',
+  },
+  {
+    year: 2019, round: 1,
+    pct: 55.50, winner: 'Joko Widodo', person_id: 'jokowi',
+    runnerup: 'Prabowo Subianto', person_id_ru: 'prabowo', runnerup_pct: 44.50,
+    turnout_pct: 81.9,
+    significance: 'Jokowi menang lagi. Prabowo menggugat lagi. Demo 22 Mei.',
+  },
+  {
+    year: 2014, round: 1,
+    pct: 53.15, winner: 'Joko Widodo', person_id: 'jokowi',
+    runnerup: 'Prabowo Subianto', person_id_ru: 'prabowo', runnerup_pct: 46.85,
+    turnout_pct: 75.1,
+    significance: 'Jokowi — figur baru non-elite. Prabowo menggugat hasil.',
+  },
+  {
+    year: 2009, round: 1,
+    pct: 60.80, winner: 'Susilo Bambang Yudhoyono', person_id: 'sby',
+    runnerup: 'Megawati Soekarnoputri', person_id_ru: 'megawati', runnerup_pct: 26.79,
+    third: 'Jusuf Kalla', third_pct: 12.41,
+    turnout_pct: 70.9,
+    significance: 'SBY menang satu putaran dengan margin lebar.',
+  },
+  {
+    year: 2004, round: 2,
+    pct: 60.62, winner: 'Susilo Bambang Yudhoyono', person_id: 'sby',
+    runnerup: 'Megawati Soekarnoputri', person_id_ru: 'megawati', runnerup_pct: 39.38,
+    turnout_pct: 76.6,
+    total_voters: 153_320_544,
+    significance: 'Pilpres langsung pertama dalam sejarah Indonesia.',
+  },
 ]
 
 export const PILKADA_JATIM_2024 = {

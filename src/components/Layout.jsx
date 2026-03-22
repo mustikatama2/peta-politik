@@ -52,6 +52,7 @@ const NAV = [
   { to:'/mahasiswa',icon:'🎓', label:'Gerakan Mahasiswa' },
   { to:'/indikator',icon:'📊', label:'Indikator' },
   { to:'/glosarium',icon:'📖', label:'Glosarium' },
+  { to:'/faq',      icon:'❓', label:'FAQ' },
   { to:'/tentang',  icon:'ℹ️', label:'Tentang' },
 ]
 
