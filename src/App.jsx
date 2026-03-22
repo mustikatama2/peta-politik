@@ -40,6 +40,7 @@ const RiskIndex      = lazy(() => import('./pages/risk/RiskIndex'))
 const ScenarioPage   = lazy(() => import('./pages/scenarios/ScenarioPage'))
 const SimulatorPage  = lazy(() => import('./pages/simulator/SimulatorPage'))
 const VotingPage     = lazy(() => import('./pages/voting/VotingPage'))
+const HukumPage      = lazy(() => import('./pages/hukum/HukumPage'))
 const BusinessPage   = lazy(() => import('./pages/business/BusinessPage'))
 const KabinetPage    = lazy(() => import('./pages/kabinet/KabinetPage'))
 const BudgetPage     = lazy(() => import('./pages/budget/BudgetPage'))
@@ -122,6 +123,7 @@ export default function App() {
         <Route path="/dynasty" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><DynastyMapper /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/timeline" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Timeline /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/voting" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><VotingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/hukum" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><HukumPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/coi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><COIScanner /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/compare" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/compare/:id1" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ComparePage /></Suspense></ErrorBoundary></ProtectedRoute>} />
