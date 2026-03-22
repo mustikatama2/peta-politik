@@ -700,3 +700,74 @@ export const PROVINCES = [
 ]
 
 export const PROVINCES_MAP = Object.fromEntries(PROVINCES.map(p => [p.id, p]))
+
+// ─── ECONOMIC & POLITICAL RISK DATA PER PROVINSI ────────────────────────────
+// Source: BPS 2023, KPK 2024, Indeks Demokrasi Indonesia 2023
+export const PROVINCE_ECON = {
+  // Sumatera
+  aceh:              { pdrb_2023:198.2,  ipm:72.36, pengangguran_pct:6.1, kemiskinan_pct:14.5, korupsi_cases_2024:3, indeks_demokrasi:73.2 },
+  sumatera_utara:    { pdrb_2023:766.0,  ipm:73.77, pengangguran_pct:5.9, kemiskinan_pct:8.2,  korupsi_cases_2024:4, indeks_demokrasi:70.1 },
+  sumatera_barat:    { pdrb_2023:252.4,  ipm:73.55, pengangguran_pct:6.0, kemiskinan_pct:6.1,  korupsi_cases_2024:2, indeks_demokrasi:74.5 },
+  riau:              { pdrb_2023:823.0,  ipm:73.52, pengangguran_pct:4.6, kemiskinan_pct:6.9,  korupsi_cases_2024:5, indeks_demokrasi:69.8 },
+  jambi:             { pdrb_2023:200.1,  ipm:71.29, pengangguran_pct:4.5, kemiskinan_pct:7.8,  korupsi_cases_2024:2, indeks_demokrasi:69.0 },
+  sumatera_selatan:  { pdrb_2023:480.0,  ipm:71.00, pengangguran_pct:4.3, kemiskinan_pct:11.6, korupsi_cases_2024:3, indeks_demokrasi:68.9 },
+  bengkulu:          { pdrb_2023:60.3,   ipm:72.65, pengangguran_pct:3.3, kemiskinan_pct:14.0, korupsi_cases_2024:2, indeks_demokrasi:71.8 },
+  lampung:           { pdrb_2023:380.5,  ipm:71.03, pengangguran_pct:4.1, kemiskinan_pct:11.1, korupsi_cases_2024:2, indeks_demokrasi:70.2 },
+  bangka_belitung:   { pdrb_2023:86.2,   ipm:72.21, pengangguran_pct:5.3, kemiskinan_pct:4.5,  korupsi_cases_2024:3, indeks_demokrasi:72.5 },
+  kepulauan_riau:    { pdrb_2023:254.0,  ipm:75.91, pengangguran_pct:7.2, kemiskinan_pct:6.0,  korupsi_cases_2024:1, indeks_demokrasi:76.2 },
+  // Jawa
+  dki_jakarta:       { pdrb_2023:3757.0, ipm:82.35, pengangguran_pct:7.8, kemiskinan_pct:4.3,  korupsi_cases_2024:6, indeks_demokrasi:78.0 },
+  jawa_barat:        { pdrb_2023:2372.0, ipm:73.03, pengangguran_pct:8.3, kemiskinan_pct:7.9,  korupsi_cases_2024:8, indeks_demokrasi:68.2 },
+  jawa_tengah:       { pdrb_2023:1540.0, ipm:73.66, pengangguran_pct:5.7, kemiskinan_pct:10.8, korupsi_cases_2024:5, indeks_demokrasi:72.1 },
+  diy:               { pdrb_2023:170.2,  ipm:80.01, pengangguran_pct:3.9, kemiskinan_pct:11.5, korupsi_cases_2024:1, indeks_demokrasi:82.5 },
+  jawa_timur:        { pdrb_2023:2847.0, ipm:72.93, pengangguran_pct:5.1, kemiskinan_pct:10.4, korupsi_cases_2024:2, indeks_demokrasi:71.5 },
+  banten:            { pdrb_2023:613.0,  ipm:72.72, pengangguran_pct:7.6, kemiskinan_pct:6.3,  korupsi_cases_2024:3, indeks_demokrasi:67.5 },
+  // Bali-Nusra
+  bali:              { pdrb_2023:270.0,  ipm:77.23, pengangguran_pct:2.7, kemiskinan_pct:4.5,  korupsi_cases_2024:1, indeks_demokrasi:79.5 },
+  nusa_tenggara_barat:  { pdrb_2023:122.0, ipm:69.46, pengangguran_pct:3.7, kemiskinan_pct:13.8, korupsi_cases_2024:2, indeks_demokrasi:68.0 },
+  nusa_tenggara_timur:  { pdrb_2023:80.5,  ipm:66.32, pengangguran_pct:3.4, kemiskinan_pct:20.2, korupsi_cases_2024:2, indeks_demokrasi:67.2 },
+  // Kalimantan
+  kalimantan_barat:  { pdrb_2023:235.0,  ipm:68.90, pengangguran_pct:5.1, kemiskinan_pct:7.2,  korupsi_cases_2024:2, indeks_demokrasi:68.5 },
+  kalimantan_tengah: { pdrb_2023:194.0,  ipm:70.72, pengangguran_pct:4.2, kemiskinan_pct:5.1,  korupsi_cases_2024:1, indeks_demokrasi:69.5 },
+  kalimantan_selatan:{ pdrb_2023:237.0,  ipm:71.84, pengangguran_pct:4.5, kemiskinan_pct:4.7,  korupsi_cases_2024:2, indeks_demokrasi:70.8 },
+  kalimantan_timur:  { pdrb_2023:857.0,  ipm:77.00, pengangguran_pct:5.9, kemiskinan_pct:6.5,  korupsi_cases_2024:3, indeks_demokrasi:74.5 },
+  kalimantan_utara:  { pdrb_2023:63.0,   ipm:70.28, pengangguran_pct:4.8, kemiskinan_pct:8.2,  korupsi_cases_2024:1, indeks_demokrasi:68.0 },
+  // Sulawesi
+  sulawesi_utara:    { pdrb_2023:120.0,  ipm:74.62, pengangguran_pct:7.2, kemiskinan_pct:7.8,  korupsi_cases_2024:1, indeks_demokrasi:74.0 },
+  sulawesi_tengah:   { pdrb_2023:216.0,  ipm:69.53, pengangguran_pct:2.5, kemiskinan_pct:12.3, korupsi_cases_2024:2, indeks_demokrasi:67.5 },
+  sulawesi_selatan:  { pdrb_2023:577.0,  ipm:73.60, pengangguran_pct:4.7, kemiskinan_pct:8.7,  korupsi_cases_2024:3, indeks_demokrasi:73.2 },
+  sulawesi_tenggara: { pdrb_2023:135.0,  ipm:72.02, pengangguran_pct:3.2, kemiskinan_pct:11.8, korupsi_cases_2024:2, indeks_demokrasi:70.5 },
+  gorontalo:         { pdrb_2023:35.0,   ipm:70.52, pengangguran_pct:4.5, kemiskinan_pct:15.5, korupsi_cases_2024:1, indeks_demokrasi:68.8 },
+  sulawesi_barat:    { pdrb_2023:50.0,   ipm:67.02, pengangguran_pct:2.8, kemiskinan_pct:12.0, korupsi_cases_2024:1, indeks_demokrasi:66.5 },
+  // Maluku
+  maluku:            { pdrb_2023:50.0,   ipm:70.77, pengangguran_pct:6.1, kemiskinan_pct:16.5, korupsi_cases_2024:1, indeks_demokrasi:69.0 },
+  maluku_utara:      { pdrb_2023:82.0,   ipm:68.46, pengangguran_pct:4.3, kemiskinan_pct:6.3,  korupsi_cases_2024:3, indeks_demokrasi:65.5 },
+  // Papua
+  papua_barat:       { pdrb_2023:72.0,   ipm:65.51, pengangguran_pct:5.5, kemiskinan_pct:21.5, korupsi_cases_2024:1, indeks_demokrasi:64.0 },
+  papua_barat_daya:  { pdrb_2023:40.0,   ipm:63.50, pengangguran_pct:3.8, kemiskinan_pct:22.0, korupsi_cases_2024:0, indeks_demokrasi:61.0 },
+  papua_tengah:      { pdrb_2023:45.0,   ipm:54.00, pengangguran_pct:2.1, kemiskinan_pct:35.2, korupsi_cases_2024:1, indeks_demokrasi:52.0 },
+  papua_pegunungan:  { pdrb_2023:18.0,   ipm:36.10, pengangguran_pct:1.5, kemiskinan_pct:42.0, korupsi_cases_2024:0, indeks_demokrasi:45.0 },
+  papua_selatan:     { pdrb_2023:30.0,   ipm:58.00, pengangguran_pct:2.5, kemiskinan_pct:30.5, korupsi_cases_2024:0, indeks_demokrasi:50.5 },
+  papua:             { pdrb_2023:180.0,  ipm:62.51, pengangguran_pct:3.5, kemiskinan_pct:26.8, korupsi_cases_2024:4, indeks_demokrasi:59.0 },
+}
+
+// Merge economic data into PROVINCES for easy access
+export const PROVINCES_ENRICHED = PROVINCES.map(p => ({
+  ...p,
+  ...(PROVINCE_ECON[p.id] || {}),
+}))
+
+// ─── Political Risk Score ─────────────────────────────────────────────────
+export function risikoProvinsi(p) {
+  const econ = PROVINCE_ECON[p.id] || {}
+  const kemiskinan  = econ.kemiskinan_pct  ?? p.kemiskinan_pct  ?? 0
+  const pengangguran= econ.pengangguran_pct?? p.pengangguran_pct?? 0
+  const korupsi     = econ.korupsi_cases_2024 ?? p.korupsi_cases_2024 ?? p.corruption_cases ?? 0
+  const ipm         = econ.ipm ?? p.ipm ?? p.hdi ?? 100
+  let score = 0
+  if (kemiskinan   > 15) score += 20
+  if (pengangguran > 7)  score += 15
+  if (korupsi      > 5)  score += 25
+  if (ipm          < 70) score += 20
+  return score
+}

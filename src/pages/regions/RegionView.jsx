@@ -1,7 +1,9 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, LineChart, Line, XAxis, YAxis } from 'recharts'
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, LineChart, Line, XAxis, YAxis,
+  RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts'
 import * as RegionsData from '../../data/regions'
+import { PROVINCE_ECON, risikoProvinsi } from '../../data/regions'
 import { PERSONS } from '../../data/persons'
 import { PARTY_MAP } from '../../data/parties'
 import { GDP_PROVINCES } from '../../data/gdp'
@@ -11,9 +13,10 @@ import { SearchBar, Card, Badge, PageHeader, Avatar } from '../../components/ui'
 
 const KIM_PLUS = ['ger', 'gol', 'nas', 'pan', 'dem', 'pks', 'pbb', 'pkb']
 
-// Safe fallbacks
+// Safe fallbacks — use enriched (with economic indicators) when available
 const JATIM_REGIONS = RegionsData.JATIM_REGIONS || []
-const PROVINCES = RegionsData.PROVINCES || []
+const PROVINCES_ENRICHED = RegionsData.PROVINCES_ENRICHED || RegionsData.PROVINCES || []
+const PROVINCES = PROVINCES_ENRICHED
 
 const ISLAND_MAP = {
   'aceh':'Sumatera','sumatera-utara':'Sumatera','sumatera-barat':'Sumatera',

@@ -44,6 +44,7 @@ const NAV = [
   { to:'/voting',   icon:'🗳️', label:'Rekam Jejak Voting' },
   { to:'/hukum',    icon:'⚖️', label:'Legislasi' },
   { to:'/kpk',      icon:'⚖️', label:'KPK Cases' },
+  { to:'/korupsi-tracker', icon:'🚨', label:'Korupsi Tracker' },
   { to:'/investigasi', icon:'🔍', label:'Investigasi' },
   { to:'/coi',      icon:'🔍', label:'Konflik Kepentingan' },
   { to:'/media',         icon:'📡', label:'Kepemilikan Media' },
