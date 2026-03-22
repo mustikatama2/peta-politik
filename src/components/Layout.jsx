@@ -38,6 +38,7 @@ const NAV = [
   { to:'/simulator',icon:'⚙️', label:'Simulator Koalisi' },
   { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
   { to:'/timeline', icon:'📅', label:'Linimasa' },
+  { to:'/timeline-kekuasaan', icon:'🏛️', label:'Sejarah Presiden' },
   { to:'/arsip',    icon:'📜', label:'Arsip Sejarah' },
   { to:'/voting',   icon:'🗳️', label:'Rekam Jejak Voting' },
   { to:'/hukum',    icon:'⚖️', label:'Legislasi' },
