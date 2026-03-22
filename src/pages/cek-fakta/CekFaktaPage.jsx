@@ -1,5 +1,8 @@
 import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import {
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend,
+} from 'recharts'
 import MetaTags from '../../components/MetaTags'
 import { CEK_FAKTA, VERDICT_META } from '../../data/cek_fakta'
 
@@ -467,6 +470,210 @@ function PembuatChart() {
   )
 }
 
+// ─── Verdict Trend Chart ─────────────────────────────────────────────────
+
+const MONTH_LABELS = [
+  'Jan 23','Feb 23','Mar 23','Apr 23','Mei 23','Jun 23',
+  'Jul 23','Agu 23','Sep 23','Okt 23','Nov 23','Des 23',
+  'Jan 24','Feb 24','Mar 24','Apr 24','Mei 24','Jun 24',
+  'Jul 24','Agu 24','Sep 24','Okt 24','Nov 24','Des 24',
+  'Jan 25','Feb 25','Mar 25',
+]
+
+function verdictMonthKey(iso) {
+  const d = new Date(iso)
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+}
+
+function VerdictTrendChart() {
+  const chartData = useMemo(() => {
+    // Build a map: "YYYY-MM" → { SALAH, MENYESATKAN, SEBAGIAN_BENAR, BENAR, TIDAK_TERBUKTI }
+    const map = {}
+    CEK_FAKTA.forEach(c => {
+      const key = verdictMonthKey(c.tanggal)
+      if (!map[key]) map[key] = { SALAH: 0, MENYESATKAN: 0, SEBAGIAN_BENAR: 0, BENAR: 0, TIDAK_TERBUKTI: 0 }
+      map[key][c.verdict] = (map[key][c.verdict] || 0) + 1
+    })
+
+    // Build rows only for months that have at least one claim, sorted
+    return Object.keys(map)
+      .sort()
+      .map(key => {
+        const [year, month] = key.split('-')
+        const idx = (parseInt(year) - 2023) * 12 + (parseInt(month) - 1)
+        const label = MONTH_LABELS[idx] || key
+        return { label, ...map[key] }
+      })
+  }, [])
+
+  if (chartData.length === 0) return null
+
+  const verdictBars = [
+    { key: 'SALAH', label: 'Salah' },
+    { key: 'MENYESATKAN', label: 'Menyesatkan' },
+    { key: 'SEBAGIAN_BENAR', label: 'Sebagian Benar' },
+    { key: 'TIDAK_TERBUKTI', label: 'Tidak Terbukti' },
+    { key: 'BENAR', label: 'Benar' },
+  ]
+
+  return (
+    <div className="bg-bg-card border border-border rounded-xl p-5">
+      <h2 className="text-base font-bold text-text-primary mb-1 flex items-center gap-2">
+        📈 Tren Klaim Bermasalah per Bulan
+      </h2>
+      <p className="text-xs text-text-muted mb-4">
+        Seberapa sering politisi membuat klaim yang salah atau menyesatkan dari waktu ke waktu?
+      </p>
+      <div className="w-full overflow-x-auto">
+        <ResponsiveContainer width="100%" height={220}>
+          <BarChart data={chartData} margin={{ top: 4, right: 8, left: -18, bottom: 0 }}>
+            <XAxis
+              dataKey="label"
+              tick={{ fontSize: 10, fill: '#9CA3AF' }}
+              tickLine={false}
+              axisLine={false}
+            />
+            <YAxis
+              tick={{ fontSize: 10, fill: '#9CA3AF' }}
+              tickLine={false}
+              axisLine={false}
+              allowDecimals={false}
+            />
+            <Tooltip
+              contentStyle={{
+                background: '#1F2937',
+                border: '1px solid #374151',
+                borderRadius: 8,
+                fontSize: 12,
+                color: '#F9FAFB',
+              }}
+              cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+            />
+            <Legend
+              wrapperStyle={{ fontSize: 11, paddingTop: 8 }}
+              formatter={value => (
+                <span style={{ color: '#9CA3AF' }}>{value}</span>
+              )}
+            />
+            {verdictBars.map(({ key, label }) => (
+              <Bar
+                key={key}
+                dataKey={key}
+                name={label}
+                stackId="a"
+                fill={VERDICT_META[key].color}
+                radius={key === 'BENAR' ? [4, 4, 0, 0] : undefined}
+              />
+            ))}
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  )
+}
+
+// ─── Jujur / Bohong Awards ────────────────────────────────────────────────
+
+function JujurBohongAwards() {
+  const { terjujur, paling_menyesatkan } = useMemo(() => {
+    const byPerson = {}
+    CEK_FAKTA.forEach(c => {
+      if (!c.person_id) return
+      if (!byPerson[c.person_id]) byPerson[c.person_id] = { name: c.pembuat, person_id: c.person_id, BENAR: 0, SALAH: 0, MENYESATKAN: 0, total: 0 }
+      byPerson[c.person_id].total++
+      if (c.verdict === 'BENAR') byPerson[c.person_id].BENAR++
+      if (c.verdict === 'SALAH') byPerson[c.person_id].SALAH++
+      if (c.verdict === 'MENYESATKAN') byPerson[c.person_id].MENYESATKAN++
+    })
+    const people = Object.values(byPerson)
+    const terjujur = [...people].sort((a, b) => b.BENAR - a.BENAR || a.SALAH - b.SALAH)[0] || null
+    const paling_menyesatkan = [...people].sort((a, b) => (b.SALAH + b.MENYESATKAN) - (a.SALAH + a.MENYESATKAN))[0] || null
+    return { terjujur, paling_menyesatkan }
+  }, [])
+
+  if (!terjujur && !paling_menyesatkan) return null
+
+  function AwardCard({ person, award, emoji, accent, desc }) {
+    if (!person) return null
+    const initials = getInitials(person.name)
+    const bg = avatarColor(person.name)
+    return (
+      <div
+        className="flex-1 min-w-[200px] rounded-xl border p-4 flex flex-col items-center gap-3 text-center"
+        style={{ borderColor: accent + '50', background: accent + '10' }}
+      >
+        {/* Big avatar + emoji badge */}
+        <div className="relative">
+          <div
+            className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-bold shadow-lg"
+            style={{ background: bg }}
+          >
+            {initials}
+          </div>
+          <div
+            className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full flex items-center justify-center text-lg border-2 border-bg-card"
+            style={{ background: accent }}
+          >
+            {emoji}
+          </div>
+        </div>
+
+        {/* Award label */}
+        <div>
+          <div
+            className="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-bold border mb-2"
+            style={{ color: accent, borderColor: accent + '60', background: accent + '18' }}
+          >
+            {award}
+          </div>
+          {person.person_id ? (
+            <Link
+              to={`/persons/${person.person_id}`}
+              className="block font-bold text-text-primary hover:underline"
+              style={{ color: accent }}
+            >
+              {person.name}
+            </Link>
+          ) : (
+            <p className="font-bold" style={{ color: accent }}>{person.name}</p>
+          )}
+          <p className="text-xs text-text-muted mt-1">{desc(person)}</p>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="bg-bg-card border border-border rounded-xl p-5">
+      <h2 className="text-base font-bold text-text-primary mb-1 flex items-center gap-2">
+        🏆 Rapor Kejujuran Politisi
+      </h2>
+      <p className="text-xs text-text-muted mb-4">
+        Berdasarkan verifikasi klaim-klaim di database ini.
+      </p>
+      <div className="flex flex-wrap gap-4">
+        <AwardCard
+          person={terjujur}
+          award="🌟 Pembuat Terjujur"
+          emoji="✓"
+          accent="#22C55E"
+          desc={p => `${p.BENAR} klaim terbukti benar dari ${p.total} total klaim`}
+        />
+        <AwardCard
+          person={paling_menyesatkan}
+          award="🚨 Paling Menyesatkan"
+          emoji="✗"
+          accent="#EF4444"
+          desc={p => `${p.SALAH + p.MENYESATKAN} klaim salah/menyesatkan dari ${p.total} total`}
+        />
+      </div>
+      <p className="text-[10px] text-text-muted mt-3 italic">
+        * Berdasarkan data di database ini saja. Semakin banyak klaim yang diverifikasi, semakin akurat hasilnya.
+      </p>
+    </div>
+  )
+}
+
 // ─── Main Page ────────────────────────────────────────────────────────────
 
 export default function CekFaktaPage() {
@@ -554,7 +761,13 @@ export default function CekFaktaPage() {
         </div>
       )}
 
-      {/* Section 4: Pembuat chart */}
+      {/* Section 4: Verdict trend chart */}
+      <VerdictTrendChart />
+
+      {/* Section 5: Jujur / Bohong awards */}
+      <JujurBohongAwards />
+
+      {/* Section 6: Pembuat chart */}
       <PembuatChart />
 
       {/* Footer note */}
