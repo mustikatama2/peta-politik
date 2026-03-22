@@ -611,6 +611,23 @@ export const CONNECTIONS = [
   { from:"saldi_isra", to:"prabowo", type:"rival", label:"Dissenting opinion putusan MK No.90 yang meloloskan Gibran", strength:5 },
   { from:"bahlil", to:"rachmat_pambudy", type:"kolega", label:"Sesama Gerindra di kabinet — ESDM dan Bappenas", strength:7 },
   { from:"agus_gumiwang", to:"nusron_wahid", type:"kolega", label:"Sesama Golkar di kabinet Prabowo", strength:6 },
+
+  // ─── KONEKSI FIGUR HISTORIS ──────────────────────────────────────────────
+  // Soeharto connections
+  { from:"soeharto", to:"habibie",  type:"mentor-murid", label:"Soeharto mendidik Habibie di Jerman, angkat sebagai Menpristek & Wapres", since:1974, strength:9 },
+  { from:"soeharto", to:"prabowo",  type:"keluarga",     label:"Mantan mertua — Prabowo menikahi Titiek Soeharto (cerai 1998)", since:1983, strength:8 },
+  { from:"soeharto", to:"megawati", type:"rival",        label:"Soeharto membubarkan PDI yang dipimpin Megawati (1996)", since:1996, strength:7 },
+  { from:"soeharto", to:"sby",      type:"mentor-murid", label:"SBY meniti karier militer di era Soeharto", since:1974, strength:6 },
+
+  // Habibie connections
+  { from:"habibie", to:"sby",       type:"kolega",       label:"Habibie dan SBY sama-sama tokoh transisi reformasi awal", since:1999, strength:6 },
+  { from:"habibie", to:"megawati",  type:"rival",        label:"Rival Pemilu 1999 — MPR pilih Gus Dur bukan Megawati maupun Habibie", since:1999, strength:5 },
+
+  // Gus Dur connections
+  { from:"gus_dur", to:"cakimin",   type:"mentor-murid", label:"Gus Dur pendiri PKB bersama Cak Imin (1998), keponakan Gus Dur", since:1998, strength:9 },
+  { from:"gus_dur", to:"megawati",  type:"kolega",       label:"Megawati Wapres di kabinet Gus Dur (1999) sebelum menggantikannya", since:1999, strength:7 },
+  { from:"gus_dur", to:"gus_yahya", type:"mentor-murid", label:"Sama-sama tokoh NU — Gus Yahya penerus tradisi Gus Dur di PBNU", since:1985, strength:8 },
+  { from:"gus_dur", to:"prabowo",   type:"rival",        label:"Gus Dur copot Wiranto (kolega Prabowo) saat Prabowo dekat dengan lingkaran Soeharto", since:2000, strength:4 },
 ];
 
 export const CONNECTION_TYPES = {
@@ -618,7 +635,9 @@ export const CONNECTION_TYPES = {
   "koalisi":         { color:"#3B82F6", label:"Koalisi Politik" },
   "bisnis":          { color:"#10B981", label:"Hubungan Bisnis" },
   "konflik":         { color:"#DC2626", label:"Konflik/Berseberangan" },
+  "rival":           { color:"#EF4444", label:"Rival/Pesaing Politik" },
   "mentor-murid":    { color:"#8B5CF6", label:"Mentor-Murid/Guru-Santri" },
+  "kolega":          { color:"#64748B", label:"Kolega/Rekan Sejawat" },
   "rekan":           { color:"#6B7280", label:"Rekan/Kolega" },
   "mantan-koalisi":  { color:"#D97706", label:"Mantan Koalisi" },
   "atasan-bawahan":  { color:"#0EA5E9", label:"Atasan-Bawahan" },

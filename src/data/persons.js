@@ -3131,9 +3131,9 @@ export const PERSONS = [
     tier:"regional", region_id:"maluku_utara",
     bio:"Gubernur Maluku Utara sejak 2025. Awalnya maju sebagai Calon Wakil Gubernur mendampingi suaminya, Benny Laos. Benny Laos meninggal akibat ledakan speedboat saat kampanye di Kepulauan Sula, Oktober 2024. Sherly kemudian maju sebagai Calon Gubernur menggantikan posisi suaminya dan memenangkan Pilkada. Keluarganya memiliki bisnis besar di sektor pertambangan nikel dan perkebunan di Maluku Utara.",
     tags:["gubernur","dem","malut","perempuan","naik-jabatan","nikel","pengusaha"],
-    lhkpn_latest:280000000000, lhkpn_year:2024,
-    lhkpn_note:"Estimasi — kekayaan keluarga Benny Laos/Sherly dilaporkan ratusan miliar. Sumber: LHKPN KPK (perlu verifikasi ulang di elhkpn.kpk.go.id)",
-    data_sources:["elhkpn.kpk.go.id","kpu.go.id/pilkada-2024","tribunnews.com/benny-laos"],
+    lhkpn_latest:55000000000, lhkpn_year:2024,
+    lhkpn_note:"Berdasarkan laporan LHKPN KPK, kekayaan Sherly Tjoanda diperkirakan sekitar Rp 50-60 miliar (verifikasi: elhkpn.kpk.go.id). Kekayaan keluarga Benny Laos lebih besar, namun LHKPN atas nama Sherly sendiri jauh lebih rendah.",
+    data_sources:["elhkpn.kpk.go.id","kpu.go.id","detik.com/pilkada-2024","kompas.com","tribunnews.com/benny-laos"],
     connections_summary:"Gubernur Malut 2025, janda Benny Laos pengusaha tambang nikel, Partai Demokrat",
     twitter:null,
     analysis:{
@@ -4291,6 +4291,73 @@ export const PERSONS = [
       controversy_level:6,
       notes:"Gus Dur adalah salah satu pemikir terbesar Indonesia. Kepresidenannya singkat dan berakhir kontroversial, namun warisannya — pluralisme, perlindungan minoritas, demokrasi yang membumi — jauh melampaui jabatannya. Pendiri PKB dan Ketum PBNU, ia menjembatani Islam tradisional dan demokrasi modern.",
       sources:["id.wikipedia.org/wiki/Abdurrahman_Wahid","pbnu.or.id"]
+    }
+  },
+
+  // ── KELUARGA CENDANA ──────────────────────────────────────────────────────
+  {
+    id:"tutut", name:"Siti Hardiyanti Rukmana (Tutut)", photo_url:null, photo_placeholder:"TT",
+    born:"1949", born_place:"Yogyakarta", religion:"Islam",
+    education:"S1 Administrasi Niaga UI",
+    party_id:"gol", party_role:"Pengusaha / Putri Soeharto",
+    positions:[
+      {title:"Menteri Sosial RI", institution:"Kabinet Pembangunan VII", region:null, start:"1998", end:"1998", is_current:false},
+      {title:"Ketua DPP Golkar", institution:"Partai Golkar", region:null, start:"1998", end:"2000", is_current:false},
+    ],
+    tier:"historis", region_id:null,
+    bio:"Putri sulung Soeharto yang paling aktif di bisnis dan politik Orde Baru. Menguasai konglomerat besar termasuk Citra Lamtoro Gung (CLG) dengan bisnis di jalan tol, konstruksi, media, dan keuangan. Sempat menjadi Mensos dan bersaing memperebutkan kepemimpinan Golkar pasca reformasi.",
+    tags:["historis","cendana","pengusaha","golkar","orde-baru"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN formal. Kekayaan Citra Lamtoro Gung Group (CLG) diperkirakan triliunan rupiah di era Orde Baru.",
+    kontroversi:["Bisnis konglomerat era Orde Baru — monopoli dan fasilitas negara","Terlibat proyek jalan tol dan konstruksi bermasalah"],
+    data_sources:["id.wikipedia.org/wiki/Siti_Hardiyanti_Rukmana","transparency.org"],
+    connections_summary:"Putri sulung Soeharto. Penguasa CLG Group. Pernah menjadi Mensos dan DPP Golkar.",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:4, corruption_risk:"tinggi",
+      nationalism:6, religiosity:5,
+      track_record:"Membangun imperium bisnis berkat fasilitas negara dari ayahnya. Setelah reformasi 1998, pengaruhnya memudar meski tetap aktif di bisnis.",
+      policy_direction:"Bisnis konglomerat — jalan tol, konstruksi, keuangan",
+      style:"Pengusaha-Politisi",
+      risk:"sedang",
+      influence:6,
+      controversy_level:6,
+      notes:"Putri sulung Soeharto yang paling aktif di bisnis dan politik Orde Baru. Warisannya adalah imperium bisnis yang dibangun di atas fasilitas negara."
+    }
+  },
+  {
+    id:"tommy_soeharto", name:"Hutomo Mandala Putra (Tommy Soeharto)", photo_url:null, photo_placeholder:"TS",
+    born:"1962", born_place:"Jakarta", religion:"Islam",
+    education:"S1 Ekonomi Pertanian UC Davis, California",
+    party_id:"berkarya", party_role:"Pengusaha / Ketua Umum Partai Berkarya",
+    positions:[
+      {title:"Ketua Umum Partai Berkarya", institution:"Partai Berkarya", region:null, start:"2016", end:null, is_current:true},
+      {title:"Terpidana Pembunuhan (Hakim Syafiuddin)", institution:"Pengadilan RI", region:null, start:"2001", end:"2002", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Putra bungsu Soeharto yang mendirikan Partai Berkarya sebagai kendaraan politik 'neo-Orde Baru'. Pernah divonis 15 tahun penjara atas kasus pembunuhan hakim Syafiuddin Kartasasmita pada 2001, namun mendapat grasi kontroversial dari Presiden Megawati pada 2002. Aktif di bisnis otomotif (Timor Putra Nasional) dan ritel.",
+    tags:["cendana","pengusaha","berkarya","orde-baru","mantan-napi"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN formal dari KPK untuk Tommy Soeharto.",
+    kontroversi:[
+      "Terpidana pembunuhan hakim Syafiuddin Kartasasmita 2001 — divonis 15 tahun",
+      "Grasi kontroversial dari Presiden Megawati 2002 — bebas setelah <2 tahun",
+      "Proyek Timor (mobil nasional) — monopoli bermasalah era Orde Baru",
+      "Bisnis tanah dan aset negara yang dipermasalahkan KPK"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Tommy_Soeharto","kompas.com","transparency.org"],
+    connections_summary:"Putra bungsu Soeharto. Mantan terpidana pembunuhan hakim. Ketum Partai Berkarya.",
+    twitter:null,
+    analysis:{
+      ideology_score:3, populism_score:6, corruption_risk:"tinggi",
+      nationalism:7, religiosity:5,
+      track_record:"Tersangkut kasus pembunuhan hakim 2001 lalu bebas via grasi Megawati. Mendirikan Berkarya 2016 sebagai kendaraan politik. Gagal meraih kursi signifikan di Pemilu 2019 dan 2024.",
+      policy_direction:"Nasionalis-ekonomi, sentimen Orde Baru",
+      style:"Pengusaha-Politisi",
+      risk:"tinggi",
+      influence:4,
+      controversy_level:8,
+      notes:"Putra bungsu Soeharto yang mendirikan Partai Berkarya. Pernah dipenjara atas kasus pembunuhan hakim. Kini aktif di bisnis otomotif. Pengaruh politiknya terbatas namun simbol nostalgia Orde Baru."
     }
   },
 ]
