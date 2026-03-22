@@ -72,6 +72,7 @@ const CekFaktaPage          = lazy(() => import('./pages/cek-fakta/CekFaktaPage'
 const TimelineKekuasaanPage = lazy(() => import('./pages/TimelineKekuasaanPage'))
 const PerbandinganPage      = lazy(() => import('./pages/PerbandinganPage'))
 const KorupsiTrackerPage    = lazy(() => import('./pages/KorupsiTrackerPage'))
+const LHKPNTrendPage        = lazy(() => import('./pages/LHKPNTrendPage'))
 
 // Loading fallback — branded spinner + skeleton
 function PageLoader() {
@@ -163,6 +164,7 @@ export default function App() {
         <Route path="/stats" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><StatsPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/cek-fakta" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><CekFaktaPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/korupsi-tracker" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KorupsiTrackerPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/lhkpn-trend" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><LHKPNTrendPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
