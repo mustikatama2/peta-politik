@@ -3768,6 +3768,221 @@ export const PERSONS = [
       notes:"Penetapan tersangka Desember 2024 mengguncang internal PDIP menjelang Pilkada"
     }
   },
+  // ─── NEW PERSONS: Prabowo Cabinet & Key Figures ──────────────────────────
+  {
+    id:"dody_hanggodo", name:"Dody Hanggodo", photo_url:null, photo_placeholder:"DH",
+    born:"1970", born_place:"Indonesia", religion:"Islam",
+    education:null,
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Menteri Pekerjaan Umum", institution:"Kementerian PUPR", region:"Nasional", start:"2024", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Menteri Pekerjaan Umum dalam Kabinet Merah Putih Prabowo Subianto. Politisi Partai Gerindra yang ditugaskan mengelola infrastruktur nasional.",
+    tags:["kabinet","infrastruktur","gerindra"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Menteri PUPR Kabinet Merah Putih",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:4, corruption_risk:"sedang",
+      nationalism:7, religiosity:5,
+      track_record:"Menteri PUPR Kabinet Merah Putih 2024.",
+      policy_direction:"Infrastruktur dan pembangunan",
+      style:"Teknokrat",
+      risk:"medium",
+      influence:5,
+      controversy_level:3,
+      notes:"Menteri PUPR Kabinet Merah Putih 2024."
+    }
+  },
+  {
+    id:"rachmat_pambudy", name:"Rachmat Pambudy", photo_url:null, photo_placeholder:"RP",
+    born:"1960", born_place:"Indonesia", religion:"Islam",
+    education:"Institut Pertanian Bogor (IPB)",
+    party_id:"ger", party_role:"Kader",
+    positions:[
+      {title:"Kepala Bappenas / Menteri PPN", institution:"Bappenas", region:"Nasional", start:"2024", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Kepala Badan Perencanaan Pembangunan Nasional (Bappenas) / Menteri PPN dalam Kabinet Merah Putih. Akademisi dari IPB yang berlatar belakang agribisnis.",
+    tags:["kabinet","bappenas","perencanaan","gerindra"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Kepala Bappenas Kabinet Merah Putih",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:3, corruption_risk:"rendah",
+      nationalism:7, religiosity:5,
+      track_record:"Akademisi IPB, Kepala Bappenas 2024.",
+      policy_direction:"Perencanaan pembangunan nasional",
+      style:"Teknokrat",
+      risk:"low",
+      influence:5,
+      controversy_level:2,
+      notes:"Akademisi IPB, Kepala Bappenas 2024."
+    }
+  },
+  {
+    id:"yandri_susanto", name:"Yandri Susanto", photo_url:null, photo_placeholder:"YS",
+    born:"1972", born_place:"Banten", religion:"Islam",
+    education:"Universitas Sultan Ageng Tirtayasa",
+    party_id:"pan", party_role:"Wakil Ketua Umum",
+    positions:[
+      {title:"Menteri Desa dan Pembangunan Daerah Tertinggal", institution:"Kemendes PDT", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Anggota DPR RI", institution:"DPR RI", region:"Nasional", start:"2014", end:"2024", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Politisi PAN asal Banten yang menjabat Menteri Desa dan PDT dalam Kabinet Merah Putih Prabowo. Sebelumnya anggota DPR RI beberapa periode dari Banten.",
+    tags:["kabinet","pan","desa","daerah-tertinggal"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Menteri Desa PDT, politisi PAN Banten",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:5, corruption_risk:"sedang",
+      nationalism:6, religiosity:6,
+      track_record:"Anggota DPR beberapa periode, kini Mendes PDT 2024.",
+      policy_direction:"Pembangunan desa dan daerah tertinggal",
+      style:"Politisi",
+      risk:"medium",
+      influence:5,
+      controversy_level:3,
+      notes:"Politisi PAN Banten, Mendes PDT Kabinet Merah Putih."
+    }
+  },
+  {
+    id:"abdul_muti", name:"Abdul Mu'ti", photo_url:null, photo_placeholder:"AM",
+    born:"2 Sep 1968", born_place:"Kudus", religion:"Islam",
+    education:"IAIN Semarang; S3 Universitas Indonesia",
+    party_id:"dem", party_role:"Kader",
+    positions:[
+      {title:"Menteri Pendidikan Dasar dan Menengah", institution:"Kemendikdasmen", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Sekretaris Jenderal PP Muhammadiyah", institution:"PP Muhammadiyah", region:"Nasional", start:"2015", end:"2022", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Akademisi dan tokoh Muhammadiyah. Sekretaris Jenderal PP Muhammadiyah 2015-2022. Ditunjuk Prabowo sebagai Menteri Pendidikan Dasar dan Menengah dalam Kabinet Merah Putih 2024.",
+    tags:["kabinet","pendidikan","muhammadiyah","demokrat"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Mendikdasmen, tokoh Muhammadiyah, akademisi",
+    twitter:"@abdulmuti",
+    analysis:{
+      ideology_score:6, populism_score:4, corruption_risk:"rendah",
+      nationalism:7, religiosity:9,
+      track_record:"Tokoh Muhammadiyah dan akademisi pendidikan. Mendikdasmen 2024.",
+      policy_direction:"Pendidikan berkarakter, berbasis nilai Islam moderat",
+      style:"Akademisi-Religius",
+      risk:"low",
+      influence:6,
+      controversy_level:3,
+      notes:"Ketua PP Muhammadiyah periode 2022-2027."
+    }
+  },
+  {
+    id:"gus_ipul", name:"Saifullah Yusuf", photo_url:null, photo_placeholder:"GI",
+    born:"28 Agu 1965", born_place:"Pasuruan", religion:"Islam",
+    education:"Universitas Islam Malang",
+    party_id:"pkb", party_role:"Kader Senior",
+    positions:[
+      {title:"Menteri Sosial", institution:"Kemensos", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Walikota Pasuruan", institution:"Pemkot Pasuruan", region:"Jawa Timur", start:"2021", end:"2024", is_current:false},
+      {title:"Wakil Gubernur Jawa Timur", institution:"Pemprov Jatim", region:"Jawa Timur", start:"2009", end:"2018", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Tokoh PKB dan NU asal Pasuruan, Jawa Timur. Akrab disapa Gus Ipul. Mantan Wakil Gubernur Jawa Timur dua periode dan Walikota Pasuruan. Kini menjabat Menteri Sosial Kabinet Merah Putih.",
+    tags:["kabinet","pkb","nu","sosial","jawa-timur"],
+    lhkpn_latest:6200000000, lhkpn_year:2023,
+    connections_summary:"Mensos, tokoh PKB-NU Jatim, mantan Wagub Jatim",
+    twitter:"@gusipul",
+    analysis:{
+      ideology_score:6, populism_score:6, corruption_risk:"rendah",
+      nationalism:7, religiosity:8,
+      track_record:"Wagub Jatim 2 periode, Walikota Pasuruan, kini Mensos 2024.",
+      policy_direction:"Jaring pengaman sosial, berbasis komunitas NU",
+      style:"Populis-Religius",
+      risk:"low",
+      influence:6,
+      controversy_level:3,
+      notes:"Dikenal dekat warga NU dan pesantren Jawa Timur."
+    }
+  },
+  {
+    id:"dadan_hindayana", name:"Dadan Hindayana", photo_url:null, photo_placeholder:"DH",
+    born:"1968", born_place:"Indonesia", religion:"Islam",
+    education:"Institut Pertanian Bogor (IPB)",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Kepala Badan Gizi Nasional (BGN)", institution:"BGN", region:"Nasional", start:"2024", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Akademisi dan ahli gizi tanaman dari IPB. Ditunjuk Prabowo sebagai Kepala Badan Gizi Nasional (BGN), lembaga baru yang mengkoordinasikan program Makan Bergizi Gratis (MBG).",
+    tags:["kabinet","gizi","makan-bergizi","badan-gizi","ipb"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Kepala BGN, koordinator program Makan Bergizi Gratis",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:5, corruption_risk:"sedang",
+      nationalism:7, religiosity:5,
+      track_record:"Akademisi IPB, Kepala BGN 2024, program andalan Prabowo.",
+      policy_direction:"Ketahanan pangan dan gizi nasional",
+      style:"Teknokrat",
+      risk:"medium",
+      influence:5,
+      controversy_level:4,
+      notes:"Program Makan Bergizi Gratis menjadi sorotan soal anggaran dan efektivitas."
+    }
+  },
+  {
+    id:"thomas_djiwandono", name:"Thomas Djiwandono", photo_url:null, photo_placeholder:"TD",
+    born:"1990", born_place:"Jakarta", religion:"Islam",
+    education:"Universitas luar negeri (AS)",
+    party_id:null, party_role:null,
+    positions:[
+      {title:"Wakil Menteri Keuangan", institution:"Kemenkeu", region:"Nasional", start:"2024", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Keponakan Prabowo Subianto dan cucu Sumitro Djojohadikusumo. Ditunjuk sebagai Wakil Menteri Keuangan dalam Kabinet Merah Putih. Penunjukan ini menuai kritik soal konflik kepentingan karena hubungan keluarga dengan Presiden.",
+    tags:["kabinet","keuangan","keluarga-prabowo","konflik-kepentingan"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Wamenkeu, keponakan Prabowo, cucu Sumitro",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:2, corruption_risk:"sedang",
+      nationalism:7, religiosity:4,
+      track_record:"Wamenkeu 2024. Penunjukan disorot karena nepotisme.",
+      policy_direction:"Fiskal dan keuangan negara",
+      style:"Teknokrat",
+      risk:"medium",
+      influence:5,
+      controversy_level:7,
+      notes:"Konflik kepentingan — keluarga Prabowo di posisi strategis Kemenkeu."
+    }
+  },
+  {
+    id:"fadli_zon", name:"Fadli Zon", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Fadli_Zon_official_portrait.jpg?width=400", photo_placeholder:"FZ",
+    born:"1 Jun 1971", born_place:"Padang", religion:"Islam",
+    education:"Universitas Indonesia (Sastra Rusia); Harvard University (Executive Education)",
+    party_id:"ger", party_role:"Wakil Ketua Umum",
+    positions:[
+      {title:"Menteri Kebudayaan", institution:"Kementerian Kebudayaan", region:"Nasional", start:"2024", end:null, is_current:true},
+      {title:"Wakil Ketua DPR RI", institution:"DPR RI", region:"Nasional", start:"2014", end:"2024", is_current:false},
+    ],
+    tier:"nasional", region_id:null,
+    bio:"Politisi senior Gerindra, sastrawan, dan kolumnis. Wakil Ketua DPR RI 2014-2024. Kini menjabat Menteri Kebudayaan Kabinet Merah Putih. Dikenal dengan pernyataan-pernyataan kontroversial di media sosial dan sidang DPR.",
+    tags:["kabinet","kebudayaan","gerindra","sastrawan","kontroversial"],
+    lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Menteri Kebudayaan, politisi senior Gerindra, Wakil Ketua DPR",
+    twitter:"@fadlizon",
+    analysis:{
+      ideology_score:3, populism_score:7, corruption_risk:"sedang",
+      nationalism:9, religiosity:7,
+      track_record:"Wakil Ketua DPR 2014-2024. Loyalis Prabowo sejak awal Gerindra.",
+      policy_direction:"Nasionalis-konservatif, promosi budaya Nusantara",
+      style:"Populis-Nasionalis",
+      risk:"medium",
+      influence:6,
+      controversy_level:8,
+      notes:"Pernyataan kontroversial soal perkosaan massal 1998 memicu protes luas."
+    }
+  },
+
   {
     id:"novel_baswedan", name:"Novel Baswedan", photo_url:null, photo_placeholder:"NB",
     born:"22 Jun 1977", born_place:"Jakarta", religion:"Islam",

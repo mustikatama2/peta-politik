@@ -16,6 +16,7 @@ const NAV = [
   { to:'/kabinet',  icon:'🏛️', label:'Kabinet Merah Putih' },
   { to:'/pemerintah', icon:'🏛️', label:'Pemerintahan' },
   { to:'/anggaran', icon:'💰', label:'Efisiensi APBN 2025' },
+  { to:'/apbn',     icon:'💰', label:'APBN Tracker' },
   { to:'/persons',  icon:'👥', label:'Tokoh' },
   { to:'/compare',  icon:'⚖️', label:'Bandingkan' },
   { to:'/parties',  icon:'🎭', label:'Partai' },

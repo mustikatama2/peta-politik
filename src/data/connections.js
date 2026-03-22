@@ -951,14 +951,61 @@ export const CONNECTIONS = [
   { from:"gatot_nurmantyo",to:"prabowo",        type:"konflik",         label:"Rival jenderal TNI — Gatot sempat oposisi, berbeda orbit politik",             strength:5  },
   { from:"gatot_nurmantyo",to:"anies",          type:"rekan",           label:"Keduanya tokoh oposisi — Gatot dekat gerakan oposisi era Anies 2019-2024",     strength:5  },
   { from:"gatot_nurmantyo",to:"megawati",       type:"konflik",         label:"Jenderal dicopot Jokowi/PDIP — dekat oposisi, bukan lingkaran Mega",           strength:3  },
+
+  // ── KELUARGA DJOJOHADIKUSUMO (new) ───────────────────────────────────────
+  { from:"prabowo",        to:"thomas_djiwandono", type:"keluarga",     label:"Paman-Keponakan — Thomas cucu Sumitro, keponakan Prabowo",                    strength:9  },
+  { from:"thomas_djiwandono", to:"prabowo",     type:"keluarga",        label:"Keponakan Presiden — Wamenkeu, konflik kepentingan",                          strength:9  },
+  { from:"thomas_djiwandono", to:"sumitro",     type:"keluarga",        label:"Cucu Sumitro Djojohadikusumo — dinasti ekonom",                               strength:8  },
+  { from:"hashim",         to:"sumitro",         type:"keluarga",        label:"Anak-Bapak — Hashim putra Sumitro Djojohadikusumo",                           strength:10 },
+  { from:"hashim",         to:"thomas_djiwandono", type:"keluarga",     label:"Paman-Keponakan — keluarga besar Djojohadikusumo",                            strength:8  },
+
+  // ── PRABOWO → KABINET BARU (new) ─────────────────────────────────────────
+  { from:"prabowo",        to:"sjafrie",         type:"rekan",           label:"Sesama perwira TNI AD, Menhan di bawah Prabowo",                              strength:8  },
+  { from:"prabowo",        to:"dody_hanggodo",   type:"atasan-bawahan",  label:"Menteri PUPR Kabinet Merah Putih",                                            strength:7  },
+  { from:"prabowo",        to:"rachmat_pambudy", type:"atasan-bawahan",  label:"Kepala Bappenas Kabinet Merah Putih",                                         strength:7  },
+  { from:"prabowo",        to:"yandri_susanto",  type:"atasan-bawahan",  label:"Mendes PDT Kabinet Merah Putih",                                              strength:7  },
+  { from:"prabowo",        to:"gus_ipul",        type:"atasan-bawahan",  label:"Mensos Kabinet Merah Putih",                                                  strength:7  },
+  { from:"prabowo",        to:"dadan_hindayana", type:"atasan-bawahan",  label:"Kepala BGN — program Makan Bergizi Gratis",                                   strength:8  },
+  { from:"prabowo",        to:"fadli_zon",       type:"rekan",           label:"Loyalis Gerindra sejak awal; Menteri Kebudayaan",                             strength:9  },
+  { from:"prabowo",        to:"abdul_muti",      type:"atasan-bawahan",  label:"Mendikdasmen Kabinet Merah Putih",                                            strength:7  },
+
+  // ── HASHIM BISNIS & POLITIK (new) ────────────────────────────────────────
+  { from:"hashim",         to:"bahlil",          type:"bisnis",          label:"Kepentingan tambang bertemu — Arsari Group & izin nikel/batu bara",           strength:7  },
+  { from:"hashim",         to:"fadli_zon",       type:"rekan",           label:"Sesama lingkaran Gerindra, funder partai",                                    strength:7  },
+
+  // ── JOKOWI → BUDI ARIE (new) ─────────────────────────────────────────────
+  { from:"jokowi",         to:"budi_arie",       type:"mentor-murid",    label:"Patron Projo — Jokowi endorser relawan Budi Arie sejak 2014",                 strength:8  },
+  { from:"budi_arie",      to:"prabowo",         type:"mantan-koalisi",  label:"Projo dukung Prabowo 2024 — berpindah dari Jokowi ke Prabowo",                strength:6  },
+  { from:"budi_arie",      to:"megawati",        type:"konflik",         label:"Budi Arie PDIP vs peran Projo yang dukung Prabowo — beda arah",               strength:4  },
+
+  // ── NUSRON WAHID KONEKSI (new) ───────────────────────────────────────────
+  { from:"nusron_wahid",   to:"prabowo",         type:"atasan-bawahan",  label:"Menteri ATR/BPN Kabinet Merah Putih",                                         strength:8  },
+  { from:"nusron_wahid",   to:"airlangga",       type:"rekan",           label:"Politisi Golkar, koordinasi koalisi KIM Plus",                                strength:7  },
+  { from:"nusron_wahid",   to:"gus_yahya",       type:"rekan",           label:"Tokoh NU — Nusron kader NU, dekat PBNU",                                     strength:6  },
+
+  // ── AGUS GUMIWANG KONEKSI (new) ──────────────────────────────────────────
+  { from:"agus_gumiwang",  to:"prabowo",         type:"atasan-bawahan",  label:"Menteri Perindustrian Kabinet Merah Putih",                                   strength:7  },
+  { from:"agus_gumiwang",  to:"airlangga",       type:"rekan",           label:"Sesama politisi Golkar senior",                                               strength:8  },
+
+  // ── BAHLIL KONEKSI (new) ─────────────────────────────────────────────────
+  { from:"bahlil",         to:"prabowo",         type:"atasan-bawahan",  label:"Menteri ESDM Kabinet Merah Putih — loyal sejak koalisi 2024",                 strength:8  },
+  { from:"bahlil",         to:"jokowi",          type:"mantan-koalisi",  label:"Menteri Investasi era Jokowi, pindah ke kabinet Prabowo",                     strength:7  },
+
+  // ── DADAN HINDAYANA (new) ────────────────────────────────────────────────
+  { from:"dadan_hindayana",to:"hashim",          type:"rekan",           label:"Hashim pendukung program MBG — koordinasi anggaran dan logistik",             strength:6  },
+
+  // ── FADLI ZON KONEKSI (new) ──────────────────────────────────────────────
+  { from:"fadli_zon",      to:"sufmi_dasco",     type:"rekan",           label:"Sesama pimpinan senior Gerindra, rekan legislatif DPR",                       strength:8  },
+  { from:"fadli_zon",      to:"ahmad_muzani",    type:"rekan",           label:"Sesama tokoh senior Gerindra, kolega DPR sejak 2009",                         strength:8  },
 ]
 
 export const CONNECTION_TYPES = {
-  "keluarga":       { color:"#F59E0B", label:"Hubungan Keluarga" },
-  "koalisi":        { color:"#3B82F6", label:"Koalisi Politik" },
-  "bisnis":         { color:"#10B981", label:"Hubungan Bisnis" },
-  "konflik":        { color:"#DC2626", label:"Konflik/Berseberangan" },
-  "mentor-murid":   { color:"#8B5CF6", label:"Mentor-Murid/Guru-Santri" },
-  "rekan":          { color:"#6B7280", label:"Rekan/Kolega" },
-  "mantan-koalisi": { color:"#D97706", label:"Mantan Koalisi" },
+  "keluarga":        { color:"#F59E0B", label:"Hubungan Keluarga" },
+  "koalisi":         { color:"#3B82F6", label:"Koalisi Politik" },
+  "bisnis":          { color:"#10B981", label:"Hubungan Bisnis" },
+  "konflik":         { color:"#DC2626", label:"Konflik/Berseberangan" },
+  "mentor-murid":    { color:"#8B5CF6", label:"Mentor-Murid/Guru-Santri" },
+  "rekan":           { color:"#6B7280", label:"Rekan/Kolega" },
+  "mantan-koalisi":  { color:"#D97706", label:"Mantan Koalisi" },
+  "atasan-bawahan":  { color:"#0EA5E9", label:"Atasan-Bawahan" },
 }
