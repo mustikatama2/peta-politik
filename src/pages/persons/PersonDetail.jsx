@@ -672,17 +672,19 @@ function RingkasanSidebar({ person, party, personConnections, navigate }) {
         </div>
       </div>
 
-      {/* Tokoh Terkait */}
-      {top3.length > 0 && (
+      {/* Orang Terkait — top 5 most-connected */}
+      {top5.length > 0 && (
         <div
           className="rounded-2xl border border-border p-4"
           style={{ backgroundColor: 'var(--bg-card)' }}
         >
-          <p className="text-xs font-bold uppercase tracking-wider text-text-secondary mb-3">👥 Tokoh Terkait</p>
+          <p className="text-xs font-bold uppercase tracking-wider text-text-secondary mb-3">👥 Orang Terkait</p>
           <div className="space-y-3">
-            {top3.map(p => {
+            {top5.map(({ person: p, conn }) => {
               const pp = p.party_id ? PARTY_MAP[p.party_id] : null
               const initials = p.name.split(' ').slice(0, 2).map(w => w[0]).join('')
+              const connType = conn?.type || 'rekan'
+              const typeColor = CONN_TYPE_COLORS[connType] || '#6B7280'
               return (
                 <Link
                   key={p.id}
@@ -704,11 +706,14 @@ function RingkasanSidebar({ person, party, personConnections, navigate }) {
                       {initials}
                     </div>
                   )}
-                  <div className="min-w-0">
+                  <div className="flex-1 min-w-0">
                     <p className="text-xs font-semibold text-text-primary group-hover:text-accent-blue transition-colors line-clamp-1">
                       {p.name}
                     </p>
-                    <p className="text-[10px] text-text-secondary">{pp?.abbr || 'Independen'}</p>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <span className="text-[10px]" style={{ color: typeColor }}>{connType}</span>
+                      {pp && <span className="text-[10px] text-text-secondary">· {pp.abbr}</span>}
+                    </div>
                   </div>
                 </Link>
               )
