@@ -100,7 +100,12 @@ export const PERSONS = [
       ideology_score:6, populism_score:8, corruption_risk:"sedang",
       nationalism:9, religiosity:5,
       track_record:"Karier militer kontroversial era Reformasi; tiga kali gagal Pilpres sebelum menang 2024. Dikenal pro-pertahanan dan nasionalisme ekonomi.",
-      policy_direction:"Nasionalis ekonomi"
+      policy_direction:"Nasionalis ekonomi",
+      style:"Militeristik",
+      risk:"medium",
+      influence:10,
+      controversy_level:8,
+      notes:"Eks-Danjen Kopassus dan Pangkostrad. Diduga terlibat pelanggaran HAM 1997-1998. Tiga kali kalah Pilpres sebelum akhirnya menang 2024 dengan 58.59%."
     }
   },
   {
@@ -468,7 +473,12 @@ export const PERSONS = [
       ideology_score:-2, populism_score:7, corruption_risk:"rendah",
       nationalism:8, religiosity:5,
       track_record:"Dua kali Ketua DPR, dinilai loyal pada PDIP dan Megawati. Berambisi capres namun elektabilitasnya stagnan.",
-      policy_direction:"Nasionalis-marhaenis"
+      policy_direction:"Nasionalis-marhaenis",
+      style:"Oligarkis-Dinasti",
+      risk:"medium",
+      influence:8,
+      controversy_level:5,
+      notes:"Putri Megawati dan cucu Bung Karno. Dua periode Ketua DPR. Dikritik karena lebih menonjolkan silsilah ketimbang kompetensi. Ambisi capres stagnan di elektabilitas."
     }
   },
   {
@@ -746,7 +756,12 @@ export const PERSONS = [
       ideology_score:5, populism_score:4, corruption_risk:"sedang",
       nationalism:7, religiosity:5,
       track_record:"Kapolri sejak 2021. Dikenal reformis di awal, namun era kepemimpinannya diwarnai kasus Ferdy Sambo (pembunuhan Brigadir J) yang mengguncang institusi Polri.",
-      policy_direction:"Penegakan Hukum"
+      policy_direction:"Penegakan Hukum",
+      style:"Militeristik",
+      risk:"medium",
+      influence:7,
+      controversy_level:6,
+      notes:"Kapolri yang menangani kasus Ferdy Sambo. Dipilih Jokowi sebagai Kapolri 2021. Era kepemimpinannya diwarnai kasus besar yang menguji reformasi Polri."
     }
   },
   {
@@ -878,7 +893,12 @@ export const PERSONS = [
       ideology_score:-2, populism_score:7, corruption_risk:"rendah",
       nationalism:7, religiosity:9,
       track_record:"Gubernur populer di Jatim dengan program sosial dan NU. Berhasil turunkan angka kemiskinan meski masih tinggi.",
-      policy_direction:"Sosial-religius, nasionalis-NU"
+      policy_direction:"Sosial-religius, nasionalis-NU",
+      style:"Religius-Populis",
+      risk:"low",
+      influence:8,
+      controversy_level:3,
+      notes:"Gubernur Jatim populer, Ketum Muslimat NU. Pemimpin perempuan dengan akar kuat di komunitas NU. Maju Pilkada Jatim 2024 sebagai calon gubernur kembali."
     }
   },
   {
@@ -1325,7 +1345,7 @@ export const PERSONS = [
     lhkpn_latest:30000000000, lhkpn_year:2023,
     lhkpn_history:[{year:2019,amount:22000000000},{year:2020,amount:24000000000},{year:2021,amount:26000000000},{year:2022,amount:28000000000},{year:2023,amount:30000000000}],
     connections_summary:"Gubernur DKI Jakarta, Seskab era Jokowi, bapak Dhito Kediri",
-    twitter:null,
+    twitter:"@pramonoanung",
     analysis:{
       ideology_score:-1, populism_score:5, corruption_risk:"rendah",
       nationalism:6, religiosity:5,
@@ -2118,7 +2138,12 @@ export const PERSONS = [
       ideology_score:-4, populism_score:5, corruption_risk:"tersangka",
       nationalism:6, religiosity:4,
       track_record:"Sebagai Sekjen PDI-P, Hasto mengelola mesin partai Megawati dengan tangan besi — koordinasi Pilkada, penentuan calon, dan disiplin fraksi. Namun kasus Harun Masiku menghantamnya langsung: KPK menduga Hasto tidak hanya mengetahui keberadaan buronan tersebut, tetapi aktif menghalang-halangi penangkapan selama bertahun-tahun. Penetapan tersangka Januari 2025 mempermalukan PDI-P yang selama ini memposisikan diri sebagai partai anti-korupsi.",
-      policy_direction:"Nasionalis-Marhaenis (PDI-P)"
+      policy_direction:"Nasionalis-Marhaenis (PDI-P)",
+      style:"Aparatur Partai",
+      risk:"high",
+      influence:7,
+      controversy_level:9,
+      notes:"Tersangka KPK obstruction of justice kasus Harun Masiku. Penetapan tersangka Januari 2025 mengguncang PDIP."
     }
   },
   {
@@ -3370,7 +3395,7 @@ export const PERSONS = [
   },
   // ── New persons: DPR leadership, KPK figures, corruption suspects ──────────
   {
-    id:"supratman_andi", name:"Supratman Andi Agtas", photo_url:null, photo_placeholder:"SA",
+    id:"supratman_andi", name:"Supratman Andi Agtas", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Supratman_Andi_Agtas.jpg?width=400", photo_placeholder:"SA",
     born:"1969", born_place:"Sulawesi Tengah", religion:"Islam",
     education:"S1 Hukum, Universitas Tadulako; S2 Hukum, Universitas Hasanuddin",
     party_id:"ger", party_role:"Anggota DPR RI / Wakil Ketua Badan Legislasi",
@@ -3398,7 +3423,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"nusron_wahid", name:"Nusron Wahid", photo_url:null, photo_placeholder:"NW",
+    id:"nusron_wahid", name:"Nusron Wahid", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Nusron_Wahid.jpg?width=400", photo_placeholder:"NW",
     born:"1973", born_place:"Cirebon, Jawa Barat", religion:"Islam",
     education:"S1 Ekonomi, Universitas Airlangga",
     party_id:"gol", party_role:"Anggota DPR RI",
@@ -3427,7 +3452,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"dito_ariotedjo", name:"Dito Ariotedjo", photo_url:null, photo_placeholder:"DA",
+    id:"dito_ariotedjo", name:"Dito Ariotedjo", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Dito_Ariotedjo.jpg?width=400", photo_placeholder:"DA",
     born:"14 Sep 1990", born_place:"Jakarta", religion:"Islam",
     education:"S1 Bisnis, Universitas Indonesia",
     party_id:"gol", party_role:"Anggota",
@@ -3703,7 +3728,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hasto_kristiyanto", name:"Hasto Kristiyanto", photo_url:null, photo_placeholder:"HK",
+    id:"hasto_kristiyanto", name:"Hasto Kristiyanto", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Hasto_Kristiyanto.jpg?width=400", photo_placeholder:"HK",
     born:"7 Apr 1973", born_place:"Yogyakarta", religion:"Islam",
     education:"S2 Ilmu Politik",
     party_id:"pdip", party_role:"Sekretaris Jenderal",
@@ -3714,9 +3739,17 @@ export const PERSONS = [
     bio:"Sekretaris Jenderal PDIP yang menjadi tersangka KPK dalam kasus perintangan penyidikan (obstruction of justice) terkait buronan Harun Masiku, ditetapkan Desember 2024.",
     tags:["pdip","sekjen","kpk","harun_masiku","korupsi","obstruction"],
     lhkpn_latest:12_000_000_000, lhkpn_year:2023,
+    connections_summary:"Sekjen PDIP, loyalis Megawati, tersangka KPK kasus Harun Masiku",
+    twitter:"@hastokristiyanto",
     analysis:{
-      ideology_score:3, style:"Aparatur Partai", risk:"high", influence:7, controversy_level:9,
-      connections_summary:"Sekjen PDIP, loyalis Megawati, tersangka KPK kasus Harun Masiku",
+      ideology_score:3, populism_score:5, corruption_risk:"tersangka",
+      nationalism:6, religiosity:4,
+      track_record:"Sekjen PDI-P selama satu dekade. Ditetapkan tersangka KPK Desember 2024 atas obstruction of justice kasus Harun Masiku. Dugaan perintangan penyidikan selama 4+ tahun.",
+      policy_direction:"Nasionalis-Marhaenis (PDI-P)",
+      style:"Aparatur Partai",
+      risk:"high",
+      influence:7,
+      controversy_level:9,
       notes:"Penetapan tersangka Desember 2024 mengguncang internal PDIP menjelang Pilkada"
     }
   },
@@ -3733,9 +3766,17 @@ export const PERSONS = [
     bio:"Mantan penyidik senior KPK yang menjadi korban penyiraman air keras pada April 2017. Kasus ini menjadi simbol serangan terhadap pemberantasan korupsi. Pelaku dihukum ringan. Kini aktif di TPDI.",
     tags:["kpk","antikorupsi","penyidik","teror","air_keras","tpdi"],
     lhkpn_latest:null, lhkpn_year:null,
+    connections_summary:"Simbol integritas KPK, korban kekerasan, kini advokasi antikorupsi",
+    twitter:"@nazaqistsha",
     analysis:{
-      ideology_score:2, style:"Penegak Hukum", risk:"low", influence:7, controversy_level:6,
-      connections_summary:"Simbol integritas KPK, korban kekerasan, kini advokasi antikorupsi",
+      ideology_score:2, populism_score:6, corruption_risk:"rendah",
+      nationalism:7, religiosity:6,
+      track_record:"Penyidik senior KPK yang diserang dengan air keras April 2017. Penglihatan kiri hilang. Kasus bergulir bertahun-tahun, pelaku dihukum sangat ringan. Simbol pemberantasan korupsi dan keberanian.",
+      policy_direction:"Anti-korupsi, penegakan hukum",
+      style:"Penegak Hukum",
+      risk:"low",
+      influence:7,
+      controversy_level:6,
       notes:"Kasus penyiraman air keras 2017 tidak tuntas, pelaku mendapat hukuman ringan"
     }
   },
