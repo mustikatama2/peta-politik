@@ -1,53 +1,91 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import {
-  LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
+  LineChart, Line, BarChart, Bar,
+  XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
+  RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Legend,
 } from 'recharts'
 import { PARTIES, KIM_PARTIES, OPPOSITION_PARTIES } from '../../data/parties'
 import { PERSONS } from '../../data/persons'
-import { AGENDAS } from '../../data/agendas'
-import { PILEG_HISTORY } from '../../data/elections'
-import { NEWS } from '../../data/news'
+import { CONNECTIONS } from '../../data/connections'
+import { KPK_CASES } from '../../data/kpk_cases'
 import PersonCard from '../../components/PersonCard'
 import { Card, Badge, Btn, KPICard, Breadcrumb } from '../../components/ui'
 
-// Party ideology compass positions (ekonomi x: kiri=-10..kanan=10, sosial y: progresif=10..konservatif=-10)
-const PARTY_COMPASS = {
-  pkb:  { x: -1, y: -3 },
-  ger:  { x:  4, y: -4 },
-  pdip: { x: -3, y:  2 },
-  gol:  { x:  3, y: -2 },
-  nas:  { x:  1, y:  4 },
-  pks:  { x: -1, y: -7 },
-  pan:  { x:  0, y: -4 },
-  dem:  { x:  2, y:  1 },
-  psi:  { x:  0, y:  8 },
-  pbb:  { x: -2, y: -8 },
-  ppp:  { x: -1, y: -5 },
-  bur:  { x: -7, y:  5 },
-  gel:  { x: -1, y: -6 },
-  per:  { x:  3, y:  0 },
-  han:  { x:  1, y: -1 },
-  gar:  { x:  2, y: -5 },
-  pkn:  { x:  0, y:  0 },
-  umm:  { x: -3, y: -7 },
+// ── helpers ──────────────────────────────────────────────────────────────────
+
+function trendLabel(history) {
+  if (!history || history.length < 2) return null
+  const first = history[0].votes_pct
+  const last  = history[history.length - 1].votes_pct
+  const delta = last - first
+  if (delta >  3) return { label: '📈 Tren Naik',   color: 'text-green-400' }
+  if (delta < -3) return { label: '📉 Tren Turun',  color: 'text-red-400'   }
+  return               { label: '➡️ Stabil',          color: 'text-yellow-400' }
 }
 
-const RISK_CONFIG = {
-  rendah:    { label: 'Rendah',    color: 'bg-green-900 text-green-300' },
-  sedang:    { label: 'Sedang',    color: 'bg-yellow-900 text-yellow-300' },
-  tinggi:    { label: 'Tinggi',    color: 'bg-orange-900 text-orange-300' },
-  tersangka: { label: 'Tersangka', color: 'bg-red-900 text-red-300' },
-  terpidana: { label: 'Terpidana', color: 'bg-red-950 text-red-200' },
+function initials(name = '') {
+  return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()
 }
 
+const SEVERITY_CONFIG = {
+  ringan:  { label: 'Ringan',  bg: 'bg-blue-900/60 text-blue-300 border-blue-700' },
+  sedang:  { label: 'Sedang',  bg: 'bg-yellow-900/60 text-yellow-300 border-yellow-700' },
+  berat:   { label: 'Berat',   bg: 'bg-orange-900/60 text-orange-300 border-orange-700' },
+  kritis:  { label: 'Kritis',  bg: 'bg-red-900/60 text-red-300 border-red-700' },
+}
+
+// Severity guesser: if it mentions korupsi/OTT/terpidana → berat, otherwise sedang/ringan
+function guessSeverity(text = '') {
+  const t = text.toLowerCase()
+  if (t.includes('terpidana') || t.includes('ott') || t.includes('obstruction') || t.includes('korupsi')) return 'berat'
+  if (t.includes('dugaan') || t.includes('dinasti') || t.includes('konflik')) return 'sedang'
+  return 'ringan'
+}
+
+const KPK_STATUS_COLOR = {
+  tersangka: 'bg-orange-900/60 text-orange-300 border-orange-700',
+  terpidana: 'bg-red-900/60 text-red-300 border-red-700',
+  bebas:     'bg-green-900/60 text-green-300 border-green-700',
+  sp3:       'bg-slate-700/60 text-slate-300 border-slate-600',
+}
+
+// ── Tab button ────────────────────────────────────────────────────────────────
+function TabBtn({ active, onClick, children }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-3 py-2 text-xs font-semibold rounded-lg transition-all whitespace-nowrap
+        ${active
+          ? 'bg-bg-card text-text-primary border border-border-default shadow'
+          : 'text-text-secondary hover:text-text-primary hover:bg-bg-card/50'}`}
+    >
+      {children}
+    </button>
+  )
+}
+
+// ── Custom Tooltip ────────────────────────────────────────────────────────────
+const ChartTooltip = ({ active, payload, label }) => {
+  if (!active || !payload?.length) return null
+  return (
+    <div className="bg-bg-card border border-border-default rounded-lg px-3 py-2 text-xs shadow-lg">
+      <p className="text-text-secondary mb-1 font-semibold">{label}</p>
+      {payload.map((p, i) => (
+        <p key={i} style={{ color: p.color }}>{p.name}: <span className="font-bold">{p.value}</span></p>
+      ))}
+    </div>
+  )
+}
+
+// ── Main Component ────────────────────────────────────────────────────────────
 export default function PartyDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const [tab, setTab] = useState(0)
 
   const party = PARTIES.find(p => p.id === id)
 
-  // Page title — called unconditionally (hooks rule)
   useEffect(() => {
     if (party) document.title = `${party.abbr} — PetaPolitik`
     return () => { document.title = 'PetaPolitik Indonesia' }
@@ -63,91 +101,89 @@ export default function PartyDetail() {
     )
   }
 
-  const members = PERSONS.filter(p => p.party_id === party.id)
-  const ketum = members.find(p => p.party_role?.includes('Ketua'))
-  const agendas = AGENDAS.filter(a => a.subject_id === party.id)
-
-  // A. Coalition
+  // ── Derived data ────────────────────────────────────────────────────────────
   const isKIM = KIM_PARTIES.includes(party.id)
   const isOpp = OPPOSITION_PARTIES.includes(party.id)
 
-  // B. Key current positions
-  const currentPositions = members.flatMap(m =>
-    (m.positions || []).filter(p => p.is_current).map(p => ({ person: m, position: p }))
-  ).slice(0, 8)
+  const members = PERSONS
+    .filter(p => p.party_id === party.id)
+    .sort((a, b) => (b.analysis?.influence || 0) - (a.analysis?.influence || 0))
 
-  // C. Ideology Compass — scatter data
-  const compassData = PARTIES.map(p => ({
-    id: p.id,
-    name: p.abbr,
-    x: PARTY_COMPASS[p.id]?.x ?? 0,
-    y: PARTY_COMPASS[p.id]?.y ?? 0,
-    isThis: p.id === party.id,
-    color: p.color,
-  }))
+  // KPK cases: match suspect id against party members
+  const memberIds = new Set(members.map(m => m.id))
+  const partyCases = KPK_CASES.filter(c =>
+    (c.suspects || []).some(s => memberIds.has(s))
+  )
 
-  // D. Member Directory
-  const nationals = members.filter(m => m.tier === 'nasional')
-  const regionals = members.filter(m => m.tier === 'regional')
+  // Connections for coalition/conflict tabs
+  const partyConns = CONNECTIONS.filter(c =>
+    c.from === party.id || c.to === party.id
+  )
+  const currentCoalitions = partyConns.filter(c => c.type === 'koalisi')
+  const historicalCoalitions = partyConns.filter(c => c.type === 'mantan-koalisi')
+  const conflicts = partyConns.filter(c => c.type === 'konflik')
 
-  // E. Recent News
-  const partyNews = NEWS
-    .filter(n =>
-      n.party_ids?.includes(party.id) ||
-      members.some(m => n.person_ids?.includes(m.id))
-    )
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
-    .slice(0, 5)
+  // Ideology radar data
+  const radarData = party.ideology_scores ? [
+    { axis: 'Nasionalisme', value: party.ideology_scores.nasionalisme },
+    { axis: 'Religiusitas', value: party.ideology_scores.religiusitas },
+    { axis: 'Populisme',    value: party.ideology_scores.populisme },
+    { axis: 'Liberalisme',  value: party.ideology_scores.liberalisme },
+    { axis: 'Sosialisme',   value: party.ideology_scores.sosialisme },
+  ] : []
 
-  // F. Corruption Profile
-  const riskCount = { rendah: 0, sedang: 0, tinggi: 0, tersangka: 0, terpidana: 0 }
-  members.forEach(m => {
-    const risk = m.analysis?.corruption_risk || 'rendah'
-    if (riskCount.hasOwnProperty(risk)) riskCount[risk]++
-  })
+  const trend = trendLabel(party.election_history)
 
-  // Historical seats
-  const historyData = PILEG_HISTORY.map(yr => {
-    const result = yr.results.find(r =>
-      r.party.toLowerCase().includes(party.abbr.toLowerCase()) ||
-      party.abbr.toLowerCase().includes(r.party.toLowerCase().slice(0, 4))
-    )
-    return { year: yr.year, seats: result?.seats || 0, votes: result?.votes_pct || 0 }
-  }).reverse()
+  const TABS = ['📊 Profil', '📈 Sejarah Pemilu', '👥 Tokoh', '🔗 Koalisi & Konflik', '⚠️ Kontroversi']
 
+  // ── Render ──────────────────────────────────────────────────────────────────
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <Breadcrumb items={[
         { label: 'Beranda', to: '/' },
         { label: 'Partai', to: '/parties' },
         { label: party.abbr },
       ]} />
 
-      {/* Header */}
+      {/* ── HEADER ─────────────────────────────────────────────────────────── */}
       <Card className="p-5" style={{ borderLeftColor: party.color, borderLeftWidth: 4 }}>
-        <div className="flex items-start justify-between flex-wrap gap-3">
+        <div className="flex items-start justify-between flex-wrap gap-4">
+          {/* Logo + name */}
           <div className="flex items-center gap-4">
-            <span className="text-5xl">{party.logo_emoji}</span>
+            <div
+              className="w-16 h-16 rounded-full flex items-center justify-center text-xl font-extrabold flex-shrink-0 shadow-lg"
+              style={{ backgroundColor: party.color + '22', border: `2px solid ${party.color}`, color: party.color }}
+            >
+              {party.abbr.slice(0, 4)}
+            </div>
             <div>
               <h1 className="text-2xl font-bold" style={{ color: party.color }}>{party.abbr}</h1>
-              <p className="text-text-secondary">{party.name}</p>
-              <p className="text-xs text-text-secondary mt-1">{party.ideology}</p>
+              <p className="text-text-secondary text-sm">{party.name}</p>
+              <div className="flex flex-wrap gap-2 mt-1.5">
+                <span className="text-xs px-2 py-0.5 rounded-full border border-border-subtle text-text-secondary">
+                  📅 Berdiri {party.founded}
+                </span>
+                <span className="text-xs px-2 py-0.5 rounded-full border border-border-subtle text-text-secondary">
+                  💡 {party.ideology}
+                </span>
+              </div>
             </div>
           </div>
-          {/* A. Coalition Badge */}
-          <div className="flex gap-2 flex-wrap mt-1">
+
+          {/* Coalition badge */}
+          <div className="flex gap-2 flex-wrap">
             {isKIM && (
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-amber-900/60 text-amber-300 border border-amber-700">
-                🏛️ Koalisi Indonesia Maju Plus
+              <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-amber-900/60 text-amber-300 border border-amber-700">
+                🏛️ KIM+ Koalisi
               </span>
             )}
             {isOpp && (
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-red-900/60 text-red-300 border border-red-700">
+              <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-red-900/60 text-red-300 border border-red-700">
                 ⚔️ Oposisi
               </span>
             )}
             {!isKIM && !isOpp && (
-              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-slate-700/60 text-slate-300 border border-slate-600">
+              <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-700/60 text-slate-300 border border-slate-600">
                 🔘 Non-Koalisi
               </span>
             )}
@@ -155,212 +191,409 @@ export default function PartyDetail() {
         </div>
       </Card>
 
-      {/* KPIs */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <KPICard label="Kursi 2024" value={party.seats_2024 || '0'} sub="Kursi DPR RI" icon="🏛️" />
-        <KPICard label="Suara 2024" value={`${party.votes_2024}%`} sub="Suara nasional" icon="📊" />
-        <KPICard label="Berdiri" value={party.founded} sub="Tahun pendirian" icon="📅" />
-        <KPICard label="Tokoh Pantau" value={members.length} sub="Dalam database" icon="👥" />
+      {/* ── TABS ───────────────────────────────────────────────────────────── */}
+      <div className="flex gap-1 overflow-x-auto pb-1">
+        {TABS.map((label, i) => (
+          <TabBtn key={i} active={tab === i} onClick={() => setTab(i)}>{label}</TabBtn>
+        ))}
       </div>
 
-      {/* Ketum */}
-      {ketum && (
-        <Card className="p-5">
-          <h3 className="text-sm font-semibold text-text-primary mb-3">Ketua Umum</h3>
-          <PersonCard person={ketum} />
-        </Card>
-      )}
-
-      {/* B. Key Positions Held */}
-      {currentPositions.length > 0 && (
-        <Card className="p-5">
-          <h3 className="text-sm font-semibold text-text-primary mb-4">⭐ Jabatan Strategis Kader</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
-            {currentPositions.map(({ person, position }, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 p-3 rounded-lg bg-bg-card border border-border-subtle cursor-pointer hover:border-border-default transition-colors"
-                onClick={() => navigate(`/persons/${person.id}`)}
-              >
-                <div className="w-10 h-10 rounded-full bg-bg-page flex items-center justify-center text-sm font-bold flex-shrink-0"
-                  style={{ color: party.color, border: `2px solid ${party.color}` }}>
-                  {person.photo_url
-                    ? <img src={person.photo_url} alt={person.name} className="w-full h-full rounded-full object-cover" />
-                    : person.photo_placeholder
-                  }
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs font-medium text-text-primary truncate">{person.name}</p>
-                  <p className="text-xs text-text-secondary truncate">{position.title}</p>
-                  <p className="text-xs text-text-secondary opacity-60 truncate">{position.institution}</p>
-                </div>
-              </div>
-            ))}
+      {/* ══════════════════════════════════════════════════════════════════════
+          TAB 0 — PROFIL
+      ══════════════════════════════════════════════════════════════════════ */}
+      {tab === 0 && (
+        <div className="space-y-5">
+          {/* Quick stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <KPICard label="Kursi 2024" value={party.seats_2024 ?? '–'} sub="Kursi DPR RI" icon="🏛️" />
+            <KPICard label="Ketua Umum" value={party.ketum?.split(' ').slice(0,2).join(' ')} sub={party.ketum} icon="👤" />
+            <KPICard label="Berdiri" value={party.founded} sub="Tahun pendirian" icon="📅" />
+            <KPICard label="Markas" value={party.headquarters ?? '–'} sub="Kantor DPP" icon="📍" />
           </div>
-        </Card>
-      )}
 
-      {/* C. Ideology Compass */}
-      <Card className="p-5">
-        <h3 className="text-sm font-semibold text-text-primary mb-1">🧭 Kompas Ideologi</h3>
-        <p className="text-xs text-text-secondary mb-4">Posisi relatif berdasarkan analisis ekonomi-sosial</p>
-        <div className="relative w-full" style={{ paddingBottom: '56%' }}>
-          <div className="absolute inset-0">
-            {/* Axis lines */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="absolute w-full h-px bg-border-subtle opacity-60" />
-              <div className="absolute h-full w-px bg-border-subtle opacity-60" />
-            </div>
-            {/* Labels */}
-            <span className="absolute left-1 top-1/2 -translate-y-1/2 text-xs text-text-secondary opacity-60">← Kiri</span>
-            <span className="absolute right-1 top-1/2 -translate-y-1/2 text-xs text-text-secondary opacity-60">Kanan →</span>
-            <span className="absolute top-1 left-1/2 -translate-x-1/2 text-xs text-text-secondary opacity-60">Progresif ↑</span>
-            <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-xs text-text-secondary opacity-60">↓ Konservatif</span>
-            {/* Dots */}
-            {compassData.map(p => {
-              const xPct = ((p.x + 10) / 20) * 100
-              const yPct = ((10 - p.y) / 20) * 100
-              const isThis = p.isThis
-              return (
-                <div
-                  key={p.id}
-                  className="absolute flex flex-col items-center"
-                  style={{
-                    left: `${xPct}%`,
-                    top: `${yPct}%`,
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: isThis ? 10 : 1,
-                  }}
-                  title={p.name}
-                >
-                  <div
-                    className={`rounded-full transition-all ${isThis ? 'w-4 h-4 ring-2 ring-white shadow-lg' : 'w-2.5 h-2.5 opacity-40'}`}
-                    style={{ backgroundColor: p.color }}
+          {/* Ideology Radar */}
+          {radarData.length > 0 && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-1">🧭 Radar Ideologi</h3>
+              <p className="text-xs text-text-secondary mb-3">{party.ideology_detail}</p>
+              <ResponsiveContainer width="100%" height={240}>
+                <RadarChart data={radarData}>
+                  <PolarGrid stroke="#2D3748" />
+                  <PolarAngleAxis dataKey="axis" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
+                  <PolarRadiusAxis angle={90} domain={[0, 10]} tick={{ fill: '#6B7280', fontSize: 9 }} />
+                  <Radar
+                    name={party.abbr}
+                    dataKey="value"
+                    stroke={party.color}
+                    fill={party.color}
+                    fillOpacity={0.25}
+                    strokeWidth={2}
                   />
-                  {isThis && (
-                    <span className="mt-1 text-xs font-bold whitespace-nowrap" style={{ color: p.color }}>
-                      {p.name}
-                    </span>
-                  )}
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </Card>
+                  <Legend wrapperStyle={{ fontSize: 11, color: '#9CA3AF' }} />
+                  <Tooltip content={<ChartTooltip />} />
+                </RadarChart>
+              </ResponsiveContainer>
+            </Card>
+          )}
 
-      {/* Election History */}
-      {historyData.some(d => d.seats > 0) && (
-        <Card className="p-5">
-          <h3 className="text-sm font-semibold text-text-primary mb-4">📈 Tren Kursi DPR</h3>
-          <ResponsiveContainer width="100%" height={180}>
-            <LineChart data={historyData}>
-              <CartesianGrid stroke="#1F2937" />
-              <XAxis dataKey="year" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
-              <YAxis tick={{ fill: '#9CA3AF', fontSize: 11 }} />
-              <Tooltip
-                contentStyle={{ backgroundColor: '#1E2235', border: '1px solid #2D3748', borderRadius: 8 }}
-                labelStyle={{ color: '#E5E7EB' }}
-              />
-              <Line
-                type="monotone"
-                dataKey="seats"
-                name="Kursi"
-                stroke={party.color}
-                strokeWidth={2}
-                dot={{ fill: party.color, r: 4 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </Card>
-      )}
+          {/* Description + Key Achievements */}
+          {party.key_achievements?.length > 0 && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-3">🏆 Pencapaian Utama</h3>
+              <ul className="space-y-1.5">
+                {party.key_achievements.map((ach, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                    <span className="text-green-400 mt-0.5">✓</span>
+                    {ach}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          )}
 
-      {/* F. Corruption Profile */}
-      {members.length > 0 && (
-        <Card className="p-5">
-          <h3 className="text-sm font-semibold text-text-primary mb-3">🔎 Profil Risiko Korupsi Kader</h3>
-          <div className="flex flex-wrap gap-2">
-            {Object.entries(riskCount).map(([risk, count]) => count > 0 && (
-              <span
-                key={risk}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold ${RISK_CONFIG[risk]?.color || 'bg-gray-700 text-gray-300'}`}
-              >
-                {RISK_CONFIG[risk]?.label || risk}
-                <span className="font-bold text-sm">{count}</span>
-              </span>
-            ))}
-          </div>
-        </Card>
-      )}
-
-      {/* D. Member Directory — Nationals */}
-      {nationals.length > 0 && (
-        <div>
-          <h3 className="text-sm font-semibold text-text-primary mb-3">🏛️ Tokoh Nasional ({nationals.length})</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-            {nationals.map(m => (
-              <PersonCard key={m.id} person={m} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* D. Member Directory — Regionals */}
-      {regionals.length > 0 && (
-        <div>
-          <h3 className="text-sm font-semibold text-text-primary mb-3">🗺️ Tokoh Daerah ({regionals.length})</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-            {regionals.map(m => (
-              <PersonCard key={m.id} person={m} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* E. Recent News */}
-      {partyNews.length > 0 && (
-        <div>
-          <h3 className="text-sm font-semibold text-text-primary mb-3">📰 Berita Terkait ({partyNews.length})</h3>
-          <div className="space-y-3">
-            {partyNews.map(n => (
-              <Card key={n.id} className="p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-text-primary">{n.headline}</p>
-                    <p className="text-xs text-text-secondary mt-1 line-clamp-2">{n.summary}</p>
-                    <div className="flex items-center gap-2 mt-2">
-                      <span className="text-xs text-text-secondary opacity-60">{n.source}</span>
-                      <span className="text-xs text-text-secondary opacity-40">·</span>
-                      <span className="text-xs text-text-secondary opacity-60">{n.date}</span>
-                    </div>
-                  </div>
-                  <Badge
-                    color={n.sentiment === 'positif' ? '#22c55e' : n.sentiment === 'negatif' ? '#ef4444' : '#94a3b8'}
+          {/* Sayap */}
+          {(party.youth_wing || party.women_wing) && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-3">🌿 Sayap Organisasi</h3>
+              <div className="flex flex-wrap gap-2">
+                {party.youth_wing && party.youth_wing !== '-' && (
+                  <span className="px-3 py-1.5 rounded-full text-xs border border-border-default text-text-secondary bg-bg-page">
+                    👶 {party.youth_wing}
+                  </span>
+                )}
+                {party.women_wing && party.women_wing !== '-' && (
+                  <span className="px-3 py-1.5 rounded-full text-xs border border-border-default text-text-secondary bg-bg-page">
+                    👩 {party.women_wing}
+                  </span>
+                )}
+                {party.website && party.website !== '-' && (
+                  <a
+                    href={party.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 rounded-full text-xs border border-border-default text-text-secondary bg-bg-page hover:text-text-primary transition-colors"
                   >
-                    {n.sentiment}
-                  </Badge>
-                </div>
-              </Card>
-            ))}
-          </div>
+                    🌐 {party.website.replace('https://', '')}
+                  </a>
+                )}
+              </div>
+            </Card>
+          )}
+
+          {/* Chairman History */}
+          {party.chairman_history?.length > 0 && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-3">📜 Sejarah Ketua Umum</h3>
+              <div className="space-y-2">
+                {party.chairman_history.map((ch, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: party.color }} />
+                    <span className="text-sm text-text-primary font-medium">{ch.name}</span>
+                    <span className="text-xs text-text-secondary ml-auto">{ch.period}</span>
+                  </div>
+                ))}
+              </div>
+              {party.founder && (
+                <p className="text-xs text-text-secondary mt-3 pt-3 border-t border-border-subtle">
+                  Pendiri: <span className="text-text-primary">{party.founder}</span>
+                </p>
+              )}
+            </Card>
+          )}
         </div>
       )}
 
-      {/* Agendas */}
-      {agendas.length > 0 && (
-        <div>
-          <h3 className="text-sm font-semibold text-text-primary mb-3">📋 Platform & Agenda ({agendas.length})</h3>
-          <div className="space-y-3">
-            {agendas.map(a => (
-              <Card key={a.id} className="p-4">
-                <div className="flex items-start justify-between gap-3">
-                  <p className="text-sm font-medium text-text-primary">{a.title}</p>
-                  <Badge variant={`status-${a.status}`}>{a.status}</Badge>
-                </div>
-                <p className="text-xs text-text-secondary mt-1">{a.description}</p>
+      {/* ══════════════════════════════════════════════════════════════════════
+          TAB 1 — SEJARAH PEMILU
+      ══════════════════════════════════════════════════════════════════════ */}
+      {tab === 1 && (
+        <div className="space-y-5">
+          {party.election_history?.length > 0 ? (
+            <>
+              {/* Trend */}
+              {trend && (
+                <div className={`text-sm font-semibold ${trend.color}`}>{trend.label}</div>
+              )}
+
+              {/* Line chart — vote % */}
+              <Card className="p-5">
+                <h3 className="text-sm font-semibold text-text-primary mb-4">📊 Perolehan Suara (%) per Pemilu</h3>
+                <ResponsiveContainer width="100%" height={200}>
+                  <LineChart data={party.election_history}>
+                    <CartesianGrid stroke="#1F2937" strokeDasharray="3 3" />
+                    <XAxis dataKey="year" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
+                    <YAxis tick={{ fill: '#9CA3AF', fontSize: 11 }} unit="%" domain={[0, 'auto']} />
+                    <Tooltip content={<ChartTooltip />} />
+                    <Line
+                      type="monotone"
+                      dataKey="votes_pct"
+                      name="Suara %"
+                      stroke={party.color}
+                      strokeWidth={2.5}
+                      dot={{ fill: party.color, r: 5 }}
+                      activeDot={{ r: 7 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
               </Card>
-            ))}
-          </div>
+
+              {/* Bar chart — seats */}
+              <Card className="p-5">
+                <h3 className="text-sm font-semibold text-text-primary mb-4">🏛️ Kursi DPR per Pemilu</h3>
+                <ResponsiveContainer width="100%" height={200}>
+                  <BarChart data={party.election_history}>
+                    <CartesianGrid stroke="#1F2937" strokeDasharray="3 3" />
+                    <XAxis dataKey="year" tick={{ fill: '#9CA3AF', fontSize: 11 }} />
+                    <YAxis tick={{ fill: '#9CA3AF', fontSize: 11 }} />
+                    <Tooltip content={<ChartTooltip />} />
+                    <Bar
+                      dataKey="seats"
+                      name="Kursi"
+                      fill={party.color}
+                      fillOpacity={0.8}
+                      radius={[4, 4, 0, 0]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </Card>
+
+              {/* Table */}
+              <Card className="p-5 overflow-x-auto">
+                <h3 className="text-sm font-semibold text-text-primary mb-4">📋 Tabel Lengkap</h3>
+                <table className="w-full text-xs text-text-secondary">
+                  <thead>
+                    <tr className="text-left border-b border-border-subtle">
+                      <th className="pb-2 pr-4 font-semibold text-text-primary">Tahun</th>
+                      <th className="pb-2 pr-4 font-semibold text-text-primary">Suara %</th>
+                      <th className="pb-2 pr-4 font-semibold text-text-primary">Kursi</th>
+                      <th className="pb-2 font-semibold text-text-primary">Peringkat</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {party.election_history.map((row, i) => (
+                      <tr key={i} className="border-b border-border-subtle/40 hover:bg-bg-card/30 transition-colors">
+                        <td className="py-2 pr-4 font-medium">{row.year}</td>
+                        <td className="py-2 pr-4">
+                          <span className="font-bold" style={{ color: party.color }}>{row.votes_pct}%</span>
+                        </td>
+                        <td className="py-2 pr-4">{row.seats}</td>
+                        <td className="py-2">
+                          <span className={`px-1.5 py-0.5 rounded text-xs ${row.rank <= 3 ? 'bg-amber-900/60 text-amber-300' : 'bg-slate-700/40 text-slate-400'}`}>
+                            #{row.rank}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Card>
+            </>
+          ) : (
+            <Card className="p-8 text-center">
+              <p className="text-text-secondary text-sm">Belum ada data sejarah pemilu untuk partai ini.</p>
+            </Card>
+          )}
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          TAB 2 — TOKOH
+      ══════════════════════════════════════════════════════════════════════ */}
+      {tab === 2 && (
+        <div className="space-y-4">
+          {members.length > 0 ? (
+            <>
+              <p className="text-xs text-text-secondary">{members.length} tokoh terdaftar · diurutkan berdasarkan skor pengaruh</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+                {members.map(m => (
+                  <div
+                    key={m.id}
+                    className="cursor-pointer"
+                    onClick={() => navigate(`/persons/${m.id}`)}
+                  >
+                    <PersonCard person={m} />
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <Card className="p-8 text-center">
+              <p className="text-text-secondary text-sm">Belum ada tokoh terdaftar untuk partai ini.</p>
+            </Card>
+          )}
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          TAB 3 — KOALISI & KONFLIK
+      ══════════════════════════════════════════════════════════════════════ */}
+      {tab === 3 && (
+        <div className="space-y-5">
+          {/* Current Coalitions */}
+          <Card className="p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-3">🤝 Koalisi Aktif</h3>
+            {currentCoalitions.length > 0 ? (
+              <div className="space-y-2">
+                {currentCoalitions.map((conn, i) => {
+                  const otherId = conn.from === party.id ? conn.to : conn.from
+                  const other = PARTIES.find(p => p.id === otherId)
+                  return (
+                    <div
+                      key={i}
+                      className="flex items-center justify-between gap-3 p-3 rounded-lg bg-bg-page border border-border-subtle hover:border-border-default transition-colors cursor-pointer"
+                      onClick={() => other && navigate(`/parties/${other.id}`)}
+                    >
+                      <div className="flex items-center gap-3">
+                        {other ? (
+                          <div
+                            className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+                            style={{ backgroundColor: other.color + '22', border: `1.5px solid ${other.color}`, color: other.color }}
+                          >
+                            {other.abbr.slice(0, 3)}
+                          </div>
+                        ) : (
+                          <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs">?</div>
+                        )}
+                        <div>
+                          <p className="text-sm font-medium text-text-primary">{other?.abbr ?? otherId}</p>
+                          <p className="text-xs text-text-secondary">{conn.label}</p>
+                        </div>
+                      </div>
+                      <div className="text-xs text-text-secondary opacity-60">Kekuatan: {conn.strength}/10</div>
+                    </div>
+                  )
+                })}
+              </div>
+            ) : (
+              <p className="text-sm text-text-secondary">Tidak ada data koalisi aktif tercatat.</p>
+            )}
+          </Card>
+
+          {/* Historical Coalitions */}
+          {historicalCoalitions.length > 0 && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-3">📜 Mantan Koalisi</h3>
+              <div className="space-y-2">
+                {historicalCoalitions.map((conn, i) => {
+                  const otherId = conn.from === party.id ? conn.to : conn.from
+                  const other = PARTIES.find(p => p.id === otherId)
+                  return (
+                    <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-bg-page border border-border-subtle">
+                      <div className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center text-xs opacity-60">
+                        {other ? other.abbr.slice(0, 2) : '?'}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-text-secondary">{other?.abbr ?? otherId}</p>
+                        <p className="text-xs text-text-secondary opacity-70">{conn.label}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          )}
+
+          {/* Conflicts */}
+          {conflicts.length > 0 && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-3">⚔️ Konflik Tercatat</h3>
+              <div className="space-y-2">
+                {conflicts.map((conn, i) => {
+                  const otherId = conn.from === party.id ? conn.to : conn.from
+                  const other = PARTIES.find(p => p.id === otherId)
+                  return (
+                    <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-red-950/30 border border-red-900/50">
+                      <div
+                        className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0"
+                        style={{ backgroundColor: other?.color + '22' || '#ef444422', border: `1.5px solid ${other?.color || '#ef4444'}`, color: other?.color || '#ef4444' }}
+                      >
+                        {other?.abbr?.slice(0, 3) ?? otherId?.slice(0, 3)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-text-primary">{other?.abbr ?? otherId}</p>
+                        <p className="text-xs text-text-secondary">{conn.label}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          )}
+
+          {currentCoalitions.length === 0 && historicalCoalitions.length === 0 && conflicts.length === 0 && (
+            <Card className="p-8 text-center">
+              <p className="text-text-secondary text-sm">Belum ada data koalisi atau konflik antar-tokoh tercatat.</p>
+            </Card>
+          )}
+        </div>
+      )}
+
+      {/* ══════════════════════════════════════════════════════════════════════
+          TAB 4 — KONTROVERSI
+      ══════════════════════════════════════════════════════════════════════ */}
+      {tab === 4 && (
+        <div className="space-y-5">
+          {/* Controversies */}
+          {party.controversies?.length > 0 && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-3">⚠️ Kontroversi Partai</h3>
+              <div className="space-y-2">
+                {party.controversies.map((c, i) => {
+                  const sev = guessSeverity(c)
+                  const cfg = SEVERITY_CONFIG[sev] || SEVERITY_CONFIG.sedang
+                  return (
+                    <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-bg-page border border-border-subtle">
+                      <span className={`flex-shrink-0 text-xs px-2 py-0.5 rounded-full border font-semibold mt-0.5 ${cfg.bg}`}>
+                        {cfg.label}
+                      </span>
+                      <p className="text-sm text-text-secondary">{c}</p>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          )}
+
+          {/* KPK Cases */}
+          {partyCases.length > 0 && (
+            <Card className="p-5">
+              <h3 className="text-sm font-semibold text-text-primary mb-3">🔎 Kasus Hukum Kader</h3>
+              <div className="space-y-3">
+                {partyCases.map((c) => {
+                  const suspect = members.find(m => (c.suspects || []).includes(m.id))
+                  return (
+                    <div key={c.id} className="p-3 rounded-lg bg-bg-page border border-border-subtle space-y-1.5">
+                      <div className="flex items-start justify-between gap-2">
+                        <p className="text-sm font-semibold text-text-primary">{c.title}</p>
+                        <span className={`flex-shrink-0 text-xs px-2 py-0.5 rounded-full border font-semibold ${KPK_STATUS_COLOR[c.status] || 'bg-slate-700 text-slate-300 border-slate-600'}`}>
+                          {c.status}
+                        </span>
+                      </div>
+                      {suspect && (
+                        <p className="text-xs text-text-secondary">👤 {suspect.name}</p>
+                      )}
+                      <p className="text-xs text-text-secondary">{c.charges}</p>
+                      {c.losses_idr && (
+                        <p className="text-xs text-red-400">
+                          💰 Kerugian: Rp {(c.losses_idr / 1_000_000_000).toFixed(1)} M
+                        </p>
+                      )}
+                      {c.notes && (
+                        <p className="text-xs text-text-secondary opacity-70 italic">{c.notes}</p>
+                      )}
+                      <p className="text-xs text-text-secondary opacity-50">📅 {c.date_start} · {c.institution}</p>
+                    </div>
+                  )
+                })}
+              </div>
+            </Card>
+          )}
+
+          {(!party.controversies?.length && partyCases.length === 0) && (
+            <Card className="p-8 text-center">
+              <p className="text-text-secondary text-sm">Tidak ada kontroversi atau kasus hukum tercatat untuk partai ini.</p>
+            </Card>
+          )}
         </div>
       )}
     </div>
