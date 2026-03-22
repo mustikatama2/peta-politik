@@ -68,3 +68,41 @@ export const PARTY_POLLS = [
   { date: '2025-01', pollster: 'indikator', parties: { pdip: 18,    ger: 14,    gol: 13,    pkb: 10,    nas: 8,    dem: 7,    pan: 6,    pks: 9 } },
   { date: '2025-03', pollster: 'lsi',       parties: { pdip: 17,    ger: 13,    gol: 12,    pkb: 11,    nas: 8,    dem: 7,    pan: 6,    pks: 10,   psi: 3 } },
 ];
+
+// Prabowo government approval rating — high-headline poll series (Indikator Politik)
+// These reflect the "net approval" methodology commonly cited in media
+export const PRABOWO_APPROVAL_TREND = [
+  { date: '2024-11', month_label: 'Nov 2024', approval: 82, note: 'Bulan pertama — honeymoon effect tinggi' },
+  { date: '2024-12', month_label: 'Des 2024', approval: 79, note: 'Masih tinggi, MBG mulai diluncurkan' },
+  { date: '2025-01', month_label: 'Jan 2025', approval: 76, note: 'Pasca kasus Hasto-KPK — sedikit turun' },
+  { date: '2025-02', month_label: 'Feb 2025', approval: 74, note: 'Isu efisiensi anggaran mulai ramai' },
+  { date: '2025-03', month_label: 'Mar 2025', approval: 71, note: 'Demo UU TNI & efisiensi APBN tekan popularitas' },
+];
+
+// PKS electability trend — growing as oposisi konsisten
+export const PKS_ELECTABILITY_TREND = [
+  { date: '2024-02', approval: 8.42,  note: 'Hasil resmi Pileg 2024', is_result: true },
+  { date: '2024-06', approval: 8.5,   note: 'Pasca-Pilpres — PKS tetap oposisi, elektabilitas stabil' },
+  { date: '2024-09', approval: 8.8,   note: 'PKS konsisten oposisi — naik tipis' },
+  { date: '2024-12', approval: 9.2,   note: 'Oposisi PKS makin terlihat; publik apresiasi konsistensi' },
+  { date: '2025-01', approval: 9.5,   note: 'PKS vokal soal anggaran dan MBG' },
+  { date: '2025-03', approval: 10.2,  note: 'Demo UU TNI — PKS jadi referensi suara kritis' },
+];
+
+// Makan Bergizi Gratis (MBG) program approval — terpisah dari approval Prabowo secara umum
+export const MBG_APPROVAL_POLLS = [
+  { date: '2024-11', pollster: 'indikator', approval: 74, note: 'Sebelum MBG diluncurkan — ekspektasi publik' },
+  { date: '2025-01', pollster: 'lsi',       approval: 69, note: 'Minggu pertama MBG — antusias tapi logistik bermasalah' },
+  { date: '2025-02', pollster: 'smrc',      approval: 65, note: 'Isu kualitas gizi dan distribusi tidak merata' },
+  { date: '2025-03', pollster: 'charta',    approval: 62, note: 'Anggaran dipangkas — publik khawatir keberlanjutan' },
+  { date: '2025-04', pollster: 'median',    approval: 60, note: 'Target 82 juta anak belum tercapai', is_projection: true },
+];
+
+// Perbandingan approval rating presiden di bulan ke-5 masa jabatan
+export const PRESIDENT_APPROVAL_COMPARISON = [
+  { person_id: 'soekarno',  period: 'Bulan ke-5 (1945)',  approval: null,  note: 'Era revolusi — tidak ada survei formal' },
+  { person_id: 'sby',       period: 'Bulan ke-5 (2004)',  approval: 78,    note: 'SBY awal pemerintahan — euphoria reformasi' },
+  { person_id: 'jokowi',    period: 'Bulan ke-5 (2014)',  approval: 62,    note: 'Jokowi awal jabatan — janji infrastruktur' },
+  { person_id: 'jokowi',    period: 'Bulan ke-5 (2019)',  approval: 71,    note: 'Periode 2 Jokowi — stabilitas awal' },
+  { person_id: 'prabowo',   period: 'Bulan ke-5 (2025)',  approval: 71,    note: 'Prabowo Mar 2025 — MBG dan efisiensi anggaran' },
+];

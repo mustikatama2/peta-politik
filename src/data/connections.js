@@ -885,6 +885,72 @@ export const CONNECTIONS = [
   { from:"ridwan_kamil",        to:"jokowi",              type:"rekan",           label:"RK Walikota-Gubernur era Jokowi — dapat banyak proyek strategis",             strength:6  },
   { from:"koster",              to:"jokowi",              type:"rekan",           label:"PDIP Bali — Koster Gubernur Bali loyal ke Jokowi",                            strength:7  },
   { from:"koster",              to:"prabowo",             type:"konflik",         label:"PDIP Bali kini oposisi — berbeda dari KIM era Prabowo",                       strength:3  },
+
+  // ── JOKOWI LEGACY NETWORK (new) ──────────────────────────────────────────
+  { from:"jokowi",         to:"bahlil",         type:"rekan",           label:"BKPM & Menteri ESDM — anak emas Jokowi dari Papua",                          strength:8  },
+  { from:"jokowi",         to:"anies",          type:"konflik",         label:"Jokowi dukung rival Anies di Pilpres 2024 — hubungan memburuk",               strength:7  },
+
+  // ── PRABOWO NETWORK EXPANSION (new) ──────────────────────────────────────
+  { from:"gibran",         to:"ahy",            type:"rekan",           label:"Wapres-Menteri ATR koordinasi kabinet Merah Putih",                           strength:7  },
+  { from:"gibran",         to:"zulhas",         type:"koalisi",         label:"Wapres-Menko Pangan koordinasi ketahanan pangan nasional",                    strength:7  },
+  { from:"gibran",         to:"cakimin",        type:"rekan",           label:"Wapres-Ketum PKB — PKB mendukung Prabowo-Gibran 2024",                        strength:5  },
+  { from:"gibran",         to:"mahfud_md",      type:"konflik",         label:"Rival Pilpres 2024: Prabowo-Gibran vs Ganjar-Mahfud",                         strength:6  },
+  { from:"gibran",         to:"anies",          type:"konflik",         label:"Rival Pilpres 2024: Prabowo-Gibran menang atas Anies-Cakimin",                strength:7  },
+  { from:"gibran",         to:"airlangga",      type:"rekan",           label:"Wapres-Menko Ekonomi koordinasi fiskal dan investasi",                        strength:7  },
+  { from:"gibran",         to:"surya_paloh",    type:"konflik",         label:"Wapres vs NasDem yang dukung Anies — hubungan renggang",                      strength:4  },
+
+  // ── KOALISI KIM+ INTERNAL (new) ──────────────────────────────────────────
+  { from:"airlangga",      to:"zulhas",         type:"rekan",           label:"Sesama Menko di kabinet Prabowo — koordinasi ekonomi dan pangan",             strength:6  },
+  { from:"sufmi_dasco",    to:"ahy",            type:"rekan",           label:"Pimpinan DPR Gerindra-Demokrat — koordinasi koalisi KIM+",                    strength:6  },
+  { from:"sufmi_dasco",    to:"puan",           type:"rekan",           label:"Wakil Ketua DPR vs Ketua DPR — koordinasi lintas fraksi parlemen",             strength:5  },
+  { from:"ahy",            to:"zulhas",         type:"rekan",           label:"Sesama menteri kabinet Prabowo — Demokrat-PAN koordinasi",                    strength:6  },
+  { from:"ahy",            to:"cakimin",        type:"mantan-koalisi",  label:"Demokrat dan PKB sama-sama di Koalisi Perubahan 2024",                        strength:5  },
+  { from:"ahy",            to:"airlangga",      type:"rekan",           label:"KIM Plus — Demokrat-Golkar koordinasi kabinet dan DPR",                       strength:7  },
+  { from:"ahy",            to:"surya_paloh",    type:"mantan-koalisi",  label:"Demokrat sempat satu koalisi dengan NasDem di Koalisi Perubahan",              strength:5  },
+  { from:"zulhas",         to:"cakimin",        type:"rekan",           label:"PAN-PKB sesama KIM Plus — koordinasi koalisi parlemen",                       strength:6  },
+  { from:"zulhas",         to:"anies",          type:"konflik",         label:"PAN dukung Prabowo vs Anies — berseberangan di Pilpres 2024",                  strength:4  },
+  { from:"cakimin",        to:"zulhas",         type:"rekan",           label:"PKB-PAN sesama KIM Plus — koordinasi koalisi pemerintahan",                    strength:6  },
+  { from:"cakimin",        to:"airlangga",      type:"rekan",           label:"PKB-Golkar KIM Plus — koordinasi parlemen dan kebijakan",                      strength:6  },
+
+  // ── HUKUM/REFORMASI (new) ────────────────────────────────────────────────
+  { from:"novel_baswedan", to:"johny_plate",    type:"konflik",         label:"KPK menyelidiki kasus BTS Kominfo — NasDem vs KPK antikorupsi",               strength:5  },
+  { from:"novel_baswedan", to:"nawawi",         type:"rekan",           label:"Penyidik senior KPK-Ketua KPK — koordinasi lembaga antikorupsi",              strength:7  },
+  { from:"novel_baswedan", to:"prabowo",        type:"konflik",         label:"Novel kritik lemahnya pemberantasan korupsi di era Prabowo",                   strength:4  },
+  { from:"alexander_marwata", to:"hasto",       type:"konflik",         label:"KPK menyidik Hasto Kristiyanto — Wakil Ketua KPK vs Sekjen PDIP",             strength:7  },
+  { from:"alexander_marwata", to:"nawawi",      type:"rekan",           label:"Sesama pimpinan KPK — koordinasi lembaga antikorupsi nasional",               strength:7  },
+  { from:"nawawi",         to:"puan",           type:"konflik",         label:"KPK vs PDIP — kasus Harun Masiku dan Hasto libatkan keluarga PDIP",            strength:4  },
+
+  // ── PDIP/OPOSISI NETWORK (new) ───────────────────────────────────────────
+  { from:"ganjar",         to:"puan",           type:"rekan",           label:"Capres PDIP koordinasi dengan Puan Ketua DPR PDIP 2024",                      strength:6  },
+  { from:"ganjar",         to:"anies",          type:"konflik",         label:"Rival Pilpres 2024 — Ganjar 16%, Anies 25%, Prabowo 58%",                     strength:5  },
+  { from:"mahfud_md",      to:"prabowo",        type:"konflik",         label:"Tokoh oposisi — kritik kebijakan Prabowo dan Makan Bergizi Gratis",            strength:6  },
+  { from:"pramono_anung",  to:"airlangga",      type:"konflik",         label:"PDIP Gubernur DKI vs Golkar — beda koalisi pasca-Pilpres 2024",               strength:4  },
+  { from:"pramono_anung",  to:"prabowo",        type:"konflik",         label:"PDIP oposisi — Pramono Gubernur DKI berseberangan dengan Prabowo",             strength:5  },
+  { from:"ahmad_syaikhu",  to:"megawati",       type:"konflik",         label:"PKS oposisi — beda blok dengan PDIP Megawati sejak lama",                     strength:5  },
+  { from:"puan",           to:"prananda",       type:"keluarga",        label:"Kakak-Adik — Puan Maharani dan Prananda Maharani anak Megawati",               strength:9  },
+  { from:"prananda",       to:"megawati",       type:"keluarga",        label:"Anak-Ibu — Prananda Maharani putra Megawati Soekarnoputri",                    strength:10 },
+  { from:"prananda",       to:"puan",           type:"keluarga",        label:"Kakak-Adik — Prananda dan Puan anak kandung Megawati",                         strength:9  },
+  { from:"megawati",       to:"sby",            type:"konflik",         label:"Rival Pilpres 2004 — Mega kalah dari SBY; hubungan kompetitif lama",           strength:4  },
+  { from:"megawati",       to:"prabowo",        type:"konflik",         label:"Beda blok Pilpres 2024 — Mega dukung Ganjar, Prabowo menang",                  strength:5  },
+  { from:"megawati",       to:"airlangga",      type:"konflik",         label:"PDIP vs Golkar — beda koalisi; Megawati oposisi pemerintahan Prabowo",         strength:4  },
+  { from:"megawati",       to:"ahy",            type:"konflik",         label:"PDIP vs Demokrat — Megawati dan AHY beda blok sejak era SBY",                  strength:4  },
+
+  // ── BISNIS/MEDIA (new) ───────────────────────────────────────────────────
+  { from:"kaesang",        to:"puan",           type:"konflik",         label:"PSI vs PDIP — Kaesang Ketum PSI berseberangan Puan Ketua DPR",                 strength:3  },
+  { from:"kaesang",        to:"bobby_nasution", type:"keluarga",        label:"Ipar — Kahiyang Ayu saudara Kaesang menikah Bobby Nasution",                   strength:9  },
+  { from:"sri_mulyani",    to:"megawati",       type:"mantan-koalisi",  label:"PDIP pernah dukung Sri Mulyani; hubungan renggang pasca era Jokowi",           strength:4  },
+  { from:"sri_mulyani",    to:"anies",          type:"konflik",         label:"Menkeu vs kritik Anies soal utang dan kebijakan fiskal",                       strength:3  },
+
+  // ── REGIONAL/PILKADA 2024 (new) ──────────────────────────────────────────
+  { from:"bobby_nasution", to:"airlangga",      type:"koalisi",         label:"Golkar mendukung Bobby di Pilgub Sumatera Utara 2024",                         strength:7  },
+  { from:"ridwan_kamil",   to:"airlangga",      type:"koalisi",         label:"Golkar dukung RK di Pilgub DKI Jakarta 2024",                                  strength:7  },
+  { from:"khofifah",       to:"bobby_nasution", type:"rekan",           label:"Sesama gubernur KIM Plus — koordinasi regional Jawa-Sumatera",                 strength:6  },
+
+  // ── KEAMANAN/TNI-POLRI (new) ─────────────────────────────────────────────
+  { from:"listyo_sigit",   to:"anies",          type:"konflik",         label:"Polri vs Anies — disorot saat Anies jadi oposisi dan kasus Basuki",            strength:4  },
+  { from:"gatot_nurmantyo",to:"prabowo",        type:"konflik",         label:"Rival jenderal TNI — Gatot sempat oposisi, berbeda orbit politik",             strength:5  },
+  { from:"gatot_nurmantyo",to:"anies",          type:"rekan",           label:"Keduanya tokoh oposisi — Gatot dekat gerakan oposisi era Anies 2019-2024",     strength:5  },
+  { from:"gatot_nurmantyo",to:"megawati",       type:"konflik",         label:"Jenderal dicopot Jokowi/PDIP — dekat oposisi, bukan lingkaran Mega",           strength:3  },
 ]
 
 export const CONNECTION_TYPES = {
