@@ -1004,3 +1004,82 @@ export const DIMENSION_LABELS = {
 }
 
 export const REGIONS = ['Jawa-Bali', 'Sumatera', 'Kalimantan', 'Sulawesi', 'Maluku-Papua']
+
+// ─── PERSONS SCORECARD ────────────────────────────────────────────────────────
+// Individual-level political influence & controversy scores
+// influence: 0-100 (broader political reach & power)
+// controversy: 1-10 (public controversy level, 10=most controversial)
+// tier: "nasional" | "regional" | "historis"
+export const PERSONS_SCORECARD = [
+  // ── Presiden & Mantan Presiden ────────────────────────────────────────────
+  { id: 'prabowo',                    influence: 95, controversy: 7,  tier: 'nasional'  },
+  { id: 'jokowi',                     influence: 90, controversy: 8,  tier: 'nasional'  },
+  { id: 'susilo_bambang_yudhoyono',   influence: 85, controversy: 3,  tier: 'nasional'  },
+  { id: 'megawati',                   influence: 82, controversy: 6,  tier: 'nasional'  },
+  { id: 'habibie',                    influence: 80, controversy: 4,  tier: 'historis'  },
+  { id: 'gus_dur',                    influence: 85, controversy: 5,  tier: 'historis'  },
+  { id: 'soeharto',                   influence: 100, controversy: 10, tier: 'historis' },
+
+  // ── Wakil Presiden & Kabinet Senior ──────────────────────────────────────
+  { id: 'gibran',                     influence: 75, controversy: 8,  tier: 'nasional'  },
+  { id: 'luhut',                      influence: 82, controversy: 6,  tier: 'nasional'  },
+  { id: 'sri_mulyani',                influence: 80, controversy: 4,  tier: 'nasional'  },
+  { id: 'erick_thohir',               influence: 72, controversy: 5,  tier: 'nasional'  },
+  { id: 'basuki',                     influence: 68, controversy: 3,  tier: 'nasional'  },
+  { id: 'tito_karnavian',             influence: 65, controversy: 4,  tier: 'nasional'  },
+  { id: 'budi_gunadi',                influence: 62, controversy: 3,  tier: 'nasional'  },
+  { id: 'fadli_zon',                  influence: 58, controversy: 8,  tier: 'nasional'  },
+  { id: 'moeldoko',                   influence: 62, controversy: 7,  tier: 'nasional'  },
+
+  // ── Tokoh Partai ─────────────────────────────────────────────────────────
+  { id: 'puan',                       influence: 72, controversy: 6,  tier: 'nasional'  },
+  { id: 'airlangga',                  influence: 70, controversy: 5,  tier: 'nasional'  },
+  { id: 'ahy',                        influence: 65, controversy: 4,  tier: 'nasional'  },
+  { id: 'cakimin',                    influence: 62, controversy: 3,  tier: 'nasional'  },
+  { id: 'surya_paloh',                influence: 68, controversy: 5,  tier: 'nasional'  },
+  { id: 'hary_tanoe',                 influence: 60, controversy: 5,  tier: 'nasional'  },
+  { id: 'amien_rais',                 influence: 60, controversy: 6,  tier: 'nasional'  },
+  { id: 'akbar_tandjung',             influence: 45, controversy: 5,  tier: 'nasional'  },
+  { id: 'sandiaga_uno',               influence: 72, controversy: 2,  tier: 'nasional'  },
+  { id: 'anies',                      influence: 70, controversy: 7,  tier: 'nasional'  },
+  { id: 'ganjar',                     influence: 65, controversy: 4,  tier: 'nasional'  },
+  { id: 'ahmad_syaikhu',              influence: 55, controversy: 2,  tier: 'nasional'  },
+
+  // ── Pengusaha-Politisi ────────────────────────────────────────────────────
+  { id: 'chairul_tanjung',            influence: 78, controversy: 2,  tier: 'nasional'  },
+  { id: 'hashim',                     influence: 68, controversy: 5,  tier: 'nasional'  },
+  { id: 'aburizal_bakrie',            influence: 65, controversy: 8,  tier: 'nasional'  },
+  { id: 'tommy_soeharto',             influence: 40, controversy: 8,  tier: 'nasional'  },
+  { id: 'tutut',                      influence: 45, controversy: 6,  tier: 'historis'  },
+
+  // ── Koruptor & Mantan Terpidana ───────────────────────────────────────────
+  { id: 'setya_novanto',              influence: 40, controversy: 9,  tier: 'nasional'  },
+  { id: 'firli_bahuri',               influence: 35, controversy: 9,  tier: 'nasional'  },
+  { id: 'anas_urbaningrum',           influence: 35, controversy: 8,  tier: 'nasional'  },
+  { id: 'nazaruddin',                 influence: 30, controversy: 9,  tier: 'nasional'  },
+  { id: 'hasto_kristiyanto',          influence: 55, controversy: 9,  tier: 'nasional'  },
+  { id: 'johny_plate',                influence: 35, controversy: 9,  tier: 'nasional'  },
+  { id: 'lukas_enembe',               influence: 30, controversy: 8,  tier: 'regional'  },
+
+  // ── KPK & Hukum ──────────────────────────────────────────────────────────
+  { id: 'agus_rahardjo',              influence: 48, controversy: 4,  tier: 'nasional'  },
+  { id: 'novel_baswedan',             influence: 50, controversy: 6,  tier: 'nasional'  },
+  { id: 'alexander_marwata',          influence: 42, controversy: 4,  tier: 'nasional'  },
+  { id: 'mahfud_md',                  influence: 65, controversy: 4,  tier: 'nasional'  },
+  { id: 'saldi_isra',                 influence: 55, controversy: 5,  tier: 'nasional'  },
+
+  // ── Militer & Keamanan ────────────────────────────────────────────────────
+  { id: 'wiranto',                    influence: 55, controversy: 5,  tier: 'nasional'  },
+  { id: 'agus_subiyanto',             influence: 60, controversy: 3,  tier: 'nasional'  },
+  { id: 'listyo_sigit',               influence: 58, controversy: 5,  tier: 'nasional'  },
+  { id: 'gatot_nurmantyo',            influence: 50, controversy: 6,  tier: 'nasional'  },
+  { id: 'sjafrie',                    influence: 55, controversy: 5,  tier: 'nasional'  },
+
+  // ── Tokoh Agama ──────────────────────────────────────────────────────────
+  { id: 'rizieq_shihab',              influence: 65, controversy: 9,  tier: 'nasional'  },
+  { id: 'din_syamsuddin',             influence: 58, controversy: 4,  tier: 'nasional'  },
+  { id: 'yenny_wahid',                influence: 55, controversy: 1,  tier: 'nasional'  },
+  { id: 'gus_yahya',                  influence: 70, controversy: 3,  tier: 'nasional'  },
+  { id: 'haedar_nashir',              influence: 65, controversy: 2,  tier: 'nasional'  },
+  { id: 'abdul_muti',                 influence: 58, controversy: 3,  tier: 'nasional'  },
+]
