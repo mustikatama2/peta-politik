@@ -656,6 +656,26 @@ export const CONNECTIONS = [
   { from:"luhut", to:"chairul_tanjung", type:"bisnis", label:"Jaringan konglomerat — investasi nikel dan energi", strength:6 },
   { from:"moeldoko", to:"wiranto", type:"kolega", label:"Sesama perwira senior TNI AD lintas generasi", strength:6 },
   { from:"moeldoko", to:"luhut", type:"kolega", label:"Sesama lingkaran istana Jokowi non-partai", strength:7 },
+  // R35 new persons connections
+  { from:"boediono", to:"susilo_bambang_yudhoyono", type:"kolega", label:"Pasangan SBY-Boediono 2009–2014", strength:9 },
+  { from:"boediono", to:"megawati", type:"kolega", label:"Gubernur BI era Megawati — kebijakan moneter", strength:7 },
+  { from:"boediono", to:"jokowi", type:"kolega", label:"Ekonom senior — masukan kebijakan ekonomi era Jokowi", strength:5 },
+  { from:"boediono", to:"sri_mulyani", type:"kolega", label:"Sesama teknokrat ekonomi senior Indonesia", strength:7 },
+  { from:"hamzah_haz", to:"megawati", type:"kolega", label:"Pasangan Presiden-Wapres 2001–2004", strength:9 },
+  { from:"hamzah_haz", to:"gus_dur", type:"kolega", label:"Sama-sama era reformasi awal — berbeda partai", strength:6 },
+  { from:"hamzah_haz", to:"zulhas", type:"mentor-murid", label:"Senior PPP — Hamzah senior, Zulhas penerus PAN (eks-PPP)", strength:5 },
+  { from:"din_syamsuddin", to:"amien_rais", type:"kolega", label:"Sesama tokoh Muhammadiyah — Din penerus Amien", strength:8 },
+  { from:"din_syamsuddin", to:"gus_yahya", type:"rival", label:"Muhammadiyah vs NU — beda ormas Islam terbesar", strength:7 },
+  { from:"din_syamsuddin", to:"anies", type:"rekan", label:"Din dukung Anies — tokoh Islam kritis pro-Anies 2024", strength:7 },
+  { from:"din_syamsuddin", to:"jokowi", type:"konflik", label:"Din kritis terhadap pemerintahan Jokowi", strength:6 },
+  { from:"rizieq_shihab", to:"anies", type:"rekan", label:"Anies gubernur DKI saat FPI 212 — relasi taktis", strength:7 },
+  { from:"rizieq_shihab", to:"prabowo", type:"mantan-koalisi", label:"Prabowo pernah dekat gerakan 212 saat oposisi Jokowi", strength:6 },
+  { from:"rizieq_shihab", to:"jokowi", type:"konflik", label:"FPI dibubarkan pemerintah Jokowi 2020", strength:9 },
+  { from:"rizieq_shihab", to:"hary_tanoe", type:"konflik", label:"Tokoh oposisi Islam vs media pro-pemerintah", strength:5 },
+  { from:"fahri_hamzah", to:"anies", type:"rekan", label:"Sesama oposisi Jokowi yang vokal — saling dukung", strength:7 },
+  { from:"fahri_hamzah", to:"ahmad_syaikhu", type:"konflik", label:"Dipecat PKS — konflik dengan pimpinan PKS", strength:8 },
+  { from:"fahri_hamzah", to:"prabowo", type:"mantan-koalisi", label:"Mendukung Prabowo 2019 saat masih parlemen", strength:6 },
+  { from:"fahri_hamzah", to:"jokowi", type:"konflik", label:"Fahri Hamzah pengkritik keras pemerintahan Jokowi", strength:8 },
 ];
 
 export const CONNECTION_TYPES = {
