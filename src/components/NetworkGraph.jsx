@@ -32,6 +32,8 @@ const LINK_COLORS = {
   rekan:             '#6B7280',
   'mantan-koalisi':  '#D97706',
   'atasan-bawahan':  '#14B8A6',
+  ideologi:          '#10B981',
+  oposisi:           '#F43F5E',
 }
 
 // Mini-map dimensions
@@ -54,6 +56,7 @@ export default function NetworkGraph({
   filterType, filterParty,
   centerNodeId, highlightIds,
   visibleTypes, focusNodeId,
+  focusPerson,
   showClusters,
 }) {
   const svgRef        = useRef(null)
@@ -214,6 +217,16 @@ export default function NetworkGraph({
       })
     }
 
+    // --- Focus person: compute 1-hop neighbourhood ---
+    let focusNeighbourhood = null
+    if (focusPerson) {
+      focusNeighbourhood = new Set([focusPerson])
+      filteredEdges2.forEach(e => {
+        if (e.from === focusPerson) focusNeighbourhood.add(e.to)
+        if (e.to   === focusPerson) focusNeighbourhood.add(e.from)
+      })
+    }
+
     // --- Score-based radius (4–20 px) ---
     const radius = d => {
       const r = scoreToRadius(d.id)
@@ -317,6 +330,12 @@ export default function NetworkGraph({
           const onPath = highlightSet.has(d.source?.id || d.from) && highlightSet.has(d.target?.id || d.to)
           return onPath ? 1 : 0.12
         }
+        if (focusNeighbourhood) {
+          const srcId = d.source?.id || d.from
+          const tgtId = d.target?.id || d.to
+          const inFocus = focusNeighbourhood.has(srcId) && focusNeighbourhood.has(tgtId)
+          return inFocus ? 0.85 : 0.05
+        }
         return 0.65
       })
       .attr('stroke-width', d => {
@@ -347,6 +366,7 @@ export default function NetworkGraph({
       .attr('cursor', 'pointer')
       .attr('opacity', d => {
         if (highlightSet && !highlightSet.has(d.id)) return 0.15
+        if (focusNeighbourhood && !focusNeighbourhood.has(d.id)) return 0.07
         if (dimmedIds.has(d.id)) return 0.2
         return 1
       })
@@ -500,7 +520,7 @@ export default function NetworkGraph({
     minimapRef.current._filteredEdges2 = d3Edges
     minimapRef.current._width          = width
     minimapRef.current._height         = height
-  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds, visibleTypes, focusNodeId, showClusters, scoreToRadius, drawMinimap])
+  }, [nodes, edges, onNodeClick, filterType, filterParty, centerNodeId, highlightIds, visibleTypes, focusNodeId, focusPerson, showClusters, scoreToRadius, drawMinimap])
 
   // Focus zoom effect
   useEffect(() => {

@@ -107,7 +107,12 @@ export const PERSONS = [
       risk:"medium",
       influence:10,
       controversy_level:8,
-      notes:"Eks-Danjen Kopassus dan Pangkostrad. Diduga terlibat pelanggaran HAM 1997-1998. Tiga kali kalah Pilpres sebelum akhirnya menang 2024 dengan 58.59%."
+      notes:"Eks-Danjen Kopassus dan Pangkostrad. Diduga terlibat pelanggaran HAM 1997-1998. Tiga kali kalah Pilpres sebelum akhirnya menang 2024 dengan 58.59%.",
+      summary:"Presiden ke-8 RI, mantan Danjen Kopassus dan Pangkostrad. Tiga kali mencalonkan diri sebelum menang 2024 dengan 58.59%. Kini memimpin kabinet terbesar sejarah RI.",
+      strength:["Pengaruh TNI dan Kopassus","Gerindra sebagai partai solid","Koalisi KIM Plus mayoritas DPR"],
+      weakness:["Rekam jejak HAM 1998","Kabinet terlalu besar dan fragmentasi","Kebijakan efisiensi kontroversial"],
+      opportunities:["Stabilitas pemerintah 5 tahun","Agenda ketahanan pangan bisa berhasil"],
+      threats:["Oposisi PDIP aktif","Tekanan ekonomi global","Demo mahasiswa berkala"]
     },
     data_sources:["id.wikipedia.org/wiki/Prabowo_Subianto","lhkpn.kpk.go.id","kpu.go.id/pilpres-2024"]
   },
@@ -138,7 +143,12 @@ export const PERSONS = [
       risk:'low',
       influence:6,
       controversy_level:3,
-      notes:"Walikota Solo dengan popularitas tinggi. Dinilai minim pengalaman untuk posisi Wapres namun diuntungkan jalur politik ayahnya."
+      notes:"Walikota Solo dengan popularitas tinggi. Dinilai minim pengalaman untuk posisi Wapres namun diuntungkan jalur politik ayahnya.",
+      summary:"Wakil Presiden RI termuda (29 tahun) sejak Sukarno. Putra sulung Jokowi. Jalan ke Wapres penuh kontroversi (putusan MK batas usia).",
+      strength:["Wakil Presiden aktif","Brand milenial dan digital","Dukungan keluarga Jokowi + KIM Plus"],
+      weakness:["Kontroversi putusan MK","Pengalaman eksekutif sangat minim","Dinasti politik rentan serangan"],
+      opportunities:["Capres 2034 atau lebih awal","Jika berhasil program MBG = legacy"],
+      threats:["Tekanan publik tentang legitimasi","Kinerja Wapres diawasi ketat"]
     },
     data_sources:["id.wikipedia.org/wiki/Gibran_Rakabuming_Raka","lhkpn.kpk.go.id","kpu.go.id"]
   },
@@ -171,7 +181,12 @@ export const PERSONS = [
       risk:'low',
       influence:9,
       controversy_level:6,
-      notes:"Presiden 2 periode. Warisannya: infrastruktur masif, IKN, hilirisasi nikel. Dikenal dekat dengan oligarki tertentu. Menantu Bobby, anak Gibran jadi VP — memunculkan narasi dinasti."
+      notes:"Presiden 2 periode. Warisannya: infrastruktur masif, IKN, hilirisasi nikel. Dikenal dekat dengan oligarki tertentu. Menantu Bobby, anak Gibran jadi VP — memunculkan narasi dinasti.",
+      summary:"Presiden ke-7 RI dua periode (2014–2024), berasal dari pengusaha furnitur Solo. Dikenal karena infrastruktur masif, IKN, dan hilirisasi nikel. Disorot karena dinasti politik (Gibran, Bobby).",
+      strength:["Rekam jejak infrastruktur","Popularitas di luar Jawa","Kelas menengah dan millennial"],
+      weakness:["PDIP kini oposisi","Warisan kontroversial (MK, IKN)","Anak-anak di politik"],
+      opportunities:["Senior statesman","Pengaruh di Golkar/KIM"],
+      threats:["Investigasi retroaktif","Warisan hutang IKN"]
     },
     data_sources:["id.wikipedia.org/wiki/Joko_Widodo","lhkpn.kpk.go.id","kpu.go.id"]
   },
@@ -203,7 +218,12 @@ export const PERSONS = [
       risk:'low',
       influence:6,
       controversy_level:3,
-      notes:"Disiplin fiskal ketat, manajemen APBN terpuji. Salah satu Menteri Keuangan paling berpengaruh di Asia Tenggara."
+      notes:"Disiplin fiskal ketat, manajemen APBN terpuji. Salah satu Menteri Keuangan paling berpengaruh di Asia Tenggara.",
+      summary:"Menteri Keuangan terlama dan terbaik Indonesia — dijuluki 'Iron Lady'. Pernah jadi Managing Director World Bank. Kini berlanjut di kabinet Prabowo.",
+      strength:["Kompetensi fiskal tertinggi","Respek internasional dan investor","Reformasi birokrasi Kemenkeu"],
+      weakness:["Konflik dengan DPR soal anggaran","Efisiensi 2025 kontroversial","Tidak punya basis partai"],
+      opportunities:["Penjaga kredibilitas fiskal Prabowo"],
+      threats:["Tekanan defisit dan utang naik","Konflik Menko Ekonomi vs Kemenkeu"]
     }
   },
   {
@@ -347,7 +367,12 @@ export const PERSONS = [
       risk:'medium',
       influence:7,
       controversy_level:5,
-      notes:"Kontroversial soal pencabutan IUP dan konflik kepentingan bisnis. Sangat cepat naik kekuasaan."
+      notes:"Kontroversial soal pencabutan IUP dan konflik kepentingan bisnis. Sangat cepat naik kekuasaan.",
+      summary:"Ketua Umum Golkar termuda, Menteri ESDM. Dari aktivis mahasiswa Papua hingga konglomerat dan menteri. Pengganti Airlangga yang kontroversial.",
+      strength:["Golkar sebagai partai kedua terbesar","Akses konsesi tambang ESDM","Loyalis Prabowo kuat"],
+      weakness:["Kontroversi pencabutan izin tambang","Latar belakang bisnis rentan COI","Golkar internal belum solid"],
+      opportunities:["Penerus kekuasaan Golkar-Prabowo","Wapres 2029 potensial"],
+      threats:["Kasus IUP tambang KPK","Airlangga dan faksi lama Golkar"]
     }
   },
   {
@@ -437,7 +462,12 @@ export const PERSONS = [
       risk:'low',
       influence:7,
       controversy_level:3,
-      notes:"Karir militer singkat, terjun ke politik mengikuti jejak ayah. Berhasil mempertahankan Demokrat dari upaya kudeta Moeldoko."
+      notes:"Karir militer singkat, terjun ke politik mengikuti jejak ayah. Berhasil mempertahankan Demokrat dari upaya kudeta Moeldoko.",
+      summary:"Ketua Umum Demokrat dan Menko Infrastruktur di kabinet Prabowo. Mantan perwira TNI, putra SBY. Bergabung koalisi KIM Plus setelah sempat di oposisi.",
+      strength:["Demokrat sebagai partai pendukung kabinet","Posisi Menko strategis","Brand militer-sipil"],
+      weakness:["Bayangan SBY selalu ada","Demokrat masih partai menengah","Belum teruji di eksekutif nasional"],
+      opportunities:["Calon Presiden 2029","Menteri berhasil = modal besar"],
+      threats:["KLB Moeldoko masih membekas","Saingan Prabowo-Gibran di 2029"]
     },
     data_sources:["id.wikipedia.org/wiki/Agus_Harimurti_Yudhoyono","lhkpn.kpk.go.id","demokrat.or.id"]
   },
@@ -500,7 +530,12 @@ export const PERSONS = [
       risk:"medium",
       influence:8,
       controversy_level:5,
-      notes:"Putri Megawati dan cucu Bung Karno. Dua periode Ketua DPR. Dikritik karena lebih menonjolkan silsilah ketimbang kompetensi. Ambisi capres stagnan di elektabilitas."
+      notes:"Putri Megawati dan cucu Bung Karno. Dua periode Ketua DPR. Dikritik karena lebih menonjolkan silsilah ketimbang kompetensi. Ambisi capres stagnan di elektabilitas.",
+      summary:"Ketua DPR RI dua periode dan putri Megawati. Calon presiden potensial PDIP walau kalah elektabilitas. Simbol dinasti Soekarno-Megawati.",
+      strength:["Ketua DPR — posisi legislatif paling tinggi","Pewaris PDIP dari Megawati","Jaringan elite PDIP dan Senayan"],
+      weakness:["Elektabilitas rendah di survei","Dianggap kurang populis","Bayangan Megawati"],
+      opportunities:["Capres PDIP 2029 jika Mega mendukung"],
+      threats:["PDIP harus bangkit dari kekalahan 2024","Rivalitas internal dengan Ganjar/Risma"]
     },
     data_sources:["id.wikipedia.org/wiki/Puan_Maharani","pdip.or.id","lhkpn.kpk.go.id"]
   },
@@ -559,7 +594,12 @@ export const PERSONS = [
       risk:'medium',
       influence:8,
       controversy_level:5,
-      notes:"Kelola ekonomi RI melewati pandemi COVID-19. Diduga terlibat kasus korupsi minyak goreng namun tidak tersangka resmi."
+      notes:"Kelola ekonomi RI melewati pandemi COVID-19. Diduga terlibat kasus korupsi minyak goreng namun tidak tersangka resmi.",
+      summary:"Mantan Ketua Umum Golkar yang tiba-tiba mundur 2023 saat diperiksa KPK. Menko Perekonomian yang dikenal low-profile tapi berpengaruh.",
+      strength:["Jaringan bisnis dan industri luas","Golkar di kabinet strategis","Teknis ekonomi solid"],
+      weakness:["Mundur Golkar misterius — shadow kasus","Dianggap tidak karismatik","Bayangan Bahlil kini lebih kuat"],
+      opportunities:["Peran technocrat senior"],
+      threats:["KPK masih mengintai","Bahlil menggeser pengaruhnya di Golkar"]
     },
     data_sources:["id.wikipedia.org/wiki/Airlangga_Hartarto","golkar.or.id","lhkpn.kpk.go.id"]
   },
@@ -592,7 +632,12 @@ export const PERSONS = [
       risk:'medium',
       influence:8,
       controversy_level:6,
-      notes:"Pemimpin PKB selama dua dekade. Pernah berkonflik dengan Gus Dur. Kasus korupsi transmigrasi pernah muncul namun tidak berlanjut."
+      notes:"Pemimpin PKB selama dua dekade. Pernah berkonflik dengan Gus Dur. Kasus korupsi transmigrasi pernah muncul namun tidak berlanjut.",
+      summary:"Ketua Umum PKB dan Cawapres Anies 2024. Mantan Wapres era SBY. Dikenal sebagai politisi licin yang tahu kapan harus berpindah koalisi.",
+      strength:["PKB sebagai partai NU kuat","Pengalaman Wapres","Jaringan pesantren dan santri"],
+      weakness:["Reputasi 'kutu loncat' koalisi","Kalah Pilpres 2024","Konflik PBNU-PKB"],
+      opportunities:["PKB platform NU terbesar — 2029 strategis"],
+      threats:["Gus Yahya dan PBNU bisa ambil alih basis PKB"]
     },
     data_sources:["id.wikipedia.org/wiki/Muhaimin_Iskandar","pkb.or.id","lhkpn.kpk.go.id"]
   },
@@ -649,7 +694,12 @@ export const PERSONS = [
       risk:'low',
       influence:7,
       controversy_level:3,
-      notes:"Awalnya pendukung Jokowi, berseberangan 2023. Dukung Anies Baswedan untuk Pilpres 2024."
+      notes:"Awalnya pendukung Jokowi, berseberangan 2023. Dukung Anies Baswedan untuk Pilpres 2024.",
+      summary:"Pendiri dan Ketua Umum NasDem, pemilik Metro TV. Mantan pendukung Jokowi, pernah usung Anies, kini merapat ke koalisi Prabowo.",
+      strength:["Media Metro TV untuk amplifikasi","NasDem di kabinet Prabowo","Modal sendiri tidak tergantung oligarki lain"],
+      weakness:["Loyalitas koalisi dipertanyakan","NasDem kecil, tergantung patron"],
+      opportunities:["Media influence tetap besar"],
+      threats:["KPK kasus Johny Plate menyeret NasDem","Kepercayaan publik turun"]
     },
     data_sources:["id.wikipedia.org/wiki/Surya_Paloh","partainasdem.id","lhkpn.kpk.go.id"]
   },
@@ -681,7 +731,12 @@ export const PERSONS = [
       risk:'low',
       influence:9,
       controversy_level:5,
-      notes:"Era kepresidenan relatif singkat tapi stabil. Kini lebih banyak di balik layar menentukan arah PDIP. Berseberangan dengan Jokowi-Prabowo."
+      notes:"Era kepresidenan relatif singkat tapi stabil. Kini lebih banyak di balik layar menentukan arah PDIP. Berseberangan dengan Jokowi-Prabowo.",
+      summary:"Presiden ke-5 RI dan Ketua Umum PDIP terlama. Putri Soekarno, simbol nasionalisme. Kini memimpin oposisi terhadap Prabowo-Gibran.",
+      strength:["Otoritas PDIP mutlak","Basis massa loyal","Simbol historis Soekarnoisme"],
+      weakness:["Usia tua, semakin jarang muncul","PDIP kehilangan simpati pasca-Gibran","Puan belum terbukti"],
+      opportunities:["Oposisi efektif sebagai check-and-balance"],
+      threats:["Generasi muda PDIP ingin regenerasi","Kasus Hasto bisa melemahkan partai"]
     },
     data_sources:["id.wikipedia.org/wiki/Megawati_Soekarnoputri","pdip.or.id","kpu.go.id"]
   },
@@ -712,7 +767,12 @@ export const PERSONS = [
       risk:'medium',
       influence:6,
       controversy_level:6,
-      notes:"Gubernur DKI penuh kontroversi: proyek Tanah Abang, Formula E, reklamasi. Didukung koalisi beragam ideologi dari Islam konservatif hingga liberal."
+      notes:"Gubernur DKI penuh kontroversi: proyek Tanah Abang, Formula E, reklamasi. Didukung koalisi beragam ideologi dari Islam konservatif hingga liberal.",
+      summary:"Mantan Gubernur DKI Jakarta dan calon presiden 2024 (urutan ke-2, 24.95%). Akademisi yang masuk politik. Dikenal karena program Jakarta dan oposisi Jokowi.",
+      strength:["Brand reformis dan intelektual","Basis massa Islam perkotaan","Pengalaman DKI Jakarta"],
+      weakness:["Kalah dua kali (Pilgub 2024, Pilpres 2024)","Tidak punya partai sendiri","NasDem sudah bergabung pemerintah"],
+      opportunities:["Tokoh oposisi nasional terkuat","Pilpres 2029 jika PDIP mendukung"],
+      threats:["Koalisi oposisi rapuh","PKS dan PKB masing-masing punya agenda sendiri"]
     },
     data_sources:["id.wikipedia.org/wiki/Anies_Baswedan","lhkpn.kpk.go.id","kpu.go.id/pilpres-2024"]
   },

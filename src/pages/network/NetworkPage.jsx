@@ -29,6 +29,8 @@ const TYPE_INFO = {
   rekan:             { label: 'Rekan',            color: '#6B7280' },
   'mantan-koalisi':  { label: 'Mantan Koalisi',   color: '#D97706' },
   'atasan-bawahan':  { label: 'Atasan-Bawahan',   color: '#14B8A6' },
+  ideologi:          { label: 'Ideologi',         color: '#10B981' },
+  oposisi:           { label: 'Oposisi',          color: '#F43F5E' },
 }
 const ALL_TYPES = Object.keys(TYPE_INFO)
 
@@ -63,6 +65,28 @@ function findShortestPath(connections, startId, endId) {
   return null
 }
 
+// Pre-compute degree map from ALL connections (module-level constant — never changes)
+const ALL_DEGREE_MAP = (() => {
+  const d = {}
+  CONNECTIONS.forEach(c => {
+    d[c.from] = (d[c.from] || 0) + 1
+    d[c.to]   = (d[c.to]   || 0) + 1
+  })
+  return d
+})()
+
+// Top connected person across all NETWORK_NODES
+const TOP_PERSON = (() => {
+  let top = null, topDeg = 0
+  NETWORK_NODES.forEach(n => {
+    const deg = ALL_DEGREE_MAP[n.id] || 0
+    if (deg > topDeg) { top = n; topDeg = deg }
+  })
+  return top ? { name: top.name, degree: topDeg } : null
+})()
+
+const MIN_DEGREE_OPTIONS = [1, 3, 5, 10, 20]
+
 export default function NetworkPage() {
   const navigate = useNavigate()
 
@@ -72,6 +96,12 @@ export default function NetworkPage() {
   const [filterTier,   setFilterTier]   = useState(null)
   const [selectedPerson, setSelectedPerson] = useState(null)
   const [showClusters, setShowClusters] = useState(false)
+
+  // Focus mode — dim nodes outside 1-hop neighbourhood
+  const [focusPerson, setFocusPerson] = useState(null)
+
+  // Min degree filter
+  const [minDegree, setMinDegree] = useState(1)
 
   // Shortest path
   const [pathStart, setPathStart] = useState('')
@@ -91,6 +121,8 @@ export default function NetworkPage() {
     setSelectedPerson(null)
     setFocusNodeId(null)
     setSearchValue('')
+    setFocusPerson(null)
+    setMinDegree(1)
   }
 
   const computePath = () => {
@@ -98,12 +130,22 @@ export default function NetworkPage() {
     setPath(findShortestPath(CONNECTIONS, pathStart, pathEnd))
   }
 
+  // Nodes after minDegree filter (degree computed from ALL connections)
+  const degreeFilteredNodes = useMemo(() => {
+    if (minDegree <= 1) return NETWORK_NODES
+    return NETWORK_NODES.filter(n => (ALL_DEGREE_MAP[n.id] || 0) >= minDegree)
+  }, [minDegree])
+
   // Live stats
   const stats = useMemo(() => {
-    const visEdges = CONNECTIONS.filter(e => visibleTypes.includes(e.type))
+    const tierFiltered = filterTier ? degreeFilteredNodes.filter(n => n.tier === filterTier) : degreeFilteredNodes
+    const tierIds = new Set(tierFiltered.map(n => n.id))
+    const visEdges = CONNECTIONS.filter(e =>
+      visibleTypes.includes(e.type) && tierIds.has(e.from) && tierIds.has(e.to)
+    )
     const activeNodeIds = new Set([...visEdges.map(e => e.from), ...visEdges.map(e => e.to)])
     return { visible: visEdges.length, total: CONNECTIONS.length, activeNodes: activeNodeIds.size }
-  }, [visibleTypes])
+  }, [visibleTypes, filterTier, degreeFilteredNodes])
 
   const connectionCounts = selectedPerson
     ? Object.keys(CONNECTION_TYPES).reduce((acc, type) => {
@@ -149,6 +191,59 @@ export default function NetworkPage() {
             <option value="">Cari tokoh...</option>
             {NETWORK_NODES.map(n => <option key={n.id} value={n.id}>{n.name}</option>)}
           </select>
+        </div>
+
+        {/* Fokus pada Tokoh */}
+        <div>
+          <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+            🎯 Fokus pada Tokoh
+          </h3>
+          <select
+            value={focusPerson || ''}
+            onChange={e => setFocusPerson(e.target.value || null)}
+            className="w-full text-xs bg-bg-elevated border border-border rounded px-2 py-1 text-text-primary"
+          >
+            <option value="">Semua tokoh...</option>
+            {NETWORK_NODES.sort((a, b) => (ALL_DEGREE_MAP[b.id] || 0) - (ALL_DEGREE_MAP[a.id] || 0))
+              .map(n => (
+                <option key={n.id} value={n.id}>
+                  {n.name} ({ALL_DEGREE_MAP[n.id] || 0})
+                </option>
+              ))}
+          </select>
+          {focusPerson && (
+            <button
+              onClick={() => setFocusPerson(null)}
+              className="mt-1.5 w-full text-xs text-blue-400 hover:bg-blue-900/20 border border-blue-700/30 rounded-lg px-2 py-1 transition-colors"
+            >
+              ✕ Reset Fokus
+            </button>
+          )}
+        </div>
+
+        {/* Min Koneksi Filter */}
+        <div>
+          <h3 className="text-xs font-semibold text-text-secondary uppercase tracking-wider mb-2">
+            📊 Min. Koneksi
+          </h3>
+          <div className="flex flex-wrap gap-1">
+            {MIN_DEGREE_OPTIONS.map(d => (
+              <button
+                key={d}
+                onClick={() => setMinDegree(d)}
+                className={`px-2 py-1 rounded text-xs font-medium transition-colors border ${
+                  minDegree === d
+                    ? 'bg-accent-red text-white border-red-700'
+                    : 'bg-bg-elevated border-border text-text-secondary hover:text-text-primary hover:bg-bg-hover'
+                }`}
+              >
+                ≥{d}
+              </button>
+            ))}
+          </div>
+          <p className="text-[10px] text-text-secondary mt-1.5">
+            {minDegree > 1 ? `${degreeFilteredNodes.length} tokoh ditampilkan` : 'Tampilkan semua tokoh'}
+          </p>
         </div>
 
         {/* Cluster Toggle */}
@@ -409,21 +504,35 @@ export default function NetworkPage() {
         ) : (
           <div className="flex-1 relative">
             <NetworkGraph
-              nodes={filterTier ? NETWORK_NODES.filter(n => n.tier === filterTier) : NETWORK_NODES}
+              nodes={filterTier ? degreeFilteredNodes.filter(n => n.tier === filterTier) : degreeFilteredNodes}
               edges={CONNECTIONS}
               onNodeClick={handleNodeClick}
               filterParty={filterParty}
               visibleTypes={visibleTypes}
               highlightIds={highlightIds}
               focusNodeId={focusNodeId}
+              focusPerson={focusPerson}
               showClusters={showClusters}
             />
 
             {/* Stats overlay */}
-            <div className="absolute top-3 left-3 flex gap-2 pointer-events-none">
+            <div className="absolute top-3 left-3 flex flex-col gap-1.5 pointer-events-none">
               <span className="px-2 py-1 bg-bg-card/90 border border-border rounded text-xs text-text-secondary">
-                {stats.visible} / {stats.total} koneksi · {stats.activeNodes} node aktif
+                Menampilkan: <strong className="text-text-primary">{stats.activeNodes}</strong> tokoh,{' '}
+                <strong className="text-text-primary">{stats.visible}</strong> koneksi
               </span>
+              {TOP_PERSON && (
+                <span className="px-2 py-1 bg-bg-card/90 border border-border rounded text-xs text-text-secondary">
+                  🏆 Paling terhubung:{' '}
+                  <strong className="text-yellow-400">{TOP_PERSON.name}</strong>{' '}
+                  <span className="text-text-muted">({TOP_PERSON.degree} koneksi)</span>
+                </span>
+              )}
+              {focusPerson && (
+                <span className="px-2 py-1 bg-blue-900/40 border border-blue-500/40 rounded text-xs text-blue-300">
+                  🎯 Fokus: {NETWORK_NODES.find(n => n.id === focusPerson)?.name}
+                </span>
+              )}
               {Array.isArray(path) && (
                 <span className="px-2 py-1 bg-yellow-500/20 border border-yellow-500/40 rounded text-xs text-yellow-400">
                   ✨ Jalur: {path.length} tokoh
