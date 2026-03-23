@@ -76,6 +76,7 @@ const KoneksiBisnisPage     = lazy(() => import('./pages/KoneksiBisnisPage'))
 const LHKPNTrendPage        = lazy(() => import('./pages/LHKPNTrendPage'))
 const JejakJabatanPage      = lazy(() => import('./pages/JejakJabatanPage'))
 const ReformasiPage         = lazy(() => import('./pages/ReformasiPage'))
+const KabinetPerbandinganPage = lazy(() => import('./pages/KabinetPerbandinganPage'))
 
 // Loading fallback — branded spinner + skeleton
 function PageLoader() {
@@ -153,6 +154,7 @@ export default function App() {
         <Route path="/bisnis" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BusinessPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/bumn" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BUMNPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/kabinet" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KabinetPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/kabinet-perbandingan" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><KabinetPerbandinganPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/pemerintah" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PemerintahPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/anggaran" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><BudgetPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/apbn" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><APBNPage /></Suspense></ErrorBoundary></ProtectedRoute>} />

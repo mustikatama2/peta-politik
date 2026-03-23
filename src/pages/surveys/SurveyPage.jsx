@@ -6,6 +6,7 @@ import {
 import {
   POLLSTERS, PILPRES_2024_POLLS, APPROVAL_POLLS, PILPRES_2029_POLLS, PARTY_POLLS,
   APPROVAL_POLLS_MULTILEMBAGA, PARTY_POLLS_2025, CAPRES_2029_POLLS, ISU_POLLS,
+  MINISTER_TRUST,
 } from '../../data/polls'
 import { PARTY_MAP } from '../../data/parties'
 import { PageHeader, Tabs, Card, KPICard } from '../../components/ui'
@@ -171,7 +172,8 @@ function computeStats() {
     CAPRES_2029_POLLS.reduce((s, p) => s + Object.keys(p.candidates).length, 0) +
     PARTY_POLLS.reduce((s, p) => s + Object.keys(p.parties).length, 0) +
     PARTY_POLLS_2025.reduce((s, p) => s + Object.keys(p.parties).length, 0) +
-    ISU_POLLS.reduce((s, p) => s + p.isu.length, 0)
+    ISU_POLLS.reduce((s, p) => s + p.isu.length, 0) +
+    MINISTER_TRUST.length
 
   const pollsterIds = new Set([
     ...PILPRES_2024_POLLS.map(p => p.pollster),
@@ -1224,6 +1226,160 @@ function IsuTerpentingTab() {
   )
 }
 
+// ── Tab 9: Kepercayaan Menteri ────────────────────────────────────────────────
+
+function MinisterTrustTab() {
+  // Sort by trust desc
+  const sorted = useMemo(
+    () => [...MINISTER_TRUST].sort((a, b) => b.trust - a.trust),
+    []
+  )
+
+  const chartData = useMemo(() =>
+    sorted.map(m => ({
+      name: m.name,
+      jabatan: m.jabatan,
+      trust: m.trust,
+      distrust: m.distrust,
+      netral: Math.max(0, 100 - m.trust - m.distrust),
+      source: m.source,
+    })), [sorted])
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (!active || !payload?.length) return null
+    const d = payload[0]?.payload
+    return (
+      <div className="bg-bg-card border border-border rounded-lg p-3 shadow-xl text-xs">
+        <p className="font-bold text-text-primary mb-0.5">{d.name}</p>
+        <p className="text-text-muted mb-2">{d.jabatan} · {d.source}</p>
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+            <span className="text-text-muted">Percaya:</span>
+            <span className="font-bold text-green-400">{d.trust}%</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+            <span className="text-text-muted">Tidak percaya:</span>
+            <span className="font-bold text-red-400">{d.distrust}%</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-gray-500" />
+            <span className="text-text-muted">Tidak tahu:</span>
+            <span className="font-bold text-gray-400">{d.netral}%</span>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/30 text-xs text-green-300">
+        🏛️ <strong>Indeks Kepercayaan Menteri Kabinet Merah Putih</strong> — berdasarkan survei berbagai lembaga Q1 2025. Diurutkan dari kepercayaan publik tertinggi ke terendah.
+      </div>
+
+      {/* Horizontal stacked bar chart */}
+      <Card className="p-4">
+        <h3 className="text-sm font-semibold text-text-primary mb-1">Tingkat Kepercayaan Publik terhadap Menteri (Q1 2025)</h3>
+        <p className="text-xs text-text-muted mb-4">
+          <span className="inline-block w-3 h-3 rounded mr-1 bg-green-500 align-middle"></span>Percaya &nbsp;
+          <span className="inline-block w-3 h-3 rounded mr-1 bg-red-500 align-middle"></span>Tidak percaya &nbsp;
+          <span className="inline-block w-3 h-3 rounded mr-1 bg-gray-500 align-middle"></span>Tidak tahu
+        </p>
+
+        <ResponsiveContainer width="100%" height={420}>
+          <BarChart
+            data={chartData}
+            layout="vertical"
+            margin={{ top: 5, right: 30, left: 120, bottom: 5 }}
+          >
+            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
+            <XAxis
+              type="number"
+              domain={[0, 100]}
+              tickFormatter={v => `${v}%`}
+              tick={{ fontSize: 10 }}
+              stroke="rgba(255,255,255,0.2)"
+            />
+            <YAxis
+              type="category"
+              dataKey="name"
+              tick={{ fontSize: 11, fill: '#9ca3af' }}
+              stroke="rgba(255,255,255,0.2)"
+              width={115}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Bar dataKey="trust"   name="Percaya"       stackId="a" fill="#22c55e" radius={0} />
+            <Bar dataKey="distrust" name="Tidak Percaya" stackId="a" fill="#ef4444" radius={0} />
+            <Bar dataKey="netral"  name="Tidak Tahu"    stackId="a" fill="#6b7280" radius={[0, 4, 4, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </Card>
+
+      {/* KPI cards grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        {sorted.slice(0, 10).map((m, i) => {
+          const net = m.trust - m.distrust
+          return (
+            <Card key={m.person_id} className="p-3">
+              <div className="flex items-start justify-between mb-2">
+                <span className="text-xs text-text-muted">#{i + 1}</span>
+                <span className={`text-xs font-bold ${net >= 30 ? 'text-green-400' : net >= 10 ? 'text-yellow-400' : 'text-red-400'}`}>
+                  net {net > 0 ? '+' : ''}{net}
+                </span>
+              </div>
+              <p className="text-xs font-semibold text-text-primary leading-tight">{m.name}</p>
+              <p className="text-[10px] text-text-muted mb-2">{m.jabatan}</p>
+              <p className="text-xl font-bold text-green-400">{m.trust}%</p>
+              <div className="flex items-center justify-between mt-1 text-[10px]">
+                <span className="text-red-400">✗ {m.distrust}%</span>
+                <span className="text-text-muted opacity-60">{m.source.split(' ').slice(-2).join(' ')}</span>
+              </div>
+            </Card>
+          )
+        })}
+      </div>
+
+      {/* Detail table */}
+      <Card className="p-4 overflow-x-auto">
+        <h3 className="text-sm font-semibold text-text-primary mb-3">Tabel Lengkap — Indeks Kepercayaan Menteri</h3>
+        <table className="w-full text-xs">
+          <thead>
+            <tr className="border-b border-border">
+              <th className="text-left py-2 pr-3 text-text-muted w-6">#</th>
+              <th className="text-left py-2 pr-3 text-text-muted">Nama</th>
+              <th className="text-left py-2 pr-3 text-text-muted">Jabatan</th>
+              <th className="text-right py-2 pr-3 text-green-400">Percaya</th>
+              <th className="text-right py-2 pr-3 text-red-400">Tdk Percaya</th>
+              <th className="text-right py-2 pr-3 text-text-muted">Net</th>
+              <th className="text-right py-2 text-text-muted">Sumber</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((m, i) => {
+              const net = m.trust - m.distrust
+              return (
+                <tr key={m.person_id} className="border-b border-border/50">
+                  <td className="py-1.5 pr-3 text-text-muted font-mono">{i + 1}</td>
+                  <td className="py-1.5 pr-3 font-medium text-text-primary">{m.name}</td>
+                  <td className="py-1.5 pr-3 text-text-muted">{m.jabatan}</td>
+                  <td className="py-1.5 pr-3 text-right font-mono text-green-400 font-semibold">{m.trust}%</td>
+                  <td className="py-1.5 pr-3 text-right font-mono text-red-400">{m.distrust}%</td>
+                  <td className={`py-1.5 pr-3 text-right font-mono font-bold ${net >= 30 ? 'text-green-400' : net >= 10 ? 'text-yellow-400' : 'text-red-400'}`}>
+                    {net > 0 ? '+' : ''}{net}
+                  </td>
+                  <td className="py-1.5 text-right text-text-muted">{m.source}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </Card>
+    </div>
+  )
+}
+
 // ── Main Page ─────────────────────────────────────────────────────────────────
 
 const TABS = [
@@ -1235,6 +1391,7 @@ const TABS = [
   { id: 'partai',       label: '🎭 Partai' },
   { id: 'horserace',    label: '🏇 Horse Race' },
   { id: 'isu',          label: '⚡ Isu Publik' },
+  { id: 'menteri',      label: '🏛️ Kepercayaan Menteri' },
 ]
 
 export default function SurveyPage() {
@@ -1272,8 +1429,8 @@ export default function SurveyPage() {
         />
         <KPICard
           label="Topik Dipantau"
-          value={6}
-          sub="Pilpres, Partai, Approval, Isu"
+          value={7}
+          sub="Pilpres, Partai, Approval, Menteri"
           icon="🗳️"
           color="red"
         />
@@ -1291,6 +1448,7 @@ export default function SurveyPage() {
       {activeTab === 'partai'      && <PartyElectabilityTab />}
       {activeTab === 'horserace'   && <HorseRacePartaiTab />}
       {activeTab === 'isu'         && <IsuTerpentingTab />}
+      {activeTab === 'menteri'     && <MinisterTrustTab />}
     </div>
   )
 }

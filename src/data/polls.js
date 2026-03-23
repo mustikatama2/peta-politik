@@ -193,6 +193,20 @@ export const CAPRES_2029_POLLS = [
   },
 ];
 
+// Minister trust index — Q1 2025 (multi-source)
+export const MINISTER_TRUST = [
+  { person_id: 'sri_mulyani',   name: 'Sri Mulyani',           jabatan: 'Menkeu',             trust: 72, distrust: 12, source: 'Kompas Jan 2025' },
+  { person_id: 'prabowo',       name: 'Prabowo Subianto',      jabatan: 'Presiden',            trust: 70, distrust: 21, source: 'Indikator Mar 2025' },
+  { person_id: 'budi_gunadi',   name: 'Budi Gunadi Sadikin',   jabatan: 'Menkes',              trust: 61, distrust: 18, source: 'Kompas Jan 2025' },
+  { person_id: 'erick_thohir',  name: 'Erick Thohir',          jabatan: 'Menteri BUMN',        trust: 58, distrust: 24, source: 'SMRC Jan 2025' },
+  { person_id: 'ahy',           name: 'AHY',                   jabatan: 'Menko Infrastruktur', trust: 55, distrust: 22, source: 'Indikator Feb 2025' },
+  { person_id: 'gibran',        name: 'Gibran Rakabuming',     jabatan: 'Wakil Presiden',      trust: 55, distrust: 30, source: 'SMRC Mar 2025' },
+  { person_id: 'tito_karnavian',name: 'Tito Karnavian',        jabatan: 'Mendagri',            trust: 50, distrust: 25, source: 'Indikator Jan 2025' },
+  { person_id: 'bahlil',        name: 'Bahlil Lahadalia',      jabatan: 'Menteri ESDM',        trust: 45, distrust: 32, source: 'Indikator Feb 2025' },
+  { person_id: 'agus_gumiwang', name: 'Agus Gumiwang',         jabatan: 'Menperin',            trust: 42, distrust: 28, source: 'Populi Feb 2025' },
+  { person_id: 'zulhas',        name: 'Zulkifli Hasan',        jabatan: 'Menko Pangan',        trust: 38, distrust: 35, source: 'SMRC Feb 2025' },
+]
+
 // Isu terpenting yang dihadapi masyarakat (issue tracker polls)
 export const ISU_POLLS = [
   {
