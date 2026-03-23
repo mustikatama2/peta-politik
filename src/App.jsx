@@ -75,6 +75,7 @@ const KorupsiTrackerPage    = lazy(() => import('./pages/KorupsiTrackerPage'))
 const KoneksiBisnisPage     = lazy(() => import('./pages/KoneksiBisnisPage'))
 const LHKPNTrendPage        = lazy(() => import('./pages/LHKPNTrendPage'))
 const JejakJabatanPage      = lazy(() => import('./pages/JejakJabatanPage'))
+const ReformasiPage         = lazy(() => import('./pages/ReformasiPage'))
 
 // Loading fallback — branded spinner + skeleton
 function PageLoader() {
@@ -136,6 +137,7 @@ export default function App() {
         <Route path="/dynasty" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><DynastyMapper /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/timeline" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Timeline /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/timeline-kekuasaan" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><TimelineKekuasaanPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/reformasi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><ReformasiPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/voting" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><VotingPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/hukum" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><HukumPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/coi" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><COIScanner /></Suspense></ErrorBoundary></ProtectedRoute>} />

@@ -40,6 +40,7 @@ const NAV = [
   { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
   { to:'/timeline', icon:'📅', label:'Linimasa' },
   { to:'/timeline-kekuasaan', icon:'🏛️', label:'Sejarah Presiden' },
+  { to:'/reformasi', icon:'🏛️', label:'Reformasi' },
   { to:'/arsip',    icon:'📜', label:'Arsip Sejarah' },
   { to:'/voting',   icon:'🗳️', label:'Rekam Jejak Voting' },
   { to:'/hukum',    icon:'⚖️', label:'Legislasi' },
