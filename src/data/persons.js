@@ -4660,7 +4660,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"susilo_bambang_yudhoyono", name:"Susilo Bambang Yudhoyono", photo_url:null, photo_placeholder:"SB",
+    id:"susilo_bambang_yudhoyono", name:"Susilo Bambang Yudhoyono", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Susilo_Bambang_Yudhoyono,_official_presidential_portrait_(2009).jpg", photo_placeholder:"SB",
     born:"1949", born_place:"Pacitan, Jawa Timur", religion:"Islam",
     education:"Akademi Militer (1973); MA Webster University; Ph.D. Institut Pertanian Bogor",
     party_id:"dem", party_role:"Ketua Umum Partai Demokrat (emeritus) / Mantan Presiden RI",
@@ -4700,7 +4700,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"sandiaga_uno", name:"Sandiaga Salahuddin Uno", photo_url:null, photo_placeholder:"SU",
+    id:"sandiaga_uno", name:"Sandiaga Salahuddin Uno", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Creative%2C_Sustainable_ASEAN_Sandiaga_Uno_%2853858559009%29_%28cropped%29.jpg/330px-Creative%2C_Sustainable_ASEAN_Sandiaga_Uno_%2853858559009%29_%28cropped%29.jpg", photo_placeholder:"SU",
     born:"1969", born_place:"Riau", religion:"Islam",
     education:"S1 Wichita State University; MBA George Washington University",
     party_id:"ppp", party_role:"Ketua Umum PPP",
@@ -4741,7 +4741,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"chairul_tanjung", name:"Chairul Tanjung", photo_url:null, photo_placeholder:"CT",
+    id:"chairul_tanjung", name:"Chairul Tanjung", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Chairul_Tanjung.jpg", photo_placeholder:"CT",
     born:"1962", born_place:"Jakarta", religion:"Islam",
     education:"S1 Kedokteran Gigi Universitas Indonesia; MBA California Coast University",
     party_id:null, party_role:"Chairman CT Corp / ex-Menko Perekonomian",
@@ -4780,7 +4780,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"moeldoko", name:"Moeldoko", photo_url:null, photo_placeholder:"MO",
+    id:"moeldoko", name:"Moeldoko", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Moeldoko-Portrait.jpg", photo_placeholder:"MO",
     born:"1957", born_place:"Kediri, Jawa Timur", religion:"Islam",
     education:"Akademi Militer (1981); S3 Universitas Indonesia",
     party_id:null, party_role:"Mantan Kepala KSP / ex-Panglima TNI",
@@ -4819,7 +4819,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"amien_rais", name:"Amien Rais", photo_url:null, photo_placeholder:"AR",
+    id:"amien_rais", name:"Amien Rais", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Amien_Rais.jpg", photo_placeholder:"AR",
     born:"1944", born_place:"Surakarta, Jawa Tengah", religion:"Islam",
     education:"S1 UGM; MA Notre Dame University; Ph.D. University of Chicago",
     party_id:"pan", party_role:"Ketua Umum Partai Ummat / Pendiri PAN",
@@ -4939,7 +4939,7 @@ export const PERSONS = [
   }
 ,
   {
-    id:"boediono", name:"Boediono", photo_url:null, photo_placeholder:"BO",
+    id:"boediono", name:"Boediono", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Boediono%2C_official_vice-presidential_portrait_%282009%29.jpg/330px-Boediono%2C_official_vice-presidential_portrait_%282009%29.jpg", photo_placeholder:"BO",
     born:"1943", born_place:"Blitar, Jawa Timur", religion:"Islam",
     education:"S1 Ekonomi UGM; PhD Ekonomi Wharton School University of Pennsylvania",
     party_id:null, party_role:"Teknokrat / Mantan Wakil Presiden",
@@ -5017,7 +5017,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"din_syamsuddin", name:"Din Syamsuddin", photo_url:null, photo_placeholder:"DS",
+    id:"din_syamsuddin", name:"Din Syamsuddin", photo_url:"https://upload.wikimedia.org/wikipedia/commons/6/69/Din_Syamsuddin.jpg", photo_placeholder:"DS",
     born:"1958", born_place:"Sumbawa, Nusa Tenggara Barat", religion:"Islam",
     education:"S3 Ilmu Politik UCLA",
     party_id:null, party_role:"Mantan Ketua Umum Muhammadiyah",
@@ -5176,7 +5176,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"rizal_ramli", name:"Rizal Ramli", photo_url:null, photo_placeholder:"RR",
+    id:"rizal_ramli", name:"Rizal Ramli", photo_url:"https://upload.wikimedia.org/wikipedia/commons/f/f1/Rizal_Ramli_Coordinating_Minister_of_Maritime_2015.jpg", photo_placeholder:"RR",
     born:"1954", born_place:"Padang, Sumatera Barat", religion:"Islam",
     education:"S1 Teknik ITB; PhD Ekonomi Boston University",
     party_id:null, party_role:"Ekonom Senior / Mantan Menko Kemaritiman",
