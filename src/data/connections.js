@@ -645,6 +645,17 @@ export const CONNECTIONS = [
   { from:"yenny_wahid", to:"gus_yahya", type:"ideologi", label:"Sama-sama keturunan NU, beda jalur", strength:6 },
   { from:"yenny_wahid", to:"anies", type:"koalisi", label:"Mendukung Anies pada Pilpres 2024", strength:7 },
   { from:"yenny_wahid", to:"cakimin", type:"konflik", label:"Kompetisi pengaruh di komunitas NU non-PKB", strength:6 },
+  // R35 pre-verified connections (appended by main agent)
+  { from:"luhut", to:"sandiaga_uno", type:"konflik", label:"Saingan investasi dan jabatan strategis era Jokowi", strength:5 },
+  { from:"firli_bahuri", to:"agus_rahardjo", type:"konflik", label:"Ketua KPK berbeda era — konflik kelembagaan", strength:7 },
+  { from:"firli_bahuri", to:"hasto_kristiyanto", type:"konflik", label:"Firli tersangka KPK, Hasto juga tersangka — dua sisi hukum", strength:5 },
+  { from:"agus_rahardjo", to:"novel_baswedan", type:"kolega", label:"Ketua KPK mendukung penyidik senior Novel", strength:7 },
+  { from:"wiranto", to:"megawati", type:"kolega", label:"Pasangan Capres-Cawapres 2004 (kalah dari SBY-JK)", strength:8 },
+  { from:"wiranto", to:"susilo_bambang_yudhoyono", type:"konflik", label:"Rivalitas Pilpres 2004 — SBY keluar dari kabinet Mega-Hamzah", strength:7 },
+  { from:"nazaruddin", to:"susilo_bambang_yudhoyono", type:"konflik", label:"Kader Demokrat jadi tersangka KPK era SBY — Hambalang", strength:7 },
+  { from:"luhut", to:"chairul_tanjung", type:"bisnis", label:"Jaringan konglomerat — investasi nikel dan energi", strength:6 },
+  { from:"moeldoko", to:"wiranto", type:"kolega", label:"Sesama perwira senior TNI AD lintas generasi", strength:6 },
+  { from:"moeldoko", to:"luhut", type:"kolega", label:"Sesama lingkaran istana Jokowi non-partai", strength:7 },
 ];
 
 export const CONNECTION_TYPES = {
@@ -658,4 +669,6 @@ export const CONNECTION_TYPES = {
   "rekan":           { color:"#6B7280", label:"Rekan/Kolega" },
   "mantan-koalisi":  { color:"#D97706", label:"Mantan Koalisi" },
   "atasan-bawahan":  { color:"#0EA5E9", label:"Atasan-Bawahan" },
+  "ideologi":        { color:"#7C3AED", label:"Ideologi/Pemikiran Sejalan" },
+  "oposisi":         { color:"#B91C1C", label:"Oposisi/Berseberangan" },
 }
