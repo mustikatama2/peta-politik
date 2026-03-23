@@ -5135,6 +5135,244 @@ export const PERSONS = [
       threats:["Tanpa basis organisasi"]
     }
   }
+,
+  {
+    id:"try_sutrisno", name:"Try Sutrisno", photo_url:null, photo_placeholder:"TS",
+    born:"1935", born_place:"Surabaya, Jawa Timur", religion:"Islam",
+    education:"Akademi Militer Nasional (AMN) 1959",
+    party_id:null, party_role:"Mantan Wakil Presiden / Mantan Panglima ABRI",
+    positions:[
+      {title:"Wakil Presiden RI", institution:"Pemerintah Republik Indonesia", region:"Nasional", start:"1993", end:"1998", is_current:false},
+      {title:"Panglima ABRI", institution:"Angkatan Bersenjata Republik Indonesia", region:"Nasional", start:"1988", end:"1993", is_current:false},
+    ],
+    tier:"nasional", region_id:"jawa-timur",
+    bio:"Try Sutrisno adalah mantan Panglima ABRI (1988–1993) dan Wakil Presiden Republik Indonesia ke-6 (1993–1998) pada era Orde Baru di bawah Presiden Soeharto. Lahir di Surabaya, ia menjalani karier militer panjang sebelum ditunjuk sebagai Wapres. Namanya dikaitkan dengan berbagai peristiwa kontroversial di era Orde Baru termasuk tuduhan keterlibatan dalam pelanggaran HAM di Timor-Timur.",
+    tags:["militer","wapres","abri","orde-baru","jawa-timur","nasional","soeharto"],
+    lhkpn_latest:18000000000, lhkpn_year:1998,
+    lhkpn_note:"Estimasi berdasarkan data publik, tidak ada LHKPN resmi terbaru.",
+    kontroversi:[
+      "Dituduh terlibat dalam pelanggaran HAM di Timor-Timur selama menjabat Panglima ABRI",
+      "Figur Orde Baru yang dianggap bertanggung jawab atas berbagai operasi militer kontroversial"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Try_Sutrisno","tempo.co","kompas.com"],
+    connections_summary:"Wapres RI ke-6 (1993–1998). Panglima ABRI 1988–1993. Figur militer senior Orde Baru.",
+    twitter:null,
+    is_active:false,
+    analysis:{
+      ideology_score:7, populism_score:3, corruption_risk:"sedang",
+      nationalism:9, religiosity:6,
+      track_record:"Panglima ABRI 1988–1993. Wakil Presiden 1993–1998. Tokoh militer senior Orde Baru.",
+      policy_direction:"Keamanan nasional, pertahanan, pendekatan militeristik",
+      style:"militer-senior",
+      risk:"sedang",
+      influence:38,
+      controversy_level:5,
+      notes:"Mantan Panglima ABRI dan Wapres era Soeharto. Terlibat dalam pelanggaran HAM Timor-Timur (dituduh).",
+      summary:"Mantan Panglima ABRI dan Wapres era Soeharto. Terlibat dalam pelanggaran HAM Timor-Timur (dituduh).",
+      strength:["Jaringan militer senior"],
+      weakness:["Warisan Orde Baru","Tuduhan HAM"],
+      opportunities:[],
+      threats:["Tuntutan HAM historis"]
+    }
+  },
+  {
+    id:"rizal_ramli", name:"Rizal Ramli", photo_url:null, photo_placeholder:"RR",
+    born:"1954", born_place:"Padang, Sumatera Barat", religion:"Islam",
+    education:"S1 Teknik ITB; PhD Ekonomi Boston University",
+    party_id:null, party_role:"Ekonom Senior / Mantan Menko Kemaritiman",
+    positions:[
+      {title:"Menteri Koordinator Bidang Kemaritiman", institution:"Kabinet Kerja Jokowi", region:"Nasional", start:"2015", end:"2016", is_current:false},
+      {title:"Menteri Keuangan", institution:"Kabinet Persatuan Nasional Gus Dur", region:"Nasional", start:"2000", end:"2001", is_current:false},
+      {title:"Kepala Bulog", institution:"Badan Urusan Logistik", region:"Nasional", start:"2000", end:"2000", is_current:false},
+    ],
+    tier:"nasional", region_id:"sumatera-barat",
+    bio:"Rizal Ramli adalah ekonom senior dan tokoh oposisi ekonomi Indonesia. Pernah menjabat Menteri Keuangan era Gus Dur (2000–2001) dan Menko Kemaritiman era Jokowi (2015–2016). Dikenal vokal dan kritis terhadap kebijakan ekonomi pemerintah, termasuk Jokowi dan Prabowo. Sering tampil di media sebagai pengkritik kebijakan fiskal dan investasi asing.",
+    tags:["ekonom","menko","nasional","sumatera-barat","independen","kritis","oposisi"],
+    lhkpn_latest:12000000000, lhkpn_year:2016,
+    lhkpn_note:"Data LHKPN terakhir saat menjabat Menko Kemaritiman.",
+    kontroversi:[
+      "Dicopot dari posisi Menko Kemaritiman oleh Jokowi pada 2016 setelah sering berseberangan pendapat",
+      "Kritik keras terhadap kebijakan investasi asing dan utang luar negeri pemerintah",
+      "Pernyataan kontroversial tentang kebijakan ekonomi Prabowo"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Rizal_Ramli","tempo.co","kompas.com","cnbcindonesia.com"],
+    connections_summary:"Menko Kemaritiman Jokowi 2015–2016. Menteri Keuangan Gus Dur 2000–2001. Ekonom kritis dan independen.",
+    twitter:"@rizalramli",
+    is_active:true,
+    analysis:{
+      ideology_score:4, populism_score:8, corruption_risk:"rendah",
+      nationalism:7, religiosity:5,
+      track_record:"Menteri Keuangan era Gus Dur. Menko Kemaritiman era Jokowi. Ekonom vokal dan independen.",
+      policy_direction:"Kebijakan ekonomi nasionalis, kritik utang luar negeri, kedaulatan ekonomi",
+      style:"ekonom-kritis",
+      risk:"rendah",
+      influence:60,
+      controversy_level:6,
+      notes:"Ekonom kritis paling vokal di Indonesia. Pernah Menteri Keuangan era Gus Dur dan Menko Kemaritiman era Jokowi. Dikenal keras kritik kebijakan ekonomi pemerintah, termasuk Jokowi dan Prabowo.",
+      summary:"Ekonom kritis paling vokal di Indonesia. Pernah Menteri Keuangan era Gus Dur dan Menko Kemaritiman era Jokowi. Dikenal keras kritik kebijakan ekonomi pemerintah, termasuk Jokowi dan Prabowo.",
+      strength:["Kompetensi ekonomi","Media presence kuat","Independen"],
+      weakness:["Tidak punya basis partai","Sering konflik dengan pemerintah"],
+      opportunities:["Suara alternatif kebijakan"],
+      threats:["Dianggap hanya pengkritik tanpa tindakan"]
+    }
+  },
+  {
+    id:"refly_harun", name:"Refly Harun", photo_url:null, photo_placeholder:"RH",
+    born:"1965", born_place:"Sumatera Selatan", religion:"Islam",
+    education:"S1 Hukum Universitas Sriwijaya; S2 Hukum UGM; S3 Hukum UGM",
+    party_id:null, party_role:"Pakar Hukum Tata Negara",
+    positions:[
+      {title:"Pakar Hukum Tata Negara", institution:"Independen / Akademisi", region:"Nasional", start:"2000", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:"sumatera-selatan",
+    bio:"Refly Harun adalah pakar hukum tata negara yang paling sering dikutip oleh media Indonesia. Dikenal kritis terhadap putusan Mahkamah Konstitusi terkait batas usia calon wakil presiden yang meloloskan Gibran Rakabuming Raka. Juga kritis terhadap revisi UU KPK dan berbagai kebijakan konstitusional era Jokowi. Sering tampil di YouTube dan media sebagai pengamat hukum konstitusi.",
+    tags:["hukum","tata-negara","akademisi","nasional","sumatera-selatan","mk","kritis"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN — bukan pejabat publik aktif.",
+    kontroversi:[
+      "Kritik keras terhadap putusan MK No. 90/PUU-XXI/2023 tentang batas usia Cawapres (meloloskan Gibran)",
+      "Dianggap partisan oposisi oleh pendukung pemerintah",
+      "Sering memberikan pendapat hukum yang berbeda dari posisi pemerintah"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Refly_Harun","tempo.co","kompas.com","hukumonline.com"],
+    connections_summary:"Pakar hukum tata negara paling vokal. Kritis terhadap MK, UU KPK, dan kebijakan konstitusional Jokowi.",
+    twitter:"@ReflyHZ",
+    is_active:true,
+    analysis:{
+      ideology_score:3, populism_score:7, corruption_risk:"rendah",
+      nationalism:6, religiosity:5,
+      track_record:"Pakar hukum tata negara paling sering dikutip media. Kritis terhadap MK dan kebijakan konstitusional Jokowi.",
+      policy_direction:"Reformasi konstitusional, supremasi hukum, demokrasi",
+      style:"akademisi-kritis",
+      risk:"rendah",
+      influence:50,
+      controversy_level:5,
+      notes:"Pakar hukum tata negara paling sering dikutip media Indonesia. Mantan anggota tim hukum berbagai pilkada. Kritis terhadap putusan MK tentang batas usia Cawapres (Gibran) dan revisi UU KPK.",
+      summary:"Pakar hukum tata negara paling sering dikutip media Indonesia. Mantan anggota tim hukum berbagai pilkada. Kritis terhadap putusan MK tentang batas usia Cawapres (Gibran) dan revisi UU KPK.",
+      strength:["Otoritas hukum konstitusional","Akses media luas"],
+      weakness:["Tidak punya kekuatan politik formal"],
+      opportunities:["Amicus curiae dan reform advisor"],
+      threats:["Dianggap partisan oposisi"]
+    }
+  },
+  {
+    id:"rocky_gerung", name:"Rocky Gerung", photo_url:null, photo_placeholder:"RG",
+    born:"1959", born_place:"Manado, Sulawesi Utara", religion:"Non-Muslim",
+    education:"S1 Filsafat Universitas Indonesia",
+    party_id:null, party_role:"Filsuf dan Pengamat Politik",
+    positions:[
+      {title:"Pengamat Politik / Filsuf", institution:"Independen", region:"Nasional", start:"2014", end:null, is_current:true},
+      {title:"Dosen Filsafat", institution:"Universitas Indonesia", region:"Jakarta", start:"1990", end:"2014", is_current:false},
+    ],
+    tier:"nasional", region_id:"sulawesi-utara",
+    bio:"Rocky Gerung adalah filsuf dan pengamat politik yang terkenal karena kritik tajam kepada pemerintahan Jokowi dan Prabowo. Viral karena ucapan-ucapan kontroversial di YouTube, podcast, dan media massa. Pernah dilaporkan ke polisi atas pernyataan yang dianggap menghina presiden. Mantan dosen Filsafat UI yang kini menjadi komentator politik paling kontroversial di Indonesia.",
+    tags:["filsuf","pengamat","nasional","sulawesi-utara","independen","kritis","viral","oposisi"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN — bukan pejabat publik.",
+    kontroversi:[
+      "Dilaporkan ke polisi atas pernyataan yang dianggap menghina Presiden Jokowi",
+      "Ucapan kontroversial tentang 'bajingan tolol' yang viral dan memicu protes",
+      "Dianggap provokatif dan sensasional oleh pendukung pemerintah"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Rocky_Gerung","tempo.co","kompas.com","tirto.id"],
+    connections_summary:"Filsuf dan pengamat politik vokal. Pengkritik keras Jokowi dan Prabowo. Mantan dosen Filsafat UI.",
+    twitter:"@rockygerung",
+    is_active:true,
+    analysis:{
+      ideology_score:3, populism_score:8, corruption_risk:"rendah",
+      nationalism:5, religiosity:2,
+      track_record:"Mantan dosen Filsafat UI. Pengamat politik vokal dan kontroversial. Pengkritik keras Jokowi dan Prabowo.",
+      policy_direction:"Demokrasi liberal, supremasi hukum, kritik kekuasaan",
+      style:"intelektual-kritis",
+      risk:"rendah",
+      influence:55,
+      controversy_level:7,
+      notes:"Filsuf dan pengamat yang terkenal karena kritik tajam kepada pemerintahan Jokowi dan Prabowo. Viral karena ucapan kontroversial di YouTube dan media. Pernah dilaporkan ke polisi.",
+      summary:"Filsuf dan pengamat yang terkenal karena kritik tajam kepada pemerintahan Jokowi dan Prabowo. Viral karena ucapan kontroversial di YouTube dan media. Pernah dilaporkan ke polisi.",
+      strength:["Kemampuan retorika","Jutaan pengikut media sosial","Independen dan non-partisan"],
+      weakness:["Sering dianggap sensasional","Tidak punya solusi konkret"],
+      opportunities:["Suara oposisi kritis"],
+      threats:["Polarisasi audiens"]
+    }
+  },
+  {
+    id:"susno_duadji", name:"Susno Duadji", photo_url:null, photo_placeholder:"SD",
+    born:"1954", born_place:"Pagar Alam, Sumatera Selatan", religion:"Islam",
+    education:"Akademi Kepolisian (AKPOL) 1977",
+    party_id:null, party_role:"Mantan Kabareskrim Polri",
+    positions:[
+      {title:"Kepala Badan Reserse Kriminal (Kabareskrim) Polri", institution:"Kepolisian Negara Republik Indonesia", region:"Nasional", start:"2008", end:"2009", is_current:false},
+    ],
+    tier:"nasional", region_id:"sumatera-selatan",
+    bio:"Susno Duadji adalah mantan Kepala Badan Reserse Kriminal (Kabareskrim) Polri yang memicu konflik legendaris 'cicak vs buaya' pada 2009. Ia menyebut KPK sebagai 'cicak' dan Polri sebagai 'buaya' dalam sebuah wawancara, yang kemudian menjadi ikon pelemahan KPK. Setelah dicopot, Susno berbalik menjadi whistle-blower internal Polri, membeberkan praktik korupsi di tubuh kepolisian. Akhirnya divonis penjara atas kasus korupsi.",
+    tags:["polri","kabareskrim","cicak-buaya","nasional","sumatera-selatan","whistle-blower"],
+    lhkpn_latest:8000000000, lhkpn_year:2009,
+    lhkpn_note:"Data LHKPN terakhir saat menjabat Kabareskrim.",
+    kontroversi:[
+      "Memicu konflik 'cicak vs buaya' 2009 dengan menyebut KPK sebagai cicak dan Polri sebagai buaya",
+      "Divonis penjara atas kasus korupsi dana pengamanan Pilkada Jawa Barat",
+      "Balik menjadi whistle-blower Polri setelah dicopot — membeberkan praktik korupsi internal"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Susno_Duadji","tempo.co","kompas.com","kpk.go.id"],
+    connections_summary:"Kabareskrim Polri 2008–2009. Pemicu cicak vs buaya 2009. Kemudian whistle-blower Polri. Divonis penjara.",
+    twitter:null,
+    is_active:false,
+    analysis:{
+      ideology_score:5, populism_score:4, corruption_risk:"tinggi",
+      nationalism:6, religiosity:5,
+      track_record:"Kabareskrim Polri 2008–2009. Memicu cicak vs buaya. Menjadi whistle-blower lalu dipenjara.",
+      policy_direction:"Hukum dan keamanan — pragmatis",
+      style:"pejabat-kontroversial",
+      risk:"tinggi",
+      influence:35,
+      controversy_level:7,
+      notes:"Kabareskrim yang memicu konflik cicak vs buaya 2009. Menyebut KPK sebagai 'cicak' vs Polri 'buaya'. Kemudian balik arah menjadi whistle-blower internal Polri, dipenjara.",
+      summary:"Kabareskrim yang memicu konflik cicak vs buaya 2009. Menyebut KPK sebagai 'cicak' vs Polri 'buaya'. Kemudian balik arah menjadi whistle-blower internal Polri, dipenjara.",
+      strength:["Insider Polri"],
+      weakness:["Rekam jejak konflik institusional","Divonis penjara"],
+      opportunities:[],
+      threats:["Warisan cicak vs buaya"]
+    }
+  },
+  {
+    id:"fuad_bawazier", name:"Fuad Bawazier", photo_url:null, photo_placeholder:"FB",
+    born:"1950", born_place:"Jakarta, DKI Jakarta", religion:"Islam",
+    education:"S1 Ekonomi Universitas Indonesia; S2 Ekonomi University of Colorado",
+    party_id:null, party_role:"Mantan Menteri Keuangan RI (1998)",
+    positions:[
+      {title:"Menteri Keuangan RI", institution:"Kabinet Reformasi Pembangunan Habibie", region:"Nasional", start:"1998", end:"1998", is_current:false},
+      {title:"Direktur Jenderal Pajak", institution:"Kementerian Keuangan", region:"Nasional", start:"1995", end:"1998", is_current:false},
+    ],
+    tier:"nasional", region_id:"dki-jakarta",
+    bio:"Fuad Bawazier adalah Menteri Keuangan terakhir era transisi Orde Baru (1998) pada Kabinet Reformasi Pembangunan di bawah Presiden B.J. Habibie. Sebelumnya menjabat sebagai Direktur Jenderal Pajak. Pasca-reformasi aktif mengkritik kebijakan fiskal era Jokowi dan Prabowo, sering tampil di media sebagai ekonom senior dan pengamat kebijakan keuangan negara.",
+    tags:["ekonom","menkeu","habibie","orde-baru","nasional","dki-jakarta","fiskal","kritis"],
+    lhkpn_latest:9000000000, lhkpn_year:1998,
+    lhkpn_note:"Estimasi berdasarkan data publik terakhir saat menjabat.",
+    kontroversi:[
+      "Menjabat Menkeu di masa krisis moneter 1998 yang paling parah dalam sejarah Indonesia",
+      "Aktif mengkritik kebijakan utang dan fiskal era Jokowi dan Prabowo"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Fuad_Bawazier","tempo.co","kompas.com","kemenkeu.go.id"],
+    connections_summary:"Menkeu terakhir era Orde Baru (1998) di bawah Habibie. Dirjen Pajak 1995–1998. Kini ekonom senior dan pengamat fiskal.",
+    twitter:null,
+    is_active:true,
+    analysis:{
+      ideology_score:5, populism_score:6, corruption_risk:"rendah",
+      nationalism:7, religiosity:6,
+      track_record:"Menkeu era Habibie (1998). Dirjen Pajak 1995–1998. Aktif mengkritik kebijakan fiskal Jokowi dan Prabowo.",
+      policy_direction:"Kebijakan fiskal konservatif, kritik utang luar negeri",
+      style:"teknokrat-kritis",
+      risk:"rendah",
+      influence:40,
+      controversy_level:4,
+      notes:"Menteri Keuangan terakhir era Orde Baru-transisi (1998). Aktif mengkritik kebijakan fiskal era Jokowi dan Prabowo. Senior ekonom yang sering muncul di media sebagai pengamat.",
+      summary:"Menteri Keuangan terakhir era Orde Baru-transisi (1998). Aktif mengkritik kebijakan fiskal era Jokowi dan Prabowo. Senior ekonom yang sering muncul di media sebagai pengamat.",
+      strength:["Pengalaman mengelola krisis 1998","Jaringan ekonom senior"],
+      weakness:["Tidak relevan di politik praktis"],
+      opportunities:["Advisor fiskal"],
+      threats:["Era sudah berlalu"]
+    }
+  }
 ]
 
 export const PERSONS_MAP = Object.fromEntries(PERSONS.map(p => [p.id, p]))
