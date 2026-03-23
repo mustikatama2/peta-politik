@@ -29,6 +29,7 @@ const NAV_FLAT = [
   { to:'/stats', icon:'📊', label:'Statistik' },
   { to:'/elections', icon:'📊', label:'Pemilu' },
   { to:'/pilkada', icon:'🗳️', label:'Pilkada 2024' },
+  { to:'/pilpres-2024', icon:'🗳️', label:'Pilpres 2024' },
   { to:'/survei', icon:'📉', label:'Survei & Polling' },
   { to:'/koalisi', icon:'🤝', label:'Sejarah Koalisi' },
   { to:'/dana-kampanye', icon:'💰', label:'Dana Kampanye' },
@@ -109,6 +110,7 @@ const NAV_GROUPS = [
     items: [
       { to:'/elections', icon:'📊', label:'Pemilu Historis' },
       { to:'/pilkada', icon:'🗳️', label:'Pilkada 2024' },
+      { to:'/pilpres-2024', icon:'🗳️', label:'Pilpres 2024' },
       { to:'/survei', icon:'📉', label:'Survei & Polling' },
       { to:'/koalisi', icon:'🤝', label:'Sejarah Koalisi' },
       { to:'/dana-kampanye', icon:'💰', label:'Dana Kampanye' },

@@ -77,6 +77,7 @@ const LHKPNTrendPage        = lazy(() => import('./pages/LHKPNTrendPage'))
 const JejakJabatanPage      = lazy(() => import('./pages/JejakJabatanPage'))
 const ReformasiPage         = lazy(() => import('./pages/ReformasiPage'))
 const KabinetPerbandinganPage = lazy(() => import('./pages/KabinetPerbandinganPage'))
+const Pilpres2024Page         = lazy(() => import('./pages/Pilpres2024Page'))
 
 // Loading fallback — branded spinner + skeleton
 function PageLoader() {
@@ -161,6 +162,7 @@ export default function App() {
         <Route path="/indikator" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><IndikatorPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/pencarian" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PencarianPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/pilkada" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><PilkadaPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
+        <Route path="/pilpres-2024" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><Pilpres2024Page /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/tentang" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><TentangPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/glosarium" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><GlosariumPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
         <Route path="/faq" element={<ProtectedRoute><ErrorBoundary><Suspense fallback={<PageLoader />}><FAQPage /></Suspense></ErrorBoundary></ProtectedRoute>} />
