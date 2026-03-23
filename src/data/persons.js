@@ -5372,6 +5372,207 @@ export const PERSONS = [
       opportunities:["Advisor fiskal"],
       threats:["Era sudah berlalu"]
     }
+  },
+  {
+    id:"jusuf_kalla", name:"Jusuf Kalla", photo_url:null, photo_placeholder:"JK",
+    born:"1942", born_place:"Watampone, Sulawesi Selatan", religion:"Islam",
+    education:"S1 Ekonomi Universitas Hasanuddin Makassar",
+    party_id:"gol", party_role:"Mantan Wakil Presiden RI (2004–2009 & 2014–2019)",
+    positions:[
+      {title:"Wakil Presiden RI", institution:"Pemerintah Republik Indonesia", region:"Nasional", start:"2004", end:"2009", is_current:false},
+      {title:"Wakil Presiden RI", institution:"Pemerintah Republik Indonesia", region:"Nasional", start:"2014", end:"2019", is_current:false},
+      {title:"Ketua Umum Partai Golkar", institution:"Partai Golkar", region:"Nasional", start:"2004", end:"2009", is_current:false},
+      {title:"Ketua Umum PMI", institution:"Palang Merah Indonesia", region:"Nasional", start:"2009", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:"sulawesi-selatan",
+    bio:"Jusuf Kalla adalah pengusaha Bugis dari Makassar yang menjadi Wakil Presiden RI dua kali di bawah dua presiden berbeda — Susilo Bambang Yudhoyono (2004–2009) dan Joko Widodo (2014–2019). Fenomena unik dalam sejarah ketatanegaraan Indonesia. Dikenal sebagai negosiator andal yang berhasil menengahi konflik Aceh (MoU Helsinki 2005), Poso, dan Ambon. Kini aktif memimpin PMI dan kegiatan kemanusiaan.",
+    tags:["wapres","golkar","sulawesi-selatan","nasional","pengusaha","negosiator","pmi","aceh","helsinki"],
+    lhkpn_latest:852000000000, lhkpn_year:2019,
+    lhkpn_note:"Data LHKPN terakhir saat mengakhiri jabatan Wapres (2019).",
+    kontroversi:[
+      "Dinilai berseberangan dengan Jokowi menjelang akhir masa jabatan Wapres periode kedua",
+      "Mendukung Prabowo di Pilpres 2024 setelah sebelumnya mendukung Jokowi"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Jusuf_Kalla","tempo.co","kompas.com","setneg.go.id"],
+    connections_summary:"Wapres RI dua periode (2004–2009 & 2014–2019) di bawah SBY dan Jokowi. Ketua Umum Golkar 2004–2009. Negosiator MoU Helsinki 2005. Ketua PMI aktif.",
+    twitter:"@JKMakassar",
+    is_active:true,
+    analysis:{
+      ideology_score:5, populism_score:6, corruption_risk:"rendah",
+      nationalism:7, religiosity:6,
+      track_record:"Wapres dua periode di bawah dua presiden berbeda. Negosiator MoU Helsinki 2005 yang mengakhiri konflik Aceh. Pengusaha sukses grup Kalla.",
+      policy_direction:"Pembangunan ekonomi, rekonsiliasi nasional, kemanusiaan",
+      style:"pragmatis-negosiator",
+      risk:"rendah",
+      influence:80,
+      controversy_level:3,
+      notes:"Wapres dua periode berbeda presiden — unik dalam sejarah RI. Negosiator konflik handal (Helsinki, Poso, Ambon). Kini aktif di PMI.",
+      summary:"Pengusaha Bugis dari Makassar yang jadi Wapres dua periode berbeda presiden — unik dalam sejarah RI. Dikenal sebagai negosiator handal (MoU Helsinki 2005, Poso, Ambon). Kini aktif di PMI dan kegiatan kemanusiaan.",
+      strength:["Jaringan Sulawesi dan Indonesia Timur","Pengalaman dua periode Wapres","Negosiator konflik handal"],
+      weakness:["Usia tua","Tidak punya partai sendiri","Golkar tidak selalu loyal"],
+      opportunities:["Mediator nasional","Patron politik Sulawesi"],
+      threats:["Generasi baru tidak kenal JK"]
+    }
+  },
+  {
+    id:"tri_rismaharini", name:"Tri Rismaharini", photo_url:null, photo_placeholder:"TR",
+    born:"1961", born_place:"Kediri, Jawa Timur", religion:"Islam",
+    education:"S1 Arsitektur Institut Teknologi Sepuluh Nopember (ITS) Surabaya",
+    party_id:"pdip", party_role:"Mantan Menteri Sosial / Calon Gubernur Jatim 2024",
+    positions:[
+      {title:"Walikota Surabaya", institution:"Pemerintah Kota Surabaya", region:"Jawa Timur", start:"2010", end:"2020", is_current:false},
+      {title:"Menteri Sosial RI", institution:"Kabinet Indonesia Maju", region:"Nasional", start:"2020", end:"2024", is_current:false},
+    ],
+    tier:"nasional", region_id:"jawa-timur",
+    bio:"Tri Rismaharini atau Risma adalah birokrat dan politisi PDIP yang menjabat Walikota Surabaya dua periode (2010–2020). Dikenal dengan transformasi taman kota, penanganan banjir, dan program sosial inovatif. Menjabat Menteri Sosial di Kabinet Indonesia Maju Jokowi (2020–2024). Mencalonkan diri sebagai Gubernur Jawa Timur pada 2024 namun kalah dari Khofifah Indar Parawansa.",
+    tags:["pdip","jawa-timur","nasional","walikota-surabaya","mensos","pilgub-jatim","populis"],
+    lhkpn_latest:12000000000, lhkpn_year:2024,
+    lhkpn_note:"Data LHKPN terakhir saat menjabat Menteri Sosial (2024).",
+    kontroversi:[
+      "Gaya bicara yang kadang dianggap emosional dan kontroversial di media",
+      "Kalah di Pilgub Jatim 2024 dari Khofifah Indar Parawansa",
+      "Beberapa keputusan kontroversial saat menjabat Mensos terkait penanganan PPKS"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Tri_Rismaharini","tempo.co","kompas.com","kemensos.go.id"],
+    connections_summary:"Walikota Surabaya dua periode 2010–2020. Mensos Jokowi 2020–2024. Kalah Pilgub Jatim 2024 dari Khofifah.",
+    twitter:"@trirismaharini",
+    is_active:true,
+    analysis:{
+      ideology_score:3, populism_score:9, corruption_risk:"rendah",
+      nationalism:6, religiosity:5,
+      track_record:"Walikota Surabaya dua periode dengan transformasi luar biasa. Mensos Jokowi 2020–2024. Kalah Pilgub Jatim 2024.",
+      policy_direction:"Pelayanan publik, pemberdayaan sosial, pembangunan kota berkelanjutan",
+      style:"populis-eksekutor",
+      risk:"rendah",
+      influence:68,
+      controversy_level:3,
+      notes:"Walikota Surabaya dua periode yang terkenal revolusi taman kota dan penanganan banjir. Mensos Jokowi 2020–2024. Kalah di Pilgub Jatim 2024.",
+      summary:"Walikota Surabaya dua periode yang terkenal revolusi taman kota dan penanganan banjir. Mensos Jokowi 2020–2024. Kalah di Pilgub Jatim 2024 dari Khofifah. PDIP yang paling populer di Jatim.",
+      strength:["Track record Surabaya sangat baik","Brand populis kuat","Basis massa PDIP Jatim"],
+      weakness:["Kalah Pilgub Jatim 2024","Gaya bicara kadang kontroversial"],
+      opportunities:["Menteri 2029","Calon Gubernur lagi"],
+      threats:["Khofifah lebih kuat di Jatim"]
+    }
+  },
+  {
+    id:"andika_perkasa", name:"Andika Perkasa", photo_url:null, photo_placeholder:"AP",
+    born:"1964", born_place:"Bandung, Jawa Barat", religion:"Islam",
+    education:"Akademi Militer 1987; M.A. Keamanan Nasional Harvard University",
+    party_id:"pdip", party_role:"Mantan Panglima TNI / Gubernur Jawa Tengah terpilih 2024",
+    positions:[
+      {title:"Panglima TNI", institution:"Tentara Nasional Indonesia", region:"Nasional", start:"2021", end:"2022", is_current:false},
+      {title:"Kepala Staf TNI AD (KSAD)", institution:"TNI Angkatan Darat", region:"Nasional", start:"2018", end:"2021", is_current:false},
+      {title:"Gubernur Jawa Tengah", institution:"Pemerintah Provinsi Jawa Tengah", region:"Jawa Tengah", start:"2024", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:"jawa-tengah",
+    bio:"Jenderal TNI (Purn.) Andika Perkasa adalah mantan Panglima TNI (2021–2022) yang menantu mantan Kepala BIN Hendropriyono. Mengejutkan publik dengan maju sebagai calon Gubernur Jawa Tengah dari PDIP pada Pilgub 2024 dan menang atas Ahmad Luthfi yang didukung Prabowo. Kini menjabat Gubernur Jawa Tengah.",
+    tags:["pdip","jawa-tengah","nasional","tni","panglima","gubernur","pilgub-jateng","hendropriyono"],
+    lhkpn_latest:176000000000, lhkpn_year:2022,
+    lhkpn_note:"Data LHKPN terakhir saat pensiun sebagai Panglima TNI (2022).",
+    kontroversi:[
+      "Menantu Hendropriyono — dinilai rentan shadow politics dari mertua",
+      "Maju dari PDIP sebagai purnawirawan TNI — melintasi batas tradisi TNI-sipil",
+      "Harta kekayaan Rp 176 Miliar — salah satu yang terbesar di antara perwira TNI"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Andika_Perkasa","tempo.co","kompas.com","tni.mil.id"],
+    connections_summary:"Panglima TNI 2021–2022. KSAD 2018–2021. Menantu Hendropriyono. Menang Pilgub Jateng 2024 dari PDIP. Kini Gubernur Jawa Tengah.",
+    twitter:null,
+    is_active:true,
+    analysis:{
+      ideology_score:5, populism_score:6, corruption_risk:"sedang",
+      nationalism:8, religiosity:5,
+      track_record:"Panglima TNI 2021–2022. KSAD 2018–2021. Menang Pilgub Jateng 2024 dari PDIP melawan kandidat Prabowo.",
+      policy_direction:"Keamanan, pembangunan daerah, stabilitas nasional",
+      style:"militer-teknokrat",
+      risk:"sedang",
+      influence:65,
+      controversy_level:4,
+      notes:"Mantan Panglima TNI yang menantu Hendropriyono. Mengejutkan dengan maju dari PDIP di Pilgub Jateng 2024 dan menang. Kini Gubernur Jateng pertama dari TNI via PDIP.",
+      summary:"Mantan Panglima TNI yang menantu Hendropriyono. Mengejutkan dengan maju dari PDIP di Pilgub Jateng 2024. Menang atas Ahmad Luthfi (Prabowo). Kini Gubernur Jateng pertama dari TNI aktif via PDIP.",
+      strength:["Jaringan militer","Menang Pilgub Jateng 2024","Dukungan PDIP"],
+      weakness:["Menantu Hendropriyono — rentan shadow politics"],
+      opportunities:["Calon Presiden 2029"],
+      threats:["Konflik kepentingan militer-sipil"]
+    }
+  },
+  {
+    id:"hendropriyono", name:"Hendropriyono", photo_url:null, photo_placeholder:"HP",
+    born:"1945", born_place:"Yogyakarta, Jawa Tengah", religion:"Islam",
+    education:"Akademi Militer 1967; berbagai pendidikan militer dan intelijen",
+    party_id:null, party_role:"Mantan Kepala BIN (2001–2004)",
+    positions:[
+      {title:"Kepala Badan Intelijen Negara (BIN)", institution:"BIN", region:"Nasional", start:"2001", end:"2004", is_current:false},
+      {title:"Menteri Transmigrasi dan PPH", institution:"Kabinet Pembangunan VII", region:"Nasional", start:"1998", end:"1999", is_current:false},
+    ],
+    tier:"nasional", region_id:"jawa-tengah",
+    bio:"Jenderal TNI (Purn.) A.M. Hendropriyono adalah mantan Kepala Badan Intelijen Negara (BIN) era Presiden Megawati (2001–2004). Dikenal sebagai 'intelligence mastermind' Indonesia. Dituduh terlibat dalam tragedi Talangsari 1989 saat masih aktif di militer. Menjadi mentor dan pendukung setia Joko Widodo sejak awal karir politiknya. Mertua mantan Panglima TNI Andika Perkasa.",
+    tags:["bin","intelijen","megawati","jokowi","nasional","jawa-tengah","talangsari","hendropriyono","shadow-politics"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Data LHKPN tidak tersedia publik — tidak pernah menjabat posisi yang wajib lapor LHKPN setelah reformasi.",
+    kontroversi:[
+      "Dituduh bertanggung jawab atas tragedi Talangsari 1989 yang menewaskan puluhan warga",
+      "Sebagai Kepala BIN dituduh melakukan penyadapan ilegal dan operasi intelijen kontroversial",
+      "Peran sebagai 'mentor di balik layar' Jokowi yang dinilai mempengaruhi kebijakan keamanan"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Hendropriyono","tempo.co","kompas.com","hrw.org"],
+    connections_summary:"Kepala BIN era Megawati 2001–2004. Mentor Jokowi sejak awal. Mertua Panglima TNI Andika Perkasa. Dituduh terlibat tragedi Talangsari 1989.",
+    twitter:null,
+    is_active:true,
+    analysis:{
+      ideology_score:5, populism_score:2, corruption_risk:"tinggi",
+      nationalism:8, religiosity:4,
+      track_record:"Kepala BIN era Megawati 2001–2004. Mentor Jokowi. Mertua Andika Perkasa. Latar belakang militer panjang.",
+      policy_direction:"Keamanan nasional, intelijen, stabilitas politik",
+      style:"shadow-power",
+      risk:"tinggi",
+      influence:62,
+      controversy_level:6,
+      notes:"Mantan Kepala BIN era Megawati, dikenal sebagai intelligence mastermind. Dituduh terlibat kasus Talangsari 1989. Mentor Jokowi. Mertua Andika Perkasa.",
+      summary:"Mantan Kepala BIN era Megawati, dikenal sebagai intelligence mastermind. Dituduh terlibat dalam kasus Talangsari 1989. Mentor dan pendukung setia Jokowi sejak awal. Mertua Panglima TNI Andika Perkasa.",
+      strength:["Jaringan intelijen luas","Loyalis Jokowi kuat","Pengaruh di TNI via Andika"],
+      weakness:["Tuduhan HAM Talangsari","Shadow figure — tidak di depan"],
+      opportunities:["Kingmaker belakang layar"],
+      threats:["Warisan kontroversi BIN"]
+    }
+  },
+  {
+    id:"bima_arya", name:"Bima Arya", photo_url:null, photo_placeholder:"BA",
+    born:"1974", born_place:"Bogor, Jawa Barat", religion:"Islam",
+    education:"S1 Ilmu Politik UI; Ph.D. Ilmu Politik Flinders University Australia",
+    party_id:"pan", party_role:"Wakil Menteri Dalam Negeri / Mantan Walikota Bogor",
+    positions:[
+      {title:"Walikota Bogor", institution:"Pemerintah Kota Bogor", region:"Jawa Barat", start:"2014", end:"2024", is_current:false},
+      {title:"Wakil Menteri Dalam Negeri RI", institution:"Kementerian Dalam Negeri", region:"Nasional", start:"2024", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:"jawa-barat",
+    bio:"Dr. Bima Arya Sugiarto adalah akademisi dan politisi PAN yang menjabat Walikota Bogor dua periode (2014–2024). Dikenal sebagai walikota reformis dan inovatif dengan berbagai program modernisasi kota. Kini menjabat Wakil Menteri Dalam Negeri di Kabinet Merah Putih Prabowo.",
+    tags:["pan","jawa-barat","nasional","walikota-bogor","wamendagri","akademisi","reformis","prabowo"],
+    lhkpn_latest:8000000000, lhkpn_year:2024,
+    lhkpn_note:"Data LHKPN terakhir saat akhir jabatan Walikota Bogor (2024).",
+    kontroversi:[
+      "Beberapa kebijakan tata kota Bogor yang dinilai kontroversial oleh warga",
+      "Pindah dari jabatan walikota ke Wamendagri dinilai meninggalkan Bogor sebelum program selesai"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Bima_Arya","tempo.co","kompas.com","kemendagri.go.id"],
+    connections_summary:"Walikota Bogor dua periode 2014–2024. Akademisi PAN. Kini Wamendagri di Kabinet Merah Putih Prabowo.",
+    twitter:"@BimaAryaBogor",
+    is_active:true,
+    analysis:{
+      ideology_score:4, populism_score:7, corruption_risk:"rendah",
+      nationalism:6, religiosity:6,
+      track_record:"Walikota Bogor dua periode 2014–2024. Akademisi dan reformis. Kini Wamendagri Prabowo.",
+      policy_direction:"Tata kelola kota modern, reformasi birokrasi, pembangunan daerah",
+      style:"akademisi-reformis",
+      risk:"rendah",
+      influence:52,
+      controversy_level:2,
+      notes:"Walikota Bogor dua periode yang sukses. Akademisi yang masuk politik PAN. Dikenal reformis dan inovatif. Kini Wamendagri di kabinet Prabowo.",
+      summary:"Walikota Bogor dua periode yang sukses. Akademisi yang masuk politik PAN. Dikenal reformis dan inovatif. Kini Wamendagri di kabinet Prabowo.",
+      strength:["Track record Bogor","Wamendagri posisi strategis","PAN koalisi pemerintah"],
+      weakness:["Belum teruji di level nasional"],
+      opportunities:["Calon Gubernur Jabar","Menteri penuh 2029"],
+      threats:["Saingan berat di PAN"]
+    }
   }
 ]
 
