@@ -10,6 +10,22 @@ import { PageHeader, Card, Badge } from '../../components/ui'
 const seatParties = PARTIES.filter(p => p.seats_2024 > 0)
   .sort((a, b) => b.seats_2024 - a.seats_2024)
 const noSeatParties = PARTIES.filter(p => p.seats_2024 === 0)
+  .sort((a, b) => (b.votes_pct_2024 || b.votes_2024 || 0) - (a.votes_pct_2024 || a.votes_2024 || 0))
+
+const STATUS_BADGE = {
+  koalisi:       { label: 'KOALISI',       bg: 'bg-blue-500/15',  text: 'text-blue-400',  border: 'border-blue-500/30' },
+  oposisi:       { label: 'OPOSISI',       bg: 'bg-red-500/15',   text: 'text-red-400',   border: 'border-red-500/30' },
+  'non-parlemen':{ label: 'NON-PARLEMEN',  bg: 'bg-gray-500/15',  text: 'text-gray-400',  border: 'border-gray-500/30' },
+}
+
+function StatusBadge({ status }) {
+  const s = STATUS_BADGE[status] || STATUS_BADGE['non-parlemen']
+  return (
+    <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${s.bg} ${s.text} ${s.border} tracking-wide`}>
+      {s.label}
+    </span>
+  )
+}
 
 const barData = seatParties.map(p => ({
   name: p.abbr,
@@ -116,9 +132,12 @@ export default function PartyList() {
                   <div className="flex items-center gap-3">
                     <span className="text-3xl">{party.logo_emoji}</span>
                     <div>
-                      <h4 className="text-lg font-bold group-hover:text-white transition-colors" style={{ color: party.color }}>
-                        {party.abbr}
-                      </h4>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <h4 className="text-lg font-bold group-hover:text-white transition-colors" style={{ color: party.color }}>
+                          {party.abbr}
+                        </h4>
+                        <StatusBadge status={party.status || party.current_stance} />
+                      </div>
                       <p className="text-xs text-text-secondary">{party.name}</p>
                     </div>
                   </div>
@@ -156,7 +175,8 @@ export default function PartyList() {
                 <span className="text-xl">{party.logo_emoji}</span>
                 <span className="font-bold text-sm text-text-secondary">{party.abbr}</span>
               </div>
-              <p className="text-xs text-text-secondary">{party.votes_2024}% suara</p>
+              <p className="text-xs text-text-secondary mb-1.5">{party.votes_pct_2024 ?? party.votes_2024}% suara</p>
+              <StatusBadge status={party.status || party.current_stance} />
             </div>
           ))}
         </div>
