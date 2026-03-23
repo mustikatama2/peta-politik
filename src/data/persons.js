@@ -191,7 +191,7 @@ export const PERSONS = [
     data_sources:["id.wikipedia.org/wiki/Joko_Widodo","lhkpn.kpk.go.id","kpu.go.id"]
   },
   {
-    id:"sri_mulyani", name:"Sri Mulyani Indrawati", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Sri_Mulyani_Indrawati_official_portrait_2022.jpg/400px-Sri_Mulyani_Indrawati_official_portrait_2022.jpg", photo_placeholder:"SM",
+    id:"sri_mulyani", name:"Sri Mulyani Indrawati", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menkeu_Sri_Mulyani_Indrawati_(cropped).jpg", photo_placeholder:"SM",
     born:"26 Aug 1962", born_place:"Lampung", religion:"Islam",
     education:"S1 FE UI; PhD Ekonomi University of Illinois (1992)",
     party_id:null, party_role:null,
@@ -313,7 +313,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"agus_gumiwang", name:"Agus Gumiwang Kartasasmita", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menteri_Perindustrian_Agus_G._Kartasasmita.jpg?width=400", photo_placeholder:"AG",
+    id:"agus_gumiwang", name:"Agus Gumiwang Kartasasmita", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Menteri_Perindustrian_Agus_G._Kartasasmita.jpg", photo_placeholder:"AG",
     born:"1971", born_place:"Bandung", religion:"Islam",
     education:"S1 Hukum, Universitas Padjajaran",
     party_id:"gol", party_role:"Anggota",
@@ -340,7 +340,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"bahlil", name:"Bahlil Lahadalia", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Bahlil_Lahadalia_at_the_Indonesia_Naik_Kelas_book_launching,_21_November_2025_24_(cropped).jpg?width=400", photo_placeholder:"BL",
+    id:"bahlil", name:"Bahlil Lahadalia", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Bahlil_Lahadalia_at_the_Indonesia_Naik_Kelas_book_launching,_21_November_2025_24_(cropped).jpg", photo_placeholder:"BL",
     born:"1975", born_place:"Papua", religion:"Islam",
     education:"S1 Ekonomi, Universitas Yapis Papua",
     party_id:"gol", party_role:"Ketua Umum",
@@ -376,7 +376,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"zulhas", name:"Zulkifli Hasan", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wakil_Ketua_MPR_Zulkifli_Hasan_(2019).jpg?width=400", photo_placeholder:"ZH",
+    id:"zulhas", name:"Zulkifli Hasan", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wakil_Ketua_MPR_Zulkifli_Hasan_(2019).jpg", photo_placeholder:"ZH",
     born:"1962", born_place:"Lampung", religion:"Islam",
     education:"S1 Ilmu Sosial, STIA LPPN Jakarta",
     party_id:"pan", party_role:"Ketua Umum",
@@ -407,7 +407,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"yusril", name:"Yusril Ihza Mahendra", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Yusril_Ihza_Mahendra,_Menko_Kumham_Imipas.png?width=400", photo_placeholder:"YI",
+    id:"yusril", name:"Yusril Ihza Mahendra", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Yusril_Ihza_Mahendra,_Menko_Kumham_Imipas.png", photo_placeholder:"YI",
     born:"5 Feb 1956", born_place:"Bangka", religion:"Islam",
     education:"S1 Hukum UI; PhD Hukum Tata Negara UI",
     party_id:"pbb", party_role:"Ketua Umum",
@@ -472,7 +472,7 @@ export const PERSONS = [
     data_sources:["id.wikipedia.org/wiki/Agus_Harimurti_Yudhoyono","lhkpn.kpk.go.id","demokrat.or.id"]
   },
   {
-    id:"sby", name:"Susilo Bambang Yudhoyono", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Susilo_Bambang_Yudhoyono,_official_presidential_portrait_(2009).jpg?width=400", photo_placeholder:"SB",
+    id:"sby", name:"Susilo Bambang Yudhoyono", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Susilo_Bambang_Yudhoyono,_official_presidential_portrait_(2009).jpg", photo_placeholder:"SB",
     born:"9 Sep 1949", born_place:"Pacitan", religion:"Islam",
     education:"Akademi Militer Magelang; Master Manajemen Webster University; PhD IPB",
     party_id:"dem", party_role:"Pembina",
@@ -505,7 +505,7 @@ export const PERSONS = [
   },
   // ─── NASIONAL — LEGISLATIF ──────────────────────────────────────────────
   {
-    id:"puan", name:"Puan Maharani", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Puan_Maharani.jpg/400px-Puan_Maharani.jpg", photo_placeholder:"PM",
+    id:"puan", name:"Puan Maharani", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Puan_Maharani.jpg", photo_placeholder:"PM",
     born:"6 Sep 1973", born_place:"Jakarta", religion:"Islam",
     education:"S1 Komunikasi FISIP UI",
     party_id:"pdip", party_role:"DPP",
@@ -704,7 +704,7 @@ export const PERSONS = [
     data_sources:["id.wikipedia.org/wiki/Surya_Paloh","partainasdem.id","lhkpn.kpk.go.id"]
   },
   {
-    id:"megawati", name:"Megawati Soekarnoputri", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Megawati_Soekarnoputri.jpg/400px-Megawati_Soekarnoputri.jpg", photo_placeholder:"MS",
+    id:"megawati", name:"Megawati Soekarnoputri", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/President_Megawati_Sukarnoputri_-_Indonesia.jpg", photo_placeholder:"MS",
     born:"23 Jan 1947", born_place:"Yogyakarta", religion:"Islam",
     education:"S1 Pertanian, Universitas Padjadjaran (tidak selesai)",
     party_id:"pdip", party_role:"Ketua Umum",
@@ -741,7 +741,7 @@ export const PERSONS = [
     data_sources:["id.wikipedia.org/wiki/Megawati_Soekarnoputri","pdip.or.id","kpu.go.id"]
   },
   {
-    id:"anies", name:"Anies Baswedan", photo_url:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Anies_Baswedan_2024.jpg/400px-Anies_Baswedan_2024.jpg", photo_placeholder:"AB",
+    id:"anies", name:"Anies Baswedan", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Gubernur_Anies.jpg", photo_placeholder:"AB",
     born:"7 May 1969", born_place:"Kuningan", religion:"Islam",
     education:"S1 Ekonomi UGM; MA Ilmu Kebijakan, University of Maryland; PhD Ilmu Pemerintahan, UMD",
     party_id:null, party_role:null,
@@ -891,7 +891,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"nawawi", name:"Nawawi Pomolango", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wakil_Ketua_KPK_RI_Nawawi_Pomolango.jpg?width=400", photo_placeholder:"NP",
+    id:"nawawi", name:"Nawawi Pomolango", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Wakil_Ketua_KPK_RI_Nawawi_Pomolango.jpg", photo_placeholder:"NP",
     born:"1961", born_place:"Gorontalo", religion:"Islam",
     education:"S1 Hukum, Universitas Indonesia",
     party_id:null, party_role:null,
@@ -4935,7 +4935,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"akbar_tandjung", name:"Akbar Tandjung", photo_url:null, photo_placeholder:"AT",
+    id:"akbar_tandjung", name:"Akbar Tandjung", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/AkTandjung.jpg", photo_placeholder:"AT",
     born:"1945", born_place:"Sibolga, Sumatera Utara", religion:"Islam",
     education:"S1 Universitas Indonesia; S2 Universitas Indonesia",
     party_id:"gol", party_role:"Politisi Senior Golkar / ex-Ketua Umum Golkar",
@@ -4975,7 +4975,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"yenny_wahid", name:"Zannuba Ariffah Chafsoh (Yenny Wahid)", photo_url:null, photo_placeholder:"YW",
+    id:"yenny_wahid", name:"Zannuba Ariffah Chafsoh (Yenny Wahid)", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Yenny_Zannuba_A._C._Wahid_-_World_Economic_Forum_on_East_Asia_2011.jpg", photo_placeholder:"YW",
     born:"1974", born_place:"Jombang, Jawa Timur", religion:"Islam",
     education:"S1 Universitas Indonesia; Hukum Universitas Sydney",
     party_id:null, party_role:"Direktur Wahid Foundation / Putri Gus Dur",
@@ -5053,7 +5053,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hamzah_haz", name:"Hamzah Haz", photo_url:null, photo_placeholder:"HH",
+    id:"hamzah_haz", name:"Hamzah Haz", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Hamzah_Haz.jpg", photo_placeholder:"HH",
     born:"1940", born_place:"Ketapang, Kalimantan Barat", religion:"Islam",
     education:"S1 Ekonomi Universitas Tanjungpura",
     party_id:"ppp", party_role:"Mantan Ketua Umum PPP",
@@ -5131,7 +5131,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"rizieq_shihab", name:"Muhammad Rizieq Shihab", photo_url:null, photo_placeholder:"RS",
+    id:"rizieq_shihab", name:"Muhammad Rizieq Shihab", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Muhammad_Rizieq_Shihab_(cropped).jpg", photo_placeholder:"RS",
     born:"1965", born_place:"Jakarta, DKI Jakarta", religion:"Islam",
     education:"S1 King Saud University Riyadh; S3 Universitas Malaya",
     party_id:null, party_role:"Imam Besar FPI",
@@ -5172,7 +5172,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"fahri_hamzah", name:"Fahri Hamzah", photo_url:null, photo_placeholder:"FH",
+    id:"fahri_hamzah", name:"Fahri Hamzah", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Fahri_Hamzah_and_Abraham_Samad.jpg", photo_placeholder:"FH",
     born:"1971", born_place:"Sumbawa, Nusa Tenggara Barat", religion:"Islam",
     education:"S1 Sosiologi Universitas Indonesia; S2 Ekonomi Politik",
     party_id:null, party_role:"Mantan Wakil Ketua DPR / Independent",
@@ -5212,7 +5212,7 @@ export const PERSONS = [
   }
 ,
   {
-    id:"try_sutrisno", name:"Try Sutrisno", photo_url:null, photo_placeholder:"TS",
+    id:"try_sutrisno", name:"Try Sutrisno", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Try_Sutrisno,_1993.jpg", photo_placeholder:"TS",
     born:"1935", born_place:"Surabaya, Jawa Timur", religion:"Islam",
     education:"Akademi Militer Nasional (AMN) 1959",
     party_id:null, party_role:"Mantan Wakil Presiden / Mantan Panglima ABRI",
@@ -5292,7 +5292,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"refly_harun", name:"Refly Harun", photo_url:null, photo_placeholder:"RH",
+    id:"refly_harun", name:"Refly Harun", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Refly_Harun_Pansel_MK.jpg", photo_placeholder:"RH",
     born:"1965", born_place:"Sumatera Selatan", religion:"Islam",
     education:"S1 Hukum Universitas Sriwijaya; S2 Hukum UGM; S3 Hukum UGM",
     party_id:null, party_role:"Pakar Hukum Tata Negara",
@@ -5331,7 +5331,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"rocky_gerung", name:"Rocky Gerung", photo_url:null, photo_placeholder:"RG",
+    id:"rocky_gerung", name:"Rocky Gerung", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Rocky_Gerung_Attended_Ratna_Sarumpaet_Trial,_2019.jpg", photo_placeholder:"RG",
     born:"1959", born_place:"Manado, Sulawesi Utara", religion:"Non-Muslim",
     education:"S1 Filsafat Universitas Indonesia",
     party_id:null, party_role:"Filsuf dan Pengamat Politik",
@@ -5371,7 +5371,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"susno_duadji", name:"Susno Duadji", photo_url:null, photo_placeholder:"SD",
+    id:"susno_duadji", name:"Susno Duadji", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/KPU_Susno_Duadji.jpg", photo_placeholder:"SD",
     born:"1954", born_place:"Pagar Alam, Sumatera Selatan", religion:"Islam",
     education:"Akademi Kepolisian (AKPOL) 1977",
     party_id:null, party_role:"Mantan Kabareskrim Polri",
@@ -5410,7 +5410,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"fuad_bawazier", name:"Fuad Bawazier", photo_url:null, photo_placeholder:"FB",
+    id:"fuad_bawazier", name:"Fuad Bawazier", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Fuad_Bawazier.jpg", photo_placeholder:"FB",
     born:"1950", born_place:"Jakarta, DKI Jakarta", religion:"Islam",
     education:"S1 Ekonomi Universitas Indonesia; S2 Ekonomi University of Colorado",
     party_id:null, party_role:"Mantan Menteri Keuangan RI (1998)",
@@ -5449,7 +5449,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"jusuf_kalla", name:"Jusuf Kalla", photo_url:null, photo_placeholder:"JK",
+    id:"jusuf_kalla", name:"Jusuf Kalla", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Jusuf_Kalla,_official_vice-presidential_portrait_(2014).jpg", photo_placeholder:"JK",
     born:"1942", born_place:"Watampone, Sulawesi Selatan", religion:"Islam",
     education:"S1 Ekonomi Universitas Hasanuddin Makassar",
     party_id:"gol", party_role:"Mantan Wakil Presiden RI (2004–2009 & 2014–2019)",
@@ -5490,7 +5490,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"tri_rismaharini", name:"Tri Rismaharini", photo_url:null, photo_placeholder:"TR",
+    id:"tri_rismaharini", name:"Tri Rismaharini", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Tri_Rismaharini_(cropped).jpg", photo_placeholder:"TR",
     born:"1961", born_place:"Kediri, Jawa Timur", religion:"Islam",
     education:"S1 Arsitektur Institut Teknologi Sepuluh Nopember (ITS) Surabaya",
     party_id:"pdip", party_role:"Mantan Menteri Sosial / Calon Gubernur Jatim 2024",
@@ -5530,7 +5530,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"andika_perkasa", name:"Andika Perkasa", photo_url:null, photo_placeholder:"AP",
+    id:"andika_perkasa", name:"Andika Perkasa", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Andika_Perkasa.jpg", photo_placeholder:"AP",
     born:"1964", born_place:"Bandung, Jawa Barat", religion:"Islam",
     education:"Akademi Militer 1987; M.A. Keamanan Nasional Harvard University",
     party_id:"pdip", party_role:"Mantan Panglima TNI / Gubernur Jawa Tengah terpilih 2024",
@@ -5571,7 +5571,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"hendropriyono", name:"Hendropriyono", photo_url:null, photo_placeholder:"HP",
+    id:"hendropriyono", name:"Hendropriyono", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/AMHENDROPRIYONO.jpg", photo_placeholder:"HP",
     born:"1945", born_place:"Yogyakarta, Jawa Tengah", religion:"Islam",
     education:"Akademi Militer 1967; berbagai pendidikan militer dan intelijen",
     party_id:null, party_role:"Mantan Kepala BIN (2001–2004)",
@@ -5611,7 +5611,7 @@ export const PERSONS = [
     }
   },
   {
-    id:"bima_arya", name:"Bima Arya", photo_url:null, photo_placeholder:"BA",
+    id:"bima_arya", name:"Bima Arya", photo_url:"https://commons.wikimedia.org/wiki/Special:FilePath/Bima_Arya_(cropped).jpg", photo_placeholder:"BA",
     born:"1974", born_place:"Bogor, Jawa Barat", religion:"Islam",
     education:"S1 Ilmu Politik UI; Ph.D. Ilmu Politik Flinders University Australia",
     party_id:"pan", party_role:"Wakil Menteri Dalam Negeri / Mantan Walikota Bogor",
