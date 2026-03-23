@@ -998,7 +998,12 @@ export const PERSONS = [
       risk:"low",
       influence:8,
       controversy_level:3,
-      notes:"Gubernur Jatim populer, Ketum Muslimat NU. Pemimpin perempuan dengan akar kuat di komunitas NU. Maju Pilkada Jatim 2024 sebagai calon gubernur kembali."
+      notes:"Gubernur Jatim populer, Ketum Muslimat NU. Pemimpin perempuan dengan akar kuat di komunitas NU. Maju Pilkada Jatim 2024 sebagai calon gubernur kembali.",
+      summary:"Gubernur Jawa Timur dua periode, mantan Mensos. Tokoh NU perempuan paling berpengaruh. Menang Pilgub Jatim 2024 atas Tri Rismaharini.",
+      strength:["Jatim provinsi terbesar kedua — basis massa","Tokoh NU perempuan — segmen besar","Golkar KIM Plus"],
+      weakness:["PKB dan PBNU tidak selalu mendukung","Posisi di bawah Prabowo setelah KIM Plus"],
+      opportunities:["Capres/Cawapres 2029 potensial kuat","Basis NU perempuan unik"],
+      threats:["Cakimin dan PKB bisa memecah suara NU"]
     }
   },
   {
@@ -2401,7 +2406,12 @@ export const PERSONS = [
       risk:'low',
       influence:7,
       controversy_level:6,
-      notes:"Gubernur Jabar populer dengan berbagai inovasi. Kalah tipis di DKI 2024. Dianggap kandidat potensial Pilpres masa depan."
+      notes:"Gubernur Jabar populer dengan berbagai inovasi. Kalah tipis di DKI 2024. Dianggap kandidat potensial Pilpres masa depan.",
+      summary:"Gubernur Jawa Barat 2018–2023, arsitek terkenal. Kalah di Pilgub DKI 2024 dari Pramono. Kini Utusan Khusus Presiden.",
+      strength:["Brand arsitek-gubernur populer","Golkar koalisi","Media sosial jutaan followers"],
+      weakness:["Kalah dua kali (DKI 2024)","Isu personal viral menghantui","Tidak punya jabatan eksekutif signifikan"],
+      opportunities:["Capres 2029 dari Golkar","Utusan Khusus bisa tingkatkan exposure"],
+      threats:["Prabowo sendiri akan maju lagi 2029?","Saingan di Golkar banyak"]
     }
   },
   {
@@ -3879,7 +3889,12 @@ export const PERSONS = [
       risk:"high",
       influence:7,
       controversy_level:9,
-      notes:"Hasto Kristiyanto adalah Sekretaris Jenderal PDIP yang ditetapkan sebagai tersangka KPK pada Desember 2024 atas dugaan obstruction of justice dan suap dalam kasus buronan Harun Masiku. Sebagai loyalis setia Megawati selama satu dekade, penetapan tersangka ini dipandang sebagian pihak sebagai serangan politik terhadap PDIP di tengah rivalitas dengan pemerintahan Prabowo. Kasus ini menempatkan PDIP dalam posisi defensif dan berpotensi memperlemah konsolidasi internal partai menjelang Pemilu 2029."
+      notes:"Hasto Kristiyanto adalah Sekretaris Jenderal PDIP yang ditetapkan sebagai tersangka KPK pada Desember 2024 atas dugaan obstruction of justice dan suap dalam kasus buronan Harun Masiku. Sebagai loyalis setia Megawati selama satu dekade, penetapan tersangka ini dipandang sebagian pihak sebagai serangan politik terhadap PDIP di tengah rivalitas dengan pemerintahan Prabowo. Kasus ini menempatkan PDIP dalam posisi defensif dan berpotensi memperlemah konsolidasi internal partai menjelang Pemilu 2029.",
+      summary:"Sekjen PDIP yang ditangkap KPK 2025 atas kasus Harun Masiku. Orang kepercayaan Megawati yang kini tersangka.",
+      strength:["Loyal kepada Megawati 100%","Arsitek strategi oposisi PDIP"],
+      weakness:["Tersangka KPK — karier terancam","PDIP kehilangan sekjen saat kritis","Kasus Harun Masiku panjang"],
+      opportunities:[],
+      threats:["Hukuman penjara","PDIP kehilangan figur koordinasi"]
     }
   },
   // ─── NEW PERSONS: Prabowo Cabinet & Key Figures ──────────────────────────
