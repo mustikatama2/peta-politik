@@ -4889,6 +4889,202 @@ export const PERSONS = [
       threats:["Dominasi PKB atas suara NU"]
     }
   }
+,
+  {
+    id:"boediono", name:"Boediono", photo_url:null, photo_placeholder:"BO",
+    born:"1943", born_place:"Blitar, Jawa Timur", religion:"Islam",
+    education:"S1 Ekonomi UGM; PhD Ekonomi Wharton School University of Pennsylvania",
+    party_id:null, party_role:"Teknokrat / Mantan Wakil Presiden",
+    positions:[
+      {title:"Wakil Presiden RI", institution:"Pemerintah Republik Indonesia", region:"Nasional", start:"2009", end:"2014", is_current:false},
+      {title:"Gubernur Bank Indonesia", institution:"Bank Indonesia", region:"Nasional", start:"2008", end:"2009", is_current:false},
+      {title:"Menteri Keuangan", institution:"Pemerintah Republik Indonesia", region:"Nasional", start:"2001", end:"2004", is_current:false},
+    ],
+    tier:"nasional", region_id:"jawa-timur",
+    bio:"Boediono adalah ekonom senior dan teknokrat Indonesia. Menjabat sebagai Wakil Presiden ke-11 RI (2009–2014) mendampingi Presiden Susilo Bambang Yudhoyono. Sebelumnya menjabat sebagai Gubernur Bank Indonesia, Menteri Keuangan, dan Menteri Koordinator Bidang Perekonomian. Dikenal bersih, low-profile, dan fokus pada kebijakan moneter dan fiskal.",
+    tags:["teknokrat","wapres","bank-indonesia","ekonom","jawa-timur","nasional","sby"],
+    lhkpn_latest:22000000000, lhkpn_year:2014,
+    lhkpn_note:"Data LHKPN terakhir saat menjabat Wakil Presiden.",
+    kontroversi:[
+      "Terseret kasus bailout Bank Century 2008 — DPR menyatakan ada pelanggaran tapi tidak ada tindak pidana",
+      "Dianggap tidak punya basis massa sehingga lemah secara politik elektoral"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Boediono","kompas.com","tempo.co","bi.go.id"],
+    connections_summary:"Wapres era SBY 2009–2014. Gubernur Bank Indonesia. Menteri Keuangan. Teknokrat senior tanpa afiliasi partai.",
+    twitter:null,
+    analysis:{
+      ideology_score:5, populism_score:2, corruption_risk:"rendah",
+      nationalism:6, religiosity:4,
+      track_record:"Wapres era SBY 2009–2014. Gubernur BI dan Menteri Keuangan. Dikenal bersih dan kompeten di bidang ekonomi makro.",
+      policy_direction:"Kebijakan moneter, fiskal, dan ekonomi makro berbasis data dan technocratic governance",
+      style:"teknokrat",
+      risk:"rendah",
+      influence:60,
+      controversy_level:2,
+      notes:"Teknokrat senior, Wapres era SBY 2009–2014. Pernah jadi Menteri Keuangan dan Gubernur Bank Indonesia. Dikenal bersih, low-profile, fokus pada kebijakan moneter dan fiskal.",
+      summary:"Teknokrat senior, Wapres era SBY 2009–2014. Pernah jadi Menteri Keuangan dan Gubernur Bank Indonesia. Dikenal bersih, low-profile, fokus pada kebijakan moneter dan fiskal.",
+      strength:["Rekam jejak bersih","Kompetensi ekonomi makro","Kepercayaan internasional"],
+      weakness:["Tidak punya basis massa","Usia tua, tidak aktif"],
+      opportunities:["Advisor ekonomi senior"],
+      threats:["Tidak relevan di politik praktis"]
+    }
+  },
+  {
+    id:"hamzah_haz", name:"Hamzah Haz", photo_url:null, photo_placeholder:"HH",
+    born:"1940", born_place:"Ketapang, Kalimantan Barat", religion:"Islam",
+    education:"S1 Ekonomi Universitas Tanjungpura",
+    party_id:"ppp", party_role:"Mantan Ketua Umum PPP",
+    positions:[
+      {title:"Wakil Presiden RI", institution:"Pemerintah Republik Indonesia", region:"Nasional", start:"2001", end:"2004", is_current:false},
+      {title:"Ketua Umum PPP", institution:"Partai Persatuan Pembangunan", region:"Nasional", start:"1998", end:"2007", is_current:false},
+      {title:"Menteri Koordinator Bidang Kesejahteraan Rakyat", institution:"Pemerintah Republik Indonesia", region:"Nasional", start:"1999", end:"2001", is_current:false},
+    ],
+    tier:"nasional", region_id:"kalimantan-barat",
+    bio:"Hamzah Haz adalah politisi senior PPP yang menjabat sebagai Wakil Presiden ke-9 RI (2001–2004) mendampingi Presiden Megawati Soekarnoputri. Sebelumnya menjabat sebagai Ketua Umum PPP dan Menko Kesra. Dikenal sebagai tokoh Islam tradisional dan pemimpin partai Islam terbesar di masa Orde Reformasi.",
+    tags:["ppp","wapres","islam","kalimantan-barat","nasional","megawati"],
+    lhkpn_latest:15000000000, lhkpn_year:2004,
+    lhkpn_note:"Data LHKPN terakhir saat menjabat Wakil Presiden.",
+    kontroversi:[
+      "Kontroversi mengunjungi Abu Bakar Baasyir (terpidana teroris) setelah peristiwa Bom Bali 2002",
+      "PPP gagal lolos ambang batas parlemen 2024"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Hamzah_Haz","kompas.com","tempo.co"],
+    connections_summary:"Wapres era Megawati 2001–2004. Ketua Umum PPP. Tokoh Islam tradisional Kalimantan Barat.",
+    twitter:null,
+    analysis:{
+      ideology_score:7, populism_score:5, corruption_risk:"sedang",
+      nationalism:6, religiosity:9,
+      track_record:"Wapres era Megawati 2001–2004. Ketua Umum PPP. Era PPP kuat sebagai partai Islam.",
+      policy_direction:"Nilai-nilai Islam dalam kehidupan berbangsa dan bernegara, kesejahteraan rakyat",
+      style:"politisi-partai",
+      risk:"rendah",
+      influence:40,
+      controversy_level:3,
+      notes:"Wapres era Megawati 2001–2004. Ketua Umum PPP, sempat kontroversi kunjungi terpidana teroris. Era PPP kuat sebagai partai Islam.",
+      summary:"Wapres era Megawati 2001–2004. Ketua Umum PPP, sempat kontroversi kunjungi terpidana teroris. Era PPP kuat sebagai partai Islam.",
+      strength:["Jaringan PPP dan Islam tradisional"],
+      weakness:["Sudah tidak aktif","PPP tidak lolos parlemen"],
+      opportunities:[],
+      threats:["Warisan kontroversi"]
+    }
+  },
+  {
+    id:"din_syamsuddin", name:"Din Syamsuddin", photo_url:null, photo_placeholder:"DS",
+    born:"1958", born_place:"Sumbawa, Nusa Tenggara Barat", religion:"Islam",
+    education:"S3 Ilmu Politik UCLA",
+    party_id:null, party_role:"Mantan Ketua Umum Muhammadiyah",
+    positions:[
+      {title:"Ketua Umum Muhammadiyah", institution:"Muhammadiyah", region:"Nasional", start:"2005", end:"2015", is_current:false},
+      {title:"Utusan Khusus Presiden untuk Dialog dan Kerjasama Antaragama", institution:"Pemerintah Republik Indonesia", region:"Nasional", start:"2015", end:"2019", is_current:false},
+    ],
+    tier:"nasional", region_id:"nusa-tenggara-barat",
+    bio:"Din Syamsuddin adalah tokoh Islam modernis dan mantan Ketua Umum Muhammadiyah (2005–2015). Dikenal sebagai akademisi dan aktivis dialog antaragama internasional. Pasca-jabatan, lebih dekat ke kubu Islam kritis terhadap pemerintah. Aktif bicara isu keumatan dan demokrasi.",
+    tags:["muhammadiyah","islam","ntb","nasional","civil-society","aktivis"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN — tidak menjabat sebagai pejabat pemerintah.",
+    kontroversi:[
+      "Dituduh terlibat radikalisme oleh BNPT — sempat heboh 2021, dibantah keras",
+      "Sikap kritis terhadap pemerintahan Jokowi dianggap terlalu vokal"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Din_Syamsuddin","muhammadiyah.or.id","tempo.co","kompas.com"],
+    connections_summary:"Mantan Ketua Umum Muhammadiyah 2005–2015. Utusan Khusus Presiden. Tokoh Islam modernis kritis.",
+    twitter:null,
+    analysis:{
+      ideology_score:7, populism_score:5, corruption_risk:"rendah",
+      nationalism:6, religiosity:9,
+      track_record:"Ketua Umum Muhammadiyah 2005–2015. Utusan Khusus Presiden untuk dialog antaragama. Aktif di forum Islam internasional.",
+      policy_direction:"Islam modernis, dialog antaragama, demokrasi, nilai keumatan",
+      style:"aktivis/ulama",
+      risk:"rendah",
+      influence:58,
+      controversy_level:4,
+      notes:"Tokoh Muhammadiyah, mantan Ketua Umum 2005–2015. Kini lebih dekat ke kubu Islam kritis terhadap pemerintah. Aktif bicara isu keumatan dan demokrasi.",
+      summary:"Tokoh Muhammadiyah, mantan Ketua Umum 2005–2015. Kini lebih dekat ke kubu Islam kritis terhadap pemerintah. Aktif bicara isu keumatan dan demokrasi.",
+      strength:["Otoritas Muhammadiyah","Jaringan Islam modernis global"],
+      weakness:["Tidak punya partai","Sering dianggap terlalu vokal"],
+      opportunities:["Suara Islam kritis"],
+      threats:["Reputasi ambivalen pasca-pandemi"]
+    }
+  },
+  {
+    id:"rizieq_shihab", name:"Muhammad Rizieq Shihab", photo_url:null, photo_placeholder:"RS",
+    born:"1965", born_place:"Jakarta, DKI Jakarta", religion:"Islam",
+    education:"S1 King Saud University Riyadh; S3 Universitas Malaya",
+    party_id:null, party_role:"Imam Besar FPI",
+    positions:[
+      {title:"Imam Besar FPI", institution:"Front Pembela Islam", region:"Nasional", start:"1998", end:null, is_current:true},
+    ],
+    tier:"nasional", region_id:"dki-jakarta",
+    bio:"Muhammad Rizieq Shihab adalah pendiri dan Imam Besar Front Pembela Islam (FPI). Memimpin gerakan reuni 212 (2016) yang menuntut penjaraan Ahok atas dugaan penistaan agama. Mengasingkan diri ke Arab Saudi 2017–2020. FPI dibubarkan pemerintah pada Desember 2020. Memiliki basis massa loyalis yang besar.",
+    tags:["fpi","islam","dki-jakarta","nasional","212","oposisi"],
+    lhkpn_latest:null, lhkpn_year:null,
+    lhkpn_note:"Tidak ada data LHKPN — bukan pejabat publik.",
+    kontroversi:[
+      "FPI dibubarkan pemerintah Desember 2020",
+      "Kasus pidana penghinaan kepala negara dan pelanggaran PPKM COVID-19",
+      "Aksi 212 dan tuntutan pemenjaraan Ahok 2016",
+      "Pengasingan di Arab Saudi 2017–2020 (penghindaran proses hukum)",
+      "Insiden penembakan 6 anggota FPI oleh polisi (Desember 2020)"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Rizieq_Shihab","tempo.co","kompas.com","bbc.com/indonesia"],
+    connections_summary:"Pendiri dan Imam Besar FPI. Pemimpin gerakan 212. Figur Islam garis keras dengan basis massa besar.",
+    twitter:null,
+    analysis:{
+      ideology_score:9, populism_score:8, corruption_risk:"tinggi",
+      nationalism:5, religiosity:10,
+      track_record:"Pendiri FPI 1998. Pimpin gerakan 212 tuntut Ahok. Kasus pidana berlapis. FPI dibubarkan 2020.",
+      policy_direction:"Syariat Islam, penegakan moral Islam, anti-liberalisme",
+      style:"ulama-massa",
+      risk:"tinggi",
+      influence:65,
+      controversy_level:9,
+      notes:"Pendiri dan Imam Besar FPI. Memimpin gerakan 212 (2016) yang tuntut Ahok. Sempat pengasingan di Saudi 2017-2020. FPI dibubarkan pemerintah 2020. Kini masih punya basis massa loyal.",
+      summary:"Pendiri dan Imam Besar FPI. Memimpin gerakan 212 (2016) yang tuntut Ahok. Sempat pengasingan di Saudi 2017-2020. FPI dibubarkan pemerintah 2020. Kini masih punya basis massa loyal.",
+      strength:["Basis massa loyalis FPI dan 212","Pengaruh besar di komunitas Islam garis keras"],
+      weakness:["FPI dibubarkan","Kasus pidana hina kepala negara","Isolasi politik dari mainstream"],
+      opportunities:["Figur oposisi moral"],
+      threats:["Hukum pidana berlapis","FPI ilegal"]
+    }
+  },
+  {
+    id:"fahri_hamzah", name:"Fahri Hamzah", photo_url:null, photo_placeholder:"FH",
+    born:"1971", born_place:"Sumbawa, Nusa Tenggara Barat", religion:"Islam",
+    education:"S1 Sosiologi Universitas Indonesia; S2 Ekonomi Politik",
+    party_id:null, party_role:"Mantan Wakil Ketua DPR / Independent",
+    positions:[
+      {title:"Wakil Ketua DPR RI", institution:"Dewan Perwakilan Rakyat", region:"Nasional", start:"2014", end:"2019", is_current:false},
+      {title:"Anggota DPR RI", institution:"Dewan Perwakilan Rakyat", region:"Nasional", start:"2004", end:"2019", is_current:false},
+    ],
+    tier:"nasional", region_id:"nusa-tenggara-barat",
+    bio:"Fahri Hamzah adalah politisi vokal mantan kader PKS yang dipecat partainya pada 2016 namun bertahan sebagai anggota DPR karena perlindungan mekanisme DPR. Menjabat Wakil Ketua DPR 2014–2019. Dikenal kritis terhadap KPK dan Jokowi. Pasca-2019 aktif sebagai pengamat, penulis, dan kolumnis politik.",
+    tags:["pks","dpr","ntb","nasional","independent","vokal"],
+    lhkpn_latest:8000000000, lhkpn_year:2019,
+    lhkpn_note:"Data LHKPN terakhir saat menjabat Wakil Ketua DPR.",
+    kontroversi:[
+      "Dipecat PKS 2016 namun menggugat balik dan bertahan di DPR",
+      "Kritik keras terhadap KPK — dianggap melemahkan pemberantasan korupsi",
+      "Berbagai pernyataan kontroversi di media yang memancing reaksi publik"
+    ],
+    data_sources:["id.wikipedia.org/wiki/Fahri_Hamzah","tempo.co","kompas.com","dpr.go.id"],
+    connections_summary:"Mantan Wakil Ketua DPR 2014–2019. Dipecat PKS 2016. Kini independent, aktif sebagai pengamat dan kolumnis.",
+    twitter:"@fahrihamzah",
+    analysis:{
+      ideology_score:7, populism_score:7, corruption_risk:"sedang",
+      nationalism:6, religiosity:7,
+      track_record:"Wakil Ketua DPR 2014–2019. Dipecat PKS tapi bertahan. Kritis terhadap KPK dan Jokowi.",
+      policy_direction:"Reformasi kelembagaan, kritik KPK, populisme kanan-Islam",
+      style:"politisi-vokal",
+      risk:"sedang",
+      influence:52,
+      controversy_level:6,
+      notes:"Politisi vokal mantan PKS, dipecat oleh PKS 2016 tapi bertahan karena perlindungan DPR. Wakil Ketua DPR 2014-2019. Dikenal kritis terhadap KPK dan Jokowi. Kini aktif sebagai pengamat dan kolumnis.",
+      summary:"Politisi vokal mantan PKS, dipecat oleh PKS 2016 tapi bertahan karena perlindungan DPR. Wakil Ketua DPR 2014-2019. Dikenal kritis terhadap KPK dan Jokowi. Kini aktif sebagai pengamat dan kolumnis.",
+      strength:["Kemampuan oratorikal tinggi","Media savvy","Pengalaman legislatif"],
+      weakness:["Tidak punya partai lagi","Kontroversi pemecatan PKS","Kritik KPK merusak citra"],
+      opportunities:["Komentator politik independen"],
+      threats:["Tanpa basis organisasi"]
+    }
+  }
 ]
 
 export const PERSONS_MAP = Object.fromEntries(PERSONS.map(p => [p.id, p]))
