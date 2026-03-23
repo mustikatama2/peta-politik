@@ -9,78 +9,184 @@ import Footer from './Footer'
 import { PERSONS } from '../data/persons'
 import { CONNECTIONS } from '../data/connections'
 
-const NAV = [
-  { to:'/',         icon:'🏠', label:'Dashboard' },
+// Flat list for breadcrumb lookup & mobile drawer
+const NAV_FLAT = [
+  { to:'/', icon:'🏠', label:'Dashboard' },
   { to:'/briefing', icon:'📋', label:'Briefing Harian' },
-  { to:'/ranking',  icon:'🏆', label:'Power Rankings' },
-  { to:'/kabinet',  icon:'🏛️', label:'Kabinet Merah Putih' },
+  { to:'/news', icon:'📰', label:'Berita' },
+  { to:'/agendas', icon:'📋', label:'Agenda' },
+  { to:'/persons', icon:'👥', label:'Tokoh' },
+  { to:'/parties', icon:'🎭', label:'Partai' },
+  { to:'/kabinet', icon:'🏛️', label:'Kabinet' },
   { to:'/kabinet-perbandingan', icon:'🏛️', label:'Perbandingan Kabinet' },
-  { to:'/pemerintah', icon:'🏛️', label:'Pemerintahan' },
-  { to:'/anggaran', icon:'💰', label:'Efisiensi APBN 2025' },
-  { to:'/apbn',     icon:'💰', label:'APBN Tracker' },
-  { to:'/persons',  icon:'👥', label:'Tokoh' },
-  { to:'/compare',             icon:'⚖️', label:'Bandingkan' },
-  { to:'/perbandingan-tokoh', icon:'⚖️', label:'Bandingkan (Pro)' },
-  { to:'/parties',  icon:'🎭', label:'Partai' },
-  { to:'/network',  icon:'🕸️', label:'Jaringan' },
+  { to:'/ranking', icon:'🏆', label:'Power Rankings' },
+  { to:'/dynasty', icon:'🌳', label:'Dinasti' },
+  { to:'/jejak-jabatan', icon:'🗂️', label:'Jejak Jabatan' },
+  { to:'/network', icon:'🕸️', label:'Jaringan' },
   { to:'/pengaruh', icon:'🌐', label:'Pengaruh' },
-  { to:'/regions',  icon:'🗺️', label:'Wilayah' },
-  { to:'/elections',icon:'📊', label:'Pemilu' },
-  { to:'/pilkada',  icon:'🗳️', label:'Pilkada 2024' },
-  { to:'/dana-kampanye', icon:'💰', label:'Dana Kampanye' },
-  { to:'/dapil',    icon:'🗳️', label:'Peta Dapil' },
-  { to:'/koalisi',  icon:'🤝', label:'Sejarah Koalisi' },
-  { to:'/survei',   icon:'📉', label:'Survei & Polling' },
   { to:'/analitik', icon:'📈', label:'Analitik' },
-  { to:'/stats',    icon:'📊', label:'Statistik DB' },
-  { to:'/risk',     icon:'🚨', label:'Indeks Risiko' },
-  { to:'/scorecard',icon:'🏆', label:'Rapor Provinsi' },
-  { to:'/scenarios',icon:'🔮', label:'Skenario 2029' },
+  { to:'/perbandingan-tokoh', icon:'⚖️', label:'Bandingkan Tokoh' },
+  { to:'/stats', icon:'📊', label:'Statistik' },
+  { to:'/elections', icon:'📊', label:'Pemilu' },
+  { to:'/pilkada', icon:'🗳️', label:'Pilkada 2024' },
+  { to:'/survei', icon:'📉', label:'Survei & Polling' },
+  { to:'/koalisi', icon:'🤝', label:'Sejarah Koalisi' },
+  { to:'/dana-kampanye', icon:'💰', label:'Dana Kampanye' },
+  { to:'/dapil', icon:'🗳️', label:'Peta Dapil' },
+  { to:'/scenarios', icon:'🔮', label:'Skenario 2029' },
   { to:'/prediksi', icon:'🔮', label:'Prediksi 2029' },
-  { to:'/simulator',icon:'⚙️', label:'Simulator Koalisi' },
-  { to:'/dynasty',  icon:'🌳', label:'Dinasti' },
+  { to:'/simulator', icon:'⚙️', label:'Simulator Koalisi' },
+  { to:'/risk', icon:'🚨', label:'Indeks Risiko' },
+  { to:'/kpk', icon:'⚖️', label:'KPK Cases' },
+  { to:'/investigasi', icon:'🔍', label:'Investigasi' },
+  { to:'/coi', icon:'🔍', label:'Konflik Kepentingan' },
+  { to:'/hukum', icon:'⚖️', label:'Legislasi' },
+  { to:'/korupsi-tracker', icon:'🚨', label:'Korupsi Tracker' },
+  { to:'/lhkpn', icon:'💰', label:'LHKPN' },
+  { to:'/lhkpn-trend', icon:'📈', label:'Tren LHKPN' },
+  { to:'/apbn', icon:'💰', label:'APBN Tracker' },
+  { to:'/anggaran', icon:'💰', label:'Efisiensi APBN' },
+  { to:'/bumn', icon:'🏢', label:'BUMN & Danantara' },
+  { to:'/koneksi-bisnis', icon:'💼', label:'Koneksi Bisnis' },
+  { to:'/bisnis', icon:'🏢', label:'Kepemilikan Bisnis' },
+  { to:'/media', icon:'📡', label:'Kepemilikan Media' },
+  { to:'/media-monitor', icon:'📺', label:'Monitor Media' },
+  { to:'/framing', icon:'🗞️', label:'Framing Media' },
   { to:'/timeline', icon:'📅', label:'Linimasa' },
   { to:'/timeline-kekuasaan', icon:'🏛️', label:'Sejarah Presiden' },
-  { to:'/reformasi', icon:'🏛️', label:'Reformasi' },
-  { to:'/arsip',    icon:'📜', label:'Arsip Sejarah' },
-  { to:'/voting',   icon:'🗳️', label:'Rekam Jejak Voting' },
-  { to:'/hukum',    icon:'⚖️', label:'Legislasi' },
-  { to:'/kpk',      icon:'⚖️', label:'KPK Cases' },
-  { to:'/korupsi-tracker', icon:'🚨', label:'Korupsi Tracker' },
-  { to:'/investigasi', icon:'🔍', label:'Investigasi' },
-  { to:'/coi',      icon:'🔍', label:'Konflik Kepentingan' },
-  { to:'/media',         icon:'📡', label:'Kepemilikan Media' },
-  { to:'/media-monitor', icon:'📺', label:'Monitor Media' },
-  { to:'/framing',       icon:'🗞️', label:'Framing Media' },
-  { to:'/bisnis',   icon:'🏢', label:'Kepemilikan Bisnis' },
-  { to:'/koneksi-bisnis', icon:'💼', label:'Koneksi Bisnis' },
-  { to:'/bumn',     icon:'🏢', label:'BUMN & Bisnis' },
-  { to:'/lhkpn',      icon:'💰', label:'LHKPN' },
-  { to:'/lhkpn-trend', icon:'📈', label:'Tren LHKPN' },
-  { to:'/jejak-jabatan', icon:'🗂️', label:'Jejak Jabatan' },
+  { to:'/reformasi', icon:'🏛️', label:'Era Reformasi' },
+  { to:'/arsip', icon:'📜', label:'Arsip Sejarah' },
+  { to:'/voting', icon:'🗳️', label:'Rekam Voting' },
+  { to:'/regions', icon:'🗺️', label:'Wilayah' },
+  { to:'/pemerintah', icon:'🏛️', label:'Pemerintahan' },
+  { to:'/ormas', icon:'🏛️', label:'Ormas' },
+  { to:'/mahasiswa', icon:'🎓', label:'Gerakan Mahasiswa' },
+  { to:'/indikator', icon:'📊', label:'Indikator' },
+  { to:'/scorecard', icon:'🏆', label:'Rapor Provinsi' },
   { to:'/quick-facts', icon:'⚡', label:'Fakta Cepat' },
-  { to:'/cek-fakta',  icon:'🔎', label:'Cek Fakta' },
-  { to:'/news',     icon:'📰', label:'Berita' },
-  { to:'/agendas',  icon:'📋', label:'Agenda' },
-  { to:'/ormas',    icon:'🏛️', label:'Ormas' },
-  { to:'/mahasiswa',icon:'🎓', label:'Gerakan Mahasiswa' },
-  { to:'/indikator',icon:'📊', label:'Indikator' },
-  { to:'/glosarium',icon:'📖', label:'Glosarium' },
-  { to:'/faq',      icon:'❓', label:'FAQ' },
-  { to:'/tentang',  icon:'ℹ️', label:'Tentang' },
-  { to:'/embed',    icon:'🔗', label:'Bagikan Profil' },
+  { to:'/cek-fakta', icon:'🔎', label:'Cek Fakta' },
+  { to:'/glosarium', icon:'📖', label:'Glosarium' },
+  { to:'/faq', icon:'❓', label:'FAQ' },
+  { to:'/tentang', icon:'ℹ️', label:'Tentang' },
+  { to:'/embed', icon:'🔗', label:'Bagikan Profil' },
 ]
 
-// Bottom nav: 5 most important tabs for mobile
+// Grouped nav for desktop sidebar
+const NAV_GROUPS = [
+  {
+    id: 'utama', label: null, pinned: true,
+    items: [
+      { to:'/', icon:'🏠', label:'Dashboard' },
+      { to:'/briefing', icon:'📋', label:'Briefing Harian' },
+      { to:'/news', icon:'📰', label:'Berita' },
+      { to:'/agendas', icon:'📋', label:'Agenda' },
+    ]
+  },
+  {
+    id: 'tokoh', label: 'Tokoh & Kekuasaan',
+    items: [
+      { to:'/persons', icon:'👥', label:'Tokoh' },
+      { to:'/parties', icon:'🎭', label:'Partai' },
+      { to:'/kabinet', icon:'🏛️', label:'Kabinet Merah Putih' },
+      { to:'/kabinet-perbandingan', icon:'🏛️', label:'Perbandingan Kabinet' },
+      { to:'/ranking', icon:'🏆', label:'Power Rankings' },
+      { to:'/dynasty', icon:'🌳', label:'Dinasti Politik' },
+      { to:'/jejak-jabatan', icon:'🗂️', label:'Jejak Jabatan' },
+    ]
+  },
+  {
+    id: 'jaringan', label: 'Jaringan & Analitik',
+    items: [
+      { to:'/network', icon:'🕸️', label:'Peta Jaringan' },
+      { to:'/pengaruh', icon:'🌐', label:'Peta Pengaruh' },
+      { to:'/analitik', icon:'📈', label:'Analitik' },
+      { to:'/perbandingan-tokoh', icon:'⚖️', label:'Bandingkan Tokoh' },
+      { to:'/stats', icon:'📊', label:'Statistik DB' },
+    ]
+  },
+  {
+    id: 'pemilu', label: 'Pemilu & Koalisi',
+    items: [
+      { to:'/elections', icon:'📊', label:'Pemilu Historis' },
+      { to:'/pilkada', icon:'🗳️', label:'Pilkada 2024' },
+      { to:'/survei', icon:'📉', label:'Survei & Polling' },
+      { to:'/koalisi', icon:'🤝', label:'Sejarah Koalisi' },
+      { to:'/dana-kampanye', icon:'💰', label:'Dana Kampanye' },
+      { to:'/dapil', icon:'🗳️', label:'Peta Dapil' },
+    ]
+  },
+  {
+    id: 'skenario', label: 'Skenario & Prediksi',
+    items: [
+      { to:'/scenarios', icon:'🔮', label:'Skenario 2029' },
+      { to:'/prediksi', icon:'🔮', label:'Prediksi 2029' },
+      { to:'/simulator', icon:'⚙️', label:'Simulator Koalisi' },
+      { to:'/risk', icon:'🚨', label:'Indeks Risiko' },
+    ]
+  },
+  {
+    id: 'hukum', label: 'Hukum & Korupsi',
+    items: [
+      { to:'/kpk', icon:'⚖️', label:'KPK Cases' },
+      { to:'/investigasi', icon:'🔍', label:'Investigasi' },
+      { to:'/coi', icon:'🔍', label:'Konflik Kepentingan' },
+      { to:'/hukum', icon:'📜', label:'Legislasi DPR' },
+      { to:'/korupsi-tracker', icon:'🚨', label:'Korupsi Tracker' },
+    ]
+  },
+  {
+    id: 'ekonomi', label: 'Ekonomi & Bisnis',
+    items: [
+      { to:'/lhkpn', icon:'💰', label:'LHKPN' },
+      { to:'/lhkpn-trend', icon:'📈', label:'Tren LHKPN' },
+      { to:'/apbn', icon:'💰', label:'APBN Tracker' },
+      { to:'/bumn', icon:'🏢', label:'BUMN & Danantara' },
+      { to:'/koneksi-bisnis', icon:'💼', label:'Koneksi Bisnis' },
+    ]
+  },
+  {
+    id: 'media', label: 'Media & Narasi',
+    items: [
+      { to:'/media', icon:'📡', label:'Kepemilikan Media' },
+      { to:'/media-monitor', icon:'📺', label:'Monitor Media' },
+      { to:'/framing', icon:'🗞️', label:'Framing Berita' },
+    ]
+  },
+  {
+    id: 'sejarah', label: 'Sejarah Politik',
+    items: [
+      { to:'/timeline', icon:'📅', label:'Linimasa' },
+      { to:'/timeline-kekuasaan', icon:'🏛️', label:'Sejarah Presiden' },
+      { to:'/reformasi', icon:'🏛️', label:'Era Reformasi' },
+      { to:'/arsip', icon:'📜', label:'Arsip' },
+      { to:'/voting', icon:'🗳️', label:'Rekam Voting' },
+    ]
+  },
+  {
+    id: 'lainnya', label: 'Lainnya',
+    items: [
+      { to:'/regions', icon:'🗺️', label:'Wilayah' },
+      { to:'/ormas', icon:'🏛️', label:'Ormas' },
+      { to:'/mahasiswa', icon:'🎓', label:'Gerakan Mahasiswa' },
+      { to:'/indikator', icon:'📊', label:'Indikator Nasional' },
+      { to:'/quick-facts', icon:'⚡', label:'Fakta Cepat' },
+      { to:'/cek-fakta', icon:'🔎', label:'Cek Fakta' },
+      { to:'/glosarium', icon:'📖', label:'Glosarium' },
+      { to:'/tentang', icon:'ℹ️', label:'Tentang' },
+    ]
+  },
+]
+
+// Bottom nav for mobile
 const MOBILE_NAV = [
-  { to:'/',        icon:'🏠', label:'Beranda' },
+  { to:'/', icon:'🏠', label:'Beranda' },
   { to:'/persons', icon:'👥', label:'Tokoh' },
   { to:'/network', icon:'🕸️', label:'Jaringan' },
-  { to:'/news',    icon:'📰', label:'Berita' },
+  { to:'/news', icon:'📰', label:'Berita' },
 ]
 
-// Remaining nav items shown in the "Lainnya" slide-up drawer
-const NAV_LAINNYA = NAV.filter(n =>
+// All items except mobile nav for the "Lainnya" drawer
+const NAV_LAINNYA = NAV_FLAT.filter(n =>
   !['/', '/persons', '/network', '/news'].includes(n.to)
 )
 
@@ -112,8 +218,24 @@ export default function Layout({ children }) {
   const navigate = useNavigate()
   const location = useLocation()
 
+  // Auto-expand groups containing active route
+  const activeGroupId = NAV_GROUPS.find(g =>
+    g.items.some(item => item.to !== '/' ? location.pathname.startsWith(item.to) : location.pathname === '/')
+  )?.id
+  const [openGroups, setOpenGroups] = useState(() => {
+    const init = {}
+    NAV_GROUPS.forEach(g => { init[g.id] = g.pinned || false })
+    return init
+  })
+  // Open the active group when location changes
+  useEffect(() => {
+    if (activeGroupId) setOpenGroups(prev => ({ ...prev, [activeGroupId]: true }))
+  }, [activeGroupId])
+
+  const toggleGroup = (id) => setOpenGroups(prev => ({ ...prev, [id]: !prev[id] }))
+
   // Breadcrumb
-  const pageLabel = NAV.find(n =>
+  const pageLabel = NAV_FLAT.find(n =>
     n.to !== '/' ? location.pathname.startsWith(n.to) : location.pathname === '/'
   )?.label || 'PetaPolitik'
 
@@ -143,30 +265,52 @@ export default function Layout({ children }) {
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 px-2 py-3 overflow-y-auto space-y-0.5" aria-label="Navigasi utama">
-          {NAV.map(link => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.to === '/'}
-              title={collapsed ? link.label : undefined}
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all duration-150 group relative ${
-                  isActive
-                    ? 'bg-white/10 text-white font-semibold border-l-2 border-red-500'
-                    : 'text-white/50 hover:text-white hover:bg-white/5'
-                }`
-              }
-            >
-              <span className="text-base flex-shrink-0">{link.icon}</span>
-              {!collapsed && <span className="truncate">{link.label}</span>}
-              {/* Tooltip when collapsed */}
-              {collapsed && (
-                <div className="absolute left-full ml-2 px-2.5 py-1.5 bg-gray-900 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 transition-opacity">
-                  {link.label}
+        <nav className="flex-1 px-2 py-3 overflow-y-auto" aria-label="Navigasi utama">
+          {NAV_GROUPS.map(group => (
+            <div key={group.id} className="mb-1">
+              {/* Group header (collapsible, hidden when sidebar collapsed) */}
+              {group.label && !collapsed && (
+                <button
+                  onClick={() => toggleGroup(group.id)}
+                  className="w-full flex items-center justify-between px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest text-white/30 hover:text-white/60 transition-colors"
+                >
+                  <span>{group.label}</span>
+                  <span className="text-[8px]">{openGroups[group.id] ? '▲' : '▼'}</span>
+                </button>
+              )}
+              {/* Group items */}
+              {(group.pinned || openGroups[group.id] || collapsed) && (
+                <div className="space-y-0.5">
+                  {group.items.map(link => (
+                    <NavLink
+                      key={link.to}
+                      to={link.to}
+                      end={link.to === '/'}
+                      title={collapsed ? link.label : undefined}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-150 group relative ${
+                          isActive
+                            ? 'bg-white/10 text-white font-semibold border-l-2 border-red-500'
+                            : 'text-white/50 hover:text-white hover:bg-white/5'
+                        }`
+                      }
+                    >
+                      <span className="text-base flex-shrink-0">{link.icon}</span>
+                      {!collapsed && <span className="truncate text-sm">{link.label}</span>}
+                      {collapsed && (
+                        <div className="absolute left-full ml-2 px-2.5 py-1.5 bg-gray-900 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 transition-opacity">
+                          {link.label}
+                        </div>
+                      )}
+                    </NavLink>
+                  ))}
                 </div>
               )}
-            </NavLink>
+              {/* Divider after pinned group */}
+              {group.pinned && !collapsed && (
+                <div className="my-2 border-t border-white/5" />
+              )}
+            </div>
           ))}
         </nav>
 
@@ -282,23 +426,33 @@ export default function Layout({ children }) {
                   </div>
                   <button onClick={() => setMobileOpen(false)} className="text-white/50 text-xl">×</button>
                 </div>
-                <nav className="flex-1 px-2 py-3 overflow-y-auto space-y-0.5">
-                  {NAV.map(link => (
-                    <NavLink
-                      key={link.to}
-                      to={link.to}
-                      end={link.to === '/'}
-                      onClick={() => setMobileOpen(false)}
-                      className={({ isActive }) =>
-                        `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm ${
-                          isActive
-                            ? 'bg-white/10 text-white border-l-2 border-red-500'
-                            : 'text-white/50 hover:text-white hover:bg-white/5'
-                        }`
-                      }
-                    >
-                      <span>{link.icon}</span>{link.label}
-                    </NavLink>
+                <nav className="flex-1 px-2 py-3 overflow-y-auto">
+                  {NAV_GROUPS.map(group => (
+                    <div key={group.id} className="mb-2">
+                      {group.label && (
+                        <p className="px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-white/30">{group.label}</p>
+                      )}
+                      <div className="space-y-0.5">
+                        {group.items.map(link => (
+                          <NavLink
+                            key={link.to}
+                            to={link.to}
+                            end={link.to === '/'}
+                            onClick={() => setMobileOpen(false)}
+                            className={({ isActive }) =>
+                              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm ${
+                                isActive
+                                  ? 'bg-white/10 text-white border-l-2 border-red-500'
+                                  : 'text-white/50 hover:text-white hover:bg-white/5'
+                              }`
+                            }
+                          >
+                            <span>{link.icon}</span><span>{link.label}</span>
+                          </NavLink>
+                        ))}
+                      </div>
+                      {group.pinned && <div className="my-2 border-t border-white/5" />}
+                    </div>
                   ))}
                 </nav>
               </motion.div>

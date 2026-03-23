@@ -676,6 +676,24 @@ export const CONNECTIONS = [
   { from:"fahri_hamzah", to:"ahmad_syaikhu", type:"konflik", label:"Dipecat PKS — konflik dengan pimpinan PKS", strength:8 },
   { from:"fahri_hamzah", to:"prabowo", type:"mantan-koalisi", label:"Mendukung Prabowo 2019 saat masih parlemen", strength:6 },
   { from:"fahri_hamzah", to:"jokowi", type:"konflik", label:"Fahri Hamzah pengkritik keras pemerintahan Jokowi", strength:8 },
+  // R36 new persons connections
+  { from:"try_sutrisno", to:"soeharto", type:"atasan-bawahan", label:"Wapres di bawah Presiden Soeharto 1993–1998", strength:9 },
+  { from:"try_sutrisno", to:"habibie", type:"kolega", label:"Sesama pejabat era transisi 1998", strength:6 },
+  { from:"try_sutrisno", to:"wiranto", type:"kolega", label:"Sesama perwira senior TNI AD", strength:7 },
+  { from:"rizal_ramli", to:"jokowi", type:"konflik", label:"Menko Maritim lalu konflik — Rizal mengkritik keras kebijakan Jokowi", strength:7 },
+  { from:"rizal_ramli", to:"prabowo", type:"konflik", label:"Ekonom kritis terhadap kebijakan ekonomi Prabowo", strength:6 },
+  { from:"rizal_ramli", to:"gus_dur", type:"kolega", label:"Menkeu era Gus Dur — ekonom kepercayaan", strength:8 },
+  { from:"rizal_ramli", to:"sri_mulyani", type:"konflik", label:"Rivalitas ekonom — beda visi kebijakan fiskal", strength:7 },
+  { from:"refly_harun", to:"anies", type:"rekan", label:"Pakar hukum sering bela Anies dalam sengketa pilkada", strength:7 },
+  { from:"refly_harun", to:"mahfud_md", type:"kolega", label:"Sesama pakar hukum tata negara", strength:6 },
+  { from:"refly_harun", to:"jokowi", type:"konflik", label:"Kritis terhadap putusan MK batas usia Cawapres", strength:7 },
+  { from:"rocky_gerung", to:"anies", type:"rekan", label:"Rocky mendukung Anies di Pilpres 2024", strength:8 },
+  { from:"rocky_gerung", to:"jokowi", type:"konflik", label:"Kritik tajam dan viral terhadap Jokowi", strength:9 },
+  { from:"rocky_gerung", to:"prabowo", type:"konflik", label:"Kritis terhadap pemerintahan Prabowo", strength:7 },
+  { from:"susno_duadji", to:"jokowi", type:"rekan", label:"Susno mendukung Jokowi di awal", strength:5 },
+  { from:"susno_duadji", to:"novel_baswedan", type:"konflik", label:"Cicak vs Buaya — Susno vs KPK, Novel penyidik KPK", strength:7 },
+  { from:"fuad_bawazier", to:"habibie", type:"atasan-bawahan", label:"Menkeu di kabinet transisi Habibie 1998", strength:9 },
+  { from:"fuad_bawazier", to:"rizal_ramli", type:"kolega", label:"Sesama ekonom kritis era pasca-Orde Baru", strength:6 },
 ];
 
 export const CONNECTION_TYPES = {
