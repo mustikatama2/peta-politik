@@ -64,6 +64,16 @@ export default function NetworkGraph({
   const [hoveredNode, setHoveredNode] = useState(null)
   const [tooltipPos, setTooltipPos]   = useState({ x: 0, y: 0 })
 
+  const handleZoomIn = useCallback(() => {
+    if (!svgRef.current || !zoomRef.current) return
+    d3.select(svgRef.current).transition().duration(300).call(zoomRef.current.scaleBy, 1.35)
+  }, [])
+
+  const handleZoomOut = useCallback(() => {
+    if (!svgRef.current || !zoomRef.current) return
+    d3.select(svgRef.current).transition().duration(300).call(zoomRef.current.scaleBy, 0.75)
+  }, [])
+
   // ── Pre-compute influence scores for all persons ──────────────────────────
   const scoreMap = useMemo(() => {
     const map = {}
@@ -359,9 +369,19 @@ export default function NetworkGraph({
       .on('mouseover', (event, d) => {
         setHoveredNode(d)
         setTooltipPos({ x: event.pageX, y: event.pageY })
+        // Show label on hover for low-influence nodes
+        if ((scoreMap[d.id] || 0) <= 70) {
+          d3.select(event.currentTarget).select('.node-label').attr('opacity', 1)
+        }
       })
       .on('mousemove', event => setTooltipPos({ x: event.pageX, y: event.pageY }))
-      .on('mouseout', () => setHoveredNode(null))
+      .on('mouseout', (event, d) => {
+        setHoveredNode(null)
+        // Hide label again for low-influence nodes
+        if ((scoreMap[d.id] || 0) <= 70) {
+          d3.select(event.currentTarget).select('.node-label').attr('opacity', 0)
+        }
+      })
 
     // Gold glow ring for path nodes
     node.filter(d => highlightSet?.has(d.id))
@@ -404,13 +424,15 @@ export default function NetworkGraph({
       })
       .attr('fill-opacity', 0.9)
 
-    // Node labels
+    // Node labels — always visible for high influence (score > 70), hover-only for others
     node.append('text')
+      .attr('class', 'node-label')
       .attr('dy', d => radius(d) + 14)
       .attr('text-anchor', 'middle')
       .attr('fill', '#F9FAFB')
       .attr('font-size', 10)
       .attr('font-weight', '500')
+      .attr('opacity', d => (scoreMap[d.id] || 0) > 70 ? 1 : 0)
       .text(d => {
         const parts = d.name?.split(' ') || ['?']
         return parts.length > 2 ? parts.slice(0, 2).join(' ') : d.name
@@ -560,6 +582,20 @@ export default function NetworkGraph({
           )}
         </div>
       )}
+
+      {/* Zoom Controls */}
+      <div className="absolute flex flex-col gap-1 z-10" style={{ bottom: MM_H + 20, right: 12 }}>
+        <button
+          onClick={handleZoomIn}
+          title="Zoom In"
+          className="w-8 h-8 bg-bg-card/90 border border-border rounded text-text-primary hover:bg-bg-elevated hover:border-accent/50 flex items-center justify-center font-bold text-base transition-colors shadow"
+        >+</button>
+        <button
+          onClick={handleZoomOut}
+          title="Zoom Out"
+          className="w-8 h-8 bg-bg-card/90 border border-border rounded text-text-primary hover:bg-bg-elevated hover:border-accent/50 flex items-center justify-center font-bold text-base transition-colors shadow"
+        >−</button>
+      </div>
 
       {/* Mini-map */}
       <div

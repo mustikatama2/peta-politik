@@ -79,13 +79,21 @@ function getPartyAbbr(partyId) {
 const TIER_LABEL = { nasional: 'Nasional', provinsi: 'Regional', kabupaten: 'Kabupaten', historis: 'Historis' }
 const RISK_COLOR = { rendah: 'text-green-400', sedang: 'text-yellow-400', tinggi: 'text-red-400', tersangka: 'text-red-500', terpidana: 'text-red-600' }
 
-// ── "Tokoh Terpanas" — top 3 by agenda count (persons only) ───────────────────
+// ── "Tokoh Terpanas" — top 6 by controversy_level ─────────────────────────────
 const HOT_PERSONS = PERSONS
   .filter(p => p.tier !== 'historis')
-  .map(p => ({ person: p, count: AGENDA_COUNTS[p.id] || 0 }))
-  .sort((a, b) => b.count - a.count)
-  .slice(0, 3)
+  .map(p => ({ person: p, score: p.analysis?.controversy_level || 0 }))
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 6)
   .map(x => x.person)
+
+// ── KPI Stats ─────────────────────────────────────────────────────────────────
+const STATS = {
+  total:    PERSONS.length,
+  nasional: PERSONS.filter(p => p.tier === 'nasional').length,
+  tersangka: PERSONS.filter(p => (p.analysis?.controversy_level || 0) >= 8 || KPK_SUSPECT_IDS.has(p.id)).length,
+  aktif:    PERSONS.filter(p => p.positions?.some(pos => pos.is_current)).length,
+}
 
 // ── LocalStorage sort preference ───────────────────────────────────────────────
 const getSavedSort = () => localStorage.getItem('pp_sort') || 'name'
@@ -170,8 +178,10 @@ export default function PersonList() {
   const filterParty   = searchParams.get('party')   || ''
   const filterRisk    = searchParams.get('risk')    || ''
   const filterTag     = searchParams.get('tag')     || ''
-  const filterWilayah = searchParams.get('wilayah') || ''
-  const filterJabatan = searchParams.get('jabatan') || ''
+  const filterWilayah     = searchParams.get('wilayah')      || ''
+  const filterJabatan     = searchParams.get('jabatan')      || ''
+  const filterActive      = searchParams.get('active')       || ''
+  const filterControversy = searchParams.get('controversy')  || ''
 
   const setFilter = (key, value) => {
     const next = new URLSearchParams(searchParams)
@@ -185,8 +195,10 @@ export default function PersonList() {
   const setFilterParty   = (v) => setFilter('party', v)
   const setFilterRisk    = (v) => setFilter('risk', v)
   const setFilterTag     = (v) => setFilter('tag', v)
-  const setFilterWilayah = (v) => setFilter('wilayah', v)
-  const setFilterJabatan = (v) => setFilter('jabatan', v)
+  const setFilterWilayah     = (v) => setFilter('wilayah', v)
+  const setFilterJabatan     = (v) => setFilter('jabatan', v)
+  const setFilterActive      = (v) => setFilter('active', v)
+  const setFilterControversy = (v) => setFilter('controversy', v)
 
   // Toggle party in advanced multi-select
   const toggleAdvParty = (pid) => {
@@ -249,6 +261,7 @@ export default function PersonList() {
     { value: 'connections', label: 'Koneksi Terbanyak ↓' },
     { value: 'controversy', label: 'Kontroversi Tertinggi ↓' },
     { value: 'risk', label: 'Risiko Korupsi ↓' },
+    { value: 'birth_year', label: 'Tahun Lahir ↑' },
   ]
 
   const wilayahOptions = [
@@ -261,6 +274,17 @@ export default function PersonList() {
     { value: 'Maluku', label: '🌊 Maluku' },
     { value: 'Papua', label: '🦜 Papua' },
     { value: 'jawa-timur', label: '🗺️ Jawa Timur' },
+  ]
+
+  const activeOptions = [
+    { value: 'aktif',       label: '✅ Aktif' },
+    { value: 'tidak-aktif', label: '❌ Tidak Aktif' },
+  ]
+
+  const controversyOptions = [
+    { value: 'rendah', label: '🟢 Rendah (<4)' },
+    { value: 'sedang', label: '🟡 Sedang (4–6)' },
+    { value: 'tinggi', label: '🔴 Tinggi (>6)' },
   ]
 
   const jabatanOptions = [
@@ -306,6 +330,13 @@ export default function PersonList() {
 
     if (filterJabatan) result = result.filter(p => getJabatan(p) === filterJabatan)
 
+    if (filterActive === 'aktif')       result = result.filter(p => p.positions?.some(pos => pos.is_current))
+    if (filterActive === 'tidak-aktif') result = result.filter(p => !p.positions?.some(pos => pos.is_current))
+
+    if (filterControversy === 'rendah') result = result.filter(p => (p.analysis?.controversy_level || 0) < 4)
+    if (filterControversy === 'sedang') result = result.filter(p => { const v = p.analysis?.controversy_level || 0; return v >= 4 && v <= 6 })
+    if (filterControversy === 'tinggi') result = result.filter(p => (p.analysis?.controversy_level || 0) > 6)
+
     // Advanced filters
     if (advParties.length) result = result.filter(p => advParties.includes(p.party_id))
 
@@ -339,19 +370,24 @@ export default function PersonList() {
         case 'connections': return (CONNECTION_COUNTS[b.id] || 0) - (CONNECTION_COUNTS[a.id] || 0)
         case 'controversy': return (b.analysis?.controversy_level || 0) - (a.analysis?.controversy_level || 0)
         case 'risk':        return (RISK_ORDER[b.analysis?.corruption_risk] || 0) - (RISK_ORDER[a.analysis?.corruption_risk] || 0)
+        case 'birth_year': {
+          const getYear = p => { const m = (p.born || '').match(/\d{4}/); return m ? parseInt(m[0]) : 9999 }
+          return getYear(a) - getYear(b)
+        }
         default:            return a.name.localeCompare(b.name)
       }
     })
 
     return result
   }, [search, filterTier, filterParty, filterRisk, filterTag, filterWilayah, filterJabatan,
+      filterActive, filterControversy,
       sortBy, showWatchlist, watchlist,
       advParties, advIdeology, advLhkpnMin, advLhkpnMax, advOnlyPhoto, advOnlyKpk])
 
   const visiblePersons = useMemo(() => filtered.slice(0, page * PAGE_SIZE), [filtered, page])
   const hasMore = filtered.length > page * PAGE_SIZE
 
-  const hasActiveFilter = search || filterTier || filterParty || filterRisk || filterTag || filterWilayah || filterJabatan || advActiveCount
+  const hasActiveFilter = search || filterTier || filterParty || filterRisk || filterTag || filterWilayah || filterJabatan || filterActive || filterControversy || advActiveCount
 
   const resetAll = () => {
     setSearchParams({}, { replace: true })
@@ -378,41 +414,60 @@ export default function PersonList() {
     <div className="space-y-5">
       <MetaTags title="Tokoh Politik" description="Direktori tokoh-tokoh politik Indonesia — profil, jabatan, kekayaan, dan rekam jejak" />
 
+      {/* ── Stats Bar ─────────────────────────────────────────────────────── */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {[
+          { label: 'Total Tokoh',        value: STATS.total,     icon: '👥', color: 'text-text-primary' },
+          { label: 'Tokoh Nasional',     value: STATS.nasional,  icon: '🏛️',  color: 'text-blue-400' },
+          { label: 'Tersangka/Terdakwa', value: STATS.tersangka, icon: '⚖️',  color: 'text-red-400' },
+          { label: 'Aktif Menjabat',     value: STATS.aktif,     icon: '✅',  color: 'text-green-400' },
+        ].map(stat => (
+          <div key={stat.label} className="bg-bg-card border border-border rounded-xl p-3 flex flex-col items-center justify-center gap-1">
+            <div className={`text-2xl font-bold tabular-nums ${stat.color}`}>{stat.value}</div>
+            <div className="text-xs text-text-secondary text-center">{stat.icon} {stat.label}</div>
+          </div>
+        ))}
+      </div>
+
       {/* ── Tokoh Terpanas ──────────────────────────────────────────────────── */}
       <div className="bg-bg-card border border-border rounded-xl p-4">
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-sm font-semibold text-text-primary flex items-center gap-2">
-            🔥 Tokoh Terpanas Minggu Ini
+            🔥 Tokoh Terpanas (Kontroversi Tertinggi)
           </h2>
-          <Link to="/persons?sort=agenda" className="text-xs text-accent hover:underline">Lihat semua →</Link>
+          <Link to="/persons?controversy=tinggi" className="text-xs text-accent hover:underline">Lihat semua →</Link>
         </div>
-        <div className="grid grid-cols-3 gap-3">
-          {HOT_PERSONS.map((p, i) => (
-            <Link key={p.id} to={`/persons/${p.id}`}
-              className="flex items-center gap-2.5 p-2.5 rounded-lg bg-bg-elevated hover:bg-bg-hover transition-colors group">
-              <div className="relative shrink-0">
-                {p.photo_url ? (
-                  <img src={p.photo_url} alt={p.name}
-                    className="w-10 h-10 rounded-full object-cover border border-border" />
-                ) : (
-                  <div className="w-10 h-10 rounded-full bg-bg-hover border border-border flex items-center justify-center text-xs font-bold text-text-secondary">
-                    {p.photo_placeholder || p.name[0]}
-                  </div>
-                )}
-                <span className="absolute -top-1 -left-1 w-4 h-4 rounded-full bg-orange-500 text-white text-[9px] font-bold flex items-center justify-center">
-                  {i + 1}
-                </span>
-              </div>
-              <div className="min-w-0">
-                <p className="text-xs font-medium text-text-primary truncate group-hover:text-accent transition-colors">
-                  {p.name}
+        <div className="flex gap-3 overflow-x-auto pb-1" style={{ scrollbarWidth: 'thin' }}>
+          {HOT_PERSONS.map((p, i) => {
+            const controversy = p.analysis?.controversy_level || 0
+            const flameCount = Math.min(Math.ceil(controversy / 2), 5)
+            const flames = '🔥'.repeat(flameCount)
+            return (
+              <Link key={p.id} to={`/persons/${p.id}`}
+                className="flex-shrink-0 w-32 flex flex-col items-center gap-1.5 p-3 rounded-xl bg-bg-elevated hover:bg-bg-hover border border-border/50 hover:border-orange-500/40 transition-all group">
+                <div className="relative">
+                  {p.photo_url ? (
+                    <img src={p.photo_url} alt={p.name}
+                      className="w-12 h-12 rounded-full object-cover border-2 border-orange-500/40" />
+                  ) : (
+                    <div className="w-12 h-12 rounded-full bg-orange-500/15 border-2 border-orange-500/40 flex items-center justify-center text-sm font-bold text-orange-400">
+                      {p.photo_placeholder || p.name[0]}
+                    </div>
+                  )}
+                  <span className="absolute -top-1 -left-1 w-5 h-5 rounded-full bg-orange-500 text-white text-[10px] font-bold flex items-center justify-center shadow">
+                    {i + 1}
+                  </span>
+                </div>
+                <p className="text-xs font-medium text-text-primary text-center truncate w-full group-hover:text-accent transition-colors leading-tight">
+                  {p.name.split(' ').slice(0, 2).join(' ')}
                 </p>
-                <p className="text-[10px] text-text-secondary truncate">
-                  {getPartyAbbr(p.party_id)}
+                <p className="text-[11px] text-orange-400 font-medium tracking-wide">{flames}</p>
+                <p className="text-[10px] text-text-muted text-center truncate w-full leading-tight">
+                  {(p.positions?.[0]?.title || '—').split(' ').slice(0, 3).join(' ')}
                 </p>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            )
+          })}
         </div>
       </div>
 
@@ -476,8 +531,10 @@ export default function PersonList() {
         <Select value={filterJabatan} onChange={setFilterJabatan} options={jabatanOptions} placeholder="💼 Semua Jabatan" className="min-w-[160px]" />
         <Select value={filterTier}    onChange={setFilterTier}    options={tierOptions}    placeholder="Semua Tingkat"   className="min-w-[140px]" />
         <Select value={filterParty}   onChange={setFilterParty}   options={partyOptions}   placeholder="Semua Partai"   className="min-w-[140px]" />
-        <Select value={filterRisk}    onChange={setFilterRisk}    options={riskOptions}    placeholder="Semua Risiko"   className="min-w-[140px]" />
-        <Select value={filterTag}     onChange={setFilterTag}     options={tagOptions}     placeholder="Semua Tag"      className="min-w-[140px]" />
+        <Select value={filterRisk}        onChange={setFilterRisk}        options={riskOptions}        placeholder="Semua Risiko"    className="min-w-[140px]" />
+        <Select value={filterTag}         onChange={setFilterTag}         options={tagOptions}         placeholder="Semua Tag"       className="min-w-[140px]" />
+        <Select value={filterActive}      onChange={setFilterActive}      options={activeOptions}      placeholder="Aktif / Tidak"   className="min-w-[140px]" />
+        <Select value={filterControversy} onChange={setFilterControversy} options={controversyOptions} placeholder="Kontroversi"     className="min-w-[140px]" />
 
         {/* Filter Lanjutan toggle */}
         <button
