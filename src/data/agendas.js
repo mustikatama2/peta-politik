@@ -1133,6 +1133,205 @@ export const AGENDAS = [
     status:"mendatang", budget_idr:null,
     source:"DPR RI / Kemenkeu, 2025", year:2025,
   },
+
+  // ── April 2025 ────────────────────────────────────────────────────────────
+  {
+    id:"a_sidang_hasto_tipikor_apr2025", subject_id:"hasto_kristiyanto", subject_type:"person",
+    title:"Sidang Lanjutan Hasto Kristiyanto di PN Tipikor",
+    description:"Persidangan lanjutan Sekjen PDIP Hasto Kristiyanto di Pengadilan Negeri Tindak Pidana Korupsi Jakarta. KPK mendakwa Hasto terkait kasus suap pergantian antarwaktu (PAW) anggota DPR dan perintangan penyidikan Harun Masiku. Sidang menghadirkan saksi-saksi kunci.",
+    status:"proses", budget_idr:null,
+    source:"KPK RI / PN Tipikor Jakarta, April 2025", year:2025,
+  },
+  {
+    id:"a_ktt_asean_kl_2025", subject_id:"prabowo", subject_type:"person",
+    title:"KTT ASEAN Summit Kuala Lumpur 2025",
+    description:"Pertemuan puncak para kepala negara ASEAN di Kuala Lumpur, Malaysia. Agenda utama: stabilitas Laut China Selatan, transformasi ekonomi digital, dan penguatan rantai pasok regional. Presiden Prabowo hadir mewakili Indonesia sebagai anggota pendiri ASEAN.",
+    status:"selesai", budget_idr:null,
+    source:"ASEAN Secretariat / Kemlu RI, April 2025", year:2025,
+  },
+  {
+    id:"a_paripurna_ruu_kejaksaan_2025", subject_id:"prabowo", subject_type:"person",
+    title:"Rapat Paripurna DPR — RUU Kejaksaan",
+    description:"DPR menggelar rapat paripurna untuk membahas dan mengesahkan Revisi Undang-Undang Kejaksaan. RUU ini memperluas kewenangan Kejaksaan Agung dalam penanganan perkara korupsi dan memperkuat koordinasi dengan KPK dan kepolisian.",
+    status:"mendatang", budget_idr:null,
+    source:"DPR RI / Komisi III, April 2025", year:2025,
+  },
+  {
+    id:"a_opm_papua_kodam_apr2025", subject_id:"prabowo", subject_type:"person",
+    title:"Pengumuman OPM Papua — Laporan Kodam XVII Cenderawasih",
+    description:"Kodam XVII Cenderawasih merilis laporan terkini operasi militer menghadapi Kelompok Kriminal Bersenjata (KKB) / OPM di Papua. Laporan mencakup situasi keamanan di Puncak Jaya, Nduga, dan Pegunungan Bintang, serta perkembangan pembangunan di kawasan terdampak.",
+    status:"proses", budget_idr:null,
+    source:"Kodam XVII Cenderawasih / Mabes TNI, April 2025", year:2025,
+  },
+  {
+    id:"a_mbg_nasional_penuh_apr2025", subject_id:"prabowo", subject_type:"person",
+    title:"Peluncuran Penuh Makan Bergizi Gratis (MBG) Nasional",
+    description:"Pemerintahan Prabowo meluncurkan fase penuh program Makan Bergizi Gratis (MBG) yang menjangkau seluruh 38 provinsi. Target 3 juta penerima manfaat di fase awal, dengan anggaran Rp71 triliun dari APBN 2025. Program dikelola oleh Badan Gizi Nasional.",
+    status:"proses", budget_idr:71_000_000_000_000,
+    source:"Badan Gizi Nasional / Kemendikbud, April 2025", year:2025,
+  },
+  {
+    id:"a_wef_indonesia_apr2025", subject_id:"prabowo", subject_type:"person",
+    title:"Forum Ekonomi Dunia (WEF) Indonesia 2025",
+    description:"Indonesia menjadi tuan rumah pertemuan khusus World Economic Forum yang membahas investasi, transisi energi, dan ekonomi digital. Presiden Prabowo bertemu para pemimpin bisnis global untuk mempromosikan hilirisasi nikel dan proyek IKN.",
+    status:"selesai", budget_idr:null,
+    source:"World Economic Forum / BKPM, April 2025", year:2025,
+  },
+  {
+    id:"a_rapim_tni_polri_2025", subject_id:"prabowo", subject_type:"person",
+    title:"Rapim TNI-Polri 2025",
+    description:"Rapat Pimpinan TNI dan Polri 2025 membahas evaluasi kinerja, program prioritas keamanan nasional, dan sinergitas TNI-Polri. Presiden Prabowo selaku Panglima Tertinggi memberikan arahan strategis terkait ancaman keamanan siber, Papua, dan pemilu daerah.",
+    status:"selesai", budget_idr:null,
+    source:"Mabes TNI / Mabes Polri, April 2025", year:2025,
+  },
+
+  // ── Mei 2025 ─────────────────────────────────────────────────────────────
+  {
+    id:"a_harkitnas_20mei2025", subject_id:"prabowo", subject_type:"person",
+    title:"Peringatan Hari Kebangkitan Nasional 20 Mei 2025",
+    description:"Peringatan Hari Kebangkitan Nasional ke-117 di Istana Negara. Presiden Prabowo menyampaikan pidato kebangsaan bertema kemandirian ekonomi dan persatuan nasional. Acara dihadiri pimpinan lembaga negara, tokoh masyarakat, dan perwakilan pemuda.",
+    status:"mendatang", budget_idr:null,
+    source:"Setneg RI / Kemendikbud, Mei 2025", year:2025,
+  },
+  {
+    id:"a_rakernas_pdip_2025", subject_id:"megawati", subject_type:"person",
+    title:"Rapat Nasional PDIP 2025 — Evaluasi Pilpres dan Strategi Oposisi",
+    description:"PDIP menggelar Rapat Kerja Nasional untuk mengevaluasi hasil Pilpres 2024 dan merumuskan strategi oposisi. Ketua Umum Megawati Soekarnoputri memimpin sidang pleno. Agenda: konsolidasi kader, pembenahan organisasi, dan roadmap menuju Pemilu 2029.",
+    status:"mendatang", budget_idr:null,
+    source:"DPP PDI Perjuangan, Mei 2025", year:2025,
+  },
+  {
+    id:"a_klb_pks_evaluasi_2024", subject_id:"ahy", subject_type:"person",
+    title:"Kongres Luar Biasa PKS — Evaluasi Pemilu 2024",
+    description:"Partai Keadilan Sejahtera (PKS) menggelar Kongres Luar Biasa untuk mengevaluasi kinerja partai di Pemilu 2024 dan menentukan arah koalisi ke depan. PKS yang kini bergabung dalam pemerintahan Prabowo membahas distribusi jabatan dan program legislasi.",
+    status:"mendatang", budget_idr:null,
+    source:"DPP PKS, Mei 2025", year:2025,
+  },
+  {
+    id:"a_sidang_tom_lembong_mei2025", subject_id:"tom_lembong", subject_type:"person",
+    title:"Sidang Tom Lembong Lanjutan — Kasus Impor Gula",
+    description:"Persidangan lanjutan mantan Menteri Perdagangan Tom Lembong di Pengadilan Tipikor Jakarta. Jaksa KPK mendakwa Tom terkait kebijakan impor gula kristal mentah yang dinilai merugikan negara. Sidang menghadirkan saksi ahli ekonomi dan bukti dokumen.",
+    status:"proses", budget_idr:null,
+    source:"KPK RI / PN Tipikor Jakarta, Mei 2025", year:2025,
+  },
+  {
+    id:"a_dies_natalis_ui_75", subject_id:"prabowo", subject_type:"person",
+    title:"Dies Natalis Universitas Indonesia ke-75",
+    description:"Universitas Indonesia merayakan Dies Natalis ke-75 dengan serangkaian acara akademik dan orasi ilmiah. Presiden Prabowo dijadwalkan hadir sebagai tamu kehormatan. Tema perayaan: 'Inovasi untuk Kemajuan Bangsa'.",
+    status:"mendatang", budget_idr:null,
+    source:"Universitas Indonesia, Mei 2025", year:2025,
+  },
+  {
+    id:"a_g7_summit_kanada_2025", subject_id:"prabowo", subject_type:"person",
+    title:"KTT G7 Summit Kanada 2025 — Indonesia Diundang",
+    description:"Indonesia menerima undangan khusus menghadiri KTT G7 di Kanada sebagai mitra outreach. Presiden Prabowo bertemu para pemimpin G7 untuk membahas isu geopolitik global, ketahanan pangan, dan transisi energi. Momen strategis memperkuat posisi Indonesia di forum multilateral.",
+    status:"mendatang", budget_idr:null,
+    source:"Kemlu RI / G7 Secretariat, Mei 2025", year:2025,
+  },
+  {
+    id:"a_muktamar_pkb_ke6_2025", subject_id:"cakimin", subject_type:"person",
+    title:"Muktamar PKB ke-6 — Evaluasi Koalisi",
+    description:"Partai Kebangkitan Bangsa menggelar Muktamar ke-6 untuk mengevaluasi posisi partai dalam koalisi pemerintahan Prabowo. Agenda utama: pemilihan ketua umum, konsolidasi basis NU, dan strategi menghadapi persaingan dengan PKB kelompok Gus Yahya di NU.",
+    status:"mendatang", budget_idr:null,
+    source:"DPP PKB, Mei 2025", year:2025,
+  },
+
+  // ── Juni 2025 ─────────────────────────────────────────────────────────────
+  {
+    id:"a_hari_lahir_pancasila_2025", subject_id:"prabowo", subject_type:"person",
+    title:"Hari Lahir Pancasila 1 Juni 2025 — Pidato Presiden Prabowo",
+    description:"Presiden Prabowo Subianto menyampaikan pidato kenegaraan dalam peringatan Hari Lahir Pancasila ke-80. Acara berlangsung di Gedung MPR/DPR dengan dihadiri seluruh pimpinan lembaga negara, tokoh agama, dan duta besar negara sahabat.",
+    status:"mendatang", budget_idr:null,
+    source:"Setneg RI / BPIP, Juni 2025", year:2025,
+  },
+  {
+    id:"a_sidang_umum_mpr_2025", subject_id:"prabowo", subject_type:"person",
+    title:"Sidang Umum MPR 2025 — Evaluasi Kinerja Pemerintah",
+    description:"Majelis Permusyawaratan Rakyat menggelar sidang umum tahunan untuk mendengarkan laporan kinerja lembaga-lembaga negara. Presiden Prabowo menyampaikan pidato pertanggungjawaban setengah tahun pertama pemerintahan Kabinet Merah Putih.",
+    status:"mendatang", budget_idr:null,
+    source:"MPR RI, Juni 2025", year:2025,
+  },
+  {
+    id:"a_evaluasi_100hari_kabinet_mp", subject_id:"prabowo", subject_type:"person",
+    title:"Pengumuman Evaluasi 100 Hari Kabinet Merah Putih",
+    description:"Pemerintahan Prabowo-Gibran mengumumkan hasil evaluasi resmi 100 hari Kabinet Merah Putih. Fokus evaluasi: realisasi program prioritas MBG, swasembada pangan, hilirisasi, dan pembangunan IKN. Publik dan media menanti laporan capaian vs target janji kampanye.",
+    status:"selesai", budget_idr:null,
+    source:"Setkab RI / Kantor Presiden, 2025", year:2025,
+  },
+  {
+    id:"a_unfccc_prep_indonesia_2025", subject_id:"prabowo", subject_type:"person",
+    title:"UNFCCC Preparatory Meeting — Indonesia Tuan Rumah",
+    description:"Indonesia menjadi tuan rumah pertemuan persiapan UNFCCC (United Nations Framework Convention on Climate Change) menjelang COP. Delegasi dari 100+ negara membahas target pengurangan emisi, pendanaan iklim, dan transisi energi. Kementerian LHK memimpin delegasi RI.",
+    status:"mendatang", budget_idr:null,
+    source:"UNFCCC / Kementerian LHK RI, Juni 2025", year:2025,
+  },
+  {
+    id:"a_kpk_pemeriksaan_bts_kominfo_lanjut", subject_id:"prabowo", subject_type:"person",
+    title:"KPK — Pemeriksaan Ulang Kasus BTS Kominfo Lanjutan",
+    description:"KPK melanjutkan proses hukum kasus korupsi BTS BAKTI Kominfo yang menjerat mantan Menkominfo Johnny G. Plate. Pemeriksaan kembali mencakup dugaan aliran dana ke pihak-pihak baru yang teridentifikasi dari bukti digital dan keterangan saksi mahkota.",
+    status:"proses", budget_idr:null,
+    source:"KPK RI / Kejagung, Juni 2025", year:2025,
+  },
+  {
+    id:"a_rapbn_2026_pembahasan_dpr", subject_id:"sri_mulyani", subject_type:"person",
+    title:"Rapat DPR — Pembahasan RAPBN 2026",
+    description:"DPR RI bersama pemerintah memulai pembahasan Rancangan Anggaran Pendapatan dan Belanja Negara (RAPBN) 2026. Menteri Keuangan Sri Mulyani memaparkan postur anggaran dengan fokus pada efisiensi belanja, penerimaan pajak, dan pembiayaan program sosial prioritas.",
+    status:"mendatang", budget_idr:null,
+    source:"DPR RI / Kemenkeu, Juni 2025", year:2025,
+  },
+
+  // ── Juli–Desember 2025 ────────────────────────────────────────────────────
+  {
+    id:"a_hut_ri_ke80_agustus2025", subject_id:"prabowo", subject_type:"person",
+    title:"Hari Kemerdekaan RI ke-80 — Sidang Tahunan MPR",
+    description:"Peringatan HUT Kemerdekaan Republik Indonesia ke-80 pada 17 Agustus 2025. Sidang Tahunan MPR digelar di IKN Nusantara sebagai simbol perpindahan ibu kota. Presiden Prabowo menyampaikan pidato kenegaraan di Istana Negara IKN.",
+    status:"mendatang", budget_idr:null,
+    source:"Setneg RI / MPR RI, Agustus 2025", year:2025,
+  },
+  {
+    id:"a_penyerahan_rapbn2026_ke_dpr", subject_id:"sri_mulyani", subject_type:"person",
+    title:"Penyerahan RAPBN 2026 ke DPR",
+    description:"Pemerintah menyerahkan nota keuangan dan Rancangan APBN 2026 kepada Dewan Perwakilan Rakyat. Menteri Keuangan Sri Mulyani mempresentasikan asumsi makroekonomi, postur belanja, dan target penerimaan negara untuk tahun anggaran 2026.",
+    status:"mendatang", budget_idr:null,
+    source:"Kemenkeu / DPR RI, Agustus 2025", year:2025,
+  },
+  {
+    id:"a_psu_pilkada_pasca_mk_sept2025", subject_id:"prabowo", subject_type:"person",
+    title:"Pemungutan Suara Ulang (PSU) Pasca Putusan MK — Sept 2025",
+    description:"KPU melaksanakan Pemungutan Suara Ulang di beberapa daerah sesuai putusan Mahkamah Konstitusi yang mengabulkan sengketa Pilkada 2024. Daerah terdampak mencakup beberapa kabupaten/kota di Jawa, Sulawesi, dan Papua.",
+    status:"mendatang", budget_idr:null,
+    source:"KPU RI / MK RI, September 2025", year:2025,
+  },
+  {
+    id:"a_kongres_golkar_xix_2025", subject_id:"bahlil", subject_type:"person",
+    title:"Kongres Partai Golkar XIX — Bahlil vs Incumbent",
+    description:"Partai Golkar menggelar Kongres ke-XIX untuk memilih ketua umum baru. Menteri ESDM Bahlil Lahadalia menjadi kandidat terkuat bersaing dengan kubu incumbent. Kongres berlangsung panas di tengah tekanan Istana dan kepentingan koalisi pemerintahan Prabowo.",
+    status:"mendatang", budget_idr:null,
+    source:"DPP Partai Golkar, Oktober 2025", year:2025,
+  },
+  {
+    id:"a_muktamar_muhammadiyah_48", subject_id:"amien_rais", subject_type:"person",
+    title:"Muktamar Muhammadiyah ke-48",
+    description:"Muhammadiyah menyelenggarakan Muktamar ke-48 untuk memilih pimpinan pusat baru dan menetapkan program kerja 5 tahun ke depan. Agenda strategis: sikap Muhammadiyah terhadap pemerintahan Prabowo, isu pertambangan, dan posisi terhadap RUU kontroversial.",
+    status:"mendatang", budget_idr:null,
+    source:"PP Muhammadiyah, November 2025", year:2025,
+  },
+  {
+    id:"a_sidang_akhir_tahun_ma_2025", subject_id:"prabowo", subject_type:"person",
+    title:"Sidang Akhir Tahun Mahkamah Agung 2025",
+    description:"Mahkamah Agung menggelar sidang pleno akhir tahun untuk menyampaikan laporan kinerja peradilan 2025. Sorotan utama: penyelesaian tunggakan perkara, integritas hakim pasca OTT KPK, dan reformasi sistem peradilan elektronik.",
+    status:"mendatang", budget_idr:null,
+    source:"Mahkamah Agung RI, Desember 2025", year:2025,
+  },
+
+  // ── 2026 ─────────────────────────────────────────────────────────────────
+  {
+    id:"a_hut_gerindra_ke17_feb2026", subject_id:"prabowo", subject_type:"person",
+    title:"HUT Gerindra ke-17 — Konsolidasi Kader",
+    description:"Partai Gerindra merayakan hari ulang tahun ke-17 dengan acara konsolidasi kader nasional. Ketua Umum sekaligus Presiden Prabowo Subianto memberikan pidato kepada ribuan kader. Acara sekaligus menjadi ajang konsolidasi menghadapi Pemilu 2029.",
+    status:"mendatang", budget_idr:null,
+    source:"DPP Gerindra, Februari 2026", year:2026,
+  },
 ]
 
 export const AGENDA_STATUS_CONFIG = {

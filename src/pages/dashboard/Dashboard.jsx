@@ -328,44 +328,61 @@ function FaktaHariIni() {
 }
 
 // ── Tokoh Terpanas Minggu Ini ─────────────────────────────────────────────
-function TokohTerpanas() {
-  // Count agendas per person subject
-  const counts = {}
+const hotPersonsData = (() => {
+  const scored = scoreAllPersons()
+  const agendaCounts = {}
   AGENDAS.forEach(a => {
     if (a.subject_type === 'person' && a.subject_id) {
-      counts[a.subject_id] = (counts[a.subject_id] || 0) + 1
+      agendaCounts[a.subject_id] = (agendaCounts[a.subject_id] || 0) + 1
     }
   })
-
-  const top3 = Object.entries(counts)
-    .sort((a, b) => b[1] - a[1])
+  // Combined heat score: power score + 2× agenda count
+  return scored
+    .map(p => ({
+      ...p,
+      agendas: agendaCounts[p.id] || 0,
+      heat: p.total + (agendaCounts[p.id] || 0) * 2,
+    }))
+    .sort((a, b) => b.heat - a.heat)
     .slice(0, 3)
-    .map(([id, count]) => ({ person: PERSONS.find(p => p.id === id), count, id }))
+    .map(p => ({ ...p, person: PERSONS.find(x => x.id === p.id) }))
     .filter(x => x.person)
+})()
 
-  if (!top3.length) return null
+function flameBar(score, max) {
+  const pct = Math.min(score / max, 1)
+  if (pct > 0.8) return '🔥🔥🔥'
+  if (pct > 0.5) return '🔥🔥'
+  return '🔥'
+}
+
+function TokohTerpanas() {
+  const maxHeat = hotPersonsData[0]?.heat || 1
+
+  if (!hotPersonsData.length) return null
 
   return (
     <Card className="p-5">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-sm font-semibold text-text-primary flex items-center gap-2">
           🔥 Tokoh Terpanas Minggu Ini
-          <span className="text-xs font-normal text-text-secondary">berdasarkan agenda aktif</span>
+          <span className="text-xs font-normal text-text-secondary">skor kekuasaan + agenda aktif</span>
         </h2>
-        <Link to="/persons" className="text-xs text-accent-blue hover:underline">Semua tokoh →</Link>
+        <Link to="/ranking" className="text-xs text-accent-blue hover:underline">Ranking lengkap →</Link>
       </div>
       <div className="space-y-3">
-        {top3.map(({ person, count, id }, rank) => {
+        {hotPersonsData.map(({ person, heat, agendas, total }, rank) => {
           const party = PARTY_MAP[person.party_id]
+          const flames = flameBar(heat, maxHeat)
           return (
             <Link
-              key={id}
-              to={`/persons/${id}`}
+              key={person.id}
+              to={`/persons/${person.id}`}
               className="flex items-center gap-3 p-3 rounded-xl border border-border bg-bg-elevated hover:border-accent-red/50 transition-all group"
             >
-              {/* Rank */}
-              <span className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-text-muted flex-shrink-0">
-                {rank + 1}
+              {/* Rank medal */}
+              <span className="w-6 text-center text-base flex-shrink-0">
+                {rank === 0 ? '🥇' : rank === 1 ? '🥈' : '🥉'}
               </span>
               {/* Avatar */}
               <div
@@ -388,7 +405,7 @@ function TokohTerpanas() {
                 <p className="text-sm font-semibold text-text-primary group-hover:text-accent-red truncate">
                   {person.name}
                 </p>
-                <div className="flex items-center gap-1.5 mt-0.5">
+                <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
                   {party && (
                     <span
                       className="text-[10px] font-bold px-1.5 py-0.5 rounded"
@@ -397,14 +414,69 @@ function TokohTerpanas() {
                       {party.abbr}
                     </span>
                   )}
-                  <span className="text-[10px] text-text-muted">{person.positions?.[0]?.title || ''}</span>
+                  <span className="text-[10px] text-text-muted">{agendas} agenda aktif</span>
                 </div>
               </div>
-              {/* Agenda count */}
+              {/* Heat score + flames */}
               <div className="text-right flex-shrink-0">
-                <span className="text-lg font-bold text-accent-red">{count}</span>
-                <p className="text-[10px] text-text-muted">agenda</p>
+                <span className="text-sm">{flames}</span>
+                <p className="text-xs font-bold text-accent-red">{heat}</p>
+                <p className="text-[10px] text-text-muted">heat score</p>
               </div>
+            </Link>
+          )
+        })}
+      </div>
+    </Card>
+  )
+}
+
+// ── Koneksi Terbaru ───────────────────────────────────────────────────────
+const recentConnections = [...CONNECTIONS].slice(-10).reverse()
+
+function KoneksiTerbaru() {
+  const typeColors = {
+    koalisi:        '#3B82F6',
+    keluarga:       '#F59E0B',
+    konflik:        '#DC2626',
+    bisnis:         '#10B981',
+    rival:          '#EF4444',
+    kolega:         '#64748B',
+    rekan:          '#6B7280',
+    'mentor-murid': '#8B5CF6',
+    'mantan-koalisi':'#D97706',
+    'atasan-bawahan':'#0EA5E9',
+    ideologi:       '#7C3AED',
+    oposisi:        '#B91C1C',
+  }
+
+  return (
+    <Card className="p-5">
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-semibold text-text-primary flex items-center gap-2">
+          🕸️ Koneksi Terbaru
+          <span className="text-xs font-normal text-text-secondary">10 koneksi terbaru</span>
+        </h2>
+        <Link to="/network" className="text-xs text-accent-blue hover:underline">Lihat jaringan →</Link>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {recentConnections.map((conn, i) => {
+          const fromPerson = PERSONS.find(p => p.id === conn.from)
+          const toPerson   = PERSONS.find(p => p.id === conn.to)
+          const color      = typeColors[conn.type] || '#6B7280'
+          const fromName   = fromPerson ? fromPerson.name.split(' ')[0] : conn.from
+          const toName     = toPerson   ? toPerson.name.split(' ')[0]   : conn.to
+          return (
+            <Link
+              key={i}
+              to="/network"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full border text-xs font-medium hover:opacity-80 transition-opacity"
+              style={{ borderColor: color + '60', backgroundColor: color + '15', color }}
+              title={conn.label}
+            >
+              <span className="font-semibold">{fromName}</span>
+              <span className="opacity-60">→</span>
+              <span className="font-semibold">{toName}</span>
             </Link>
           )
         })}
@@ -474,52 +546,59 @@ function AlertBanner() {
   )
 }
 
-// ── A. Agenda Politik Terkini ──────────────────────────────────────────────
+// ── A. Agenda Mendatang ────────────────────────────────────────────────────
 function HariIniDiPolitik() {
   const agendas = [
     ...AGENDAS.filter(a => a.status === 'berlangsung'),
-    ...AGENDAS.filter(a => a.status === 'mendatang'),
-    ...AGENDAS.filter(a => a.status === 'proses' && a.year >= 2025),
-  ].slice(0, 3)
+    ...AGENDAS.filter(a => a.status === 'mendatang').sort((a, b) => (a.year || 0) - (b.year || 0)),
+    ...AGENDAS.filter(a => a.status === 'proses' && a.year >= 2025).sort((a, b) => (b.year || 0) - (a.year || 0)),
+  ].slice(0, 5)
 
   const statusCfg = {
-    berlangsung: { color: '#EF4444', label: 'Berlangsung', bg: '#EF444420' },
-    mendatang:   { color: '#8B5CF6', label: 'Mendatang',   bg: '#8B5CF620' },
-    proses:      { color: '#F59E0B', label: 'Proses',      bg: '#F59E0B20' },
+    berlangsung: { color: '#EF4444', label: '🔴 Live',      bg: '#EF444420' },
+    mendatang:   { color: '#8B5CF6', label: '🟣 Mendatang', bg: '#8B5CF620' },
+    proses:      { color: '#F59E0B', label: '🟡 Proses',    bg: '#F59E0B20' },
   }
 
   return (
     <Card className="p-5">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-sm font-semibold text-text-primary flex items-center gap-2">
-          📅 Hari Ini di Politik
+          📅 Agenda Mendatang
         </h2>
         <Link to="/agendas" className="text-xs text-accent-blue hover:underline">Semua agenda →</Link>
       </div>
       {agendas.length === 0 ? (
-        <p className="text-text-secondary text-sm py-2 text-center">Tidak ada agenda terjadwal minggu ini</p>
+        <p className="text-text-secondary text-sm py-2 text-center">Tidak ada agenda terjadwal</p>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {agendas.map(a => {
             const person = a.subject_type === 'person' ? PERSONS.find(p => p.id === a.subject_id) : null
             const cfg = statusCfg[a.status] || { color: '#6B7280', label: a.status, bg: '#6B728020' }
             return (
-              <div key={a.id} className="flex items-start gap-3 p-3 rounded-xl border border-border bg-bg-elevated">
-                <span
-                  className="text-[10px] px-2 py-0.5 rounded-full font-medium flex-shrink-0 mt-0.5"
-                  style={{ background: cfg.bg, color: cfg.color, border: `1px solid ${cfg.color}60` }}
-                >
-                  {cfg.label}
-                </span>
+              <div key={a.id} className="flex items-start gap-3 p-3 rounded-xl border border-border bg-bg-elevated hover:border-accent-blue/40 transition-colors">
+                <div className="flex-shrink-0 text-center min-w-[42px]">
+                  <span
+                    className="text-[9px] px-1.5 py-0.5 rounded font-bold block"
+                    style={{ background: cfg.bg, color: cfg.color }}
+                  >
+                    {a.year}
+                  </span>
+                </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-text-primary leading-snug">{a.title}</p>
+                  <p className="text-xs font-medium text-text-primary leading-snug">{a.title}</p>
                   {person && (
-                    <Link to={`/persons/${person.id}`} className="text-xs text-accent-blue hover:underline mt-0.5 block">
-                      {person.name}
+                    <Link to={`/persons/${person.id}`} className="text-[10px] text-accent-blue hover:underline mt-0.5 block">
+                      👤 {person.name}
                     </Link>
                   )}
                 </div>
-                <span className="text-xs text-text-muted flex-shrink-0">{a.year}</span>
+                <span
+                  className="text-[9px] px-1.5 py-0.5 rounded-full font-medium flex-shrink-0 whitespace-nowrap"
+                  style={{ background: cfg.bg, color: cfg.color }}
+                >
+                  {cfg.label}
+                </span>
               </div>
             )
           })}
@@ -782,6 +861,9 @@ export default function Dashboard() {
         <BeritaPalingRelevan />
         <PowerRankingsPreview />
       </div>
+
+      {/* ── Koneksi Terbaru ── */}
+      <KoneksiTerbaru />
 
       {/* ── Trending Politicians ── */}
       <TrendingPoliticians />
